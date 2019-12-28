@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29609.76
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PS4KeyboardAndMouseAdapter", "PS4KeyboardAndMouseAdapter\PS4KeyboardAndMouseAdapter.csproj", "{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PS4RemotePlayInjection", "PS4RemotePlayInjection\PS4RemotePlayInjection.csproj", "{D3D6F621-7CB9-4992-80AC-FF9745D974EC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {215189D4-FCF7-4F3E-BC57-0EA3347DD037}
+	EndGlobalSection
+EndGlobal
