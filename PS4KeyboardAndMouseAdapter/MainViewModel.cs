@@ -134,6 +134,8 @@ namespace PS4KeyboardAndMouseAdapter
 
         public MainViewModel()
         {
+            Injector.FindProcess(TARGET_PROCESS_NAME)?.Kill();
+
             cts.CancelAfter(2500);
             Task.Run(UpdateApp, cts.Token).Wait();
 
