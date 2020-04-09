@@ -33,11 +33,46 @@
                         <RowDefinition Height="2*" />
                     </Grid.RowDefinitions>
 
-                    <Image x:Name="JoystickImage" Stretch="Uniform" Grid.ColumnSpan="3" Grid.RowSpan="3">
-                        <Image.Source>
-                            <BitmapImage UriSource="dualshock4_layout.png"/>
-                        </Image.Source>
-                    </Image>
+                     <Image x:Name="JoystickImage" Stretch="Uniform" Grid.ColumnSpan="3" Grid.RowSpan="3"> 
+                         <Image.Source> 
+                             <BitmapImage UriSource="dualshock4_layout.png"/> 
+                         </Image.Source> 
+                     </Image>
+
+            <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Margin="0, 20, 0, 0">
+                <ToggleButton 
+                              IsChecked="{Binding IsCursorHideRequested, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              Margin="0, 5, 0, 5"
+                              Height="30"
+                              HorizontalAlignment="Center"
+                              Opacity="0.72"
+                              Background="Transparent"
+                              Click="OnMouseHideToggleButtonClicked">
+                    <ToggleButton.Style>    
+                        <Style TargetType="{x:Type ToggleButton}">
+
+                            <Style.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter Property="Foreground" Value="DarkSlateGray" />
+                                    <Setter Property="Content" Value="  Mouse will now be hidden once you go back to RemotePlay  "/>
+                                </Trigger>
+                                <Trigger Property="IsChecked" Value="False">
+                                    <Setter Property="Content" Value="  Hide mouse cursor in RemotePlay  "/>
+                                    <Setter Property="Foreground" Value="WhiteSmoke" />
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Foreground" Value="DarkSlateGray" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ToggleButton.Style>
+                </ToggleButton>
+
+                <TextBlock Text="Tip: You can press alt+tab to switch between windows once the mouse is hidden."
+                           HorizontalAlignment="Center"
+                           Foreground="WhiteSmoke" Opacity="0.7" FontSize="10"/>
+            </StackPanel>
+
 
                     <TextBlock x:Name="PressKeyText" Text="Press a key to map" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Grid.ColumnSpan="3"
                                HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Crimson" Opacity="0"

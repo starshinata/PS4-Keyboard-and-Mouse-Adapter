@@ -52,7 +52,7 @@ namespace PS4KeyboardAndMouseAdapter
         private string INJECT_DLL_NAME = "PS4RemotePlayInjection.dll";
 
         public DualShockState CurrentState { get; private set; }
-        public bool EnableMouseInput { get; set; } = true;
+        public bool EnableMouseInput { get; set; } = false;
         private Stopwatch mouseIdleTimer = Stopwatch.StartNew();
         public double MouseSensitivity { get; set; } = 3;
         public Vector2i MouseDirection { get; set; }
@@ -66,8 +66,13 @@ namespace PS4KeyboardAndMouseAdapter
         public bool IsFrameEven = true;
         private Stopwatch timer = new Stopwatch();
         private CancellationTokenSource cts = new CancellationTokenSource();
+        private bool isCursorHideRequested;
 
-
+        public bool IsCursorHideRequested
+        {
+            get => isCursorHideRequested;
+            set => isCursorHideRequested = value;
+        }
 
         public void SetMapping(VirtualKey key, Keyboard.Key value)
         {
@@ -255,7 +260,7 @@ namespace PS4KeyboardAndMouseAdapter
             // Mouse Input
             var prevVal = EnableMouseInput;
             RemotePlayProcess.Refresh();
-            EnableMouseInput = IsProcessInForeground(RemotePlayProcess);
+            EnableMouseInput = IsCursorHideRequested && IsProcessInForeground(RemotePlayProcess);
             if (EnableMouseInput != prevVal)
                 Utility.ShowCursor(prevVal);
 

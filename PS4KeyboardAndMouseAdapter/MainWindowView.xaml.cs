@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using SFML.Window;
+using Button = System.Windows.Controls.Button;
+using Keyboard = SFML.Window.Keyboard;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 
 namespace PS4KeyboardAndMouseAdapter
@@ -44,7 +37,7 @@ namespace PS4KeyboardAndMouseAdapter
                 {
                     foreach (var key in Enum.GetValues(typeof(Keyboard.Key)).Cast<Keyboard.Key>())
                     {
-                        if (Keyboard.IsKeyPressed(key))
+                        if (Keyboard.IsKeyPressed(key) && key != Keyboard.Key.P)
                         {
                             vm.SetMapping((VirtualKey) lastClickedButton.Tag, key);
                             lastClickedButton = null;
@@ -109,6 +102,12 @@ namespace PS4KeyboardAndMouseAdapter
                     }
                 }
             }
+        }
+
+        private void OnMouseHideToggleButtonClicked(object sender, RoutedEventArgs e)
+        {
+            var toggle = (ToggleButton) sender;
+
         }
     }
 }
