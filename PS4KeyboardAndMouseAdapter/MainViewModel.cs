@@ -117,36 +117,9 @@ namespace PS4KeyboardAndMouseAdapter
             return false;
         }
 
-        public void UpdateApp()
-        {
-            try
-            {
-                using (var mgr = UpdateManager.GitHubUpdateManager("https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter"))
-                {
-                    mgr.Result.UpdateApp();
-                }
-            }
-            catch (Exception)
-            {
-                // ignored
-            }
-
-            try
-            {
-                string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                File.Delete(Path.Combine(desktopPath, "EasyHookSvc.lnk"));
-            }
-            catch (Exception)
-            {
-                // ignored
-            }
-        }
-
         public MainViewModel()
         {
             Injector.FindProcess(TARGET_PROCESS_NAME)?.Kill();
-
-            Task.Run(UpdateApp).Wait();
 
             EventWaitHandle waitHandle = new ManualResetEvent(initialState: false);
 

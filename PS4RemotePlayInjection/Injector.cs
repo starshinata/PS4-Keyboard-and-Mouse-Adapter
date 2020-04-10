@@ -39,6 +39,7 @@ namespace PS4RemotePlayInterceptor
 
         public static int Inject(string processName, string dllToInject)
         {
+            Thread.Sleep(4000);
             // Find the process
             var process = FindProcess(processName);
             if (process == null)
