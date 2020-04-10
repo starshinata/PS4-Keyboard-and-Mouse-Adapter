@@ -1,15 +1,20 @@
 # PS4 Keyboard and Mouse Adapter 
-(if you come up with a sexier name, feel free to give me suggestions [and no, I don't like "IPS4 X" :smile:])
+
+## :rocket: Click --> [here](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/1.0.1/Setup.exe) <-- to Download!
+
+I didn't expect a single person to find out about this repo but you guys somehow did, so I added a UI, made the configuration process more user-friendly, and also created a setup for those of you that don't know how to build the code and just want to play.
+
+If you think something doesn't work or is not good enough, don't get too mad at me and don't hesitate to tell me about it [here](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/issues/new/choose)
 
 ## How to use
 
 (currently working on the tutorial)
 
-## To-do list:
+## To-do list for the next release:
 - Make mouse settings configurable
 - Improve the UI
-- Silently auto-update client at startup
-- Distribute updates as github release assets
+- Silently auto-update client at startup DONE
+- Distribute updates as github release assets DONE
 
 ## Why this and not REM4P?
 
@@ -21,6 +26,6 @@ What this app does that REM4P doesn't:
 
 ## Credits
 
-- [PS4Macro](https://github.com/komefai/PS4Macro) - Big thanks to komefai for making and open-sourcing this tool. I've grown a lot as a developer by reading and learning from his code, I'd never have started doing this if hadn't stumbled on PS4Macro. Komefai is MIA for 2 years and his repo is not supported anymore but you can still write pretty good bots with it, definitely check it out if you are into that kind of stuff
-- [EasyHook](https://easyhook.github.io) - The best tool for Windows API hooking. Perfectly implemented - from the assembly injection, to the hook trampoline code
+- [PS4Macro](https://github.com/komefai/PS4Macro) - Big thanks to komefai for making and open-sourcing this tool. I've grown a lot as a developer by reading and learning from his code. PS4Macro served as a basis for this repo. I'd never have done this if hadn't stumbled on it. Komefai is MIA for 2 years and his repo is not supported anymore but you can still write pretty good bots with it, definitely check it out if you are into that kind of stuff
+- [EasyHook](https://easyhook.github.io) - The best tool for Windows API hooking. Works flawlessly - from the assembly injection, to the hook trampoline code. I haven't had a single problem with it
 - [Jays2Kings/DS4Windows](https://github.com/Jays2Kings/DS4Windows) - don't need to explain that one
