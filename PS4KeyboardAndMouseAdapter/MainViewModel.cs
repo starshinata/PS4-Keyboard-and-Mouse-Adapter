@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Numerics;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security.RightsManagement;
@@ -59,6 +60,9 @@ namespace PS4KeyboardAndMouseAdapter
         public Vector2i anchor { get; set; } = new Vector2i(900, 500);
         public Process RemotePlayProcess;
 
+        public string Title { get; set; } =
+            "PS4 Keyboard&Mouse Adapter v" + GetAssemblyVersion();
+
         public Dictionary<VirtualKey, Keyboard.Key> Mappings { get; }
         public Dictionary<Keyboard.Key, VirtualKey> ReverseMappings { get; }
 
@@ -72,6 +76,12 @@ namespace PS4KeyboardAndMouseAdapter
         {
             get => isCursorHideRequested;
             set => isCursorHideRequested = value;
+        }
+
+        public static string GetAssemblyVersion()
+        {
+            Version v = Assembly.GetExecutingAssembly().GetName().Version;
+            return $"{v.Major}.{v.Minor}.{v.Build}";
         }
 
         public void SetMapping(VirtualKey key, Keyboard.Key value)

@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:PS4KeyboardAndMouseAdapter"
         xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
         mc:Ignorable="d"
-        Title="PS4 Keyboard&amp;Mouse Adapter" Height="450" Width="639" ResizeMode="NoResize">
+        Title="{Binding Title}"
+        Height="450" Width="639" ResizeMode="CanMinimize">
 
     <Window.DataContext>
         <local:MainViewModel />
