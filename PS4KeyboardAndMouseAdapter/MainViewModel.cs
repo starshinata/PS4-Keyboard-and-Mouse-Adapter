@@ -130,14 +130,23 @@ namespace PS4KeyboardAndMouseAdapter
             {
                 // ignored
             }
+
+            try
+            {
+                string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                File.Delete(Path.Combine(desktopPath, "EasyHookSvc.lnk"));
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
         }
 
         public MainViewModel()
         {
             Injector.FindProcess(TARGET_PROCESS_NAME)?.Kill();
 
-            cts.CancelAfter(2500);
-            Task.Run(UpdateApp, cts.Token).Wait();
+            Task.Run(UpdateApp).Wait();
 
             EventWaitHandle waitHandle = new ManualResetEvent(initialState: false);
 
