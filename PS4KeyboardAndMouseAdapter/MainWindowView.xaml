@@ -13,9 +13,6 @@
         <local:MainViewModel />
     </Window.DataContext>
     
-    <!--<Grid>
-        <TabControl>
-            <TabItem Header="Hotkeys">-->
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="8*" />
@@ -119,13 +116,14 @@
                             </Style>
                         </Grid.Resources>
 
-                        <!--<Button Content="asd" Grid.Column="0" Grid.Row="0" Visibility="Hidden"/>-->
+                <Button Tag="{x:Static local:VirtualKey.TouchButton}" Content="{Binding Path=Mappings[(local:VirtualKey)TouchButton], UpdateSourceTrigger=PropertyChanged}"
+                        Grid.Column="0" Grid.Row="0" Visibility="Visible"/>
                         <svgc:SvgViewbox Grid.Column="0" Grid.Row="2" Margin="-5, -5, -5, -2" Stretch="Uniform" 
                                          Source="pack://application:,,,/mouse-right-button.svg" Opacity="0.4"/>
 
 <!--<TextBlock Text="R   Click" Grid.Column="0" Grid.Row="2" Visibility="Visible"/>-->
 
-                <Button Tag="{x:Static local:VirtualKey.L1}" Content="{Binding Path=Mappings[(local:VirtualKey)L1], UpdateSourceTrigger=PropertyChanged}"
+                        <Button Tag="{x:Static local:VirtualKey.L1}" Content="{Binding Path=Mappings[(local:VirtualKey)L1], UpdateSourceTrigger=PropertyChanged}"
                         Grid.Column="0" Grid.Row="4" Visibility="Visible"/>
                         <Button Content="asd" Grid.Column="0" Grid.Row="6" Visibility="Hidden"/>
                         <Button Content="asd" Grid.Column="0" Grid.Row="7" Visibility="Hidden"/>
@@ -153,7 +151,7 @@
                                         Grid.Column="2" />
                             </Grid>
                         </Grid>
-                <Button Tag="{x:Static local:VirtualKey.LeftAnalogStickClick}" Content="{Binding Path=Mappings[(local:VirtualKey)LeftAnalogStickClick], UpdateSourceTrigger=PropertyChanged}"
+                <Button Tag="{x:Static local:VirtualKey.L3}" Content="{Binding Path=Mappings[(local:VirtualKey)L3], UpdateSourceTrigger=PropertyChanged}"
                         Grid.Column="0" Grid.Row="13" Visibility="Visible"/>
 
                         <Button Tag="{x:Static local:VirtualKey.Options}" Content="{Binding Path=Mappings[(local:VirtualKey)Options]}"

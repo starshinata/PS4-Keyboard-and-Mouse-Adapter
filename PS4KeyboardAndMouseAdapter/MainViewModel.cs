@@ -37,16 +37,18 @@ namespace PS4KeyboardAndMouseAdapter
         Right,
         Up,
         Down,
-        LeftAnalogStickClick,
         Triangle,
         Circle,
         Cross,
         Square,
         L1,
         L2,
+        L3,
         R1,
         R2,
+        R3,
         Options,
+        TouchButton,
     }
 
     public class MainViewModel : INotifyPropertyChanged
@@ -132,6 +134,23 @@ namespace PS4KeyboardAndMouseAdapter
 
         public MainViewModel()
         {
+            Mappings = new Dictionary<VirtualKey, Keyboard.Key>();
+            Mappings.Add(VirtualKey.Left, Keyboard.Key.A);
+            Mappings.Add(VirtualKey.Right, Keyboard.Key.D);
+            Mappings.Add(VirtualKey.Up, Keyboard.Key.W);
+            Mappings.Add(VirtualKey.Down, Keyboard.Key.S);
+            Mappings.Add(VirtualKey.Triangle, Keyboard.Key.F);
+            Mappings.Add(VirtualKey.Circle, Keyboard.Key.C);
+            Mappings.Add(VirtualKey.Cross, Keyboard.Key.V);
+            Mappings.Add(VirtualKey.Square, Keyboard.Key.R);
+            Mappings.Add(VirtualKey.L1, Keyboard.Key.Q);
+            Mappings.Add(VirtualKey.L3, Keyboard.Key.LShift);
+            Mappings.Add(VirtualKey.R1, Keyboard.Key.E);
+            Mappings.Add(VirtualKey.Options, Keyboard.Key.O);
+            Mappings.Add(VirtualKey.TouchButton, Keyboard.Key.M);
+
+            File.WriteAllText("mappings.json", JsonConvert.SerializeObject(Mappings, Formatting.Indented));
+
             Injector.FindProcess(TARGET_PROCESS_NAME)?.Kill();
 
             EventWaitHandle waitHandle = new ManualResetEvent(initialState: false);
@@ -246,6 +265,18 @@ namespace PS4KeyboardAndMouseAdapter
             if (Keyboard.IsKeyPressed(Mappings[VirtualKey.Options]))
                 CurrentState.Options = true;
 
+            if (Keyboard.IsKeyPressed(Mappings[VirtualKey.L1]))
+                CurrentState.L1 = true;
+
+            if (Keyboard.IsKeyPressed(Mappings[VirtualKey.R1]))
+                CurrentState.R1 = true;
+
+            if (Keyboard.IsKeyPressed(Mappings[VirtualKey.L3]))
+                CurrentState.L3 = true;
+
+            if (Keyboard.IsKeyPressed(Mappings[VirtualKey.TouchButton]))
+                CurrentState.TouchButton = true;
+
             // Mouse Input
             var prevVal = EnableMouseInput;
             RemotePlayProcess.Refresh();
@@ -272,9 +303,9 @@ namespace PS4KeyboardAndMouseAdapter
 
                 // Middle mouse
                 if (SFML.Window.Mouse.IsButtonPressed(Mouse.Button.Middle))
-                    CurrentState.L1 = true;
+                    CurrentState.R3 = true;
                 else
-                    CurrentState.L1 = false;
+                    CurrentState.R3 = false;
 
                 MouseDirection = FeedMouseCoords();
 
