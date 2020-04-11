@@ -26,6 +26,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Serilog;
 
 namespace PS4RemotePlayInterceptor
 {
@@ -37,15 +38,11 @@ namespace PS4RemotePlayInterceptor
         public static int printFrequency = 10;
 
         /// <summary>
-        /// Called when the hook has been injected successsfully
+        /// Called when the hook has been injected successfully
         /// </summary>
         public void OnInjectionSuccess(int clientPID)
         {
-            try
-            {
-                Console.WriteLine("OnInjectionSuccess {0}", clientPID);
-            }
-            catch (Exception) { }
+            Log.Logger.Error("OnInjectionSuccess {0}", clientPID);
         }
 
         /// <summary>
@@ -53,14 +50,8 @@ namespace PS4RemotePlayInterceptor
         /// </summary>
         public void Ping()
         {
-            try
-            {
-                //Console.WriteLine("Ping");
-
-                // Store timestamp
-                Injector.LastPingTime = DateTime.Now;
-            }
-            catch (Exception) { }
+            // Store timestamp
+            Injector.LastPingTime = DateTime.Now;
         }
 
         /// <summary>
@@ -129,7 +120,7 @@ namespace PS4RemotePlayInterceptor
             {
                 //Console.WriteLine("OnReadFile {0}", filename);
                 //if((printFrequency++)%30 == 0)
-                  //  PrintAnalogSticksAsDegrees(inputReport.Skip(1).Take(4).ToArray());
+                //  PrintAnalogSticksAsDegrees(inputReport.Skip(1).Take(4).ToArray());
                 // Expect inputReport to be modified
                 if (Injector.Callback != null)
                 {
@@ -147,7 +138,10 @@ namespace PS4RemotePlayInterceptor
                     state.ConvertToDualshockRaw(ref inputReport);
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                Log.Logger.Error("Problem in OnReadFile: " + ex.Message);
+            }
         }
 
         public void OnWriteFile(string filename, ref byte[] outputReport)
@@ -159,17 +153,10 @@ namespace PS4RemotePlayInterceptor
             catch (Exception) { }
         }
 
-
         /* Config Wrappers */
-
         public bool ShouldEmulateController()
         {
-            try
-            {
-                return Injector.EmulateController;
-            }
-            catch (Exception) { return false; }
-            
+            return Injector.EmulateController;
         }
     }
 }

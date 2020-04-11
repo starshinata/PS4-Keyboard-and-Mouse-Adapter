@@ -13,12 +13,15 @@ using System.Security.RightsManagement;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 using FlaUI.Core.AutomationElements;
+using FlaUI.Core.Logging;
 using FlaUI.UIA2;
 using Newtonsoft.Json;
 using PS4KeyboardAndMouseAdapter.Annotations;
 using PS4RemotePlayInjection;
 using PS4RemotePlayInterceptor;
+using Serilog;
 using SFML.System;
 using SFML.Window;
 using Shell32;
@@ -119,9 +122,9 @@ namespace PS4KeyboardAndMouseAdapter
                 Process.Start(shortcutPath);
                 return true;
             }
-            catch
+            catch (Exception e)
             {
-                // TODO: ignored
+                Log.Logger.Error("Cannot open RemotePlay: " + e.Message);
             }
 
             return false;
@@ -154,59 +157,51 @@ namespace PS4KeyboardAndMouseAdapter
             {
                 Inject();
             }
+            Task.Run(AutoClickStart);
+        }
 
-            //ReverseMappings = Mappings.ToDictionary((i) => i.Value, (i) => i.Key);
+        public void AutoClickStart()
+        {
+            try
+            {
+                Application app = FlaUI.Core.Application.Attach(Process.GetProcessById(RemotePlayProcess.Id));
 
-            //Mappings.Add(VirtualKey.Left, Keyboard.Key.A);
-            //Mappings.Add(VirtualKey.Right, Keyboard.Key.D);
-            //Mappings.Add(VirtualKey.Up, Keyboard.Key.W);
-            //Mappings.Add(VirtualKey.Down, Keyboard.Key.S);
-            //Mappings.Add(VirtualKey.Triangle, Keyboard.Key.F);
-            //Mappings.Add(VirtualKey.Circle, Keyboard.Key.C);
-            //Mappings.Add(VirtualKey.Cross, Keyboard.Key.V);
-            //Mappings.Add(VirtualKey.Square, Keyboard.Key.R);
+                using (var automation = new UIA2Automation())
+                {
+                    while (true)
+                    {
+                        Window window = app.GetMainWindow(automation);
+                        Button button1 = window.FindFirstDescendant(cf => cf.ByText("Start"))?.AsButton();
+                        if (button1 == null)
+                            Thread.Sleep(1000);
 
+                        else
+                        {
+                            button1?.Invoke();
+                            break;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Error("Problem with auto-clicker: " + ex.Message);
+            }
         }
 
         public void Inject()
         {
+            Thread.Sleep(3100);
             int remotePlayProcessId = Injector.Inject(TARGET_PROCESS_NAME, INJECT_DLL_NAME);
             RemotePlayProcess = Process.GetProcessById(remotePlayProcessId);
             RemotePlayProcess.EnableRaisingEvents = true;
             RemotePlayProcess.Exited += (sender, args) => { Utility.ShowCursor(true); };
 
-            Task.Run(() =>
-                {
-                    Application app = FlaUI.Core.Application.Attach(Process.GetProcessById(RemotePlayProcess.Id));
-
-                    using (var automation = new UIA2Automation())
-                    {
-                        while (true)
-                        {
-                            Window window = app.GetMainWindow(automation);
-                            Button button1 = window.FindFirstDescendant(cf => cf.ByText("Start"))?.AsButton();
-                            if(button1 == null)
-                                Thread.Sleep(1000);
-
-                            else
-                            {
-                                button1?.Invoke();
-                                break;
-                            }
-                        }
-                    }
-                }
-            );
-
             Injector.Callback += OnReceiveData;
         }
 
- 
-
         [DllImport("user32.dll")]
         public static extern IntPtr SetCursor(IntPtr handle);
-
-        private int counter = 0;
 
         public void OnReceiveData(ref DualShockState state)
         {

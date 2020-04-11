@@ -6,6 +6,8 @@ using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels.Ipc;
 using System.Security.Principal;
 using System.Threading;
+using PS4RemotePlayInjection;
+using Serilog;
 
 namespace PS4RemotePlayInterceptor
 {
@@ -39,11 +41,15 @@ namespace PS4RemotePlayInterceptor
 
         public static int Inject(string processName, string dllToInject)
         {
-            Thread.Sleep(3100);
             // Find the process
             var process = FindProcess(processName);
             if (process == null)
-                throw new InterceptorException(string.Format("{0} not found in list of processes", processName));
+            {
+                string error = string.Format("{0} not found in list of processes", processName);
+                Log.Error(error);
+                throw new InterceptorException(error);
+
+            }
 
             // Full path to our dll file
             string injectionLibrary = Path.Combine(Path.GetDirectoryName(typeof(InjectionInterface).Assembly.Location), dllToInject);
@@ -57,7 +63,7 @@ namespace PS4RemotePlayInterceptor
                     if (_ipcServer == null)
                     {
                         // Setup remote hooking
-                        _channelName = null;//DateTime.Now.ToString();
+                        _channelName = DateTime.Now.ToString("yy-MM-dd hh:mm:ss");
                         _ipcServer = RemoteHooking.IpcCreateServer<InjectionInterface>(ref _channelName, WellKnownObjectMode.Singleton, WellKnownSidType.WorldSid);
                         shouldInject = true;
                     }
@@ -88,7 +94,9 @@ namespace PS4RemotePlayInterceptor
             }
             catch (Exception ex)
             {
-                throw new InterceptorException(string.Format("Failed to inject to target: {0}", ex.Message), ex);
+                string error = string.Format("Failed to inject to target: {0}", ex.Message);
+                Log.Error(error);
+                throw new InterceptorException(error, ex);
             }
         }
 

@@ -23,12 +23,10 @@
 // THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Timers;
+using PS4RemotePlayInterceptor;
 
-namespace PS4RemotePlayInterceptor
+namespace PS4RemotePlayInjection
 {
     public delegate void WatchdogEventDelegate();
 
