@@ -1,6 +1,6 @@
 # PS4 Keyboard and Mouse Adapter 
 
-## :rocket: Click --> [here](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/1.0.3/Setup.exe) <-- to Download!
+## :rocket: Click --> [here](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/1.0.4/Setup.exe) <-- to Download!
 
 I didn't expect a single person to find out about this repo but you guys somehow did, so I added a UI, made the configuration process more user-friendly, and also created a setup for those of you that don't know how to build the code and just want to play.
 
