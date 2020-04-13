@@ -144,8 +144,11 @@ namespace PS4KeyboardAndMouseAdapter
             Mappings.Add(VirtualKey.Cross, Keyboard.Key.V);
             Mappings.Add(VirtualKey.Square, Keyboard.Key.R);
             Mappings.Add(VirtualKey.L1, Keyboard.Key.Q);
+            Mappings.Add(VirtualKey.L2, Keyboard.Key.K);
             Mappings.Add(VirtualKey.L3, Keyboard.Key.LShift);
             Mappings.Add(VirtualKey.R1, Keyboard.Key.E);
+            Mappings.Add(VirtualKey.R2, Keyboard.Key.J);
+            Mappings.Add(VirtualKey.R3, Keyboard.Key.L);
             Mappings.Add(VirtualKey.Options, Keyboard.Key.O);
             Mappings.Add(VirtualKey.TouchButton, Keyboard.Key.M);
 
@@ -268,11 +271,20 @@ namespace PS4KeyboardAndMouseAdapter
             if (Keyboard.IsKeyPressed(Mappings[VirtualKey.L1]))
                 CurrentState.L1 = true;
 
-            if (Keyboard.IsKeyPressed(Mappings[VirtualKey.R1]))
-                CurrentState.R1 = true;
+            if (Keyboard.IsKeyPressed(Mappings[VirtualKey.L2]))
+                CurrentState.L2 = 255;
 
             if (Keyboard.IsKeyPressed(Mappings[VirtualKey.L3]))
                 CurrentState.L3 = true;
+
+            if (Keyboard.IsKeyPressed(Mappings[VirtualKey.R1]))
+                CurrentState.R1 = true;
+
+            if (Keyboard.IsKeyPressed(Mappings[VirtualKey.R2]))
+                CurrentState.R2 = 255;
+
+            if (Keyboard.IsKeyPressed(Mappings[VirtualKey.R3]))
+                CurrentState.R3 = true;
 
             if (Keyboard.IsKeyPressed(Mappings[VirtualKey.TouchButton]))
                 CurrentState.TouchButton = true;
@@ -292,20 +304,14 @@ namespace PS4KeyboardAndMouseAdapter
                 // Left mouse
                 if (SFML.Window.Mouse.IsButtonPressed(Mouse.Button.Left))
                     CurrentState.R2 = 255;
-                else
-                    CurrentState.R2 = 0;
 
                 // Right mouse
                 if (SFML.Window.Mouse.IsButtonPressed(Mouse.Button.Right))
                     CurrentState.L2 = 255;
-                else
-                    CurrentState.L2 = 0;
 
                 // Middle mouse
                 if (SFML.Window.Mouse.IsButtonPressed(Mouse.Button.Middle))
                     CurrentState.R3 = true;
-                else
-                    CurrentState.R3 = false;
 
                 MouseDirection = FeedMouseCoords();
 
