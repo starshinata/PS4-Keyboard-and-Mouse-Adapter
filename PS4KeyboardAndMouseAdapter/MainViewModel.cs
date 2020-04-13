@@ -134,25 +134,25 @@ namespace PS4KeyboardAndMouseAdapter
 
         public MainViewModel()
         {
-            Mappings = new Dictionary<VirtualKey, Keyboard.Key>();
-            Mappings.Add(VirtualKey.Left, Keyboard.Key.A);
-            Mappings.Add(VirtualKey.Right, Keyboard.Key.D);
-            Mappings.Add(VirtualKey.Up, Keyboard.Key.W);
-            Mappings.Add(VirtualKey.Down, Keyboard.Key.S);
-            Mappings.Add(VirtualKey.Triangle, Keyboard.Key.F);
-            Mappings.Add(VirtualKey.Circle, Keyboard.Key.C);
-            Mappings.Add(VirtualKey.Cross, Keyboard.Key.V);
-            Mappings.Add(VirtualKey.Square, Keyboard.Key.R);
-            Mappings.Add(VirtualKey.L1, Keyboard.Key.Q);
-            Mappings.Add(VirtualKey.L2, Keyboard.Key.K);
-            Mappings.Add(VirtualKey.L3, Keyboard.Key.LShift);
-            Mappings.Add(VirtualKey.R1, Keyboard.Key.E);
-            Mappings.Add(VirtualKey.R2, Keyboard.Key.J);
-            Mappings.Add(VirtualKey.R3, Keyboard.Key.L);
-            Mappings.Add(VirtualKey.Options, Keyboard.Key.O);
-            Mappings.Add(VirtualKey.TouchButton, Keyboard.Key.M);
+            //Mappings = new Dictionary<VirtualKey, Keyboard.Key>();
+            //Mappings.Add(VirtualKey.Left, Keyboard.Key.A);
+            //Mappings.Add(VirtualKey.Right, Keyboard.Key.D);
+            //Mappings.Add(VirtualKey.Up, Keyboard.Key.W);
+            //Mappings.Add(VirtualKey.Down, Keyboard.Key.S);
+            //Mappings.Add(VirtualKey.Triangle, Keyboard.Key.F);
+            //Mappings.Add(VirtualKey.Circle, Keyboard.Key.C);
+            //Mappings.Add(VirtualKey.Cross, Keyboard.Key.V);
+            //Mappings.Add(VirtualKey.Square, Keyboard.Key.R);
+            //Mappings.Add(VirtualKey.L1, Keyboard.Key.Q);
+            //Mappings.Add(VirtualKey.L2, Keyboard.Key.K);
+            //Mappings.Add(VirtualKey.L3, Keyboard.Key.LShift);
+            //Mappings.Add(VirtualKey.R1, Keyboard.Key.E);
+            //Mappings.Add(VirtualKey.R2, Keyboard.Key.J);
+            //Mappings.Add(VirtualKey.R3, Keyboard.Key.L);
+            //Mappings.Add(VirtualKey.Options, Keyboard.Key.O);
+            //Mappings.Add(VirtualKey.TouchButton, Keyboard.Key.M);
 
-            File.WriteAllText("mappings.json", JsonConvert.SerializeObject(Mappings, Formatting.Indented));
+            //File.WriteAllText("mappings.json", JsonConvert.SerializeObject(Mappings, Formatting.Indented));
 
             Injector.FindProcess(TARGET_PROCESS_NAME)?.Kill();
 
@@ -357,7 +357,7 @@ namespace PS4KeyboardAndMouseAdapter
         {
             mouseTimer.Start();
 
-            if (mouseTimer.ElapsedMilliseconds >= 16)
+            if (mouseTimer.ElapsedMilliseconds >= 33)
             {
                 Vector2i currentMousePosition = Mouse.GetPosition();
                 mouseDirection = currentMousePosition - anchor;
