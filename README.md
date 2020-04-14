@@ -1,6 +1,6 @@
 # PS4 Keyboard and Mouse Adapter 
 
-## :rocket: Click --> [here](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/1.0.4/Setup.exe) <-- to Download!
+## :rocket: Click --> [here](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/1.0.5/Setup.exe) <-- to Download!
 
 I didn't expect a single person to find out about this repo but you guys somehow did, so I added a UI, made the configuration process more user-friendly, and also created a setup for those of you that don't know how to build the code and just want to play.
 
@@ -8,7 +8,11 @@ If you think something doesn't work or is not good enough, don't get too mad at 
 
 ## How to use
 
-Just download and run it. It will automatically do all the configuration stuff for you (if you get into trouble and need help, join the discord server I linked above).
+1. Make sure you've enabled remote play from your PS4's settings menu
+2. Download and run the setup from the download link above
+3. That's it. It will automatically do all the configuration stuff for you (if you get into trouble and need help, ask for help in the discord server I linked above).
+
+Do NOT plug your DS4 controller into your PC. If it is plugged already, unplug it because it interferes with the device emulator.
 
 ## To-do list for the next release
 - Make mouse settings configurable

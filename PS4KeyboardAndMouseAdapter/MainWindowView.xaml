@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PS4KeyboardAndMouseAdapter"
         xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+        xmlns:converters="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Converters"
         mc:Ignorable="d"
         Title="{Binding Title}"
         Height="450" Width="639" ResizeMode="CanMinimize">
@@ -12,6 +13,10 @@
     <Window.DataContext>
         <local:MainViewModel />
     </Window.DataContext>
+
+    <Window.Resources>
+        <converters:KeyNameToSymbolConverter x:Key="KeyNameToSymbolConverter"/>
+    </Window.Resources>
     
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -128,17 +133,23 @@
                                          Source="pack://application:,,,/mouse-right-button.svg" Opacity="0.4"/>
 
                         <Button Tag="{x:Static local:VirtualKey.L1}" Content="{Binding Path=Mappings[(local:VirtualKey)L1], UpdateSourceTrigger=PropertyChanged}"
-                        Grid.Column="1" Grid.Row="4" Visibility="Visible"/>
-                        <Button Content="asd" Grid.Column="1" Grid.Row="6" Visibility="Hidden"/>
-                        <Button Content="asd" Grid.Column="1" Grid.Row="7" Visibility="Hidden"/>
-                        <Button Content="asd" Grid.Column="1" Grid.Row="8" Visibility="Hidden"/>
-                        <Button Content="asd" Grid.Column="1" Grid.Row="9" Visibility="Hidden"/>
-                        <Grid Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0, 0, 0, 0" HorizontalAlignment="Stretch">
+                                Grid.Column="1" Grid.Row="4" Visibility="Visible"/>
+
+                        <Button Tag="{x:Static local:VirtualKey.DPadUp}" Content="{Binding Path=Mappings[(local:VirtualKey)DPadUp], Converter={StaticResource KeyNameToSymbolConverter}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                                Grid.Column="1" Grid.Row="6" Visibility="Visible" />
+                <Button Tag="{x:Static local:VirtualKey.DPadLeft}" Content="{Binding Path=Mappings[(local:VirtualKey)DPadLeft], Converter={StaticResource KeyNameToSymbolConverter}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                                Grid.Column="1" Grid.Row="7" Visibility="Visible"/>
+                <Button Tag="{x:Static local:VirtualKey.DPadDown}" Content="{Binding Path=Mappings[(local:VirtualKey)DPadDown], Converter={StaticResource KeyNameToSymbolConverter}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                                Grid.Column="1" Grid.Row="8" Visibility="Visible"/>
+                <Button Tag="{x:Static local:VirtualKey.DPadRight}" Content="{Binding Path=Mappings[(local:VirtualKey)DPadRight], Converter={StaticResource KeyNameToSymbolConverter}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                                Grid.Column="1" Grid.Row="9" Visibility="Visible"/>
+
+                        <Grid Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0, 6, 0, 0" HorizontalAlignment="Stretch">
                             <Grid.RowDefinitions>
                                 <RowDefinition />
                                 <RowDefinition />
                             </Grid.RowDefinitions>
-                            <Button Tag="{x:Static local:VirtualKey.Up}" Content="{Binding Path=Mappings[(local:VirtualKey)Up], UpdateSourceTrigger=PropertyChanged}" 
+                    <Button Tag="{x:Static local:VirtualKey.Up}" Content="{Binding Path=Mappings[(local:VirtualKey)Up], Converter={StaticResource KeyNameToSymbolConverter}, UpdateSourceTrigger=PropertyChanged}" 
                                     Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" />
                             <Grid  Grid.Column="0" Grid.Row="1">
                                 <Grid.ColumnDefinitions>
@@ -147,11 +158,11 @@
                                     <ColumnDefinition Width="1*" />
                                 </Grid.ColumnDefinitions>
 
-                                <Button Tag="{x:Static local:VirtualKey.Left}" Content="{Binding Path=Mappings[(local:VirtualKey)Left], UpdateSourceTrigger=PropertyChanged}" 
+                        <Button Tag="{x:Static local:VirtualKey.Left}" Content="{Binding Path=Mappings[(local:VirtualKey)Left], Converter={StaticResource KeyNameToSymbolConverter}, UpdateSourceTrigger=PropertyChanged}" 
                                         Grid.Column="0" />
-                                <Button Tag="{x:Static local:VirtualKey.Down}" Content="{Binding Path=Mappings[(local:VirtualKey)Down], UpdateSourceTrigger=PropertyChanged}" 
+                        <Button Tag="{x:Static local:VirtualKey.Down}" Content="{Binding Path=Mappings[(local:VirtualKey)Down], Converter={StaticResource KeyNameToSymbolConverter}, UpdateSourceTrigger=PropertyChanged}" 
                                         Grid.Column="1" />
-                                <Button Tag="{x:Static local:VirtualKey.Right}" Content="{Binding Path=Mappings[(local:VirtualKey)Right], UpdateSourceTrigger=PropertyChanged}" 
+                        <Button Tag="{x:Static local:VirtualKey.Right}" Content="{Binding Path=Mappings[(local:VirtualKey)Right], Converter={StaticResource KeyNameToSymbolConverter}, UpdateSourceTrigger=PropertyChanged}" 
                                         Grid.Column="2" />
                             </Grid>
                         </Grid>
