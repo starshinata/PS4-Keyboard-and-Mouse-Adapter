@@ -1,6 +1,6 @@
 # PS4 Keyboard and Mouse Adapter 
 
-## :rocket: Click --> [here](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/1.0.5/Setup.exe) <-- to Download!
+## :rocket: Click --> [here](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/1.0.6/Setup.exe) <-- to Download!
 
 ## How to use
 
@@ -15,18 +15,13 @@ Do NOT plug your DS4 controller into your PC while using this tool. If it is plu
 
 If you think something doesn't work or is not good enough, don't get too mad at me and don't hesitate to tell me about it in our Discord server https://discord.gg/zH4b8p4 or create an issue [here](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/issues/new/choose)
 
-## To-do list for the next release
-- Make mouse settings configurable
-- Improve the UI
+## To-do list
+- Mouse settings - deadzone, sensitivity, x/y ratio, etc.
+- Create and switch between multiple mapping profiles to make configuration easy when playing multiple games
+- Map multiple keys to the same button
+- Option to map mouse movement to left analog stick
 - Fix a nasty injection crash that appears when dealing with RemotePlay that has been patched by another software 
-
-## Why this and not REM4P?
-
-I learned about REM4P's existence after I wrote this tool. I checked it out and I have to give props to the dev - he's done a damn good job. The app works good, great website, documentation, and tutorial. Things you might not like are: it requires a plugged-in DS4 controller at all times instead of emulating it, also it's paid, no trial, non-refundable, and the forums are locked for reading if you are not a member.
-
-What this app does that REM4P doesn't:
-- fully emulates a ds4 controller - you don't need to buy one and keep it plugged-in
-- it's free
+- Improve the UI
 
 ## Credits
 
