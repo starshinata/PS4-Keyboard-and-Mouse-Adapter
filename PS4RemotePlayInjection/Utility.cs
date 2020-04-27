@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using mscoree;
 
 namespace PS4RemotePlayInjection
 {
     public class Utility
     {
+        public static bool IsCursorVisible = true;
+
         [DllImport("user32.dll")]
         private static extern IntPtr LoadCursorFromFile(string lpFileName);
 
@@ -42,8 +46,40 @@ namespace PS4RemotePlayInjection
                 SystemParametersInfo(0x0057, 0, null, 0);
             }
 
+            IsCursorVisible = show;
+
             //TODO: getLastError check
             return true;
+        }
+
+        public static IList<AppDomain> GetAppDomains()
+        {
+            IList<AppDomain> _IList = new List<AppDomain>();
+            IntPtr enumHandle = IntPtr.Zero;
+            CorRuntimeHostClass host = new mscoree.CorRuntimeHostClass();
+            try
+            {
+                host.EnumDomains(out enumHandle);
+                object domain = null;
+                while (true)
+                {
+                    host.NextDomain(enumHandle, out domain);
+                    if (domain == null) break;
+                    AppDomain appDomain = (AppDomain)domain;
+                    _IList.Add(appDomain);
+                }
+                return _IList;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return null;
+            }
+            finally
+            {
+                host.CloseEnum(enumHandle);
+                Marshal.ReleaseComObject(host);
+            }
         }
     }
 }

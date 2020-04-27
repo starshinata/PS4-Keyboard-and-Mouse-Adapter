@@ -23,7 +23,9 @@ namespace PS4RemotePlayInterceptor
     {
         // EasyHook
         private static string _channelName = null;
+        private static string _channelName2 = null;
         private static IpcServerChannel _ipcServer;
+        private static IpcServerChannel _ipcServer2;
         private static bool _noGAC = false;
 
         // Watchdog
@@ -65,16 +67,18 @@ namespace PS4RemotePlayInterceptor
                         // Setup remote hooking
                         _channelName = DateTime.Now.ToString("yy-MM-dd hh:mm:ss");
                         _ipcServer = RemoteHooking.IpcCreateServer<InjectionInterface>(ref _channelName, WellKnownObjectMode.Singleton, WellKnownSidType.WorldSid);
+                        _channelName2 = "dotnethooks";
+                        _ipcServer2 = RemoteHooking.IpcCreateServer<InjectionInterface>(ref _channelName2, WellKnownObjectMode.Singleton, WellKnownSidType.WorldSid);
                         shouldInject = true;
                     }
                 }
-                else if (InjectionMode == InjectionMode.Compatibility)
-                {
-                    // Setup remote hooking
-                    _channelName = null;
-                    _ipcServer = RemoteHooking.IpcCreateServer<InjectionInterface>(ref _channelName, WellKnownObjectMode.Singleton);
-                    shouldInject = true;
-                }
+                // else if (InjectionMode == InjectionMode.Compatibility)
+                // {
+                //     // Setup remote hooking
+                //     _channelName = null;
+                //     _ipcServer = RemoteHooking.IpcCreateServer<InjectionInterface>(ref _channelName, WellKnownObjectMode.Singleton);
+                //     shouldInject = true;
+                // }
 
                 // Inject dll into the process
                 if (shouldInject)

@@ -24,11 +24,17 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using AppDomainToolkit;
 using EasyHook;
+using PS4RemotePlayInterceptor;
+using Serilog;
 
-namespace PS4RemotePlayInterceptor
+namespace PS4RemotePlayInjection
 {
     /// <summary>
     /// EasyHook will look for a class implementing <see cref="EasyHook.IEntryPoint"/> during injection. This
@@ -85,6 +91,29 @@ namespace PS4RemotePlayInterceptor
             _server.Ping();
         }
 
+        public void DotNetHooks()
+        {
+            var appDomains = Utility.GetAppDomains();
+
+            using (var domainContext = AppDomainContext.Wrap(appDomains[0]))
+            {
+                try
+                {
+                    RemoteAction.Invoke(
+                        domainContext.Domain,
+                        () =>
+                        {
+                            Patcher.server = EasyHook.RemoteHooking.IpcConnectClient<InjectionInterface>("dotnethooks");
+                            Patcher.DoPatching();
+                        });
+                }
+                catch(Exception e)
+                {
+                    _server.Print(e, "Error when executing remote AppDomain code");
+                }
+            }
+        }
+
         /// <summary>
         /// The main entry point for our logic once injected within the target process. 
         /// This is where the hooks will be created, and a loop will be entered until host process exits.
@@ -98,6 +127,8 @@ namespace PS4RemotePlayInterceptor
         {
             // Injection is now complete and the server interface is connected
             _server.OnInjectionSuccess(EasyHook.RemoteHooking.GetCurrentProcessId());
+            
+            DotNetHooks();
 
             // Install hooks
             List<EasyHook.LocalHook> hooks = new List<LocalHook>();

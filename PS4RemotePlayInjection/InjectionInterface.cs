@@ -26,6 +26,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using PS4RemotePlayInjection;
 using Serilog;
 
 namespace PS4RemotePlayInterceptor
@@ -35,8 +36,6 @@ namespace PS4RemotePlayInterceptor
     /// </summary>
     class InjectionInterface : MarshalByRefObject
     {
-        public static int printFrequency = 10;
-
         /// <summary>
         /// Called when the hook has been injected successfully
         /// </summary>
@@ -52,6 +51,21 @@ namespace PS4RemotePlayInterceptor
         {
             // Store timestamp
             Injector.LastPingTime = DateTime.Now;
+        }
+
+        public void Print(string msg)
+        {
+            Log.Logger.Information(msg);
+        }
+
+        public void Print(Exception e, string msg)
+        {
+            Log.Logger.Error(e, msg);
+        }
+
+        public bool ShouldHideToolbar()
+        {
+            return !Utility.IsCursorVisible;
         }
 
         /// <summary>

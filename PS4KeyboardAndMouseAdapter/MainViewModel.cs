@@ -9,11 +9,9 @@ using System.Numerics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Security.RightsManagement;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Media;
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Logging;
 using FlaUI.UIA2;
@@ -24,8 +22,6 @@ using PS4RemotePlayInterceptor;
 using Serilog;
 using SFML.System;
 using SFML.Window;
-using Shell32;
-using Squirrel;
 using Application = FlaUI.Core.Application;
 using Window = FlaUI.Core.AutomationElements.Window;
 
@@ -63,29 +59,15 @@ namespace PS4KeyboardAndMouseAdapter
 
         public DualShockState CurrentState { get; private set; }
         public bool EnableMouseInput { get; set; } = false;
-        private Stopwatch mouseIdleTimer = Stopwatch.StartNew();
-        public double MouseSensitivity { get; set; } = 3;
         public Vector2i MouseDirection { get; set; }
         public Vector2i anchor { get; set; } = new Vector2i(900, 500);
         public Process RemotePlayProcess;
 
-        public string Title { get; set; } =
-            "PS4 Keyboard&Mouse Adapter v" + GetAssemblyVersion();
+        public string Title { get; set; } = "PS4 Keyboard&Mouse Adapter v" + GetAssemblyVersion();
 
         public Dictionary<VirtualKey, Keyboard.Key> Mappings { get; }
-        public Dictionary<Keyboard.Key, VirtualKey> ReverseMappings { get; }
 
-        public int MouseFrameCounter = 1;
-        public bool IsFrameEven = true;
-        private Stopwatch timer = new Stopwatch();
-        private CancellationTokenSource cts = new CancellationTokenSource();
-        private bool isCursorHideRequested;
-
-        public bool IsCursorHideRequested
-        {
-            get => isCursorHideRequested;
-            set => isCursorHideRequested = value;
-        }
+        public bool IsCursorHideRequested { get; set; }
 
         public static string GetAssemblyVersion()
         {
@@ -149,29 +131,29 @@ namespace PS4KeyboardAndMouseAdapter
 
         public MainViewModel()
         {
-            // Mappings = new Dictionary<VirtualKey, Keyboard.Key>();
-            // Mappings.Add(VirtualKey.Left, Keyboard.Key.A);
-            // Mappings.Add(VirtualKey.Right, Keyboard.Key.D);
-            // Mappings.Add(VirtualKey.Up, Keyboard.Key.W);
-            // Mappings.Add(VirtualKey.Down, Keyboard.Key.S);
-            // Mappings.Add(VirtualKey.Triangle, Keyboard.Key.F);
-            // Mappings.Add(VirtualKey.Circle, Keyboard.Key.C);
-            // Mappings.Add(VirtualKey.Cross, Keyboard.Key.V);
-            // Mappings.Add(VirtualKey.Square, Keyboard.Key.R);
-            // Mappings.Add(VirtualKey.L1, Keyboard.Key.Q);
-            // Mappings.Add(VirtualKey.L2, Keyboard.Key.K);
-            // Mappings.Add(VirtualKey.L3, Keyboard.Key.LShift);
-            // Mappings.Add(VirtualKey.R1, Keyboard.Key.E);
-            // Mappings.Add(VirtualKey.R2, Keyboard.Key.J);
-            // Mappings.Add(VirtualKey.R3, Keyboard.Key.L);
-            // Mappings.Add(VirtualKey.Options, Keyboard.Key.O);
-            // Mappings.Add(VirtualKey.TouchButton, Keyboard.Key.M);
-            // Mappings.Add(VirtualKey.DPadUp, Keyboard.Key.Num1);
-            // Mappings.Add(VirtualKey.DPadLeft, Keyboard.Key.Num2);
-            // Mappings.Add(VirtualKey.DPadDown, Keyboard.Key.Num3);
-            // Mappings.Add(VirtualKey.DPadRight, Keyboard.Key.Num4);
-            //
-            // File.WriteAllText("mappings.json", JsonConvert.SerializeObject(Mappings, Formatting.Indented));
+            //Mappings = new Dictionary<VirtualKey, Keyboard.Key>();
+            //Mappings.Add(VirtualKey.Left, Keyboard.Key.A);
+            //Mappings.Add(VirtualKey.Right, Keyboard.Key.D);
+            //Mappings.Add(VirtualKey.Up, Keyboard.Key.W);
+            //Mappings.Add(VirtualKey.Down, Keyboard.Key.S);
+            //Mappings.Add(VirtualKey.Triangle, Keyboard.Key.F);
+            //Mappings.Add(VirtualKey.Circle, Keyboard.Key.C);
+            //Mappings.Add(VirtualKey.Cross, Keyboard.Key.V);
+            //Mappings.Add(VirtualKey.Square, Keyboard.Key.R);
+            //Mappings.Add(VirtualKey.L1, Keyboard.Key.Q);
+            //Mappings.Add(VirtualKey.L2, Keyboard.Key.K);
+            //Mappings.Add(VirtualKey.L3, Keyboard.Key.LShift);
+            //Mappings.Add(VirtualKey.R1, Keyboard.Key.E);
+            //Mappings.Add(VirtualKey.R2, Keyboard.Key.J);
+            //Mappings.Add(VirtualKey.R3, Keyboard.Key.L);
+            //Mappings.Add(VirtualKey.Options, Keyboard.Key.O);
+            //Mappings.Add(VirtualKey.TouchButton, Keyboard.Key.M);
+            //Mappings.Add(VirtualKey.DPadUp, Keyboard.Key.Num1);
+            //Mappings.Add(VirtualKey.DPadLeft, Keyboard.Key.Num2);
+            //Mappings.Add(VirtualKey.DPadDown, Keyboard.Key.Num3);
+            //Mappings.Add(VirtualKey.DPadRight, Keyboard.Key.Num4);
+
+            //File.WriteAllText("mappings.json", JsonConvert.SerializeObject(Mappings, Formatting.Indented));
 
             Injector.FindProcess(TARGET_PROCESS_NAME)?.Kill();
 
@@ -198,6 +180,7 @@ namespace PS4KeyboardAndMouseAdapter
             {
                 Inject();
             }
+
             Task.Run(AutoClickStart);
         }
 

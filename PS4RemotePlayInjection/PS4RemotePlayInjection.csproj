@@ -56,6 +56,12 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="0Harmony, Version=2.0.0.10, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lib.Harmony.2.0.0.10\lib\net45\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="AppDomainToolkit, Version=1.0.4.1, Culture=neutral, PublicKeyToken=f2fc7ab5180cf5c4, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppDomainToolkit.1.0.4.3\lib\net\AppDomainToolkit.dll</HintPath>
+    </Reference>
     <Reference Include="EasyHook, Version=2.7.7097.0, Culture=neutral, PublicKeyToken=4b580fca19d0b0c5, processorArchitecture=MSIL">
       <HintPath>..\packages\EasyHook.2.7.7097\lib\net40\EasyHook.dll</HintPath>
     </Reference>
@@ -81,6 +87,7 @@
     <Compile Include="InjectionInterface.cs" />
     <Compile Include="Injector.cs" />
     <Compile Include="InterceptorException.cs" />
+    <Compile Include="Patcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="Watchdog.cs" />
@@ -107,6 +114,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="mscoree">
+      <Guid>{5477469E-83B1-11D2-8B49-00A0C9B7C9C4}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>4</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
