@@ -13,17 +13,12 @@ namespace PS4RemotePlayInjection
 
         public static void DoPatching()
         {
-            server.Print("DoPatching start");
             var harmony = new Harmony("com.example.patch");
 
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            //server.Print(string.Join(" ", assemblies.Select(x => x.FullName)));
 
             var dll = assemblies?.FirstOrDefault(x => x.FullName.Contains("RemotePlay"));
-            //server.Print(dll?.ToString());
             var types = dll?.GetTypes();
-            //server.Print(string.Join(", ", types.Select(t => t.FullName).ToArray()));
-
 
             // Show toolbar patch
             var type = types?.FirstOrDefault(x => x.Name.Equals("StreamingToolBar"));
@@ -41,8 +36,6 @@ namespace PS4RemotePlayInjection
             var hideToolBarPostfix = SymbolExtensions.GetMethodInfo(() => HideToolBarPostfix());
 
             harmony.Patch(hideToolBarMethod, new HarmonyMethod(hideToolBarPrefix), new HarmonyMethod(hideToolBarPostfix));
-
-            server.Print("DoPatching end");
         }
 
         public static bool ShowToolBarPrefix()

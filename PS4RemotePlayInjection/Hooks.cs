@@ -127,8 +127,16 @@ namespace PS4RemotePlayInjection
         {
             // Injection is now complete and the server interface is connected
             _server.OnInjectionSuccess(EasyHook.RemoteHooking.GetCurrentProcessId());
-            
-            DotNetHooks();
+
+            try
+            {
+                DotNetHooks();
+            }
+            catch (Exception e)
+            {
+                _server.Print(e, "Problem creating dotnet hooks");
+            }
+            _server.Print("Dotnet hooks created.");
 
             // Install hooks
             List<EasyHook.LocalHook> hooks = new List<LocalHook>();
