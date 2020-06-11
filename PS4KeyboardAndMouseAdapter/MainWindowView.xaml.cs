@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
+using PS4KeyboardAndMouseAdapter.UI;
 using Button = System.Windows.Controls.Button;
 using Keyboard = SFML.Window.Keyboard;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
@@ -108,6 +109,21 @@ namespace PS4KeyboardAndMouseAdapter
         {
             var toggle = (ToggleButton) sender;
 
+        }
+
+        private void OnMouseSettingsButtonClick(object sender, RoutedEventArgs e)
+        {
+            UITools.ShowWindow<MouseSettings>();
+        }
+
+        private void MainWindowView_OnActivated(object sender, EventArgs e)
+        {
+            vm.RemotePlayProcess.Refresh();
+        }
+
+        private void MainWindowView_OnDeactivated(object sender, EventArgs e)
+        {
+            vm.RemotePlayProcess.Refresh();
         }
     }
 }

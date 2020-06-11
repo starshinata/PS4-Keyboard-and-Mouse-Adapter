@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="PS4KeyboardAndMouseAdapter.UI.Controls.MouseSettingsControl"
+             x:Name="This"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Controls"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="400">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <local:RangeSlider x:Name="mouseDistanceRangeSlider"
+                           Description="Mouse distance range"
+                           Grid.Row="0"
+                           Minimum="0" 
+                           Maximum="{Binding MaxMouseDistance, ElementName=This}" 
+                           LowerValue="{Binding MouseDistanceMinRange, Mode=TwoWay, ElementName=This}"
+                           UpperValue="{Binding MouseDistanceMaxRange, Mode=TwoWay, ElementName=This}"/>
+
+         <local:RangeSlider x:Name="AnalogStickRangeSlider" 
+                            Description="Analog stick range (in %)" 
+                            Grid.Row="1" 
+                            Minimum="0"  
+                            Maximum="95"  
+                            LowerValue="{Binding AnalogStickLowerRange, Mode=TwoWay, ElementName=This}" 
+                            UpperValue="{Binding AnalogStickUpperRange, Mode=TwoWay, ElementName=This}"/> 
+
+         <local:SliderV Grid.Row="2" Description="Horizontal/Vertical ratio" 
+                        Minimum="0.1" Maximum="1" Value="{Binding HorizontalVerticalRatio, ElementName=This, Mode=TwoWay}" TickFrequency="0.1"/> 
+         
+
+        <!-- <local:SliderV Grid.Row="3" Description="Deadzone (in %)" -->
+        <!--                Minimum="0" Maximum="100" Value="{Binding Deadzone, ElementName=This, Mode=TwoWay}" TickFrequency="1"/> -->
+    </Grid>
+</UserControl>

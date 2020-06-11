@@ -24,7 +24,7 @@ namespace PS4KeyboardAndMouseAdapter
             Utility.ShowCursor(true);
             
             //TODO: hardcoded, fix.
-            Injector.FindProcess("RemotePlay").Kill();
+            //Injector.FindProcess("RemotePlay").Kill();
         }
 
         private async Task UpdateIfAvailable()

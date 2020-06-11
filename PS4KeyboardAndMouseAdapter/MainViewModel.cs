@@ -60,12 +60,47 @@ namespace PS4KeyboardAndMouseAdapter
         public DualShockState CurrentState { get; private set; }
         public bool EnableMouseInput { get; set; } = false;
         public Vector2i MouseDirection { get; set; }
+        public UserSettings Settings { get; set; } = new UserSettings();
+
+        public class UserSettings
+        {
+            public Dictionary<VirtualKey, Keyboard.Key> Mappings { get; set; }
+
+            public double MouseDistanceLowerRange { get; set; } = 5;
+            public double MouseDistanceUpperRange { get; set; } = VideoMode.DesktopMode.Width / 20f;
+
+            public int AnalogStickLowerRange { get; set; } = 40;
+            public int AnalogStickUpperRange { get; set; } = 95;
+
+            public double MouseMaxDistance => VideoMode.DesktopMode.Width / 2f;
+            public double XYRatio { get; set; } = 0.6;
+        }
+
+
+        public int AnalogX
+        {
+            get => analogX;
+            set
+            {
+                analogX = value;
+                OnPropertyChanged(nameof(AnalogX));
+            }
+        }
+
+        public int AnalogY
+        {
+            get => analogY;
+            set
+            {
+                analogY = value;
+                OnPropertyChanged(nameof(AnalogY));
+            }
+        }
+
         public Vector2i anchor { get; set; } = new Vector2i(900, 500);
         public Process RemotePlayProcess;
 
         public string Title { get; set; } = "PS4 Keyboard&Mouse Adapter v" + GetAssemblyVersion();
-
-        public Dictionary<VirtualKey, Keyboard.Key> Mappings { get; }
 
         public bool IsCursorHideRequested { get; set; }
 
@@ -77,10 +112,10 @@ namespace PS4KeyboardAndMouseAdapter
 
         public void SetMapping(VirtualKey key, Keyboard.Key value)
         {
-            Mappings[key] = value;
-            OnPropertyChanged(nameof(Mappings));
+            Settings.Mappings[key] = value;
+            OnPropertyChanged(nameof(Settings));
 
-            string json = JsonConvert.SerializeObject(Mappings, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(Settings, Formatting.Indented);
             File.WriteAllText("mappings.json", json);
         }
 
@@ -131,6 +166,7 @@ namespace PS4KeyboardAndMouseAdapter
 
         public MainViewModel()
         {
+            //var Mappings = Settings.Mappings;
             //Mappings = new Dictionary<VirtualKey, Keyboard.Key>();
             //Mappings.Add(VirtualKey.Left, Keyboard.Key.A);
             //Mappings.Add(VirtualKey.Right, Keyboard.Key.D);
@@ -152,15 +188,16 @@ namespace PS4KeyboardAndMouseAdapter
             //Mappings.Add(VirtualKey.DPadLeft, Keyboard.Key.Num2);
             //Mappings.Add(VirtualKey.DPadDown, Keyboard.Key.Num3);
             //Mappings.Add(VirtualKey.DPadRight, Keyboard.Key.Num4);
+            //Settings.Mappings = Mappings;
 
-            //File.WriteAllText("mappings.json", JsonConvert.SerializeObject(Mappings, Formatting.Indented));
+            //File.WriteAllText("mappings.json", JsonConvert.SerializeObject(Settings, Formatting.Indented));
 
             Injector.FindProcess(TARGET_PROCESS_NAME)?.Kill();
 
             EventWaitHandle waitHandle = new ManualResetEvent(initialState: false);
 
             string json = File.ReadAllText("mappings.json");
-            Mappings = JsonConvert.DeserializeObject<Dictionary<VirtualKey, Keyboard.Key>>(json);
+            Settings = JsonConvert.DeserializeObject<UserSettings>(json);
 
             bool success = OpenRemotePlay();
             if (!success)
@@ -229,6 +266,8 @@ namespace PS4KeyboardAndMouseAdapter
 
         public void OnReceiveData(ref DualShockState state)
         {
+            // if (!IsCursorHideRequested)
+            //     return;
             //timer.Start();
             //counter++;
             //if (timer.ElapsedMilliseconds > 1000)
@@ -243,69 +282,68 @@ namespace PS4KeyboardAndMouseAdapter
                 CurrentState = new DualShockState() { Battery = 255 };
             }
 
-            if (Keyboard.IsKeyPressed(Mappings[VirtualKey.Left]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.Left]))
                 CurrentState.LX = 0;
 
-            if (Keyboard.IsKeyPressed(Mappings[VirtualKey.Right]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.Right]))
                 CurrentState.LX = 255;
 
-            if (Keyboard.IsKeyPressed(Mappings[VirtualKey.Up]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.Up]))
                 CurrentState.LY = 0;
 
-            if (Keyboard.IsKeyPressed(Mappings[VirtualKey.Down]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.Down]))
                 CurrentState.LY = 255;
 
-            if (Keyboard.IsKeyPressed(Mappings[VirtualKey.Triangle]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.Triangle]))
                 CurrentState.Triangle = true;
 
-            if (Keyboard.IsKeyPressed(Mappings[VirtualKey.Circle]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.Circle]))
                 CurrentState.Circle = true;
 
-            if (Keyboard.IsKeyPressed(Mappings[VirtualKey.Cross]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.Cross]))
                 CurrentState.Cross = true;
 
-            if (Keyboard.IsKeyPressed(Mappings[VirtualKey.Square]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.Square]))
                 CurrentState.Square = true;
 
-            if (Keyboard.IsKeyPressed(Mappings[VirtualKey.Options]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.Options]))
                 CurrentState.Options = true;
 
-            if (Keyboard.IsKeyPressed(Mappings[VirtualKey.L1]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.L1]))
                 CurrentState.L1 = true;
 
-            if (Keyboard.IsKeyPressed(Mappings[VirtualKey.L2]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.L2]))
                 CurrentState.L2 = 255;
 
-            if (Keyboard.IsKeyPressed(Mappings[VirtualKey.L3]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.L3]))
                 CurrentState.L3 = true;
 
-            if (Keyboard.IsKeyPressed(Mappings[VirtualKey.R1]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.R1]))
                 CurrentState.R1 = true;
 
-            if (Keyboard.IsKeyPressed(Mappings[VirtualKey.R2]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.R2]))
                 CurrentState.R2 = 255;
 
-            if (Keyboard.IsKeyPressed(Mappings[VirtualKey.R3]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.R3]))
                 CurrentState.R3 = true;
 
-            if (Keyboard.IsKeyPressed(Mappings[VirtualKey.TouchButton]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.TouchButton]))
                 CurrentState.TouchButton = true;
 
-            if (Keyboard.IsKeyPressed(Mappings[VirtualKey.DPadUp]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.DPadUp]))
                 CurrentState.DPad_Up = true;
 
-            if (Keyboard.IsKeyPressed(Mappings[VirtualKey.DPadLeft]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.DPadLeft]))
                 CurrentState.DPad_Left = true;
 
-            if (Keyboard.IsKeyPressed(Mappings[VirtualKey.DPadDown]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.DPadDown]))
                 CurrentState.DPad_Down = true;
 
-            if (Keyboard.IsKeyPressed(Mappings[VirtualKey.DPadRight]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.DPadRight]))
                 CurrentState.DPad_Right = true;
 
             // Mouse Input
             var prevVal = EnableMouseInput;
-            RemotePlayProcess.Refresh();
             EnableMouseInput = IsCursorHideRequested && IsProcessInForeground(RemotePlayProcess);
             if (EnableMouseInput != prevVal)
                 Utility.ShowCursor(prevVal);
@@ -313,7 +351,6 @@ namespace PS4KeyboardAndMouseAdapter
             if (EnableMouseInput)
             {
                 //ShowCursor(false);
-                var checkState = new DualShockState();
 
                 // Left mouse
                 if (SFML.Window.Mouse.IsButtonPressed(Mouse.Button.Left))
@@ -329,19 +366,20 @@ namespace PS4KeyboardAndMouseAdapter
 
                 MouseDirection = FeedMouseCoords();
 
-                //string analogProperty = MouseMovementAnalog == AnalogStick.Left ? "L" : "R";
-
                 var direction = new Vector2(MouseDirection.X, MouseDirection.Y);
-                int maxLength = 6;
-                int minLength = 3;
-                var length = direction.Length() > maxLength ? maxLength : direction.Length();
-                if (length < minLength)
-                    length = minLength;
-                direction = Vector2.Normalize(direction);
-                //direction = Vector2.Multiply(direction, minLength);
 
-                var scaledX = (byte)map(direction.X*length, -maxLength, maxLength, 0, 255);
-                var scaledY = (byte)map(direction.Y*length, -maxLength, maxLength, 0, 255);
+                // Cap length to fit range.
+                var normalizedLength = Utility.mapcap(direction.Length(), 
+                    Settings.MouseDistanceLowerRange, Settings.MouseDistanceUpperRange,
+                    Settings.AnalogStickLowerRange / 100f, Settings.AnalogStickUpperRange / 100f);
+
+                direction = Vector2.Normalize(direction);
+
+                direction.X *= (float)Settings.XYRatio;
+                direction = Vector2.Normalize(direction);
+
+                var scaledX = (byte)Utility.map(direction.X*normalizedLength, -1, 1, 0, 255);
+                var scaledY = (byte)Utility.map(direction.Y*normalizedLength, -1, 1, 0, 255);
 
                 if (float.IsNaN(direction.X) && float.IsNaN(direction.Y))
                 {
@@ -352,6 +390,9 @@ namespace PS4KeyboardAndMouseAdapter
                 // Set the analog values
                 CurrentState.RX = scaledX;
                 CurrentState.RY = scaledY;
+
+                AnalogX = scaledX;
+                AnalogY = scaledY;
 
                 ///Console.WriteLine("{0:000}, {1:000}", scaledX, scaledY);
                 //if(scaledX != 128 && scaledY != 128) Console.WriteLine("{0}  {1}", MouseSpeedX, MouseSpeedY);
@@ -366,6 +407,8 @@ namespace PS4KeyboardAndMouseAdapter
 
         private readonly Stopwatch mouseTimer = new Stopwatch();
         private Vector2i mouseDirection = new Vector2i(0, 0);
+        private int analogX;
+        private int analogY;
 
         public Vector2i FeedMouseCoords()
         {
@@ -399,11 +442,6 @@ namespace PS4KeyboardAndMouseAdapter
                 return false;
 
             return true;
-        }
-
-        double map(double x, double in_min, double in_max, double out_min, double out_max)
-        {
-            return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
