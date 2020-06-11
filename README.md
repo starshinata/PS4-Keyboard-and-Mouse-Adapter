@@ -1,6 +1,6 @@
 # PS4 Keyboard and Mouse Adapter 
 
-## :rocket: Click --> [here](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/1.0.6/Setup.exe) <-- to Download!
+## :rocket: Click --> [here](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/1.0.7/Setup.exe) <-- to Download!
 
 ## How to use
 
@@ -16,12 +16,9 @@ Do NOT plug your DS4 controller into your PC while using this tool. If it is plu
 If you think something doesn't work or is not good enough, don't get too mad at me and create an issue [here](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/issues/new/choose)
 
 ## To-do list
-- Mouse settings - deadzone, sensitivity, x/y ratio, etc.
 - Create and switch between multiple mapping profiles to make configuration easy when playing multiple games
 - Map multiple keys to the same button
 - Option to map mouse movement to left analog stick
-- Fix a nasty injection crash that appears when dealing with RemotePlay that has been patched by another software 
-- Improve the UI
 
 ## Credits
 
