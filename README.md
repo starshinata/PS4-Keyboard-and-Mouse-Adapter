@@ -2,6 +2,8 @@
 
 ## :rocket: Click --> [here](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/1.0.7/Setup.exe) <-- to Download!
 
+UPDATE: Guys, I'm rarely online these days, so feel free to join the discord here https://discord.gg/zH4b8p4 and ask other members for help.
+
 ## How to use
 
 1. Make sure you've enabled remote play from your PS4's settings menu. To do that:
