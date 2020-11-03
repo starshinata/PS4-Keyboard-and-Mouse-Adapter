@@ -136,7 +136,7 @@ namespace PS4KeyboardAndMouseAdapter
         {
             var path = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
 
-            var exeLocation = path + @"\PS4 Remote Play\RemotePlay.exe";
+            var exeLocation = path + @"\Sony\PS Remote Play\RemotePlay.exe";
 
             if (File.Exists(exeLocation))
             {
@@ -147,7 +147,7 @@ namespace PS4KeyboardAndMouseAdapter
             try
             {
                 //TODO: hardcoded currently, so it doesn't work when OS is set to non-default system language.
-                var shortcutPath = @"C:\ProgramData\Microsoft\Windows\Start Menu\Programs\PS4 Remote Play.lnk";
+                var shortcutPath = @"C:\ProgramData\Microsoft\Windows\Start Menu\Programs\PS Remote Play.lnk";
                 IWshRuntimeLibrary.IWshShell wsh = new IWshRuntimeLibrary.WshShellClass();
                 IWshRuntimeLibrary.IWshShortcut sc = (IWshRuntimeLibrary.IWshShortcut) wsh.CreateShortcut(shortcutPath);
                 shortcutPath = sc.TargetPath;
