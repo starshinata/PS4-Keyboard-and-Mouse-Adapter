@@ -22,24 +22,35 @@ namespace PS4KeyboardAndMouseAdapter
         private void OnAppExit(object sender, ExitEventArgs e)
         {
             Utility.ShowCursor(true);
-            
+
             //TODO: hardcoded, fix.
             //Injector.FindProcess("RemotePlay").Kill();
         }
 
+        private void Debug(String message)
+        {
+            Console.WriteLine(message);
+            Log.Information(message);
+        }
         private async Task UpdateIfAvailable()
         {
+            Debug("UpdateIfAvailable 37");
             try
             {
+                Debug("UpdateIfAvailable 30");
                 using (var mgr = await UpdateManager.GitHubUpdateManager("https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter"))
                 {
+                    Debug("UpdateIfAvailable 43");
                     await mgr.UpdateApp();
+                    Debug("UpdateIfAvailable 45");
                 }
             }
             catch (Exception ex)
             {
+                Debug("UpdateIfAvailable 50" + ex.Message);
                 Log.Logger.Error("Github Update failed: " + ex.Message);
             }
+            Debug("UpdateIfAvailable 53");
 
             try
             {
