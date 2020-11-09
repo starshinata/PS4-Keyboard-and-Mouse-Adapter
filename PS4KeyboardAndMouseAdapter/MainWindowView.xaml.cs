@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls.Primitives;
 using System.Windows.Media;
-using PS4KeyboardAndMouseAdapter.UI;
 using Button = System.Windows.Controls.Button;
 using Keyboard = SFML.Window.Keyboard;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
@@ -20,39 +18,44 @@ namespace PS4KeyboardAndMouseAdapter
 
         private const double LowOpacity = 0.1;
 
-        private Button lastClickedButton;
+        public Button lastClickedButton;
 
         public MainWindowView()
         {
             InitializeComponent();
-            vm = (MainViewModel) DataContext;
-            this.KeyDown += OnKeyDown;
-
+            vm = (MainViewModel)DataContext;
+            KeyDown += OnKeyDown_Super;
+            WaitingForKeyPress_Hide();
         }
 
-        private void OnKeyDown(object sender, KeyEventArgs e)
+
+        public void OnKeyDown_Super(object sender, KeyEventArgs e)
         {
-            if (lastClickedButton != null)
+
+            if (lastClickedButton != null && lastClickedButton.Tag != null)
             {
-                while (true)
+
+                foreach (var key in Enum.GetValues(typeof(Keyboard.Key)).Cast<Keyboard.Key>())
                 {
-                    foreach (var key in Enum.GetValues(typeof(Keyboard.Key)).Cast<Keyboard.Key>())
+                    if (Keyboard.IsKeyPressed(key))
                     {
-                        if (Keyboard.IsKeyPressed(key) && key != Keyboard.Key.P)
+
+                        if (key != Keyboard.Key.Escape)
                         {
-                            vm.SetMapping((VirtualKey) lastClickedButton.Tag, key);
-                            lastClickedButton = null;
-                            hidePressKey();
-                            return;
+                            vm.SetMapping((VirtualKey)lastClickedButton.Tag, key);
                         }
+
+                        lastClickedButton = null;
+                        WaitingForKeyPress_Hide();
                     }
                 }
+
             }
         }
 
-        private void displayPressKey()
+        public void WaitingForKeyPress_Show()
         {
-            PressKeyText.Opacity = 0.7;
+            WaitForKeyPress.Opacity = 0.7;
             JoystickImage.Opacity = LowOpacity;
 
             foreach (var button in FindVisualChildren<Button>(this))
@@ -62,9 +65,9 @@ namespace PS4KeyboardAndMouseAdapter
             }
         }
 
-        private void hidePressKey()
+        private void WaitingForKeyPress_Hide()
         {
-            PressKeyText.Opacity = 0;
+            WaitForKeyPress.Opacity = 0;
             JoystickImage.Opacity = 1;
 
             foreach (var button in FindVisualChildren<Button>(this))
@@ -78,11 +81,7 @@ namespace PS4KeyboardAndMouseAdapter
         {
             lastClickedButton = (Button)sender;
 
-            displayPressKey();
-
-            var b = (Button) sender;
-            //b.Content = vm.mappings[]
-            //b.Content = ((string) b.Content) + new Random().Next(5);
+            WaitingForKeyPress_Show();
         }
 
         public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
@@ -103,17 +102,6 @@ namespace PS4KeyboardAndMouseAdapter
                     }
                 }
             }
-        }
-
-        private void OnMouseHideToggleButtonClicked(object sender, RoutedEventArgs e)
-        {
-            var toggle = (ToggleButton) sender;
-
-        }
-
-        private void OnMouseSettingsButtonClick(object sender, RoutedEventArgs e)
-        {
-            UITools.ShowWindow<MouseSettings>();
         }
 
         private void MainWindowView_OnActivated(object sender, EventArgs e)

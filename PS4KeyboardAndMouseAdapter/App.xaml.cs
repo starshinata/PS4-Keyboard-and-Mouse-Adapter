@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using PS4RemotePlayInjection;
-using PS4RemotePlayInterceptor;
 using Serilog;
 using Squirrel;
 
@@ -34,15 +28,15 @@ namespace PS4KeyboardAndMouseAdapter
         }
         private async Task UpdateIfAvailable()
         {
-            Debug("UpdateIfAvailable 37");
+            Debug("UpdateIfAvailable() start");
             try
             {
-                Debug("UpdateIfAvailable 30");
+                Debug("UpdateIfAvailable() trying GitHubUpdateManager");
                 using (var mgr = await UpdateManager.GitHubUpdateManager("https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter"))
                 {
-                    Debug("UpdateIfAvailable 43");
+                    Debug("UpdateIfAvailable trying UpdateApp");
                     await mgr.UpdateApp();
-                    Debug("UpdateIfAvailable 45");
+                    Debug("UpdateIfAvailable UpdateApp complete");
                 }
             }
             catch (Exception ex)
@@ -50,7 +44,7 @@ namespace PS4KeyboardAndMouseAdapter
                 Debug("UpdateIfAvailable 50" + ex.Message);
                 Log.Logger.Error("Github Update failed: " + ex.Message);
             }
-            Debug("UpdateIfAvailable 53");
+            Debug("UpdateIfAvailable() update check completed");
 
             try
             {

@@ -6,13 +6,13 @@
         xmlns:local="clr-namespace:PS4KeyboardAndMouseAdapter"
         xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
         xmlns:converters="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Converters"
-        xmlns:controls="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Controls"
+        xmlns:controls="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Controls" xmlns:wpfspark="clr-namespace:WPFSpark;assembly=WPFSpark"
         mc:Ignorable="d"
         Title="{Binding Title}"
-        Width="620" Height="520" ResizeMode="CanMinimize"
+        Width="700" Height="670" 
         Activated="MainWindowView_OnActivated"
         Deactivated="MainWindowView_OnDeactivated">
-
+    <!-- ResizeMode="CanMinimize"    -->
     <Window.Style>
         <Style TargetType="Window" BasedOn="{StaticResource {x:Type Window}}"/>
     </Window.Style>
@@ -24,7 +24,7 @@
     <Window.Resources>
         <converters:KeyNameToSymbolConverter x:Key="KeyNameToSymbolConverter"/>
     </Window.Resources>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
@@ -33,73 +33,65 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*" />
-            <RowDefinition Height="8.3*" />
-            <RowDefinition Height="2*" />
+            <RowDefinition Height="15px" />
+            <RowDefinition Height="395px" />
+            <RowDefinition Height="30px" />
+            <RowDefinition Height="8*" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Margin="0, 20, 0, 0" Visibility="Visible">
-            <ToggleButton IsChecked="{Binding IsCursorHideRequested, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                          Margin="0, 5, 0, 5"
-                          Height="30"
-                          HorizontalAlignment="Center"
-                          Background="Transparent"
-                          Click="OnMouseHideToggleButtonClicked">
-                <ToggleButton.Style>    
-                    <Style TargetType="{x:Type ToggleButton}">
+        <StackPanel 
+            Grid.Column="0" Grid.Row="1" Grid.RowSpan="3" Grid.ColumnSpan="3"
+            x:Name="WaitForKeyPress" 
+            Panel.ZIndex="99">
 
-                        <Style.Triggers>
-                            <Trigger Property="IsChecked" Value="True">
-                                <Setter Property="Foreground" Value="DarkSlateGray" />
-                                <Setter Property="Content" Value="  Mouse will now be hidden once you go back to RemotePlay  "/>
-                            </Trigger>
-                            <Trigger Property="IsChecked" Value="False">
-                                <Setter Property="Content" Value="  Hide mouse cursor in RemotePlay  "/>
-                                <Setter Property="Foreground" Value="WhiteSmoke" />
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Foreground" Value="DarkSlateGray" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </ToggleButton.Style>
-            </ToggleButton>
+            <TextBlock 
+                Text="Press any key to map" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                Foreground="Crimson" 
+                FontFamily="consolas"
+                FontWeight="Bold" 
+                FontSize="30"/>
 
-            <TextBlock Text="Tip: You can press alt+tab to switch between windows once the mouse is hidden."
-                       HorizontalAlignment="Center"
-                       Foreground="WhiteSmoke" FontSize="10"/>
+            <TextBlock 
+                Text="or Escape to cancel" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                Foreground="Crimson" 
+                FontFamily="consolas"
+                FontWeight="Bold" 
+                FontSize="20"/>
         </StackPanel>
-
-
-        <TextBlock x:Name="PressKeyText" Text="Press a key to map" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Grid.ColumnSpan="3"
-                   HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Crimson" Opacity="0"
-                   FontFamily="Comic Sans MS" FontWeight="Bold" FontSize="30"/>
 
         <Grid Grid.Column="1" Grid.Row="1" Visibility="Visible">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="15px" />
+                <ColumnDefinition Width="3*" />
                 <ColumnDefinition Width="17*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="15px" />
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="1.1*"/>
-                <RowDefinition Height="1.5*" />
-                <RowDefinition Height="1.1*" />
-                <RowDefinition Height="0.75*" />
-                <RowDefinition Height="1.15*" />
-                <RowDefinition Height="1.2*" />
-                <RowDefinition Height="1.2*" />
-                <RowDefinition Height="1.2*" />
-                <RowDefinition Height="1.2*" />
-                <RowDefinition Height="1.2*" />
-                <RowDefinition Height="1.6*" />
-                <RowDefinition Height="1.0*" />
-                <RowDefinition Height="0.1*" />
-                <RowDefinition Height="1.1*" />
-                <RowDefinition Height="1.0*" />
+                <!-- 0 -->
+                <RowDefinition Height=".5*"/>
+                <!-- 1 -->
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <!-- 5 -->
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <!-- 10 -->
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="32px" />
             </Grid.RowDefinitions>
 
             <Grid.Resources>
@@ -108,107 +100,138 @@
                 </Style>
             </Grid.Resources>
 
-            <Image x:Name="JoystickImage" Stretch="Uniform" Grid.Column="2" Grid.RowSpan="15">
+            <Image x:Name="JoystickImage" Stretch="Uniform" Grid.Column="2" Grid.RowSpan="15" Margin="0,-24,0,4">
                 <Image.Source>
                     <BitmapImage UriSource="ds4_final_layout.png"/>
                 </Image.Source>
             </Image>
 
-            <Button Tag="{x:Static local:VirtualKey.TouchButton}" Content="{Binding Path=Settings.Mappings[(local:VirtualKey)TouchButton], UpdateSourceTrigger=PropertyChanged}"
-                    Grid.Column="1" Grid.Row="0" Visibility="Visible"/>
+            <!-- LEFT half of controller -->
 
             <Button Tag="{x:Static local:VirtualKey.L2}" Content="{Binding Path=Settings.Mappings[(local:VirtualKey)L2], UpdateSourceTrigger=PropertyChanged}"
-                    Grid.Column="1" Grid.Row="2" Visibility="Visible"/>
+                    Grid.Column="1" Grid.Row="2" Visibility="Visible" Margin="0,22,0,4" Grid.RowSpan="2"/>
 
-            <svgc:SvgViewbox Grid.Column="0" Grid.Row="2" Margin="-8, -5, -2, -2" Stretch="Uniform" 
-                             Source="pack://application:,,,/mouse-right-button.svg"/>
+            <svgc:SvgViewbox Grid.Column="0" Grid.Row="2" Margin="-12,22,2,25" Stretch="Uniform" 
+                             Source="pack://application:,,,/mouse-right-button.svg" Grid.RowSpan="3"/>
 
             <Button Tag="{x:Static local:VirtualKey.L1}" Content="{Binding Path=Settings.Mappings[(local:VirtualKey)L1], UpdateSourceTrigger=PropertyChanged}"
-                    Grid.Column="1" Grid.Row="4" Visibility="Visible"/>
+                    Grid.Column="1" Grid.Row="4" Visibility="Visible" Margin="0,2,0,27" Grid.RowSpan="2"/>
 
-            <Button Tag="{x:Static local:VirtualKey.DPadUp}" Content="{Binding Path=Settings.Mappings[(local:VirtualKey)DPadUp], Converter={StaticResource KeyNameToSymbolConverter}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                    Grid.Column="1" Grid.Row="6" Visibility="Visible" />
-            <Button Tag="{x:Static local:VirtualKey.DPadLeft}" Content="{Binding Path=Settings.Mappings[(local:VirtualKey)DPadLeft], Converter={StaticResource KeyNameToSymbolConverter}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                    Grid.Column="1" Grid.Row="7" Visibility="Visible"/>
-            <Button Tag="{x:Static local:VirtualKey.DPadDown}" Content="{Binding Path=Settings.Mappings[(local:VirtualKey)DPadDown], Converter={StaticResource KeyNameToSymbolConverter}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                    Grid.Column="1" Grid.Row="8" Visibility="Visible"/>
-            <Button Tag="{x:Static local:VirtualKey.DPadRight}" Content="{Binding Path=Settings.Mappings[(local:VirtualKey)DPadRight], Converter={StaticResource KeyNameToSymbolConverter}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                    Grid.Column="1" Grid.Row="9" Visibility="Visible"/>
+            <Button Tag="{x:Static local:VirtualKey.DPadUp}" 
+                    Content="{Binding Path=Settings.Mappings[(local:VirtualKey)DPadUp], Converter={StaticResource KeyNameToSymbolConverter}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                    Grid.Column="1" Grid.Row="6" Visibility="Visible" Margin="0,4,0,2" />
+            <Button Tag="{x:Static local:VirtualKey.DPadLeft}"
+                    Content="{Binding Path=Settings.Mappings[(local:VirtualKey)DPadLeft], Converter={StaticResource KeyNameToSymbolConverter}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                    Grid.Column="1" Grid.Row="7" Visibility="Visible" Margin="0,0,0,1"/>
+            <Button Tag="{x:Static local:VirtualKey.DPadDown}" 
+                    Content="{Binding Path=Settings.Mappings[(local:VirtualKey)DPadDown], Converter={StaticResource KeyNameToSymbolConverter}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                    Grid.Column="1" Grid.Row="8" Visibility="Visible" Margin="0,0,0,3"/>
+            <Button Tag="{x:Static local:VirtualKey.DPadRight}"
+                    Content="{Binding Path=Settings.Mappings[(local:VirtualKey)DPadRight], Converter={StaticResource KeyNameToSymbolConverter}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                    Grid.Column="1" Grid.Row="8" Visibility="Visible" Margin="0,25,0,7" Grid.RowSpan="2"/>
 
-            <Grid Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0, 6, 0, 0" HorizontalAlignment="Stretch">
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                </Grid.ColumnDefinitions>
-
-                <Button Tag="{x:Static local:VirtualKey.Up}" Content="{Binding Path=Settings.Mappings[(local:VirtualKey)Up], Converter={StaticResource KeyNameToSymbolConverter}, UpdateSourceTrigger=PropertyChanged}" 
-                                Grid.Column="1" Grid.Row="0" Padding="2"/>
+            <!-- LEFT STICK -->
+            <controls:AnalogStickBindings 
+                Grid.Row="9" 
+                Grid.RowSpan="5"
+                Grid.ColumnSpan="2"
+                Margin="-14,22,0,17"
+                StickContext="LEFT"/>
 
 
-                <Button Tag="{x:Static local:VirtualKey.Left}" Content="{Binding Path=Settings.Mappings[(local:VirtualKey)Left], Converter={StaticResource KeyNameToSymbolConverter}, UpdateSourceTrigger=PropertyChanged}" 
-                        Grid.Row="1" Grid.Column="0" Padding="2"/>
-                <Button Tag="{x:Static local:VirtualKey.Down}" Content="{Binding Path=Settings.Mappings[(local:VirtualKey)Down], Converter={StaticResource KeyNameToSymbolConverter}, UpdateSourceTrigger=PropertyChanged}" 
-                        Grid.Row="1" Grid.Column="1" Padding="2"/>
-                <Button Tag="{x:Static local:VirtualKey.Right}" Content="{Binding Path=Settings.Mappings[(local:VirtualKey)Right], Converter={StaticResource KeyNameToSymbolConverter}, UpdateSourceTrigger=PropertyChanged}" 
-                        Grid.Row="1" Grid.Column="2" Padding="2"/>
-            </Grid>
+            <!-- https://www.codeproject.com/Articles/1060961/WPFSpark-v -->
+            <wpfspark:ToggleSwitch
+                Grid.Row="14" 
+                IsChecked="{Binding Path=Settings.MouseControlsL3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Height="30"
+                HorizontalAlignment="Right"
+                Style="{StaticResource {ComponentResourceKey ResourceId=ToggleSwitch.UWP.Dark.Style, TypeInTargetAssembly={x:Type wpfspark:ToggleSwitch}}}" 
+                VerticalAlignment="Center" Margin="0,2,1,-4" Width="60" Grid.Column="1"/>
 
-            <Button Tag="{x:Static local:VirtualKey.L3}" Content="{Binding Path=Settings.Mappings[(local:VirtualKey)L3], UpdateSourceTrigger=PropertyChanged}"
-                    Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="13" Visibility="Visible"/>
+            <!-- left stick -> Mouse image -->
+            <svgc:SvgViewbox 
+                Grid.Row="13" 
+                Grid.Column="2"
+                Margin="2,22,407,0"
+                Stretch="Uniform" 
+                Source="pack://application:,,,/mouse-move.svg" Grid.RowSpan="2" />
+
+
+            <!-- MIDDLE of controller -->
+
+            <Button Tag="{x:Static local:VirtualKey.TouchButton}" Content="{Binding Path=Settings.Mappings[(local:VirtualKey)TouchButton], UpdateSourceTrigger=PropertyChanged}"
+                    Grid.Column="1" Grid.Row="1" Visibility="Visible" Margin="0,0,0,25" Grid.RowSpan="2"/>
 
             <Button Tag="{x:Static local:VirtualKey.Options}" Content="{Binding Path=Settings.Mappings[(local:VirtualKey)Options]}"
-                    Grid.Column="3" Grid.Row="0" Visibility="Visible"/>
-            <svgc:SvgViewbox Grid.Column="4" Grid.Row="2" Margin="-2, -5, -8, -2" Stretch="Uniform" 
-                             Source="pack://application:,,,/mouse-left-button.svg" />
+                    Grid.Column="3" Grid.Row="1" Visibility="Visible" Margin="0,0,0,25" Grid.RowSpan="2"/>
+
+
+            <!-- RIGHT half of controller -->
 
             <Button Tag="{x:Static local:VirtualKey.R2}" Content="{Binding Path=Settings.Mappings[(local:VirtualKey)R2]}"
-                    Grid.Column="3" Grid.Row="2" Visibility="Visible"/>
+                    Grid.Column="3" Grid.Row="2" Visibility="Visible" Margin="0,22,0,5" Grid.RowSpan="2"/>
+
+            <svgc:SvgViewbox Grid.Column="4" Grid.Row="2" Margin="2,22,-12,25" Stretch="Uniform" 
+                             Source="pack://application:,,,/mouse-left-button.svg" Grid.RowSpan="3" />
 
             <Button Tag="{x:Static local:VirtualKey.R1}" Content="{Binding Path=Settings.Mappings[(local:VirtualKey)R1]}"
                     Grid.Column="3" Grid.Row="4" Visibility="Visible"/>
+
             <Button Tag="{x:Static local:VirtualKey.Triangle}" Content="{Binding Path=Settings.Mappings[(local:VirtualKey)Triangle]}" 
-                    Grid.Column="3" Grid.Row="6" />
+                    Grid.Column="3" Grid.Row="6" Margin="0,6,0,0" />
             <Button Tag="{x:Static local:VirtualKey.Circle}" Content="{Binding Path=Settings.Mappings[(local:VirtualKey)Circle]}" 
-                    Grid.Column="3" Grid.Row="7" />
+                    Grid.Column="3" Grid.Row="7" Margin="0,2,0,1" />
             <Button Tag="{x:Static local:VirtualKey.Square}" Content="{Binding Path=Settings.Mappings[(local:VirtualKey)Square]}" 
-                    Grid.Column="3" Grid.Row="8" />
+                    Grid.Column="3" Grid.Row="8" Margin="0,0,0,1" />
             <Button Tag="{x:Static local:VirtualKey.Cross}" Content="{Binding Path=Settings.Mappings[(local:VirtualKey)Cross]}" 
-                    Grid.Column="3" Grid.Row="9" />
-            <svgc:SvgViewbox Grid.Column="4" Grid.Row="11" Margin="-4, -5, -9, -2" Stretch="Uniform" 
-                             Source="pack://application:,,,/mouse-move.svg" />
-            <Button Tag="{x:Static local:VirtualKey.R3}" Content="{Binding Path=Settings.Mappings[(local:VirtualKey)R3]}"
-                    Grid.Column="3" Grid.Row="13" Visibility="Visible"/>
+                    Grid.Column="3" Grid.Row="9" Margin="0,0,0,5" />
+
+            <!-- RIGHT STICK -->
+            <controls:AnalogStickBindings 
+                Grid.Row="9" 
+                Grid.RowSpan="5"
+                Grid.Column="3" Grid.ColumnSpan="2" 
+                Margin="0,24,-16,18"
+                StickContext="RIGHT"/>
+
+            <!-- right stick -> Mouse image -->
+            <svgc:SvgViewbox 
+                Grid.Row="13" 
+                Grid.Column="2"
+                Margin="405,24,4,-2"
+                Stretch="Uniform" 
+                Source="pack://application:,,,/mouse-move.svg" Grid.RowSpan="2" />
+
+            <!-- https://www.codeproject.com/Articles/1060961/WPFSpark-v -->
+            <wpfspark:ToggleSwitch
+                Grid.Row="14" Grid.Column="3" 
+                IsChecked="{Binding Path=Settings.MouseControlsR3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Height="30"
+                HorizontalAlignment="Right"
+                Style="{StaticResource {ComponentResourceKey ResourceId=ToggleSwitch.UWP.Dark.Style, TypeInTargetAssembly={x:Type wpfspark:ToggleSwitch}}}" 
+                VerticalAlignment="Center" Margin="0,4,18,-2" Width="60"/>
+
         </Grid>
 
-        <Grid Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"  Visibility="Visible">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="2*"/>
-                </Grid.ColumnDefinitions>
-                <!-- -->
-                <!-- <controls:AnalogStickVisualizer Grid.Column="0" -->
-                <!--                                 Diameter="50" -->
-                <!--                                 analogX="{Binding AnalogX, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" -->
-                <!--                                 analogY="{Binding AnalogY, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/> -->
+        <Grid  Grid.Row="3"  Grid.Column="1" Grid.ColumnSpan="2"  Visibility="Visible">
 
-                <controls:MouseSettingsControl MouseDistanceMinRange="{Binding Settings.MouseDistanceLowerRange, Mode=TwoWay}"
-                                               MouseDistanceMaxRange="{Binding Settings.MouseDistanceUpperRange, Mode=TwoWay}"
-                                               AnalogStickLowerRange="{Binding Settings.AnalogStickLowerRange, Mode=TwoWay}"
-                                               AnalogStickUpperRange="{Binding Settings.AnalogStickUpperRange, Mode=TwoWay}"
-                                               MaxMouseDistance="{Binding Settings.MouseMaxDistance}"
-                                               HorizontalVerticalRatio="{Binding Settings.XYRatio, Mode=TwoWay}" 
-                                               Margin="20, 10, 20, 10"
-                                               Grid.Column="1"/> 
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
 
-                <!--<Button Grid.Column="2" Content="Mouse Settings" HorizontalAlignment="Center" VerticalAlignment="Center"
-                        Padding="8, 3, 8, 3" Click="OnMouseSettingsButtonClick"/>-->
-            </Grid>
+
+            <controls:MouseSettingsControl
+                Grid.Column="1"
+                AnalogStickLowerRange="{Binding Settings.AnalogStickLowerRange, Mode=TwoWay}"
+                AnalogStickUpperRange="{Binding Settings.AnalogStickUpperRange, Mode=TwoWay}"
+                HorizontalVerticalRatio="{Binding Settings.XYRatio, Mode=TwoWay}" 
+                MouseDistanceMinRange="{Binding Settings.MouseDistanceLowerRange, Mode=TwoWay}"
+                MouseDistanceMaxRange="{Binding Settings.MouseDistanceUpperRange, Mode=TwoWay}"
+                MaxMouseDistance="{Binding Settings.MouseMaxDistance}"
+                Margin="20, 10, 20, 10"
+                />
         </Grid>
+
     </Grid>
 </Window>

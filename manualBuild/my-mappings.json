@@ -25,14 +25,17 @@
     "DPadDown": 11,
     "DPadRight": 10
   },
-  "AnalogStickLowerRange": 41,
+  "AnalogStickLowerRange": 31,
   "AnalogStickUpperRange": 95,
   "MouseDistanceLowerRange": 0.0,
-  "MouseDistanceUpperRange": 121.5,
+  "MouseDistanceUpperRange": 410.5,
   "MouseMaxDistance": 960.0,
   "MouseControlsL3": false,
   "MouseControlsR3": true,
-  "MouseXAxisSensitivityModifier": 8.0000000014901165,
-  "MouseYAxisSensitivityModifier": 7.8000000014901163,
+  "MousePollingRate": 100,
+  "MouseXAxisSensitivityMax": 100.0,
+  "MouseXAxisSensitivityModifier": 59.6,
+  "MouseYAxisSensitivityMax": 100.0,
+  "MouseYAxisSensitivityModifier": 55.0,
   "XYRatio": 1.0
 }
