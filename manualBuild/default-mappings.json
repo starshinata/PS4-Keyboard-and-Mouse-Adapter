@@ -23,7 +23,11 @@
 		"DPadUp": 27,
 		"DPadLeft": 28,
 		"DPadDown": 29,
-		"DPadRight": 30
+		"DPadRight": 30,
+		"PlaystationButton": 12,
+        "Share": 1,
+        "Options": 14,
+        "TouchButton": 13
 	},
 	"MouseDistanceLowerRange": 5.0,
 	"MouseDistanceUpperRange": 96.0,

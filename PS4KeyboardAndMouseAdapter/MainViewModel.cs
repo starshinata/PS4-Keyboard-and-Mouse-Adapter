@@ -139,32 +139,12 @@ namespace PS4KeyboardAndMouseAdapter
 
         public void HandleKeyboardInput()
         {
-            //left stick
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.LeftStickLeft]))
-                CurrentState.LX = 0;
+            // ORDER
+            // LEFT -- MIDDLE -- RIGHT
 
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.LeftStickRight]))
-                CurrentState.LX = 255;
-
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.LeftStickUp]))
-                CurrentState.LY = 0;
-
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.LeftStickDown]))
-                CurrentState.LY = 255;
-
-            //right stick
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.RightStickLeft]))
-                CurrentState.RX = 0;
-
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.RightStickRight]))
-                CurrentState.RX = 255;
-
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.RightStickUp]))
-                CurrentState.RY = 0;
-
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.RightStickDown]))
-                CurrentState.RY = 255;
-
+            ////////////////////////////////////////////
+            ////////////////////////////////////////////
+            
             //left face
             if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.DPadUp]))
                 CurrentState.DPad_Up = true;
@@ -177,6 +157,71 @@ namespace PS4KeyboardAndMouseAdapter
 
             if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.DPadRight]))
                 CurrentState.DPad_Right = true;
+
+            //left stick Analog
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.LeftStickLeft]))
+                CurrentState.LX = 0;
+
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.LeftStickRight]))
+                CurrentState.LX = 255;
+
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.LeftStickUp]))
+                CurrentState.LY = 0;
+
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.LeftStickDown]))
+                CurrentState.LY = 255;
+
+            //left stick Buttons
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.L1]))
+                CurrentState.L1 = true;
+
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.L2]))
+                CurrentState.L2 = 255;
+
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.L3]))
+                CurrentState.L3 = true;
+
+            ////////////////////////////////////////////
+            ////////////////////////////////////////////
+
+            // middle face
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.Share]))
+                CurrentState.Share = true;
+
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.TouchButton]))
+                CurrentState.TouchButton = true;
+
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.Options]))
+                CurrentState.Options = true;
+
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.PlaystationButton]))
+                CurrentState.PS = true;
+
+            ////////////////////////////////////////////
+            ////////////////////////////////////////////
+
+            //right stick Analog
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.RightStickLeft]))
+                CurrentState.RX = 0;
+
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.RightStickRight]))
+                CurrentState.RX = 255;
+
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.RightStickUp]))
+                CurrentState.RY = 0;
+
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.RightStickDown]))
+                CurrentState.RY = 255;
+
+            //right stick Buttons
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.R1]))
+                CurrentState.R1 = true;
+
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.R2]))
+                CurrentState.R2 = 255;
+
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.R3]))
+                CurrentState.R3 = true;
 
             //right face
             if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.Triangle]))
@@ -191,30 +236,6 @@ namespace PS4KeyboardAndMouseAdapter
             if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.Square]))
                 CurrentState.Square = true;
 
-
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.Options]))
-                CurrentState.Options = true;
-
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.L1]))
-                CurrentState.L1 = true;
-
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.L2]))
-                CurrentState.L2 = 255;
-
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.L3]))
-                CurrentState.L3 = true;
-
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.R1]))
-                CurrentState.R1 = true;
-
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.R2]))
-                CurrentState.R2 = 255;
-
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.R3]))
-                CurrentState.R3 = true;
-
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.TouchButton]))
-                CurrentState.TouchButton = true;
         }
 
 
@@ -408,7 +429,7 @@ namespace PS4KeyboardAndMouseAdapter
         public Vector2i FeedMouseCoords()
         {
             mouseTimer.Start();
-            
+
             int MillisecondsPerInput = 1000 / Settings.MousePollingRate;
             if (mouseTimer.ElapsedMilliseconds >= MillisecondsPerInput)
             {
@@ -427,6 +448,7 @@ namespace PS4KeyboardAndMouseAdapter
 
         public void SetMapping(VirtualKey key, Keyboard.Key value)
         {
+            Console.WriteLine("SetMapping {VirtKey:" + key + ", keyboardValue: " + value + "}");
             Settings.Mappings[key] = value;
             OnPropertyChanged(nameof(Settings));
 

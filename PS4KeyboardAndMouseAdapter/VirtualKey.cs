@@ -6,8 +6,10 @@ namespace PS4KeyboardAndMouseAdapter
     {
         NULL, 
 
+        Share,
         Options,
         TouchButton,
+        PlaystationButton,
 
         DPadLeft,
         DPadRight,
