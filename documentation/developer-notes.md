@@ -7,7 +7,7 @@ https://github.com/Squirrel/Squirrel.Windows/blob/develop/docs/using/application
 https://github.com/Squirrel/Squirrel.Windows/blob/develop/docs/using/squirrel-command-line.md squirrel-command-line documentation
 
 
-# Setup
+## Setup
 visual studio 2019
 
 Workloads ?
@@ -16,29 +16,29 @@ Workloads ?
   (Specifically "ClickOnce Publishing Tools"
 
 
-# Build
+## Build
 run the powershell script
 
 ` build.ps1 `
 
 
-# Code Signing
+## Code Signing
 For non self signed read https://virtualgl.org/DeveloperInfo/CodeSigningHell
 
 If you are happy with self signed certificates
 we can thank soulehshaikh9 for their pfx certificate generator https://github.com/soulehshaikh99/self-signed-certificate-generator
 
 
-### Gotchas
+## Gotchas
 
 (in order which they seem most prevalent for me)
 
-* "Markup is invalid"
+### "Markup is invalid"
 1. Clean the projects
 2. rebuild the solution
 
 
-* "Could not copy \Squirrel.exe"
+### "Could not copy \Squirrel.exe"
 you need to set "SquirrelToolsPath" in your project properties
 
 eg if you have your project as 'D:\workspace\pancakeslp\PS4-Keyboard-and-Mouse-Adapter\'
@@ -48,8 +48,21 @@ then your squirrel tools will be at  'D:\workspace\pancakeslp\PS4-Keyboard-and-M
 so then  ` SquirrelToolsPath = packages\squirrel.windows.1.9.1\tools `
 
 
-*  issue where WPFSpark is not found
- 1. remove WPFSpark from packages.config
- 2. Visual Studio Code > Tools > Nuget Package Manager > Package manager Console
- 3. ` Install-Package WPFSpark `
+### issue where WPFSpark is not found
+1. remove WPFSpark from packages.config
+2. Visual Studio Code > Tools > Nuget Package Manager > Package manager Console
+3. ` Install-Package WPFSpark `
+
+
+## Release checklist
+
+1. Have we enabled the auto update logic in ` App.xaml.cs `
+
+2. Have we updated the version number at 
+   * ` AssemblyInfo.cs `
+   * ` build.ps1 `
+
+3. if this version number unique, and not previously released?
+
+4. if everything uploaded and committed to git ?
 
