@@ -14,7 +14,8 @@ $CERT_DIRECTORY="D:\workspace\##certificates\github.com-pancakeslp"
 
 $SIGN_TOOL_PATH="C:\Program Files (x86)\Windows Kits\10\bin\10.0.17763.0\x64\signtool.exe"
 
-$VERSION="1.0.8"
+## TODO get this to read from the assembly file
+$VERSION="1.0.9"
 
 ################################
 ################################
@@ -27,9 +28,6 @@ $env:Path += ";C:\Program Files (x86)\Windows Kits\10\bin\10.0.17763.0\x64\"
 ## type is the windows equiavlent of cat
 $CERT_PASSWORD=$( type ${CERT_DIRECTORY}\cert-password.txt )
 $CERT_PFX="${CERT_DIRECTORY}\github.com-pancakeslp.pfx"
-## \`" is escape " in powershell
-$SIGN_TOOL_ARGS=" /a /f \`"${CERT_PFX}\`" /p \`"${CERT_PASSWORD}\`" /fd sha256 /tr http://timestamp.digicert.com /td sha256 "
-
 
 $GENERATED_INSTALLER_PATH="SquirrelReleases"
 
@@ -37,8 +35,33 @@ $GENERATED_INSTALLER_PATH="SquirrelReleases"
 ################################
 
 function cleanup {
-  remove PS4KeyboardAndMouseAdapter\bin\
   remove $GENERATED_INSTALLER_PATH
+  
+  remove PS4KeyboardAndMouseAdapter.*.nupkg
+  
+  remove PS4KeyboardAndMouseAdapter\bin\
+  remove PS4KeyboardAndMouseAdapter\logs\
+  remove PS4KeyboardAndMouseAdapter\obj\
+  
+  remove PS4RemotePlayInjection\bin\
+  remove PS4RemotePlayInjection\obj\
+    
+}
+
+function make-nuget-package {
+
+  $FIND="<version>REPLACE_VERSION_REPLACE</version>"
+  $REPLACE="<version>$VERSION</version>"
+  $TARGET_NUSPEC_FILE="nuget\PS4KeyboardAndMouseAdapter.nuspec"
+  
+  remove nuget\PS4KeyboardAndMouseAdapter.nuspec
+
+  Copy-Item nuget\PS4KeyboardAndMouseAdapter.nuspec.template.xml -Destination $TARGET_NUSPEC_FILE
+
+  ((Get-Content -path $TARGET_NUSPEC_FILE -Raw) -replace $FIND,$REPLACE) | Set-Content -Path $TARGET_NUSPEC_FILE
+
+  nuget\nuget.exe pack $TARGET_NUSPEC_FILE
+
 }
 
 
@@ -93,15 +116,22 @@ function squirrel {
   
   ## in powershell uses ` to denote continues on next line
   $COMMAND=" packages\squirrel.windows.1.9.1\tools\Squirrel.exe  --releasify \`"PS4KeyboardAndMouseAdapter.${VERSION}.nupkg\`"  --releaseDir $GENERATED_INSTALLER_PATH "
-  	
-	powershell.exe -ExecutionPolicy Bypass -Command "$COMMAND ... | Write-Output"
+  
+  powershell.exe -ExecutionPolicy Bypass -Command "$COMMAND | Write-Output"
 	
   echo "squirrel-ed package!"
   ##echo "wait for popup CMD to close ... "	
   
 }
 
+
+################################
+################################
+
 cleanup
+
+nuget\nuget.exe install PS4KeyboardAndMouseAdapter\packages.config -OutputDirectory packages
+nuget\nuget.exe install PS4RemotePlayInjection\packages.config     -OutputDirectory packages
 
 echo "msbuild-ing"
 MSBuild.exe PS4KeyboardAndMouseAdapter.sln -p:Configuration=Release /p:VersionNumber=$VERSION
@@ -114,7 +144,8 @@ Copy-Item   manualBuild\default-mappings.json        PS4KeyboardAndMouseAdapter\
 sign-executables
 
 echo ""
-nuget\nuget.exe pack nuget\PS4KeyboardAndMouseAdapter.nuspec
+
+make-nuget-package
 
 squirrel
 

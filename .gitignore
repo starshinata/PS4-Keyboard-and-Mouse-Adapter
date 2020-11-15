@@ -348,4 +348,10 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+###############
+.idea
+
 /SquirrelReleases
+/PS4KeyboardAndMouseAdapter/RemotePlayInstaller.exe
+/nuget/PS4KeyboardAndMouseAdapter.nuspec

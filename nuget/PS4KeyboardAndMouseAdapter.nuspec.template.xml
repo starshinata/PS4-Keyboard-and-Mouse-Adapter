@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>PS4KeyboardAndMouseAdapter</id>
-    <version>1.0.8</version>
+    <version>REPLACE_VERSION_REPLACE</version>
     <authors>Me</authors>
     <owners>Me</owners>
 	<!-- The description will appear as the program name when viewed in the list of installed programs within the Control Panel -->
