@@ -1,6 +1,6 @@
 # PS4 Keyboard and Mouse Adapter  Developer stuff
 
-# background reading
+# Background Reading
 https://intellitect.com/deploying-app-squirrel/ for how to use squirrel to make setup.exe and setup.msi installers
 https://www.twelve21.io/using-signtool-exe-to-sign-a-dotnet-core-assembly-with-a-digital-certificate/ for using code signing in dotnet
 https://github.com/Squirrel/Squirrel.Windows/blob/develop/docs/using/application-signing.md using squirrel to code sign installers
@@ -33,12 +33,12 @@ we can thank soulehshaikh9 for their pfx certificate generator https://github.co
 
 (in order which they seem most prevalent for me)
 
-### "Markup is invalid"
+#### "Markup is invalid"
 1. Clean the projects
 2. rebuild the solution
 
 
-### "Could not copy \Squirrel.exe"
+#### "Could not copy \Squirrel.exe"
 you need to set "SquirrelToolsPath" in your project properties
 
 eg if you have your project as 'D:\workspace\pancakeslp\PS4-Keyboard-and-Mouse-Adapter\'
@@ -48,7 +48,7 @@ then your squirrel tools will be at  'D:\workspace\pancakeslp\PS4-Keyboard-and-M
 so then  ` SquirrelToolsPath = packages\squirrel.windows.1.9.1\tools `
 
 
-### issue where WPFSpark is not found
+#### issue where WPFSpark is not found
 1. remove WPFSpark from packages.config
 2. Visual Studio Code > Tools > Nuget Package Manager > Package manager Console
 3. ` Install-Package WPFSpark `

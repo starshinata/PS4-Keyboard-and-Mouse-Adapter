@@ -12,28 +12,28 @@ So mouse configurations will likely specific to a combination of
 ## What do the different mouse settings do ?
 
 
-### Enable mouse input
+#### Enable mouse input
 This will enable mouse input, AND hide the mouse cursor when the "PS remote play" application is focuses
 
 
-### Mouse polling rate 
+#### Mouse polling rate 
 How many times a second do you want the application to measure mouse input and feed it to the Playstation.
   
 Be aware that increasing this number will make it more responsive, but may mean that your sensitivity needs to be increased; this is because we do not have mouse smoothing (as in gaming people generally appear to prefar Raw Input over Mouse Smoothed input).
 
 
-### Mouse sensitivity
+#### Mouse sensitivity
 Mouse sensitivity is the speed of a mouse pointer (or in games, your target reticle) and how fast it moves on the screen (or in games, how fast you turn and look). With increased sensitivity (ie the bigger the number), the mouse moves faster and requires less effort to get across the screen.
 This is comparable to increasing your mouse's DPI setting.
 
-### Mouse X axis sensitivity
+#### Mouse X axis sensitivity
 Left and right
 
-### Mouse Y axis sensitivity
+#### Mouse Y axis sensitivity
 Up and Down
 
 
-### Drift and deadzones
+#### Drift and deadzones
 This is not a setting but explaining it for below settings
 
 Drift is when you think your stick is idle or reset back to central, but the game recognises input. 
@@ -41,13 +41,13 @@ Drift is when you think your stick is idle or reset back to central, but the gam
 Games often require you to move the stick a certain amount, before it says that cant be drift and must be interesting input. The minimum amount is generally known as a deadzone.
 
 
-### Mouse distance range
+#### Mouse distance range
 disclaimer: I recommend just using mouse sensitivity
 
 This is the minimum and maximum amount of mouse input our application will accept per mouse poll (which happens many times a second).
 
 
-### Analog stick range
+#### Analog stick range
 disclaimer: I recommend just using mouse sensitivity
 
 Think of this as deadzone management for your emulated stick.
@@ -59,7 +59,7 @@ If you want lots of input you want a range of say 15%-95%
 If you want to be very precise you might find you want 30%-40%
 
 
-### Horizontal / Vertical ratio
+#### Horizontal / Vertical ratio
 disclaimer: I recommend just using mouse sensitivity
 
 This is for scaling down the Horizontal input (X axis / left and right).

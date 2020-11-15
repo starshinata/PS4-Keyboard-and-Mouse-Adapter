@@ -25,5 +25,5 @@
 
 ## Problems and fixes
 
-### Application says "need to  install remote play" but I already have it installed
+#### Application says "need to  install remote play" but I already have it installed
 If you are on PS4KeyboardAndMouseAdapter v1.0.7 or lower, you need to upgrade to a newer version. Sometime in October 2020 Sony issued a new version of "PS Remote Play" to support PS5, that broke some things in older versions of our application.

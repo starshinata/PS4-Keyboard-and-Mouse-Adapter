@@ -1,6 +1,8 @@
 # PS4 Keyboard and Mouse Adapter 
 Disclaimer: This project is not endorsed or certified by Sony, Playstation or any of their partners.
 
+![example UI](documentation/example-ui.png)
+
 
 ## DISCORD
 Try our discord here https://discord.gg/zH4b8p4 where you can either suggest ideas or ask other members for help.
@@ -8,8 +10,6 @@ Try our discord here https://discord.gg/zH4b8p4 where you can either suggest ide
 
 ## DOWNLOAD
 :rocket: Click --> [here](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/1.0.7/Setup.exe) <-- to Download!
-
-![example UI](documentation/example-ui.png)
 
 
 ## How to use
