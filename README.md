@@ -43,6 +43,7 @@ Read [developers-notes.md](documentation/troubleshooting.md)
 ## Version History
 ### v 1.0.9
 * Fixed image render so controller image is smoothly scaled (looks less janky)
+* Fixed issue where 'PS Remote Play' was still taking input, even though it wasnt focused
 * Added mappings for PS Button and Touch button
 * Added Keyboard mappings for right stick
 * Added mouse poll rate settings
