@@ -13,7 +13,7 @@
         mc:Ignorable="d"
         Title="{Binding Title}"
         Width="700" 
-        Height="670" 
+        Height="700" 
         ResizeMode="CanMinimize"
         Activated="MainWindowView_OnActivated"
         Deactivated="MainWindowView_OnDeactivated">
@@ -43,9 +43,9 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="15px" />
-            <RowDefinition Height="395px" />
-            <RowDefinition Height="30px" />
-            <RowDefinition Height="8*" />
+            <RowDefinition Height="390px" />
+            <RowDefinition Height="20px" />
+            <RowDefinition Height="220px" />
         </Grid.RowDefinitions>
 
         <StackPanel 
@@ -185,7 +185,7 @@
 
             <Button Tag="{x:Static PS4KeyboardAndMouseAdapter:VirtualKey.PlaystationButton}"
                 Content="{Binding Path=Settings.Mappings[(PS4KeyboardAndMouseAdapter:VirtualKey)PlaystationButton], UpdateSourceTrigger=PropertyChanged}"
-                Grid.Column="2" Grid.Row="13" Visibility="Visible" Margin="201,2,170,30" Grid.RowSpan="2"/>
+                Grid.Column="2" Grid.Row="13" Visibility="Visible" Margin="189,2,182,30" Grid.RowSpan="2"/>
 
 
             <!-- RIGHT half of controller -->

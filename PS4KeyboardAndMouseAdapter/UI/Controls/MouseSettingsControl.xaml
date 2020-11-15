@@ -17,77 +17,96 @@
         <Grid.RowDefinitions>
             <!-- row 0 -->
             <RowDefinition Height="30px" />
+            
             <!-- row 1 -->
+            <RowDefinition Height="30px" />
             <RowDefinition />
             <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="5px" />
+
             <!-- row 5-->
             <RowDefinition />
-            <!-- row 6 -->
             <RowDefinition />
-            <!-- row 7 -->
             <RowDefinition />
-            <!-- row 8 -->
             <RowDefinition />
+            <RowDefinition />
+            <!-- row 10 -->
+            <RowDefinition />
+            <RowDefinition />
+            
         </Grid.RowDefinitions>
 
         <TextBlock
             Grid.Row="0"
             Grid.Column="0"
+            FontSize="16"
+            FontWeight="Bold"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="Mouse Settings"/>
+
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="0"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
-            Text="Hide mouse cursor in RemotePlay"/>
+            Text="Enable mouse input in 'PS Remote Play'"/>
 
         <!-- https://www.codeproject.com/Articles/1060961/WPFSpark-v -->
         <wpfspark:ToggleSwitch
-            Grid.Row="0"
+            Grid.Row="1"
             Grid.Column="5"
             IsChecked="{Binding Path=IsCursorHideRequested, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             Height="30"
             HorizontalAlignment="Right"
             Style="{StaticResource {ComponentResourceKey ResourceId=ToggleSwitch.UWP.Dark.Style, TypeInTargetAssembly={x:Type wpfspark:ToggleSwitch}}}" 
-            VerticalAlignment="Center"
+            VerticalAlignment="Top"
             Width="60"/>
 
         <TextBlock 
-            Grid.Row="1"
+            Grid.Row="2"
             Grid.Column="0"
             FontSize="10"
+            HorizontalAlignment="Left"
+            Text="This will also hide the  mouse cursor in 'PS Remote Play'"
+            VerticalAlignment="Top" />
 
+        <TextBlock 
+            Grid.Row="3"
+            Grid.Column="0"
+            FontSize="10"
             HorizontalAlignment="Left"
             Text="Tip: You can press alt+tab to switch between windows once the mouse is hidden."
             VerticalAlignment="Center" />
 
+        <!-- Row 4 empty -->
+
         <controls:SliderV
-            Grid.Row="2"
+            Grid.Row="5"
             Description="Mouse polling rate"
             Minimum="10" 
             Maximum="250"
             TickFrequency="1"
-            Value="{Binding Path=Settings.MousePollingRate, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"
-            />
+            Value="{Binding Path=Settings.MousePollingRate, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}" />
 
         <controls:SliderV
-            Grid.Row="3"
+            Grid.Row="6"
             Description="Mouse X axis sensitivity"
             Minimum="1" 
             Maximum="{Binding Path=Settings.MouseXAxisSensitivityMax, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"
             TickFrequency="0.1"
-            Value="{Binding Path=Settings.MouseXAxisSensitivityModifier, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"
-            />
+            Value="{Binding Path=Settings.MouseXAxisSensitivityModifier, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}" />
 
         <controls:SliderV
-            Grid.Row="4"
+            Grid.Row="7"
             Description="Mouse Y axis sensitivity"
             Minimum="1" 
             Maximum="{Binding Path=Settings.MouseYAxisSensitivityMax, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"
             TickFrequency="0.1"
-            Value="{Binding Path=Settings.MouseYAxisSensitivityModifier, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"
-            />
+            Value="{Binding Path=Settings.MouseYAxisSensitivityModifier, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}" />
 
         <controls:RangeSlider            
-            Grid.Row="5"
+            Grid.Row="8"
             Description="Mouse distance range"
             Minimum="0" 
             Maximum="{Binding MaxMouseDistance, ElementName=This}" 
@@ -95,9 +114,8 @@
             UpperValue="{Binding MouseDistanceMaxRange, Mode=TwoWay, ElementName=This}"
             x:Name="mouseDistanceRangeSlider"/>
 
-
         <controls:RangeSlider 
-            Grid.Row="6" 
+            Grid.Row="9" 
             Description="Analog stick range (in %)" 
             LowerValue="{Binding AnalogStickLowerRange, Mode=TwoWay, ElementName=This}" 
             Minimum="0"  
@@ -106,7 +124,7 @@
             x:Name="AnalogStickRangeSlider" />
 
         <controls:SliderV 
-            Grid.Row="7"
+            Grid.Row="10"
             Description="Horizontal/Vertical ratio" 
             Minimum="0.1" 
             Maximum="1" 

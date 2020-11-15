@@ -14,9 +14,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		build.sh = build.sh
 		manualBuild\csfml-Window.dll = manualBuild\csfml-Window.dll
 		manualBuild\default-mappings.json = manualBuild\default-mappings.json
+		documentation\developer-notes.md = documentation\developer-notes.md
 		LICENSE = LICENSE
+		documentation\mouse-configuration.md = documentation\mouse-configuration.md
 		manualBuild\my-mappings.json = manualBuild\my-mappings.json
 		README.md = README.md
+		documentation\troubleshooting.md = documentation\troubleshooting.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{0439F286-1E5F-4B55-B902-F7EF43C7B22B}"
+	ProjectSection(SolutionItems) = preProject
+		documentation\developer-notes.md = documentation\developer-notes.md
+		documentation\mouse-configuration.md = documentation\mouse-configuration.md
+		documentation\troubleshooting.md = documentation\troubleshooting.md
 	EndProjectSection
 EndProject
 Global
@@ -46,6 +56,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0439F286-1E5F-4B55-B902-F7EF43C7B22B} = {9FF1BB60-DFEF-4108-A4A6-945C22D8882C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {215189D4-FCF7-4F3E-BC57-0EA3347DD037}
