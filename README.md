@@ -9,7 +9,7 @@ Try our discord here https://discord.gg/zH4b8p4 where you can either suggest ide
 
 
 ## DOWNLOAD
-:rocket: Click --> [here](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/1.0.7/Setup.exe) <-- to Download!
+:rocket: Click --> [here](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/1.0.9/Setup.exe) <-- to Download!
 
 
 ## How to use
@@ -43,11 +43,11 @@ Read [developers-notes.md](documentation/troubleshooting.md)
 ## Version History
 ### v 1.0.9
 * Fixed image render so controller image is smoothly scaled (looks less janky)
-* Fixed issue where 'PS Remote Play' was still taking input, even though it wasnt focused
+* Fixed issue where 'PS Remote Play' was still taking input, even though it wasn't focused
 * Added mappings for PS Button and Touch button
 * Added Keyboard mappings for right stick
 * Added mouse poll rate settings
-* Updated mouse anchoring logic so it is harder for you to click out of 'PS Remote Play' (still theorically possible to click out of 'PS Remote Play', if you experience this issue try increasing the mouse poll rate, or file an issue). <br> We specifically recognise where 'PS Remote Play' window is and anchor to the center of that - previously it was a random (not strictly random but it didnt have any obvious significance) point on your primary monitor
+* Updated mouse anchoring logic so it is harder for you to click out of 'PS Remote Play' (still theoretically possible to click out of 'PS Remote Play', if you experience this issue try increasing the mouse poll rate, or file an issue). <br> We specifically recognise where 'PS Remote Play' window is and anchor to the centre of that - previously it was a random (not strictly random but it didn't have any obvious significance) point on your primary monitor
 * Added switches to let user set which stick takes input from the mouse.<br> You could technically have move sticks controlled by the mouse ... I WOULD NOT recommend both sticks bound to the mouse!
 * Added more documentation
 * Lots of refactorings to make the code cleaner.
