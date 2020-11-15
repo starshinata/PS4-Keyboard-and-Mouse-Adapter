@@ -66,13 +66,19 @@ so then  ` SquirrelToolsPath = packages\squirrel.windows.1.9.1\tools `
 
 4. if this version number unique, and not previously released?
 
-5. if everything uploaded and committed to git ?
+5. Does the installer install to the version we expect?
 
-6. Verify the executables and installers are digitally signed
+6. If everything committed to git ?
 
-7. Do antivirus scans of
- * ps4keyboardandmouse.exe
- * setup.exe
- * setup.msi 
+7. Verify things are digitally signed
+   * AppData\Local\PS4KeyboardAndMouseAdapter\VERSION\PS4KeyboardAndMouseAdapter.exe 
+   * starshinata\PS4-Keyboard-and-Mouse-Adapter\PS4KeyboardAndMouseAdapter\bin\Release\PS4KeyboardAndMouseAdapter.exe 
+   * starshinata\PS4-Keyboard-and-Mouse-Adapter\SquirrelReleases\setup.exe
+   * starshinata\PS4-Keyboard-and-Mouse-Adapter\SquirrelReleases\setup.msi
 
-8. merge to master
+8. Do antivirus scans of
+   * AppData\Local\PS4KeyboardAndMouseAdapter\VERSION\PS4KeyboardAndMouseAdapter.exe 
+   * starshinata\PS4-Keyboard-and-Mouse-Adapter\SquirrelReleases\setup.exe
+   * starshinata\PS4-Keyboard-and-Mouse-Adapter\SquirrelReleases\setup.msi
+
+9. merge to master
