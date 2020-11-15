@@ -58,11 +58,21 @@ so then  ` SquirrelToolsPath = packages\squirrel.windows.1.9.1\tools `
 
 1. Have we enabled the auto update logic in ` App.xaml.cs `
 
-2. Have we updated the version number at 
+2. Write update notes
+
+3. Have we updated the version number at 
    * ` AssemblyInfo.cs `
    * ` build.ps1 `
 
-3. if this version number unique, and not previously released?
+4. if this version number unique, and not previously released?
 
-4. if everything uploaded and committed to git ?
+5. if everything uploaded and committed to git ?
 
+6. Verify the executables and installers are digitally signed
+
+7. Do antivirus scans of
+ * ps4keyboardandmouse.exe
+ * setup.exe
+ * setup.msi 
+
+8. merge to master
