@@ -76,7 +76,7 @@ so then  ` SquirrelToolsPath = packages\squirrel.windows.1.9.1\tools `
    * starshinata\PS4-Keyboard-and-Mouse-Adapter\SquirrelReleases\setup.exe
    * starshinata\PS4-Keyboard-and-Mouse-Adapter\SquirrelReleases\setup.msi
 
-8. Do antivirus scans of
+8. Do antivirus scans of via (https://www.virustotal.com/)[https://www.virustotal.com/]
    * AppData\Local\PS4KeyboardAndMouseAdapter\VERSION\PS4KeyboardAndMouseAdapter.exe 
    * starshinata\PS4-Keyboard-and-Mouse-Adapter\SquirrelReleases\setup.exe
    * starshinata\PS4-Keyboard-and-Mouse-Adapter\SquirrelReleases\setup.msi
