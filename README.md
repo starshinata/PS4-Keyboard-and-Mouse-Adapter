@@ -11,8 +11,6 @@ Try our discord here https://discord.gg/zH4b8p4 where you can either suggest ide
 ## DOWNLOAD
 :rocket: Click --> [here (v1.0.8)](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/1.0.8/Setup.exe) <-- to Download!
 
-:rocket: If you are feeling brave try our prerelease [here (v1.0.9)](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/1.0.9/Setup.exe) 
-
 
 
 ## How to use
