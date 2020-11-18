@@ -9,7 +9,10 @@ Try our discord here https://discord.gg/zH4b8p4 where you can either suggest ide
 
 
 ## DOWNLOAD
-:rocket: Click --> [here](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/1.0.9/Setup.exe) <-- to Download!
+:rocket: Click --> [here (v1.0.8)](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/1.0.8/Setup.exe) <-- to Download!
+
+:rocket: If you are feeling brave try our prerelease [here (v1.0.9)](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/1.0.9/Setup.exe) 
+
 
 
 ## How to use
@@ -42,6 +45,7 @@ Read [developers-notes.md](documentation/troubleshooting.md)
 
 ## Version History
 ### v 1.0.9
+* Disclaimer: this version seems to have an increase in CPU usage, if thats a problem please use v1.0.8 instead.
 * Fixed image render so controller image is smoothly scaled (looks less janky)
 * Fixed issue where 'PS Remote Play' was still taking input, even though it wasn't focused
 * Added mappings for PS Button and Touch button
