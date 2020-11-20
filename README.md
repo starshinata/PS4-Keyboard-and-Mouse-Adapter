@@ -40,6 +40,9 @@ Read [developers-notes.md](documentation/troubleshooting.md)
 
 
 ## Version History
+### v 1.0.10
+* fixed an issue where we were unintentionally using extra CPU
+
 ### v 1.0.9
 * Disclaimer: this version seems to have an increase in CPU usage, if thats a problem please use v1.0.8 instead.
 * Fixed image render so controller image is smoothly scaled (looks less janky)
@@ -85,7 +88,7 @@ Read [developers-notes.md](documentation/troubleshooting.md)
 
 
 ## Notes for Developers
-Read [developers-notes.md](documentation/developers-notes.md)
+Read [developer-notes.md](documentation/developer-notes.md)
 
 
 ## Credits

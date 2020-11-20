@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 using mscoree;
 
 namespace PS4RemotePlayInjection
@@ -32,24 +27,28 @@ namespace PS4RemotePlayInjection
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool SystemParametersInfo(uint uiAction, uint uiParam, string pvParam, SPIF fWinIni);
 
-        public static bool ShowCursor(bool show)
+        public static void ShowCursor(bool show)
         {
-            if (!show)
+            // pancakeslp 2020.11.19
+            // these actions are expensive - it was the cause of issue https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/issues/27
+            // so we should check to see if there is a difference between requested value and current value
+            // then execute if there is a difference
+            if (show != IsCursorVisible)
             {
-                // Make the cursor transparent
-                IntPtr cursor = LoadCursorFromFile("cursor.cur");
-                SetSystemCursor(cursor, 32512);
-            }
-            else
-            {
-                // Reset to default cursor settings
-                SystemParametersInfo(0x0057, 0, null, 0);
-            }
+                if (!show)
+                {
+                    // Make the cursor transparent
+                    IntPtr cursor = LoadCursorFromFile("cursor.cur");
+                    SetSystemCursor(cursor, 32512);
+                }
+                else
+                {
+                    // Reset to default cursor settings
+                    SystemParametersInfo(0x0057, 0, null, 0);
+                }
 
-            IsCursorVisible = show;
-
-            //TODO: getLastError check
-            return true;
+                IsCursorVisible = show;
+            }
         }
 
         public static double map(double x, double in_min, double in_max, double out_min, double out_max)
@@ -63,7 +62,7 @@ namespace PS4RemotePlayInjection
                 x = in_min;
 
             if (x > in_max)
-                x = in_max; 
+                x = in_max;
 
             return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
         }
