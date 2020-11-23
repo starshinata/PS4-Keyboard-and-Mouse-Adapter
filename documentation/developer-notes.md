@@ -1,10 +1,11 @@
 # PS4 Keyboard and Mouse Adapter  Developer stuff
 
 # Background Reading
-https://intellitect.com/deploying-app-squirrel/ for how to use squirrel to make setup.exe and setup.msi installers
-https://www.twelve21.io/using-signtool-exe-to-sign-a-dotnet-core-assembly-with-a-digital-certificate/ for using code signing in dotnet
-https://github.com/Squirrel/Squirrel.Windows/blob/develop/docs/using/application-signing.md using squirrel to code sign installers
-https://github.com/Squirrel/Squirrel.Windows/blob/develop/docs/using/squirrel-command-line.md squirrel-command-line documentation
+* [How to use squirrel to make setup.exe and setup.msi installers](https://intellitect.com/deploying-app-squirrel/ )
+* [How to use code signing in dotnet](https://www.twelve21.io/using-signtool-exe-to-sign-a-dotnet-core-assembly-with-a-digital-certificate/)
+* [Using squirrel to code sign installers](https://github.com/Squirrel/Squirrel.Windows/blob/develop/docs/using/application-signing.md )
+* [Squirrel command line documentation](https://github.com/Squirrel/Squirrel.Windows/blob/develop/docs/using/squirrel-command-line.md)
+* [Easy Hook Intro](https://www.codeproject.com/Articles/27637/EasyHook-The-reinvention-of-Windows-API-hooking)
 
 
 ## Setup
