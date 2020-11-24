@@ -1,3 +1,5 @@
+**This is only interesting if you want to manually edit mappgins.json**
+
 For mapping of keyboard keys, we use "Simple and Fast Multimedia Library" SFML - https://www.sfml-dev.org/
 
 If you are interested in what is a specific value of a key, see the below listing
