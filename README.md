@@ -9,7 +9,7 @@ Try our discord here https://discord.gg/zH4b8p4 where you can either suggest ide
 
 
 ## DOWNLOAD
-:rocket: Click --> [here (v1.0.8)](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/1.0.8/Setup.exe) <-- to Download!
+:rocket: Click --> [here (v1.0.10)](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/1.0.10/Setup.exe) <-- to Download!
 
 
 
