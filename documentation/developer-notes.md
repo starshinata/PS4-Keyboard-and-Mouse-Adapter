@@ -1,10 +1,11 @@
 # PS4 Keyboard and Mouse Adapter  Developer stuff
 
 # Background Reading
-https://intellitect.com/deploying-app-squirrel/ for how to use squirrel to make setup.exe and setup.msi installers
-https://www.twelve21.io/using-signtool-exe-to-sign-a-dotnet-core-assembly-with-a-digital-certificate/ for using code signing in dotnet
-https://github.com/Squirrel/Squirrel.Windows/blob/develop/docs/using/application-signing.md using squirrel to code sign installers
-https://github.com/Squirrel/Squirrel.Windows/blob/develop/docs/using/squirrel-command-line.md squirrel-command-line documentation
+* [How to use squirrel to make setup.exe and setup.msi installers](https://intellitect.com/deploying-app-squirrel/ )
+* [How to use code signing in dotnet](https://www.twelve21.io/using-signtool-exe-to-sign-a-dotnet-core-assembly-with-a-digital-certificate/)
+* [Using squirrel to code sign installers](https://github.com/Squirrel/Squirrel.Windows/blob/develop/docs/using/application-signing.md )
+* [Squirrel command line documentation](https://github.com/Squirrel/Squirrel.Windows/blob/develop/docs/using/squirrel-command-line.md)
+* [Easy Hook Intro](https://www.codeproject.com/Articles/27637/EasyHook-The-reinvention-of-Windows-API-hooking)
 
 
 ## Setup
@@ -68,17 +69,19 @@ so then  ` SquirrelToolsPath = packages\squirrel.windows.1.9.1\tools `
 
 5. Does the installer install to the version we expect?
 
-6. If everything committed to git ?
+6. CPU analysis, are we still using only 1% of the CPU?
 
-7. Verify things are digitally signed
+7. If everything committed to git ?
+
+8. Verify things are digitally signed
    * AppData\Local\PS4KeyboardAndMouseAdapter\VERSION\PS4KeyboardAndMouseAdapter.exe 
    * starshinata\PS4-Keyboard-and-Mouse-Adapter\PS4KeyboardAndMouseAdapter\bin\Release\PS4KeyboardAndMouseAdapter.exe 
    * starshinata\PS4-Keyboard-and-Mouse-Adapter\SquirrelReleases\setup.exe
    * starshinata\PS4-Keyboard-and-Mouse-Adapter\SquirrelReleases\setup.msi
 
-8. Do antivirus scans of via (https://www.virustotal.com/)[https://www.virustotal.com/]
+9. Do antivirus scans of via (https://www.virustotal.com/)[https://www.virustotal.com/]
    * AppData\Local\PS4KeyboardAndMouseAdapter\VERSION\PS4KeyboardAndMouseAdapter.exe 
    * starshinata\PS4-Keyboard-and-Mouse-Adapter\SquirrelReleases\setup.exe
    * starshinata\PS4-Keyboard-and-Mouse-Adapter\SquirrelReleases\setup.msi
 
-9. merge to master
+10. merge to master
