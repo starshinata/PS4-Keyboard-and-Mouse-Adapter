@@ -71,6 +71,8 @@ namespace PS4KeyboardAndMouseAdapter
         // AKA init
         public MainViewModel()
         {
+            Log.Information("MainViewModel constructor IN");
+
             // cause not having a cursor is a pain in the ass
             Utility.ShowCursor(true);
 
@@ -100,6 +102,7 @@ namespace PS4KeyboardAndMouseAdapter
             }
 
             Task.Run(AutoClickStart);
+            Log.Information("MainViewModel constructor OUT");
         }
 
         public void AutoClickStart()

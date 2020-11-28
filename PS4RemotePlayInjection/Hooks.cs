@@ -24,15 +24,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using AppDomainToolkit;
 using EasyHook;
 using PS4RemotePlayInterceptor;
-using Serilog;
 
 namespace PS4RemotePlayInjection
 {
@@ -84,34 +80,44 @@ namespace PS4RemotePlayInjection
             EasyHook.RemoteHooking.IContext context,
             string channelName)
         {
+
             // Connect to server object using provided channel name
             _server = EasyHook.RemoteHooking.IpcConnectClient<InjectionInterface>(channelName);
-
+            _server.Print("InjectionInterface for " + channelName + " made");
             // If Ping fails then the Run method will be not be called
             _server.Ping();
         }
 
         public void DotNetHooks()
         {
-            var appDomains = Utility.GetAppDomains();
 
-            using (var domainContext = AppDomainContext.Wrap(appDomains[0]))
+            _server.Print("Hooks.DotNetHooks IN");
+            var appDomains = Utility.GetAppDomains();
+            try
             {
-                try
+                using (var domainContext = AppDomainContext.Wrap(appDomains[0]))
                 {
-                    RemoteAction.Invoke(
-                        domainContext.Domain,
-                        () =>
-                        {
-                            Patcher.server = EasyHook.RemoteHooking.IpcConnectClient<InjectionInterface>("dotnethooks");
-                            Patcher.DoPatching();
-                        });
-                }
-                catch(Exception e)
-                {
-                    _server.Print(e, "Error when executing remote AppDomain code");
+                    try
+                    {
+                        RemoteAction.Invoke(
+                            domainContext.Domain,
+                            () =>
+                            {
+                                Patcher.server = EasyHook.RemoteHooking.IpcConnectClient<InjectionInterface>("dotnethooks");
+                                Patcher.DoPatching();
+                            });
+                    }
+                    catch (Exception e)
+                    {
+                        _server.Print(e, "Error when executing remote AppDomain code");
+                    }
                 }
             }
+            catch (Exception e)
+            {
+                _server.Print(e, "Error Hooks.118");
+            }
+            _server.Print("Hooks.DotNetHooks OUT");
         }
 
         /// <summary>
@@ -125,18 +131,21 @@ namespace PS4RemotePlayInjection
             EasyHook.RemoteHooking.IContext context,
             string channelName)
         {
+            _server.Print("Hooks.Run IN");
+
             // Injection is now complete and the server interface is connected
             _server.OnInjectionSuccess(EasyHook.RemoteHooking.GetCurrentProcessId());
 
             try
             {
                 DotNetHooks();
+                _server.Print("Dotnet hooks created.");
             }
             catch (Exception e)
             {
                 _server.Print(e, "Problem creating dotnet hooks");
             }
-            _server.Print("Dotnet hooks created.");
+
 
             // Install hooks
             List<EasyHook.LocalHook> hooks = new List<LocalHook>();
@@ -248,11 +257,13 @@ namespace PS4RemotePlayInjection
                 hooks.Add(readFileHook);
             }
 
+            _server.Print("Hooks.Run activating hooks");
             // Activate hooks on all threads except the current thread
             foreach (var h in hooks)
             {
                 h.ThreadACL.SetExclusiveACL(new Int32[] { 0 });
             }
+            _server.Print("Hooks.Run activated hooks");
 
             // Wake up the process (required if using RemoteHooking.CreateAndInject)
             EasyHook.RemoteHooking.WakeUpProcess();
@@ -269,16 +280,20 @@ namespace PS4RemotePlayInjection
             catch
             {
                 // Ping() will raise an exception if host is unreachable
+                _server.Print("Hooks.Run remote server is unreachable");
             }
 
+            _server.Print("Hooks.Run removing hooks");
             // Remove hooks
             foreach (var h in hooks)
             {
                 h.Dispose();
             }
+            _server.Print("Hooks.Run removed hooks");
 
             // Finalise cleanup of hooks
             EasyHook.LocalHook.Release();
+            _server.Print("Hooks.Run OUT");
         }
 
         /// <summary>

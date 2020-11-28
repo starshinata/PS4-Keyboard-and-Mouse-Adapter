@@ -102,7 +102,7 @@ function sign-executables {
 }
 
 function sign-installers {
-echo ""
+  echo ""
   echo "sign-ing installers" 
   
   manually-sign-file  $GENERATED_INSTALLER_PATH\setup.exe
@@ -118,10 +118,11 @@ function squirrel {
   $COMMAND=" packages\squirrel.windows.1.9.1\tools\Squirrel.exe  --releasify \`"PS4KeyboardAndMouseAdapter.${VERSION}.nupkg\`"  --releaseDir $GENERATED_INSTALLER_PATH "
   
   powershell.exe -ExecutionPolicy Bypass -Command "$COMMAND | Write-Output"
-	
+
+  ## squirrel makes an MSI, but the MSI seems to do nothing
+  remove $GENERATED_INSTALLER_PATH\setup.msi
+
   echo "squirrel-ed package!"
-  ##echo "wait for popup CMD to close ... "	
-  
 }
 
 

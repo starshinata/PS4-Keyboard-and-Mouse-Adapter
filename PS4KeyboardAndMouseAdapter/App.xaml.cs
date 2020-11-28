@@ -28,23 +28,23 @@ namespace PS4KeyboardAndMouseAdapter
         }
         private async Task UpdateIfAvailable()
         {
-            Debug("UpdateIfAvailable() start");
+            Debug("App.UpdateIfAvailable() start");
             try
             {
-                Debug("UpdateIfAvailable() trying GitHubUpdateManager");
+                Debug("App.UpdateIfAvailable() trying GitHubUpdateManager");
                 using (var mgr = await UpdateManager.GitHubUpdateManager("https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter"))
                 {
-                    Debug("UpdateIfAvailable trying UpdateApp");
+                    Debug("App.UpdateIfAvailable() trying UpdateApp");
                     await mgr.UpdateApp();
-                    Debug("UpdateIfAvailable UpdateApp complete");
+                    Debug("App.UpdateIfAvailable() UpdateApp complete");
                 }
             }
             catch (Exception ex)
             {
-                Debug("UpdateIfAvailable 50" + ex.Message);
+                Debug("App.UpdateIfAvailable() 44" + ex.Message);
                 Log.Logger.Error("Github Update failed: " + ex.Message);
             }
-            Debug("UpdateIfAvailable() update check completed");
+            Debug("App.UpdateIfAvailable() update check completed");
 
             try
             {

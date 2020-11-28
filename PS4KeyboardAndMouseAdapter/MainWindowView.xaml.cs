@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
+using Serilog;
 using Button = System.Windows.Controls.Button;
 using Keyboard = SFML.Window.Keyboard;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
@@ -22,10 +23,14 @@ namespace PS4KeyboardAndMouseAdapter
 
         public MainWindowView()
         {
+            Log.Information("MainWindowView constructor IN");
+
             InitializeComponent();
             vm = (MainViewModel)DataContext;
             KeyDown += OnKeyDown_Super;
             WaitingForKeyPress_Hide();
+
+            Log.Information("MainWindowView constructor OUT");
         }
 
 
