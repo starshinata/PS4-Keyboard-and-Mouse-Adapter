@@ -1,11 +1,14 @@
 # Version History
 
+### v 1.0.11
+* You can now save and load profiles (which are a collection of bindings/settings for a particular application on PS4)
+
 ### v 1.0.10
 * fixed an issue where we were unintentionally using extra CPU
 
 ### v 1.0.9
 * Disclaimer: this version seems to have an increase in CPU usage, if thats a problem please use v1.0.8 instead.
-* Fixed image render so controller image is smoothly scaled (looks less janky)
+* Fixed image render so controller image is smoothly scaled (controller image, and other images look less jagged/janky)
 * Fixed issue where 'PS Remote Play' was still taking input, even though it wasn't focused
 * Added mappings for PS Button and Touch button
 * Added Keyboard mappings for right stick

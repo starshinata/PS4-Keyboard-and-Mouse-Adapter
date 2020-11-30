@@ -23,7 +23,7 @@ Because this software is not authorised by SIE LLC (Sony), this may technically 
 
 
 ### I have a question or issue, why havent you replied?
-We do this in our free time, and we have normaly 9-5 day jobs to contend with.
+We do this in our free time, and we normally have 9-5 day jobs to contend with.
 
 I would like to remind you this application is **free**.
 
