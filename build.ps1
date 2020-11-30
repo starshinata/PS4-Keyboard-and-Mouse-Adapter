@@ -9,13 +9,14 @@ $ErrorActionPreference = "Stop"
 
 ################################
 ################################
+
 ## might need configuring
 $CERT_DIRECTORY="D:\workspace\##certificates\github.com-pancakeslp"
 
 $SIGN_TOOL_PATH="C:\Program Files (x86)\Windows Kits\10\bin\10.0.17763.0\x64\signtool.exe"
 
 ## TODO get this to read from the assembly file
-$VERSION="1.0.10"
+$VERSION="1.0.11"
 
 ################################
 ################################
@@ -25,7 +26,7 @@ $env:Path += ";C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSB
 $env:Path += ";C:\Program Files (x86)\Windows Kits\10\bin\10.0.17763.0\x64\"
 
 
-## type is the windows equiavlent of cat
+## type is the windows equivalent of cat
 $CERT_PASSWORD=$( type ${CERT_DIRECTORY}\cert-password.txt )
 $CERT_PFX="${CERT_DIRECTORY}\github.com-pancakeslp.pfx"
 
@@ -33,6 +34,23 @@ $GENERATED_INSTALLER_PATH="SquirrelReleases"
 
 ################################
 ################################
+
+function build-msbuild {
+
+  echo "msbuild-ing"
+      
+  MSBuild.exe PS4KeyboardAndMouseAdapter.sln `
+    -p:Configuration=Release                 `
+    -p:VersionNumber=$VERSION
+
+  if ( $LASTEXITCODE -ne 0) {
+    echo "msbuild failed"
+    exit $LASTEXITCODE 
+  }
+
+  echo "msbuild done"
+}
+
 
 function cleanup {
   remove $GENERATED_INSTALLER_PATH
@@ -48,19 +66,38 @@ function cleanup {
     
 }
 
+function dependencies-nuget {
+  nuget install PS4KeyboardAndMouseAdapter\packages.config -OutputDirectory packages
+  error-on-bad-return-code	
+
+  nuget install PS4RemotePlayInjection\packages.config     -OutputDirectory packages
+  error-on-bad-return-code	
+}
+
+
+function error-on-bad-return-code {
+  if ( $LASTEXITCODE -ne 0) {
+    echo "error-on-bad-return-code!"
+    exit $LASTEXITCODE 
+  }
+}
+
+
 function make-nuget-package {
 
   $FIND="<version>REPLACE_VERSION_REPLACE</version>"
   $REPLACE="<version>$VERSION</version>"
-  $TARGET_NUSPEC_FILE="nuget\PS4KeyboardAndMouseAdapter.nuspec"
+  $SOURCE_NUSPEC_FILE="manualBuild\nuget\PS4KeyboardAndMouseAdapter.nuspec.template.xml"
+  $TARGET_NUSPEC_FILE="manualBuild\nuget\PS4KeyboardAndMouseAdapter.nuspec"
   
-  remove nuget\PS4KeyboardAndMouseAdapter.nuspec
+  remove $TARGET_NUSPEC_FILE
 
-  Copy-Item nuget\PS4KeyboardAndMouseAdapter.nuspec.template.xml -Destination $TARGET_NUSPEC_FILE
+  Copy-Item $SOURCE_NUSPEC_FILE -Destination $TARGET_NUSPEC_FILE
 
   ((Get-Content -path $TARGET_NUSPEC_FILE -Raw) -replace $FIND,$REPLACE) | Set-Content -Path $TARGET_NUSPEC_FILE
 
-  nuget\nuget.exe pack $TARGET_NUSPEC_FILE
+  nuget pack $TARGET_NUSPEC_FILE
+  error-on-bad-return-code
 
 }
 
@@ -68,7 +105,7 @@ function make-nuget-package {
 function manually-sign-file {
   $FILE_NAME = $args[0]
 
-  if(![System.IO.File]::Exists($FILE_NAME))  {
+  if(![System.IO.File]::Exists($FILE_NAME)) {
     Write-Error "file $FILE_NAME missing!" 
     exit 1
   }
@@ -82,17 +119,22 @@ function manually-sign-file {
 	  /tr http://timestamp.digicert.com   `
 	  /td sha256                          `
       $FILE_NAME
-	
+
+  error-on-bad-return-code	
+}
+
+function nuget {
+  manualBuild\nuget\nuget.exe $args
 }
 
 function remove {
   $FILE_NAME = $args[0]
 
-  if (Test-Path $FILE_NAME) 
-  {
+  if (Test-Path $FILE_NAME) {
     Remove-Item -Recurse $FILE_NAME
   }
 }
+
 
 function sign-executables {
   echo ""
@@ -101,14 +143,16 @@ function sign-executables {
   echo "signed executables"
 }
 
-function sign-installers {
+
+function sign-installer {
   echo ""
-  echo "sign-ing installers" 
+  echo "sign-ing installer" 
   
   manually-sign-file  $GENERATED_INSTALLER_PATH\setup.exe
-  manually-sign-file  $GENERATED_INSTALLER_PATH\setup.msi
-  echo "signed installers"
+
+  echo "signed installer"
 }
+
 
 function squirrel {
   echo ""
@@ -118,6 +162,7 @@ function squirrel {
   $COMMAND=" packages\squirrel.windows.1.9.1\tools\Squirrel.exe  --releasify \`"PS4KeyboardAndMouseAdapter.${VERSION}.nupkg\`"  --releaseDir $GENERATED_INSTALLER_PATH "
   
   powershell.exe -ExecutionPolicy Bypass -Command "$COMMAND | Write-Output"
+  error-on-bad-return-code	
 
   ## squirrel makes an MSI, but the MSI seems to do nothing
   remove $GENERATED_INSTALLER_PATH\setup.msi
@@ -126,21 +171,43 @@ function squirrel {
 }
 
 
+function valid-xaml-xmllint {
+  echo ""
+  echo "validating xamls xmllint"
+
+  $files =  Get-ChildItem -recurse *.xaml | where {! $_.PSIsContainer}
+
+  foreach ($file in $files) {
+ 
+    manualBuild\libxml\bin\xmllint.exe $file.FullName  --noout
+
+    if ( $LASTEXITCODE -ne 0) {
+      echo "ERROR for file $file"
+      exit $LASTEXITCODE 
+    }
+
+  }
+
+  echo "validated xamls xmllint"
+}
+
+
 ################################
 ################################
+
 
 cleanup
 
-nuget\nuget.exe install PS4KeyboardAndMouseAdapter\packages.config -OutputDirectory packages
-nuget\nuget.exe install PS4RemotePlayInjection\packages.config     -OutputDirectory packages
+dependencies-nuget
 
-echo "msbuild-ing"
-MSBuild.exe PS4KeyboardAndMouseAdapter.sln -p:Configuration=Release /p:VersionNumber=$VERSION
-echo "msbuild done"
+valid-xaml-xmllint
+
+build-msbuild
 
 echo ""
-Copy-Item   manualBuild\csfml-Window.dll             PS4KeyboardAndMouseAdapter\bin\Release
-Copy-Item   manualBuild\default-mappings.json        PS4KeyboardAndMouseAdapter\bin\Release\mappings.json
+Copy-Item                   manualBuild\csfml-Window.dll             PS4KeyboardAndMouseAdapter\bin\Release
+Copy-Item                   profiles\default-profile.json            PS4KeyboardAndMouseAdapter\bin\Release\profile-previous.json
+Copy-Item  -recurse -Force  profiles                                 PS4KeyboardAndMouseAdapter\bin\Release\profiles              
 
 sign-executables
 
@@ -150,5 +217,5 @@ make-nuget-package
 
 squirrel
 
-sign-installers
+sign-installer
 

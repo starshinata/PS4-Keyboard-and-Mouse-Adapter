@@ -245,12 +245,17 @@
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="20px"/>
                 <ColumnDefinition Width="5*"/>
             </Grid.ColumnDefinitions>
 
 
+            <controls:ProfileManager
+                Grid.Column="0"
+                />
+
             <controls:MouseSettingsControl
-                Grid.Column="1"
+                Grid.Column="2"
                 AnalogStickLowerRange="{Binding Settings.AnalogStickLowerRange, Mode=TwoWay}"
                 AnalogStickUpperRange="{Binding Settings.AnalogStickUpperRange, Mode=TwoWay}"
                 HorizontalVerticalRatio="{Binding Settings.XYRatio, Mode=TwoWay}" 

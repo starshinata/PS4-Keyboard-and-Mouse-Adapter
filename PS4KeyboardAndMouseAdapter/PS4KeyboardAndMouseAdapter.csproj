@@ -242,9 +242,11 @@
     <Compile Include="Dll\Rect.cs" />
     <Compile Include="Dll\User32.cs" />
     <Compile Include="MouseAnchor.cs" />
-    <Compile Include="UserSettingsManager.cs" />
     <Compile Include="VirtualKey.cs" />
     <Compile Include="UserSettings.cs" />
+    <Compile Include="UI\Controls\ProfileManager.xaml.cs">
+      <DependentUpon>ProfileManager.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MouseSettings.xaml.cs">
       <DependentUpon>MouseSettings.xaml</DependentUpon>
     </Compile>
@@ -291,6 +293,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Controls\ProfileManager.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UI\Controls\RangeSlider.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -323,9 +329,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="mappings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">

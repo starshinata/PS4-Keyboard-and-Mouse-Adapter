@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using Newtonsoft.Json;
+using Serilog;
 using SFML.Window;
 
 namespace PS4KeyboardAndMouseAdapter
@@ -7,9 +11,75 @@ namespace PS4KeyboardAndMouseAdapter
     public class UserSettings
     {
 
-        public Dictionary<VirtualKey, Keyboard.Key> Mappings { get; set; }
+        public static string PROFILE_DEFAULT = "profiles/default-profile.json";
+        public static string PROFILE_PREVIOUS = "profile-previous.json";
+
+        private static UserSettings thisInstance = null;
+        private static ILogger staticLogger = Log.ForContext(typeof(UserSettings));
 
         //////////////////////////////////////////////////////////////////////
+
+        public static UserSettings GetInstance()
+        {
+            if (thisInstance == null)
+            {
+                thisInstance = new UserSettings();
+            }
+            return thisInstance;
+        }
+
+        public static void Load(string file)
+        {
+            staticLogger.Information("UserSettings.Load: " + file);
+            thisInstance = ReadUserSettings(file);
+        }
+
+        public static void LoadWithCatch(string file)
+        {
+            try
+            {
+                Load(file);
+            }
+            catch (Exception ex)
+            {
+                staticLogger.Error("UserSettings.LoadWithCatch failed: " + ex.Message);
+                staticLogger.Error(ex.GetType().ToString());
+                staticLogger.Error(ex.StackTrace);
+            }
+        }
+
+        public static void LoadDefault()
+        {
+            LoadWithCatch(PROFILE_DEFAULT);
+        }
+
+        public static void LoadPrevious()
+        {
+            LoadWithCatch(PROFILE_PREVIOUS);
+        }
+
+        private static UserSettings ReadUserSettings(string file)
+        {
+            string json = File.ReadAllText(file);
+            return JsonConvert.DeserializeObject<UserSettings>(json);
+        }
+
+
+        public static void Save(string file)
+        {
+            staticLogger.Information("UserSettings.Save: " + file);
+            WriteUserSettings(thisInstance, file);
+        }
+
+        private static void WriteUserSettings(UserSettings Settings, string file)
+        {
+            string json = JsonConvert.SerializeObject(Settings, Formatting.Indented);
+            File.WriteAllText(file, json);
+        }
+
+        //////////////////////////////////////////////////////////////////////
+
+        public Dictionary<VirtualKey, Keyboard.Key> Mappings { get; set; }
 
         public int AnalogStickLowerRange { get; set; } = 40;
         public int AnalogStickUpperRange { get; set; } = 95;
@@ -62,10 +132,11 @@ namespace PS4KeyboardAndMouseAdapter
         //TODO do we still need this ?
         public double XYRatio { get; set; } = 0.6;
 
-        public UserSettings()
+        private UserSettings()
         {
             MousePollingRate = 60;
         }
+
     }
 
 }

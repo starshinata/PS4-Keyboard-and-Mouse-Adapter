@@ -26,6 +26,7 @@ namespace PS4KeyboardAndMouseAdapter
             Console.WriteLine(message);
             Log.Information(message);
         }
+
         private async Task UpdateIfAvailable()
         {
             Debug("App.UpdateIfAvailable() start");

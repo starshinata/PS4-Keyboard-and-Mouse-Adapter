@@ -34,8 +34,7 @@ namespace PS4KeyboardAndMouseAdapter
         public DualShockState CurrentState { get; private set; }
         public bool EnableMouseInput { get; set; } = false;
         public Vector2i MouseDirection { get; set; }
-        public UserSettings Settings { get; set; } = new UserSettings();
-
+        public UserSettings Settings { get; set; } = null;
 
         public int AnalogX
         {
@@ -78,28 +77,9 @@ namespace PS4KeyboardAndMouseAdapter
 
             Injector.FindProcess(TARGET_PROCESS_NAME)?.Kill();
 
-            EventWaitHandle waitHandle = new ManualResetEvent(initialState: false);
+            LoadSettings();
 
-            Settings = UserSettingsManager.ReadUserSettings();
-
-            bool success = OpenRemotePlay();
-            if (!success)
-            {
-                Process installerProcess = RunRemotePlaySetup();
-                installerProcess.EnableRaisingEvents = true;
-                installerProcess.Exited += (sender, args) =>
-                {
-                    OpenRemotePlay();
-                    Inject();
-                    waitHandle.Set();
-                };
-
-                waitHandle.WaitOne();
-            }
-            else
-            {
-                Inject();
-            }
+            OpenRemotePlayAndInject();
 
             Task.Run(AutoClickStart);
             Log.Information("MainViewModel constructor OUT");
@@ -147,7 +127,7 @@ namespace PS4KeyboardAndMouseAdapter
 
             ////////////////////////////////////////////
             ////////////////////////////////////////////
-            
+
             //left face
             if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.DPadUp]))
                 CurrentState.DPad_Up = true;
@@ -240,7 +220,6 @@ namespace PS4KeyboardAndMouseAdapter
                 CurrentState.Square = true;
 
         }
-
 
         public void HandleMouseInput()
         {
@@ -357,6 +336,23 @@ namespace PS4KeyboardAndMouseAdapter
             Injector.Callback += OnReceiveData;
         }
 
+
+        public void LoadSettings()
+        {
+            try
+            {
+                UserSettings.LoadPrevious();
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Error("MainViewModel.LoadSettings failed: " + ex.Message);
+                Log.Logger.Error(ex.StackTrace);
+            }
+
+            Settings = UserSettings.GetInstance();
+
+        }
+
         public void OnReceiveData(ref DualShockState state)
         {
             // if (!IsCursorHideRequested)
@@ -424,6 +420,31 @@ namespace PS4KeyboardAndMouseAdapter
             return false;
         }
 
+        public void OpenRemotePlayAndInject()
+        {
+            EventWaitHandle waitHandle = new ManualResetEvent(initialState: false);
+
+            bool success = OpenRemotePlay();
+            if (!success)
+            {
+                Process installerProcess = RunRemotePlaySetup();
+                installerProcess.EnableRaisingEvents = true;
+                installerProcess.Exited += (sender, args) =>
+                {
+                    OpenRemotePlay();
+                    Inject();
+                    waitHandle.Set();
+                };
+
+                waitHandle.WaitOne();
+            }
+            else
+            {
+                Inject();
+            }
+        }
+
+
         private readonly Stopwatch mouseTimer = new Stopwatch();
         private Vector2i mouseDirection = new Vector2i(0, 0);
         private int analogX;
@@ -451,11 +472,13 @@ namespace PS4KeyboardAndMouseAdapter
 
         public void SetMapping(VirtualKey key, Keyboard.Key value)
         {
-            Console.WriteLine("SetMapping {VirtKey:" + key + ", keyboardValue: " + value + "}");
+            Log.Information("MainViewModel.SetMapping {VirtKey:" + key + ", keyboardValue: " + value + "}");
+            Console.WriteLine("MainViewModel.SetMapping {VirtKey:" + key + ", keyboardValue: " + value + "}");
+
             Settings.Mappings[key] = value;
             OnPropertyChanged(nameof(Settings));
 
-            UserSettingsManager.WriteUserSettings(Settings);
+            UserSettings.Save(UserSettings.PROFILE_PREVIOUS);
         }
 
         public Process RunRemotePlaySetup()
