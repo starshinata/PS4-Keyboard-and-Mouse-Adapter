@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 using Serilog;
 using SFML.Window;
@@ -8,7 +11,7 @@ using SFML.Window;
 namespace PS4KeyboardAndMouseAdapter
 {
 
-    public class UserSettings
+    public class UserSettings : INotifyPropertyChanged
     {
 
         public static string PROFILE_DEFAULT = "profiles/default-profile.json";
@@ -31,11 +34,14 @@ namespace PS4KeyboardAndMouseAdapter
         public static void Load(string file)
         {
             staticLogger.Information("UserSettings.Load: " + file);
-            thisInstance = ReadUserSettings(file);
+            Console.WriteLine("UserSettings.Load: " + file);
+            thisInstance.importValues( ReadUserSettings(file));
+
         }
 
         public static void LoadWithCatch(string file)
         {
+
             try
             {
                 Load(file);
@@ -55,6 +61,9 @@ namespace PS4KeyboardAndMouseAdapter
 
         public static void LoadPrevious()
         {
+            // ensure to ensure there is something to load into
+            GetInstance();
+
             LoadWithCatch(PROFILE_PREVIOUS);
         }
 
@@ -79,7 +88,9 @@ namespace PS4KeyboardAndMouseAdapter
 
         //////////////////////////////////////////////////////////////////////
 
-        public Dictionary<VirtualKey, Keyboard.Key> Mappings { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public Dictionary<VirtualKey, Keyboard.Key> Mappings { get; set; } = new Dictionary<VirtualKey, Keyboard.Key>();
 
         public int AnalogStickLowerRange { get; set; } = 40;
         public int AnalogStickUpperRange { get; set; } = 95;
@@ -137,6 +148,66 @@ namespace PS4KeyboardAndMouseAdapter
             MousePollingRate = 60;
         }
 
+
+        // This method is called by the Set accessor of each property.
+        // The CallerMemberName attribute that is applied to the optional propertyName
+        // parameter causes the property name of the caller to be substituted as an argument.
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            Console.WriteLine("User.NotifyPropertyChanged");
+            Log.Information("User.NotifyPropertyChanged");
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                Console.WriteLine("User.NotifyPropertyChanged bb");
+                Log.Information("User.NotifyPropertyChanged bb");
+            }
+        }
+
+        // pancakeslp 2020.12.02
+        // yes we are using reflection, 
+        // and yes it is said to be slow and bad
+        // I dont want to write something specific to import values, and then we keep forgetting to update this method
+        public void importValues(UserSettings newSettings)
+        {
+            //reminder we want to import stuff into variable **thisInstance**
+            Console.WriteLine("importValues()" );
+
+            Console.WriteLine("importValues old " + thisInstance.ToString());
+            Console.WriteLine("importValues old " + thisInstance.Mappings.ToString());
+
+            Type t = newSettings.GetType();
+            PropertyInfo[] properties = t.GetProperties();
+            foreach (PropertyInfo prop in properties)
+            {
+                Console.WriteLine("got prop " + prop.Name);
+                MethodInfo getter = prop.GetGetMethod();
+                MethodInfo setter = prop.GetSetMethod();
+
+                if (getter != null && setter != null) {
+                    Console.WriteLine("got getter and setter ");
+                    Object value = getter.Invoke(thisInstance, new object[] { });
+                    Console.WriteLine("value" + value);
+                    setter.Invoke(thisInstance, new object[] { value });
+                    Console.WriteLine("value set!");
+                }
+            }
+
+
+
+            Console.WriteLine("importValues old " + thisInstance.ToString());
+            Console.WriteLine("importValues old "+ thisInstance.Mappings.ToString());
+            Console.WriteLine("importValues new " + newSettings.Mappings.ToString());
+
+            foreach (VirtualKey key in newSettings.Mappings.Keys)
+            {
+                Console.WriteLine("importValues {VirtKey:" + key + ", keyboardValue: " + newSettings.Mappings[key] + "}");
+
+                thisInstance.Mappings[key] = newSettings.Mappings[key];
+            }
+
+            NotifyPropertyChanged();
+        }
     }
 
 }

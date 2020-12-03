@@ -34,7 +34,7 @@ namespace PS4KeyboardAndMouseAdapter
         public DualShockState CurrentState { get; private set; }
         public bool EnableMouseInput { get; set; } = false;
         public Vector2i MouseDirection { get; set; }
-        public UserSettings Settings { get; set; } = null;
+        public UserSettings Settings { get; set; } = UserSettings.GetInstance();
 
         public int AnalogX
         {
@@ -339,6 +339,8 @@ namespace PS4KeyboardAndMouseAdapter
 
         public void LoadSettings()
         {
+            Console.WriteLine("MainViewModel.LoadSettings START");
+            Log.Logger.Information("MainViewModel.LoadSettings START");
             try
             {
                 UserSettings.LoadPrevious();
@@ -346,11 +348,16 @@ namespace PS4KeyboardAndMouseAdapter
             catch (Exception ex)
             {
                 Log.Logger.Error("MainViewModel.LoadSettings failed: " + ex.Message);
+                Log.Logger.Error(ex.GetType().ToString());
                 Log.Logger.Error(ex.StackTrace);
             }
 
             Settings = UserSettings.GetInstance();
+            OnPropertyChanged(nameof(Settings));
 
+            Console.WriteLine(Settings);
+            Console.WriteLine("MainViewModel.LoadSettings FINISH");
+            Log.Logger.Information("MainViewModel.LoadSettings FINISH");
         }
 
         public void OnReceiveData(ref DualShockState state)
@@ -474,6 +481,11 @@ namespace PS4KeyboardAndMouseAdapter
         {
             Log.Information("MainViewModel.SetMapping {VirtKey:" + key + ", keyboardValue: " + value + "}");
             Console.WriteLine("MainViewModel.SetMapping {VirtKey:" + key + ", keyboardValue: " + value + "}");
+            
+            Console.WriteLine("Settings" + Settings);
+            Console.WriteLine("Settings.Mappings" + Settings.Mappings);
+            Console.WriteLine("Settings.Mappings[key] = value;");
+            Console.WriteLine("Settings.Mappings[key] = value;");
 
             Settings.Mappings[key] = value;
             OnPropertyChanged(nameof(Settings));
@@ -517,6 +529,9 @@ namespace PS4KeyboardAndMouseAdapter
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
+            Console.WriteLine("OnPropertyChanged");
+            Log.Information("OnPropertyChanged");
+
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }

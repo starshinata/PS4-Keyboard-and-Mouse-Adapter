@@ -242,6 +242,9 @@
     <Compile Include="Dll\Rect.cs" />
     <Compile Include="Dll\User32.cs" />
     <Compile Include="MouseAnchor.cs" />
+    <Compile Include="UI\Controls\GamepadMappingController.xaml.cs">
+      <DependentUpon>GamepadMappingController.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VirtualKey.cs" />
     <Compile Include="UserSettings.cs" />
     <Compile Include="UI\Controls\ProfileManager.xaml.cs">
@@ -306,6 +309,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Controls\SliderV.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Controls\GamepadMappingController.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

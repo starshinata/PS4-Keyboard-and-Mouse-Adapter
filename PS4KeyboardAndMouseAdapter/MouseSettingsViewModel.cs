@@ -29,7 +29,7 @@ namespace PS4KeyboardAndMouseAdapter
 
         public MouseSettingsViewModel()
         {
-            mainVm = Application.Current.Windows.OfType<MainWindowView>().FirstOrDefault()?.vm;
+            //mainVm = Application.Current.Windows.OfType<MainWindowView>().FirstOrDefault()?.vm;
         }
     }
 }
