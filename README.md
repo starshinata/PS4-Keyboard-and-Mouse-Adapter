@@ -4,13 +4,8 @@ Disclaimer: This project is not endorsed or certified by Sony, Playstation or an
 ![example UI](documentation/example-ui.png)
 
 
-## DISCORD
-Try our discord here https://discord.gg/zH4b8p4 where you can either suggest ideas or ask other members for help.
-
-
 ## DOWNLOAD
 :rocket: Click --> [here (v1.0.10)](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/1.0.10/Setup.exe) <-- to Download!
-
 
 
 ## How to use
@@ -20,6 +15,10 @@ Try our discord here https://discord.gg/zH4b8p4 where you can either suggest ide
   * To activate it as your primary PS4, select  (Settings) -> [Account Management] -> [Activate as Your Primary PS4] -> [Activate].
 3. Download and run the setup from the download link above. It will automatically do all the configuration stuff for you
 4. If you want 0 lag, connect your PS4 to your TV/Monitor and watch the game from there (thus NOT from the Remote Play app)
+
+
+## DISCORD
+Try our discord here https://discord.gg/zH4b8p4 where you can either suggest ideas or ask other members for help.
 
 
 ## To-do list
