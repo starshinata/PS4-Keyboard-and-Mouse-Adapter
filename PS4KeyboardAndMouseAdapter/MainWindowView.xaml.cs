@@ -1,5 +1,8 @@
-﻿using System;
-
+﻿using PS4KeyboardAndMouseAdapter.UI.Controls;
+using System;
+using System.Linq;
+using System.Windows;
+using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 namespace PS4KeyboardAndMouseAdapter
 {
     /// <summary>
@@ -8,13 +11,14 @@ namespace PS4KeyboardAndMouseAdapter
     public partial class MainWindowView
     {
         public MainViewModel vm;
-
+       
         public MainWindowView()
         {
             InitializeComponent();
             vm = (MainViewModel)DataContext;
+            KeyDown += MainWindowView_OnKeyDown;
         }
-      
+
         private void MainWindowView_OnActivated(object sender, EventArgs e)
         {
             vm.RemotePlayProcess.Refresh();
@@ -25,5 +29,13 @@ namespace PS4KeyboardAndMouseAdapter
             vm.RemotePlayProcess.Refresh();
         }
 
+        public void MainWindowView_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            Console.WriteLine("MainWindowView_OnKeyDown");
+       
+            {
+                gamepadMappingController.Handler_OnKeyDown(sender, e);
+            }
+        }
     }
 }

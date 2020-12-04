@@ -49,6 +49,7 @@
         </Grid.ColumnDefinitions>
 
         <controls:GamepadMappingController
+            x:Name="gamepadMappingController"
             Grid.Row="0"  
             Grid.Column="1"  
             Grid.ColumnSpan="3"/>

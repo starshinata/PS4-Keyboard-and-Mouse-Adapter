@@ -477,6 +477,7 @@ namespace PS4KeyboardAndMouseAdapter
             return mouseDirection;
         }
 
+        //TODO am i needed?
         public void SetMapping(VirtualKey key, Keyboard.Key value)
         {
             Log.Information("MainViewModel.SetMapping {VirtKey:" + key + ", keyboardValue: " + value + "}");

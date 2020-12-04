@@ -1,33 +1,28 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Serilog;
+using SFML.Window;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using Newtonsoft.Json;
-using Serilog;
-using SFML.Window;
 
 namespace PS4KeyboardAndMouseAdapter
 {
 
-    public class UserSettings : INotifyPropertyChanged
+    public class UserSettings  : INotifyPropertyChanged
     {
 
         public static string PROFILE_DEFAULT = "profiles/default-profile.json";
         public static string PROFILE_PREVIOUS = "profile-previous.json";
 
-        private static UserSettings thisInstance = null;
+        public  static UserSettings thisInstance = new UserSettings();
         private static ILogger staticLogger = Log.ForContext(typeof(UserSettings));
 
         //////////////////////////////////////////////////////////////////////
 
         public static UserSettings GetInstance()
         {
-            if (thisInstance == null)
-            {
-                thisInstance = new UserSettings();
-            }
             return thisInstance;
         }
 
@@ -36,12 +31,10 @@ namespace PS4KeyboardAndMouseAdapter
             staticLogger.Information("UserSettings.Load: " + file);
             Console.WriteLine("UserSettings.Load: " + file);
             thisInstance.importValues( ReadUserSettings(file));
-
         }
 
         public static void LoadWithCatch(string file)
         {
-
             try
             {
                 Load(file);
@@ -66,13 +59,20 @@ namespace PS4KeyboardAndMouseAdapter
 
             LoadWithCatch(PROFILE_PREVIOUS);
         }
-
+        
+        public static void print()
+        {
+            foreach (VirtualKey key in thisInstance.Mappings.Keys)
+            {
+                Console.WriteLine("print {VirtKey:" + key + ", keyboardValue: " + thisInstance.Mappings[key] + "}");
+            }
+        }
+       
         private static UserSettings ReadUserSettings(string file)
         {
             string json = File.ReadAllText(file);
             return JsonConvert.DeserializeObject<UserSettings>(json);
         }
-
 
         public static void Save(string file)
         {
@@ -80,6 +80,23 @@ namespace PS4KeyboardAndMouseAdapter
             WriteUserSettings(thisInstance, file);
         }
 
+        public static void SetMapping(VirtualKey key, Keyboard.Key value)
+        {
+            Log.Information("MainViewModel.SetMapping {VirtKey:" + key + ", keyboardValue: " + value + "}");
+            Console.WriteLine("MainViewModel.SetMapping {VirtKey:" + key + ", keyboardValue: " + value + "}");
+
+            Console.WriteLine("Settings" + thisInstance);
+            Console.WriteLine("Settings.Mappings" + thisInstance.Mappings);
+            Console.WriteLine("Settings.Mappings[key] = value;");
+            Console.WriteLine("Settings.Mappings[key] = value;");
+
+            thisInstance.Mappings[key] = value;
+
+
+            Save(PROFILE_PREVIOUS);
+            //LoadPrevious();
+            thisInstance.PropertyChanged(thisInstance, new PropertyChangedEventArgs(""));
+        }
         private static void WriteUserSettings(UserSettings Settings, string file)
         {
             string json = JsonConvert.SerializeObject(Settings, Formatting.Indented);
@@ -88,7 +105,7 @@ namespace PS4KeyboardAndMouseAdapter
 
         //////////////////////////////////////////////////////////////////////
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
         public Dictionary<VirtualKey, Keyboard.Key> Mappings { get; set; } = new Dictionary<VirtualKey, Keyboard.Key>();
 
@@ -149,20 +166,7 @@ namespace PS4KeyboardAndMouseAdapter
         }
 
 
-        // This method is called by the Set accessor of each property.
-        // The CallerMemberName attribute that is applied to the optional propertyName
-        // parameter causes the property name of the caller to be substituted as an argument.
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            Console.WriteLine("User.NotifyPropertyChanged");
-            Log.Information("User.NotifyPropertyChanged");
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-                Console.WriteLine("User.NotifyPropertyChanged bb");
-                Log.Information("User.NotifyPropertyChanged bb");
-            }
-        }
+      
 
         // pancakeslp 2020.12.02
         // yes we are using reflection, 
@@ -206,7 +210,7 @@ namespace PS4KeyboardAndMouseAdapter
                 thisInstance.Mappings[key] = newSettings.Mappings[key];
             }
 
-            NotifyPropertyChanged();
+          
         }
     }
 

@@ -21,7 +21,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
         //TODO can be private ?
         public Button lastClickedButton;
 
-        private MainViewModel vm;
+        private MainViewModel mvm;
         private UserSettings Settings;
 
         public GamepadMappingController()
@@ -29,9 +29,9 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
             Log.Information("GamepadMappingController constructor IN");
 
             InitializeComponent();
-            vm = Application.Current.Windows.OfType<MainViewModel>().FirstOrDefault();
+            mvm = Application.Current.Windows.OfType<MainViewModel>().FirstOrDefault();
             Settings = UserSettings.GetInstance();
-            KeyDown += OnKeyDown_Super;
+            //
             WaitingForKeyPress_Hide();
 
             Log.Information("GamepadMappingController constructor OUT");
@@ -57,9 +57,16 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
             }
         }
 
-        public void OnKeyDown_Super(object sender, KeyEventArgs e)
+        private void Handler_ButtonClicked(object sender, RoutedEventArgs e)
         {
+            Button button = (Button)sender;
+            WaitingForKeyPress_Show(button);
+        }
 
+        public void Handler_OnKeyDown(object sender, KeyEventArgs e)
+        {
+    
+            Console.WriteLine("GMC OnKeyDown_Super");
             if (lastClickedButton != null && lastClickedButton.Tag != null)
             {
 
@@ -70,19 +77,24 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
 
                         if (key != Keyboard.Key.Escape)
                         {
-                            vm.SetMapping((VirtualKey)lastClickedButton.Tag, key);
+                            UserSettings.SetMapping((VirtualKey)lastClickedButton.Tag, key);
                         }
 
                         lastClickedButton = null;
                         WaitingForKeyPress_Hide();
+                        Settings = UserSettings.GetInstance();
+                        UserSettings.print();
                     }
                 }
 
             }
         }
 
-        public void WaitingForKeyPress_Show()
+        public void WaitingForKeyPress_Show(Button sender)
         {
+
+            lastClickedButton = sender;
+                 
             WaitForKeyPress.Opacity = 0.7;
             JoystickImage.Opacity = LowOpacity;
 
@@ -100,16 +112,9 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
 
             foreach (var button in FindVisualChildren<Button>(this))
             {
-                button.Opacity = 0.7;
+                button.Opacity = 1;
                 button.IsEnabled = true;
             }
-        }
-
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            lastClickedButton = (Button)sender;
-
-            WaitingForKeyPress_Show();
         }
     }
 }

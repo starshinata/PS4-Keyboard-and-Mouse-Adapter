@@ -10,7 +10,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
     public partial class AnalogStickBindings : UserControl
     {
 
-        private GamepadMappingController mvm;
+        private GamepadMappingController gamepadMappingController;
 
         public static readonly DependencyProperty StickContextProperty = DependencyProperty.Register(
                 "StickContext", typeof(string), typeof(AnalogStickBindings), new PropertyMetadata(default(string)));
@@ -26,6 +26,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
         public AnalogStickBindings()
         {
             InitializeComponent();
+            gamepadMappingController = Application.Current.Windows.OfType<GamepadMappingController>().FirstOrDefault();
         }
 
         private void InitializeButtons()
@@ -101,12 +102,8 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
 
         private void Handler_ButtonClicked(object sender, RoutedEventArgs e)
         {
-            mvm = Application.Current.Windows.OfType<GamepadMappingController>().FirstOrDefault();
-
             Button button = (Button)sender;
-            mvm.lastClickedButton = button;
-
-            mvm.WaitingForKeyPress_Show();
+            gamepadMappingController.WaitingForKeyPress_Show(button);
         }
 
         private void Handler_ButtonLoaded(object sender, RoutedEventArgs e)
