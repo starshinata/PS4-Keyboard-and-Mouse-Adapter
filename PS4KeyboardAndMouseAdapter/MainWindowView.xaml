@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         
         xmlns:controls="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Controls"
-        xmlns:converters="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Converters"
         xmlns:PS4KeyboardAndMouseAdapter="clr-namespace:PS4KeyboardAndMouseAdapter"
         
         mc:Ignorable="d"
@@ -25,8 +24,6 @@
     </Window.Style>
 
     <Window.Resources>
-        <converters:KeyNameToSymbolConverter x:Key="KeyNameToSymbolConverter"/>
-
         <Style TargetType="Image">
             <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality" />
         </Style>
