@@ -4,13 +4,8 @@ Disclaimer: This project is not endorsed or certified by Sony, Playstation or an
 ![example UI](documentation/example-ui.png)
 
 
-## DISCORD
-Try our discord here https://discord.gg/zH4b8p4 where you can either suggest ideas or ask other members for help.
-
-
 ## DOWNLOAD
 :rocket: Click --> [here (v1.0.10)](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/1.0.10/Setup.exe) <-- to Download!
-
 
 
 ## How to use
@@ -22,11 +17,18 @@ Try our discord here https://discord.gg/zH4b8p4 where you can either suggest ide
 4. If you want 0 lag, connect your PS4 to your TV/Monitor and watch the game from there (thus NOT from the Remote Play app)
 
 
+## DISCORD
+Try our discord here https://discord.gg/zH4b8p4 where you can either suggest ideas or ask other members for help.
+
+
 ## To-do list
 * Explicit error message box for when mappings.json is missing or invalid <br> Currently it (kinda) silently fails unless you open it via a command line.
 * Create and switch between multiple mapping profiles to make configuration easy when playing multiple games <br>I am thinking of  being able to save and load mappings.json files
+* Detect when the user does have a DS4 controller plugged in ... and ask user to unplug it
 * Map multiple keys to the same button
 * option to allow mouse button remapping
+* some game need to detect you shaking the controller, need to figure out how to handle/emulate that
+* touchpad needs more work :(
 * supporting ps5 (we dont know if this works on ps5 atm)
 * support linux/mac 
 * support chaikis
