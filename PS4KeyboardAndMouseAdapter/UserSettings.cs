@@ -31,8 +31,6 @@ namespace PS4KeyboardAndMouseAdapter
             thisInstance.ImportValues(ReadFile(file));
 
             thisInstance.PropertyChanged(thisInstance, new PropertyChangedEventArgs(""));
-
-            Print(thisInstance);
         }
 
         public static void LoadWithCatch(string file)

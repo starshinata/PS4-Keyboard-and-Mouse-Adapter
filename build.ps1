@@ -205,7 +205,6 @@ valid-xaml-xmllint
 build-msbuild
 
 echo ""
-Copy-Item                   manualBuild\csfml-Window.dll             PS4KeyboardAndMouseAdapter\bin\Release
 Copy-Item                   profiles\default-profile.json            PS4KeyboardAndMouseAdapter\bin\Release\profile-previous.json
 Copy-Item  -recurse -Force  profiles                                 PS4KeyboardAndMouseAdapter\bin\Release\profiles              
 
