@@ -27,6 +27,8 @@ Try our discord here https://discord.gg/zH4b8p4 where you can either suggest ide
 * Detect when the user does have a DS4 controller plugged in ... and ask user to unplug it
 * Map multiple keys to the same button
 * option to allow mouse button remapping
+* some game need to detect you shaking the controller, need to figure out how to handle/emulate that
+* touchpad needs more work :(
 * supporting ps5 (we dont know if this works on ps5 atm)
 * support linux/mac 
 * support chaikis
