@@ -65,20 +65,17 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
 
         /////////////////////////
 
-        public static readonly DependencyProperty HorizontalVerticalRatioProperty = DependencyProperty.Register(
-         "HorizontalVerticalRatio", typeof(double), typeof(MouseSettingsControl), new PropertyMetadata(default(double)));
-
-        public double HorizontalVerticalRatio
-        {
-            get => (double)GetValue(HorizontalVerticalRatioProperty);
-            set => SetValue(HorizontalVerticalRatioProperty, value);
-        }
-
+      
         /////////////////////////
+
+
+
+        private UserSettings Settings;
 
         public MouseSettingsControl()
         {
             InitializeComponent();
+            Settings = UserSettings.GetInstance();
         }
     }
 }

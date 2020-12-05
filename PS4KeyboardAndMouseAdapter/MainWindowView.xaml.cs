@@ -1,7 +1,4 @@
-﻿using PS4KeyboardAndMouseAdapter.UI.Controls;
-using System;
-using System.Linq;
-using System.Windows;
+﻿using System;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 namespace PS4KeyboardAndMouseAdapter
 {
@@ -11,7 +8,7 @@ namespace PS4KeyboardAndMouseAdapter
     public partial class MainWindowView
     {
         public MainViewModel vm;
-       
+
         public MainWindowView()
         {
             InitializeComponent();
@@ -31,11 +28,7 @@ namespace PS4KeyboardAndMouseAdapter
 
         public void MainWindowView_OnKeyDown(object sender, KeyEventArgs e)
         {
-            Console.WriteLine("MainWindowView_OnKeyDown");
-       
-            {
-                gamepadMappingController.Handler_OnKeyDown(sender, e);
-            }
+            gamepadMappingController.Handler_OnKeyDown(sender, e);
         }
     }
 }

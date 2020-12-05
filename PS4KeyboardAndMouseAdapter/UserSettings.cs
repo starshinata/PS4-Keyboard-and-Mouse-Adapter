@@ -9,14 +9,13 @@ using System.Reflection;
 
 namespace PS4KeyboardAndMouseAdapter
 {
-
-    public class UserSettings  : INotifyPropertyChanged
+    public class UserSettings : INotifyPropertyChanged
     {
 
         public static string PROFILE_DEFAULT = "profiles/default-profile.json";
         public static string PROFILE_PREVIOUS = "profile-previous.json";
 
-        public  static UserSettings thisInstance = new UserSettings();
+        private static UserSettings thisInstance = new UserSettings();
         private static ILogger staticLogger = Log.ForContext(typeof(UserSettings));
 
         //////////////////////////////////////////////////////////////////////
@@ -29,8 +28,11 @@ namespace PS4KeyboardAndMouseAdapter
         public static void Load(string file)
         {
             staticLogger.Information("UserSettings.Load: " + file);
-            Console.WriteLine("UserSettings.Load: " + file);
-            thisInstance.importValues( ReadUserSettings(file));
+            thisInstance.ImportValues(ReadFile(file));
+
+            thisInstance.PropertyChanged(thisInstance, new PropertyChangedEventArgs(""));
+
+            Print(thisInstance);
         }
 
         public static void LoadWithCatch(string file)
@@ -54,21 +56,38 @@ namespace PS4KeyboardAndMouseAdapter
 
         public static void LoadPrevious()
         {
-            // ensure to ensure there is something to load into
-            GetInstance();
-
             LoadWithCatch(PROFILE_PREVIOUS);
         }
-        
-        public static void print()
+
+        public static void Print(UserSettings settings)
         {
-            foreach (VirtualKey key in thisInstance.Mappings.Keys)
+            staticLogger.Information("UserSettings.Print()");
+            Console.WriteLine("UserSettings.Print()");
+
+            foreach (VirtualKey key in settings.Mappings.Keys)
             {
-                Console.WriteLine("print {VirtKey:" + key + ", keyboardValue: " + thisInstance.Mappings[key] + "}");
+                staticLogger.Information("print Mappings:{VirtKey:" + key + ", keyboardValue: " + settings.Mappings[key] + "}");
+                Console.WriteLine("print Mappings:{VirtKey:" + key + ", keyboardValue: " + settings.Mappings[key] + "}");
             }
+
+
+            Type t = settings.GetType();
+            PropertyInfo[] properties = t.GetProperties();
+            foreach (PropertyInfo prop in properties)
+            {
+                MethodInfo getter = prop.GetGetMethod();
+                if (getter != null)
+                {
+                    Object value = getter.Invoke(settings, new object[] { });
+
+                    staticLogger.Information("print " + prop + ":" + value);
+                    Console.WriteLine("print " + prop + ":" + value);
+                }
+            }
+
         }
-       
-        private static UserSettings ReadUserSettings(string file)
+
+        private static UserSettings ReadFile(string file)
         {
             string json = File.ReadAllText(file);
             return JsonConvert.DeserializeObject<UserSettings>(json);
@@ -77,27 +96,20 @@ namespace PS4KeyboardAndMouseAdapter
         public static void Save(string file)
         {
             staticLogger.Information("UserSettings.Save: " + file);
-            WriteUserSettings(thisInstance, file);
+            WriteFile(thisInstance, file);
         }
 
         public static void SetMapping(VirtualKey key, Keyboard.Key value)
         {
-            Log.Information("MainViewModel.SetMapping {VirtKey:" + key + ", keyboardValue: " + value + "}");
-            Console.WriteLine("MainViewModel.SetMapping {VirtKey:" + key + ", keyboardValue: " + value + "}");
-
-            Console.WriteLine("Settings" + thisInstance);
-            Console.WriteLine("Settings.Mappings" + thisInstance.Mappings);
-            Console.WriteLine("Settings.Mappings[key] = value;");
-            Console.WriteLine("Settings.Mappings[key] = value;");
+            staticLogger.Information("MainViewModel.SetMapping {VirtKey:" + key + ", keyboardValue: " + value + "}");
 
             thisInstance.Mappings[key] = value;
 
-
             Save(PROFILE_PREVIOUS);
-            //LoadPrevious();
             thisInstance.PropertyChanged(thisInstance, new PropertyChangedEventArgs(""));
         }
-        private static void WriteUserSettings(UserSettings Settings, string file)
+
+        private static void WriteFile(UserSettings Settings, string file)
         {
             string json = JsonConvert.SerializeObject(Settings, Formatting.Indented);
             File.WriteAllText(file, json);
@@ -105,20 +117,27 @@ namespace PS4KeyboardAndMouseAdapter
 
         //////////////////////////////////////////////////////////////////////
 
+        //
+        // Instance properties not to be persisted
+        //
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
+        //
+        // Instance properties to be persisted
+        // REMINDER if you add a new property, be sure to add it to ImportValues method
+        //
 
         public Dictionary<VirtualKey, Keyboard.Key> Mappings { get; set; } = new Dictionary<VirtualKey, Keyboard.Key>();
 
         public int AnalogStickLowerRange { get; set; } = 40;
         public int AnalogStickUpperRange { get; set; } = 95;
 
-        public double MouseDistanceLowerRange { get; set; } = 5;
-        public double MouseDistanceUpperRange { get; set; } = VideoMode.DesktopMode.Width / 20f;
-        public double MouseMaxDistance => VideoMode.DesktopMode.Width / 2f;
-
         public bool MouseControlsL3 { get; set; } = false;
         public bool MouseControlsR3 { get; set; } = false;
 
+        public double MouseDistanceLowerRange { get; set; } = 5;
+        public double MouseDistanceUpperRange { get; set; } = VideoMode.DesktopMode.Width / 20f;
+        public double MouseMaxDistance { get; set; } =  VideoMode.DesktopMode.Width / 2f;
 
         private int _MousePollingRate;
 
@@ -160,58 +179,46 @@ namespace PS4KeyboardAndMouseAdapter
         //TODO do we still need this ?
         public double XYRatio { get; set; } = 0.6;
 
+        //
+        // REMINDER if you add a new property, be sure to add it to ImportValues method
+        //
+
+        //////////////////////////////////////////////////////////////////////
+
         private UserSettings()
         {
             MousePollingRate = 60;
         }
 
-
-      
-
-        // pancakeslp 2020.12.02
-        // yes we are using reflection, 
-        // and yes it is said to be slow and bad
-        // I dont want to write something specific to import values, and then we keep forgetting to update this method
-        public void importValues(UserSettings newSettings)
+        public void ImportValues(UserSettings newSettings)
         {
             //reminder we want to import stuff into variable **thisInstance**
-            Console.WriteLine("importValues()" );
 
-            Console.WriteLine("importValues old " + thisInstance.ToString());
-            Console.WriteLine("importValues old " + thisInstance.Mappings.ToString());
+            thisInstance.AnalogStickLowerRange = newSettings.AnalogStickLowerRange;
+            thisInstance.AnalogStickUpperRange = newSettings.AnalogStickUpperRange;
 
-            Type t = newSettings.GetType();
-            PropertyInfo[] properties = t.GetProperties();
-            foreach (PropertyInfo prop in properties)
-            {
-                Console.WriteLine("got prop " + prop.Name);
-                MethodInfo getter = prop.GetGetMethod();
-                MethodInfo setter = prop.GetSetMethod();
+            thisInstance.MouseControlsL3 = newSettings.MouseControlsL3;
+            thisInstance.MouseControlsR3 = newSettings.MouseControlsR3;
 
-                if (getter != null && setter != null) {
-                    Console.WriteLine("got getter and setter ");
-                    Object value = getter.Invoke(thisInstance, new object[] { });
-                    Console.WriteLine("value" + value);
-                    setter.Invoke(thisInstance, new object[] { value });
-                    Console.WriteLine("value set!");
-                }
-            }
+            thisInstance.MouseDistanceLowerRange = newSettings.MouseDistanceLowerRange;
+            thisInstance.MouseDistanceUpperRange = newSettings.MouseDistanceUpperRange;
+            thisInstance.MouseMaxDistance = newSettings.MouseMaxDistance;
+            
+            thisInstance.MousePollingRate = newSettings.MousePollingRate;
 
+            thisInstance.MouseXAxisSensitivityMax = newSettings.MouseXAxisSensitivityMax;
+            thisInstance.MouseXAxisSensitivityModifier = newSettings.MouseXAxisSensitivityModifier;
+            thisInstance.MouseYAxisSensitivityMax = newSettings.MouseYAxisSensitivityMax;
+            thisInstance.MouseYAxisSensitivityModifier = newSettings.MouseYAxisSensitivityModifier;
 
+            thisInstance.XYRatio = newSettings.XYRatio;
 
-            Console.WriteLine("importValues old " + thisInstance.ToString());
-            Console.WriteLine("importValues old "+ thisInstance.Mappings.ToString());
-            Console.WriteLine("importValues new " + newSettings.Mappings.ToString());
 
             foreach (VirtualKey key in newSettings.Mappings.Keys)
             {
-                Console.WriteLine("importValues {VirtKey:" + key + ", keyboardValue: " + newSettings.Mappings[key] + "}");
-
                 thisInstance.Mappings[key] = newSettings.Mappings[key];
             }
-
-          
         }
-    }
 
+    }
 }

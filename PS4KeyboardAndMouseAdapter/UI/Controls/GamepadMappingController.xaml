@@ -117,7 +117,7 @@
       			Grid.ColumnSpan="2"
       			Tag="{x:Static PS4KeyboardAndMouseAdapter:VirtualKey.L2}"
       		    Content="{Binding Path=Settings.Mappings[(PS4KeyboardAndMouseAdapter:VirtualKey)L2], UpdateSourceTrigger=PropertyChanged}"
-                Margin="0,22,0,5"
+                Margin="0,23,0,5"
       			Visibility="Visible" Grid.RowSpan="2" />
 
             <svgc:SvgViewbox
@@ -132,51 +132,45 @@
 
             <Button 
                 Grid.Row="4"
-                Grid.RowSpan="2"
                 Grid.Column="1"
                 Grid.ColumnSpan="2"
                 Tag="{x:Static PS4KeyboardAndMouseAdapter:VirtualKey.L1}"
       			Content="{Binding Path=Settings.Mappings[(PS4KeyboardAndMouseAdapter:VirtualKey)L1], UpdateSourceTrigger=PropertyChanged}"
       		    Visibility="Visible"
-    			Margin="0,2,0,27"
   				/>
 
             <Button 
-      			Grid.Row="6"
+      			Grid.Row="5"
                 Grid.Column="1"
                 Grid.ColumnSpan="2"
                 Tag="{x:Static PS4KeyboardAndMouseAdapter:VirtualKey.DPadUp}"
       			Content="{Binding Path=Settings.Mappings[(PS4KeyboardAndMouseAdapter:VirtualKey)DPadUp], Converter={StaticResource KeyNameToSymbolConverter}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
       			Visibility="Visible"
-    			Margin="0,-1,0,2" />
+    			Margin="0,20,0,7" Grid.RowSpan="2" />
+
+            <Button 
+      			Grid.Row="6"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Tag="{x:Static PS4KeyboardAndMouseAdapter:VirtualKey.DPadLeft}"
+  				Content="{Binding Path=Settings.Mappings[(PS4KeyboardAndMouseAdapter:VirtualKey)DPadLeft], Converter={StaticResource KeyNameToSymbolConverter}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+      			Visibility="Visible" Height="26" VerticalAlignment="Top" Margin="0,20,0,0" Grid.RowSpan="2"/>
 
             <Button 
       			Grid.Row="7"
                 Grid.Column="1"
                 Grid.ColumnSpan="2"
-                Tag="{x:Static PS4KeyboardAndMouseAdapter:VirtualKey.DPadLeft}"
-  				Content="{Binding Path=Settings.Mappings[(PS4KeyboardAndMouseAdapter:VirtualKey)DPadLeft], Converter={StaticResource KeyNameToSymbolConverter}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-      			Visibility="Visible"
-      			Margin="0,0,0,1"/>
-
-            <Button 
-      			Grid.Row="8"
-                Grid.Column="1"
-                Grid.ColumnSpan="2"
       			Tag="{x:Static PS4KeyboardAndMouseAdapter:VirtualKey.DPadDown}"
       			Content="{Binding Path=Settings.Mappings[(PS4KeyboardAndMouseAdapter:VirtualKey)DPadDown], Converter={StaticResource KeyNameToSymbolConverter}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-      			Visibility="Visible"
-      			Margin="0,0,0,3"/>
+      			Visibility="Visible" Margin="0,21,0,5" Grid.RowSpan="2"/>
 
             <Button
             	Grid.Row="8"
-                Grid.RowSpan="2"
                 Grid.Column="1"
                 Grid.ColumnSpan="2"
                 Tag="{x:Static PS4KeyboardAndMouseAdapter:VirtualKey.DPadRight}"
       			Content="{Binding Path=Settings.Mappings[(PS4KeyboardAndMouseAdapter:VirtualKey)DPadRight], Converter={StaticResource KeyNameToSymbolConverter}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-      			Visibility="Visible"
-      			Margin="0,25,0,7"
+      			Visibility="Visible" Margin="0,22,0,4" Grid.RowSpan="2"
     			/>
 
             <!-- LEFT STICK -->
@@ -184,7 +178,7 @@
                 Grid.Row="9"
     			Grid.RowSpan="5"
                 Grid.ColumnSpan="3"
-            	Margin="0,22,0,17"
+            	Margin="0,24,0,18"
                 StickContext="LEFT"/>
 
             <!-- https://www.codeproject.com/Articles/1060961/WPFSpark-v -->
@@ -215,52 +209,43 @@
       			Grid.ColumnSpan="2"
                 Tag="{x:Static PS4KeyboardAndMouseAdapter:VirtualKey.Share}"
     			Content="{Binding Path=Settings.Mappings[(PS4KeyboardAndMouseAdapter:VirtualKey)Share], UpdateSourceTrigger=PropertyChanged}"
-      			Visibility="Visible"
-      			Margin="0,0,0,25"
-      			Grid.RowSpan="2"/>
+      			Visibility="Visible" />
 
             <!-- REMINDER make sure this button doesnt overlap with the Presss any key Text -->
             <Button
       			Grid.Row="3"
-      			Grid.RowSpan="2"
             	Grid.Column="3"
                 Tag="{x:Static PS4KeyboardAndMouseAdapter:VirtualKey.TouchButton}"
       		    Content="{Binding Path=Settings.Mappings[(PS4KeyboardAndMouseAdapter:VirtualKey)TouchButton],  UpdateSourceTrigger=PropertyChanged}"
       			Visibility="Visible"
-      			Margin="195,1,199,23"
-      			/>
+      			Margin="200,1,194,0" />
 
             <Button 
                 Grid.Row="1"
                 Grid.Column="4"
                 Grid.ColumnSpan="2"
-                Grid.RowSpan="2"
                 Tag="{x:Static PS4KeyboardAndMouseAdapter:VirtualKey.Options}"
     			Content="{Binding Path=Settings.Mappings[(PS4KeyboardAndMouseAdapter:VirtualKey)Options], UpdateSourceTrigger=PropertyChanged}"
   				Visibility="Visible"
-      			Margin="0,0,0,25"
       				/>
 
             <Button 
                 Grid.Column="3"
       			Grid.Row="12"
-                Grid.RowSpan="3"
                 Tag="{x:Static PS4KeyboardAndMouseAdapter:VirtualKey.PlaystationButton}"
       			Content="{Binding Path=Settings.Mappings[(PS4KeyboardAndMouseAdapter:VirtualKey)PlaystationButton], UpdateSourceTrigger=PropertyChanged}"
       			Visibility="Visible"
-    			Margin="196,21,198,37"
+    			Margin="200,21,194,5" Grid.RowSpan="2"
       				/>
 
             <!-- RIGHT half of controller -->
             <Button 
                 Grid.Row="2"
-                Grid.RowSpan="2"
                 Grid.Column="4"
                 Grid.ColumnSpan="2"
                 Tag="{x:Static PS4KeyboardAndMouseAdapter:VirtualKey.R2}"
       			Content="{Binding Path=Settings.Mappings[(PS4KeyboardAndMouseAdapter:VirtualKey)R2]}"
-      			Visibility="Visible"
-    			Margin="0,22,0,5" />
+      			Visibility="Visible" Margin="0,23,0,5" Grid.RowSpan="2" />
 
             <svgc:SvgViewbox
                 Grid.Row="2"
@@ -280,35 +265,32 @@
     			Visibility="Visible"/>
 
             <Button 
-            	Grid.Row="6"
+            	Grid.Row="5"
                 Grid.Column="4"
                 Grid.ColumnSpan="2"
                 Tag="{x:Static PS4KeyboardAndMouseAdapter:VirtualKey.Triangle}"
-      			Content="{Binding Path=Settings.Mappings[(PS4KeyboardAndMouseAdapter:VirtualKey)Triangle]}" />
+      			Content="{Binding Path=Settings.Mappings[(PS4KeyboardAndMouseAdapter:VirtualKey)Triangle]}" Margin="0,19,0,8" Grid.RowSpan="2" />
+
+            <Button 
+                Grid.Row="6"
+                Grid.Column="4"
+                Grid.ColumnSpan="2"
+                Tag="{x:Static PS4KeyboardAndMouseAdapter:VirtualKey.Circle}"
+    			Content="{Binding Path=Settings.Mappings[(PS4KeyboardAndMouseAdapter:VirtualKey)Circle]}" Margin="0,19,0,7" Grid.RowSpan="2" />
 
             <Button 
                 Grid.Row="7"
                 Grid.Column="4"
                 Grid.ColumnSpan="2"
-                Tag="{x:Static PS4KeyboardAndMouseAdapter:VirtualKey.Circle}"
-    			Content="{Binding Path=Settings.Mappings[(PS4KeyboardAndMouseAdapter:VirtualKey)Circle]}"
-  				Margin="0,2,0,1" />
+                Tag="{x:Static PS4KeyboardAndMouseAdapter:VirtualKey.Square}"
+    			Content="{Binding Path=Settings.Mappings[(PS4KeyboardAndMouseAdapter:VirtualKey)Square]}" Margin="0,21,0,5" Grid.RowSpan="2" />
 
             <Button 
                 Grid.Row="8"
                 Grid.Column="4"
                 Grid.ColumnSpan="2"
-                Tag="{x:Static PS4KeyboardAndMouseAdapter:VirtualKey.Square}"
-    			Content="{Binding Path=Settings.Mappings[(PS4KeyboardAndMouseAdapter:VirtualKey)Square]}"
-  				Margin="0,0,0,1" />
-
-            <Button 
-                Grid.Row="9"
-                Grid.Column="4"
-                Grid.ColumnSpan="2"
                 Tag="{x:Static PS4KeyboardAndMouseAdapter:VirtualKey.Cross}"
-    			Content="{Binding Path=Settings.Mappings[(PS4KeyboardAndMouseAdapter:VirtualKey)Cross]}"
-   				Margin="0,0,0,5" />
+    			Content="{Binding Path=Settings.Mappings[(PS4KeyboardAndMouseAdapter:VirtualKey)Cross]}" Margin="0,22,0,4" Grid.RowSpan="2" />
 
             <!-- RIGHT STICK -->
             <controls:AnalogStickBindings

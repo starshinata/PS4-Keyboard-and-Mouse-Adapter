@@ -250,10 +250,6 @@
     <Compile Include="UI\Controls\ProfileManager.xaml.cs">
       <DependentUpon>ProfileManager.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MouseSettings.xaml.cs">
-      <DependentUpon>MouseSettings.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MouseSettingsViewModel.cs" />
     <Compile Include="UI\Controls\AnalogStickBindings.xaml.cs">
       <DependentUpon>AnalogStickBindings.xaml</DependentUpon>
     </Compile>
@@ -284,10 +280,6 @@
       <DependentUpon>MainWindowView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MouseSettings.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UI\Controls\AnalogStickBindings.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -18,8 +18,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
     {
         private const double LowOpacity = 0.1;
         
-        //TODO can be private ?
-        public Button lastClickedButton;
+        private Button lastClickedButton;
 
         private MainViewModel mvm;
         private UserSettings Settings;
@@ -65,11 +64,8 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
 
         public void Handler_OnKeyDown(object sender, KeyEventArgs e)
         {
-    
-            Console.WriteLine("GMC OnKeyDown_Super");
             if (lastClickedButton != null && lastClickedButton.Tag != null)
             {
-
                 foreach (var key in Enum.GetValues(typeof(Keyboard.Key)).Cast<Keyboard.Key>())
                 {
                     if (Keyboard.IsKeyPressed(key))
@@ -82,11 +78,11 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
 
                         lastClickedButton = null;
                         WaitingForKeyPress_Hide();
+
                         Settings = UserSettings.GetInstance();
-                        UserSettings.print();
+
                     }
                 }
-
             }
         }
 

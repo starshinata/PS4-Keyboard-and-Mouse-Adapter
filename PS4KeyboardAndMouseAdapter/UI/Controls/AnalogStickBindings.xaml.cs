@@ -26,7 +26,6 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
         public AnalogStickBindings()
         {
             InitializeComponent();
-            gamepadMappingController = Application.Current.Windows.OfType<GamepadMappingController>().FirstOrDefault();
         }
 
         private void InitializeButtons()
@@ -102,6 +101,8 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
 
         private void Handler_ButtonClicked(object sender, RoutedEventArgs e)
         {
+            gamepadMappingController = ((GamepadMappingController)((Grid)((Grid)this.Parent).Parent).Parent);
+
             Button button = (Button)sender;
             gamepadMappingController.WaitingForKeyPress_Show(button);
         }

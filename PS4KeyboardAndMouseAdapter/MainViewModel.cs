@@ -1,31 +1,22 @@
-﻿using System;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.IO;
-using System.Net;
-using System.Numerics;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
-using FlaUI.Core.AutomationElements;
-using FlaUI.UIA2;
-using PS4KeyboardAndMouseAdapter.Annotations;
-using PS4KeyboardAndMouseAdapter.Dll;
+﻿using PS4KeyboardAndMouseAdapter.Dll;
 using PS4RemotePlayInjection;
 using PS4RemotePlayInterceptor;
 using Serilog;
 using SFML.System;
 using SFML.Window;
-
-using Application = FlaUI.Core.Application;
-using Window = FlaUI.Core.AutomationElements.Window;
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Net;
+using System.Numerics;
+using System.Reflection;
+using System.Threading;
+using System.Windows;
 
 namespace PS4KeyboardAndMouseAdapter
 {
 
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel
     {
         // Constants
         private readonly string TARGET_PROCESS_NAME = "RemotePlay";
@@ -36,25 +27,11 @@ namespace PS4KeyboardAndMouseAdapter
         public Vector2i MouseDirection { get; set; }
         public UserSettings Settings { get; set; } = UserSettings.GetInstance();
 
-        public int AnalogX
-        {
-            get => analogX;
-            set
-            {
-                analogX = value;
-                OnPropertyChanged(nameof(AnalogX));
-            }
-        }
+        public int AnalogX { get; set; }
+        public int AnalogY { get; set; }
 
-        public int AnalogY
-        {
-            get => analogY;
-            set
-            {
-                analogY = value;
-                OnPropertyChanged(nameof(AnalogY));
-            }
-        }
+        private readonly Stopwatch mouseTimer = new Stopwatch();
+        private Vector2i mouseDirection = new Vector2i(0, 0);
 
         // Anchor is relative to the top left of the primary monitor
         public Vector2i Anchor { get; set; } = new Vector2i(900, 500);
@@ -81,37 +58,27 @@ namespace PS4KeyboardAndMouseAdapter
 
             OpenRemotePlayAndInject();
 
-            Task.Run(AutoClickStart);
             Log.Information("MainViewModel constructor OUT");
         }
 
-        public void AutoClickStart()
+        public Vector2i FeedMouseCoords()
         {
-            try
-            {
-                Application app = FlaUI.Core.Application.Attach(Process.GetProcessById(RemotePlayProcess.Id));
+            mouseTimer.Start();
 
-                using (var automation = new UIA2Automation())
-                {
-                    while (true)
-                    {
-                        Window window = app.GetMainWindow(automation);
-                        Button button1 = window.FindFirstDescendant(cf => cf.ByText("Start"))?.AsButton();
-                        if (button1 == null)
-                            Thread.Sleep(1000);
-
-                        else
-                        {
-                            button1?.Invoke();
-                            break;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
+            int MillisecondsPerInput = 1000 / Settings.MousePollingRate;
+            if (mouseTimer.ElapsedMilliseconds >= MillisecondsPerInput)
             {
-                Log.Logger.Error("Problem with auto-clicker: " + ex.Message);
+                Vector2i currentMousePosition = Mouse.GetPosition();
+                mouseDirection = currentMousePosition - Anchor;
+
+                //recalculate incase they moved the window
+                Anchor = MouseAnchor.CalculateAnchor();
+
+                Mouse.SetPosition(Anchor);
+                mouseTimer.Restart();
             }
+
+            return mouseDirection;
         }
 
         public static string GetAssemblyVersion()
@@ -337,27 +304,26 @@ namespace PS4KeyboardAndMouseAdapter
         }
 
 
+        public static bool IsProcessInForeground(Process process)
+        {
+            if (process == null)
+                return false;
+
+            var activeWindow = User32.GetForegroundWindow();
+
+            if (activeWindow == IntPtr.Zero)
+                return false;
+
+            if (activeWindow != process.MainWindowHandle)
+                return false;
+
+            return true;
+        }
+
         public void LoadSettings()
         {
-            Console.WriteLine("MainViewModel.LoadSettings START");
-            Log.Logger.Information("MainViewModel.LoadSettings START");
-            try
-            {
-                UserSettings.LoadPrevious();
-            }
-            catch (Exception ex)
-            {
-                Log.Logger.Error("MainViewModel.LoadSettings failed: " + ex.Message);
-                Log.Logger.Error(ex.GetType().ToString());
-                Log.Logger.Error(ex.StackTrace);
-            }
-
+            UserSettings.LoadPrevious();
             Settings = UserSettings.GetInstance();
-            OnPropertyChanged(nameof(Settings));
-
-            Console.WriteLine(Settings);
-            Console.WriteLine("MainViewModel.LoadSettings FINISH");
-            Log.Logger.Information("MainViewModel.LoadSettings FINISH");
         }
 
         public void OnReceiveData(ref DualShockState state)
@@ -451,49 +417,6 @@ namespace PS4KeyboardAndMouseAdapter
             }
         }
 
-
-        private readonly Stopwatch mouseTimer = new Stopwatch();
-        private Vector2i mouseDirection = new Vector2i(0, 0);
-        private int analogX;
-        private int analogY;
-
-        public Vector2i FeedMouseCoords()
-        {
-            mouseTimer.Start();
-
-            int MillisecondsPerInput = 1000 / Settings.MousePollingRate;
-            if (mouseTimer.ElapsedMilliseconds >= MillisecondsPerInput)
-            {
-                Vector2i currentMousePosition = Mouse.GetPosition();
-                mouseDirection = currentMousePosition - Anchor;
-
-                //recalculate incase they moved the window
-                Anchor = MouseAnchor.CalculateAnchor();
-
-                Mouse.SetPosition(Anchor);
-                mouseTimer.Restart();
-            }
-
-            return mouseDirection;
-        }
-
-        //TODO am i needed?
-        public void SetMapping(VirtualKey key, Keyboard.Key value)
-        {
-            Log.Information("MainViewModel.SetMapping {VirtKey:" + key + ", keyboardValue: " + value + "}");
-            Console.WriteLine("MainViewModel.SetMapping {VirtKey:" + key + ", keyboardValue: " + value + "}");
-            
-            Console.WriteLine("Settings" + Settings);
-            Console.WriteLine("Settings.Mappings" + Settings.Mappings);
-            Console.WriteLine("Settings.Mappings[key] = value;");
-            Console.WriteLine("Settings.Mappings[key] = value;");
-
-            Settings.Mappings[key] = value;
-            OnPropertyChanged(nameof(Settings));
-
-            UserSettings.Save(UserSettings.PROFILE_PREVIOUS);
-        }
-
         public Process RunRemotePlaySetup()
         {
             MessageBox.Show("In order to play, PS4 Remote Play is required. Do you want to install it now?",
@@ -509,31 +432,5 @@ namespace PS4KeyboardAndMouseAdapter
             return Process.Start(installerName);
         }
 
-        public static bool IsProcessInForeground(Process process)
-        {
-            if (process == null)
-                return false;
-
-            var activeWindow = User32.GetForegroundWindow();
-
-            if (activeWindow == IntPtr.Zero)
-                return false;
-
-            if (activeWindow != process.MainWindowHandle)
-                return false;
-
-            return true;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            Console.WriteLine("OnPropertyChanged");
-            Log.Information("OnPropertyChanged");
-
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

@@ -63,7 +63,6 @@
             Grid.Column="3"
             AnalogStickLowerRange="{Binding Settings.AnalogStickLowerRange, Mode=TwoWay}"
             AnalogStickUpperRange="{Binding Settings.AnalogStickUpperRange, Mode=TwoWay}"
-            HorizontalVerticalRatio="{Binding Settings.XYRatio, Mode=TwoWay}" 
             MouseDistanceMinRange="{Binding Settings.MouseDistanceLowerRange, Mode=TwoWay}"
             MouseDistanceMaxRange="{Binding Settings.MouseDistanceUpperRange, Mode=TwoWay}"
             MaxMouseDistance="{Binding Settings.MouseMaxDistance}"
