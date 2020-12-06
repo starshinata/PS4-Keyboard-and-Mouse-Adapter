@@ -57,13 +57,7 @@
 
         <controls:MouseSettingsControl
             Grid.Row="2"  
-            Grid.Column="3"
-            AnalogStickLowerRange="{Binding Settings.AnalogStickLowerRange, Mode=TwoWay}"
-            AnalogStickUpperRange="{Binding Settings.AnalogStickUpperRange, Mode=TwoWay}"
-            MouseDistanceMinRange="{Binding Settings.MouseDistanceLowerRange, Mode=TwoWay}"
-            MouseDistanceMaxRange="{Binding Settings.MouseDistanceUpperRange, Mode=TwoWay}"
-            MaxMouseDistance="{Binding Settings.MouseMaxDistance}"
-                />
+            Grid.Column="3" />
 
     </Grid>
 </Window>
