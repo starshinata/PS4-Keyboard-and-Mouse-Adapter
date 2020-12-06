@@ -18,16 +18,16 @@ namespace PS4KeyboardAndMouseAdapter.UI.Converters
                 keyName = keyName.Replace("Num", "");
 
             if (keyName.Equals("Left"))
-                keyName = "\u21e6";
+                keyName = "\u21e6 Left";
 
             if (keyName.Equals("Up"))
-                keyName = "\u21e7";
+                keyName = "\u21e7 Up";
 
             if (keyName.Equals("Right"))
-                keyName = "\u21e8";
+                keyName = "\u21e8 Right";
 
             if (keyName.Equals("Down"))
-                keyName = "\u21e9";
+                keyName = "\u21e9 Down";
 
             return keyName;
         }

@@ -23,7 +23,6 @@
 // THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using PS4RemotePlayInjection;
@@ -41,7 +40,7 @@ namespace PS4RemotePlayInterceptor
         /// </summary>
         public void OnInjectionSuccess(int clientPID)
         {
-            Log.Logger.Error("OnInjectionSuccess {0}", clientPID);
+            Log.Logger.Information("OnInjectionSuccess clientPID {0}", clientPID);
         }
 
         /// <summary>

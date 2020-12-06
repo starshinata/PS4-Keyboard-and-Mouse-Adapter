@@ -1,5 +1,4 @@
 ﻿<UserControl x:Class="PS4KeyboardAndMouseAdapter.UI.Controls.MouseSettingsControl"
-             x:Name="This"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -68,7 +67,7 @@
             Grid.Column="0"
             FontSize="10"
             HorizontalAlignment="Left"
-            Text="This will also hide the  mouse cursor in 'PS Remote Play'"
+            Text="This will also hide the mouse cursor in 'PS Remote Play'"
             VerticalAlignment="Top" />
 
         <TextBlock 
@@ -87,40 +86,40 @@
             Minimum="10" 
             Maximum="250"
             TickFrequency="1"
-            Value="{Binding Path=Settings.MousePollingRate, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}" />
+            Value="{Binding Path=Settings.MousePollingRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <controls:SliderV
             Grid.Row="6"
             Description="Mouse X axis sensitivity"
             Minimum="1" 
-            Maximum="{Binding Path=Settings.MouseXAxisSensitivityMax, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"
+            Maximum="{Binding Path=Settings.MouseXAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             TickFrequency="0.1"
-            Value="{Binding Path=Settings.MouseXAxisSensitivityModifier, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}" />
+            Value="{Binding Path=Settings.MouseXAxisSensitivityModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <controls:SliderV
             Grid.Row="7"
             Description="Mouse Y axis sensitivity"
             Minimum="1" 
-            Maximum="{Binding Path=Settings.MouseYAxisSensitivityMax, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"
+            Maximum="{Binding Path=Settings.MouseYAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             TickFrequency="0.1"
-            Value="{Binding Path=Settings.MouseYAxisSensitivityModifier, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}" />
+            Value="{Binding Path=Settings.MouseYAxisSensitivityModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <controls:RangeSlider            
             Grid.Row="8"
             Description="Mouse distance range"
             Minimum="0" 
-            Maximum="{Binding MaxMouseDistance, ElementName=This}" 
-            LowerValue="{Binding MouseDistanceMinRange, Mode=TwoWay, ElementName=This}"
-            UpperValue="{Binding MouseDistanceMaxRange, Mode=TwoWay, ElementName=This}"
+            Maximum="{Binding Path=Settings.MaxMouseDistance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            LowerValue="{Binding Path=Settings.MouseDistanceLowerRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            UpperValue="{Binding Path=Settings.MouseDistanceUpperRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             x:Name="mouseDistanceRangeSlider"/>
 
         <controls:RangeSlider 
             Grid.Row="9" 
             Description="Analog stick range (in %)" 
-            LowerValue="{Binding AnalogStickLowerRange, Mode=TwoWay, ElementName=This}" 
+            LowerValue="{Binding Path=Settings.AnalogStickLowerRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             Minimum="0"  
             Maximum="95"  
-            UpperValue="{Binding AnalogStickUpperRange, Mode=TwoWay, ElementName=This}"
+            UpperValue="{Binding Path=Settings.AnalogStickUpperRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             x:Name="AnalogStickRangeSlider" />
 
         <controls:SliderV 
@@ -128,7 +127,7 @@
             Description="Horizontal/Vertical ratio" 
             Minimum="0.1" 
             Maximum="1" 
-            Value="{Binding HorizontalVerticalRatio, ElementName=This, Mode=TwoWay}"
+            Value="{Binding Path=Settings.XYRatio, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             TickFrequency="0.1"/>
 
     </Grid>

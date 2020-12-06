@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using Button = System.Windows.Controls.Button;
@@ -9,7 +10,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
     public partial class AnalogStickBindings : UserControl
     {
 
-        private MainWindowView mwv;
+        private GamepadMappingController gamepadMappingController;
 
         public static readonly DependencyProperty StickContextProperty = DependencyProperty.Register(
                 "StickContext", typeof(string), typeof(AnalogStickBindings), new PropertyMetadata(default(string)));
@@ -100,12 +101,10 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
 
         private void Handler_ButtonClicked(object sender, RoutedEventArgs e)
         {
-            mwv = (MainWindowView)((Grid)((Grid)this.Parent).Parent).Parent;
+            gamepadMappingController = ((GamepadMappingController)((Grid)((Grid)this.Parent).Parent).Parent);
 
             Button button = (Button)sender;
-            mwv.lastClickedButton = button;
-
-            mwv.WaitingForKeyPress_Show();
+            gamepadMappingController.WaitingForKeyPress_Show(button);
         }
 
         private void Handler_ButtonLoaded(object sender, RoutedEventArgs e)

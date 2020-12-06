@@ -21,42 +21,13 @@ namespace PS4KeyboardAndMouseAdapter
             //Injector.FindProcess("RemotePlay").Kill();
         }
 
-        private void Debug(String message)
+        private async void OnAppStartup(object sender, StartupEventArgs e)
         {
-            Console.WriteLine(message);
-            Log.Information(message);
-        }
-        private async Task UpdateIfAvailable()
-        {
-            Debug("UpdateIfAvailable() start");
-            try
-            {
-                Debug("UpdateIfAvailable() trying GitHubUpdateManager");
-                using (var mgr = await UpdateManager.GitHubUpdateManager("https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter"))
-                {
-                    Debug("UpdateIfAvailable trying UpdateApp");
-                    await mgr.UpdateApp();
-                    Debug("UpdateIfAvailable UpdateApp complete");
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug("UpdateIfAvailable 50" + ex.Message);
-                Log.Logger.Error("Github Update failed: " + ex.Message);
-            }
-            Debug("UpdateIfAvailable() update check completed");
+            Console.WriteLine("app/adapter started");
+            Console.WriteLine("for more about what has happened in this app, see logs/log.txt");
 
-            try
-            {
-                string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                File.Delete(Path.Combine(desktopPath, "EasyHookSvc.lnk"));
-                File.Delete(Path.Combine(desktopPath, "EasyHookSvc64.lnk"));
-                File.Delete(Path.Combine(desktopPath, "EasyHookSvc32.lnk"));
-            }
-            catch (Exception ex)
-            {
-                Log.Logger.Error("Shortcut deletion failed:" + ex.Message);
-            }
+            SetupLogger();
+            await UpdateIfAvailable();
         }
 
         private void SetupLogger()
@@ -69,10 +40,36 @@ namespace PS4KeyboardAndMouseAdapter
             Log.Information("Log created");
         }
 
-        private async void OnAppStartup(object sender, StartupEventArgs e)
+        private async Task UpdateIfAvailable()
         {
-            SetupLogger();
-            await UpdateIfAvailable();
+            Log.Information("App.UpdateIfAvailable() start");
+            try
+            {
+                Log.Information("App.UpdateIfAvailable() trying GitHubUpdateManager");
+                using (var mgr = await UpdateManager.GitHubUpdateManager("https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter"))
+                {
+                    Log.Information("App.UpdateIfAvailable() trying UpdateApp");
+                    await mgr.UpdateApp();
+                    Log.Information("App.UpdateIfAvailable() UpdateApp complete");
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Error("App.UpdateIfAvailable() Github Update failed: " + ex.Message);
+            }
+            Log.Information("App.UpdateIfAvailable() update check completed");
+
+            try
+            {
+                string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                File.Delete(Path.Combine(desktopPath, "EasyHookSvc.lnk"));
+                File.Delete(Path.Combine(desktopPath, "EasyHookSvc64.lnk"));
+                File.Delete(Path.Combine(desktopPath, "EasyHookSvc32.lnk"));
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Error("Shortcut deletion failed:" + ex.Message);
+            }
         }
     }
 }

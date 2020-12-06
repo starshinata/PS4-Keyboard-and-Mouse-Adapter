@@ -242,13 +242,14 @@
     <Compile Include="Dll\Rect.cs" />
     <Compile Include="Dll\User32.cs" />
     <Compile Include="MouseAnchor.cs" />
-    <Compile Include="UserSettingsManager.cs" />
+    <Compile Include="UI\Controls\GamepadMappingController.xaml.cs">
+      <DependentUpon>GamepadMappingController.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VirtualKey.cs" />
     <Compile Include="UserSettings.cs" />
-    <Compile Include="MouseSettings.xaml.cs">
-      <DependentUpon>MouseSettings.xaml</DependentUpon>
+    <Compile Include="UI\Controls\ProfileManager.xaml.cs">
+      <DependentUpon>ProfileManager.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MouseSettingsViewModel.cs" />
     <Compile Include="UI\Controls\AnalogStickBindings.xaml.cs">
       <DependentUpon>AnalogStickBindings.xaml</DependentUpon>
     </Compile>
@@ -279,10 +280,6 @@
       <DependentUpon>MainWindowView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MouseSettings.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UI\Controls\AnalogStickBindings.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -290,6 +287,10 @@
     <Page Include="UI\Controls\AnalogStickVisualizer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Controls\ProfileManager.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\Controls\RangeSlider.xaml">
       <SubType>Designer</SubType>
@@ -303,6 +304,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Controls\GamepadMappingController.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\packages\CSFML.2.5.0\runtimes\win-x86\native\csfml-Window.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\Annotations.cs" />
@@ -323,9 +333,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="mappings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
