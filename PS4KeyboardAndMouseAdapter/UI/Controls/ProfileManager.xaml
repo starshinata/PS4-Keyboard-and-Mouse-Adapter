@@ -17,7 +17,7 @@
             <!-- row 0 -->
             <RowDefinition Height="30px" />
             <RowDefinition Height="15px" />
-            
+
             <!-- row 2 -->
             <RowDefinition />
             <RowDefinition Height="15px" />
@@ -25,13 +25,13 @@
             <!-- row 4 -->
             <RowDefinition />
             <RowDefinition Height="15px" />
-            
+
             <!-- row 6 -->
             <RowDefinition />
             <RowDefinition Height="15px" />
             <RowDefinition />
-            
-            
+
+
         </Grid.RowDefinitions>
 
         <!-- row 0 -->
@@ -42,27 +42,29 @@
             FontWeight="Bold"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Text="Profile Management"/>
+            Text="Profile Management"
+            />
 
         <!-- row 2 -->
         <Button
             Grid.Row="2" 
-			Click="HandleSave"
-            Content="Save / Export"  />
+            Click="HandleSave"
+            Content="Save / Export"
+            />
 
         <!-- row 4 -->
         <Button
             Grid.Row="4"
             Click="HandleLoad"
             Content="Load / Import"
-			/>
+            />
 
         <!-- row 8 -->
         <Button
             Grid.Row="6"
             Click="HandleReset"
-			Content="Reset to Default"
-			/>
+            Content="Reset to Default"
+            />
 
     </Grid>
 </UserControl>
