@@ -36,4 +36,4 @@ Sony has licensed Hori products https://www.playstation.com/en-us/explore/access
 If you are using an application to improve you aim or response time, that could be considered cheating. The developers of this application consider this a accessibility aid for people who have issues using a controller (I personally have RSI and cannot play with a controller for long periods of time, but can use a mouse and keyboard all day).
 
 ### How do I uninstall PS4 KMA?
-goto `%AppData%\..\Local\PS4KeyboardAndMouseAdapter` in windows explorer and delete everything there
+Goto `%AppData%\..\Local\PS4KeyboardAndMouseAdapter` in windows explorer and delete everything there

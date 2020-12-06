@@ -24,8 +24,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{0439F286-1E5F-4B55-B902-F7EF43C7B22B}"
 	ProjectSection(SolutionItems) = preProject
 		documentation\developer-notes.md = documentation\developer-notes.md
+		documentation\frequently-asked-questions.md = documentation\frequently-asked-questions.md
 		documentation\keyboard-keys-map.md = documentation\keyboard-keys-map.md
 		documentation\mouse-configuration.md = documentation\mouse-configuration.md
+		documentation\release-checklist.md = documentation\release-checklist.md
 		documentation\troubleshooting.md = documentation\troubleshooting.md
 		documentation\version-history.md = documentation\version-history.md
 	EndProjectSection
