@@ -25,4 +25,5 @@ echo " tail -f  $PWD/$BINARY_FOLDER/logs/log.txt "
 cd $BINARY_FOLDER
 
 echo "EXECUTING ./PS4KeyboardAndMouseAdapter.exe"
+echo ""
 ./PS4KeyboardAndMouseAdapter.exe
