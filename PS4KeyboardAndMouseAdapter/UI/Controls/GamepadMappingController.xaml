@@ -25,39 +25,42 @@
 
             <Style TargetType="Image">
                 <Setter Property="RenderOptions.BitmapScalingMode"
-                          Value="HighQuality" />
+                        Value="HighQuality" />
             </Style>
         </Grid.Resources>
 
         <StackPanel 
-            Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
-            x:Name="WaitForKeyPress" 
-            Panel.ZIndex="99">
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Panel.ZIndex="99"
+            x:Name="WaitForKeyPress" >
 
             <TextBlock 
+                FontFamily="consolas"
+                FontSize="30"
+                FontWeight="Bold" 
+                Foreground="Crimson" 
+                HorizontalAlignment="Center" 
                 Text="Press any key to map" 
-                HorizontalAlignment="Center" 
                 VerticalAlignment="Center" 
-                Foreground="Crimson" 
-                FontFamily="consolas"
-                FontWeight="Bold" 
-                FontSize="30"/>
+                />
 
             <TextBlock 
-                Text="or Escape to cancel" 
-                HorizontalAlignment="Center" 
-                VerticalAlignment="Center" 
-                Foreground="Crimson" 
                 FontFamily="consolas"
+                FontSize="20"
                 FontWeight="Bold" 
-                FontSize="20"/>
+                Foreground="Crimson" 
+                HorizontalAlignment="Center" 
+                Text="or Escape to cancel" 
+                VerticalAlignment="Center" 
+                />
+            
         </StackPanel>
 
         <Grid Grid.Column="1"
               Grid.Row="1"
               Visibility="Visible">
-
-
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="32px" />
@@ -117,7 +120,8 @@
                 Tag="{x:Static PS4KeyboardAndMouseAdapter:VirtualKey.L2}"
                 Content="{Binding Path=Settings.Mappings[(PS4KeyboardAndMouseAdapter:VirtualKey)L2], UpdateSourceTrigger=PropertyChanged}"
                 Margin="0,23,0,5"
-                Visibility="Visible" />
+                Visibility="Visible"
+                />
 
             <svgc:SvgViewbox
                 Grid.Row="2"
@@ -136,7 +140,7 @@
                 Tag="{x:Static PS4KeyboardAndMouseAdapter:VirtualKey.L1}"
                 Content="{Binding Path=Settings.Mappings[(PS4KeyboardAndMouseAdapter:VirtualKey)L1], UpdateSourceTrigger=PropertyChanged}"
                 Visibility="Visible"
-                  />
+                />
 
             <Button 
                 Grid.Row="5"
@@ -199,9 +203,9 @@
                 IsChecked="{Binding Path=Settings.MouseControlsL3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Height="30"
                 HorizontalAlignment="Right"
+                Margin="0,2,1,-4"
                 Style="{StaticResource {ComponentResourceKey ResourceId=ToggleSwitch.UWP.Dark.Style, TypeInTargetAssembly={x:Type wpfspark:ToggleSwitch}}}"
                 VerticalAlignment="Center"
-                Margin="0,2,1,-4"
                 Width="60" />
 
             <!-- left stick -> Mouse image -->
@@ -225,7 +229,7 @@
 
             <!-- REMINDER make sure this button doesnt overlap with the Presss any key Text -->
             <Button
-                  Grid.Row="3"
+                Grid.Row="3"
                 Grid.Column="3"
                 Tag="{x:Static PS4KeyboardAndMouseAdapter:VirtualKey.TouchButton}"
                 Content="{Binding Path=Settings.Mappings[(PS4KeyboardAndMouseAdapter:VirtualKey)TouchButton],  UpdateSourceTrigger=PropertyChanged}"
@@ -248,8 +252,8 @@
                 Grid.Column="3"
                 Tag="{x:Static PS4KeyboardAndMouseAdapter:VirtualKey.PlaystationButton}"
                 Content="{Binding Path=Settings.Mappings[(PS4KeyboardAndMouseAdapter:VirtualKey)PlaystationButton], UpdateSourceTrigger=PropertyChanged}"
-                Visibility="Visible"
                 Margin="200,21,194,5" 
+                Visibility="Visible"
                 />
 
             <!-- RIGHT half of controller -->
@@ -283,39 +287,43 @@
 
             <Button 
                 Grid.Row="5"
+                Grid.RowSpan="2"
                 Grid.Column="4"
                 Grid.ColumnSpan="2"
                 Tag="{x:Static PS4KeyboardAndMouseAdapter:VirtualKey.Triangle}"
                 Content="{Binding Path=Settings.Mappings[(PS4KeyboardAndMouseAdapter:VirtualKey)Triangle]}" 
                 Margin="0,19,0,8" 
-                Grid.RowSpan="2" />
+                />
 
             <Button 
                 Grid.Row="6"
+                Grid.RowSpan="2" 
                 Grid.Column="4"
                 Grid.ColumnSpan="2"
                 Tag="{x:Static PS4KeyboardAndMouseAdapter:VirtualKey.Circle}"
                 Content="{Binding Path=Settings.Mappings[(PS4KeyboardAndMouseAdapter:VirtualKey)Circle]}"
                 Margin="0,19,0,7"
-                Grid.RowSpan="2" />
+                />
 
             <Button 
                 Grid.Row="7"
+                Grid.RowSpan="2" 
                 Grid.Column="4"
                 Grid.ColumnSpan="2"
                 Tag="{x:Static PS4KeyboardAndMouseAdapter:VirtualKey.Square}"
                 Content="{Binding Path=Settings.Mappings[(PS4KeyboardAndMouseAdapter:VirtualKey)Square]}"
                 Margin="0,21,0,5" 
-                Grid.RowSpan="2" />
+                />
 
             <Button 
                 Grid.Row="8"
+                Grid.RowSpan="2" 
                 Grid.Column="4"
                 Grid.ColumnSpan="2"
                 Tag="{x:Static PS4KeyboardAndMouseAdapter:VirtualKey.Cross}"
                 Content="{Binding Path=Settings.Mappings[(PS4KeyboardAndMouseAdapter:VirtualKey)Cross]}"
                 Margin="0,22,0,4"
-                Grid.RowSpan="2" />
+                />
 
             <!-- RIGHT STICK -->
             <controls:AnalogStickBindings
@@ -345,8 +353,8 @@
                 Height="30"
                 HorizontalAlignment="Right"
                 Style="{StaticResource {ComponentResourceKey ResourceId=ToggleSwitch.UWP.Dark.Style, TypeInTargetAssembly={x:Type wpfspark:ToggleSwitch}}}"
-                VerticalAlignment="Center"
                 Margin="0,7,3,1"
+                VerticalAlignment="Center"
                 Width="60"/>
         </Grid>
     </Grid>
