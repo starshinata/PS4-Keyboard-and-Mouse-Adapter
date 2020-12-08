@@ -194,6 +194,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Management" />
     <Reference Include="System.Numerics" />
@@ -239,11 +240,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Class1.cs" />
     <Compile Include="Dll\Rect.cs" />
     <Compile Include="Dll\User32.cs" />
     <Compile Include="MouseAnchor.cs" />
     <Compile Include="UI\Controls\GamepadMappingController.xaml.cs">
       <DependentUpon>GamepadMappingController.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\MouseSettingsSimpleControl.xaml.cs">
+      <DependentUpon>MouseSettingsSimpleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\SimpleConfigPage.xaml.cs">
+      <DependentUpon>SimpleConfigPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\MouseAdvancedConfigPage.xaml.cs">
+      <DependentUpon>MouseAdvancedConfigPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\AdvancedMappingsPage.xaml.cs">
+      <DependentUpon>AdvancedMappingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="VirtualKey.cs" />
     <Compile Include="UserSettings.cs" />
@@ -308,6 +322,22 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Controls\MouseSettingsSimpleControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\SimpleConfigPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\MouseAdvancedConfigPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\AdvancedMappingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\packages\CSFML.2.5.0\runtimes\win-x86\native\csfml-Window.dll">
@@ -349,9 +379,6 @@
       <Project>{d3d6f621-7cb9-4992-80ac-ff9745d974ec}</Project>
       <Name>PS4RemotePlayInjection</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="dualshock4_layout.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cursor.cur">

@@ -2,11 +2,11 @@
 
 namespace PS4KeyboardAndMouseAdapter.UI.Controls
 {
-    public partial class MouseSettingsControl : UserControl
+    public partial class MouseSettingsSimpleControl : UserControl
     {
         private UserSettings Settings;
 
-        public MouseSettingsControl()
+        public MouseSettingsSimpleControl()
         {
             InitializeComponent();
             Settings = UserSettings.GetInstance();

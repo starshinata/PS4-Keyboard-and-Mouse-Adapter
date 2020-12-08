@@ -31,6 +31,7 @@ namespace PS4KeyboardAndMouseAdapter
             thisInstance.ImportValues(ReadFile(file));
 
             thisInstance.PropertyChanged(thisInstance, new PropertyChangedEventArgs(""));
+            Print(thisInstance);
         }
 
         public static void LoadWithCatch(string file)
@@ -168,11 +169,15 @@ namespace PS4KeyboardAndMouseAdapter
         }
 
 
-        public double MouseXAxisSensitivityMax { get; set; } = 100;
-        public double MouseXAxisSensitivityModifier { get; set; } = 2;
-        public double MouseYAxisSensitivityMax { get; set; } = 100;
-        public double MouseYAxisSensitivityModifier { get; set; } = 1;
+        public bool MouseAimSensitivityEnabled { get; set; } = false;
 
+        public double MouseXAxisSensitivityAimModifier { get; set; } = 1; 
+        public double MouseXAxisSensitivityLookModifier { get; set; } = 1;
+        public double MouseXAxisSensitivityMax { get; set; } = 100;
+
+        public double MouseYAxisSensitivityAimModifier { get; set; } = 1;
+        public double MouseYAxisSensitivityLookModifier { get; set; } = 1;
+        public double MouseYAxisSensitivityMax { get; set; } = 100;
 
         //TODO do we still need this ?
         public double XYRatio { get; set; } = 0.6;
@@ -204,10 +209,13 @@ namespace PS4KeyboardAndMouseAdapter
             
             thisInstance.MousePollingRate = newSettings.MousePollingRate;
 
+            thisInstance.MouseXAxisSensitivityAimModifier = newSettings.MouseXAxisSensitivityAimModifier;
+            thisInstance.MouseXAxisSensitivityLookModifier = newSettings.MouseXAxisSensitivityLookModifier; 
             thisInstance.MouseXAxisSensitivityMax = newSettings.MouseXAxisSensitivityMax;
-            thisInstance.MouseXAxisSensitivityModifier = newSettings.MouseXAxisSensitivityModifier;
+
+            thisInstance.MouseYAxisSensitivityAimModifier = newSettings.MouseYAxisSensitivityAimModifier;
+            thisInstance.MouseYAxisSensitivityLookModifier = newSettings.MouseYAxisSensitivityLookModifier;
             thisInstance.MouseYAxisSensitivityMax = newSettings.MouseYAxisSensitivityMax;
-            thisInstance.MouseYAxisSensitivityModifier = newSettings.MouseYAxisSensitivityModifier;
 
             thisInstance.XYRatio = newSettings.XYRatio;
 

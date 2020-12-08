@@ -4,45 +4,45 @@
     "LeftStickRight": 3,
     "LeftStickUp": 22,
     "LeftStickDown": 18,
-
     "RightStickLeft": 9,
     "RightStickRight": 11,
     "RightStickUp": 8,
     "RightStickDown": 10,
-
     "Triangle": 27,
     "Circle": 37,
     "Cross": 57,
     "Square": 17,
-
     "L1": 16,
     "L2": 24,
     "L3": 38,
     "R1": 2,
     "R2": 20,
     "R3": 12,
-    
+    "Options": 14,
+    "TouchButton": 60,
     "DPadUp": 73,
     "DPadLeft": 71,
     "DPadDown": 74,
     "DPadRight": 72,
-	
-    "PlaystationButton": 12,
-    "Share": 1,
-    "Options": 14,
-    "TouchButton": 13
+    "PlaystationButton": 59,
+    "Share": 1
   },
   "AnalogStickLowerRange": 31,
   "AnalogStickUpperRange": 95,
+  "MouseControlsL3": false,
+  "MouseControlsR3": true,
   "MouseDistanceLowerRange": 0.0,
   "MouseDistanceUpperRange": 410.5,
   "MouseMaxDistance": 960.0,
-  "MouseControlsL3": false,
-  "MouseControlsR3": true,
   "MousePollingRate": 100,
+
+  "MouseXAxisSensitivityAimModifier": 51.0,
+  "MouseXAxisSensitivityLookModifier": 52.0,
   "MouseXAxisSensitivityMax": 100.0,
-  "MouseXAxisSensitivityModifier": 59.6,
+  
+  "MouseYAxisSensitivityAimModifier": 53.0,
+  "MouseYAxisSensitivityLookModifier": 54.0,
   "MouseYAxisSensitivityMax": 100.0,
-  "MouseYAxisSensitivityModifier": 55.0,
+  
   "XYRatio": 1.0
 }

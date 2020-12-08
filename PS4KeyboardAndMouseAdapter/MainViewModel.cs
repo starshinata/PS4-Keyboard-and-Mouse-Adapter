@@ -12,6 +12,7 @@ using System.Numerics;
 using System.Reflection;
 using System.Threading;
 using System.Windows;
+using System.Windows.Forms;
 
 namespace PS4KeyboardAndMouseAdapter
 {
@@ -244,7 +245,21 @@ namespace PS4KeyboardAndMouseAdapter
                 // mouse displacement relative to the anchor
                 MouseDirection = FeedMouseCoords();
 
-                MouseDirection = new Vector2i((int)(MouseDirection.X * Settings.MouseXAxisSensitivityModifier), (int)(MouseDirection.Y * Settings.MouseYAxisSensitivityModifier));
+                if (isUserAiming())
+                {
+                    Console.WriteLine("Aiming, X:" + Settings.MouseXAxisSensitivityAimModifier + " Y: " +  Settings.MouseYAxisSensitivityAimModifier);
+                    MouseDirection = new Vector2i(
+                        (int)(MouseDirection.X * Settings.MouseXAxisSensitivityAimModifier),
+                        (int)(MouseDirection.Y * Settings.MouseYAxisSensitivityAimModifier));
+                }
+                else
+                {
+
+                    Console.WriteLine("LOOKING, X:"+ Settings.MouseXAxisSensitivityLookModifier + " Y: "+ Settings.MouseYAxisSensitivityLookModifier);
+                    MouseDirection = new Vector2i(
+                        (int)(MouseDirection.X * Settings.MouseXAxisSensitivityLookModifier),
+                        (int)(MouseDirection.Y * Settings.MouseYAxisSensitivityLookModifier));
+                }
                 var direction = new Vector2(MouseDirection.X, MouseDirection.Y);
 
                 // Cap length to fit range.
@@ -318,6 +333,11 @@ namespace PS4KeyboardAndMouseAdapter
                 return false;
 
             return true;
+        }
+
+        private bool isUserAiming()
+        {
+            return Settings.MouseAimSensitivityEnabled && SFML.Window.Mouse.IsButtonPressed(Mouse.Button.Right);
         }
 
         public void LoadSettings()
@@ -395,31 +415,44 @@ namespace PS4KeyboardAndMouseAdapter
 
         public void OpenRemotePlayAndInject()
         {
-            EventWaitHandle waitHandle = new ManualResetEvent(initialState: false);
-
-            bool success = OpenRemotePlay();
-            if (!success)
+            try
             {
-                Process installerProcess = RunRemotePlaySetup();
-                installerProcess.EnableRaisingEvents = true;
-                installerProcess.Exited += (sender, args) =>
+                EventWaitHandle waitHandle = new ManualResetEvent(initialState: false);
+
+                bool success = OpenRemotePlay();
+                if (!success)
                 {
-                    OpenRemotePlay();
-                    Inject();
-                    waitHandle.Set();
-                };
+                    Process installerProcess = RunRemotePlaySetup();
+                    installerProcess.EnableRaisingEvents = true;
+                    installerProcess.Exited += (sender, args) =>
+                    {
+                        OpenRemotePlay();
+                        Inject();
+                        waitHandle.Set();
+                    };
 
-                waitHandle.WaitOne();
+                    waitHandle.WaitOne();
+                }
+                else
+                {
+                    Inject();
+                }
             }
-            else
-            {
-                Inject();
+            catch (Exception e) {
+                Log.Logger.Error("MainViewModel OpenRemotePlayAndInject() fatal error" + e.Message);
+                Log.Logger.Error(""+ e.GetType());
+                Log.Logger.Error(e.StackTrace);
+                System.Windows.MessageBox.Show("Fatal error, program closing",
+                   "fatal",
+                   (MessageBoxButton)MessageBoxButtons.OK,
+                   (MessageBoxImage)MessageBoxIcon.Error);
+                throw e;
             }
         }
 
         public Process RunRemotePlaySetup()
         {
-            MessageBox.Show("In order to play, PS4 Remote Play is required. Do you want to install it now?",
+            System.Windows.MessageBox.Show("In order to play, PS4 Remote Play is required. Do you want to install it now?",
                 "Install PS4 Remote play", MessageBoxButton.OK);
 
             string installerName = "RemotePlayInstaller.exe";

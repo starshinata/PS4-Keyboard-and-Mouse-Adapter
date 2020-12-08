@@ -16,7 +16,7 @@ $CERT_DIRECTORY="D:\workspace\##certificates\github.com-pancakeslp"
 $SIGN_TOOL_PATH="C:\Program Files (x86)\Windows Kits\10\bin\10.0.17763.0\x64\signtool.exe"
 
 ## TODO get this to read from the assembly file
-$VERSION="1.0.11"
+$VERSION="1.0.12"
 
 ################################
 ################################

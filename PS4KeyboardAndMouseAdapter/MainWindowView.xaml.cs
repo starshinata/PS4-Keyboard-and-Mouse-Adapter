@@ -28,7 +28,7 @@ namespace PS4KeyboardAndMouseAdapter
 
         public void MainWindowView_OnKeyDown(object sender, KeyEventArgs e)
         {
-            gamepadMappingController.Handler_OnKeyDown(sender, e);
+            simpleConfigPage.gamepadMappingController.Handler_OnKeyDown(sender, e);
         }
     }
 }

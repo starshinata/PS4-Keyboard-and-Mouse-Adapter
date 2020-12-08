@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace PS4KeyboardAndMouseAdapter.UI.Controls
@@ -17,6 +18,8 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
             set => SetValue(DescriptionProperty, value);
         }
 
+        //////////////////////////////////////////////////////
+        ///
         public static readonly DependencyProperty MinimumProperty = DependencyProperty.Register(
             "Minimum", typeof(float), typeof(SliderV), new PropertyMetadata(default(float)));
 
@@ -26,6 +29,8 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
             set => SetValue(MinimumProperty, value);
         }
 
+        //////////////////////////////////////////////////////
+        ///
         public static readonly DependencyProperty MaximumProperty = DependencyProperty.Register(
             "Maximum", typeof(int), typeof(SliderV), new PropertyMetadata(default(int)));
 
@@ -35,6 +40,8 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
             set => SetValue(MaximumProperty, value);
         }
 
+        //////////////////////////////////////////////////////
+
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
             "Value", typeof(double), typeof(SliderV), new PropertyMetadata(default(double)));
 
@@ -43,6 +50,8 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
             get => (double) GetValue(ValueProperty);
             set => SetValue(ValueProperty, value);
         }
+        
+        //////////////////////////////////////////////////////
 
         public static readonly DependencyProperty TickFrequencyProperty = DependencyProperty.Register(
             "TickFrequency", typeof(double), typeof(SliderV), new PropertyMetadata(default(double)));
@@ -57,5 +66,6 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
         {
             InitializeComponent();
         }
+
     }
 }

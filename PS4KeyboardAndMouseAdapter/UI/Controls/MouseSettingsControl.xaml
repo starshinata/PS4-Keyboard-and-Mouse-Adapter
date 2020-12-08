@@ -6,7 +6,7 @@
              xmlns:controls="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Controls"
              xmlns:wpfspark="clr-namespace:WPFSpark;assembly=WPFSpark" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="500">
+             d:DesignHeight="700" d:DesignWidth="700">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -28,11 +28,34 @@
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="30px" />
+            
             <!-- row 10 -->
             <RowDefinition />
             <RowDefinition />
-            
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <!-- row 15 -->
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+
+            <!-- row 20 -->
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <!-- row 25 -->
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+
         </Grid.RowDefinitions>
 
         <TextBlock
@@ -78,7 +101,7 @@
             Text="Tip: You can press alt+tab to switch between windows once the mouse is hidden."
             VerticalAlignment="Center" />
 
-        <!-- Row 4 empty -->
+        <!-- Row 4 intentionally empty -->
 
         <controls:SliderV
             Grid.Row="5"
@@ -87,25 +110,71 @@
             Maximum="250"
             TickFrequency="1"
             Value="{Binding Path=Settings.MousePollingRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-
+        
         <controls:SliderV
             Grid.Row="6"
-            Description="Mouse X axis sensitivity"
+            Description="Mouse Look X axis sensitivity"
             Minimum="1" 
             Maximum="{Binding Path=Settings.MouseXAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             TickFrequency="0.1"
-            Value="{Binding Path=Settings.MouseXAxisSensitivityModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            Value="{Binding Path=Settings.MouseXAxisSensitivityLookModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <controls:SliderV
             Grid.Row="7"
-            Description="Mouse Y axis sensitivity"
+            Description="Mouse Look Y axis sensitivity"
             Minimum="1" 
             Maximum="{Binding Path=Settings.MouseYAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             TickFrequency="0.1"
-            Value="{Binding Path=Settings.MouseYAxisSensitivityModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            Value="{Binding Path=Settings.MouseYAxisSensitivityLookModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+     
+        <!-- Row 8 intentionally empty -->
 
+        <TextBlock
+            Grid.Row="9"
+            Grid.Column="0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Text="Enable 'Aim' specific sensitivity?"/>
+
+        <!-- https://www.codeproject.com/Articles/1060961/WPFSpark-v -->
+        <wpfspark:ToggleSwitch
+            Grid.Row="9"
+            Grid.Column="5"
+            IsChecked="{Binding Path=Settings.MouseAimSensitivityEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Height="30"
+            HorizontalAlignment="Right"
+            Style="{StaticResource {ComponentResourceKey ResourceId=ToggleSwitch.UWP.Dark.Style, TypeInTargetAssembly={x:Type wpfspark:ToggleSwitch}}}" 
+            VerticalAlignment="Top"
+            Width="60"/>
+
+
+
+        <TextBlock
+            Grid.Row="10"
+            Grid.Column="0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Text="Right Mouse is aim"/>
+
+
+        <controls:SliderV
+            Grid.Row="11"
+            Description="Mouse Look X axis sensitivity"
+            Minimum="1" 
+            Maximum="{Binding Path=Settings.MouseXAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            TickFrequency="0.1"
+            Value="{Binding Path=Settings.MouseXAxisSensitivityAimModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+        <controls:SliderV
+            Grid.Row="12"
+            Description="Mouse Look Y axis sensitivity"
+            Minimum="1" 
+            Maximum="{Binding Path=Settings.MouseYAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            TickFrequency="0.1"
+            Value="{Binding Path=Settings.MouseYAxisSensitivityAimModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+      
         <controls:RangeSlider            
-            Grid.Row="8"
+            Grid.Row="14"
             Description="Mouse distance range"
             Minimum="0" 
             Maximum="{Binding Path=Settings.MaxMouseDistance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -114,7 +183,7 @@
             x:Name="mouseDistanceRangeSlider"/>
 
         <controls:RangeSlider 
-            Grid.Row="9" 
+            Grid.Row="15" 
             Description="Analog stick range (in %)" 
             LowerValue="{Binding Path=Settings.AnalogStickLowerRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             Minimum="0"  
@@ -123,7 +192,7 @@
             x:Name="AnalogStickRangeSlider" />
 
         <controls:SliderV 
-            Grid.Row="10"
+            Grid.Row="16"
             Description="Horizontal/Vertical ratio" 
             Minimum="0.1" 
             Maximum="1" 
