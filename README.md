@@ -5,7 +5,7 @@ Disclaimer: This project is not endorsed or certified by Sony, Playstation or an
 
 
 ## DOWNLOAD
-:rocket: Click --> [here (v1.0.10)](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/1.0.10/Setup.exe) <-- to Download!
+:rocket: Click --> [here (v1.0.11)](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/1.0.11/Setup.exe) <-- to Download!
 
 
 ## How to use
