@@ -27,7 +27,6 @@
     "PlaystationButton": 59,
     "Share": 1
   },
-  "Version_1_0_12_OrGreater": true,
   "AnalogStickLowerRange": 31,
   "AnalogStickUpperRange": 95,
   "MouseControlsL3": false,

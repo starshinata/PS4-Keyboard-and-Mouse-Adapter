@@ -18,7 +18,7 @@ using System.Windows.Forms;
 namespace PS4KeyboardAndMouseAdapter
 {
 
-    public class MainViewModel
+    public class GamepadProcessor
     {
         // Constants
         private readonly string TARGET_PROCESS_NAME = "RemotePlay";
@@ -47,7 +47,7 @@ namespace PS4KeyboardAndMouseAdapter
 
         // constructor
         // AKA init
-        public MainViewModel()
+        public GamepadProcessor()
         {
             Log.Information("MainViewModel constructor IN");
 
