@@ -1,4 +1,5 @@
-﻿using PS4KeyboardAndMouseAdapter.Dll;
+﻿using PS4KeyboardAndMouseAdapter.Config;
+using PS4KeyboardAndMouseAdapter.Dll;
 using PS4RemotePlayInjection;
 using PS4RemotePlayInterceptor;
 using Serilog;
@@ -97,94 +98,94 @@ namespace PS4KeyboardAndMouseAdapter
             ////////////////////////////////////////////
 
             //left face
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.DPadUp]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.DPadUp].KeyboardValue))
                 CurrentState.DPad_Up = true;
 
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.DPadLeft]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.DPadLeft].KeyboardValue))
                 CurrentState.DPad_Left = true;
 
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.DPadDown]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.DPadDown].KeyboardValue))
                 CurrentState.DPad_Down = true;
 
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.DPadRight]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.DPadRight].KeyboardValue))
                 CurrentState.DPad_Right = true;
 
             //left stick Analog
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.LeftStickLeft]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.LeftStickLeft].KeyboardValue))
                 CurrentState.LX = 0;
 
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.LeftStickRight]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.LeftStickRight].KeyboardValue))
                 CurrentState.LX = 255;
 
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.LeftStickUp]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.LeftStickUp].KeyboardValue))
                 CurrentState.LY = 0;
 
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.LeftStickDown]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.LeftStickDown].KeyboardValue))
                 CurrentState.LY = 255;
 
             //left stick Buttons
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.L1]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.L1].KeyboardValue))
                 CurrentState.L1 = true;
 
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.L2]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.L2].KeyboardValue))
                 CurrentState.L2 = 255;
 
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.L3]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.L3].KeyboardValue))
                 CurrentState.L3 = true;
 
             ////////////////////////////////////////////
             ////////////////////////////////////////////
 
             // middle face
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.Share]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.Share].KeyboardValue))
                 CurrentState.Share = true;
 
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.TouchButton]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.TouchButton].KeyboardValue))
                 CurrentState.TouchButton = true;
 
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.Options]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.Options].KeyboardValue))
                 CurrentState.Options = true;
 
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.PlaystationButton]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.PlaystationButton].KeyboardValue))
                 CurrentState.PS = true;
 
             ////////////////////////////////////////////
             ////////////////////////////////////////////
 
             //right stick Analog
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.RightStickLeft]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.RightStickLeft].KeyboardValue))
                 CurrentState.RX = 0;
 
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.RightStickRight]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.RightStickRight].KeyboardValue))
                 CurrentState.RX = 255;
 
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.RightStickUp]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.RightStickUp].KeyboardValue))
                 CurrentState.RY = 0;
 
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.RightStickDown]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.RightStickDown].KeyboardValue))
                 CurrentState.RY = 255;
 
             //right stick Buttons
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.R1]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.R1].KeyboardValue))
                 CurrentState.R1 = true;
 
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.R2]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.R2].KeyboardValue))
                 CurrentState.R2 = 255;
 
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.R3]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.R3].KeyboardValue))
                 CurrentState.R3 = true;
 
             //right face
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.Triangle]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.Triangle].KeyboardValue))
                 CurrentState.Triangle = true;
 
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.Circle]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.Circle].KeyboardValue))
                 CurrentState.Circle = true;
 
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.Cross]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.Cross].KeyboardValue))
                 CurrentState.Cross = true;
 
-            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.Square]))
+            if (Keyboard.IsKeyPressed(Settings.Mappings[VirtualKey.Square].KeyboardValue))
                 CurrentState.Square = true;
 
         }

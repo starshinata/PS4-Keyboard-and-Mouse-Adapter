@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using PS4KeyboardAndMouseAdapter.Config;
+using System.Windows.Controls;
 
 namespace PS4KeyboardAndMouseAdapter.UI.Controls
 {

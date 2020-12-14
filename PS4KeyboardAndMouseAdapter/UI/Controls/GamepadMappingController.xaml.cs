@@ -1,10 +1,11 @@
-﻿using Serilog;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using PS4KeyboardAndMouseAdapter.Config;
+using Serilog;
 using Button = System.Windows.Controls.Button;
 using Keyboard = SFML.Window.Keyboard;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
@@ -73,7 +74,9 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
 
                         if (key != Keyboard.Key.Escape)
                         {
-                            UserSettings.SetMapping((VirtualKey)lastClickedButton.Tag, key);
+                            PhysicalKey pk = new PhysicalKey();
+                            pk.KeyboardValue = key;
+                            UserSettings.SetMapping((VirtualKey)lastClickedButton.Tag, pk);
                         }
 
                         lastClickedButton = null;

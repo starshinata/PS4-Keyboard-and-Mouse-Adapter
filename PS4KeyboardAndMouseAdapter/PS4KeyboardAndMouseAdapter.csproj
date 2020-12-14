@@ -240,7 +240,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Config\MouseButton.cs" />
+    <Compile Include="Config\PhysicalKey.cs" />
+    <Compile Include="Config\UserSettings_1_0_11.cs" />
     <Compile Include="Dll\Rect.cs" />
     <Compile Include="Dll\User32.cs" />
     <Compile Include="MouseAnchor.cs" />
@@ -259,8 +261,8 @@
     <Compile Include="UI\Pages\AdvancedMappingsPage.xaml.cs">
       <DependentUpon>AdvancedMappingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="VirtualKey.cs" />
-    <Compile Include="UserSettings.cs" />
+    <Compile Include="Config\VirtualKey.cs" />
+    <Compile Include="Config\UserSettings.cs" />
     <Compile Include="UI\Controls\ProfileManager.xaml.cs">
       <DependentUpon>ProfileManager.xaml</DependentUpon>
     </Compile>

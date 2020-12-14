@@ -1,7 +1,7 @@
-﻿using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using PS4KeyboardAndMouseAdapter.Config;
 using Button = System.Windows.Controls.Button;
 
 namespace PS4KeyboardAndMouseAdapter.UI.Controls

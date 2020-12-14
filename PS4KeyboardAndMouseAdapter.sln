@@ -7,17 +7,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PS4KeyboardAndMouseAdapter"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PS4RemotePlayInjection", "PS4RemotePlayInjection\PS4RemotePlayInjection.csproj", "{D3D6F621-7CB9-4992-80AC-FF9745D974EC}"
 EndProject
+
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{9776BFC3-C0DE-4185-A5CC-E43545CBD9CA}"
+EndProject
+
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9FF1BB60-DFEF-4108-A4A6-945C22D8882C}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
 		build-and-run.sh = build-and-run.sh
 		build.ps1 = build.ps1
-		manualBuild\default-mappings.json = manualBuild\default-mappings.json
-		documentation\developer-notes.md = documentation\developer-notes.md
 		LICENSE = LICENSE
-		documentation\mouse-configuration.md = documentation\mouse-configuration.md
-		manualBuild\my-mappings.json = manualBuild\my-mappings.json
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -38,6 +38,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "profiles", "profiles", "{3A
 		profiles\pancakes-destiny-profile.json = profiles\pancakes-destiny-profile.json
 	EndProjectSection
 EndProject
+
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +63,14 @@ Global
 		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Release|x64.ActiveCfg = Release|x64
 		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Release|x64.Build.0 = Release|x64
+		{9776BFC3-C0DE-4185-A5CC-E43545CBD9CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9776BFC3-C0DE-4185-A5CC-E43545CBD9CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9776BFC3-C0DE-4185-A5CC-E43545CBD9CA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9776BFC3-C0DE-4185-A5CC-E43545CBD9CA}.Debug|x64.Build.0 = Debug|Any CPU
+		{9776BFC3-C0DE-4185-A5CC-E43545CBD9CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9776BFC3-C0DE-4185-A5CC-E43545CBD9CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9776BFC3-C0DE-4185-A5CC-E43545CBD9CA}.Release|x64.ActiveCfg = Release|Any CPU
+		{9776BFC3-C0DE-4185-A5CC-E43545CBD9CA}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

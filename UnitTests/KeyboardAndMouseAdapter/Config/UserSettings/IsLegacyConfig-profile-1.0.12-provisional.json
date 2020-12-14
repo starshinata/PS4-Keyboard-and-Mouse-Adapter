@@ -1,0 +1,9 @@
+{
+	"Version_1_0_12_OrGreater":true,
+	"MouseDistanceLowerRange": 5.0,
+	"MouseDistanceUpperRange": 96.0,
+	"AnalogStickLowerRange": 40,
+	"AnalogStickUpperRange": 95,
+	"MouseMaxDistance": 960.0,
+	"XYRatio": 0.6
+}

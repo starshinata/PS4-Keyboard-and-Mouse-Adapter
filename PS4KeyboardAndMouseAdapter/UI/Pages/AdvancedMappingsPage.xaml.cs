@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using PS4KeyboardAndMouseAdapter.Config;
 
 namespace PS4KeyboardAndMouseAdapter.UI.Pages
 {
@@ -27,7 +28,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
                     Button button = new Button();
 
 
-                    if (Settings.Mappings[vk] != SFML.Window.Keyboard.Key.Unknown)
+                    if (Settings.Mappings[vk].KeyboardValue != SFML.Window.Keyboard.Key.Unknown)
                     {
                         button.Content = string.Format("value '{0}'", Settings.Mappings[vk]);
                     }

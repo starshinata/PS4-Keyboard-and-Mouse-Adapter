@@ -1,6 +1,5 @@
 ﻿
-
-namespace PS4KeyboardAndMouseAdapter
+namespace PS4KeyboardAndMouseAdapter.Config
 {
     public enum VirtualKey
     {

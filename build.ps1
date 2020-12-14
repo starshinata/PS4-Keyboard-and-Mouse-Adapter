@@ -13,17 +13,23 @@ $ErrorActionPreference = "Stop"
 ## might need configuring
 $CERT_DIRECTORY="D:\workspace\##certificates\github.com-pancakeslp"
 
-$SIGN_TOOL_PATH="C:\Program Files (x86)\Windows Kits\10\bin\10.0.17763.0\x64\signtool.exe"
-
 ## TODO get this to read from the assembly file
 $VERSION="1.0.12"
 
 ################################
 ################################
 
-
+## Path for MSBuild.exe
 $env:Path += ";C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\amd64\"
+
+## Path for MSTest.exe
+##$env:Path += ";C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE"
+
+## Path for signtool.exe
 $env:Path += ";C:\Program Files (x86)\Windows Kits\10\bin\10.0.17763.0\x64\"
+
+## Path for vstest.console.exe
+$env:Path += ";C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\TestWindow"
 
 
 ## type is the windows equivalent of cat
@@ -63,7 +69,8 @@ function cleanup {
   
   remove PS4RemotePlayInjection\bin\
   remove PS4RemotePlayInjection\obj\
-    
+
+  remove TestResults
 }
 
 function dependencies-nuget {
@@ -171,6 +178,24 @@ function squirrel {
 }
 
 
+function test-vstest {
+
+  echo "vstest-ing"
+      
+  vstest.console.exe UnitTests\bin\Release\netcoreapp3.1\UnitTests.dll --ListTests
+  echo ""
+
+  vstest.console.exe UnitTests\bin\Release\netcoreapp3.1\UnitTests.dll UnitTests\bin\Release\netcoreapp3.1\csfml-Window.dll
+
+  if ( $LASTEXITCODE -ne 0) {
+    echo "vstest failed"
+    exit $LASTEXITCODE 
+  }
+
+  echo "vstest done"
+}
+
+
 function valid-xaml-xmllint {
   echo ""
   echo "validating xamls xmllint"
@@ -203,6 +228,10 @@ dependencies-nuget
 valid-xaml-xmllint
 
 build-msbuild
+
+test-vstest
+
+
 
 echo ""
 Copy-Item                   profiles\default-profile.json            PS4KeyboardAndMouseAdapter\bin\Release\profile-previous.json

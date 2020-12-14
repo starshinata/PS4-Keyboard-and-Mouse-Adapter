@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
-using SFML.Window;
+using PS4KeyboardAndMouseAdapter.Config;
 
 namespace PS4KeyboardAndMouseAdapter.UI.Converters
 {
@@ -12,7 +12,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Converters
             if (value == null)
                 return null;
 
-            var keyName = ((Keyboard.Key)value).ToString();
+            var keyName = ((PhysicalKey)value).ToString();
 
             if (keyName.Contains("Num"))
                 keyName = keyName.Replace("Num", "");

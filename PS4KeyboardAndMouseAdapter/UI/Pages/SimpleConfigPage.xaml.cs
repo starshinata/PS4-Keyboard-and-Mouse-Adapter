@@ -1,6 +1,6 @@
-﻿using PS4KeyboardAndMouseAdapter.UI.Controls;
+﻿using System.Windows.Controls;
+using PS4KeyboardAndMouseAdapter.UI.Controls;
 using Serilog;
-using System.Windows.Controls;
 
 namespace PS4KeyboardAndMouseAdapter.UI.Pages
 {
