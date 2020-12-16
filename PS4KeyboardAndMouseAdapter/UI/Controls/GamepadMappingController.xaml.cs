@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 using PS4KeyboardAndMouseAdapter.Config;
 using Serilog;
@@ -18,24 +19,46 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
     public partial class GamepadMappingController : UserControl
     {
         private const double LowOpacity = 0.1;
-        
+
         private Button lastClickedButton;
 
-        private MainViewModel mvm;
-        private UserSettings Settings;
+        public UserSettings Settings;
 
         public GamepadMappingController()
         {
             Log.Information("GamepadMappingController constructor IN");
-
-            InitializeComponent();
-            mvm = Application.Current.Windows.OfType<MainViewModel>().FirstOrDefault();
             Settings = UserSettings.GetInstance();
-            //
+            Console.WriteLine("SEEEEEEE");
+            UserSettings.Print(Settings);
+            InitializeComponent();
+
+            InitializeButtons();
+
             WaitingForKeyPress_Hide();
 
             Log.Information("GamepadMappingController constructor OUT");
         }
+
+
+        private void InitializeButtons()
+        {
+            InitializeButton("buttonQQ");
+
+        }
+
+        private void InitializeButton(string buttonName)
+        {
+            Button button = FindName(buttonName) as Button;
+            if (button != null)
+            {
+                VirtualKey virtualKey = (VirtualKey)button.Tag;
+
+                button.Tag = virtualKey;
+                Binding dataBinding = new Binding("Settings.Mappings[" + virtualKey + "]");
+                button.SetBinding(ContentProperty, dataBinding);
+            }
+        }
+
 
         public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
         {
@@ -67,7 +90,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
         {
             if (lastClickedButton != null && lastClickedButton.Tag != null)
             {
-                foreach (var key in Enum.GetValues(typeof(Keyboard.Key)).Cast<Keyboard.Key>())
+                foreach (Keyboard.Key key in Enum.GetValues(typeof(Keyboard.Key)).Cast<Keyboard.Key>())
                 {
                     if (Keyboard.IsKeyPressed(key))
                     {
@@ -93,7 +116,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
         {
 
             lastClickedButton = sender;
-                 
+
             WaitForKeyPress.Opacity = 0.7;
             JoystickImage.Opacity = LowOpacity;
 

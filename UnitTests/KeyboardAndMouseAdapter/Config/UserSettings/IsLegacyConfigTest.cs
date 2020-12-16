@@ -7,7 +7,7 @@ namespace UnitTests.KeyboardAndMouseAdapter.Config.UserSettingsTest
     [TestClass]
     public class IsLegacyConfigTest
     {
-        private readonly string PROJECT_ROOT ="..\\..\\..\\..\\";
+        private readonly string PROJECT_ROOT ="..\\..\\..\\";
 
         private void IsLegacyConfigRunner( string file, bool expected) {
             string json = File.ReadAllText(file);

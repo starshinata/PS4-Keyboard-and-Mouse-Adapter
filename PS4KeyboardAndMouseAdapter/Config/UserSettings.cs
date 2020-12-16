@@ -38,7 +38,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
                     {
                         if (property.Name == "Version_1_0_12_OrGreater")
                         {
-                            bool value = (bool) property.Value;
+                            bool value = (bool)property.Value;
                             return value;
                         }
                     }
@@ -62,12 +62,13 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         public static void Load(string file)
         {
-            Console.WriteLine("UserSettings.Load: " + file);
-            staticLogger.Information("UserSettings.Load: " + file);
-            thisInstance.ImportValues(file);
+            string fullFilePath = Path.GetFullPath(file);
+            Console.WriteLine("UserSettings.Load: " + fullFilePath);
+            staticLogger.Information("UserSettings.Load: " + fullFilePath);
+            thisInstance.ImportValues(fullFilePath);
 
             thisInstance.PropertyChanged(thisInstance, new PropertyChangedEventArgs(""));
-            Print(thisInstance);
+            //Print(thisInstance);
         }
 
         public static void LoadWithCatch(string file)
@@ -101,10 +102,14 @@ namespace PS4KeyboardAndMouseAdapter.Config
             Console.WriteLine("UserSettings.Print()");
 
             Console.WriteLine("mappings");
-            foreach (VirtualKey key in settings.Mappings.Keys)
+            var virtualKeys = System.Enum.GetValues(typeof(VirtualKey));
+            foreach (VirtualKey key in virtualKeys)
             {
-                staticLogger.Information("print Mappings:{VirtKey:" + key + ", keyboardValue: " + settings.Mappings[key] + "}");
-                Console.WriteLine("print Mappings:{VirtKey:" + key + ", keyboardValue: " + settings.Mappings[key] + "}");
+                if (key != VirtualKey.NULL)
+                {
+                    staticLogger.Information("print Mappings:{VirtKey:" + key + ", keyboardValue: " + settings.Mappings[key] + "}");
+                    Console.WriteLine("print Mappings:{VirtKey:" + key + ", keyboardValue: " + settings.Mappings[key] + "}");
+                }
             }
 
 
@@ -273,10 +278,14 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
             thisInstance.XYRatio = newSettings.XYRatio;
 
-
-            foreach (VirtualKey key in newSettings.Mappings.Keys)
+            var virtualKeys = System.Enum.GetValues(typeof(VirtualKey));
+            Console.WriteLine("virtualKeys " + virtualKeys);
+            foreach (VirtualKey key in virtualKeys)
             {
-                thisInstance.Mappings[key] = newSettings.Mappings[key];
+                if (key != VirtualKey.NULL && newSettings.Mappings[key] != null)
+                {
+                    thisInstance.Mappings[key] = newSettings.Mappings[key];
+                }
             }
 
             thisInstance.Version_1_0_12_OrGreater = true;

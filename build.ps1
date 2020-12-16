@@ -79,6 +79,9 @@ function dependencies-nuget {
 
   nuget install PS4RemotePlayInjection\packages.config     -OutputDirectory packages
   error-on-bad-return-code	
+
+  nuget install UnitTests\packages.config -OutputDirectory packages
+  error-on-bad-return-code	
 }
 
 
@@ -181,12 +184,18 @@ function squirrel {
 function test-vstest {
 
   echo "vstest-ing"
-      
-  vstest.console.exe UnitTests\bin\Release\netcoreapp3.1\UnitTests.dll --ListTests
+  $UNIT_TEST_DLL="UnitTests\bin\Release\UnitTests.dll"
+
+  if (!(Test-Path $UNIT_TEST_DLL )) {
+    echo "UnitTests.dll missing! ... path $UNIT_TEST_DLL"
+    exit 1
+  }
+
+  vstest.console.exe $UNIT_TEST_DLL --ListTests
   echo ""
 
-  vstest.console.exe UnitTests\bin\Release\netcoreapp3.1\UnitTests.dll UnitTests\bin\Release\netcoreapp3.1\csfml-Window.dll
-
+  vstest.console.exe $UNIT_TEST_DLL UnitTests\bin\Release\csfml-Window.dll
+  
   if ( $LASTEXITCODE -ne 0) {
     echo "vstest failed"
     exit $LASTEXITCODE 

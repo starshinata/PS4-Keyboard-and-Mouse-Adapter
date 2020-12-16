@@ -7,7 +7,7 @@ namespace UnitTests.KeyboardAndMouseAdapter.Config.UserSettingsTest
     [TestClass]
     public class ImportValuesTest
     {
-        private readonly string PROJECT_ROOT="..\\..\\..\\..\\";
+        private readonly string PROJECT_ROOT="..\\..\\..\\";
 
         private void HasNoNullProperties(UserSettings settings) {
            

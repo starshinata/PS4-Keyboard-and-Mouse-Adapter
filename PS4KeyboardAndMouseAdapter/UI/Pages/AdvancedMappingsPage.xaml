@@ -6,11 +6,8 @@
              
              mc:Ignorable="d" 
              d:DesignHeight="700" 
-             d:DesignWidth="700"
-             
-             xmlns:local="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Pages">
-
-
+             d:DesignWidth="700">
+	
     <Grid >
         <StackPanel 
             Panel.ZIndex="99"
