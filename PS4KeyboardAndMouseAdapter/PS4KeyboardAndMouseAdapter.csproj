@@ -245,6 +245,7 @@
     <Compile Include="Config\UserSettings_1_0_11.cs" />
     <Compile Include="Dll\Rect.cs" />
     <Compile Include="Dll\User32.cs" />
+    <Compile Include="GamepadProcessor.cs" />
     <Compile Include="MouseAnchor.cs" />
     <Compile Include="UI\Controls\GamepadMappingController.xaml.cs">
       <DependentUpon>GamepadMappingController.xaml</DependentUpon>

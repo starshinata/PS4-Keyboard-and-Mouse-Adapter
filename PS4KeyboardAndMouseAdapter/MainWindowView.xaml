@@ -5,7 +5,7 @@
         xmlns:pages="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Pages"
         xmlns:PS4KeyboardAndMouseAdapter="clr-namespace:PS4KeyboardAndMouseAdapter"
         
-        Title="{Binding Title}"
+        Title="{Binding WindowTitle}"
         Width="700" 
         Height="728" 
         ResizeMode="CanMinimize"

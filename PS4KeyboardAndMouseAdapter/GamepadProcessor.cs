@@ -49,18 +49,18 @@ namespace PS4KeyboardAndMouseAdapter
         // AKA init
         public GamepadProcessor()
         {
-            Log.Information("MainViewModel constructor IN");
+            Log.Information("GamepadProcessor constructor IN");
 
             // cause not having a cursor is a pain in the ass
             Utility.ShowCursor(true);
 
             Injector.FindProcess(TARGET_PROCESS_NAME)?.Kill();
 
-            LoadSettings();
+            Settings = UserSettings.GetInstance();
 
             OpenRemotePlayAndInject();
 
-            Log.Information("MainViewModel constructor OUT");
+            Log.Information("GamepadProcessor constructor OUT");
         }
 
         public Vector2i FeedMouseCoords()
@@ -321,12 +321,6 @@ namespace PS4KeyboardAndMouseAdapter
             return false;
         }
 
-        public void LoadSettings()
-        {
-            UserSettings.LoadPrevious();
-            Settings = UserSettings.GetInstance();
-        }
-
         public void OnReceiveData(ref DualShockState state)
         {
             // if (!IsCursorHideRequested)
@@ -420,7 +414,7 @@ namespace PS4KeyboardAndMouseAdapter
             }
             catch (Exception e)
             {
-                Log.Logger.Error("MainViewModel OpenRemotePlayAndInject() fatal error" + e.Message);
+                Log.Logger.Error("GamepadProcessor OpenRemotePlayAndInject() fatal error" + e.Message);
                 Log.Logger.Error("" + e.GetType());
                 Log.Logger.Error(e.StackTrace);
                 System.Windows.MessageBox.Show("Fatal error, program closing",
