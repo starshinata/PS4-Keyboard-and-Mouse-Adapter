@@ -18,14 +18,14 @@ namespace UnitTests.KeyboardAndMouseAdapter.Config.UserSettingsTest
         [TestMethod]
         public void ShouldDetect_1_0_11_IsLegacy()
         {
-            string file = PROJECT_ROOT + "UnitTests\\KeyboardAndMouseAdapter\\Config\\UserSettings\\IsLegacyConfig-profile-1.0.11-default.json";
+            string file = PROJECT_ROOT + "UnitTests\\KeyboardAndMouseAdapter\\Config\\UserSettings\\IsLegacyConfig--profile-1.0.11-default.json";
             IsLegacyConfigRunner(file, true);
         }
 
         [TestMethod]
         public void ShouldDetect_1_0_12_IsCurrent()
         {
-            string file = PROJECT_ROOT + "UnitTests\\KeyboardAndMouseAdapter\\Config\\UserSettings\\IsLegacyConfig-profile-1.0.12-provisional.json";
+            string file = PROJECT_ROOT + "UnitTests\\KeyboardAndMouseAdapter\\Config\\UserSettings\\IsLegacyConfig--profile-1.0.12-provisional.json";
             IsLegacyConfigRunner(file, true);
         }
     }

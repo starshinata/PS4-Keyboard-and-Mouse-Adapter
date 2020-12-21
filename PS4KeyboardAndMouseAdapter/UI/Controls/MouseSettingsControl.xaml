@@ -1,12 +1,16 @@
 ﻿<UserControl x:Class="PS4KeyboardAndMouseAdapter.UI.Controls.MouseSettingsControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             
+             d:DesignHeight="700"
+             d:DesignWidth="700"
+             mc:Ignorable="d" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             
              xmlns:controls="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Controls"
              xmlns:wpfspark="clr-namespace:WPFSpark;assembly=WPFSpark" 
-             mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="700">
+             >
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -78,7 +82,7 @@
         <wpfspark:ToggleSwitch
             Grid.Row="1"
             Grid.Column="5"
-            IsChecked="{Binding Path=IsCursorHideRequested, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            IsChecked="{Binding Path=InstanceSettings.EnableMouseInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             Height="30"
             HorizontalAlignment="Right"
             Style="{StaticResource {ComponentResourceKey ResourceId=ToggleSwitch.UWP.Dark.Style, TypeInTargetAssembly={x:Type wpfspark:ToggleSwitch}}}" 
@@ -115,9 +119,9 @@
             Grid.Row="6"
             Description="Mouse Look X axis sensitivity"
             Minimum="1" 
-            Maximum="{Binding Path=Settings.MouseXAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Maximum="{Binding Settings.MouseXAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             TickFrequency="0.1"
-            Value="{Binding Path=Settings.MouseXAxisSensitivityLookModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            Value="{Binding Settings.MouseXAxisSensitivityLookModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <controls:SliderV
             Grid.Row="7"

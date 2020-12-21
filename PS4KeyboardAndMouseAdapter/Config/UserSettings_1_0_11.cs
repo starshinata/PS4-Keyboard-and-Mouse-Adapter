@@ -41,8 +41,6 @@ namespace PS4KeyboardAndMouseAdapter.Config
             Console.WriteLine("UserSettings_1_0_11.ImportValues()"); 
             staticLogger.Information("UserSettings_1_0_11.ImportValues()");
 
-            Print(legacySettings);
-
             UserSettings newSettings = UserSettings.GetInstance();
 
             newSettings.AnalogStickLowerRange = legacySettings.AnalogStickLowerRange;

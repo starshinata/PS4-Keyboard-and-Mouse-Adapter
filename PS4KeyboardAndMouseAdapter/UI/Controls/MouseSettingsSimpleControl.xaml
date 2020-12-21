@@ -55,7 +55,7 @@
         <wpfspark:ToggleSwitch
             Grid.Row="1"
             Grid.Column="5"
-            IsChecked="{Binding Path=IsCursorHideRequested, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            IsChecked="{Binding Path=InstanceSettings.EnableMouseInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             Height="30"
             HorizontalAlignment="Right"
             Style="{StaticResource {ComponentResourceKey ResourceId=ToggleSwitch.UWP.Dark.Style, TypeInTargetAssembly={x:Type wpfspark:ToggleSwitch}}}" 
@@ -81,12 +81,13 @@
         <!-- Row 4 empty -->
 
         <controls:SliderV
+               x:Name="xSlider"
             Grid.Row="5"
             Description="Mouse Look X axis sensitivity"
             Minimum="1" 
-            Maximum="{Binding Path=Settings.MouseXAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Maximum="{Binding Settings.MouseXAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             TickFrequency="0.1"
-            Value="{Binding Path=Settings.MouseXAxisSensitivityLookModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            Value="{Binding Settings.MouseXAxisSensitivityLookModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <controls:SliderV
             Grid.Row="6"

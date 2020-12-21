@@ -24,21 +24,37 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
 
         public UserSettings Settings;
 
+        public Dictionary<VirtualKey, PhysicalKey> keyboardMappings { get; set; } = new Dictionary<VirtualKey, PhysicalKey>();
+
         public GamepadMappingController()
         {
             Log.Information("GamepadMappingController constructor IN");
             Settings = UserSettings.GetInstance();
-            Console.WriteLine("SEEEEEEE");
-            UserSettings.Print(Settings);
             InitializeComponent();
 
             InitializeButtons();
 
             WaitingForKeyPress_Hide();
 
+            GetKeyboardMappings();
             Log.Information("GamepadMappingController constructor OUT");
         }
 
+        private void GetKeyboardMappings() {
+            if (Settings != null) {
+
+                var virtualKeys = KeyUtility.GetVirtualKeyValues();
+                Console.WriteLine("virtualKeys " + virtualKeys);
+                foreach (VirtualKey key in virtualKeys)
+                {
+                    PhysicalKey pk = Settings.Mappings[key];
+                    if (pk != null && pk.KeyboardValue!=Keyboard.Key.Unknown )
+                    {
+                        keyboardMappings[key] = Settings.Mappings[key];
+                    }
+                }
+            }
+        }
 
         private void InitializeButtons()
         {

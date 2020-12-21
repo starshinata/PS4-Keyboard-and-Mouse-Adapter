@@ -1,0 +1,125 @@
+{
+  "Mappings": {
+    "LeftStickLeft": {
+      "KeyboardValue": 0,
+      "MouseValue": -1
+    },
+    "LeftStickRight": {
+      "KeyboardValue": 3,
+      "MouseValue": -1
+    },
+    "LeftStickUp": {
+      "KeyboardValue": 22,
+      "MouseValue": -1
+    },
+    "LeftStickDown": {
+      "KeyboardValue": 18,
+      "MouseValue": -1
+    },
+    "RightStickLeft": {
+      "KeyboardValue": 9,
+      "MouseValue": -1
+    },
+    "RightStickRight": {
+      "KeyboardValue": 11,
+      "MouseValue": -1
+    },
+    "RightStickUp": {
+      "KeyboardValue": 8,
+      "MouseValue": -1
+    },
+    "RightStickDown": {
+      "KeyboardValue": 10,
+      "MouseValue": -1
+    },
+    "Triangle": {
+      "KeyboardValue": 5,
+      "MouseValue": -1
+    },
+    "Circle": {
+      "KeyboardValue": 2,
+      "MouseValue": -1
+    },
+    "Cross": {
+      "KeyboardValue": 21,
+      "MouseValue": -1
+    },
+    "Square": {
+      "KeyboardValue": 17,
+      "MouseValue": -1
+    },
+    "L1": {
+      "KeyboardValue": 16,
+      "MouseValue": -1
+    },
+    "L2": {
+      "KeyboardValue": 10,
+      "MouseValue": -1
+    },
+    "L3": {
+      "KeyboardValue": 38,
+      "MouseValue": -1
+    },
+    "R1": {
+      "KeyboardValue": 4,
+      "MouseValue": -1
+    },
+    "R2": {
+      "KeyboardValue": 9,
+      "MouseValue": -1
+    },
+    "R3": {
+      "KeyboardValue": 11,
+      "MouseValue": -1
+    },
+    "Options": {
+      "KeyboardValue": 14,
+      "MouseValue": -1
+    },
+    "TouchButton": {
+      "KeyboardValue": 13,
+      "MouseValue": -1
+    },
+    "DPadUp": {
+      "KeyboardValue": 27,
+      "MouseValue": -1
+    },
+    "DPadLeft": {
+      "KeyboardValue": 28,
+      "MouseValue": -1
+    },
+    "DPadDown": {
+      "KeyboardValue": 29,
+      "MouseValue": -1
+    },
+    "DPadRight": {
+      "KeyboardValue": 30,
+      "MouseValue": -1
+    },
+    "PlaystationButton": {
+      "KeyboardValue": 12,
+      "MouseValue": -1
+    },
+    "Share": {
+      "KeyboardValue": 1,
+      "MouseValue": -1
+    }
+  },
+  "MouseControlsL3": false,
+  "MouseControlsR3": false,
+  "MouseXAxisSensitivityMax": 100.0,
+  "MouseXAxisSensitivityLookModifier": 2.0,
+  "MouseYAxisSensitivityMax": 100.0,
+  "MouseYAxisSensitivityLookModifier": 1.0,
+  "MousePollingRate": 10,
+  "MouseAimSensitivityEnabled": false,
+  "MouseXAxisSensitivityAimModifier": 2.0,
+  "MouseYAxisSensitivityAimModifier": 1.0,
+  "Version_1_0_12_OrGreater": true,
+  "AnalogStickLowerRange": 40,
+  "AnalogStickUpperRange": 95,
+  "MouseDistanceLowerRange": 5.0,
+  "MouseDistanceUpperRange": 96.0,
+  "MouseMaxDistance": 960.0,
+  "XYRatio": 0.6
+}

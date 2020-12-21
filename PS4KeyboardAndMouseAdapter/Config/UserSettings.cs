@@ -21,11 +21,71 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         //////////////////////////////////////////////////////////////////////
 
+        public static void BroadcastRefresh()
+        {
+            thisInstance.PropertyChanged(thisInstance, new PropertyChangedEventArgs(""));
+        }
+
         public static UserSettings GetInstance()
         {
             return thisInstance;
         }
 
+        public static void ImportValues(string file)
+        {
+            Console.WriteLine("ImportValues()");
+            string json = File.ReadAllText(file);
+            UserSettings newSettings = null;
+
+            if (IsLegacyConfig(json))
+            {
+                UserSettings_1_0_11 legacySettings = JsonConvert.DeserializeObject<UserSettings_1_0_11>(json);
+                newSettings = UserSettings_1_0_11.ImportValues(legacySettings);
+            }
+
+            ImportValuesCurrent(newSettings);
+        }
+
+        public static void ImportValuesCurrent(UserSettings newSettings)
+        {
+            staticLogger.Information("UserSettings.ImportValuesCurrent()");
+
+            //reminder we want to import stuff into variable **thisInstance**
+
+            thisInstance.AnalogStickLowerRange = newSettings.AnalogStickLowerRange;
+            thisInstance.AnalogStickUpperRange = newSettings.AnalogStickUpperRange;
+
+            thisInstance.MouseControlsL3 = newSettings.MouseControlsL3;
+            thisInstance.MouseControlsR3 = newSettings.MouseControlsR3;
+
+            thisInstance.MouseDistanceLowerRange = newSettings.MouseDistanceLowerRange;
+            thisInstance.MouseDistanceUpperRange = newSettings.MouseDistanceUpperRange;
+            thisInstance.MouseMaxDistance = newSettings.MouseMaxDistance;
+
+            thisInstance.MousePollingRate = newSettings.MousePollingRate;
+
+            thisInstance.MouseXAxisSensitivityAimModifier = newSettings.MouseXAxisSensitivityAimModifier;
+            thisInstance.MouseXAxisSensitivityLookModifier = newSettings.MouseXAxisSensitivityLookModifier;
+            thisInstance.MouseXAxisSensitivityMax = newSettings.MouseXAxisSensitivityMax;
+
+            thisInstance.MouseYAxisSensitivityAimModifier = newSettings.MouseYAxisSensitivityAimModifier;
+            thisInstance.MouseYAxisSensitivityLookModifier = newSettings.MouseYAxisSensitivityLookModifier;
+            thisInstance.MouseYAxisSensitivityMax = newSettings.MouseYAxisSensitivityMax;
+
+            thisInstance.XYRatio = newSettings.XYRatio;
+
+            var virtualKeys = KeyUtility.GetVirtualKeyValues();
+            Console.WriteLine("virtualKeys " + virtualKeys);
+            foreach (VirtualKey key in virtualKeys)
+            {
+                if (newSettings.Mappings[key] != null)
+                {
+                    thisInstance.Mappings[key] = newSettings.Mappings[key];
+                }
+            }
+
+            thisInstance.Version_1_0_12_OrGreater = true;
+        }
         public static bool IsLegacyConfig(string json)
         {
             try
@@ -65,10 +125,10 @@ namespace PS4KeyboardAndMouseAdapter.Config
             string fullFilePath = Path.GetFullPath(file);
             Console.WriteLine("UserSettings.Load: " + fullFilePath);
             staticLogger.Information("UserSettings.Load: " + fullFilePath);
-            thisInstance.ImportValues(fullFilePath);
+            ImportValues(fullFilePath);
 
             thisInstance.PropertyChanged(thisInstance, new PropertyChangedEventArgs(""));
-            //Print(thisInstance);
+            Print(thisInstance);
         }
 
         public static void LoadWithCatch(string file)
@@ -102,14 +162,11 @@ namespace PS4KeyboardAndMouseAdapter.Config
             Console.WriteLine("UserSettings.Print()");
 
             Console.WriteLine("mappings");
-            var virtualKeys = System.Enum.GetValues(typeof(VirtualKey));
+            var virtualKeys = KeyUtility.GetVirtualKeyValues();
             foreach (VirtualKey key in virtualKeys)
             {
-                if (key != VirtualKey.NULL)
-                {
-                    staticLogger.Information("print Mappings:{VirtKey:" + key + ", keyboardValue: " + settings.Mappings[key] + "}");
-                    Console.WriteLine("print Mappings:{VirtKey:" + key + ", keyboardValue: " + settings.Mappings[key] + "}");
-                }
+                staticLogger.Information("print Mappings:{VirtKey:" + key + ", keyboardValue: " + settings.Mappings[key] + "}");
+                Console.WriteLine("print Mappings:{VirtKey:" + key + ", keyboardValue: " + settings.Mappings[key] + "}");
             }
 
 
@@ -156,7 +213,6 @@ namespace PS4KeyboardAndMouseAdapter.Config
         // Instance properties not to be persisted
         //
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
-
 
         //
         // Instance properties to be persisted
@@ -235,61 +291,8 @@ namespace PS4KeyboardAndMouseAdapter.Config
             MousePollingRate = 60;
         }
 
-        public void ImportValues(string file)
-        {
-            Console.WriteLine("ImportValues()");
-            string json = File.ReadAllText(file);
-            UserSettings newSettings = null;
 
-            if (IsLegacyConfig(json))
-            {
-                UserSettings_1_0_11 legacySettings = JsonConvert.DeserializeObject<UserSettings_1_0_11>(json);
-                newSettings = UserSettings_1_0_11.ImportValues(legacySettings);
-            }
 
-            ImportValuesCurrent(newSettings);
-        }
-
-        public static void ImportValuesCurrent(UserSettings newSettings)
-        {
-            staticLogger.Information("UserSettings.ImportValuesCurrent()");
-
-            //reminder we want to import stuff into variable **thisInstance**
-
-            thisInstance.AnalogStickLowerRange = newSettings.AnalogStickLowerRange;
-            thisInstance.AnalogStickUpperRange = newSettings.AnalogStickUpperRange;
-
-            thisInstance.MouseControlsL3 = newSettings.MouseControlsL3;
-            thisInstance.MouseControlsR3 = newSettings.MouseControlsR3;
-
-            thisInstance.MouseDistanceLowerRange = newSettings.MouseDistanceLowerRange;
-            thisInstance.MouseDistanceUpperRange = newSettings.MouseDistanceUpperRange;
-            thisInstance.MouseMaxDistance = newSettings.MouseMaxDistance;
-
-            thisInstance.MousePollingRate = newSettings.MousePollingRate;
-
-            thisInstance.MouseXAxisSensitivityAimModifier = newSettings.MouseXAxisSensitivityAimModifier;
-            thisInstance.MouseXAxisSensitivityLookModifier = newSettings.MouseXAxisSensitivityLookModifier;
-            thisInstance.MouseXAxisSensitivityMax = newSettings.MouseXAxisSensitivityMax;
-
-            thisInstance.MouseYAxisSensitivityAimModifier = newSettings.MouseYAxisSensitivityAimModifier;
-            thisInstance.MouseYAxisSensitivityLookModifier = newSettings.MouseYAxisSensitivityLookModifier;
-            thisInstance.MouseYAxisSensitivityMax = newSettings.MouseYAxisSensitivityMax;
-
-            thisInstance.XYRatio = newSettings.XYRatio;
-
-            var virtualKeys = System.Enum.GetValues(typeof(VirtualKey));
-            Console.WriteLine("virtualKeys " + virtualKeys);
-            foreach (VirtualKey key in virtualKeys)
-            {
-                if (key != VirtualKey.NULL && newSettings.Mappings[key] != null)
-                {
-                    thisInstance.Mappings[key] = newSettings.Mappings[key];
-                }
-            }
-
-            thisInstance.Version_1_0_12_OrGreater = true;
-        }
 
     }
 }

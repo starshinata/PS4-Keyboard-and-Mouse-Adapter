@@ -1,4 +1,7 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
+using PS4KeyboardAndMouseAdapter.Config;
 using Serilog;
 
 namespace PS4KeyboardAndMouseAdapter.UI.Pages
@@ -14,5 +17,13 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
             InitializeComponent();
             Log.Information("MouseAdvancedConfigPage constructor FINISHED");
         }
+
+        private void GotFocusLocal(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("MouseAdvancedConfigPage.GotFocusLocal()");
+            InstanceSettings.BroadcastRefresh();
+            UserSettings.BroadcastRefresh();
+        }
+
     }
 }

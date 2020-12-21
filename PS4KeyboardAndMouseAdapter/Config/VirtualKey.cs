@@ -35,7 +35,8 @@ namespace PS4KeyboardAndMouseAdapter.Config
         RightStickLeft,
         RightStickRight,
         RightStickUp,
-        RightStickDown,
+        RightStickDown
+
     }
 
 }
