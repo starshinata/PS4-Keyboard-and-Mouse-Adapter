@@ -85,17 +85,17 @@
             Grid.Row="5"
             Description="Mouse Look X axis sensitivity"
             Minimum="1" 
-            Maximum="{Binding Settings.MouseXAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Maximum="{Binding UserSettings.MouseXAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             TickFrequency="0.1"
-            Value="{Binding Settings.MouseXAxisSensitivityLookModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            Value="{Binding UserSettings.MouseXAxisSensitivityLookModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <controls:SliderV
             Grid.Row="6"
             Description="Mouse Look Y axis sensitivity"
             Minimum="1" 
-            Maximum="{Binding Path=Settings.MouseYAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Maximum="{Binding Path=UserSettings.MouseYAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             TickFrequency="0.1"
-            Value="{Binding Path=Settings.MouseYAxisSensitivityLookModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            Value="{Binding Path=UserSettings.MouseYAxisSensitivityLookModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
     </Grid>
 </UserControl>

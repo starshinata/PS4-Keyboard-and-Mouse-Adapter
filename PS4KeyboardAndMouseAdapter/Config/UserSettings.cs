@@ -16,19 +16,20 @@ namespace PS4KeyboardAndMouseAdapter.Config
         public static string PROFILE_DEFAULT = "profiles/default-profile.json";
         public static string PROFILE_PREVIOUS = "profile-previous.json";
 
-        private static UserSettings thisInstance = new UserSettings();
-        private static ILogger staticLogger = Log.ForContext(typeof(UserSettings));
+        private static UserSettings ThisInstance = new UserSettings();
+        private static ILogger StaticLogger = Log.ForContext(typeof(UserSettings));
 
         //////////////////////////////////////////////////////////////////////
 
         public static void BroadcastRefresh()
         {
-            thisInstance.PropertyChanged(thisInstance, new PropertyChangedEventArgs(""));
+            ThisInstance.GetKeyboardMappings();
+            ThisInstance.PropertyChanged(ThisInstance, new PropertyChangedEventArgs(""));
         }
 
         public static UserSettings GetInstance()
         {
-            return thisInstance;
+            return ThisInstance;
         }
 
         public static void ImportValues(string file)
@@ -48,31 +49,31 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         public static void ImportValuesCurrent(UserSettings newSettings)
         {
-            staticLogger.Information("UserSettings.ImportValuesCurrent()");
+            StaticLogger.Information("UserSettings.ImportValuesCurrent()");
 
             //reminder we want to import stuff into variable **thisInstance**
 
-            thisInstance.AnalogStickLowerRange = newSettings.AnalogStickLowerRange;
-            thisInstance.AnalogStickUpperRange = newSettings.AnalogStickUpperRange;
+            ThisInstance.AnalogStickLowerRange = newSettings.AnalogStickLowerRange;
+            ThisInstance.AnalogStickUpperRange = newSettings.AnalogStickUpperRange;
 
-            thisInstance.MouseControlsL3 = newSettings.MouseControlsL3;
-            thisInstance.MouseControlsR3 = newSettings.MouseControlsR3;
+            ThisInstance.MouseControlsL3 = newSettings.MouseControlsL3;
+            ThisInstance.MouseControlsR3 = newSettings.MouseControlsR3;
 
-            thisInstance.MouseDistanceLowerRange = newSettings.MouseDistanceLowerRange;
-            thisInstance.MouseDistanceUpperRange = newSettings.MouseDistanceUpperRange;
-            thisInstance.MouseMaxDistance = newSettings.MouseMaxDistance;
+            ThisInstance.MouseDistanceLowerRange = newSettings.MouseDistanceLowerRange;
+            ThisInstance.MouseDistanceUpperRange = newSettings.MouseDistanceUpperRange;
+            ThisInstance.MouseMaxDistance = newSettings.MouseMaxDistance;
 
-            thisInstance.MousePollingRate = newSettings.MousePollingRate;
+            ThisInstance.MousePollingRate = newSettings.MousePollingRate;
 
-            thisInstance.MouseXAxisSensitivityAimModifier = newSettings.MouseXAxisSensitivityAimModifier;
-            thisInstance.MouseXAxisSensitivityLookModifier = newSettings.MouseXAxisSensitivityLookModifier;
-            thisInstance.MouseXAxisSensitivityMax = newSettings.MouseXAxisSensitivityMax;
+            ThisInstance.MouseXAxisSensitivityAimModifier = newSettings.MouseXAxisSensitivityAimModifier;
+            ThisInstance.MouseXAxisSensitivityLookModifier = newSettings.MouseXAxisSensitivityLookModifier;
+            ThisInstance.MouseXAxisSensitivityMax = newSettings.MouseXAxisSensitivityMax;
 
-            thisInstance.MouseYAxisSensitivityAimModifier = newSettings.MouseYAxisSensitivityAimModifier;
-            thisInstance.MouseYAxisSensitivityLookModifier = newSettings.MouseYAxisSensitivityLookModifier;
-            thisInstance.MouseYAxisSensitivityMax = newSettings.MouseYAxisSensitivityMax;
+            ThisInstance.MouseYAxisSensitivityAimModifier = newSettings.MouseYAxisSensitivityAimModifier;
+            ThisInstance.MouseYAxisSensitivityLookModifier = newSettings.MouseYAxisSensitivityLookModifier;
+            ThisInstance.MouseYAxisSensitivityMax = newSettings.MouseYAxisSensitivityMax;
 
-            thisInstance.XYRatio = newSettings.XYRatio;
+            ThisInstance.XYRatio = newSettings.XYRatio;
 
             var virtualKeys = KeyUtility.GetVirtualKeyValues();
             Console.WriteLine("virtualKeys " + virtualKeys);
@@ -80,11 +81,11 @@ namespace PS4KeyboardAndMouseAdapter.Config
             {
                 if (newSettings.Mappings[key] != null)
                 {
-                    thisInstance.Mappings[key] = newSettings.Mappings[key];
+                    ThisInstance.Mappings[key] = newSettings.Mappings[key];
                 }
             }
 
-            thisInstance.Version_1_0_12_OrGreater = true;
+            ThisInstance.Version_1_0_12_OrGreater = true;
         }
         public static bool IsLegacyConfig(string json)
         {
@@ -104,17 +105,17 @@ namespace PS4KeyboardAndMouseAdapter.Config
                     }
                     catch (Exception ex)
                     {
-                        staticLogger.Error("UserSettings.IsLegacyConfig error(a): " + ex.Message);
-                        staticLogger.Error(ex.GetType().ToString());
-                        staticLogger.Error(ex.StackTrace);
+                        StaticLogger.Error("UserSettings.IsLegacyConfig error(a): " + ex.Message);
+                        StaticLogger.Error(ex.GetType().ToString());
+                        StaticLogger.Error(ex.StackTrace);
                     }
                 }
             }
             catch (Exception ex)
             {
-                staticLogger.Error("UserSettings.IsLegacyConfig error(b): " + ex.Message);
-                staticLogger.Error(ex.GetType().ToString());
-                staticLogger.Error(ex.StackTrace);
+                StaticLogger.Error("UserSettings.IsLegacyConfig error(b): " + ex.Message);
+                StaticLogger.Error(ex.GetType().ToString());
+                StaticLogger.Error(ex.StackTrace);
             }
 
             return true;
@@ -124,11 +125,12 @@ namespace PS4KeyboardAndMouseAdapter.Config
         {
             string fullFilePath = Path.GetFullPath(file);
             Console.WriteLine("UserSettings.Load: " + fullFilePath);
-            staticLogger.Information("UserSettings.Load: " + fullFilePath);
+            StaticLogger.Information("UserSettings.Load: " + fullFilePath);
             ImportValues(fullFilePath);
 
-            thisInstance.PropertyChanged(thisInstance, new PropertyChangedEventArgs(""));
-            Print(thisInstance);
+            ThisInstance.GetKeyboardMappings();
+            ThisInstance.PropertyChanged(ThisInstance, new PropertyChangedEventArgs(""));
+            Print(ThisInstance);
         }
 
         public static void LoadWithCatch(string file)
@@ -139,9 +141,9 @@ namespace PS4KeyboardAndMouseAdapter.Config
             }
             catch (Exception ex)
             {
-                staticLogger.Error("UserSettings.LoadWithCatch failed: " + ex.Message);
-                staticLogger.Error(ex.GetType().ToString());
-                staticLogger.Error(ex.StackTrace);
+                StaticLogger.Error("UserSettings.LoadWithCatch failed: " + ex.Message);
+                StaticLogger.Error(ex.GetType().ToString());
+                StaticLogger.Error(ex.StackTrace);
             }
         }
 
@@ -153,19 +155,18 @@ namespace PS4KeyboardAndMouseAdapter.Config
         public static void LoadPrevious()
         {
             LoadWithCatch(PROFILE_PREVIOUS);
-            Print(thisInstance);
         }
 
         public static void Print(UserSettings settings)
         {
-            staticLogger.Information("UserSettings.Print()");
+            StaticLogger.Information("UserSettings.Print()");
             Console.WriteLine("UserSettings.Print()");
 
             Console.WriteLine("mappings");
             var virtualKeys = KeyUtility.GetVirtualKeyValues();
             foreach (VirtualKey key in virtualKeys)
             {
-                staticLogger.Information("print Mappings:{VirtKey:" + key + ", keyboardValue: " + settings.Mappings[key] + "}");
+                StaticLogger.Information("print Mappings:{VirtKey:" + key + ", keyboardValue: " + settings.Mappings[key] + "}");
                 Console.WriteLine("print Mappings:{VirtKey:" + key + ", keyboardValue: " + settings.Mappings[key] + "}");
             }
 
@@ -183,7 +184,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
                     {
                         var value = getter.Invoke(settings, new object[] { });
 
-                        staticLogger.Information("print " + prop + ":" + value);
+                        StaticLogger.Information("print " + prop + ":" + value);
                         Console.WriteLine("print " + prop + ":" + value);
                     }
                 }
@@ -192,19 +193,19 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         public static void Save(string file)
         {
-            staticLogger.Information("UserSettings.Save: " + file);
-            string json = JsonConvert.SerializeObject(thisInstance, Formatting.Indented);
+            StaticLogger.Information("UserSettings.Save: " + file);
+            string json = JsonConvert.SerializeObject(ThisInstance, Formatting.Indented);
             File.WriteAllText(file, json);
         }
 
         public static void SetMapping(VirtualKey key, PhysicalKey value)
         {
-            staticLogger.Information("MainViewModel.SetMapping {VirtualKey:" + key + ", PhysicalKey: " + value + "}");
+            StaticLogger.Information("MainViewModel.SetMapping {VirtualKey:" + key + ", PhysicalKey: " + value + "}");
 
-            thisInstance.Mappings[key] = value;
+            ThisInstance.Mappings[key] = value;
 
             Save(PROFILE_PREVIOUS);
-            thisInstance.PropertyChanged(thisInstance, new PropertyChangedEventArgs(""));
+            ThisInstance.PropertyChanged(ThisInstance, new PropertyChangedEventArgs(""));
         }
 
         //////////////////////////////////////////////////////////////////////
@@ -293,6 +294,20 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
 
 
+        public Dictionary<VirtualKey, PhysicalKey> KeyboardMappings { get; set; } = new Dictionary<VirtualKey, PhysicalKey>();
 
+        public void GetKeyboardMappings()
+        {
+            var virtualKeys = KeyUtility.GetVirtualKeyValues();
+            foreach (VirtualKey key in virtualKeys)
+            {
+                PhysicalKey pk = Mappings[key];
+                if (pk != null && pk.KeyboardValue != Keyboard.Key.Unknown)
+                {
+                    KeyboardMappings[key] = Mappings[key];
+                }
+            }
+        }
     }
 }
+

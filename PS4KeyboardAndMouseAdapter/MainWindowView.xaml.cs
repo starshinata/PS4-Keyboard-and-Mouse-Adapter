@@ -18,12 +18,12 @@ namespace PS4KeyboardAndMouseAdapter
 
         private void MainWindowView_OnActivated(object sender, EventArgs e)
         {
-            vm.RemotePlayProcess.Refresh();
+            vm.RemotePlayInjector.RemotePlayProcess.Refresh();
         }
 
         private void MainWindowView_OnDeactivated(object sender, EventArgs e)
         {
-            vm.RemotePlayProcess.Refresh();
+            vm.RemotePlayInjector.RemotePlayProcess.Refresh();
         }
 
         public void MainWindowView_OnKeyDown(object sender, KeyEventArgs e)

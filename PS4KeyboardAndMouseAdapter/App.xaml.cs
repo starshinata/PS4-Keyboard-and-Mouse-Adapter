@@ -17,6 +17,7 @@ namespace PS4KeyboardAndMouseAdapter
 
         private void OnAppExit(object sender, ExitEventArgs e)
         {
+            // cause not having a cursor is a pain in the ass
             Utility.ShowCursor(true);
 
             //TODO: hardcoded, fix.

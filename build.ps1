@@ -238,7 +238,8 @@ valid-xaml-xmllint
 
 build-msbuild
 
-test-vstest
+## TODO
+##test-vstest
 
 
 

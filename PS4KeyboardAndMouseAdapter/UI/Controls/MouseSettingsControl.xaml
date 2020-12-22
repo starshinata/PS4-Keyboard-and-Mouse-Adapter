@@ -113,23 +113,23 @@
             Minimum="10" 
             Maximum="250"
             TickFrequency="1"
-            Value="{Binding Path=Settings.MousePollingRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            Value="{Binding Path=UserSettings.MousePollingRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         
         <controls:SliderV
             Grid.Row="6"
             Description="Mouse Look X axis sensitivity"
             Minimum="1" 
-            Maximum="{Binding Settings.MouseXAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Maximum="{Binding UserSettings.MouseXAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             TickFrequency="0.1"
-            Value="{Binding Settings.MouseXAxisSensitivityLookModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            Value="{Binding UserSettings.MouseXAxisSensitivityLookModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <controls:SliderV
             Grid.Row="7"
             Description="Mouse Look Y axis sensitivity"
             Minimum="1" 
-            Maximum="{Binding Path=Settings.MouseYAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Maximum="{Binding Path=UserSettings.MouseYAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             TickFrequency="0.1"
-            Value="{Binding Path=Settings.MouseYAxisSensitivityLookModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            Value="{Binding Path=UserSettings.MouseYAxisSensitivityLookModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
      
         <!-- Row 8 intentionally empty -->
 
@@ -144,7 +144,7 @@
         <wpfspark:ToggleSwitch
             Grid.Row="9"
             Grid.Column="5"
-            IsChecked="{Binding Path=Settings.MouseAimSensitivityEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            IsChecked="{Binding Path=UserSettings.MouseAimSensitivityEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             Height="30"
             HorizontalAlignment="Right"
             Style="{StaticResource {ComponentResourceKey ResourceId=ToggleSwitch.UWP.Dark.Style, TypeInTargetAssembly={x:Type wpfspark:ToggleSwitch}}}" 
@@ -165,34 +165,34 @@
             Grid.Row="11"
             Description="Mouse Look X axis sensitivity"
             Minimum="1" 
-            Maximum="{Binding Path=Settings.MouseXAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Maximum="{Binding Path=UserSettings.MouseXAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             TickFrequency="0.1"
-            Value="{Binding Path=Settings.MouseXAxisSensitivityAimModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            Value="{Binding Path=UserSettings.MouseXAxisSensitivityAimModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <controls:SliderV
             Grid.Row="12"
             Description="Mouse Look Y axis sensitivity"
             Minimum="1" 
-            Maximum="{Binding Path=Settings.MouseYAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Maximum="{Binding Path=UserSettings.MouseYAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             TickFrequency="0.1"
-            Value="{Binding Path=Settings.MouseYAxisSensitivityAimModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            Value="{Binding Path=UserSettings.MouseYAxisSensitivityAimModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
       
         <controls:RangeSlider            
             Grid.Row="14"
             Description="Mouse distance range"
             Minimum="0" 
-            Maximum="{Binding Path=Settings.MaxMouseDistance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            LowerValue="{Binding Path=Settings.MouseDistanceLowerRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            UpperValue="{Binding Path=Settings.MouseDistanceUpperRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Maximum="{Binding Path=UserSettings.MaxMouseDistance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            LowerValue="{Binding Path=UserSettings.MouseDistanceLowerRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            UpperValue="{Binding Path=UserSettings.MouseDistanceUpperRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             x:Name="mouseDistanceRangeSlider"/>
 
         <controls:RangeSlider 
             Grid.Row="15" 
             Description="Analog stick range (in %)" 
-            LowerValue="{Binding Path=Settings.AnalogStickLowerRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            LowerValue="{Binding Path=UserSettings.AnalogStickLowerRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             Minimum="0"  
             Maximum="95"  
-            UpperValue="{Binding Path=Settings.AnalogStickUpperRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            UpperValue="{Binding Path=UserSettings.AnalogStickUpperRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             x:Name="AnalogStickRangeSlider" />
 
         <controls:SliderV 
@@ -200,7 +200,7 @@
             Description="Horizontal/Vertical ratio" 
             Minimum="0.1" 
             Maximum="1" 
-            Value="{Binding Path=Settings.XYRatio, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Value="{Binding Path=UserSettings.XYRatio, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             TickFrequency="0.1"/>
 
     </Grid>

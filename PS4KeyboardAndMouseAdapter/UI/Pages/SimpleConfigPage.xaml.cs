@@ -1,7 +1,5 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using PS4KeyboardAndMouseAdapter.Config;
 using PS4KeyboardAndMouseAdapter.UI.Controls;
 using Serilog;
 
@@ -21,9 +19,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
 
         private void GotFocusLocal(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("SimpleConfigPage.GotFocusLocal()");
-            InstanceSettings.BroadcastRefresh();
-            UserSettings.BroadcastRefresh();
+            ((MainViewModel)DataContext).RefreshData();
         }
 
     }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Media;
 using PS4KeyboardAndMouseAdapter.Config;
 using Serilog;
@@ -22,59 +21,17 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
 
         private Button lastClickedButton;
 
-        public UserSettings Settings;
-
-        public Dictionary<VirtualKey, PhysicalKey> keyboardMappings { get; set; } = new Dictionary<VirtualKey, PhysicalKey>();
+                
 
         public GamepadMappingController()
         {
             Log.Information("GamepadMappingController constructor IN");
-            Settings = UserSettings.GetInstance();
             InitializeComponent();
 
-            InitializeButtons();
-
             WaitingForKeyPress_Hide();
-
-            GetKeyboardMappings();
             Log.Information("GamepadMappingController constructor OUT");
         }
-
-        private void GetKeyboardMappings() {
-            if (Settings != null) {
-
-                var virtualKeys = KeyUtility.GetVirtualKeyValues();
-                Console.WriteLine("virtualKeys " + virtualKeys);
-                foreach (VirtualKey key in virtualKeys)
-                {
-                    PhysicalKey pk = Settings.Mappings[key];
-                    if (pk != null && pk.KeyboardValue!=Keyboard.Key.Unknown )
-                    {
-                        keyboardMappings[key] = Settings.Mappings[key];
-                    }
-                }
-            }
-        }
-
-        private void InitializeButtons()
-        {
-            InitializeButton("buttonQQ");
-
-        }
-
-        private void InitializeButton(string buttonName)
-        {
-            Button button = FindName(buttonName) as Button;
-            if (button != null)
-            {
-                VirtualKey virtualKey = (VirtualKey)button.Tag;
-
-                button.Tag = virtualKey;
-                Binding dataBinding = new Binding("Settings.Mappings[" + virtualKey + "]");
-                button.SetBinding(ContentProperty, dataBinding);
-            }
-        }
-
+        
 
         public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
         {
@@ -119,10 +76,8 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
                         }
 
                         lastClickedButton = null;
+                        ((MainViewModel)DataContext).RefreshData();
                         WaitingForKeyPress_Hide();
-
-                        Settings = UserSettings.GetInstance();
-
                     }
                 }
             }

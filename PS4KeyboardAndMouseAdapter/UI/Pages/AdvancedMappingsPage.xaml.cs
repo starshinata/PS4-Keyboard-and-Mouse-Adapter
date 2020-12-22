@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using PS4KeyboardAndMouseAdapter.Config;
 
@@ -15,10 +14,10 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
 
             Settings = UserSettings.GetInstance();
 
-            addStuff();
+            AddStuff();
         }
 
-        private void addStuff()
+        private void AddStuff()
         {
             var virtualKeys = KeyUtility.GetVirtualKeyValues();
             foreach (VirtualKey vk in virtualKeys)
@@ -46,9 +45,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
 
         private void GotFocusLocal(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("AdvancedMappingsPage.GotFocusLocal()");
-            InstanceSettings.BroadcastRefresh();
-            UserSettings.BroadcastRefresh();
+            ((MainViewModel)DataContext).RefreshData();
         }
 
     }
