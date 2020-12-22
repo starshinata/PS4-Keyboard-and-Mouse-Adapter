@@ -259,6 +259,7 @@
     </ApplicationDefinition>
     <Compile Include="Config\KeyUtility.cs" />
     <Compile Include="Config\MouseButton.cs" />
+    <Compile Include="Config\PhysicalKeyGroup.cs" />
     <Compile Include="Config\PhysicalKey.cs" />
     <Compile Include="Config\InstanceSettings.cs" />
     <Compile Include="Config\UserSettings_1_0_11.cs" />

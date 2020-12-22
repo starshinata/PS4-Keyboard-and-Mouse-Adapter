@@ -22,7 +22,7 @@ namespace PS4KeyboardAndMouseAdapter
         public Vector2i MouseDirection { get; set; }
         public int AnalogX { get; set; }
         public int AnalogY { get; set; }
-        
+
         private readonly Stopwatch mouseTimer = new Stopwatch();
         private Vector2i mouseDirection = new Vector2i(0, 0);
 
@@ -190,8 +190,8 @@ namespace PS4KeyboardAndMouseAdapter
 
 
                 // L3R3 center is 127, 
-                // full left is 0
-                // full right is 255
+                // full left/up is 0
+                // full right/down is 255
                 var scaledX = (byte)Utility.map(direction.X * normalizedLength, -1, 1, 0, 255);
                 var scaledY = (byte)Utility.map(direction.Y * normalizedLength, -1, 1, 0, 255);
 
@@ -210,7 +210,6 @@ namespace PS4KeyboardAndMouseAdapter
                     Console.WriteLine("scaledY" + scaledY);
                 }
 
-
                 if (UserSettings.MouseControlsL3)
                 {
                     CurrentState.LX = scaledX;
@@ -225,6 +224,22 @@ namespace PS4KeyboardAndMouseAdapter
             }
         }
 
+        public bool IsPhysicalKeyPressed(PhysicalKey key)
+        {
+            if (Keyboard.IsKeyPressed(key.KeyboardValue))
+                return true;
+
+            if (key.MouseValue != MouseButton.Unknown)
+            {
+                Mouse.Button csfmlMouseButton = (Mouse.Button)key.MouseValue;
+                if (Mouse.IsButtonPressed(csfmlMouseButton))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
         public static bool IsProcessInForeground(Process process)
         {
@@ -244,7 +259,8 @@ namespace PS4KeyboardAndMouseAdapter
 
         private bool IsUserAiming()
         {
-            return UserSettings.MouseAimSensitivityEnabled && SFML.Window.Mouse.IsButtonPressed(Mouse.Button.Right);
+            //TODO make this dynamic
+            return UserSettings.MouseAimSensitivityEnabled && Mouse.IsButtonPressed(Mouse.Button.Right);
         }
 
         public bool IsVirtualKeyPressed(VirtualKey key)
@@ -252,21 +268,21 @@ namespace PS4KeyboardAndMouseAdapter
             if (key == VirtualKey.NULL)
                 return false;
 
-            if (UserSettings.Mappings[key] == null)
+            PhysicalKeyGroup pkg = UserSettings.Mappings[key];
+            if (pkg == null || pkg.PhysicalKeys == null)
                 return false;
 
-            if (Keyboard.IsKeyPressed(UserSettings.Mappings[key].KeyboardValue))
-                return true;
-
-            if (UserSettings.Mappings[key].MouseValue != MouseButton.Unknown)
+            foreach (PhysicalKey pk in pkg.PhysicalKeys)
             {
-                Mouse.Button csfmlMouseButton = (Mouse.Button)UserSettings.Mappings[key].MouseValue;
-                if (Mouse.IsButtonPressed(csfmlMouseButton))
+                if (IsPhysicalKeyPressed(pk))
+                {
                     return true;
+                }
             }
 
             return false;
         }
+
 
         public void OnReceiveData(ref DualShockState state)
         {

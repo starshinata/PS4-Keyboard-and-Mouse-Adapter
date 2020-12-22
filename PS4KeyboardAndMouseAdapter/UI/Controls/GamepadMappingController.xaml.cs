@@ -70,9 +70,13 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
 
                         if (key != Keyboard.Key.Escape)
                         {
-                            PhysicalKey pk = new PhysicalKey();
-                            pk.KeyboardValue = key;
-                            UserSettings.SetMapping((VirtualKey)lastClickedButton.Tag, pk);
+                            VirtualKey vk = (VirtualKey)lastClickedButton.Tag;
+
+                            PhysicalKey valueOld = UserSettings.GetInstance().KeyboardMappings[vk];
+
+                            PhysicalKey valueNew = new PhysicalKey();
+                            valueNew.KeyboardValue = key;
+                            UserSettings.SetMapping(vk, valueOld,valueNew);
                         }
 
                         lastClickedButton = null;

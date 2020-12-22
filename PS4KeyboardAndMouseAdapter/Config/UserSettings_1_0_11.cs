@@ -10,7 +10,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
     {
 
         private static ILogger staticLogger = Log.ForContext(typeof(UserSettings_1_0_11));
-        
+
         ////////////////////////////////////////////////////////////////////////////
 
         public Dictionary<VirtualKey, Keyboard.Key> Mappings { get; set; } = new Dictionary<VirtualKey, Keyboard.Key>();
@@ -36,9 +36,29 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         //////////////////////////////////////////////////////////////////////
 
+        private static void AddManualMouseMapping(UserSettings newSettings, VirtualKey vk, MouseButton mouseButton)
+        {
+            if (newSettings.Mappings[vk] == null)
+            {
+                newSettings.Mappings[vk] = new PhysicalKeyGroup();
+            }
+
+            PhysicalKey pk = new PhysicalKey();
+            pk.MouseValue = mouseButton;
+
+            newSettings.Mappings[vk].PhysicalKeys.Add(pk);
+        }
+
+        public static PhysicalKeyGroup GetPhysicalKeyGroup(PhysicalKey pk)
+        {
+            PhysicalKeyGroup pkg = new PhysicalKeyGroup();
+            pkg.PhysicalKeys.Add(pk);
+            return pkg;
+        }
+
         public static UserSettings ImportValues(UserSettings_1_0_11 legacySettings)
         {
-            Console.WriteLine("UserSettings_1_0_11.ImportValues()"); 
+            Console.WriteLine("UserSettings_1_0_11.ImportValues()");
             staticLogger.Information("UserSettings_1_0_11.ImportValues()");
 
             UserSettings newSettings = UserSettings.GetInstance();
@@ -60,9 +80,9 @@ namespace PS4KeyboardAndMouseAdapter.Config
             newSettings.MouseXAxisSensitivityMax = legacySettings.MouseXAxisSensitivityMax;
 
             newSettings.MouseYAxisSensitivityAimModifier = legacySettings.MouseYAxisSensitivityModifier;
-            newSettings.MouseYAxisSensitivityLookModifier = legacySettings.MouseYAxisSensitivityModifier; 
+            newSettings.MouseYAxisSensitivityLookModifier = legacySettings.MouseYAxisSensitivityModifier;
             newSettings.MouseYAxisSensitivityMax = legacySettings.MouseYAxisSensitivityMax;
-            
+
             newSettings.XYRatio = legacySettings.XYRatio;
 
 
@@ -71,8 +91,12 @@ namespace PS4KeyboardAndMouseAdapter.Config
                 PhysicalKey pk = new PhysicalKey();
                 pk.KeyboardValue = legacySettings.Mappings[key];
 
-                newSettings.Mappings[key] = pk;
+                newSettings.Mappings[key] = GetPhysicalKeyGroup(pk);
             }
+
+            // Now readd the mouse bindings that didnt exist as config in 1.0.11
+            AddManualMouseMapping(newSettings, VirtualKey.L2, MouseButton.Right);
+            AddManualMouseMapping(newSettings, VirtualKey.R2, MouseButton.Left);
 
             newSettings.Version_1_0_12_OrGreater = true;
 
@@ -81,7 +105,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         public static void Print(UserSettings_1_0_11 settings)
         {
-            
+
             Console.WriteLine("UserSettings_1_0_11.Print()");
 
             Console.WriteLine("mappings");

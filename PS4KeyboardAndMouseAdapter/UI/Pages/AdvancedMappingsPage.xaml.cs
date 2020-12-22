@@ -28,15 +28,16 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
                 };
                 mappingHolder.Children.Add(textblock);
 
-                if (Settings.Mappings[vk] != null)
+                PhysicalKeyGroup pkg = Settings.Mappings[vk];
+                if (pkg != null && pkg.PhysicalKeys != null)
                 {
-                    Button button = new Button();
 
-                    if (Settings.Mappings[vk].KeyboardValue != SFML.Window.Keyboard.Key.Unknown)
+                    foreach (PhysicalKey pk in pkg.PhysicalKeys)
                     {
-                        button.Content = string.Format("value '{0}'", Settings.Mappings[vk]);
+                        Button button = new Button();
+                        button.Content = string.Format("value '{0}'", pk);
+                        mappingHolder.Children.Add(button);
                     }
-                    mappingHolder.Children.Add(button);
                 }
 
             }

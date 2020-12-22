@@ -16,8 +16,8 @@ namespace PS4KeyboardAndMouseAdapter.Config
         public static string PROFILE_DEFAULT = "profiles/default-profile.json";
         public static string PROFILE_PREVIOUS = "profile-previous.json";
 
-        private static UserSettings ThisInstance = new UserSettings();
-        private static ILogger StaticLogger = Log.ForContext(typeof(UserSettings));
+        private static readonly UserSettings ThisInstance = new UserSettings();
+        private static readonly ILogger StaticLogger = Log.ForContext(typeof(UserSettings));
 
         //////////////////////////////////////////////////////////////////////
 
@@ -198,11 +198,15 @@ namespace PS4KeyboardAndMouseAdapter.Config
             File.WriteAllText(file, json);
         }
 
-        public static void SetMapping(VirtualKey key, PhysicalKey value)
+        public static void SetMapping(VirtualKey key, PhysicalKey valueOld, PhysicalKey valueNew)
         {
-            StaticLogger.Information("MainViewModel.SetMapping {VirtualKey:" + key + ", PhysicalKey: " + value + "}");
+            StaticLogger.Information("MainViewModel.SetMapping {VirtualKey:" + key + ", PhysicalKey: '" + valueOld + " -> "+ valueNew+ "'}");
 
-            ThisInstance.Mappings[key] = value;
+            if (valueOld != null) {
+                ThisInstance.Mappings[key].PhysicalKeys.Remove(valueOld);
+            }
+
+            ThisInstance.Mappings[key].PhysicalKeys.Add(valueNew);
 
             Save(PROFILE_PREVIOUS);
             ThisInstance.PropertyChanged(ThisInstance, new PropertyChangedEventArgs(""));
@@ -225,7 +229,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
         // default if false until we find a value
         public bool Version_1_0_12_OrGreater { get; set; } = false;
 
-        public Dictionary<VirtualKey, PhysicalKey> Mappings { get; set; } = new Dictionary<VirtualKey, PhysicalKey>();
+        public Dictionary<VirtualKey, PhysicalKeyGroup> Mappings { get; set; } = new Dictionary<VirtualKey, PhysicalKeyGroup>();
 
         public int AnalogStickLowerRange { get; set; } = 40;
         public int AnalogStickUpperRange { get; set; } = 95;
@@ -299,12 +303,15 @@ namespace PS4KeyboardAndMouseAdapter.Config
         public void GetKeyboardMappings()
         {
             var virtualKeys = KeyUtility.GetVirtualKeyValues();
-            foreach (VirtualKey key in virtualKeys)
+            foreach (VirtualKey vk in virtualKeys)
             {
-                PhysicalKey pk = Mappings[key];
-                if (pk != null && pk.KeyboardValue != Keyboard.Key.Unknown)
+                PhysicalKeyGroup pkg = Mappings[vk];
+                foreach (PhysicalKey pk in pkg.PhysicalKeys)
                 {
-                    KeyboardMappings[key] = Mappings[key];
+                    if (pk != null && pk.KeyboardValue != Keyboard.Key.Unknown)
+                    {
+                        KeyboardMappings[vk] = pk;
+                    }
                 }
             }
         }
