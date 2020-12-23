@@ -1,24 +1,21 @@
 ﻿<UserControl x:Class="PS4KeyboardAndMouseAdapter.UI.Controls.GamepadMappingController"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                
              d:DesignHeight="390"
              d:DesignWidth="700"
              mc:Ignorable="d"
-               
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+
              xmlns:config="clr-namespace:PS4KeyboardAndMouseAdapter.Config"
              xmlns:controls="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Controls"
-             xmlns:converters="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Converters"
              xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
              xmlns:wpfspark="clr-namespace:WPFSpark;assembly=WPFSpark">
 
     <Grid>
 
         <Grid.Resources>
-            <converters:KeyNameToSymbolConverter x:Key="KeyNameToSymbolConverter"/>
-
             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
                 <EventSetter Event="Click" Handler="Handler_ButtonClicked" />
             </Style>
@@ -42,7 +39,7 @@
                 FontWeight="Bold" 
                 Foreground="Crimson" 
                 HorizontalAlignment="Center" 
-                Text="Press any key to map" 
+                Text="Press any Keyboard key to map" 
                 VerticalAlignment="Center" 
                 />
 
@@ -148,7 +145,7 @@
                 Grid.Column="1"
                 Grid.ColumnSpan="2"
                 Tag="{x:Static config:VirtualKey.DPadUp}"
-                Content="{Binding Path=UserSettings.KeyboardMappings[(config:VirtualKey)DPadUp], Converter={StaticResource KeyNameToSymbolConverter}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                Content="{Binding Path=UserSettings.KeyboardMappings[(config:VirtualKey)DPadUp], UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                 Visibility="Visible"
                 Margin="0,20,0,7"
                 />
@@ -159,7 +156,7 @@
                 Grid.Column="1"
                 Grid.ColumnSpan="2"
                 Tag="{x:Static config:VirtualKey.DPadLeft}"
-                Content="{Binding Path=UserSettings.KeyboardMappings[(config:VirtualKey)DPadLeft], Converter={StaticResource KeyNameToSymbolConverter}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                Content="{Binding Path=UserSettings.KeyboardMappings[(config:VirtualKey)DPadLeft], UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                 Height="26"
                 Margin="0,20,0,0" 
                 VerticalAlignment="Top"
@@ -172,7 +169,7 @@
                 Grid.Column="1"
                 Grid.ColumnSpan="2"
                 Tag="{x:Static config:VirtualKey.DPadDown}"
-                Content="{Binding Path=UserSettings.KeyboardMappings[(config:VirtualKey)DPadDown], Converter={StaticResource KeyNameToSymbolConverter}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                Content="{Binding Path=UserSettings.KeyboardMappings[(config:VirtualKey)DPadDown], UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                 Margin="0,21,0,5" 
                 Visibility="Visible"/>
 
@@ -182,7 +179,7 @@
                 Grid.Column="1"
                 Grid.ColumnSpan="2"
                 Tag="{x:Static config:VirtualKey.DPadRight}"
-                Content="{Binding Path=UserSettings.KeyboardMappings[(config:VirtualKey)DPadRight], Converter={StaticResource KeyNameToSymbolConverter}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                Content="{Binding Path=UserSettings.KeyboardMappings[(config:VirtualKey)DPadRight], UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                 Margin="0,22,0,4" 
                 Visibility="Visible"
                 />

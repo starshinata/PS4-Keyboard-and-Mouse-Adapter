@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using PS4KeyboardAndMouseAdapter.Config;
 using Serilog;
 using Button = System.Windows.Controls.Button;
@@ -17,11 +15,8 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
     /// </summary>
     public partial class GamepadMappingController : UserControl
     {
-        private const double LowOpacity = 0.1;
 
         private Button lastClickedButton;
-
-                
 
         public GamepadMappingController()
         {
@@ -30,27 +25,6 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
 
             WaitingForKeyPress_Hide();
             Log.Information("GamepadMappingController constructor OUT");
-        }
-        
-
-        public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
-        {
-            if (depObj != null)
-            {
-                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
-                {
-                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
-                    if (child != null && child is T)
-                    {
-                        yield return (T)child;
-                    }
-
-                    foreach (T childOfChild in FindVisualChildren<T>(child))
-                    {
-                        yield return childOfChild;
-                    }
-                }
-            }
         }
 
         private void Handler_ButtonClicked(object sender, RoutedEventArgs e)
@@ -89,15 +63,14 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
 
         public void WaitingForKeyPress_Show(Button sender)
         {
-
             lastClickedButton = sender;
 
             WaitForKeyPress.Opacity = 0.7;
-            JoystickImage.Opacity = LowOpacity;
+            JoystickImage.Opacity = UIConstants.LowVisibility;
 
-            foreach (var button in FindVisualChildren<Button>(this))
+            foreach (Button button in UITools.FindVisualChildren<Button>(this))
             {
-                button.Opacity = LowOpacity;
+                button.Opacity = UIConstants.LowVisibility;
                 button.IsEnabled = false;
             }
         }
@@ -107,7 +80,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
             WaitForKeyPress.Opacity = 0;
             JoystickImage.Opacity = 1;
 
-            foreach (var button in FindVisualChildren<Button>(this))
+            foreach (Button button in UITools.FindVisualChildren<Button>(this))
             {
                 button.Opacity = 1;
                 button.IsEnabled = true;

@@ -266,6 +266,7 @@
     <Compile Include="Dll\Rect.cs" />
     <Compile Include="Dll\User32.cs" />
     <Compile Include="GamepadProcessor.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="RemotePlayInjector.cs" />
     <Compile Include="MouseAnchor.cs" />
     <Compile Include="UI\Controls\GamepadMappingController.xaml.cs">
@@ -303,7 +304,7 @@
     <Compile Include="UI\Controls\SliderV.xaml.cs">
       <DependentUpon>SliderV.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Converters\KeyNameToSymbolConverter.cs" />
+    <Compile Include="UI\UIConstants.cs" />
     <Compile Include="UI\UITools.cs" />
     <Page Include="MainWindowView.xaml">
       <Generator>MSBuild:Compile</Generator>

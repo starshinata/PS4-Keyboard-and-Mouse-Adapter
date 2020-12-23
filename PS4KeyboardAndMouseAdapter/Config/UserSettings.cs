@@ -87,6 +87,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
             ThisInstance.Version_1_0_12_OrGreater = true;
         }
+
         public static bool IsLegacyConfig(string json)
         {
             try
@@ -194,15 +195,21 @@ namespace PS4KeyboardAndMouseAdapter.Config
         public static void Save(string file)
         {
             StaticLogger.Information("UserSettings.Save: " + file);
-            string json = JsonConvert.SerializeObject(ThisInstance, Formatting.Indented);
+
+            UserSettings instanceForSaving = ThisInstance.Clone();
+            // removing KeyboardMappings, as these are generated after each key remapping
+            instanceForSaving.KeyboardMappings = null;
+
+            string json = JsonConvert.SerializeObject(instanceForSaving, Formatting.Indented);
             File.WriteAllText(file, json);
         }
 
         public static void SetMapping(VirtualKey key, PhysicalKey valueOld, PhysicalKey valueNew)
         {
-            StaticLogger.Information("MainViewModel.SetMapping {VirtualKey:" + key + ", PhysicalKey: '" + valueOld + " -> "+ valueNew+ "'}");
+            StaticLogger.Information("MainViewModel.SetMapping {VirtualKey:" + key + ", PhysicalKey: '" + valueOld + " -> " + valueNew + "'}");
 
-            if (valueOld != null) {
+            if (valueOld != null)
+            {
                 ThisInstance.Mappings[key].PhysicalKeys.Remove(valueOld);
             }
 
@@ -217,7 +224,12 @@ namespace PS4KeyboardAndMouseAdapter.Config
         //
         // Instance properties not to be persisted
         //
+
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
+
+        //Note this property will not be serialised (see the save method)
+        public Dictionary<VirtualKey, PhysicalKey> KeyboardMappings { get; set; } = new Dictionary<VirtualKey, PhysicalKey>();
 
         //
         // Instance properties to be persisted
@@ -297,8 +309,12 @@ namespace PS4KeyboardAndMouseAdapter.Config
         }
 
 
-
-        public Dictionary<VirtualKey, PhysicalKey> KeyboardMappings { get; set; } = new Dictionary<VirtualKey, PhysicalKey>();
+        public UserSettings Clone()
+        {
+            // cloning by (serilise to string then deserialise)
+            string json = JsonConvert.SerializeObject(ThisInstance, Formatting.Indented);
+            return JsonConvert.DeserializeObject<UserSettings>(json);
+        }
 
         public void GetKeyboardMappings()
         {

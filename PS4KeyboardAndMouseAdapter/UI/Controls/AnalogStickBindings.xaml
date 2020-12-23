@@ -2,15 +2,14 @@
              x:Name="This"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:converters="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Converters"
+             
+             d:DesignHeight="160"
+             d:DesignWidth="120"
              mc:Ignorable="d" 
-             d:DesignHeight="160" d:DesignWidth="120">
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
 
     <UserControl.Resources>
-        <converters:KeyNameToSymbolConverter x:Key="KeyNameToSymbolConverter"/>
-
         <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
             <EventSetter Event="Click" Handler="Handler_ButtonClicked" />
             <EventSetter Event="Loaded" Handler="Handler_ButtonLoaded" />

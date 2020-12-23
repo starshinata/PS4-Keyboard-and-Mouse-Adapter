@@ -9,7 +9,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
     public class UserSettings_1_0_11
     {
 
-        private static ILogger staticLogger = Log.ForContext(typeof(UserSettings_1_0_11));
+        private static readonly ILogger StaticLogger = Log.ForContext(typeof(UserSettings_1_0_11));
 
         ////////////////////////////////////////////////////////////////////////////
 
@@ -59,7 +59,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
         public static UserSettings ImportValues(UserSettings_1_0_11 legacySettings)
         {
             Console.WriteLine("UserSettings_1_0_11.ImportValues()");
-            staticLogger.Information("UserSettings_1_0_11.ImportValues()");
+            StaticLogger.Information("UserSettings_1_0_11.ImportValues()");
 
             UserSettings newSettings = UserSettings.GetInstance();
 

@@ -9,12 +9,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              
              GotFocus="GotFocusLocal"
+             KeyDown="Handler_OnKeyboardKeyDown"
              >
-	
-    <Grid >
+
+    <Grid>
         <StackPanel 
+            Margin="0,250,0,0"
             Panel.ZIndex="99"
-            x:Name="WaitForKeyPress" >
+            x:Name="WaitForKeyPress_1" >
 
             <TextBlock 
                 FontFamily="consolas"
@@ -23,26 +25,38 @@
                 Foreground="Crimson" 
                 HorizontalAlignment="Center" 
                 Text="Press any key to map" 
-                VerticalAlignment="Center" 
+                x:Name="WaitForKeyPress_2"
                 />
 
             <TextBlock 
                 FontFamily="consolas"
-                FontSize="20"
+                FontSize="15"
+                FontWeight="Bold" 
+                Foreground="Crimson" 
+                HorizontalAlignment="Center" 
+                Text="(mouse or keyboard)" 
+                x:Name="WaitForKeyPress_3"
+                />
+            
+            <TextBlock 
+                FontFamily="consolas"
+                FontSize="30"
                 FontWeight="Bold" 
                 Foreground="Crimson" 
                 HorizontalAlignment="Center" 
                 Text="or Escape to cancel" 
-                VerticalAlignment="Center" 
+                x:Name="WaitForKeyPress_4"
                 />
-
         </StackPanel>
-        <ScrollViewer>
+            
+        <ScrollViewer
+             x:Name="scrollViewer" >
+            
 
             <StackPanel x:Name="mappingHolder"  VerticalAlignment="Top" HorizontalAlignment="Left">
-              
+
             </StackPanel>
         </ScrollViewer>
     </Grid>
-   
+
 </UserControl>
