@@ -6,4 +6,5 @@
 using System.Diagnostics.CodeAnalysis;
 
 // pancakeslp we shouldnt be telling the user to be vague
-[assembly: SuppressMessage("Style", "IDE0007:Use implicit type", Justification = "<Pending>", Scope = "member", Target = "~M:PS4KeyboardAndMouseAdapter.UI.Controls.GamepadMappingController.FindVisualChildren``1(System.Windows.DependencyObject)~System.Collections.Generic.IEnumerable{``0}")]
+[assembly: SuppressMessage("Style", "IDE0007:Use implicit type", Justification = "<Pending>", Scope = "member")]
+

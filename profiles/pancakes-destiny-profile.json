@@ -34,15 +34,10 @@
   "MouseDistanceLowerRange": 0.0,
   "MouseDistanceUpperRange": 410.5,
   "MouseMaxDistance": 2960.0,
-  "MousePollingRate": 100,
-
-  "MouseXAxisSensitivityAimModifier": 51.0,
-  "MouseXAxisSensitivityLookModifier": 52.0,
+  "MousePollingRate": 68,
   "MouseXAxisSensitivityMax": 100.0,
-  
-  "MouseYAxisSensitivityAimModifier": 53.0,
-  "MouseYAxisSensitivityLookModifier": 54.0,
+  "MouseXAxisSensitivityModifier": 32.0,
   "MouseYAxisSensitivityMax": 100.0,
-  
+  "MouseYAxisSensitivityModifier": 32.5,
   "XYRatio": 1.0
 }

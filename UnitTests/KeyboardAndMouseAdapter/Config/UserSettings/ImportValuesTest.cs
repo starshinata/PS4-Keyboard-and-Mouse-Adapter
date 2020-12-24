@@ -27,12 +27,16 @@ namespace UnitTests.KeyboardAndMouseAdapter.Config.UserSettingsTest
             AssertionExtensions.Should(actual).BeEquivalentTo(expected);
         }
 
-        //TODO
-        //[TestMethod]
-        //public void ShouldDetect_1_0_12_IsCurrent()
-        //{
-        //    string file = PROJECT_ROOT + "UnitTests\\KeyboardAndMouseAdapter\\Config\\UserSettings\\profile-1.0.12-provisional.json";
-        //    UserSettings.Load(file);
-        //}
+       // [TestMethod]
+       // public void ShouldImport_1_0_12()
+       // {
+       //     string inputFile = PROJECT_ROOT + "UnitTests\\KeyboardAndMouseAdapter\\Config\\UserSettings\\ImportValues--profile-1.0.12-default--input.json";
+       //     string expectedFile = PROJECT_ROOT + "UnitTests\\KeyboardAndMouseAdapter\\Config\\UserSettings\\ImportValues--profile-1.0.12-default--expected.json";
+       //     UserSettings.ImportValues(inputFile);
+       //     var actual = UserSettings.GetInstance();
+       //     var expected = ReadExpectedfile(expectedFile);
+       //     AssertionExtensions.Should(actual).BeEquivalentTo(expected);
+       // }
+
     }
 }

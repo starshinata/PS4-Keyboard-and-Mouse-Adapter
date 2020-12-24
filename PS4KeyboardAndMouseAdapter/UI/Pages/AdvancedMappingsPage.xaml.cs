@@ -13,8 +13,9 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
 {
     public partial class AdvancedMappingsPage : UserControl
     {
-        private readonly UserSettings Settings;
         private Button lastClickedButton;
+        private double OpacityUnMappedButton = 0.5;
+        private readonly UserSettings Settings;
 
         public AdvancedMappingsPage()
         {
@@ -22,52 +23,16 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
             WaitForKeyPress_1.Opacity = 0;
 
             Settings = UserSettings.GetInstance();
-            AddStuff();
-        }
-
-        private void AddStuff()
-        {
-            Thickness buttonMargin = new Thickness();
-            buttonMargin.Left = 15;
-
-            List<VirtualKey> virtualKeys = KeyUtility.GetVirtualKeyValues();
-            foreach (VirtualKey vk in virtualKeys)
-            {
-
-                StackPanel stackPanel = new StackPanel();
-                stackPanel.Orientation = Orientation.Horizontal;
-                stackPanel.Tag = vk;
-
-                TextBlock textblock = new TextBlock() {
-                    FontWeight = FontWeights.Bold
-                };
-                textblock.Text = vk.ToString();
-                textblock.Width = 100;
-                stackPanel.Children.Add(textblock);
-
-                PhysicalKeyGroup pkg = Settings.Mappings[vk];
-                if (pkg != null && pkg.PhysicalKeys != null)
-                {
-
-                    foreach (PhysicalKey pk in pkg.PhysicalKeys)
-                    {
-                        Button button = new Button();
-                        button.Click += Handler_ButtonClicked;
-                        button.Content = pk.ToString();
-                        button.Margin = buttonMargin;
-                        button.Tag = pk;
-                        button.Width = 100;
-                        stackPanel.Children.Add(button);
-                    }
-                }
-
-                mappingHolder.Children.Add(stackPanel);
-            }
+            PopulateWithMappings();
         }
 
         private void GotFocusLocal(object sender, RoutedEventArgs e)
         {
             ((MainViewModel)DataContext).RefreshData();
+            Console.WriteLine("GotFocusLocal");
+            Console.WriteLine("REMINDER - do refresh logic for when you load profiles");
+            Console.WriteLine("REMINDER - do mouse click binding");
+            Console.WriteLine("REMINDER - delte bind button");
         }
 
         private void Handler_ButtonClicked(object sender, RoutedEventArgs e)
@@ -81,14 +46,10 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
         {
             Console.WriteLine("Handler_OnKeyboardKeyDown");
             Console.WriteLine("lastClickedButton " + lastClickedButton);
-            Console.WriteLine("lastClickedButton.Tag " + lastClickedButton.Tag);
 
-
-
-            if (lastClickedButton != null && lastClickedButton.Tag != null && lastClickedButton.Parent != null)
+            if (lastClickedButton != null && lastClickedButton.Parent != null)
             {
-                Console.WriteLine("lastClickedButton.Parent " + lastClickedButton.Parent);
-                StackPanel parentStackPanel = ((StackPanel)lastClickedButton.Parent);
+                StackPanel parentStackPanel = (StackPanel)lastClickedButton.Parent;
                 if (parentStackPanel.Tag != null)
                 {
                     Console.WriteLine("parentStackPanel.Tag " + parentStackPanel.Tag);
@@ -107,7 +68,11 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
                                 PhysicalKey valueNew = new PhysicalKey();
                                 valueNew.KeyboardValue = key;
 
+                                lastClickedButton.Tag = valueNew;
+
                                 UserSettings.SetMapping(vk, valueOld, valueNew);
+
+                                lastClickedButton.Content = valueNew.ToString();
                             }
 
                             lastClickedButton = null;
@@ -117,6 +82,63 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
                     }
 
                 }
+            }
+        }
+
+        private void PopulateWithMappings()
+        {
+            Thickness buttonMargin = new Thickness();
+            buttonMargin.Left = 15;
+
+            List<VirtualKey> virtualKeys = KeyUtility.GetVirtualKeyValues();
+            foreach (VirtualKey vk in virtualKeys)
+            {
+                Console.WriteLine("PopulateWithMappings() vk " + vk);
+                Console.WriteLine("PopulateWithMappings() Settings.Mappings[vk] " + Settings.Mappings[vk]);
+                
+                StackPanel stackPanel = new StackPanel();
+                stackPanel.Orientation = Orientation.Horizontal;
+                stackPanel.Tag = vk;
+
+                TextBlock textblock = new TextBlock() {
+                    FontWeight = FontWeights.Bold
+                };
+                textblock.Text = vk.ToString();
+                textblock.Width = 100;
+                stackPanel.Children.Add(textblock);
+
+                Console.WriteLine("PopulateWithMappings() vk " + vk);
+                Console.WriteLine("PopulateWithMappings() Settings.Mappings.Count " + Settings.Mappings.Count());
+                PhysicalKeyGroup pkg = Settings.Mappings[vk];
+
+                if (pkg != null && pkg.PhysicalKeys != null)
+                {
+
+                    for (int i = 0; i < Settings.AdvancedMappingPage_MappingsToShow; i++)
+                    {
+
+                        Button button = new Button();
+                        button.Click += Handler_ButtonClicked;
+                        button.Margin = buttonMargin;
+                        button.Width = 100;
+
+                        if (i < pkg.PhysicalKeys.Count)
+                        {
+                            PhysicalKey pk = pkg.PhysicalKeys[i];
+                            button.Content = pk.ToString();
+                            button.Tag = pk;
+                        }
+                        else
+                        {
+                            button.Content = "set mapping";
+                            button.Opacity = OpacityUnMappedButton;
+                        }
+
+                        stackPanel.Children.Add(button);
+                    }
+                }
+
+                mappingHolder.Children.Add(stackPanel);
             }
         }
 
@@ -154,7 +176,15 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
 
             foreach (Button button in UITools.FindVisualChildren<Button>(this))
             {
-                button.Opacity = 1;
+                if (button.Tag != null)
+                {
+                    button.Opacity = 1;
+                }
+                else
+                {
+                    button.Opacity = OpacityUnMappedButton;
+                }
+
                 button.IsEnabled = true;
             }
             foreach (TextBlock textBlock in UITools.FindVisualChildren<TextBlock>(this))

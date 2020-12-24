@@ -17,6 +17,8 @@ namespace PS4KeyboardAndMouseAdapter
 
         private void OnAppExit(object sender, ExitEventArgs e)
         {
+            InstanceSettings.GetInstance().EnableMouseInput = false;
+
             // cause not having a cursor is a pain in the ass
             Utility.ShowCursor(true);
 

@@ -263,6 +263,10 @@
     <Compile Include="Config\PhysicalKey.cs" />
     <Compile Include="Config\InstanceSettings.cs" />
     <Compile Include="Config\UserSettings_1_0_11.cs" />
+	<Compile Include="Config\UserSettings.cs" />
+	<Compile Include="Config\UserSettings_Instance.cs" />
+	<Compile Include="Config\UserSettings_Static.cs" />
+	<Compile Include="Config\VirtualKey.cs" />
     <Compile Include="Dll\Rect.cs" />
     <Compile Include="Dll\User32.cs" />
     <Compile Include="GamepadProcessor.cs" />
@@ -284,8 +288,8 @@
     <Compile Include="UI\Pages\AdvancedMappingsPage.xaml.cs">
       <DependentUpon>AdvancedMappingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Config\VirtualKey.cs" />
-    <Compile Include="Config\UserSettings.cs" />
+    
+    
     <Compile Include="UI\Controls\ProfileManager.xaml.cs">
       <DependentUpon>ProfileManager.xaml</DependentUpon>
     </Compile>

@@ -8,11 +8,14 @@ namespace PS4KeyboardAndMouseAdapter.Config
 {
     public class UserSettings_1_0_11
     {
-
+        ////////////////////////////////////////////////////////////////////////////
+        /// Static props
+        ////////////////////////////////////////////////////////////////////////////
         private static readonly ILogger StaticLogger = Log.ForContext(typeof(UserSettings_1_0_11));
 
         ////////////////////////////////////////////////////////////////////////////
-
+        /// Instance props
+        ////////////////////////////////////////////////////////////////////////////
         public Dictionary<VirtualKey, Keyboard.Key> Mappings { get; set; } = new Dictionary<VirtualKey, Keyboard.Key>();
 
         public int AnalogStickLowerRange { get; set; } = 40;
@@ -34,8 +37,9 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         public double XYRatio { get; set; } = 0.6;
 
-        //////////////////////////////////////////////////////////////////////
-
+        ////////////////////////////////////////////////////////////////////////////
+        /// Static Methods
+        ////////////////////////////////////////////////////////////////////////////
         private static void AddManualMouseMapping(UserSettings newSettings, VirtualKey vk, MouseButton mouseButton)
         {
             if (newSettings.Mappings[vk] == null)

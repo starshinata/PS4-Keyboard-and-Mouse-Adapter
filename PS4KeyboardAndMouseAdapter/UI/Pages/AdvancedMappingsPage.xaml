@@ -15,7 +15,7 @@
     <Grid>
         <StackPanel 
             Margin="0,250,0,0"
-            Panel.ZIndex="99"
+            Panel.ZIndex="1"
             x:Name="WaitForKeyPress_1" >
 
             <TextBlock 
@@ -50,6 +50,9 @@
         </StackPanel>
             
         <ScrollViewer
+            Panel.ZIndex="2"
+            HorizontalScrollBarVisibility="Auto"
+            VerticalScrollBarVisibility="Auto"
              x:Name="scrollViewer" >
             
 

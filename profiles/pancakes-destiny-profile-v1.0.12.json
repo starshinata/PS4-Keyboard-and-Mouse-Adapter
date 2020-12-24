@@ -1,15 +1,15 @@
 {
   "KeyboardMappings": null,
   "MouseControlsL3": false,
-  "MouseControlsR3": false,
+  "MouseControlsR3": true,
   "MouseXAxisSensitivityMax": 100.0,
-  "MouseXAxisSensitivityLookModifier": 2.0,
+  "MouseXAxisSensitivityLookModifier": 32.0,
   "MouseYAxisSensitivityMax": 100.0,
-  "MouseYAxisSensitivityLookModifier": 1.0,
-  "MousePollingRate": 10,
+  "MouseYAxisSensitivityLookModifier": 32.5,
+  "MousePollingRate": 68,
   "MouseAimSensitivityEnabled": false,
-  "MouseXAxisSensitivityAimModifier": 2.0,
-  "MouseYAxisSensitivityAimModifier": 1.0,
+  "MouseXAxisSensitivityAimModifier": 32.0,
+  "MouseYAxisSensitivityAimModifier": 32.5,
   "Version_1_0_12_OrGreater": true,
   "Mappings": {
     "LeftStickLeft": {
@@ -79,7 +79,7 @@
     "Triangle": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 5,
+          "KeyboardValue": 27,
           "MouseValue": -1
         }
       ]
@@ -87,7 +87,7 @@
     "Circle": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 2,
+          "KeyboardValue": 37,
           "MouseValue": -1
         }
       ]
@@ -95,7 +95,7 @@
     "Cross": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 21,
+          "KeyboardValue": 57,
           "MouseValue": -1
         }
       ]
@@ -104,6 +104,10 @@
       "PhysicalKeys": [
         {
           "KeyboardValue": 17,
+          "MouseValue": -1
+        },
+        {
+          "KeyboardValue": 4,
           "MouseValue": -1
         }
       ]
@@ -119,7 +123,7 @@
     "L2": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 10,
+          "KeyboardValue": 24,
           "MouseValue": -1
         },
         {
@@ -139,7 +143,7 @@
     "R1": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 4,
+          "KeyboardValue": 2,
           "MouseValue": -1
         }
       ]
@@ -147,7 +151,7 @@
     "R2": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 9,
+          "KeyboardValue": 20,
           "MouseValue": -1
         },
         {
@@ -159,7 +163,7 @@
     "R3": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 11,
+          "KeyboardValue": 12,
           "MouseValue": -1
         }
       ]
@@ -169,13 +173,17 @@
         {
           "KeyboardValue": 14,
           "MouseValue": -1
+        },
+        {
+          "KeyboardValue": 85,
+          "MouseValue": -1
         }
       ]
     },
     "TouchButton": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 13,
+          "KeyboardValue": 60,
           "MouseValue": -1
         }
       ]
@@ -183,7 +191,7 @@
     "DPadUp": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 27,
+          "KeyboardValue": 73,
           "MouseValue": -1
         }
       ]
@@ -191,7 +199,7 @@
     "DPadLeft": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 28,
+          "KeyboardValue": 71,
           "MouseValue": -1
         }
       ]
@@ -199,7 +207,7 @@
     "DPadDown": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 29,
+          "KeyboardValue": 74,
           "MouseValue": -1
         }
       ]
@@ -207,7 +215,7 @@
     "DPadRight": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 30,
+          "KeyboardValue": 72,
           "MouseValue": -1
         }
       ]
@@ -215,7 +223,7 @@
     "PlaystationButton": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 12,
+          "KeyboardValue": 59,
           "MouseValue": -1
         }
       ]
@@ -230,10 +238,10 @@
     }
   },
   "AdvancedMappingPage_MappingsToShow": 4,
-  "AnalogStickLowerRange": 40,
+  "AnalogStickLowerRange": 31,
   "AnalogStickUpperRange": 95,
-  "MouseDistanceLowerRange": 5.0,
-  "MouseDistanceUpperRange": 96.0,
-  "MouseMaxDistance": 960.0,
-  "XYRatio": 0.6
+  "MouseDistanceLowerRange": 0.0,
+  "MouseDistanceUpperRange": 410.5,
+  "MouseMaxDistance": 2960.0,
+  "XYRatio": 1.0
 }

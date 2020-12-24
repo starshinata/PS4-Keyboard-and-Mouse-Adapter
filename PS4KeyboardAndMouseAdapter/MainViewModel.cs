@@ -9,6 +9,7 @@ namespace PS4KeyboardAndMouseAdapter
     public class MainViewModel
     {
         public InstanceSettings InstanceSettings { get; set; } = InstanceSettings.GetInstance();
+        
         public UserSettings UserSettings { get; set; } = UserSettings.GetInstance();
 
         public RemotePlayInjector RemotePlayInjector;

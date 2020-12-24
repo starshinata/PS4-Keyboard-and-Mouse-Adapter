@@ -15,6 +15,36 @@ namespace PS4KeyboardAndMouseAdapter.Config
             if (displayValue.Contains("Num"))
                 displayValue = displayValue.Replace("Num", "");
 
+            if (key == Key.F1) 
+                displayValue = "F1";
+            
+            if (key == Key.F2)
+                displayValue = "F2";
+
+            if (key == Key.F3)
+                displayValue = "F3";
+            if (key == Key.F4)
+                displayValue = "F4";
+
+            if (key == Key.F5)
+                displayValue = "F5";
+
+            if (key == Key.F6)
+                displayValue = "F6";
+
+            if (key == Key.F7)
+                displayValue = "F8";
+
+            if (key == Key.F8)
+                displayValue = "F8";
+
+            if (key == Key.F9)
+                displayValue = "F9";
+
+            if (key == Key.F10)
+                displayValue = "F10";
+
+
             if (displayValue.Equals("Left"))
                 displayValue = "\u21e6 Left";
 
