@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 
 using PS4KeyboardAndMouseAdapter.Config;
+using SFML.Window;
 using Button = System.Windows.Controls.Button;
 using Keyboard = SFML.Window.Keyboard;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
@@ -14,7 +15,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
     public partial class AdvancedMappingsPage : UserControl
     {
         private Button lastClickedButton;
-        private double OpacityUnMappedButton = 0.5;
+        private readonly double OpacityUnMappedButton = 0.5;
         private readonly UserSettings Settings;
 
         public AdvancedMappingsPage()
@@ -42,45 +43,77 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
             WaitingForKeyPress_Show(button);
         }
 
-        public void Handler_OnKeyboardKeyDown(object sender, KeyEventArgs e)
+        private void Handler_AddMapping_GenericKeyDown(Keyboard.Key keyboardValue, MouseButton mouseValue)
         {
-            Console.WriteLine("Handler_OnKeyboardKeyDown");
             Console.WriteLine("lastClickedButton " + lastClickedButton);
 
             if (lastClickedButton != null && lastClickedButton.Parent != null)
             {
+
                 StackPanel parentStackPanel = (StackPanel)lastClickedButton.Parent;
                 if (parentStackPanel.Tag != null)
                 {
                     Console.WriteLine("parentStackPanel.Tag " + parentStackPanel.Tag);
 
-                    foreach (Keyboard.Key key in Enum.GetValues(typeof(Keyboard.Key)).Cast<Keyboard.Key>())
+                    if (keyboardValue != Keyboard.Key.Escape)
                     {
-                        if (Keyboard.IsKeyPressed(key))
-                        {
+                        VirtualKey vk = (VirtualKey)parentStackPanel.Tag;
 
-                            if (key != Keyboard.Key.Escape)
-                            {
-                                VirtualKey vk = (VirtualKey)parentStackPanel.Tag;
+                        PhysicalKey valueOld = (PhysicalKey)lastClickedButton.Tag;
 
-                                PhysicalKey valueOld = (PhysicalKey)lastClickedButton.Tag;
+                        PhysicalKey valueNew = new PhysicalKey();
+                        valueNew.KeyboardValue = keyboardValue;
+                        valueNew.MouseValue = mouseValue;
 
-                                PhysicalKey valueNew = new PhysicalKey();
-                                valueNew.KeyboardValue = key;
+                        lastClickedButton.Tag = valueNew;
 
-                                lastClickedButton.Tag = valueNew;
+                        UserSettings.SetMapping(vk, valueOld, valueNew);
 
-                                UserSettings.SetMapping(vk, valueOld, valueNew);
-
-                                lastClickedButton.Content = valueNew.ToString();
-                            }
-
-                            lastClickedButton = null;
-                            ((MainViewModel)DataContext).RefreshData();
-                            WaitingForKeyPress_Hide();
-                        }
+                        lastClickedButton.Content = valueNew.ToString();
                     }
 
+                    lastClickedButton = null;
+                    ((MainViewModel)DataContext).RefreshData();
+                    WaitingForKeyPress_Hide();
+                }
+            }
+        }
+
+
+
+        private void Handler_AddMapping_OnMouseDown(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("Handler_AddMapping_OnMouseDown");
+
+            Array mouseButtons = Enum.GetValues(typeof(Mouse.Button));
+            foreach (Mouse.Button button in mouseButtons)
+            {
+                Console.WriteLine("check  button " + button);
+                if (Mouse.IsButtonPressed(button))
+                {
+                    Console.WriteLine("pressed " + button);
+                    MouseButton mouseButton = (MouseButton)button;
+                    Handler_AddMapping_GenericKeyDown(Keyboard.Key.Unknown, mouseButton);
+                }
+            }
+        }
+
+        private void Handler_AddMapping_OnMouseLeftButtonUp(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("Handler_AddMapping_OnMouseLeftButtonUp");
+
+            Handler_AddMapping_GenericKeyDown(Keyboard.Key.Unknown, MouseButton.Left);
+        }
+
+        private void Handler_AddMapping_OnKeyboardKeyDown(object sender, KeyEventArgs e)
+        {
+            Console.WriteLine("Handler_OnKeyboardKeyDown");
+
+            foreach (Keyboard.Key key in Enum.GetValues(typeof(Keyboard.Key)).Cast<Keyboard.Key>())
+            {
+                if (Keyboard.IsKeyPressed(key))
+                {
+                    Handler_AddMapping_GenericKeyDown(key, MouseButton.Unknown);
                 }
             }
         }
@@ -94,7 +127,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
             foreach (VirtualKey vk in virtualKeys)
             {
                 Console.WriteLine("PopulateWithMappings() vk " + vk);
-                
+
                 StackPanel stackPanel = new StackPanel();
                 stackPanel.Orientation = Orientation.Horizontal;
                 stackPanel.Tag = vk;
@@ -121,7 +154,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
                             Button button = new Button();
                             button.Click += Handler_ButtonClicked;
                             button.Margin = buttonMargin;
-                            button.Width = 100;
+                            button.Width = 120;
 
                             if (i < pkg.PhysicalKeys.Count)
                             {
@@ -144,6 +177,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
             }
         }
 
+        // Needs to public
         public void WaitingForKeyPress_Show(Button sender)
         {
             Console.WriteLine("WaitingForKeyPress_Show");
@@ -165,7 +199,6 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
             WaitForKeyPress_3.Opacity = 1;
             WaitForKeyPress_4.Opacity = 1;
         }
-
 
         private void WaitingForKeyPress_Hide()
         {

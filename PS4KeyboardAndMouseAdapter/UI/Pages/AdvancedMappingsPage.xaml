@@ -9,14 +9,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              
              GotFocus="GotFocusLocal"
-             KeyDown="Handler_OnKeyboardKeyDown"
+             KeyDown="Handler_AddMapping_OnKeyboardKeyDown"
+             MouseDown="Handler_AddMapping_OnMouseDown"
+             MouseLeftButtonUp="Handler_AddMapping_OnMouseLeftButtonUp"
              >
-
+    <!-- 
+    pancakeslp 2020.12.26
+    note see above element         ^^^
+    MouseDown does not include left click ... O.o
+    -->
+    
     <Grid>
         <StackPanel 
-            Margin="0,250,0,0"
+            HorizontalAlignment="Center"
             Panel.ZIndex="1"
-            x:Name="WaitForKeyPress_1" >
+            VerticalAlignment="Center"
+            x:Name="WaitForKeyPress_1">
 
             <TextBlock 
                 FontFamily="consolas"
