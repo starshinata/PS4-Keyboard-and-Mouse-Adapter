@@ -1,77 +1,71 @@
 {
   "KeyboardMappings": null,
-  "MouseControlsL3": false,
-  "MouseControlsR3": true,
-  "MouseXAxisSensitivityMax": 100.0,
-  "MouseXAxisSensitivityLookModifier": 32.0,
-  "MouseYAxisSensitivityMax": 100.0,
-  "MouseYAxisSensitivityLookModifier": 32.5,
-  "MousePollingRate": 68,
-  "MouseAimSensitivityEnabled": false,
-  "MouseXAxisSensitivityAimModifier": 32.0,
-  "MouseYAxisSensitivityAimModifier": 32.5,
   "Version_1_0_12_OrGreater": true,
   "Mappings": {
-    "LeftStickLeft": {
+    "Share": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 0,
+          "KeyboardValue": 1,
           "MouseValue": -1
         }
       ]
     },
-    "LeftStickRight": {
+    "Options": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 3,
+          "KeyboardValue": 14,
+          "MouseValue": -1
+        },
+        {
+          "KeyboardValue": 85,
           "MouseValue": -1
         }
       ]
     },
-    "LeftStickUp": {
+    "TouchButton": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 22,
+          "KeyboardValue": 60,
           "MouseValue": -1
         }
       ]
     },
-    "LeftStickDown": {
+    "PlaystationButton": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 18,
+          "KeyboardValue": 59,
           "MouseValue": -1
         }
       ]
     },
-    "RightStickLeft": {
+    "DPadLeft": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 9,
+          "KeyboardValue": 71,
           "MouseValue": -1
         }
       ]
     },
-    "RightStickRight": {
+    "DPadRight": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 11,
+          "KeyboardValue": 72,
           "MouseValue": -1
         }
       ]
     },
-    "RightStickUp": {
+    "DPadUp": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 8,
+          "KeyboardValue": 73,
           "MouseValue": -1
         }
       ]
     },
-    "RightStickDown": {
+    "DPadDown": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 10,
+          "KeyboardValue": 74,
           "MouseValue": -1
         }
       ]
@@ -168,80 +162,87 @@
         }
       ]
     },
-    "Options": {
+    "LeftStickLeft": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 14,
-          "MouseValue": -1
-        },
-        {
-          "KeyboardValue": 85,
+          "KeyboardValue": 0,
           "MouseValue": -1
         }
       ]
     },
-    "TouchButton": {
+    "LeftStickRight": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 60,
+          "KeyboardValue": 3,
           "MouseValue": -1
         }
       ]
     },
-    "DPadUp": {
+    "LeftStickUp": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 73,
+          "KeyboardValue": 22,
           "MouseValue": -1
         }
       ]
     },
-    "DPadLeft": {
+    "LeftStickDown": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 71,
+          "KeyboardValue": 18,
           "MouseValue": -1
         }
       ]
     },
-    "DPadDown": {
+    "RightStickLeft": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 74,
+          "KeyboardValue": 9,
           "MouseValue": -1
         }
       ]
     },
-    "DPadRight": {
+    "RightStickRight": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 72,
+          "KeyboardValue": 11,
           "MouseValue": -1
         }
       ]
     },
-    "PlaystationButton": {
+    "RightStickUp": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 59,
+          "KeyboardValue": 8,
           "MouseValue": -1
         }
       ]
     },
-    "Share": {
+    "RightStickDown": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 1,
+          "KeyboardValue": 10,
           "MouseValue": -1
         }
       ]
     }
   },
   "AdvancedMappingPage_MappingsToShow": 4,
+  "AimToggle": true,
   "AnalogStickLowerRange": 31,
   "AnalogStickUpperRange": 95,
+  "MouseControlsL3": false,
+  "MouseControlsR3": true,
   "MouseDistanceLowerRange": 0.0,
   "MouseDistanceUpperRange": 410.5,
   "MouseMaxDistance": 2960.0,
+  "MousePollingRate": 68,
+  "MouseAimSensitivityEnabled": true,
+  "MouseXAxisSensitivityAimModifier": 37.2,
+  "MouseXAxisSensitivityLookModifier": 27.1,
+  "MouseXAxisSensitivityMax": 100.0,
+  "MouseYAxisSensitivityAimModifier": 37.7,
+  "MouseYAxisSensitivityLookModifier": 26.5,
+  "MouseYAxisSensitivityMax": 100.0,
   "XYRatio": 1.0
 }

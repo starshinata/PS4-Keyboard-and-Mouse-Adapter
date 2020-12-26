@@ -3,7 +3,6 @@ using System.Runtime.InteropServices;
 
 namespace PS4KeyboardAndMouseAdapter.Dll
 {
-  
 
     public class User32 
     {
@@ -22,8 +21,6 @@ namespace PS4KeyboardAndMouseAdapter.Dll
 
         [DllImport("user32.dll")]
         public static extern IntPtr SetCursor(IntPtr handle);
-
-     
 
     }
 }

@@ -63,6 +63,16 @@
                 <pages:MouseAdvancedConfigPage />
             </TabItem>
 
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock 
+                        Text="Miscellaneous Settings" 
+                        Width="150px"
+                        />
+                </TabItem.Header>
+
+                <pages:MiscellaneousSettingsPage/>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

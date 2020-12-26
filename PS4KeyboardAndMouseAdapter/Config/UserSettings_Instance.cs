@@ -26,6 +26,8 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         public int AdvancedMappingPage_MappingsToShow { get; set; } = 4;
 
+        public bool AimToggle { get; set; } = false;
+
         public int AnalogStickLowerRange { get; set; } = 40;
         public int AnalogStickUpperRange { get; set; } = 95;
 

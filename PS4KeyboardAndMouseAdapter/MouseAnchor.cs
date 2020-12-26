@@ -7,19 +7,15 @@ namespace PS4KeyboardAndMouseAdapter
 
     public class MouseAnchor
     {
-
-        // Constants
-        private static readonly string REMOTE_PLAY_WINDOW_CAPTION = "PS Remote Play";
-
         // Anchor is relative to the top left of the primary monitor
         private static Vector2i AnchorFallback { get; set; } = new Vector2i(900, 500);
 
         public static Vector2i CalculateAnchor()
         {
-            IntPtr target_hwnd = User32.FindWindowByCaption(IntPtr.Zero, REMOTE_PLAY_WINDOW_CAPTION);
+            IntPtr target_hwnd = User32.FindWindowByCaption(IntPtr.Zero, RemotePlayConstants.WINDOW_NAME);
             if (target_hwnd == IntPtr.Zero)
             {
-                Console.WriteLine("Could not find a window with the title - " + REMOTE_PLAY_WINDOW_CAPTION);
+                Console.WriteLine("Could not find a window with the title - " + RemotePlayConstants.WINDOW_NAME);
                 return AnchorFallback;
             }
 

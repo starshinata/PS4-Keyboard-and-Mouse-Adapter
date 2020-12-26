@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
@@ -14,10 +15,6 @@ namespace PS4KeyboardAndMouseAdapter
 
     public class RemotePlayInjector
     {
-        // Constants
-        private readonly string TARGET_PROCESS_NAME = "RemotePlay";
-        private readonly string INJECT_DLL_NAME = "PS4RemotePlayInjection.dll";
-
         public Process RemotePlayProcess;
 
         private GamepadProcessor gamepadProcessor;
@@ -26,7 +23,7 @@ namespace PS4KeyboardAndMouseAdapter
         {
             this.gamepadProcessor = gamepadProcessor;
 
-            Injector.FindProcess(TARGET_PROCESS_NAME)?.Kill();
+            Injector.FindProcess(RemotePlayConstants.TARGET_PROCESS_NAME)?.Kill();
         }
 
         public void Inject()
@@ -34,7 +31,7 @@ namespace PS4KeyboardAndMouseAdapter
             try
             {
                 Thread.Sleep(3100);
-                int remotePlayProcessId = Injector.Inject(TARGET_PROCESS_NAME, INJECT_DLL_NAME);
+                int remotePlayProcessId = Injector.Inject(RemotePlayConstants.TARGET_PROCESS_NAME, RemotePlayConstants.INJECT_DLL_NAME);
                 RemotePlayProcess = Process.GetProcessById(remotePlayProcessId);
                 RemotePlayProcess.EnableRaisingEvents = true;
                 RemotePlayProcess.Exited += (sender, args) => { Utility.ShowCursor(true); };
@@ -93,9 +90,9 @@ namespace PS4KeyboardAndMouseAdapter
                 bool success = OpenRemotePlay();
                 if (success)
                 {
-                    
-                
-                Inject();
+
+
+                    Inject();
                 }
                 else
                 {

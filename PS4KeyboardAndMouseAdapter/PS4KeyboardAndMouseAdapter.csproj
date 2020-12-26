@@ -263,6 +263,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="RemotePlayConstants.cs" />
+    <Compile Include="WindowUtil.cs" />
     <Compile Include="Config\KeyUtility.cs" />
     <Compile Include="Config\MouseButton.cs" />
     <Compile Include="Config\PhysicalKeyGroup.cs" />
@@ -311,6 +313,9 @@
     </Compile>
     <Compile Include="UI\Controls\SliderV.xaml.cs">
       <DependentUpon>SliderV.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\MiscellaneousSettingsPage.xaml.cs">
+      <DependentUpon>MiscellaneousSettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\UIConstants.cs" />
     <Compile Include="UI\UITools.cs" />
@@ -368,6 +373,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Pages\AdvancedMappingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\MiscellaneousSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

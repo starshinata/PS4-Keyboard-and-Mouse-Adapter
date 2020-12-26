@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Reflection;
@@ -36,7 +37,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
         {
             string json = File.ReadAllText(file);
             
-            UserSettings newSettings = null;
+            UserSettings newSettings;
             if (IsLegacyConfig(json))
             {
                 UserSettings_1_0_11 legacySettings = JsonConvert.DeserializeObject<UserSettings_1_0_11>(json);
@@ -52,7 +53,6 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         public static void ImportValuesCurrent(UserSettings newSettings)
         {
-            Console.WriteLine("ImportValuesCurrent");
             StaticLogger.Information("UserSettings.ImportValuesCurrent()");
 
             //reminder we want to import stuff into variable **thisInstance**
@@ -79,8 +79,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
             ThisInstance.XYRatio = newSettings.XYRatio;
 
-            var virtualKeys = KeyUtility.GetVirtualKeyValues();
-            Console.WriteLine("virtualKeys " + virtualKeys);
+            List<VirtualKey> virtualKeys = KeyUtility.GetVirtualKeyValues();
             foreach (VirtualKey key in virtualKeys)
             {
                 if (newSettings.Mappings[key] != null)
@@ -133,7 +132,6 @@ namespace PS4KeyboardAndMouseAdapter.Config
         public static void Load(string file)
         {
             string fullFilePath = Path.GetFullPath(file);
-            Console.WriteLine("UserSettings.Load: " + fullFilePath);
             StaticLogger.Information("UserSettings.Load: " + fullFilePath);
             ImportValues(fullFilePath);
 
@@ -175,8 +173,8 @@ namespace PS4KeyboardAndMouseAdapter.Config
             var virtualKeys = KeyUtility.GetVirtualKeyValues();
             foreach (VirtualKey key in virtualKeys)
             {
-                StaticLogger.Information("print Mappings:{VirtKey:" + key + ", keyboardValue: " + settings.Mappings[key] + "}");
-                Console.WriteLine("print Mappings:{VirtKey:" + key + ", keyboardValue: " + settings.Mappings[key] + "}");
+                StaticLogger.Information("print Mappings:{VirtKey:" + key + ", PhysicalKeyGroup: " + settings.Mappings[key] + "}");
+                Console.WriteLine("print Mappings:{VirtKey:" + key + ", PhysicalKeyGroup: " + settings.Mappings[key] + "}");
             }
 
 

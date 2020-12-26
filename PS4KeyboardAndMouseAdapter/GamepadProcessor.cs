@@ -14,41 +14,54 @@ namespace PS4KeyboardAndMouseAdapter
     public class GamepadProcessor
     {
 
-        public UserSettings UserSettings { get; set; } = UserSettings.GetInstance();
-        public InstanceSettings InstanceSettings { get; set; } = InstanceSettings.GetInstance();
-
-        public DualShockState CurrentState { get; private set; }
-
-        public Vector2i MouseDirection { get; set; }
-        public int AnalogX { get; set; }
-        public int AnalogY { get; set; }
-
-        private readonly Stopwatch mouseTimer = new Stopwatch();
-        private Vector2i mouseDirection = new Vector2i(0, 0);
+        private UserSettings UserSettings { get; set; } = UserSettings.GetInstance();
+        private InstanceSettings InstanceSettings { get; set; } = InstanceSettings.GetInstance();
 
         // Anchor 0,0 is the top left of the primary monitor
-        public Vector2i Anchor { get; set; } = new Vector2i(900, 500);
+        private Vector2i Anchor { get; set; } = new Vector2i(900, 500);
+
+        private DualShockState CurrentState { get; set; }
+
+        private bool IsAiming { get; set; } = false;
+
+        private Vector2i MouseDirection { get; set; }
+        private Vector2i MouseDirectionTemp = new Vector2i(0, 0);
+
+        private readonly Stopwatch MouseTimer = new Stopwatch();
+
+        private readonly Stopwatch AimToggleTimer = new Stopwatch();
 
         public Process RemotePlayProcess;
 
+        public GamepadProcessor()
+        {
+            AimToggleTimer.Start();
+            MouseTimer.Start();
+        }
+
+
         public Vector2i FeedMouseCoords()
         {
-            mouseTimer.Start();
 
             int MillisecondsPerInput = 1000 / UserSettings.MousePollingRate;
-            if (mouseTimer.ElapsedMilliseconds >= MillisecondsPerInput)
+            if (MouseTimer.ElapsedMilliseconds >= MillisecondsPerInput)
             {
                 Vector2i currentMousePosition = Mouse.GetPosition();
-                mouseDirection = currentMousePosition - Anchor;
+                MouseDirectionTemp = currentMousePosition - Anchor;
 
                 //recalculate incase they moved the window
                 Anchor = MouseAnchor.CalculateAnchor();
 
                 Mouse.SetPosition(Anchor);
-                mouseTimer.Restart();
+                MouseTimer.Restart();
             }
 
-            return mouseDirection;
+            // pancakeslp 2020.12.27
+            // it might seem sensible that was can just return a value when when the time between pollingRates has happened
+            // if we do this, sometimes we wont return a value
+            // if we dont return a value the mouse input is perceived  as unresponsive of jumpy
+            // so until we have a new polled value, just return the previous value
+            return MouseDirectionTemp;
         }
 
         public void HandleButtonPressed()
@@ -150,6 +163,33 @@ namespace PS4KeyboardAndMouseAdapter
             if (IsVirtualKeyPressed(VirtualKey.Square))
                 CurrentState.Square = true;
 
+
+            ////////////////////////////////////////////
+
+            if (UserSettings.AimToggle)
+            {
+
+                // waiting a little before we can re-toggle the Aiming
+                if (AimToggleTimer.ElapsedMilliseconds > 250)
+                {
+                    //TODO make it dynamic so the L2 doesnt have to be the AIM key
+                    if (IsVirtualKeyPressed(VirtualKey.L2))
+                    {
+                        Console.WriteLine("toggle IsAIMING" + IsAiming);
+                        IsAiming = !IsAiming;
+                        AimToggleTimer.Restart();
+                    }
+                }
+
+                if (IsAiming)
+                {
+                    CurrentState.L2 = 255;
+                }
+                else
+                {
+                    CurrentState.L2 = 0;
+                }
+            }
         }
 
         public void HandleMouseCursor()
@@ -163,9 +203,9 @@ namespace PS4KeyboardAndMouseAdapter
                 // mouse displacement relative to the anchor
                 MouseDirection = FeedMouseCoords();
 
-                if (IsUserAiming())
+                if (IsAimingWithAimSpecificSenitivity())
                 {
-                    Console.WriteLine("Aiming, X:" + UserSettings.MouseXAxisSensitivityAimModifier + " Y: " + UserSettings.MouseYAxisSensitivityAimModifier);
+                    //Console.WriteLine("Aiming, X:" + UserSettings.MouseXAxisSensitivityAimModifier + " Y: " + UserSettings.MouseYAxisSensitivityAimModifier);
                     MouseDirection = new Vector2i(
                         (int)(MouseDirection.X * UserSettings.MouseXAxisSensitivityAimModifier),
                         (int)(MouseDirection.Y * UserSettings.MouseYAxisSensitivityAimModifier));
@@ -173,12 +213,12 @@ namespace PS4KeyboardAndMouseAdapter
                 else
                 {
 
-                    Console.WriteLine("LOOKING, X:" + UserSettings.MouseXAxisSensitivityLookModifier + " Y: " + UserSettings.MouseYAxisSensitivityLookModifier);
+                    //Console.WriteLine("LOOKING, X:" + UserSettings.MouseXAxisSensitivityLookModifier + " Y: " + UserSettings.MouseYAxisSensitivityLookModifier);
                     MouseDirection = new Vector2i(
                         (int)(MouseDirection.X * UserSettings.MouseXAxisSensitivityLookModifier),
                         (int)(MouseDirection.Y * UserSettings.MouseYAxisSensitivityLookModifier));
                 }
-                var direction = new Vector2(MouseDirection.X, MouseDirection.Y);
+                Vector2 direction = new Vector2(MouseDirection.X, MouseDirection.Y);
 
                 // Cap length to fit range.
 
@@ -204,11 +244,11 @@ namespace PS4KeyboardAndMouseAdapter
                     scaledY = 127;
                 }
 
-                if (scaledX != 127 && scaledY != 127)
-                {
-                    Console.WriteLine("scaledX" + scaledX);
-                    Console.WriteLine("scaledY" + scaledY);
-                }
+                // if (scaledX != 127 && scaledY != 127)
+                // {
+                //     Console.WriteLine("scaledX" + scaledX);
+                //     Console.WriteLine("scaledY" + scaledY);
+                // }
 
                 if (UserSettings.MouseControlsL3)
                 {
@@ -222,6 +262,11 @@ namespace PS4KeyboardAndMouseAdapter
                     CurrentState.RY = scaledY;
                 }
             }
+        }
+
+        private bool IsAimingWithAimSpecificSenitivity()
+        {
+            return IsAiming && UserSettings.MouseAimSensitivityEnabled;
         }
 
         public bool IsPhysicalKeyPressed(PhysicalKey key)
@@ -246,7 +291,7 @@ namespace PS4KeyboardAndMouseAdapter
             if (process == null)
                 return false;
 
-            var activeWindow = User32.GetForegroundWindow();
+            IntPtr activeWindow = User32.GetForegroundWindow();
 
             if (activeWindow == IntPtr.Zero)
                 return false;
@@ -255,12 +300,6 @@ namespace PS4KeyboardAndMouseAdapter
                 return false;
 
             return true;
-        }
-
-        private bool IsUserAiming()
-        {
-            //TODO make this dynamic
-            return UserSettings.MouseAimSensitivityEnabled && Mouse.IsButtonPressed(Mouse.Button.Right);
         }
 
         public bool IsVirtualKeyPressed(VirtualKey key)
