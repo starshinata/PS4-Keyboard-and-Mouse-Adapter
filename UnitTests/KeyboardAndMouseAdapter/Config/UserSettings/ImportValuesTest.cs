@@ -9,9 +9,10 @@ namespace UnitTests.KeyboardAndMouseAdapter.Config.UserSettingsTest
     [TestClass]
     public class ImportValuesTest
     {
-        private readonly string PROJECT_ROOT="..\\..\\..\\";
+        private readonly string PROJECT_ROOT = "..\\..\\..\\";
 
-        private UserSettings ReadExpectedfile(string file) {
+        private UserSettings ReadExpectedFile(string file)
+        {
             string json = File.ReadAllText(file);
             return JsonConvert.DeserializeObject<UserSettings>(json);
         }
@@ -22,21 +23,22 @@ namespace UnitTests.KeyboardAndMouseAdapter.Config.UserSettingsTest
             string inputFile = PROJECT_ROOT + "UnitTests\\KeyboardAndMouseAdapter\\Config\\UserSettings\\ImportValues--profile-1.0.11-default--input.json";
             string expectedFile = PROJECT_ROOT + "UnitTests\\KeyboardAndMouseAdapter\\Config\\UserSettings\\ImportValues--profile-1.0.11-default--expected.json";
             UserSettings.ImportValues(inputFile);
-            var actual = UserSettings.GetInstance();
-            var expected = ReadExpectedfile(expectedFile);
+            UserSettings actual = UserSettings.GetInstance();
+            actual.KeyboardMappings = null;
+            UserSettings expected = ReadExpectedFile(expectedFile);
             AssertionExtensions.Should(actual).BeEquivalentTo(expected);
         }
 
-       // [TestMethod]
-       // public void ShouldImport_1_0_12()
-       // {
-       //     string inputFile = PROJECT_ROOT + "UnitTests\\KeyboardAndMouseAdapter\\Config\\UserSettings\\ImportValues--profile-1.0.12-default--input.json";
-       //     string expectedFile = PROJECT_ROOT + "UnitTests\\KeyboardAndMouseAdapter\\Config\\UserSettings\\ImportValues--profile-1.0.12-default--expected.json";
-       //     UserSettings.ImportValues(inputFile);
-       //     var actual = UserSettings.GetInstance();
-       //     var expected = ReadExpectedfile(expectedFile);
-       //     AssertionExtensions.Should(actual).BeEquivalentTo(expected);
-       // }
+        [TestMethod]
+        public void ShouldImport_1_0_12()
+        {
+            string inputFile = PROJECT_ROOT + "UnitTests\\KeyboardAndMouseAdapter\\Config\\UserSettings\\ImportValues--profile-1.0.12-default--input.json";
+            string expectedFile = PROJECT_ROOT + "UnitTests\\KeyboardAndMouseAdapter\\Config\\UserSettings\\ImportValues--profile-1.0.12-default--expected.json";
+            UserSettings.ImportValues(inputFile);
+            UserSettings actual = UserSettings.GetInstance();
+            UserSettings expected = ReadExpectedFile(expectedFile);
+            AssertionExtensions.Should(actual).BeEquivalentTo(expected);
+        }
 
     }
 }

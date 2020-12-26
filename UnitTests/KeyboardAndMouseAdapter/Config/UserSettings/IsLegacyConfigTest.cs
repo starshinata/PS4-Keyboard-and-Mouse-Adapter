@@ -26,7 +26,7 @@ namespace UnitTests.KeyboardAndMouseAdapter.Config.UserSettingsTest
         public void ShouldDetect_1_0_12_IsCurrent()
         {
             string file = PROJECT_ROOT + "UnitTests\\KeyboardAndMouseAdapter\\Config\\UserSettings\\IsLegacyConfig--profile-1.0.12-provisional.json";
-            IsLegacyConfigRunner(file, true);
+            IsLegacyConfigRunner(file, false);
         }
     }
 }

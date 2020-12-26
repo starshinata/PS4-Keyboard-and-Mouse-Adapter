@@ -153,6 +153,12 @@
     <Reference Include="Serilog.Sinks.File, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\packages\Serilog.Sinks.File.4.1.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
     </Reference>
+    <Reference Include="SFML.Audio, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFML.Audio.2.5.0\lib\netstandard2.0\SFML.Audio.dll</HintPath>
+    </Reference>
+    <Reference Include="SFML.Graphics, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFML.Graphics.2.5.0\lib\netstandard2.0\SFML.Graphics.dll</HintPath>
+    </Reference>
     <Reference Include="SFML.System, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFML.System.2.5.0\lib\netstandard2.0\SFML.System.dll</HintPath>
     </Reference>
@@ -263,10 +269,10 @@
     <Compile Include="Config\PhysicalKey.cs" />
     <Compile Include="Config\InstanceSettings.cs" />
     <Compile Include="Config\UserSettings_1_0_11.cs" />
-	<Compile Include="Config\UserSettings.cs" />
-	<Compile Include="Config\UserSettings_Instance.cs" />
-	<Compile Include="Config\UserSettings_Static.cs" />
-	<Compile Include="Config\VirtualKey.cs" />
+    <Compile Include="Config\UserSettings.cs" />
+    <Compile Include="Config\UserSettings_Instance.cs" />
+    <Compile Include="Config\UserSettings_Static.cs" />
+    <Compile Include="Config\VirtualKey.cs" />
     <Compile Include="Dll\Rect.cs" />
     <Compile Include="Dll\User32.cs" />
     <Compile Include="GamepadProcessor.cs" />
@@ -288,8 +294,6 @@
     <Compile Include="UI\Pages\AdvancedMappingsPage.xaml.cs">
       <DependentUpon>AdvancedMappingsPage.xaml</DependentUpon>
     </Compile>
-    
-    
     <Compile Include="UI\Controls\ProfileManager.xaml.cs">
       <DependentUpon>ProfileManager.xaml</DependentUpon>
     </Compile>

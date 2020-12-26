@@ -9,7 +9,7 @@ using Serilog;
 namespace PS4KeyboardAndMouseAdapter.Config
 {
     public partial class UserSettings : INotifyPropertyChanged
-    { 
+    {
 
         public static string PROFILE_DEFAULT = "profiles/default-profile.json";
         public static string PROFILE_PREVIOUS = "profile-previous.json";
@@ -34,14 +34,17 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         public static void ImportValues(string file)
         {
-            Console.WriteLine("ImportValues()");
             string json = File.ReadAllText(file);
+            
             UserSettings newSettings = null;
-
             if (IsLegacyConfig(json))
             {
                 UserSettings_1_0_11 legacySettings = JsonConvert.DeserializeObject<UserSettings_1_0_11>(json);
                 newSettings = UserSettings_1_0_11.ImportValues(legacySettings);
+            }
+            else
+            {
+                newSettings = JsonConvert.DeserializeObject<UserSettings>(json);
             }
 
             ImportValuesCurrent(newSettings);
@@ -49,6 +52,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         public static void ImportValuesCurrent(UserSettings newSettings)
         {
+            Console.WriteLine("ImportValuesCurrent");
             StaticLogger.Information("UserSettings.ImportValuesCurrent()");
 
             //reminder we want to import stuff into variable **thisInstance**
@@ -90,6 +94,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         public static bool IsLegacyConfig(string json)
         {
+
             try
             {
                 JObject newSetting2s = JsonConvert.DeserializeObject<JObject>(json);
@@ -100,7 +105,10 @@ namespace PS4KeyboardAndMouseAdapter.Config
                     {
                         if (property.Name == "Version_1_0_12_OrGreater")
                         {
-                            bool value = (bool)property.Value;
+                            // remember to flip this value
+                            // if it is 1.0.11 we want to return true
+                            // if it is 1.0.12 or greater we want to return false
+                            bool value = !(bool)property.Value;
                             return value;
                         }
                     }

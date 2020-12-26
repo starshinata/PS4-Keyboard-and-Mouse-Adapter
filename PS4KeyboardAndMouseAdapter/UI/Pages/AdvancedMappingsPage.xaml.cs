@@ -94,7 +94,6 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
             foreach (VirtualKey vk in virtualKeys)
             {
                 Console.WriteLine("PopulateWithMappings() vk " + vk);
-                Console.WriteLine("PopulateWithMappings() Settings.Mappings[vk] " + Settings.Mappings[vk]);
                 
                 StackPanel stackPanel = new StackPanel();
                 stackPanel.Orientation = Orientation.Horizontal;
@@ -109,32 +108,35 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
 
                 Console.WriteLine("PopulateWithMappings() vk " + vk);
                 Console.WriteLine("PopulateWithMappings() Settings.Mappings.Count " + Settings.Mappings.Count());
-                PhysicalKeyGroup pkg = Settings.Mappings[vk];
 
-                if (pkg != null && pkg.PhysicalKeys != null)
+                if (Settings.Mappings.ContainsKey(vk))
                 {
-
-                    for (int i = 0; i < Settings.AdvancedMappingPage_MappingsToShow; i++)
+                    PhysicalKeyGroup pkg = Settings.Mappings[vk];
+                    if (pkg != null && pkg.PhysicalKeys != null)
                     {
 
-                        Button button = new Button();
-                        button.Click += Handler_ButtonClicked;
-                        button.Margin = buttonMargin;
-                        button.Width = 100;
-
-                        if (i < pkg.PhysicalKeys.Count)
+                        for (int i = 0; i < Settings.AdvancedMappingPage_MappingsToShow; i++)
                         {
-                            PhysicalKey pk = pkg.PhysicalKeys[i];
-                            button.Content = pk.ToString();
-                            button.Tag = pk;
-                        }
-                        else
-                        {
-                            button.Content = "set mapping";
-                            button.Opacity = OpacityUnMappedButton;
-                        }
 
-                        stackPanel.Children.Add(button);
+                            Button button = new Button();
+                            button.Click += Handler_ButtonClicked;
+                            button.Margin = buttonMargin;
+                            button.Width = 100;
+
+                            if (i < pkg.PhysicalKeys.Count)
+                            {
+                                PhysicalKey pk = pkg.PhysicalKeys[i];
+                                button.Content = pk.ToString();
+                                button.Tag = pk;
+                            }
+                            else
+                            {
+                                button.Content = "set mapping";
+                                button.Opacity = OpacityUnMappedButton;
+                            }
+
+                            stackPanel.Children.Add(button);
+                        }
                     }
                 }
 

@@ -238,7 +238,7 @@ valid-xaml-xmllint
 
 build-msbuild
 
-##test-vstest
+test-vstest
 
 echo ""
 Copy-Item                   profiles\default-profile.json            PS4KeyboardAndMouseAdapter\bin\Release\profile-previous.json
