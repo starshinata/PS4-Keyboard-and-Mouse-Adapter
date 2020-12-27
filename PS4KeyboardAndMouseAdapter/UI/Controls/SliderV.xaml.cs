@@ -4,11 +4,12 @@ using System.Windows.Controls;
 
 namespace PS4KeyboardAndMouseAdapter.UI.Controls
 {
-    /// <summary>
-    /// Interaction logic for SliderV.xaml
-    /// </summary>
+
     public partial class SliderV : UserControl
     {
+
+        public event EventHandler ValueChanged = delegate { };
+
         public static readonly DependencyProperty DescriptionProperty = DependencyProperty.Register(
             "Description", typeof(string), typeof(SliderV), new PropertyMetadata(default(string)));
 
@@ -19,7 +20,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
         }
 
         //////////////////////////////////////////////////////
-        ///
+
         public static readonly DependencyProperty MinimumProperty = DependencyProperty.Register(
             "Minimum", typeof(float), typeof(SliderV), new PropertyMetadata(default(float)));
 
@@ -30,7 +31,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
         }
 
         //////////////////////////////////////////////////////
-        ///
+
         public static readonly DependencyProperty MaximumProperty = DependencyProperty.Register(
             "Maximum", typeof(int), typeof(SliderV), new PropertyMetadata(default(int)));
 
@@ -67,5 +68,9 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
             InitializeComponent();
         }
 
+        private void Handler_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            ValueChanged(this, EventArgs.Empty);
+        }
     }
 }

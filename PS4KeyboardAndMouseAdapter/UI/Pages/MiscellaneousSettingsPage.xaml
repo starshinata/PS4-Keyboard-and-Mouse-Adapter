@@ -7,34 +7,85 @@
              mc:Ignorable="d" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             
+             xmlns:controls="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Controls"
              >
 
     <Grid >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="5*" />
         </Grid.ColumnDefinitions>
 
-        <StackPanel
-            Grid.Column="0">
-            <Button 
-                Content="Reset RemotePlay window location"
-                Click="Handler_ResetRemotePlay"
+        <Grid.RowDefinitions>
+            <!-- row 0 -->
+            <RowDefinition Height="30px" />
+
+            <!-- row 1 -->
+            <RowDefinition Height="30px" />
+            <RowDefinition  />
+            <RowDefinition  />
+            <RowDefinition Height="5px" />
+            <RowDefinition  />
+            <RowDefinition  />
+            <RowDefinition  />
+            <RowDefinition  />
+            <RowDefinition  />
+            
+        </Grid.RowDefinitions>
+
+        <TextBlock 
+            Text="Reset RemotePlay window location"
+            />
+        
+        <!-- RichTextBox for word wrap -->
+        <RichTextBox  
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            >
+            <FlowDocument>
+                <Paragraph>
+                    Sometimes when you have enabled mouse input for RemotePlay, then sometimes you can drag the RemotePlay window offscreen
+                </Paragraph>
+            </FlowDocument>
+            
+        </RichTextBox>
+
+        <Button 
+            Grid.Row="2"
+            Grid.Column="4"
+            Grid.ColumnSpan="1"
+            Click="Handler_ResetRemotePlay"
+            Content="Reset RemotePlay window location"
             />
 
-            <!-- RichTextBox for word wrap -->
-            <RichTextBox  
-                Grid.Column="0"
-                Grid.Row="2"
-                >
-                <FlowDocument>
-                    <Paragraph>
-                        Sometimes when you have enabled mouse input for RemotePlay, then sometimes you can drag the RemotePlay window offscreen
-                    </Paragraph>
-                </FlowDocument>
-            </RichTextBox>
+<!-- TODO add bindings-->
+        <controls:SliderV
+            Grid.Row="3"
+            Description="RemotePlay Volume"
+            Minimum="0" 
+            Maximum="100"
+            TickFrequency="1"
+            Value="50"
+            x:Name="sliderVolume"
+            />
+        
+        <TextBlock 
+            Grid.Row="4"
+            Text="Because seems to always RemotePlay reset to 100% volume"
+            />
+        
+        <!-- 
+        <controls:SliderV
+            Grid.Row="15"
+            Description="Mouse Look Y axis sensitivity"
+            Minimum="1" 
+            Maximum="{Binding Path=UserSettings.MouseYAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            TickFrequency="0.1"
+            Value="{Binding Path=UserSettings.MouseYAxisSensitivityAimModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-        </StackPanel>
+            -->
+
+
     </Grid>
 </UserControl>

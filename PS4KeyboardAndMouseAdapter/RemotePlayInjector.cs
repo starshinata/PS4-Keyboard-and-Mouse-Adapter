@@ -54,7 +54,7 @@ namespace PS4KeyboardAndMouseAdapter
             if (File.Exists(exeLocation))
             {
                 Process.Start(exeLocation);
-                Log.Information("RemotePlay start requested-60");
+                Log.Information("RemotePlay start requested-57");
                 return true;
             }
 
@@ -70,7 +70,7 @@ namespace PS4KeyboardAndMouseAdapter
                     return false;
 
                 Process.Start(shortcutPath);
-                Log.Information("RemotePlay start requested-76");
+                Log.Information("RemotePlay start requested-73");
                 return true;
             }
             catch (Exception e)
@@ -90,8 +90,6 @@ namespace PS4KeyboardAndMouseAdapter
                 bool success = OpenRemotePlay();
                 if (success)
                 {
-
-
                     Inject();
                 }
                 else
@@ -136,12 +134,12 @@ namespace PS4KeyboardAndMouseAdapter
 
             string installerName = "RemotePlayInstaller.exe";
 
-            using (var client = new WebClient())
+            using (WebClient client = new WebClient())
             {
                 client.DownloadFile("https://remoteplay.dl.playstation.net/remoteplay/module/win/RemotePlayInstaller.exe", installerName);
             }
 
-            Log.Information("RemotePlay installer start requested-147");
+            Log.Information("RemotePlay installer start requested-142");
             return Process.Start(installerName);
         }
 

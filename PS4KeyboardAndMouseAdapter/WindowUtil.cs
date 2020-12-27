@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace PS4KeyboardAndMouseAdapter
 {
-    class WindowUtil
+    public class WindowUtil
     {
 
         [DllImport("user32.dll", SetLastError = true)]
@@ -17,20 +17,17 @@ namespace PS4KeyboardAndMouseAdapter
 
         public static void ResetWindowLocation(string windowTitle)
         {
-            Console.WriteLine("ResetWindowLocation");
-            // Find (the first-in-Z-order) Notepad window.
+            // Find (the first-in-Z-order) window.
             IntPtr hWnd = FindWindow(null, windowTitle);
 
             // If found, position it.
             if (hWnd != IntPtr.Zero)
             {
-                
-                     Console.WriteLine("ResetWindowLocation() found");
-
-                // Move the window to (0,0) without changing its size or position
-                // in the Z order.
+                // Move the window to (0,0) without changing its size or
+                // position in the Z order.
                 SetWindowPos(hWnd, IntPtr.Zero, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
             }
         }
+
     }
 }

@@ -32,8 +32,8 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
             ((MainViewModel)DataContext).RefreshData();
             Console.WriteLine("GotFocusLocal");
             Console.WriteLine("REMINDER - do refresh logic for when you load profiles");
-            Console.WriteLine("REMINDER - do mouse click binding");
             Console.WriteLine("REMINDER - delte bind button");
+            RefreshButtonContents();
         }
 
         private void Handler_ButtonClicked(object sender, RoutedEventArgs e)
@@ -78,8 +78,6 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
                 }
             }
         }
-
-
 
         private void Handler_AddMapping_OnMouseDown(object sender, RoutedEventArgs e)
         {
@@ -126,8 +124,6 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
             List<VirtualKey> virtualKeys = KeyUtility.GetVirtualKeyValues();
             foreach (VirtualKey vk in virtualKeys)
             {
-                Console.WriteLine("PopulateWithMappings() vk " + vk);
-
                 StackPanel stackPanel = new StackPanel();
                 stackPanel.Orientation = Orientation.Horizontal;
                 stackPanel.Tag = vk;
@@ -138,9 +134,6 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
                 textblock.Text = vk.ToString();
                 textblock.Width = 100;
                 stackPanel.Children.Add(textblock);
-
-                Console.WriteLine("PopulateWithMappings() vk " + vk);
-                Console.WriteLine("PopulateWithMappings() Settings.Mappings.Count " + Settings.Mappings.Count());
 
                 if (Settings.Mappings.ContainsKey(vk))
                 {
@@ -154,19 +147,13 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
                             Button button = new Button();
                             button.Click += Handler_ButtonClicked;
                             button.Margin = buttonMargin;
+                            button.Tag = i;
                             button.Width = 120;
 
-                            if (i < pkg.PhysicalKeys.Count)
-                            {
-                                PhysicalKey pk = pkg.PhysicalKeys[i];
-                                button.Content = pk.ToString();
-                                button.Tag = pk;
-                            }
-                            else
-                            {
-                                button.Content = "set mapping";
-                                button.Opacity = OpacityUnMappedButton;
-                            }
+
+
+
+
 
                             stackPanel.Children.Add(button);
                         }
@@ -175,6 +162,8 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
 
                 mappingHolder.Children.Add(stackPanel);
             }
+
+            RefreshButtonContents();
         }
 
         // Needs to public
@@ -208,25 +197,52 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
             WaitForKeyPress_3.Opacity = 0;
             WaitForKeyPress_4.Opacity = 0;
 
-
-            foreach (Button button in UITools.FindVisualChildren<Button>(this))
-            {
-                if (button.Tag != null)
-                {
-                    button.Opacity = 1;
-                }
-                else
-                {
-                    button.Opacity = OpacityUnMappedButton;
-                }
-
-                button.IsEnabled = true;
-            }
+            RefreshButtonContents();
             foreach (TextBlock textBlock in UITools.FindVisualChildren<TextBlock>(this))
             {
                 textBlock.Opacity = 1;
             }
 
+        }
+
+        public void RefreshButtonContents()
+        {
+            Console.WriteLine("RefreshButtonContents");
+            foreach (Button button in UITools.FindVisualChildren<Button>(this))
+            {
+                // assume unmapped first
+                button.Content = "set mapping";
+                button.IsEnabled = true;
+                button.Opacity = OpacityUnMappedButton;
+
+                if (button != null && button.Tag != null)
+                {
+                    StackPanel parentStackPanel = (StackPanel)button.Parent;
+                    if (parentStackPanel != null && parentStackPanel.Tag != null)
+                    {
+                        VirtualKey vk = (VirtualKey)parentStackPanel.Tag;
+                        if (Settings.Mappings != null && Settings.Mappings.ContainsKey(vk))
+                        {
+                            PhysicalKeyGroup pkg = Settings.Mappings[vk];
+                            if (pkg != null && pkg.PhysicalKeys != null)
+                            {
+
+                                int index = (int)button.Tag;
+                                if (index < pkg.PhysicalKeys.Count)
+                                {
+                                    PhysicalKey pk = pkg.PhysicalKeys[index];
+                                    if (pk != null)
+                                    {
+                                        button.Content = pk.ToString();
+                                        button.Opacity = 1;
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
         }
     }
 }
