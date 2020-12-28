@@ -42,7 +42,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
         ////////////////////////////////////////////////////////////////////////////
         private static void AddManualMouseMapping(UserSettings newSettings, VirtualKey vk, MouseButton mouseButton)
         {
-            if (newSettings.Mappings[vk] == null)
+            if (!newSettings.MappingsContainsKey(vk))
             {
                 newSettings.Mappings[vk] = new PhysicalKeyGroup();
             }

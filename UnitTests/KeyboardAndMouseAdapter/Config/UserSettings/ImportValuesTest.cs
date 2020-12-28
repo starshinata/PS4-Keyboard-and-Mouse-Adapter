@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -17,6 +18,12 @@ namespace UnitTests.KeyboardAndMouseAdapter.Config.UserSettingsTest
             return JsonConvert.DeserializeObject<UserSettings>(json);
         }
 
+        [TestInitialize]
+        public void BeforeEach()
+        {
+            UserSettings.TestOnly_ResetUserSettings();
+        }
+
         [TestMethod]
         public void ShouldImport_1_0_11()
         {
@@ -30,12 +37,26 @@ namespace UnitTests.KeyboardAndMouseAdapter.Config.UserSettingsTest
         }
 
         [TestMethod]
-        public void ShouldImport_1_0_12()
+        public void ShouldImport_1_0_12_Default()
         {
             string inputFile = PROJECT_ROOT + "UnitTests\\KeyboardAndMouseAdapter\\Config\\UserSettings\\ImportValues--profile-1.0.12-default--input.json";
             string expectedFile = PROJECT_ROOT + "UnitTests\\KeyboardAndMouseAdapter\\Config\\UserSettings\\ImportValues--profile-1.0.12-default--expected.json";
             UserSettings.ImportValues(inputFile);
             UserSettings actual = UserSettings.GetInstance();
+            actual.KeyboardMappings = null;
+            UserSettings expected = ReadExpectedFile(expectedFile);
+            AssertionExtensions.Should(actual).BeEquivalentTo(expected);
+        }
+
+        [TestMethod]
+        public void ShouldImport_Empty()
+        {
+            string inputFile = PROJECT_ROOT + "UnitTests\\KeyboardAndMouseAdapter\\Config\\UserSettings\\ImportValues--profile-empty--input.json";
+            string expectedFile = PROJECT_ROOT + "UnitTests\\KeyboardAndMouseAdapter\\Config\\UserSettings\\ImportValues--profile-empty--expected.json";
+            UserSettings.ImportValues(inputFile);
+            UserSettings actual = UserSettings.GetInstance();
+            actual.KeyboardMappings = null;
+            Console.WriteLine("actual" + actual.Mappings);
             UserSettings expected = ReadExpectedFile(expectedFile);
             AssertionExtensions.Should(actual).BeEquivalentTo(expected);
         }

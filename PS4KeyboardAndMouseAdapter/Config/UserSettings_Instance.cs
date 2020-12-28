@@ -101,17 +101,27 @@ namespace PS4KeyboardAndMouseAdapter.Config
             return JsonConvert.DeserializeObject<UserSettings>(json);
         }
 
+        public bool MappingsContainsKey(VirtualKey vk) {
+            return Mappings.ContainsKey(vk) && Mappings[vk] != null;
+        }
+
         public void GetKeyboardMappings()
         {
             List<VirtualKey> virtualKeys = KeyUtility.GetVirtualKeyValues();
             foreach (VirtualKey vk in virtualKeys)
             {
-                PhysicalKeyGroup pkg = Mappings[vk];
-                foreach (PhysicalKey pk in pkg.PhysicalKeys)
+                if (Mappings.ContainsKey(vk))
                 {
-                    if (pk != null && pk.KeyboardValue != Keyboard.Key.Unknown)
+                    PhysicalKeyGroup pkg = Mappings[vk];
+                    if (pkg.PhysicalKeys != null)
                     {
-                        KeyboardMappings[vk] = pk;
+                        foreach (PhysicalKey pk in pkg.PhysicalKeys)
+                        {
+                            if (pk != null && pk.KeyboardValue != Keyboard.Key.Unknown)
+                            {
+                                KeyboardMappings[vk] = pk;
+                            }
+                        }
                     }
                 }
             }

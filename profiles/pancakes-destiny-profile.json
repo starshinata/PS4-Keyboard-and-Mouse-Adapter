@@ -75,6 +75,10 @@
         {
           "KeyboardValue": 27,
           "MouseValue": -1
+        },
+        {
+          "KeyboardValue": 28,
+          "MouseValue": -1
         }
       ]
     },
@@ -228,7 +232,7 @@
     }
   },
   "AdvancedMappingPage_MappingsToShow": 4,
-  "AimToggle": true,
+  "AimToggle": false,
   "AnalogStickLowerRange": 31,
   "AnalogStickUpperRange": 95,
   "MouseControlsL3": false,
@@ -237,7 +241,7 @@
   "MouseDistanceUpperRange": 410.5,
   "MouseMaxDistance": 2960.0,
   "MousePollingRate": 68,
-  "MouseAimSensitivityEnabled": true,
+  "MouseAimSensitivityEnabled": false,
   "MouseXAxisSensitivityAimModifier": 37.2,
   "MouseXAxisSensitivityLookModifier": 27.1,
   "MouseXAxisSensitivityMax": 100.0,

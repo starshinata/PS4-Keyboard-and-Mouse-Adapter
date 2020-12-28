@@ -64,7 +64,9 @@
   <ItemGroup>
     <None Include="KeyboardAndMouseAdapter\Config\UserSettings\ImportValues--profile-1.0.11-default--expected.json" />
     <None Include="KeyboardAndMouseAdapter\Config\UserSettings\ImportValues--profile-1.0.11-default--input.json" />
-	<None Include="KeyboardAndMouseAdapter\Config\UserSettings\ImportValues--profile-1.0.12-default--expected.json" />
+    <None Include="KeyboardAndMouseAdapter\Config\UserSettings\ImportValues--profile-1.0.12-default--expected.json" />
+    <None Include="KeyboardAndMouseAdapter\Config\UserSettings\ImportValues--profile-empty--expected.json" />
+    <None Include="KeyboardAndMouseAdapter\Config\UserSettings\ImportValues--profile-empty--input.json" />
     <None Include="KeyboardAndMouseAdapter\Config\UserSettings\ImportValues--profile-1.0.12-default--input.json" />
     <Compile Include="KeyboardAndMouseAdapter\Config\UserSettings\ImportValuesTest.cs" />
     <None Include="KeyboardAndMouseAdapter\Config\UserSettings\IsLegacyConfig--profile-1.0.11-default.json" />

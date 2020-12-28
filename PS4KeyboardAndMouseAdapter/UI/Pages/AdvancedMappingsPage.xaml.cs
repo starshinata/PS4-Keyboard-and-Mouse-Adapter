@@ -59,17 +59,22 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
                     {
                         VirtualKey vk = (VirtualKey)parentStackPanel.Tag;
 
-                        PhysicalKey valueOld = (PhysicalKey)lastClickedButton.Tag;
+                        int index = (int)lastClickedButton.Tag;
+                        PhysicalKey valueOld = null;
+
+                        if (Settings.MappingsContainsKey(vk))
+                        {
+                            if (index < Settings.Mappings[vk].PhysicalKeys.Count)
+                            {
+                                valueOld = Settings.Mappings[vk].PhysicalKeys[index];
+                            }
+                        }
 
                         PhysicalKey valueNew = new PhysicalKey();
                         valueNew.KeyboardValue = keyboardValue;
                         valueNew.MouseValue = mouseValue;
 
-                        lastClickedButton.Tag = valueNew;
-
                         UserSettings.SetMapping(vk, valueOld, valueNew);
-
-                        lastClickedButton.Content = valueNew.ToString();
                     }
 
                     lastClickedButton = null;
@@ -135,29 +140,16 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
                 textblock.Width = 100;
                 stackPanel.Children.Add(textblock);
 
-                if (Settings.Mappings.ContainsKey(vk))
+                for (int i = 0; i < Settings.AdvancedMappingPage_MappingsToShow; i++)
                 {
-                    PhysicalKeyGroup pkg = Settings.Mappings[vk];
-                    if (pkg != null && pkg.PhysicalKeys != null)
-                    {
 
-                        for (int i = 0; i < Settings.AdvancedMappingPage_MappingsToShow; i++)
-                        {
+                    Button button = new Button();
+                    button.Click += Handler_ButtonClicked;
+                    button.Margin = buttonMargin;
+                    button.Tag = i;
+                    button.Width = 120;
 
-                            Button button = new Button();
-                            button.Click += Handler_ButtonClicked;
-                            button.Margin = buttonMargin;
-                            button.Tag = i;
-                            button.Width = 120;
-
-
-
-
-
-
-                            stackPanel.Children.Add(button);
-                        }
-                    }
+                    stackPanel.Children.Add(button);
                 }
 
                 mappingHolder.Children.Add(stackPanel);
@@ -183,6 +175,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
                 textBlock.Opacity = UIConstants.LowVisibility;
             }
 
+            Panel.SetZIndex(WaitForKeyPress_1, 10);
             WaitForKeyPress_1.Opacity = 1;
             WaitForKeyPress_2.Opacity = 1;
             WaitForKeyPress_3.Opacity = 1;
@@ -192,6 +185,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
         private void WaitingForKeyPress_Hide()
         {
             Console.WriteLine("WaitingForKeyPress_Hide");
+            Panel.SetZIndex(WaitForKeyPress_1, 0);
             WaitForKeyPress_1.Opacity = 0;
             WaitForKeyPress_2.Opacity = 0;
             WaitForKeyPress_3.Opacity = 0;
@@ -221,10 +215,10 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
                     if (parentStackPanel != null && parentStackPanel.Tag != null)
                     {
                         VirtualKey vk = (VirtualKey)parentStackPanel.Tag;
-                        if (Settings.Mappings != null && Settings.Mappings.ContainsKey(vk))
+                        if (Settings.Mappings != null && Settings.MappingsContainsKey(vk))
                         {
                             PhysicalKeyGroup pkg = Settings.Mappings[vk];
-                            if (pkg != null && pkg.PhysicalKeys != null)
+                            if (pkg.PhysicalKeys != null)
                             {
 
                                 int index = (int)button.Tag;
@@ -239,10 +233,10 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
                                 }
                             }
                         }
-
                     }
                 }
             }
         }
+
     }
 }

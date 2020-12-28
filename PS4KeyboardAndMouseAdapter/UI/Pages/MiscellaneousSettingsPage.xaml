@@ -13,55 +13,84 @@
 
     <Grid >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="5*" />
+            <!-- 5 columns -->
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <!-- row 0 -->
-            <RowDefinition Height="30px" />
 
+            <RowDefinition />
             <!-- row 1 -->
-            <RowDefinition Height="30px" />
-            <RowDefinition  />
-            <RowDefinition  />
-            <RowDefinition Height="5px" />
-            <RowDefinition  />
-            <RowDefinition  />
-            <RowDefinition  />
-            <RowDefinition  />
-            <RowDefinition  />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+
+            <!-- row 5 -->
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
             
+            <!-- row 10 -->
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            
+            <!-- row 15 -->
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="5"
+            FontSize="16"
+            FontWeight="Bold"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="Misc Settings"/>
+
         <TextBlock 
-            Text="Reset RemotePlay window location"
-            />
-        
-        <!-- RichTextBox for word wrap -->
-        <RichTextBox  
             Grid.Row="1"
             Grid.Column="0"
             Grid.ColumnSpan="3"
-            >
-            <FlowDocument>
-                <Paragraph>
-                    Sometimes when you have enabled mouse input for RemotePlay, then sometimes you can drag the RemotePlay window offscreen
-                </Paragraph>
-            </FlowDocument>
-            
-        </RichTextBox>
-
+            Text="Reset RemotePlay window location"
+            />
+        
         <Button 
-            Grid.Row="2"
-            Grid.Column="4"
-            Grid.ColumnSpan="1"
+            Grid.Row="1"
+            Grid.Column="3"
+            Grid.ColumnSpan="2"
             Click="Handler_ResetRemotePlay"
             Content="Reset RemotePlay window location"
             />
 
-<!-- TODO add bindings-->
+        <TextBlock 
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="5"
+            Text="Sometimes when you have enabled mouse input for RemotePlay, then sometimes you can drag the RemotePlay window offscreen"
+            />
+
+
+        <!-- row 3 intentionally empty -->
+        <!-- TODO add bindings-->
         <controls:SliderV
-            Grid.Row="3"
+            Grid.Row="4"
+            Grid.ColumnSpan="5"
             Description="RemotePlay Volume"
             Minimum="0" 
             Maximum="100"
@@ -69,12 +98,13 @@
             Value="50"
             x:Name="sliderVolume"
             />
-        
+
         <TextBlock 
-            Grid.Row="4"
+            Grid.Row="5"
+            Grid.ColumnSpan="5"
             Text="Because seems to always RemotePlay reset to 100% volume"
             />
-        
+
         <!-- 
         <controls:SliderV
             Grid.Row="15"

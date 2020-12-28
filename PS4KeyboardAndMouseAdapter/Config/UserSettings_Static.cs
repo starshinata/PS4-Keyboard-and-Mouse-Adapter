@@ -15,7 +15,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
         public static string PROFILE_DEFAULT = "profiles/default-profile.json";
         public static string PROFILE_PREVIOUS = "profile-previous.json";
 
-        private static readonly UserSettings ThisInstance = new UserSettings();
+        private static UserSettings ThisInstance = new UserSettings();
         private static readonly ILogger StaticLogger = Log.ForContext(typeof(UserSettings));
 
 
@@ -36,7 +36,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
         public static void ImportValues(string file)
         {
             string json = File.ReadAllText(file);
-            
+
             UserSettings newSettings;
             if (IsLegacyConfig(json))
             {
@@ -82,7 +82,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
             List<VirtualKey> virtualKeys = KeyUtility.GetVirtualKeyValues();
             foreach (VirtualKey key in virtualKeys)
             {
-                if (newSettings.Mappings[key] != null)
+                if (newSettings.MappingsContainsKey(key))
                 {
                     ThisInstance.Mappings[key] = newSettings.Mappings[key];
                 }
@@ -214,6 +214,11 @@ namespace PS4KeyboardAndMouseAdapter.Config
         {
             StaticLogger.Information("MainViewModel.SetMapping {VirtualKey:" + key + ", PhysicalKey: '" + valueOld + " -> " + valueNew + "'}");
 
+            if (!ThisInstance.MappingsContainsKey(key))
+            {
+                ThisInstance.Mappings[key] = new PhysicalKeyGroup();
+            }
+
             if (valueOld != null)
             {
                 ThisInstance.Mappings[key].PhysicalKeys.Remove(valueOld);
@@ -225,6 +230,11 @@ namespace PS4KeyboardAndMouseAdapter.Config
             ThisInstance.PropertyChanged(ThisInstance, new PropertyChangedEventArgs(""));
         }
 
+
+        public static void TestOnly_ResetUserSettings()
+        {
+            ThisInstance = new UserSettings();
+        }
     }
 }
 
