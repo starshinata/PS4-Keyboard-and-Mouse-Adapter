@@ -28,6 +28,8 @@ Try our discord here https://discord.gg/zH4b8p4 where you can either suggest ide
 * Map multiple keys to the same button
 * some game need to detect you shaking the controller, need to figure out how to handle/emulate that
 * touchpad needs more work :(
+* make DS4 emulation optional
+* support for analog input like from a controller stick, controller trigger, or Steering wheel
 * supporting ps5 (we dont know if this works on ps5 atm)
 * support linux/mac 
 * support chaikis
