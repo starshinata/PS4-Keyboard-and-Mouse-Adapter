@@ -64,9 +64,7 @@
             <!-- row 25 -->
             <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
-            <RowDefinition Height="21px" />
-            <RowDefinition Height="21px" />
-            <!-- last row is currently #28 -->
+            
 
         </Grid.RowDefinitions>
 

@@ -28,7 +28,7 @@
   "MouseYAxisSensitivityLookModifier": 1.0,
   "MouseYAxisSensitivityMax": 100.0,
 
-  "RemotePlayVolume": 0.75,
+  "RemotePlayVolume": 75.0,
 
   "XYRatio": 1,
   "Version_1_0_12_OrGreater": true

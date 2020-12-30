@@ -265,6 +265,9 @@
     </ApplicationDefinition>
     <Compile Include="AudioManager.cs" />
     <Compile Include="RemotePlayConstants.cs" />
+    <Compile Include="UI\Controls\MiscellaneousSettingsControl.xaml.cs">
+      <DependentUpon>MiscellaneousSettingsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WindowUtil.cs" />
     <Compile Include="Config\KeyUtility.cs" />
     <Compile Include="Config\MouseButton.cs" />
@@ -340,6 +343,10 @@
     <Page Include="UI\Controls\AnalogStickVisualizer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Controls\MiscellaneousSettingsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\Controls\ProfileManager.xaml">
       <Generator>MSBuild:Compile</Generator>
