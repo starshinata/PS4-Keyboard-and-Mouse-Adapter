@@ -1,0 +1,33 @@
+{
+  "AdvancedMappingPage_MappingsToShow": 4,
+  "AimToggle": false,
+  "AimToggleRetoggleDelay":500,
+  
+  "AnalogStickLowerRange": 40,
+  "AnalogStickUpperRange": 95,
+  
+  "KeyboardMappings": null,
+
+  "Mappings": {
+  },
+
+  "MouseAimSensitivityEnabled": true,
+  "MouseControlsL3": false,
+  "MouseControlsR3": false,
+  
+  "MouseDistanceLowerRange": 5.0,
+  "MouseDistanceUpperRange": 96.0,
+  "MouseMaxDistance": 960.0,
+  "MousePollingRate": 60,
+
+  "MouseXAxisSensitivityAimModifier": 1.0,
+  "MouseXAxisSensitivityLookModifier": 1.0,
+  "MouseXAxisSensitivityMax": 100.0,
+
+  "MouseYAxisSensitivityAimModifier": 1.0,
+  "MouseYAxisSensitivityLookModifier": 1.0,
+  "MouseYAxisSensitivityMax": 100.0,
+
+  "XYRatio": 1,
+  "Version_1_0_12_OrGreater": true
+}

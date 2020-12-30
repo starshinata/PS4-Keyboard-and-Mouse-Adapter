@@ -235,5 +235,5 @@
   "MouseDistanceLowerRange": 5.0,
   "MouseDistanceUpperRange": 96.0,
   "MouseMaxDistance": 960.0,
-  "XYRatio": 0.6
+  "XYRatio": 1
 }
