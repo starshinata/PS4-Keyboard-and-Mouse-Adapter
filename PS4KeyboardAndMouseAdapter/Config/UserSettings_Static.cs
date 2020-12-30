@@ -57,8 +57,13 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
             //reminder we want to import stuff into variable **thisInstance**
 
+            ThisInstance.AimToggle= newSettings.AimToggle;
+            ThisInstance.AimToggleRetoggleDelay = newSettings.AimToggleRetoggleDelay;
+
             ThisInstance.AnalogStickLowerRange = newSettings.AnalogStickLowerRange;
             ThisInstance.AnalogStickUpperRange = newSettings.AnalogStickUpperRange;
+            
+            ThisInstance.MouseAimSensitivityEnabled = newSettings.MouseAimSensitivityEnabled;
 
             ThisInstance.MouseControlsL3 = newSettings.MouseControlsL3;
             ThisInstance.MouseControlsR3 = newSettings.MouseControlsR3;
@@ -68,7 +73,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
             ThisInstance.MouseMaxDistance = newSettings.MouseMaxDistance;
 
             ThisInstance.MousePollingRate = newSettings.MousePollingRate;
-
+            
             ThisInstance.MouseXAxisSensitivityAimModifier = newSettings.MouseXAxisSensitivityAimModifier;
             ThisInstance.MouseXAxisSensitivityLookModifier = newSettings.MouseXAxisSensitivityLookModifier;
             ThisInstance.MouseXAxisSensitivityMax = newSettings.MouseXAxisSensitivityMax;
@@ -76,6 +81,8 @@ namespace PS4KeyboardAndMouseAdapter.Config
             ThisInstance.MouseYAxisSensitivityAimModifier = newSettings.MouseYAxisSensitivityAimModifier;
             ThisInstance.MouseYAxisSensitivityLookModifier = newSettings.MouseYAxisSensitivityLookModifier;
             ThisInstance.MouseYAxisSensitivityMax = newSettings.MouseYAxisSensitivityMax;
+
+            ThisInstance.RemotePlayVolume= newSettings.RemotePlayVolume;
 
             ThisInstance.XYRatio = newSettings.XYRatio;
 

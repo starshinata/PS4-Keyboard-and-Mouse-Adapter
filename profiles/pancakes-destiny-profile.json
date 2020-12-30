@@ -232,7 +232,7 @@
     }
   },
   "AdvancedMappingPage_MappingsToShow": 4,
-  "AimToggle": false,
+  "AimToggle": true,
   "AnalogStickLowerRange": 31,
   "AnalogStickUpperRange": 95,
   "MouseControlsL3": false,
@@ -241,7 +241,7 @@
   "MouseDistanceUpperRange": 410.5,
   "MouseMaxDistance": 2960.0,
   "MousePollingRate": 68,
-  "MouseAimSensitivityEnabled": false,
+  "MouseAimSensitivityEnabled": true,
   "MouseXAxisSensitivityAimModifier": 37.2,
   "MouseXAxisSensitivityLookModifier": 27.1,
   "MouseXAxisSensitivityMax": 100.0,

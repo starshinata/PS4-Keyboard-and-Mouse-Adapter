@@ -18,49 +18,55 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            <!-- Heading 30px -->
+            <!-- Regular line 21px -->
+            <!-- subtext line 15px -->
+            <!-- Toggle 30px -->
+            
+            
             <!-- row 0 -->
             <RowDefinition Height="30px" />
 
             <!-- row 1 -->
             <RowDefinition Height="30px" />
-            <RowDefinition Height="20*" />
-            <RowDefinition Height="21*" />
-            <RowDefinition Height="5px" />
+            <RowDefinition Height="15px" />
+            <RowDefinition Height="15px" />
+            <RowDefinition Height="21px" />
 
             <!-- row 5-->
-            <RowDefinition Height="20*" />
-            <RowDefinition Height="20*" />
-            <RowDefinition Height="20*" />
-            <RowDefinition Height="20*" />
-            <RowDefinition Height="30px"/>
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="30px" />
 
             <!-- row 10 -->
-            <RowDefinition Height="20*" />
-            <RowDefinition Height="21*" />
-            <RowDefinition Height="30px" />
-            <RowDefinition Height="21*" />
-            <RowDefinition Height="21*" />
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="15px" />
+            <RowDefinition Height="15px" />
+            <RowDefinition Height="21px" />
 
             <!-- row 15 -->
-            <RowDefinition Height="21*" />
-            <RowDefinition Height="20*" />
-            <RowDefinition Height="21*" />
-            <RowDefinition Height="21*" />
-            <RowDefinition Height="21*" />
+            <RowDefinition Height="30px" />
+            <RowDefinition Height="15px" />
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="21px" />
 
             <!-- row 20 -->
-            <RowDefinition Height="21*" />
-            <RowDefinition Height="21*" />
-            <RowDefinition Height="21*" />
-            <RowDefinition Height="21*" />
-            <RowDefinition Height="21*" />
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="21px" />
 
             <!-- row 25 -->
-            <RowDefinition Height="21*" />
-            <RowDefinition Height="21*" />
-            <RowDefinition Height="21*" />
-            <RowDefinition Height="21*" />
-            <RowDefinition Height="20*" />
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="21px" />
+            <!-- last row is currently #28 -->
 
         </Grid.RowDefinitions>
 
@@ -136,7 +142,6 @@
 
         <!-- Row 8 intentionally empty -->
 
-
         <TextBlock
             Grid.Row="9"
             Grid.Column="0"
@@ -161,12 +166,39 @@
             FontSize="10"
             HorizontalAlignment="Left"
             Text="In an FPS, when you are aiming, do you want to hold down the right mouse button (default), or click it once to togle aiming ?"
-            VerticalAlignment="Top" />
+            VerticalAlignment="Center"
+            />
 
-        <!-- Row 11 intentionally empty -->
+        <controls:SliderV
+            Grid.Row="11"
+            Description="Aim Toggle, Re-Toggle Delay (milliseconds)"
+            Minimum="100" 
+            Maximum="5000"
+            TickFrequency="100"
+            Value="{Binding Path=UserSettings.AimToggleRetoggleDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+        <TextBlock 
+            Grid.Row="12"
+            Grid.Column="0"
+            FontSize="10"
+            HorizontalAlignment="Left"
+            Text="How long should we delay before toggling aim/no aim?"
+            VerticalAlignment="Center"
+            />
+
+        <TextBlock 
+            Grid.Row="13"
+            Grid.Column="0"
+            FontSize="10"
+            HorizontalAlignment="Left"
+            Text="Set it too low, and you will be constantly toggline between aiming and not aiming"
+            VerticalAlignment="Center"
+            />
+
+        <!-- Row 14 intentionally empty -->
 
         <TextBlock
-            Grid.Row="12"
+            Grid.Row="15"
             Grid.Column="0"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
@@ -175,7 +207,7 @@
 
         <!-- https://www.codeproject.com/Articles/1060961/WPFSpark-v -->
         <wpfspark:ToggleSwitch
-            Grid.Row="12"
+            Grid.Row="15"
             IsChecked="{Binding Path=UserSettings.MouseAimSensitivityEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             Height="30"
             HorizontalAlignment="Right"
@@ -184,7 +216,7 @@
             Width="60" Grid.RowSpan="2"/>
 
         <TextBlock
-            Grid.Row="13"
+            Grid.Row="16"
             Grid.Column="0"
             FontSize="10"
             HorizontalAlignment="Left"
@@ -192,9 +224,8 @@
             Text="Right Mouse is aim"
             />
 
-
         <controls:SliderV
-            Grid.Row="14"
+            Grid.Row="17"
             Description="Mouse Look X axis sensitivity"
             Minimum="1" 
             Maximum="{Binding Path=UserSettings.MouseXAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -202,7 +233,7 @@
             Value="{Binding Path=UserSettings.MouseXAxisSensitivityAimModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <controls:SliderV
-            Grid.Row="15"
+            Grid.Row="18"
             Description="Mouse Look Y axis sensitivity"
             Minimum="1" 
             Maximum="{Binding Path=UserSettings.MouseYAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -210,7 +241,7 @@
             Value="{Binding Path=UserSettings.MouseYAxisSensitivityAimModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <controls:RangeSlider            
-            Grid.Row="17"
+            Grid.Row="20"
             Description="Mouse distance range"
             Minimum="0" 
             Maximum="{Binding Path=UserSettings.MaxMouseDistance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -219,7 +250,7 @@
             x:Name="mouseDistanceRangeSlider"/>
 
         <controls:RangeSlider 
-            Grid.Row="18" 
+            Grid.Row="21" 
             Description="Analog stick range (in %)" 
             LowerValue="{Binding Path=UserSettings.AnalogStickLowerRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             Minimum="0"  
@@ -228,7 +259,7 @@
             x:Name="AnalogStickRangeSlider" />
 
         <controls:SliderV 
-            Grid.Row="19"
+            Grid.Row="22"
             Description="Horizontal/Vertical ratio" 
             Minimum="0.1" 
             Maximum="1" 

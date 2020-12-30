@@ -13,9 +13,12 @@ namespace PS4KeyboardAndMouseAdapter
 
     public class GamepadProcessor
     {
-
-        private UserSettings UserSettings { get; set; } = UserSettings.GetInstance();
         private InstanceSettings InstanceSettings { get; set; } = InstanceSettings.GetInstance();
+        private UserSettings UserSettings { get; set; } = UserSettings.GetInstance();
+
+        ////////////////////////////////////////////////////////////////////////////
+        
+        private readonly Stopwatch AimToggleTimer = new Stopwatch();
 
         // Anchor 0,0 is the top left of the primary monitor
         private Vector2i Anchor { get; set; } = new Vector2i(900, 500);
@@ -29,16 +32,41 @@ namespace PS4KeyboardAndMouseAdapter
 
         private readonly Stopwatch MouseTimer = new Stopwatch();
 
-        private readonly Stopwatch AimToggleTimer = new Stopwatch();
-
         public Process RemotePlayProcess;
 
+        ////////////////////////////////////////////////////////////////////////////
+        
         public GamepadProcessor()
         {
             AimToggleTimer.Start();
             MouseTimer.Start();
         }
 
+        public void HandleAimToggle()
+        {
+            if (UserSettings.AimToggle)
+            {
+                // waiting a little before we can re-toggle the Aiming
+                if (AimToggleTimer.ElapsedMilliseconds > UserSettings.AimToggleRetoggleDelay)
+                {
+                    //TODO make it dynamic so the L2 doesnt have to be the AIM key
+                    if (IsVirtualKeyPressed(VirtualKey.L2))
+                    {
+                        IsAiming = !IsAiming;
+                        AimToggleTimer.Restart();
+                    }
+                }
+
+                if (IsAiming)
+                {
+                    CurrentState.L2 = 255;
+                }
+                else
+                {
+                    CurrentState.L2 = 0;
+                }
+            }
+        }
 
         public Vector2i FeedMouseCoords()
         {
@@ -165,31 +193,7 @@ namespace PS4KeyboardAndMouseAdapter
 
 
             ////////////////////////////////////////////
-
-            if (UserSettings.AimToggle)
-            {
-
-                // waiting a little before we can re-toggle the Aiming
-                if (AimToggleTimer.ElapsedMilliseconds > 250)
-                {
-                    //TODO make it dynamic so the L2 doesnt have to be the AIM key
-                    if (IsVirtualKeyPressed(VirtualKey.L2))
-                    {
-                        Console.WriteLine("toggle IsAIMING" + IsAiming);
-                        IsAiming = !IsAiming;
-                        AimToggleTimer.Restart();
-                    }
-                }
-
-                if (IsAiming)
-                {
-                    CurrentState.L2 = 255;
-                }
-                else
-                {
-                    CurrentState.L2 = 0;
-                }
-            }
+            HandleAimToggle();
         }
 
         public void HandleMouseCursor()

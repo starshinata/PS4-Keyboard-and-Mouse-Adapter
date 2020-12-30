@@ -28,8 +28,14 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         public bool AimToggle { get; set; } = false;
 
+        // time in milliseconds, after toggling aim on/off, before we retrigger on/off
+        // set it too low, and you will be constantly toggline between aiming and not aiming
+        public int AimToggleRetoggleDelay { get; set; } = 500;
+
         public int AnalogStickLowerRange { get; set; } = 40;
         public int AnalogStickUpperRange { get; set; } = 95;
+
+        public bool MouseAimSensitivityEnabled { get; set; } = false;
 
         public bool MouseControlsL3 { get; set; } = false;
         public bool MouseControlsR3 { get; set; } = false;
@@ -68,8 +74,6 @@ namespace PS4KeyboardAndMouseAdapter.Config
             }
         }
 
-        public bool MouseAimSensitivityEnabled { get; set; } = false;
-
         public double MouseXAxisSensitivityAimModifier { get; set; } = 1;
         public double MouseXAxisSensitivityLookModifier { get; set; } = 1;
         public double MouseXAxisSensitivityMax { get; set; } = 100;
@@ -77,9 +81,11 @@ namespace PS4KeyboardAndMouseAdapter.Config
         public double MouseYAxisSensitivityAimModifier { get; set; } = 1;
         public double MouseYAxisSensitivityLookModifier { get; set; } = 1;
         public double MouseYAxisSensitivityMax { get; set; } = 100;
+        
+        public double RemotePlayVolume { get; set; } = 1;
 
         //TODO do we still need this ?
-        public double XYRatio { get; set; } = 0.6;
+        public double XYRatio { get; set; } = 1;
 
         //
         // REMINDER if you add a new property, be sure to add it to ImportValues method

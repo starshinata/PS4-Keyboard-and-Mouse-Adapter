@@ -32,10 +32,11 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         public double MouseXAxisSensitivityMax { get; set; } = 100;
         public double MouseXAxisSensitivityModifier { get; set; } = 2;
+
         public double MouseYAxisSensitivityMax { get; set; } = 100;
         public double MouseYAxisSensitivityModifier { get; set; } = 1;
 
-        public double XYRatio { get; set; } = 0.6;
+        public double XYRatio { get; set; } = 1;
 
         ////////////////////////////////////////////////////////////////////////////
         /// Static Methods
