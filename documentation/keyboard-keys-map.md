@@ -1,4 +1,4 @@
-**This is only interesting if you want to manually edit mappgins.json**
+**This is only interesting if you want to manually edit a profile.json**
 
 For mapping of keyboard keys, we use "Simple and Fast Multimedia Library" SFML - https://www.sfml-dev.org/
 
