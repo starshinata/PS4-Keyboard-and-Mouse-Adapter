@@ -224,7 +224,7 @@
 
         <controls:SliderV
             Grid.Row="17"
-            Description="Mouse Look X axis sensitivity"
+            Description="Mouse Aim X axis sensitivity"
             Minimum="1" 
             Maximum="{Binding Path=UserSettings.MouseXAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             TickFrequency="0.1"
@@ -232,7 +232,7 @@
 
         <controls:SliderV
             Grid.Row="18"
-            Description="Mouse Look Y axis sensitivity"
+            Description="Mouse Aim Y axis sensitivity"
             Minimum="1" 
             Maximum="{Binding Path=UserSettings.MouseYAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             TickFrequency="0.1"
