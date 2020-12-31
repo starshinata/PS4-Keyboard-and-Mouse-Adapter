@@ -3,7 +3,7 @@
 Questions ordered alphabetically
 
 
-### Can I get banned for using this application? 
+### Can I get banned from PSN for using this application? 
 I cannot find a specific text saying this is a bannable offense. But strictly because it is an unauthorised third party  I would not be surprised if SIE LLC (Sony) claimed that using this is a banable offense.
 
 **No one has reported being banned for it.**
@@ -22,6 +22,16 @@ Source: https://www.playstation.com/en-us/legal/softwarelicense/
 Because this software is not authorised by SIE LLC (Sony), this may technically " invalidate your PlayStation system warranty"
 
 
+### How do I increase mouse sensitivity so I can quickly turn 180 degress?
+You cant
+
+This is a limitation of console controllers. For a better explanation watch the first minute f https://youtu.be/KtBHArN3QW0 
+
+
+### How do I uninstall PS4 KMA?
+Goto `%AppData%\..\Local\PS4KeyboardAndMouseAdapter` in windows explorer and delete everything there
+
+
 ### I have a question or issue, why havent you replied?
 We do this in our free time, and we normally have 9-5 day jobs to contend with.
 
@@ -35,5 +45,13 @@ Sony has licensed Hori products https://www.playstation.com/en-us/explore/access
 
 If you are using an application to improve you aim or response time, that could be considered cheating. The developers of this application consider this a accessibility aid for people who have issues using a controller (I personally have RSI and cannot play with a controller for long periods of time, but can use a mouse and keyboard all day).
 
-### How do I uninstall PS4 KMA?
-Goto `%AppData%\..\Local\PS4KeyboardAndMouseAdapter` in windows explorer and delete everything there
+
+### Will this trigger Riot Valorant's Vanguard Anti Cheat?
+https://support-valorant.riotgames.com/hc/en-us/articles/360046160933-What-is-Vanguard-
+
+Assumption: we do not expect you to be playing Valorant, while you have PS4KMA (our adapter) running.
+
+Vanguard is running all the time. Vanguard anticheat should not be triggered by our adapter. If it is triggered by our adapter (and the above assumption holds true) then there are much bigger privacy concerns about running the Vanguard Anticheat.
+
+If you play Valorant with PS4KMA active then it *may* detect you as trying to cheat. It could be considered on par to using Discord's voice overlay (the overlay to see who is speaking). We dont see how capturing keyboard and mouse input could be used for cheating, but Vanguard is proprietary and we cannot look at it's inner workings.
+
