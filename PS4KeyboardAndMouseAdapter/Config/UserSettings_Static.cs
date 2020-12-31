@@ -173,20 +173,21 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         public static void Print(UserSettings settings)
         {
+            Console.WriteLine("UserSettings.Print()"); 
             StaticLogger.Information("UserSettings.Print()");
-            Console.WriteLine("UserSettings.Print()");
 
             Console.WriteLine("mappings");
-            var virtualKeys = KeyUtility.GetVirtualKeyValues();
+            StaticLogger.Information("mappings");
+            List<VirtualKey> virtualKeys = KeyUtility.GetVirtualKeyValues();
             foreach (VirtualKey key in virtualKeys)
             {
+                Console.WriteLine("print Mappings:{VirtKey:" + key + ", PhysicalKeyGroup: " + settings.Mappings[key] + "}"); 
                 StaticLogger.Information("print Mappings:{VirtKey:" + key + ", PhysicalKeyGroup: " + settings.Mappings[key] + "}");
-                Console.WriteLine("print Mappings:{VirtKey:" + key + ", PhysicalKeyGroup: " + settings.Mappings[key] + "}");
             }
 
 
             Console.WriteLine("values");
-
+            StaticLogger.Information("values");
             Type t = settings.GetType();
             PropertyInfo[] properties = t.GetProperties();
             foreach (PropertyInfo prop in properties)
@@ -198,8 +199,8 @@ namespace PS4KeyboardAndMouseAdapter.Config
                     {
                         var value = getter.Invoke(settings, new object[] { });
 
+                        Console.WriteLine("print " + prop + ":" + value); 
                         StaticLogger.Information("print " + prop + ":" + value);
-                        Console.WriteLine("print " + prop + ":" + value);
                     }
                 }
             }
@@ -236,7 +237,6 @@ namespace PS4KeyboardAndMouseAdapter.Config
             Save(PROFILE_PREVIOUS);
             ThisInstance.PropertyChanged(ThisInstance, new PropertyChangedEventArgs(""));
         }
-
 
         public static void TestOnly_ResetUserSettings()
         {

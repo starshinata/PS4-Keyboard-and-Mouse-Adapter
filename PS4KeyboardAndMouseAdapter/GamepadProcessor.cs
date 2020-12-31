@@ -209,15 +209,12 @@ namespace PS4KeyboardAndMouseAdapter
 
                 if (IsAimingWithAimSpecificSenitivity())
                 {
-                    //Console.WriteLine("Aiming, X:" + UserSettings.MouseXAxisSensitivityAimModifier + " Y: " + UserSettings.MouseYAxisSensitivityAimModifier);
                     MouseDirection = new Vector2i(
                         (int)(MouseDirection.X * UserSettings.MouseXAxisSensitivityAimModifier),
                         (int)(MouseDirection.Y * UserSettings.MouseYAxisSensitivityAimModifier));
                 }
                 else
                 {
-
-                    //Console.WriteLine("LOOKING, X:" + UserSettings.MouseXAxisSensitivityLookModifier + " Y: " + UserSettings.MouseYAxisSensitivityLookModifier);
                     MouseDirection = new Vector2i(
                         (int)(MouseDirection.X * UserSettings.MouseXAxisSensitivityLookModifier),
                         (int)(MouseDirection.Y * UserSettings.MouseYAxisSensitivityLookModifier));

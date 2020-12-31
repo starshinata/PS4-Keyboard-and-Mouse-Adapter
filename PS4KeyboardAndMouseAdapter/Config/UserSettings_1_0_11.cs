@@ -41,6 +41,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
         ////////////////////////////////////////////////////////////////////////////
         /// Static Methods
         ////////////////////////////////////////////////////////////////////////////
+
         private static void AddManualMouseMapping(UserSettings newSettings, VirtualKey vk, MouseButton mouseButton)
         {
             if (!newSettings.MappingsContainsKey(vk))
@@ -63,7 +64,6 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         public static UserSettings ImportValues(UserSettings_1_0_11 legacySettings)
         {
-            Console.WriteLine("UserSettings_1_0_11.ImportValues()");
             StaticLogger.Information("UserSettings_1_0_11.ImportValues()");
 
             UserSettings newSettings = UserSettings.GetInstance();
@@ -108,35 +108,5 @@ namespace PS4KeyboardAndMouseAdapter.Config
             return newSettings;
         }
 
-        public static void Print(UserSettings_1_0_11 settings)
-        {
-
-            Console.WriteLine("UserSettings_1_0_11.Print()");
-
-            Console.WriteLine("mappings");
-            foreach (VirtualKey key in settings.Mappings.Keys)
-            {
-                Console.WriteLine("print Mappings:{VirtKey:" + key + ", keyboardValue: " + settings.Mappings[key] + "}");
-            }
-
-
-            Console.WriteLine("values");
-
-            Type t = settings.GetType();
-            PropertyInfo[] properties = t.GetProperties();
-            foreach (PropertyInfo prop in properties)
-            {
-                if (prop.Name != "Mappings")
-                {
-                    MethodInfo getter = prop.GetGetMethod();
-                    if (getter != null)
-                    {
-                        var value = getter.Invoke(settings, new object[] { });
-
-                        Console.WriteLine("print " + prop + ":" + value);
-                    }
-                }
-            }
-        }
     }
 }

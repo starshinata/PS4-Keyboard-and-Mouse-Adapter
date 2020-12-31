@@ -30,22 +30,17 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
         private void GotFocusLocal(object sender, RoutedEventArgs e)
         {
             ((MainViewModel)DataContext).RefreshData();
-            Console.WriteLine("GotFocusLocal");
-            Console.WriteLine("REMINDER - do refresh logic for when you load profiles");
-            Console.WriteLine("REMINDER - delte bind button");
             RefreshButtonContents();
         }
 
         private void Handler_ButtonClicked(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("Handler_ButtonClicked");
             Button button = (Button)sender;
             WaitingForKeyPress_Show(button);
         }
 
         private void Handler_AddMapping_GenericKeyDown(Keyboard.Key keyboardValue, MouseButton mouseValue)
         {
-            Console.WriteLine("lastClickedButton " + lastClickedButton);
 
             if (lastClickedButton != null && lastClickedButton.Parent != null)
             {
@@ -53,8 +48,6 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
                 StackPanel parentStackPanel = (StackPanel)lastClickedButton.Parent;
                 if (parentStackPanel.Tag != null)
                 {
-                    Console.WriteLine("parentStackPanel.Tag " + parentStackPanel.Tag);
-
                     if (keyboardValue != Keyboard.Key.Escape)
                     {
                         VirtualKey vk = (VirtualKey)parentStackPanel.Tag;
@@ -86,15 +79,11 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
 
         private void Handler_AddMapping_OnMouseDown(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("Handler_AddMapping_OnMouseDown");
-
             Array mouseButtons = Enum.GetValues(typeof(Mouse.Button));
             foreach (Mouse.Button button in mouseButtons)
             {
-                Console.WriteLine("check  button " + button);
                 if (Mouse.IsButtonPressed(button))
                 {
-                    Console.WriteLine("pressed " + button);
                     MouseButton mouseButton = (MouseButton)button;
                     Handler_AddMapping_GenericKeyDown(Keyboard.Key.Unknown, mouseButton);
                 }
@@ -103,15 +92,11 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
 
         private void Handler_AddMapping_OnMouseLeftButtonUp(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("Handler_AddMapping_OnMouseLeftButtonUp");
-
             Handler_AddMapping_GenericKeyDown(Keyboard.Key.Unknown, MouseButton.Left);
         }
 
         private void Handler_AddMapping_OnKeyboardKeyDown(object sender, KeyEventArgs e)
         {
-            Console.WriteLine("Handler_OnKeyboardKeyDown");
-
             foreach (Keyboard.Key key in Enum.GetValues(typeof(Keyboard.Key)).Cast<Keyboard.Key>())
             {
                 if (Keyboard.IsKeyPressed(key))
@@ -158,50 +143,8 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
             RefreshButtonContents();
         }
 
-        // Needs to public
-        public void WaitingForKeyPress_Show(Button sender)
-        {
-            Console.WriteLine("WaitingForKeyPress_Show");
-            lastClickedButton = sender;
-
-            foreach (Button button in UITools.FindVisualChildren<Button>(this))
-            {
-                button.Opacity = UIConstants.LowVisibility;
-                button.IsEnabled = false;
-            }
-
-            foreach (TextBlock textBlock in UITools.FindVisualChildren<TextBlock>(this))
-            {
-                textBlock.Opacity = UIConstants.LowVisibility;
-            }
-
-            Panel.SetZIndex(WaitForKeyPress_1, 10);
-            WaitForKeyPress_1.Opacity = 1;
-            WaitForKeyPress_2.Opacity = 1;
-            WaitForKeyPress_3.Opacity = 1;
-            WaitForKeyPress_4.Opacity = 1;
-        }
-
-        private void WaitingForKeyPress_Hide()
-        {
-            Console.WriteLine("WaitingForKeyPress_Hide");
-            Panel.SetZIndex(WaitForKeyPress_1, 0);
-            WaitForKeyPress_1.Opacity = 0;
-            WaitForKeyPress_2.Opacity = 0;
-            WaitForKeyPress_3.Opacity = 0;
-            WaitForKeyPress_4.Opacity = 0;
-
-            RefreshButtonContents();
-            foreach (TextBlock textBlock in UITools.FindVisualChildren<TextBlock>(this))
-            {
-                textBlock.Opacity = 1;
-            }
-
-        }
-
         public void RefreshButtonContents()
         {
-            Console.WriteLine("RefreshButtonContents");
             foreach (Button button in UITools.FindVisualChildren<Button>(this))
             {
                 // assume unmapped first
@@ -235,6 +178,44 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
                         }
                     }
                 }
+            }
+        }
+
+        // Needs to public
+        public void WaitingForKeyPress_Show(Button sender)
+        {
+            lastClickedButton = sender;
+
+            foreach (Button button in UITools.FindVisualChildren<Button>(this))
+            {
+                button.Opacity = UIConstants.LowVisibility;
+                button.IsEnabled = false;
+            }
+
+            foreach (TextBlock textBlock in UITools.FindVisualChildren<TextBlock>(this))
+            {
+                textBlock.Opacity = UIConstants.LowVisibility;
+            }
+
+            Panel.SetZIndex(WaitForKeyPress_1, 10);
+            WaitForKeyPress_1.Opacity = 1;
+            WaitForKeyPress_2.Opacity = 1;
+            WaitForKeyPress_3.Opacity = 1;
+            WaitForKeyPress_4.Opacity = 1;
+        }
+
+        private void WaitingForKeyPress_Hide()
+        {
+            Panel.SetZIndex(WaitForKeyPress_1, 0);
+            WaitForKeyPress_1.Opacity = 0;
+            WaitForKeyPress_2.Opacity = 0;
+            WaitForKeyPress_3.Opacity = 0;
+            WaitForKeyPress_4.Opacity = 0;
+
+            RefreshButtonContents();
+            foreach (TextBlock textBlock in UITools.FindVisualChildren<TextBlock>(this))
+            {
+                textBlock.Opacity = 1;
             }
         }
 
