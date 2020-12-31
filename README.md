@@ -45,9 +45,10 @@ see [here](documentation/frequently-asked-questions.md)
 All documenation [here](documentation/)
 
 But some popular topics are
-* [mouse configuration](documentation/mouse-configuration.md)
-* [troubleshooting](documentation/troubleshooting.md)
-* [version history](documentation/version-history.md)
+* [Glossary and Terms](documentation/glossary-and-terms.md)
+* [Mouse Configuration](documentation/mouse-configuration.md)
+* [Troubleshooting](documentation/troubleshooting.md)
+* [Version History](documentation/version-history.md)
 
 
 
