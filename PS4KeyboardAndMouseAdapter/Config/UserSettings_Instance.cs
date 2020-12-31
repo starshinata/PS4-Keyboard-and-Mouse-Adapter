@@ -20,7 +20,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
         // false if we need to migrate
         // true means we can ignore
         // default if false until we find a value
-        public bool Version_1_0_12_OrGreater { get; set; } = false;
+        public bool Version_2_0_0_OrGreater { get; set; } = false;
 
         public Dictionary<VirtualKey, PhysicalKeyGroup> Mappings { get; set; } = new Dictionary<VirtualKey, PhysicalKeyGroup>();
 

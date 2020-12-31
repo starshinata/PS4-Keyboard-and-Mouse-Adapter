@@ -14,7 +14,7 @@ $ErrorActionPreference = "Stop"
 $CERT_DIRECTORY="D:\workspace\##certificates\github.com-pancakeslp"
 
 ## TODO get this to read from the assembly file
-$VERSION="1.0.12"
+$VERSION="2.0.0"
 
 ################################
 ################################

@@ -33,12 +33,12 @@
             <RowDefinition Height="30px" />
             <!-- row 1 -->
             <RowDefinition Height="30px" />
-            <RowDefinition Height="21px" />
+            <RowDefinition Height="15px" />
             <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
 
             <!-- row 5 -->
-            <RowDefinition Height="21px" />
+            <RowDefinition Height="15px" />
             <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
@@ -75,10 +75,12 @@
             Grid.Row="2"
             Grid.Column="0"
             Grid.ColumnSpan="5"
+            FontSize="10"
             Text="Sometimes when you have enabled mouse input for RemotePlay, then sometimes you can drag the RemotePlay window offscreen"
             />
 
         <!-- row 3 intentionally empty -->
+        
         <controls:SliderV
             Grid.Row="4"
             Grid.ColumnSpan="5"
@@ -93,6 +95,7 @@
         <TextBlock 
             Grid.Row="5"
             Grid.ColumnSpan="5"
+            FontSize="10"
             Text="Because seems to always RemotePlay reset to 100% volume"
             />
 

@@ -103,7 +103,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
             AddManualMouseMapping(newSettings, VirtualKey.L2, MouseButton.Right);
             AddManualMouseMapping(newSettings, VirtualKey.R2, MouseButton.Left);
 
-            newSettings.Version_1_0_12_OrGreater = true;
+            newSettings.Version_2_0_0_OrGreater = true;
 
             return newSettings;
         }

@@ -95,7 +95,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
                 }
             }
 
-            ThisInstance.Version_1_0_12_OrGreater = true;
+            ThisInstance.Version_2_0_0_OrGreater = true;
         }
 
         public static bool IsLegacyConfig(string json)
@@ -109,11 +109,11 @@ namespace PS4KeyboardAndMouseAdapter.Config
                 {
                     try
                     {
-                        if (property.Name == "Version_1_0_12_OrGreater")
+                        if (property.Name == "Version_2_0_0_OrGreater")
                         {
                             // remember to flip this value
                             // if it is 1.0.11 we want to return true
-                            // if it is 1.0.12 or greater we want to return false
+                            // if it is 2.0.0 or greater we want to return false
                             bool value = !(bool)property.Value;
                             return value;
                         }

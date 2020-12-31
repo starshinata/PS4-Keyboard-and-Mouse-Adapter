@@ -22,8 +22,8 @@
             <!-- Regular line 21px -->
             <!-- subtext line 15px -->
             <!-- Toggle 30px -->
-            
-            
+
+
             <!-- row 0 -->
             <RowDefinition Height="30px" />
 
@@ -50,6 +50,7 @@
             <!-- row 15 -->
             <RowDefinition Height="30px" />
             <RowDefinition Height="15px" />
+           
             <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
@@ -64,7 +65,7 @@
             <!-- row 25 -->
             <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
-            
+
 
         </Grid.RowDefinitions>
 
@@ -223,7 +224,7 @@
             />
 
         <controls:SliderV
-            Grid.Row="17"
+            Grid.Row="18"
             Description="Mouse Aim X axis sensitivity"
             Minimum="1" 
             Maximum="{Binding Path=UserSettings.MouseXAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -231,7 +232,7 @@
             Value="{Binding Path=UserSettings.MouseXAxisSensitivityAimModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <controls:SliderV
-            Grid.Row="18"
+            Grid.Row="19"
             Description="Mouse Aim Y axis sensitivity"
             Minimum="1" 
             Maximum="{Binding Path=UserSettings.MouseYAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -239,7 +240,7 @@
             Value="{Binding Path=UserSettings.MouseYAxisSensitivityAimModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <controls:RangeSlider            
-            Grid.Row="20"
+            Grid.Row="21"
             Description="Mouse distance range"
             Minimum="0" 
             Maximum="{Binding Path=UserSettings.MaxMouseDistance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -248,7 +249,7 @@
             x:Name="mouseDistanceRangeSlider"/>
 
         <controls:RangeSlider 
-            Grid.Row="21" 
+            Grid.Row="22" 
             Description="Analog stick range (in %)" 
             LowerValue="{Binding Path=UserSettings.AnalogStickLowerRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             Minimum="0"  
@@ -257,7 +258,7 @@
             x:Name="AnalogStickRangeSlider" />
 
         <controls:SliderV 
-            Grid.Row="22"
+            Grid.Row="23"
             Description="Horizontal/Vertical ratio" 
             Minimum="0.1" 
             Maximum="1" 

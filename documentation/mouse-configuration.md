@@ -42,7 +42,7 @@ The time milliseconds before we toggle aim toggle
 Set this too low, and keep holding the button for L2, and you will appear as if you cant decide between aiming or not aimining.
 
 
-## Enable 'Aim' specific sensitivity
+#### Enable 'Aim' specific sensitivity
 Would you like to have a seperate sensitivity for when you Aim?
 
 

@@ -1,6 +1,6 @@
 {
   "KeyboardMappings": null,
-  "Version_1_0_12_OrGreater": true,
+  "Version_2_0_0_OrGreater": true,
   "Mappings": {
     "Share": {
       "PhysicalKeys": [
@@ -227,7 +227,7 @@
   "MouseDistanceLowerRange": 5.0,
   "MouseDistanceUpperRange": 96.0,
   "MouseMaxDistance": 960.0,
-  "MousePollingRate": 10,
+  "MousePollingRate": 60,
   "MouseAimSensitivityEnabled": false,
   "MouseXAxisSensitivityAimModifier": 2.0,
   "MouseXAxisSensitivityLookModifier": 2.0,

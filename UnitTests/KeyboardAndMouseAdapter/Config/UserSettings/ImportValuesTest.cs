@@ -39,10 +39,10 @@ namespace UnitTests.KeyboardAndMouseAdapter.Config.UserSettingsTest
         }
 
         [TestMethod]
-        public void ShouldImport_Profile_1_0_12_Default()
+        public void ShouldImport_Profile_2_0_0_Default()
         {
-            string inputFile = PROFILE_DIRECTORY + "ImportValues--profile-1.0.12-default--input.json";
-            string expectedFile = PROFILE_DIRECTORY + "ImportValues--profile-1.0.12-default--expected.json";
+            string inputFile = PROFILE_DIRECTORY + "ImportValues--profile-2.0.0-default--input.json";
+            string expectedFile = PROFILE_DIRECTORY + "ImportValues--profile-2.0.0-default--expected.json";
             UserSettings.ImportValues(inputFile);
             UserSettings actual = UserSettings.GetInstance();
             actual.KeyboardMappings = null;

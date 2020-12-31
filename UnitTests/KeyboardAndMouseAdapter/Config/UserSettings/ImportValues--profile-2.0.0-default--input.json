@@ -10,7 +10,7 @@
   "MouseAimSensitivityEnabled": false,
   "MouseXAxisSensitivityAimModifier": 2.0,
   "MouseYAxisSensitivityAimModifier": 1.0,
-  "Version_1_0_12_OrGreater": true,
+  "Version_2_0_0_OrGreater": true,
   "Mappings": {
     "LeftStickLeft": {
       "PhysicalKeys": [

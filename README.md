@@ -1,6 +1,9 @@
 # PS4 Keyboard and Mouse Adapter 
 Disclaimer: This project is not endorsed or certified by Sony, Playstation or any of their partners.
 
+## UI
+
+Click the images for bigger views
 
 <a href="documentation/example-ui-1.png" target="_blank"><img src="documentation/example-ui-1.png" alt="example UI Tab 1" width="200"/></a>
 <a href="documentation/example-ui-2.png" target="_blank"><img src="documentation/example-ui-2.png" alt="example UI Tab 2" width="200"/></a>
@@ -49,7 +52,6 @@ But some popular topics are
 * [Mouse Configuration](documentation/mouse-configuration.md)
 * [Troubleshooting](documentation/troubleshooting.md)
 * [Version History](documentation/version-history.md)
-
 
 
 ## Credits
