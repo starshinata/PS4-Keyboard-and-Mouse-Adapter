@@ -2,10 +2,13 @@
 
 
 ## Terms / Glossary
+* ADS - Aim Down Sight (in an FPS, to use the scope on your gun to aim to shoot it)
 * Cross hairs - think mouse cursor
 * DPI - Dots Per Inch, a higher number means your mouse should have higher sensitivity
+* FPS - First Person Shooter (its a type of game)
 * X Axis - left and right directions
 * Y Axis - Up and down directions
+
 
 #### Drift and deadzones
 This is not a setting but explaining it for below settings
@@ -24,6 +27,12 @@ So mouse configurations will likely specific to a combination of
 * the mouses DPI setting
 * the computers mouse sensitivity setting (set via control panel or equiavlent)
 
+
+#### Mouse sensitivity
+Mouse sensitivity is the speed of a mouse cursor moves on the screen (or in games, how fast you turn and look). With increased sensitivity (ie the bigger the number), the mouse moves faster and requires less effort to get across the screen.
+This is comparable to increasing your mouse's DPI setting.
+
+
 ## What do the different mouse settings do ?
 
 
@@ -37,15 +46,35 @@ How many times a second do you want the application to measure mouse input and f
 Be aware that increasing this number will make it more responsive, but may mean that your sensitivity needs to be increased; this is because we do not have mouse smoothing (as in gaming people generally appear to prefar Raw Input over Mouse Smoothed input).
 
 
-#### Mouse sensitivity
-Mouse sensitivity is the speed of a mouse cursor moves on the screen (or in games, how fast you turn and look). With increased sensitivity (ie the bigger the number), the mouse moves faster and requires less effort to get across the screen.
-This is comparable to increasing your mouse's DPI setting.
-
-#### Mouse X axis sensitivity
+#### Mouse Look X axis sensitivity
 Left and right
 
-#### Mouse Y axis sensitivity
+
+#### Mouse Look Y axis sensitivity
 Up and Down
+
+
+#### Aim Toggle
+In an FPS games on a console, you would normally hold L2 to 'Aim' or 'Aim Down Sight'
+Some games allow you to have this as a toggle, for when that is not available we have this option.
+
+
+#### Aim Toggle Retoggle Delay 
+The time milliseconds before we toggle aim toggle
+Set this too low, and keep holding the button for L2, and you will appear as if you cant decide between aiming or not aimining.
+
+
+## Enable 'Aim' specific sensitivity
+Would you like to have a seperate sensitivity for when you Aim?
+
+
+#### Mouse Aim X axis sensitivity
+Left and right (When Aiming and Aim specific sensitivity is enabled)
+
+
+#### Mouse Aim Y axis sensitivity
+Up and Down (When Aiming and Aim specific sensitivity is enabled)
+
 
 #### Mouse distance range
 disclaimer: I recommend just using mouse sensitivity
