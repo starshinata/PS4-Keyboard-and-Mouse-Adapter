@@ -135,4 +135,3 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
     }
 }
-

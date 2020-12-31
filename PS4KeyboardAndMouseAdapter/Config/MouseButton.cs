@@ -30,4 +30,3 @@
         ButtonCount = 5
     }
 }
-
