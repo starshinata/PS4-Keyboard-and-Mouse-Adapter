@@ -1,7 +1,11 @@
 # PS4 Keyboard and Mouse Adapter 
 Disclaimer: This project is not endorsed or certified by Sony, Playstation or any of their partners.
 
-![example UI](documentation/example-ui.png)
+
+<a href="documentation/example-ui-1.png" target="_blank"><img src="documentation/example-ui-1.png" alt="example UI Tab 1" width="200"/></a>
+<a href="documentation/example-ui-2.png" target="_blank"><img src="documentation/example-ui-2.png" alt="example UI Tab 2" width="200"/></a>
+<a href="documentation/example-ui-3.png" target="_blank"><img src="documentation/example-ui-3.png" alt="example UI Tab 3" width="200"/></a>
+<a href="documentation/example-ui-4.png" target="_blank"><img src="documentation/example-ui-4.png" alt="example UI Tab 4" width="200"/></a>
 
 
 ## DOWNLOAD
@@ -23,9 +27,7 @@ Try our discord here https://discord.gg/zH4b8p4 where you can either suggest ide
 
 ## To-do list
 * Explicit error message box for when mappings.json is missing or invalid <br> Currently it (kinda) silently fails unless you open it via a command line.
-* option to allow mouse button remapping
 * Detect when the user does have a DS4 controller plugged in ... and ask user to unplug it
-* Map multiple keys to the same button
 * some game need to detect you shaking the controller, need to figure out how to handle/emulate that
 * touchpad needs more work :(
 * make DS4 emulation optional
@@ -55,3 +57,4 @@ But some popular topics are
 - [EasyHook](https://easyhook.github.io) - The best tool for Windows API hooking. Works flawlessly - from the assembly injection, to the hook trampoline code. ~~I haven't had a single problem with it~~ I had one but that doesn't make EasyHook any less cool
 - [Jays2Kings/DS4Windows](https://github.com/Jays2Kings/DS4Windows) - don't need to explain that one
 - [soulehshaikh9](https://github.com/soulehshaikh99/self-signed-certificate-generator) for pfx certificate generator
+
