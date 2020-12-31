@@ -5,7 +5,7 @@ Disclaimer: This project is not endorsed or certified by Sony, Playstation or an
 
 
 ## DOWNLOAD
-:rocket: Click --> [here (v1.0.10)](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/1.0.10/Setup.exe) <-- to Download!
+:rocket: Click --> [here (v1.0.11)](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/1.0.11/Setup.exe) <-- to Download!
 
 
 ## How to use
@@ -23,12 +23,13 @@ Try our discord here https://discord.gg/zH4b8p4 where you can either suggest ide
 
 ## To-do list
 * Explicit error message box for when mappings.json is missing or invalid <br> Currently it (kinda) silently fails unless you open it via a command line.
-* Create and switch between multiple mapping profiles to make configuration easy when playing multiple games <br>I am thinking of  being able to save and load mappings.json files
+* option to allow mouse button remapping
 * Detect when the user does have a DS4 controller plugged in ... and ask user to unplug it
 * Map multiple keys to the same button
-* option to allow mouse button remapping
 * some game need to detect you shaking the controller, need to figure out how to handle/emulate that
 * touchpad needs more work :(
+* make DS4 emulation optional
+* support for analog input like from a controller stick, controller trigger, or Steering wheel
 * supporting ps5 (we dont know if this works on ps5 atm)
 * support linux/mac 
 * support chaikis
