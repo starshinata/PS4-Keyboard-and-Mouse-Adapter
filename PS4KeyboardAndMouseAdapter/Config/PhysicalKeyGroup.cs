@@ -16,13 +16,24 @@ namespace PS4KeyboardAndMouseAdapter.Config
             string returned = "";
             if (PhysicalKeys != null)
             {
+                bool first = true;
                 returned += "[";
+
                 foreach (PhysicalKey pk in PhysicalKeys)
                 {
-                    returned += pk + ",";
+                    if (first)
+                    {
+                        first = false;
+                        returned += pk;
+                    }
+                    else
+                    {
+                        returned += ", " + pk;
+                    }
                 }
+
+                returned += "]";
             }
-            returned += "]";
 
             return returned;
         }
