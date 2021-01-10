@@ -20,13 +20,25 @@ namespace PS4KeyboardAndMouseAdapter
         
         private readonly Stopwatch AimToggleTimer = new Stopwatch();
 
+        // only used when UserSettings.AimToggle is true
+        // assuming Mouse2 is Aim,
+        // Has as in past tense
+        //
+        // for init the aim button will have never been pressed, so technically it will have never been released
+        // so logically the default value is false,
+        // if we want the default value to be false we need to add in a bunch of logic
+        // so lets have the default as true and skip the extra logic
+        private bool HasAimButtonBeenReleased { get; set; } = true;
+
+        private bool IsAiming { get; set; } = false;
+
+        ////////////////////////////////////////////////////////////////////////////
+
         // Anchor 0,0 is the top left of the primary monitor
         private Vector2i Anchor { get; set; } = new Vector2i(900, 500);
 
         private DualShockState CurrentState { get; set; }
-
-        private bool IsAiming { get; set; } = false;
-
+        
         private Vector2i MouseDirection { get; set; }
         private Vector2i MouseDirectionTemp = new Vector2i(0, 0);
 
@@ -46,16 +58,40 @@ namespace PS4KeyboardAndMouseAdapter
         {
             if (UserSettings.AimToggle)
             {
+
+
+
                 // waiting a little before we can re-toggle the Aiming
                 if (AimToggleTimer.ElapsedMilliseconds > UserSettings.AimToggleRetoggleDelay)
                 {
                     //TODO make it dynamic so the L2 doesnt have to be the AIM key
-                    if (IsVirtualKeyPressed(VirtualKey.L2))
+                    if (IsVirtualKeyPressed(VirtualKey.L2)  && HasAimButtonBeenReleased)
                     {
+                        Console.WriteLine(" ");
+                        Console.WriteLine("66 toggle click");
+                             
+                             Console.WriteLine("AimToggleTimer.ElapsedMilliseconds " + AimToggleTimer.ElapsedMilliseconds);
+                             Console.WriteLine("IsAiming " + IsAiming);
+                             Console.WriteLine("HasAimButtonBeenPressed " + HasAimButtonBeenReleased);
+                             Console.WriteLine("UserSettings.AimToggleRetoggleDelay " + UserSettings.AimToggleRetoggleDelay);
+
+                        
+                        HasAimButtonBeenReleased = false;
                         IsAiming = !IsAiming;
-                        AimToggleTimer.Restart();
                     }
                 }
+
+    
+
+                // if (IsVirtualKeyPressed(VirtualKey.L2) || AimToggleTimer.ElapsedMilliseconds < 200)
+                // {
+                //     Console.WriteLine(" ");
+                //     Console.WriteLine("AimToggleTimer.ElapsedMilliseconds " + AimToggleTimer.ElapsedMilliseconds);
+                //     Console.WriteLine("IsAiming " + IsAiming);
+                //     Console.WriteLine("HasAimButtonBeenPressed " + HasAimButtonBeenPressed);
+                //     Console.WriteLine("UserSettings.AimToggleRetoggleDelay " + UserSettings.AimToggleRetoggleDelay);
+                // 
+                // }
 
                 if (IsAiming)
                 {
@@ -64,6 +100,26 @@ namespace PS4KeyboardAndMouseAdapter
                 else
                 {
                     CurrentState.L2 = 0;
+                }
+
+
+                // we need to only reset the timer once
+                // 
+                // we could have said ` !IsVirtualKeyPressed(VirtualKey.L2) `
+                // however that would mean as soon as you release RightMouse/L2 then you restart the timer
+                // and keep restarting the timer, so that the AimToggleRetoggleDelay is never met
+                if (!IsVirtualKeyPressed(VirtualKey.L2) && !HasAimButtonBeenReleased)
+                {
+                    HasAimButtonBeenReleased = true;
+                   
+                    AimToggleTimer.Restart();
+                    Console.WriteLine(" ");
+                    Console.WriteLine("109 restart");
+
+                    Console.WriteLine("AimToggleTimer.ElapsedMilliseconds " + AimToggleTimer.ElapsedMilliseconds);
+                    Console.WriteLine("IsAiming " + IsAiming);
+                    Console.WriteLine("HasAimButtonBeenPressed " + HasAimButtonBeenReleased);
+                    Console.WriteLine("UserSettings.AimToggleRetoggleDelay " + UserSettings.AimToggleRetoggleDelay);
                 }
             }
         }

@@ -182,7 +182,7 @@
         <controls:SliderV
             Grid.Row="13"
             Description="Aim Toggle, Re-Toggle Delay (milliseconds)"
-            Minimum="100" 
+            Minimum="0" 
             Maximum="5000"
             TickFrequency="100"
             Value="{Binding Path=UserSettings.AimToggleRetoggleDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />

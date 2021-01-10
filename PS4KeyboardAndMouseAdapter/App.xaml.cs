@@ -22,6 +22,8 @@ namespace PS4KeyboardAndMouseAdapter
             // cause not having a cursor is a pain in the ass
             Utility.ShowCursor(true);
 
+            UserSettings.Save(UserSettings.PROFILE_PREVIOUS);
+
             //TODO: hardcoded, fix.
             //Injector.FindProcess("RemotePlay").Kill();
         }
