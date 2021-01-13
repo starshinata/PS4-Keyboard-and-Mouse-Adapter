@@ -1,3 +1,5 @@
+# You can learn more about editorconfig here: https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference
+
 # Remove the line below if you want to inherit .editorconfig settings from higher directories
 root = true
 
