@@ -282,7 +282,6 @@
     <Compile Include="Dll\Rect.cs" />
     <Compile Include="Dll\User32.cs" />
     <Compile Include="GamepadProcessor.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="RemotePlayInjector.cs" />
     <Compile Include="MouseAnchor.cs" />
     <Compile Include="UI\Controls\GamepadMappingController.xaml.cs">
