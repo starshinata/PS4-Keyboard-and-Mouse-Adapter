@@ -39,6 +39,7 @@
 
             <!-- row 5 -->
             <RowDefinition Height="15px" />
+            <RowDefinition Height="15px" />
             <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
@@ -96,8 +97,14 @@
             Grid.Row="5"
             Grid.ColumnSpan="5"
             FontSize="10"
-            Text="Because seems to always RemotePlay reset to 100% volume"
+            Text="Because RemotePlay always seems reset to 100% volume on restart"
             />
-
+        
+        <TextBlock 
+            Grid.Row="6"
+            Grid.ColumnSpan="5"
+            FontSize="10"
+            Text="By editing the value of the slider, the volume will be remembered when you restart RemotePlay"
+            />
     </Grid>
 </UserControl>
