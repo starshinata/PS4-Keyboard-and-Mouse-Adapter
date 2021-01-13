@@ -36,7 +36,7 @@ namespace PS4KeyboardAndMouseAdapter
                     RectResult.Left == 0 && RectResult.Right == 0)
             {
                 Console.WriteLine("using AnchorFallback - empty RECT");
-                StaticLogger.Information("using AnchorFallback -empty RECT");
+                StaticLogger.Information("using AnchorFallback - empty RECT");
                 return AnchorFallback;
             }
 
