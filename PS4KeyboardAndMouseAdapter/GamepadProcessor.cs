@@ -59,39 +59,17 @@ namespace PS4KeyboardAndMouseAdapter
             if (UserSettings.AimToggle)
             {
 
-
-
                 // waiting a little before we can re-toggle the Aiming
                 if (AimToggleTimer.ElapsedMilliseconds > UserSettings.AimToggleRetoggleDelay)
                 {
                     //TODO make it dynamic so the L2 doesnt have to be the AIM key
                     if (IsVirtualKeyPressed(VirtualKey.L2)  && HasAimButtonBeenReleased)
                     {
-                        Console.WriteLine(" ");
-                        Console.WriteLine("66 toggle click");
-                             
-                             Console.WriteLine("AimToggleTimer.ElapsedMilliseconds " + AimToggleTimer.ElapsedMilliseconds);
-                             Console.WriteLine("IsAiming " + IsAiming);
-                             Console.WriteLine("HasAimButtonBeenPressed " + HasAimButtonBeenReleased);
-                             Console.WriteLine("UserSettings.AimToggleRetoggleDelay " + UserSettings.AimToggleRetoggleDelay);
-
-                        
                         HasAimButtonBeenReleased = false;
                         IsAiming = !IsAiming;
                     }
                 }
 
-    
-
-                // if (IsVirtualKeyPressed(VirtualKey.L2) || AimToggleTimer.ElapsedMilliseconds < 200)
-                // {
-                //     Console.WriteLine(" ");
-                //     Console.WriteLine("AimToggleTimer.ElapsedMilliseconds " + AimToggleTimer.ElapsedMilliseconds);
-                //     Console.WriteLine("IsAiming " + IsAiming);
-                //     Console.WriteLine("HasAimButtonBeenPressed " + HasAimButtonBeenPressed);
-                //     Console.WriteLine("UserSettings.AimToggleRetoggleDelay " + UserSettings.AimToggleRetoggleDelay);
-                // 
-                // }
 
                 if (IsAiming)
                 {
@@ -103,7 +81,7 @@ namespace PS4KeyboardAndMouseAdapter
                 }
 
 
-                // we need to only reset the timer once
+                // we should only reset the timer once
                 // 
                 // we could have said ` !IsVirtualKeyPressed(VirtualKey.L2) `
                 // however that would mean as soon as you release RightMouse/L2 then you restart the timer
@@ -113,13 +91,6 @@ namespace PS4KeyboardAndMouseAdapter
                     HasAimButtonBeenReleased = true;
                    
                     AimToggleTimer.Restart();
-                    Console.WriteLine(" ");
-                    Console.WriteLine("109 restart");
-
-                    Console.WriteLine("AimToggleTimer.ElapsedMilliseconds " + AimToggleTimer.ElapsedMilliseconds);
-                    Console.WriteLine("IsAiming " + IsAiming);
-                    Console.WriteLine("HasAimButtonBeenPressed " + HasAimButtonBeenReleased);
-                    Console.WriteLine("UserSettings.AimToggleRetoggleDelay " + UserSettings.AimToggleRetoggleDelay);
                 }
             }
         }
