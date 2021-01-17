@@ -150,7 +150,7 @@
             TickFrequency="0.1"
             Value="{Binding Path=UserSettings.MouseYAxisSensitivityLookModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-        <!-- Row 8 intentionally empty -->
+        <!-- Row 10 intentionally empty -->
 
         <TextBlock
             Grid.Row="11"
@@ -205,7 +205,7 @@
             VerticalAlignment="Center"
             />
 
-        <!-- Row 14 intentionally empty -->
+        <!-- Row 16 intentionally empty -->
 
         <TextBlock
             Grid.Row="17"
@@ -233,7 +233,10 @@
             VerticalAlignment="Center"
             Text="Right Mouse is aim"
             />
-
+        
+        <!-- Row 19 intentionally empty -->
+        <!-- to improve readability of what row 18 relates to -->
+        
         <controls:SliderV
             Grid.Row="20"
             Description="Mouse Aim X axis sensitivity"
@@ -250,6 +253,8 @@
             TickFrequency="0.1"
             Value="{Binding Path=UserSettings.MouseYAxisSensitivityAimModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
+        <!-- Row 22 intentionally empty -->
+        
         <controls:RangeSlider            
             Grid.Row="23"
             Description="Mouse distance range"
