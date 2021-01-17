@@ -1,7 +1,6 @@
-﻿using System.Windows;
+﻿using PS4KeyboardAndMouseAdapter.UI.Controls;
+using System.Windows;
 using System.Windows.Controls;
-using PS4KeyboardAndMouseAdapter.UI.Controls;
-using Serilog;
 
 namespace PS4KeyboardAndMouseAdapter.UI.Pages
 {
@@ -11,16 +10,13 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
 
         public SimpleConfigPage()
         {
-            Log.Information("SimpleConfigPage constructor START");
             InitializeComponent();
             gamepadMappingController = gamepadMappingControllerInner;
-            Log.Information("SimpleConfigPage constructor END");
         }
 
         private void GotFocusLocal(object sender, RoutedEventArgs e)
         {
             ((MainViewModel)DataContext).RefreshData();
         }
-
     }
 }
