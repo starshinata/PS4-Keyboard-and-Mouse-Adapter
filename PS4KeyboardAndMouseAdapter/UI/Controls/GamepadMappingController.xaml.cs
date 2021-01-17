@@ -1,21 +1,17 @@
-﻿using System;
+﻿using PS4KeyboardAndMouseAdapter.Config;
+using Serilog;
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using PS4KeyboardAndMouseAdapter.Config;
-using Serilog;
 using Button = System.Windows.Controls.Button;
 using Keyboard = SFML.Window.Keyboard;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 
 namespace PS4KeyboardAndMouseAdapter.UI.Controls
 {
-    /// <summary>
-    /// Interaction logic for GamepadMappingController.xaml
-    /// </summary>
     public partial class GamepadMappingController : UserControl
     {
-
         private Button lastClickedButton;
 
         public GamepadMappingController()
@@ -41,7 +37,6 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
                 {
                     if (Keyboard.IsKeyPressed(key))
                     {
-
                         if (key != Keyboard.Key.Escape)
                         {
                             VirtualKey vk = (VirtualKey)lastClickedButton.Tag;
@@ -50,7 +45,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
 
                             PhysicalKey valueNew = new PhysicalKey();
                             valueNew.KeyboardValue = key;
-                            UserSettings.SetMapping(vk, valueOld,valueNew);
+                            UserSettings.SetMapping(vk, valueOld, valueNew);
                         }
 
                         lastClickedButton = null;
