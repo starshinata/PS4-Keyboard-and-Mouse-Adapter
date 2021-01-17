@@ -19,7 +19,7 @@
 
 8. Have we updated the documentation
 
-9. Have we update the documentation screenshots
+9. Have we update the documentation screenshots (using the default profile)
 
 10. If everything committed to git ?
 
