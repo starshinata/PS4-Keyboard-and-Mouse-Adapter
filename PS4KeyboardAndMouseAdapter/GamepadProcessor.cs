@@ -20,13 +20,13 @@ namespace PS4KeyboardAndMouseAdapter
         
         private readonly Stopwatch AimToggleTimer = new Stopwatch();
 
-        // only used when UserSettings.AimToggle is true
-        // assuming Mouse2 is Aim,
-        // Has as in past tense
+        // this variable is only used when UserSettings.AimToggle is true
+        //
+        // "Has" prefix, as in past tense
         //
         // for init the aim button will have never been pressed, so technically it will have never been released
         // so logically the default value is false,
-        // if we want the default value to be false we need to add in a bunch of logic
+        // BUT if we want the default value to be false we need to add in a bunch of logic
         // so lets have the default as true and skip the extra logic
         private bool HasAimButtonBeenReleased { get; set; } = true;
 
@@ -34,7 +34,7 @@ namespace PS4KeyboardAndMouseAdapter
 
         ////////////////////////////////////////////////////////////////////////////
 
-        // Anchor 0,0 is the top left of the primary monitor
+        // position 0,0 is the top left of the primary monitor
         private Vector2i Anchor { get; set; } = new Vector2i(900, 500);
 
         private DualShockState CurrentState { get; set; }
@@ -114,7 +114,7 @@ namespace PS4KeyboardAndMouseAdapter
             // pancakeslp 2020.12.27
             // it might seem sensible that was can just return a value when when the time between pollingRates has happened
             // if we do this, sometimes we wont return a value
-            // if we dont return a value the mouse input is perceived  as unresponsive of jumpy
+            // if we dont return a value the mouse input is perceived as unresponsive or jumpy
             // so until we have a new polled value, just return the previous value
             return MouseDirectionTemp;
         }
@@ -182,6 +182,20 @@ namespace PS4KeyboardAndMouseAdapter
             ////////////////////////////////////////////
             ////////////////////////////////////////////
 
+
+            //right face
+            if (IsVirtualKeyPressed(VirtualKey.Triangle))
+                CurrentState.Triangle = true;
+
+            if (IsVirtualKeyPressed(VirtualKey.Circle))
+                CurrentState.Circle = true;
+
+            if (IsVirtualKeyPressed(VirtualKey.Cross))
+                CurrentState.Cross = true;
+
+            if (IsVirtualKeyPressed(VirtualKey.Square))
+                CurrentState.Square = true;
+
             //right stick Analog
             if (IsVirtualKeyPressed(VirtualKey.RightStickLeft))
                 CurrentState.RX = 0;
@@ -204,22 +218,9 @@ namespace PS4KeyboardAndMouseAdapter
 
             if (IsVirtualKeyPressed(VirtualKey.R3))
                 CurrentState.R3 = true;
-
-            //right face
-            if (IsVirtualKeyPressed(VirtualKey.Triangle))
-                CurrentState.Triangle = true;
-
-            if (IsVirtualKeyPressed(VirtualKey.Circle))
-                CurrentState.Circle = true;
-
-            if (IsVirtualKeyPressed(VirtualKey.Cross))
-                CurrentState.Cross = true;
-
-            if (IsVirtualKeyPressed(VirtualKey.Square))
-                CurrentState.Square = true;
-
-
+        
             ////////////////////////////////////////////
+
             HandleAimToggle();
         }
 
@@ -353,17 +354,6 @@ namespace PS4KeyboardAndMouseAdapter
 
         public void OnReceiveData(ref DualShockState state)
         {
-            // if (!IsCursorHideRequested)
-            //     return;
-            //timer.Start();
-            //counter++;
-            //if (timer.ElapsedMilliseconds > 1000)
-            //{
-            //    Console.WriteLine("OnReceiveData is called " + counter + "times per second");
-            //    counter = 0;
-            //    timer.Restart();
-            //}
-
             // Create the default state to modify
             if (true)//CurrentState == null)
             {
