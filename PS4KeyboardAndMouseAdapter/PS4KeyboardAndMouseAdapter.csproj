@@ -264,6 +264,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AudioManager.cs" />
+    <Compile Include="ProcessUtil.cs" />
     <Compile Include="RemotePlayConstants.cs" />
     <Compile Include="UI\Controls\MiscellaneousSettingsControl.xaml.cs">
       <DependentUpon>MiscellaneousSettingsControl.xaml</DependentUpon>

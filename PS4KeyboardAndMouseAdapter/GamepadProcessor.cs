@@ -41,7 +41,7 @@ namespace PS4KeyboardAndMouseAdapter
         private DualShockState CurrentState { get; set; }
         
         private Vector2i MouseDirection { get; set; }
-        private Vector2i MouseDirectionTemp = new Vector2i(0, 0);
+        private Vector2i MouseDirectionPrevious = new Vector2i(0, 0);
 
         // timer to know how long it has been since we last polled the mouse for an update
         private readonly Stopwatch MouseInputTimer = new Stopwatch();
@@ -83,7 +83,7 @@ namespace PS4KeyboardAndMouseAdapter
                 }
 
 
-                // we should only reset the timer once
+                // we should only reset the timer once per release of aim button
                 // 
                 // we could have said ` !IsVirtualKeyPressed(VirtualKey.L2) `
                 // however that would mean as soon as you release RightMouse/L2 then you restart the timer
@@ -99,12 +99,11 @@ namespace PS4KeyboardAndMouseAdapter
 
         public Vector2i FeedMouseCoords()
         {
-
             int MillisecondsPerInput = 1000 / UserSettings.MousePollingRate;
             if (MouseInputTimer.ElapsedMilliseconds >= MillisecondsPerInput)
             {
                 Vector2i currentMousePosition = Mouse.GetPosition();
-                MouseDirectionTemp = currentMousePosition - Anchor;
+                MouseDirectionPrevious = currentMousePosition - Anchor;
 
                 //recalculate incase they moved the window
                 Anchor = MouseAnchor.CalculateAnchor();
@@ -114,19 +113,21 @@ namespace PS4KeyboardAndMouseAdapter
             }
 
             // pancakeslp 2020.12.27
-            // it might seem sensible that was can just return a value when when the time between pollingRates has happened
-            // if we do this, sometimes we wont return a value
-            // if we dont return a value the mouse input is perceived as unresponsive or jumpy
-            // so until we have a new polled value, just return the previous value
-            return MouseDirectionTemp;
+            // it might seem sensible to say that we should only return a value when enough time has passed (as per MousePollingRate)
+            // and if enough time has not passed, return null
+            //
+            // if we return null, then the DS/Controller will register that as no stick movement
+            // thus the mouse input is perceived as unresponsive or jumpy
+            //
+            // to mitigate this, just return the previously polled value (and wait for the new value)
+            return MouseDirectionPrevious;
         }
 
         public void HandleButtonPressed()
         {
             // ORDER
-            // LEFT -- MIDDLE -- RIGHT
+            // LEFT -- MIDDLE -- RIGHT of Controller
 
-            ////////////////////////////////////////////
             ////////////////////////////////////////////
 
             //left face
@@ -166,9 +167,8 @@ namespace PS4KeyboardAndMouseAdapter
                 CurrentState.L3 = true;
 
             ////////////////////////////////////////////
-            ////////////////////////////////////////////
 
-            // middle face
+            // middle
             if (IsVirtualKeyPressed(VirtualKey.Share))
                 CurrentState.Share = true;
 
@@ -181,9 +181,8 @@ namespace PS4KeyboardAndMouseAdapter
             if (IsVirtualKeyPressed(VirtualKey.PlaystationButton))
                 CurrentState.PS = true;
 
-            ////////////////////////////////////////////
-            ////////////////////////////////////////////
 
+            ////////////////////////////////////////////
 
             //right face
             if (IsVirtualKeyPressed(VirtualKey.Triangle))
@@ -228,7 +227,7 @@ namespace PS4KeyboardAndMouseAdapter
 
         public void HandleMouseCursor()
         {
-            bool EnableMouseInput = InstanceSettings.EnableMouseInput && IsProcessInForeground(RemotePlayProcess);
+            bool EnableMouseInput = InstanceSettings.EnableMouseInput && ProcessUtil.IsInForeground(RemotePlayProcess);
 
             if (EnableMouseInput)
             {
@@ -237,7 +236,7 @@ namespace PS4KeyboardAndMouseAdapter
                 // mouse displacement relative to the anchor
                 MouseDirection = FeedMouseCoords();
 
-                if (IsAimingWithAimSpecificSenitivity())
+                if (IsAimingWithAimSpecificSensitivity())
                 {
                     MouseDirection = new Vector2i(
                         (int)(MouseDirection.X * UserSettings.MouseXAxisSensitivityAimModifier),
@@ -253,7 +252,7 @@ namespace PS4KeyboardAndMouseAdapter
 
                 // Cap length to fit range.
 
-                var normalizedLength = Utility.mapcap(direction.Length(),
+                double normalizedLength = Utility.mapcap(direction.Length(),
                     UserSettings.MouseDistanceLowerRange, UserSettings.MouseDistanceUpperRange,
                     UserSettings.AnalogStickLowerRange / 100f, UserSettings.AnalogStickUpperRange / 100f);
 
@@ -263,8 +262,8 @@ namespace PS4KeyboardAndMouseAdapter
                 // L3R3 center is 127, 
                 // full left/up is 0
                 // full right/down is 255
-                var scaledX = (byte)Utility.map(direction.X * normalizedLength, -1, 1, 0, 255);
-                var scaledY = (byte)Utility.map(direction.Y * normalizedLength, -1, 1, 0, 255);
+                byte scaledX = (byte)Utility.map(direction.X * normalizedLength, -1, 1, 0, 255);
+                byte scaledY = (byte)Utility.map(direction.Y * normalizedLength, -1, 1, 0, 255);
 
                 direction.X *= (float)UserSettings.XYRatio;
                 direction = Vector2.Normalize(direction);
@@ -295,7 +294,7 @@ namespace PS4KeyboardAndMouseAdapter
             }
         }
 
-        private bool IsAimingWithAimSpecificSenitivity()
+        private bool IsAimingWithAimSpecificSensitivity()
         {
             return IsAiming && UserSettings.MouseAimSensitivityEnabled;
         }
@@ -316,23 +315,7 @@ namespace PS4KeyboardAndMouseAdapter
 
             return false;
         }
-
-        public static bool IsProcessInForeground(Process process)
-        {
-            if (process == null)
-                return false;
-
-            IntPtr activeWindow = User32.GetForegroundWindow();
-
-            if (activeWindow == IntPtr.Zero)
-                return false;
-
-            if (activeWindow != process.MainWindowHandle)
-                return false;
-
-            return true;
-        }
-
+             
         public bool IsVirtualKeyPressed(VirtualKey key)
         {
             if (key == VirtualKey.NULL)
@@ -362,7 +345,7 @@ namespace PS4KeyboardAndMouseAdapter
                 CurrentState = new DualShockState() { Battery = 255 };
             }
 
-            if (!IsProcessInForeground(RemotePlayProcess))
+            if (!ProcessUtil.IsInForeground(RemotePlayProcess))
             {
                 Utility.ShowCursor(true);
                 return;

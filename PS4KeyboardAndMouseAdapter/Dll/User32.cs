@@ -7,10 +7,7 @@ namespace PS4KeyboardAndMouseAdapter.Dll
     public class User32 
     {
     
-        [DllImport("user32.dll")]
-        public static extern IntPtr GetForegroundWindow();
-
-        // dont assume you can use C#'s Rect it uses Doubles, and this api returns Ints
+         // dont assume you can use C#'s Rect it uses Doubles, and this api returns Ints
         [DllImport("user32.dll")]
         public static extern bool GetWindowRect(IntPtr hwnd, ref RECT rectangle);
 
