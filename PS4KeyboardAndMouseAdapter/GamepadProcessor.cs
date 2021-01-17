@@ -42,7 +42,7 @@ namespace PS4KeyboardAndMouseAdapter
         private Vector2i MouseDirection { get; set; }
         private Vector2i MouseDirectionTemp = new Vector2i(0, 0);
 
-        private readonly Stopwatch MouseTimer = new Stopwatch();
+        private readonly Stopwatch MouseInputTimer = new Stopwatch();
 
         public Process RemotePlayProcess;
 
@@ -51,7 +51,7 @@ namespace PS4KeyboardAndMouseAdapter
         public GamepadProcessor()
         {
             AimToggleTimer.Start();
-            MouseTimer.Start();
+            MouseInputTimer.Start();
         }
 
         public void HandleAimToggle()
@@ -99,7 +99,7 @@ namespace PS4KeyboardAndMouseAdapter
         {
 
             int MillisecondsPerInput = 1000 / UserSettings.MousePollingRate;
-            if (MouseTimer.ElapsedMilliseconds >= MillisecondsPerInput)
+            if (MouseInputTimer.ElapsedMilliseconds >= MillisecondsPerInput)
             {
                 Vector2i currentMousePosition = Mouse.GetPosition();
                 MouseDirectionTemp = currentMousePosition - Anchor;
@@ -108,7 +108,7 @@ namespace PS4KeyboardAndMouseAdapter
                 Anchor = MouseAnchor.CalculateAnchor();
 
                 Mouse.SetPosition(Anchor);
-                MouseTimer.Restart();
+                MouseInputTimer.Restart();
             }
 
             // pancakeslp 2020.12.27
