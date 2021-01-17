@@ -5,7 +5,7 @@
     "Share": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 1,
+          "KeyboardValue": 6,
           "MouseValue": -1
         }
       ]
@@ -13,7 +13,7 @@
     "Options": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 14,
+          "KeyboardValue": 7,
           "MouseValue": -1
         }
       ]
@@ -29,7 +29,7 @@
     "PlaystationButton": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 12,
+          "KeyboardValue": 1,
           "MouseValue": -1
         }
       ]
@@ -109,12 +109,12 @@
     "L2": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 10,
-          "MouseValue": -1
-        },
-        {
           "KeyboardValue": -1,
           "MouseValue": 1
+        },
+        {
+          "KeyboardValue": 20,
+          "MouseValue": -1
         }
       ]
     },
@@ -137,19 +137,19 @@
     "R2": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 9,
-          "MouseValue": -1
-        },
-        {
           "KeyboardValue": -1,
           "MouseValue": 0
+        },
+        {
+          "KeyboardValue": 14,
+          "MouseValue": -1
         }
       ]
     },
     "R3": {
       "PhysicalKeys": [
         {
-          "KeyboardValue": 11,
+          "KeyboardValue": 12,
           "MouseValue": -1
         }
       ]
@@ -220,20 +220,23 @@
     }
   },
   "AdvancedMappingPage_MappingsToShow": 4,
+  "AimToggle": false,
+  "AimToggleRetoggleDelay": 0,
   "AnalogStickLowerRange": 40,
   "AnalogStickUpperRange": 95,
+  "MouseAimSensitivityEnabled": false,
   "MouseControlsL3": false,
   "MouseControlsR3": true,
   "MouseDistanceLowerRange": 5.0,
   "MouseDistanceUpperRange": 96.0,
   "MouseMaxDistance": 960.0,
   "MousePollingRate": 60,
-  "MouseAimSensitivityEnabled": false,
-  "MouseXAxisSensitivityAimModifier": 2.0,
-  "MouseXAxisSensitivityLookModifier": 2.0,
+  "MouseXAxisSensitivityAimModifier": 10.0,
+  "MouseXAxisSensitivityLookModifier": 10.0,
   "MouseXAxisSensitivityMax": 100.0,
-  "MouseYAxisSensitivityAimModifier": 1.0,
-  "MouseYAxisSensitivityLookModifier": 1.0,
+  "MouseYAxisSensitivityAimModifier": 10.0,
+  "MouseYAxisSensitivityLookModifier": 10.0,
   "MouseYAxisSensitivityMax": 100.0,
-  "XYRatio": 1
+  "RemotePlayVolume": 100.0,
+  "XYRatio": 1.0
 }
