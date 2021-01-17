@@ -43,7 +43,7 @@ namespace PS4KeyboardAndMouseAdapter
         private Vector2i MouseDirection { get; set; }
         private Vector2i MouseDirectionTemp = new Vector2i(0, 0);
 
-        // timer to know how long it has been since we last sent polled the mouse for an update
+        // timer to know how long it has been since we last polled the mouse for an update
         private readonly Stopwatch MouseInputTimer = new Stopwatch();
 
         public Process RemotePlayProcess;
