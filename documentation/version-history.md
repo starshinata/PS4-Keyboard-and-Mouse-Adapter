@@ -5,9 +5,8 @@
 
 <li>
   lots of subtle changes and bug fixes <br>
-  (added 5,708 lines, removed 1,069 lines)
+  (added 5,761 lines, removed 1,210 lines)
 </li>
-
 
 <li>Reworked button mappings to allow
   <ul>
@@ -20,6 +19,18 @@
   <ul>
   <li>Added aim specific mouse sensitivity</li>
   <li>Added aim Toggle</li>
+  </ul>
+</li>
+
+<li>Remote Play settings (from inside the adapter)
+  <ul>
+  <li>
+    Ability to reset the Remote Play window <br>
+    (cause it is annoying when you accidentally drag it offscreen(</li>
+  <li>
+    Option to configure Remote Play volume <br>
+    (this value will saved to the profile, so will be remembered on reopening adapter or loading profile)
+  </li>
   </ul>
 </li>
 
