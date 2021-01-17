@@ -39,7 +39,7 @@
             Grid.Column="1" />
 
         <controls:MouseSettingsSimpleControl
-             x:Name="mouseSettingsSimpleControl"
+            x:Name="mouseSettingsSimpleControl"
             Grid.Row="2"  
             Grid.Column="3" />
 
