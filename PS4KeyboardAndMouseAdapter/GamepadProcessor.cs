@@ -18,6 +18,7 @@ namespace PS4KeyboardAndMouseAdapter
 
         ////////////////////////////////////////////////////////////////////////////
         
+        // timer to know how long it has been since Aim button has been released
         private readonly Stopwatch AimToggleTimer = new Stopwatch();
 
         // this variable is only used when UserSettings.AimToggle is true
@@ -42,6 +43,7 @@ namespace PS4KeyboardAndMouseAdapter
         private Vector2i MouseDirection { get; set; }
         private Vector2i MouseDirectionTemp = new Vector2i(0, 0);
 
+        // timer to know how long it has been since we last sent polled the mouse for an update
         private readonly Stopwatch MouseInputTimer = new Stopwatch();
 
         public Process RemotePlayProcess;
