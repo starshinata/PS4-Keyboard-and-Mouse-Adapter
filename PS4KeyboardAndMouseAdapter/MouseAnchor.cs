@@ -1,5 +1,6 @@
 ﻿using System;
 using PS4KeyboardAndMouseAdapter.Dll;
+using Serilog;
 using SFML.System;
 
 namespace PS4KeyboardAndMouseAdapter
@@ -7,19 +8,18 @@ namespace PS4KeyboardAndMouseAdapter
 
     public class MouseAnchor
     {
-
-        // Constants
-        private static readonly string REMOTE_PLAY_WINDOW_CAPTION = "PS Remote Play";
-
         // Anchor is relative to the top left of the primary monitor
         private static Vector2i AnchorFallback { get; set; } = new Vector2i(900, 500);
 
+        private static readonly ILogger StaticLogger = Log.ForContext(typeof(MouseAnchor));
+
         public static Vector2i CalculateAnchor()
         {
-            IntPtr target_hwnd = User32.FindWindowByCaption(IntPtr.Zero, REMOTE_PLAY_WINDOW_CAPTION);
+            IntPtr target_hwnd = User32.FindWindowByCaption(IntPtr.Zero, RemotePlayConstants.WINDOW_NAME);
             if (target_hwnd == IntPtr.Zero)
             {
-                Console.WriteLine("Could not find a window with the title - " + REMOTE_PLAY_WINDOW_CAPTION);
+                Console.WriteLine("Could not find a window with the title - " + RemotePlayConstants.WINDOW_NAME);
+                StaticLogger.Information("Could not find a window with the title - " + RemotePlayConstants.WINDOW_NAME);
                 return AnchorFallback;
             }
 
@@ -28,6 +28,7 @@ namespace PS4KeyboardAndMouseAdapter
             if (!success)
             {
                 Console.WriteLine("using AnchorFallback - GetWindowRect failed");
+                StaticLogger.Information("using AnchorFallback - GetWindowRect failed");
                 return AnchorFallback;
             }
 
@@ -35,6 +36,7 @@ namespace PS4KeyboardAndMouseAdapter
                     RectResult.Left == 0 && RectResult.Right == 0)
             {
                 Console.WriteLine("using AnchorFallback - empty RECT");
+                StaticLogger.Information("using AnchorFallback - empty RECT");
                 return AnchorFallback;
             }
 

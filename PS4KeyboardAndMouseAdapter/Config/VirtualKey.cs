@@ -1,6 +1,5 @@
 ﻿
-
-namespace PS4KeyboardAndMouseAdapter
+namespace PS4KeyboardAndMouseAdapter.Config
 {
     public enum VirtualKey
     {
@@ -36,7 +35,8 @@ namespace PS4KeyboardAndMouseAdapter
         RightStickLeft,
         RightStickRight,
         RightStickUp,
-        RightStickDown,
+        RightStickDown
+
     }
 
 }

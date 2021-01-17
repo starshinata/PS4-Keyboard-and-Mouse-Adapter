@@ -153,6 +153,12 @@
     <Reference Include="Serilog.Sinks.File, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\packages\Serilog.Sinks.File.4.1.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
     </Reference>
+    <Reference Include="SFML.Audio, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFML.Audio.2.5.0\lib\netstandard2.0\SFML.Audio.dll</HintPath>
+    </Reference>
+    <Reference Include="SFML.Graphics, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFML.Graphics.2.5.0\lib\netstandard2.0\SFML.Graphics.dll</HintPath>
+    </Reference>
     <Reference Include="SFML.System, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFML.System.2.5.0\lib\netstandard2.0\SFML.System.dll</HintPath>
     </Reference>
@@ -193,10 +199,28 @@
       <HintPath>..\packages\squirrel.windows.1.9.1\lib\Net45\Squirrel.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Management" />
     <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Formatters, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.Serialization.Formatters.4.3.0\lib\net46\System.Runtime.Serialization.Formatters.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Primitives, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.Serialization.Primitives.4.3.0\lib\net46\System.Runtime.Serialization.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WPFSpark.1.4.0\lib\net461\System.Windows.Interactivity.dll</HintPath>
@@ -239,14 +263,43 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AudioManager.cs" />
+    <Compile Include="ProcessUtil.cs" />
+    <Compile Include="RemotePlayConstants.cs" />
+    <Compile Include="UI\Controls\MiscellaneousSettingsControl.xaml.cs">
+      <DependentUpon>MiscellaneousSettingsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowUtil.cs" />
+    <Compile Include="Config\KeyUtility.cs" />
+    <Compile Include="Config\MouseButton.cs" />
+    <Compile Include="Config\PhysicalKeyGroup.cs" />
+    <Compile Include="Config\PhysicalKey.cs" />
+    <Compile Include="Config\InstanceSettings.cs" />
+    <Compile Include="Config\UserSettings_1_0_11.cs" />
+    <Compile Include="Config\UserSettings.cs" />
+    <Compile Include="Config\UserSettings_Instance.cs" />
+    <Compile Include="Config\UserSettings_Static.cs" />
+    <Compile Include="Config\VirtualKey.cs" />
     <Compile Include="Dll\Rect.cs" />
     <Compile Include="Dll\User32.cs" />
+    <Compile Include="GamepadProcessor.cs" />
+    <Compile Include="RemotePlayInjector.cs" />
     <Compile Include="MouseAnchor.cs" />
     <Compile Include="UI\Controls\GamepadMappingController.xaml.cs">
       <DependentUpon>GamepadMappingController.xaml</DependentUpon>
     </Compile>
-    <Compile Include="VirtualKey.cs" />
-    <Compile Include="UserSettings.cs" />
+    <Compile Include="UI\Controls\MouseSettingsSimpleControl.xaml.cs">
+      <DependentUpon>MouseSettingsSimpleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\SimpleConfigPage.xaml.cs">
+      <DependentUpon>SimpleConfigPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\MouseAdvancedConfigPage.xaml.cs">
+      <DependentUpon>MouseAdvancedConfigPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\AdvancedMappingsPage.xaml.cs">
+      <DependentUpon>AdvancedMappingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\ProfileManager.xaml.cs">
       <DependentUpon>ProfileManager.xaml</DependentUpon>
     </Compile>
@@ -265,7 +318,10 @@
     <Compile Include="UI\Controls\SliderV.xaml.cs">
       <DependentUpon>SliderV.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Converters\KeyNameToSymbolConverter.cs" />
+    <Compile Include="UI\Pages\MiscellaneousSettingsPage.xaml.cs">
+      <DependentUpon>MiscellaneousSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UIConstants.cs" />
     <Compile Include="UI\UITools.cs" />
     <Page Include="MainWindowView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -288,6 +344,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Controls\MiscellaneousSettingsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UI\Controls\ProfileManager.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -305,6 +365,26 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Controls\GamepadMappingController.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Controls\MouseSettingsSimpleControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\SimpleConfigPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\MouseAdvancedConfigPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\AdvancedMappingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\MiscellaneousSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -339,7 +419,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="PS4KeyboardAndMouseAdapter_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -349,9 +428,6 @@
       <Project>{d3d6f621-7cb9-4992-80ac-ff9745d974ec}</Project>
       <Name>PS4RemotePlayInjection</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="dualshock4_layout.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cursor.cur">

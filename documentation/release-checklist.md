@@ -11,21 +11,25 @@
    * ` AssemblyInfo.cs `
    * ` build.ps1 `
 
-5. if this version number unique, and not previously released?
+5. Is this version number unique, and not previously released?
 
 6. Does the installer install to the version we expect?
 
 7. CPU analysis, are we still using only 1% of the CPU?
 
-8. If everything committed to git ?
+8. Have we updated the documentation
 
-9. Verify things are digitally signed
+9. Have we update the documentation screenshots (using the default profile)
+
+10. If everything committed to git ?
+
+11. Verify things are digitally signed
    * AppData\Local\PS4KeyboardAndMouseAdapter\VERSION\PS4KeyboardAndMouseAdapter.exe 
    * starshinata\PS4-Keyboard-and-Mouse-Adapter\PS4KeyboardAndMouseAdapter\bin\Release\PS4KeyboardAndMouseAdapter.exe 
    * starshinata\PS4-Keyboard-and-Mouse-Adapter\SquirrelReleases\setup.exe
 
-10. Do antivirus scans of via [https://www.virustotal.com/](https://www.virustotal.com/)
+12. Do antivirus scans of via [https://www.virustotal.com/](https://www.virustotal.com/)
    * AppData\Local\PS4KeyboardAndMouseAdapter\VERSION\PS4KeyboardAndMouseAdapter.exe 
    * starshinata\PS4-Keyboard-and-Mouse-Adapter\SquirrelReleases\setup.exe
 
-11. merge to master
+13. merge to master

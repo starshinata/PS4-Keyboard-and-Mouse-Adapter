@@ -1,7 +1,7 @@
-﻿using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using PS4KeyboardAndMouseAdapter.Config;
 using Button = System.Windows.Controls.Button;
 
 namespace PS4KeyboardAndMouseAdapter.UI.Controls
@@ -45,7 +45,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
                 VirtualKey virtualKey = GetVirtualKey(button);
 
                 button.Tag = virtualKey;
-                Binding dataBinding = new Binding("Settings.Mappings[" + virtualKey + "]");
+                Binding dataBinding = new Binding("UserSettings.KeyboardMappings[" + virtualKey + "]");
                 button.SetBinding(ContentProperty, dataBinding);
             }
         }

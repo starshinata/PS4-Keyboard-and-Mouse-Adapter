@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
+using PS4KeyboardAndMouseAdapter.Config;
 using PS4RemotePlayInjection;
 using Serilog;
 using Squirrel;
@@ -13,9 +14,15 @@ namespace PS4KeyboardAndMouseAdapter
     /// </summary>
     public partial class App : Application
     {
+
         private void OnAppExit(object sender, ExitEventArgs e)
         {
+            InstanceSettings.GetInstance().EnableMouseInput = false;
+
+            // cause not having a cursor is a pain in the ass
             Utility.ShowCursor(true);
+
+            UserSettings.Save(UserSettings.PROFILE_PREVIOUS);
 
             //TODO: hardcoded, fix.
             //Injector.FindProcess("RemotePlay").Kill();
@@ -23,10 +30,15 @@ namespace PS4KeyboardAndMouseAdapter
 
         private async void OnAppStartup(object sender, StartupEventArgs e)
         {
+            SetupLogger();
             Console.WriteLine("app/adapter started");
             Console.WriteLine("for more about what has happened in this app, see logs/log.txt");
 
-            SetupLogger();
+            // cause not having a cursor is a pain in the ass
+            Utility.ShowCursor(true);
+
+            UserSettings.LoadPrevious();
+
             await UpdateIfAvailable();
         }
 

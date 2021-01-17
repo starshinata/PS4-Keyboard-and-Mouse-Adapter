@@ -355,3 +355,5 @@ MigrationBackup/
 /SquirrelReleases
 /PS4KeyboardAndMouseAdapter/RemotePlayInstaller.exe
 /nuget/PS4KeyboardAndMouseAdapter.nuspec
+/manualBuild/nuget/PS4KeyboardAndMouseAdapter.nuspec
+/packages

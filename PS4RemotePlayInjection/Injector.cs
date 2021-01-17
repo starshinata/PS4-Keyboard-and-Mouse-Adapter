@@ -1,11 +1,10 @@
-﻿using EasyHook;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels.Ipc;
 using System.Security.Principal;
-using System.Threading;
+using EasyHook;
 using PS4RemotePlayInjection;
 using Serilog;
 
@@ -44,7 +43,7 @@ namespace PS4RemotePlayInterceptor
         public static int Inject(string processName, string dllToInject)
         {
             // Find the process
-            var process = FindProcess(processName);
+            Process process = FindProcess(processName);
             if (process == null)
             {
                 string error = string.Format("{0} not found in list of processes", processName);
@@ -115,8 +114,8 @@ namespace PS4RemotePlayInterceptor
 
         public static Process FindProcess(string processName)
         {
-            var processes = Process.GetProcessesByName(processName);
-            foreach (var process in processes)
+            Process[] processes = Process.GetProcessesByName(processName);
+            foreach (Process process in processes)
                 return process;
 
             return null;

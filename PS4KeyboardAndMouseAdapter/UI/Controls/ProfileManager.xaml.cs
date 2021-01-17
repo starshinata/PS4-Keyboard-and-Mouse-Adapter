@@ -1,8 +1,9 @@
-﻿using Newtonsoft.Json;
-using Serilog;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using PS4KeyboardAndMouseAdapter.Config;
+using Serilog;
 
 namespace PS4KeyboardAndMouseAdapter.UI.Controls
 {

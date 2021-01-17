@@ -1,12 +1,16 @@
 ﻿<UserControl x:Class="PS4KeyboardAndMouseAdapter.UI.Controls.MouseSettingsControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             
+             d:DesignHeight="700"
+             d:DesignWidth="700"
+             mc:Ignorable="d" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             
              xmlns:controls="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Controls"
              xmlns:wpfspark="clr-namespace:WPFSpark;assembly=WPFSpark" 
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="500">
+             >
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -14,25 +18,55 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            <!-- Heading 30px -->
+            <!-- Regular line 21px -->
+            <!-- subtext line 15px -->
+            <!-- Toggle 30px -->
+
+
             <!-- row 0 -->
             <RowDefinition Height="30px" />
-            
+
             <!-- row 1 -->
             <RowDefinition Height="30px" />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition Height="5px" />
+            <RowDefinition Height="15px" />
+            <RowDefinition Height="15px" />
+            <RowDefinition Height="21px" />
 
             <!-- row 5-->
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="15px" />
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="21px" />
+
             <!-- row 10 -->
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="30px" />
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="15px" />
+
+            <!-- row 15 -->
+            <RowDefinition Height="15px" />
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="30px" />
+            <RowDefinition Height="15px" />
+            <RowDefinition Height="21px" />
+
+            <!-- row 20 -->
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="21px" />
             
+            <!-- row 25 -->
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="21px" />
+
         </Grid.RowDefinitions>
 
         <TextBlock
@@ -49,13 +83,13 @@
             Grid.Column="0"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
-            Text="Enable mouse input in 'PS Remote Play'"/>
+            Text="Enable mouse input in 'PS Remote Play'"
+            />
 
         <!-- https://www.codeproject.com/Articles/1060961/WPFSpark-v -->
         <wpfspark:ToggleSwitch
             Grid.Row="1"
-            Grid.Column="5"
-            IsChecked="{Binding Path=IsCursorHideRequested, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            IsChecked="{Binding Path=InstanceSettings.EnableMouseInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             Height="30"
             HorizontalAlignment="Right"
             Style="{StaticResource {ComponentResourceKey ResourceId=ToggleSwitch.UWP.Dark.Style, TypeInTargetAssembly={x:Type wpfspark:ToggleSwitch}}}" 
@@ -76,9 +110,10 @@
             FontSize="10"
             HorizontalAlignment="Left"
             Text="Tip: You can press alt+tab to switch between windows once the mouse is hidden."
-            VerticalAlignment="Center" />
+            VerticalAlignment="Center"
+            />
 
-        <!-- Row 4 empty -->
+        <!-- Row 4 intentionally empty -->
 
         <controls:SliderV
             Grid.Row="5"
@@ -86,48 +121,164 @@
             Minimum="10" 
             Maximum="250"
             TickFrequency="1"
-            Value="{Binding Path=Settings.MousePollingRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            Value="{Binding Path=UserSettings.MousePollingRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <controls:SliderV
+        <TextBlock 
             Grid.Row="6"
-            Description="Mouse X axis sensitivity"
-            Minimum="1" 
-            Maximum="{Binding Path=Settings.MouseXAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            TickFrequency="0.1"
-            Value="{Binding Path=Settings.MouseXAxisSensitivityModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            Grid.Column="0"
+            FontSize="10"
+            HorizontalAlignment="Left"
+            Text="How many times a second should we poll the mouse for an update?"
+            VerticalAlignment="Center"
+            />
+
+        <!-- Row 7 intentionally empty -->
 
         <controls:SliderV
-            Grid.Row="7"
-            Description="Mouse Y axis sensitivity"
-            Minimum="1" 
-            Maximum="{Binding Path=Settings.MouseYAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            TickFrequency="0.1"
-            Value="{Binding Path=Settings.MouseYAxisSensitivityModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
-        <controls:RangeSlider            
             Grid.Row="8"
+            Description="Mouse Look X axis sensitivity"
+            Minimum="1" 
+            Maximum="{Binding UserSettings.MouseXAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            TickFrequency="0.1"
+            Value="{Binding UserSettings.MouseXAxisSensitivityLookModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+        <controls:SliderV
+            Grid.Row="9"
+            Description="Mouse Look Y axis sensitivity"
+            Minimum="1" 
+            Maximum="{Binding Path=UserSettings.MouseYAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            TickFrequency="0.1"
+            Value="{Binding Path=UserSettings.MouseYAxisSensitivityLookModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+        <!-- Row 10 intentionally empty -->
+
+        <TextBlock
+            Grid.Row="11"
+            Grid.Column="0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Text="'Aim' Toggle?"
+            />
+
+        <!-- https://www.codeproject.com/Articles/1060961/WPFSpark-v -->
+        <wpfspark:ToggleSwitch
+            Grid.Row="11"
+            IsChecked="{Binding Path=UserSettings.AimToggle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Height="30"
+            HorizontalAlignment="Right"
+            Style="{StaticResource {ComponentResourceKey ResourceId=ToggleSwitch.UWP.Dark.Style, TypeInTargetAssembly={x:Type wpfspark:ToggleSwitch}}}" 
+            VerticalAlignment="Top"
+            Width="60"/>
+
+        <TextBlock 
+            Grid.Row="12"
+            Grid.Column="0"
+            FontSize="10"
+            HorizontalAlignment="Left"
+            Text="In an FPS, when you are aiming, do you want to hold down the right mouse button (default), or click it once to togle aiming ?"
+            VerticalAlignment="Center"
+            />
+
+        <controls:SliderV
+            Grid.Row="13"
+            Description="Aim Toggle, Re-Toggle Delay (milliseconds)"
+            Minimum="0" 
+            Maximum="5000"
+            TickFrequency="100"
+            Value="{Binding Path=UserSettings.AimToggleRetoggleDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+        <TextBlock 
+            Grid.Row="14"
+            Grid.Column="0"
+            FontSize="10"
+            HorizontalAlignment="Left"
+            Text="How long should we delay before toggling aim / no aim?"
+            VerticalAlignment="Center"
+            />
+
+        <TextBlock 
+            Grid.Row="15"
+            Grid.Column="0"
+            FontSize="10"
+            HorizontalAlignment="Left"
+            Text="Set it too low, and you will be constantly toggling between aiming and not aiming"
+            VerticalAlignment="Center"
+            />
+
+        <!-- Row 16 intentionally empty -->
+
+        <TextBlock
+            Grid.Row="17"
+            Grid.Column="0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Text="Enable 'Aim' specific sensitivity?"
+            />
+
+        <!-- https://www.codeproject.com/Articles/1060961/WPFSpark-v -->
+        <wpfspark:ToggleSwitch
+            Grid.Row="17"
+            IsChecked="{Binding Path=UserSettings.MouseAimSensitivityEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Height="30"
+            HorizontalAlignment="Right"
+            Style="{StaticResource {ComponentResourceKey ResourceId=ToggleSwitch.UWP.Dark.Style, TypeInTargetAssembly={x:Type wpfspark:ToggleSwitch}}}" 
+            VerticalAlignment="Top"
+            Width="60" Grid.RowSpan="2"/>
+
+        <TextBlock
+            Grid.Row="18"
+            Grid.Column="0"
+            FontSize="10"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Text="Right Mouse is aim"
+            />
+        
+        <!-- Row 19 intentionally empty -->
+        <!-- to improve readability of what row 18 relates to -->
+        
+        <controls:SliderV
+            Grid.Row="20"
+            Description="Mouse Aim X axis sensitivity"
+            Minimum="1" 
+            Maximum="{Binding Path=UserSettings.MouseXAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            TickFrequency="0.1"
+            Value="{Binding Path=UserSettings.MouseXAxisSensitivityAimModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+        <controls:SliderV
+            Grid.Row="21"
+            Description="Mouse Aim Y axis sensitivity"
+            Minimum="1" 
+            Maximum="{Binding Path=UserSettings.MouseYAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            TickFrequency="0.1"
+            Value="{Binding Path=UserSettings.MouseYAxisSensitivityAimModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+        <!-- Row 22 intentionally empty -->
+        
+        <controls:RangeSlider            
+            Grid.Row="23"
             Description="Mouse distance range"
             Minimum="0" 
-            Maximum="{Binding Path=Settings.MaxMouseDistance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            LowerValue="{Binding Path=Settings.MouseDistanceLowerRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            UpperValue="{Binding Path=Settings.MouseDistanceUpperRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Maximum="{Binding Path=UserSettings.MaxMouseDistance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            LowerValue="{Binding Path=UserSettings.MouseDistanceLowerRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            UpperValue="{Binding Path=UserSettings.MouseDistanceUpperRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             x:Name="mouseDistanceRangeSlider"/>
 
         <controls:RangeSlider 
-            Grid.Row="9" 
+            Grid.Row="24" 
             Description="Analog stick range (in %)" 
-            LowerValue="{Binding Path=Settings.AnalogStickLowerRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            LowerValue="{Binding Path=UserSettings.AnalogStickLowerRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             Minimum="0"  
             Maximum="95"  
-            UpperValue="{Binding Path=Settings.AnalogStickUpperRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            UpperValue="{Binding Path=UserSettings.AnalogStickUpperRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             x:Name="AnalogStickRangeSlider" />
 
         <controls:SliderV 
-            Grid.Row="10"
+            Grid.Row="25"
             Description="Horizontal/Vertical ratio" 
             Minimum="0.1" 
             Maximum="1" 
-            Value="{Binding Path=Settings.XYRatio, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Value="{Binding Path=UserSettings.XYRatio, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             TickFrequency="0.1"/>
 
     </Grid>

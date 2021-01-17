@@ -13,12 +13,22 @@
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Column="0" Text="{Binding Description, ElementName=This}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Slider Grid.Column="1" x:Name="Slider" TickFrequency="{Binding TickFrequency, ElementName=This}" IsSnapToTickEnabled="True"
-                Minimum="{Binding Minimum, ElementName=This}"
-                Maximum="{Binding Maximum, ElementName=This}"
-                Value="{Binding Value, ElementName=This}"
-                VerticalAlignment="Center"/>
+        <TextBlock 
+            Grid.Column="0"
+            HorizontalAlignment="Left" 
+            Text="{Binding Description, ElementName=This}"
+            VerticalAlignment="Center"/>
+
+        <Slider
+            Grid.Column="1"
+            IsSnapToTickEnabled="True"
+            Minimum="{Binding Minimum, ElementName=This}"
+            Maximum="{Binding Maximum, ElementName=This}"
+            TickFrequency="{Binding TickFrequency, ElementName=This}"
+            Value="{Binding Value, ElementName=This}"
+            VerticalAlignment="Center"
+            ValueChanged="Handler_ValueChanged"
+            x:Name="Slider"/>
 
         <TextBlock Grid.Column="2" Text="{Binding Value, ElementName=Slider, StringFormat=N1}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>

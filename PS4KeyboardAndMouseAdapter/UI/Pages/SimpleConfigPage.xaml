@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="PS4KeyboardAndMouseAdapter.UI.Pages.SimpleConfigPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
+             d:DesignHeight="700"
+             d:DesignWidth="700"
+             mc:Ignorable="d" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             
+             xmlns:controls="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Controls"
+
+             GotFocus="GotFocusLocal"
+             >
+
+    <Grid Margin="0,10,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="390px" />
+            <RowDefinition Height="30px" />
+            <RowDefinition Height="220px" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20px" />
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="30px"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="20px" />
+        </Grid.ColumnDefinitions>
+
+        <controls:GamepadMappingController
+            x:Name="gamepadMappingControllerInner"
+            Grid.Row="0"  
+            Grid.Column="1"  
+            Grid.ColumnSpan="3"/>
+
+        <controls:ProfileManager
+            Grid.Row="2"  
+            Grid.Column="1" />
+
+        <controls:MouseSettingsSimpleControl
+            x:Name="mouseSettingsSimpleControl"
+            Grid.Row="2"  
+            Grid.Column="3" />
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,101 @@
+﻿<UserControl x:Class="PS4KeyboardAndMouseAdapter.UI.Controls.MouseSettingsSimpleControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:controls="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Controls"
+             xmlns:wpfspark="clr-namespace:WPFSpark;assembly=WPFSpark" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="500">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <!-- row 0 -->
+            <RowDefinition Height="30px" />
+
+            <!-- row 1 -->
+            <RowDefinition Height="30px" />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition Height="5px" />
+
+            <!-- row 5-->
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <!-- row 10 -->
+            <RowDefinition />
+            <RowDefinition />
+
+        </Grid.RowDefinitions>
+
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="0"
+            FontSize="16"
+            FontWeight="Bold"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="Mouse Settings"/>
+
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Text="Enable mouse input in 'PS Remote Play'"/>
+
+        <!-- https://www.codeproject.com/Articles/1060961/WPFSpark-v -->
+        <wpfspark:ToggleSwitch
+            Grid.Row="1"
+            Grid.Column="5"
+            IsChecked="{Binding Path=InstanceSettings.EnableMouseInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Height="30"
+            HorizontalAlignment="Right"
+            Style="{StaticResource {ComponentResourceKey ResourceId=ToggleSwitch.UWP.Dark.Style, TypeInTargetAssembly={x:Type wpfspark:ToggleSwitch}}}" 
+            VerticalAlignment="Top"
+            Width="60"/>
+
+        <TextBlock 
+            Grid.Row="2"
+            Grid.Column="0"
+            FontSize="10"
+            HorizontalAlignment="Left"
+            Text="This will also hide the mouse cursor in 'PS Remote Play'"
+            VerticalAlignment="Top" />
+
+        <TextBlock 
+            Grid.Row="3"
+            Grid.Column="0"
+            FontSize="10"
+            HorizontalAlignment="Left"
+            Text="Tip: You can press alt+tab to switch between windows once the mouse is hidden."
+            VerticalAlignment="Center" />
+
+        <!-- Row 4 empty -->
+
+        <controls:SliderV
+               x:Name="xSlider"
+            Grid.Row="5"
+            Description="Mouse Look X axis sensitivity"
+            Minimum="1" 
+            Maximum="{Binding UserSettings.MouseXAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            TickFrequency="0.1"
+            Value="{Binding UserSettings.MouseXAxisSensitivityLookModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+        <controls:SliderV
+            Grid.Row="6"
+            Description="Mouse Look Y axis sensitivity"
+            Minimum="1" 
+            Maximum="{Binding Path=UserSettings.MouseYAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            TickFrequency="0.1"
+            Value="{Binding Path=UserSettings.MouseYAxisSensitivityLookModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+    </Grid>
+</UserControl>
