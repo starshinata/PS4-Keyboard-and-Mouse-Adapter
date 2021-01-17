@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -112,10 +113,10 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
 
         private void RangeSlider_OnLoaded(object sender, RoutedEventArgs e)
         {
-            var slider = sender as RangeSlider;
+            RangeSlider slider = sender as RangeSlider;
             Slider topSlider = slider.upperSlider;
 
-            var c = UITools.FindVisualChildren<RepeatButton>(topSlider);
+            IEnumerable<RepeatButton> c = UITools.FindVisualChildren<RepeatButton>(topSlider);
 
             foreach (RepeatButton repeatButton in c)
             {
