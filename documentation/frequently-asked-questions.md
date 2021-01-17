@@ -3,8 +3,19 @@
 Questions ordered alphabetically
 
 
+### Can I get a profile for <INSERT GAME>
+
+We have a short list of profiles at 
+https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/blob/master/profiles/
+
+"I am looking for the perfect settings for ..." <br>
+Imagine you have walked in to a  shoe shop, and you ask for the perfect shoe. <br>
+The shoe salesman will likely tell you the perfect shoe for you will be specific to you. <br>
+If you are curious how settings can depend on the user please have a read of  https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/blob/master/documentation/mouse-configuration.md
+
+
 ### Can I get banned from PSN for using this application? 
-I cannot find a specific text saying this is a bannable offense. But strictly because it is an unauthorised third party  I would not be surprised if SIE LLC (Sony) claimed that using this is a banable offense.
+I cannot find a specific text saying this is a bannable offense. But strictly because it is an unauthorised third party I would not be surprised if SIE LLC (Sony) claimed that using this is a banable offense.
 
 **No one has reported being banned for it.**
 
@@ -25,7 +36,7 @@ Because this software is not authorised by SIE LLC (Sony), this may technically 
 ### How do I increase mouse sensitivity so I can quickly turn 180 degress?
 You cant
 
-This is a limitation of console controllers. For a better explanation watch the first minute f https://youtu.be/KtBHArN3QW0 
+This is a limitation of console controllers. For a better explanation watch the first minute of https://youtu.be/KtBHArN3QW0 
 
 
 ### How do I uninstall PS4 KMA?

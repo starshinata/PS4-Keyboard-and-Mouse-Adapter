@@ -1,5 +1,32 @@
 # Version History
 
+### v 2.0.0
+<ul>
+
+<li>
+  lots of subtle changes and bug fixes <br>
+  (added 5,708 lines, removed 1,069 lines)
+</li>
+
+
+<li>Reworked button mappings to allow
+  <ul>
+    <li> allow mouse buttons to be rebound</li>
+    <li> allow as many mappings as the user desires</li>
+  </ul>
+</li>
+
+<li>Mouse
+  <ul>
+  <li>Added aim specific mouse sensitivity</li>
+  <li>Added aim Toggle</li>
+  </ul>
+</li>
+
+</ul>
+
+
+
 ### v 1.0.11
 * You can now save and load profiles (which are a collection of bindings/settings for a particular application on PS4)
 
