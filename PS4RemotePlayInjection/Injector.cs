@@ -43,7 +43,7 @@ namespace PS4RemotePlayInterceptor
         public static int Inject(string processName, string dllToInject)
         {
             // Find the process
-            var process = FindProcess(processName);
+            Process process = FindProcess(processName);
             if (process == null)
             {
                 string error = string.Format("{0} not found in list of processes", processName);
