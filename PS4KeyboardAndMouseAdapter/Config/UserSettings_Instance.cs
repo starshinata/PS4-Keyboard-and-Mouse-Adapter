@@ -19,7 +19,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         // false if we need to migrate
         // true means we can ignore
-        // default if false until we find a value
+        // default is false until we find a value
         public bool Version_2_0_0_OrGreater { get; set; } = false;
 
         public Dictionary<VirtualKey, PhysicalKeyGroup> Mappings { get; set; } = new Dictionary<VirtualKey, PhysicalKeyGroup>();
@@ -28,9 +28,8 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         public bool AimToggle { get; set; } = false;
 
-        // time in milliseconds, after toggling aim on/off, before we retrigger on/off
-        // set it too low, and you will be constantly toggle-ing between aiming and not aiming
-        public int AimToggleRetoggleDelay { get; set; } = 500;
+        // time in milliseconds, after toggling aim on/off, (and the user releases the aim button) before we retrigger on/off
+        public int AimToggleRetoggleDelay { get; set; } = 0;
 
         public int AnalogStickLowerRange { get; set; } = 40;
         public int AnalogStickUpperRange { get; set; } = 95;
