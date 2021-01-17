@@ -192,7 +192,7 @@
             Grid.Column="0"
             FontSize="10"
             HorizontalAlignment="Left"
-            Text="How long should we delay before toggling aim/no aim?"
+            Text="How long should we delay before toggling aim / no aim?"
             VerticalAlignment="Center"
             />
 
@@ -201,7 +201,7 @@
             Grid.Column="0"
             FontSize="10"
             HorizontalAlignment="Left"
-            Text="Set it too low, and you will be constantly toggline between aiming and not aiming"
+            Text="Set it too low, and you will be constantly toggling between aiming and not aiming"
             VerticalAlignment="Center"
             />
 
