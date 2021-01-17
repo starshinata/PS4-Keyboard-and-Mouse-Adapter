@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -7,9 +6,6 @@ using System.Windows.Media;
 
 namespace PS4KeyboardAndMouseAdapter.UI.Controls
 {
-    /// <summary>
-    /// Interaction logic for RangeSlider.xaml
-    /// </summary>
     public partial class RangeSlider : UserControl
     {
         public static readonly DependencyProperty MinimumProperty =
@@ -119,37 +115,17 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
             var slider = sender as RangeSlider;
             Slider topSlider = slider.upperSlider;
 
-            var c = FindVisualChildren<RepeatButton>(topSlider);
+            var c = UITools.FindVisualChildren<RepeatButton>(topSlider);
 
             foreach (RepeatButton repeatButton in c)
             {
                 repeatButton.Visibility = Visibility.Collapsed;
             }
 
-            foreach (Border border in FindVisualChildren<Border>(topSlider))
+            foreach (Border border in UITools.FindVisualChildren<Border>(topSlider))
             {
                 if (border.Name.Equals("TrackBackground"))
                     border.Visibility = Visibility.Collapsed;
-            }
-        }
-
-        public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
-        {
-            if (depObj != null)
-            {
-                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
-                {
-                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
-                    if (child != null && child is T)
-                    {
-                        yield return (T)child;
-                    }
-
-                    foreach (T childOfChild in FindVisualChildren<T>(child))
-                    {
-                        yield return childOfChild;
-                    }
-                }
             }
         }
     }

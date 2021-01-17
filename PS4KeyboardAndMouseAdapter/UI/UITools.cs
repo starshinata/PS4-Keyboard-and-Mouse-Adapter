@@ -6,7 +6,6 @@ namespace PS4KeyboardAndMouseAdapter.UI
 {
     public class UITools
     {
-
         public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
         {
             if (depObj != null)
