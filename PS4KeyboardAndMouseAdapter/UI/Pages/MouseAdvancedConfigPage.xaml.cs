@@ -14,6 +14,5 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
         {
             ((MainViewModel)DataContext).RefreshData();
         }
-
     }
 }
