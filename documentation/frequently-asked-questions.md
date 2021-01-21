@@ -49,6 +49,10 @@ We do this in our free time, and we normally have 9-5 day jobs to contend with.
 I would like to remind you this application is **free**.
 
 
+### Is Dualsense or PS5 supported?
+Not currently, and I dont have a PS5 so no ETA on that support arriving.
+
+
 ### Is using a mouse and keyboard cheating?
 No.
 
