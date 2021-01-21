@@ -35,7 +35,7 @@ Try our discord here https://discord.gg/zH4b8p4 where you can either suggest ide
 * touchpad needs more work :(
 * make DS4 emulation optional
 * support for analog input like from a controller stick, controller trigger, or Steering wheel
-* supporting ps5 (we dont know if this works on ps5 atm)
+* supporting ps5
 * support linux/mac 
 * support chaikis
 
