@@ -3,6 +3,9 @@
 
 ## Recommended user environment
 
+* If you have a DS4 or DS5, unplug it from computer
+  Either controller being plugged in can cause interference with this application
+  
 * PS4 it connected to internet via Ethernet cable
   (this reduces lag, and make your PS4 more consistently find-able from the "PS Remote Play" application)
 
@@ -17,10 +20,9 @@
 
 * PS Remote Play application has its video settings set to the lowest
   (This should reduce the the amount of data your PS4 has to send, and how much your Remote Play application has to receive.)
-  PS Remote Play application (without a an active device connected) -> "Settings" via the cod symbol -> "Video Quality for Remote Play" tab -> pick either PS4 or PS5 > Resolution set to lowest
+  PS Remote Play application (without a an active device connected) -> "Settings" via the cog symbol -> "Video Quality for Remote Play" tab -> pick either PS4 or PS5 > Resolution set to lowest
 
-* If you have a DS4 or DS5, unplug it from computer
-  Either controller being plugged in can cause interference with this application
+
 
 
 ## Problems and fixes
