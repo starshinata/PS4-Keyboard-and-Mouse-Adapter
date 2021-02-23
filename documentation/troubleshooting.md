@@ -9,10 +9,11 @@
 * If you have a DS4 or DS5 controller/gamepad, unplug it from computer <br>
   Either being plugged in can cause interference with this application
   
-* PS4 it connected to internet via Ethernet cable <br>
+* PS4 is connected to your router via Ethernet cable <br>
   (this reduces lag, and make your PS4 more consistently find-able from the "PS Remote Play" application)
 
-* PS4 use video from the monitor/TV it is plugged into <br>
+* Use video from the PS4 <br>
+  Plug a HDMI cable into your PS4, and connect the other end into your monitor/TV even when using remote play <br>
   (If you choose to use the video from the "PS Remote Play" then you are adding delay/lag which is generally undesired)
 
 * The PS4 you are trying to connect to has Remote play enabled <br>
@@ -20,6 +21,9 @@
 
 * The PS4 you are trying to connect to is set as your PSN account's Primary PS4 <br>
   PS4 -> select (Settings) -> [Account Management] -> [Activate as Your Primary PS4] -> [Activate].
+
+* PS Remote Play connects via a code <br>
+  see [playstation.net : Using remote play on a home network](https://manuals.playstation.net/document/gb/psvita/ps4link/viaprivate.html#:~:text=%E2%84%A2%20system%202.-,On%20your%20system%2C%20select%20(PS4%20Link)%20%3E%20%5BStart,%E2%84%A2%20system%20from%20rest%20mode)
 
 * PS Remote Play application has its video settings set to the lowest <br>
   (This should reduce the the amount of data your PS4 has to send, and how much your Remote Play application has to receive) <br>
