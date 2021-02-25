@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics;
 
 namespace PS4KeyboardAndMouseAdapter.Config
 {
@@ -18,10 +19,12 @@ namespace PS4KeyboardAndMouseAdapter.Config
         }
 
         //////////////////////////////////////////////////////////////////////
-        
+
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
         public bool EnableMouseInput { get; set; } = false;
+
+        public Process RemotePlayProcess;
 
     }
 }

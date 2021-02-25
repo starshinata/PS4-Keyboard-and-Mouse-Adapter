@@ -1,6 +1,6 @@
 {
   "AimToggle": true,
-  "AimToggleRetoggleDelay":500,
+  "AimToggleRetoggleDelay":0,
   "AdvancedMappingPage_MappingsToShow": 4,
   "AnalogStickLowerRange": 40,
   "AnalogStickUpperRange": 95,

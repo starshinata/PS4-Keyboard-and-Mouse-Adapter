@@ -16,13 +16,9 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
 
         private void Handler_RemotePlayVolumeChange(object sender, EventArgs e)
         {
-            MainViewModel mvm = (MainViewModel)DataContext;
-            if (mvm != null &&
-                mvm.RemotePlayInjector != null &&
-                mvm.RemotePlayInjector.RemotePlayProcess != null)
+            if (InstanceSettings.GetInstance().RemotePlayProcess != null)
             {
-                AudioManager.SetApplicationVolume(mvm.RemotePlayInjector.RemotePlayProcess.Id, UserSettings.GetInstance().RemotePlayVolume);
-
+                AudioManager.SetApplicationVolume(InstanceSettings.GetInstance().RemotePlayProcess.Id, UserSettings.GetInstance().RemotePlayVolume);
             }
         }
 

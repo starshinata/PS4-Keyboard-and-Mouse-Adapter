@@ -57,12 +57,12 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
             //reminder we want to import stuff into variable **thisInstance**
 
-            ThisInstance.AimToggle= newSettings.AimToggle;
+            ThisInstance.AimToggle = newSettings.AimToggle;
             ThisInstance.AimToggleRetoggleDelay = newSettings.AimToggleRetoggleDelay;
 
             ThisInstance.AnalogStickLowerRange = newSettings.AnalogStickLowerRange;
             ThisInstance.AnalogStickUpperRange = newSettings.AnalogStickUpperRange;
-            
+
             ThisInstance.MouseAimSensitivityEnabled = newSettings.MouseAimSensitivityEnabled;
 
             ThisInstance.MouseControlsL3 = newSettings.MouseControlsL3;
@@ -73,7 +73,9 @@ namespace PS4KeyboardAndMouseAdapter.Config
             ThisInstance.MouseMaxDistance = newSettings.MouseMaxDistance;
 
             ThisInstance.MousePollingRate = newSettings.MousePollingRate;
-            
+
+            ThisInstance.MouseWheelScrollHoldDuration = newSettings.MouseWheelScrollHoldDuration;
+
             ThisInstance.MouseXAxisSensitivityAimModifier = newSettings.MouseXAxisSensitivityAimModifier;
             ThisInstance.MouseXAxisSensitivityLookModifier = newSettings.MouseXAxisSensitivityLookModifier;
             ThisInstance.MouseXAxisSensitivityMax = newSettings.MouseXAxisSensitivityMax;
@@ -82,7 +84,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
             ThisInstance.MouseYAxisSensitivityLookModifier = newSettings.MouseYAxisSensitivityLookModifier;
             ThisInstance.MouseYAxisSensitivityMax = newSettings.MouseYAxisSensitivityMax;
 
-            ThisInstance.RemotePlayVolume= newSettings.RemotePlayVolume;
+            ThisInstance.RemotePlayVolume = newSettings.RemotePlayVolume;
 
             ThisInstance.XYRatio = newSettings.XYRatio;
 
@@ -173,7 +175,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         public static void Print(UserSettings settings)
         {
-            Console.WriteLine("UserSettings.Print()"); 
+            Console.WriteLine("UserSettings.Print()");
             StaticLogger.Information("UserSettings.Print()");
 
             Console.WriteLine("mappings");
@@ -181,7 +183,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
             List<VirtualKey> virtualKeys = KeyUtility.GetVirtualKeyValues();
             foreach (VirtualKey key in virtualKeys)
             {
-                Console.WriteLine("print Mappings:{VirtKey:" + key + ", PhysicalKeyGroup: " + settings.Mappings[key] + "}"); 
+                Console.WriteLine("print Mappings:{VirtKey:" + key + ", PhysicalKeyGroup: " + settings.Mappings[key] + "}");
                 StaticLogger.Information("print Mappings:{VirtKey:" + key + ", PhysicalKeyGroup: " + settings.Mappings[key] + "}");
             }
 
@@ -199,7 +201,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
                     {
                         var value = getter.Invoke(settings, new object[] { });
 
-                        Console.WriteLine("print " + prop + ":" + value); 
+                        Console.WriteLine("print " + prop + ":" + value);
                         StaticLogger.Information("print " + prop + ":" + value);
                     }
                 }

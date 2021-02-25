@@ -17,7 +17,7 @@
     </UserControl.Resources>
 
     <Grid>
-        
+
         <Grid.RowDefinitions>
             <!-- row 0 -->
             <RowDefinition Height="1*" />
@@ -28,23 +28,23 @@
             <!-- row 3 -->
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="1*" />
-            
+
         </Grid.ColumnDefinitions>
 
         <!-- reminder the below data bindings are done via the .xaml.cs file in fixButton method -->
-        
+
         <!-- row 0 -->
         <Button
             Grid.Row="0" Grid.Column="1" 
             x:Name="buttonUp" 
             Padding="2"/>
 
-        
+
         <!-- row 1 -->
         <Button
             Grid.Row="1" Grid.Column="0"
@@ -65,13 +65,13 @@
 
         <!-- row 2 -->
         <!-- intentionnaly blank to allow spacing -->
-        
+
         <!-- row 3 -->
         <Button 
             Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" 
             x:Name="buttonL3R3"
             Visibility="Visible"/>
-       
+
     </Grid>
 
 </UserControl>

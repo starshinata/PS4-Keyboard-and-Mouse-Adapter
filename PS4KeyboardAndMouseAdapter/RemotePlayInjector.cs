@@ -6,6 +6,7 @@ using System.Net;
 using System.Threading;
 using System.Windows;
 using System.Windows.Forms;
+using PS4KeyboardAndMouseAdapter.Config;
 using PS4RemotePlayInjection;
 using PS4RemotePlayInterceptor;
 using Serilog;
@@ -15,7 +16,6 @@ namespace PS4KeyboardAndMouseAdapter
 
     public class RemotePlayInjector
     {
-        public Process RemotePlayProcess;
 
         private GamepadProcessor gamepadProcessor;
 
@@ -32,9 +32,11 @@ namespace PS4KeyboardAndMouseAdapter
             {
                 Thread.Sleep(3100);
                 int remotePlayProcessId = Injector.Inject(RemotePlayConstants.TARGET_PROCESS_NAME, RemotePlayConstants.INJECT_DLL_NAME);
-                RemotePlayProcess = Process.GetProcessById(remotePlayProcessId);
+                Process RemotePlayProcess = Process.GetProcessById(remotePlayProcessId);
                 RemotePlayProcess.EnableRaisingEvents = true;
                 RemotePlayProcess.Exited += (sender, args) => { Utility.ShowCursor(true); };
+
+                InstanceSettings.GetInstance().RemotePlayProcess = RemotePlayProcess;
 
                 Injector.Callback += gamepadProcessor.OnReceiveData;
             }
@@ -47,9 +49,9 @@ namespace PS4KeyboardAndMouseAdapter
 
         private bool OpenRemotePlay()
         {
-            var path = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
 
-            var exeLocation = path + @"\Sony\PS Remote Play\RemotePlay.exe";
+            string exeLocation = path + @"\Sony\PS Remote Play\RemotePlay.exe";
 
             if (File.Exists(exeLocation))
             {
@@ -61,7 +63,7 @@ namespace PS4KeyboardAndMouseAdapter
             try
             {
                 //TODO: hardcoded currently, so it doesn't work when OS is set to non-default system language.
-                var shortcutPath = @"C:\ProgramData\Microsoft\Windows\Start Menu\Programs\PS Remote Play.lnk";
+                string shortcutPath = @"C:\ProgramData\Microsoft\Windows\Start Menu\Programs\PS Remote Play.lnk";
                 IWshRuntimeLibrary.IWshShell wsh = new IWshRuntimeLibrary.WshShellClass();
                 IWshRuntimeLibrary.IWshShortcut sc = (IWshRuntimeLibrary.IWshShortcut)wsh.CreateShortcut(shortcutPath);
                 shortcutPath = sc.TargetPath;
@@ -105,9 +107,6 @@ namespace PS4KeyboardAndMouseAdapter
 
                     waitHandle.WaitOne();
                 }
-
-
-                gamepadProcessor.RemotePlayProcess = RemotePlayProcess;
             }
             catch (Exception e)
             {

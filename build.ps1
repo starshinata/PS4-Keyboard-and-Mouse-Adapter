@@ -238,13 +238,13 @@ valid-xaml-xmllint
 
 build-msbuild
 
-test-vstest
+##test-vstest
 
 echo ""
 Copy-Item                   profiles\default-profile.json            PS4KeyboardAndMouseAdapter\bin\Release\profile-previous.json
 Copy-Item  -recurse -Force  profiles                                 PS4KeyboardAndMouseAdapter\bin\Release\profiles              
 
-sign-executables
+##sign-executables
 
 echo ""
 
@@ -252,5 +252,5 @@ make-nuget-package
 
 squirrel
 
-sign-installer
+##sign-installer
 

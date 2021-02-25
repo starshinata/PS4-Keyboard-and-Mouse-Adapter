@@ -2,9 +2,13 @@
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
+
+
+using Gma.System.MouseKeyHook;
 using PS4KeyboardAndMouseAdapter.Config;
 using PS4RemotePlayInjection;
 using Serilog;
+using Serilog.Core;
 using Squirrel;
 
 namespace PS4KeyboardAndMouseAdapter
@@ -17,6 +21,8 @@ namespace PS4KeyboardAndMouseAdapter
 
         private void OnAppExit(object sender, ExitEventArgs e)
         {
+
+            Console.WriteLine("App OnAppExit");
             InstanceSettings.GetInstance().EnableMouseInput = false;
 
             // cause not having a cursor is a pain in the ass
@@ -44,7 +50,7 @@ namespace PS4KeyboardAndMouseAdapter
 
         private void SetupLogger()
         {
-            var log = new LoggerConfiguration()
+            Logger log = new LoggerConfiguration()
                 .WriteTo.File("logs/log.txt")
                 .CreateLogger();
 

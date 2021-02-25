@@ -1,12 +1,10 @@
-﻿using System;
-using System.Diagnostics;
-using System.Numerics;
-using PS4KeyboardAndMouseAdapter.Config;
-using PS4KeyboardAndMouseAdapter.Dll;
+﻿using PS4KeyboardAndMouseAdapter.Config;
 using PS4RemotePlayInjection;
 using PS4RemotePlayInterceptor;
 using SFML.System;
 using SFML.Window;
+using System.Diagnostics;
+using System.Numerics;
 
 namespace PS4KeyboardAndMouseAdapter
 {
@@ -17,7 +15,7 @@ namespace PS4KeyboardAndMouseAdapter
         private UserSettings UserSettings { get; set; } = UserSettings.GetInstance();
 
         ////////////////////////////////////////////////////////////////////////////
-        
+
         // timer to know how long it has been since Aim button has been released
         private readonly Stopwatch AimToggleTimer = new Stopwatch();
 
@@ -38,63 +36,24 @@ namespace PS4KeyboardAndMouseAdapter
         // position 0,0 is the top left of the primary monitor
         private Vector2i Anchor { get; set; } = new Vector2i(900, 500);
 
-        private DualShockState CurrentState { get; set; }
-        
+        private DualShockState CurrentState;
+
         private Vector2i MouseDirection { get; set; }
         private Vector2i MouseDirectionPrevious = new Vector2i(0, 0);
 
         // timer to know how long it has been since we last polled the mouse for an update
         private readonly Stopwatch MouseInputTimer = new Stopwatch();
 
-        public Process RemotePlayProcess;
+        private readonly MouseWheelProcessor MouseWheelProcessor;
 
         ////////////////////////////////////////////////////////////////////////////
-        
+
         public GamepadProcessor()
         {
             AimToggleTimer.Start();
             MouseInputTimer.Start();
-        }
 
-        public void HandleAimToggle()
-        {
-            if (UserSettings.AimToggle)
-            {
-
-                // waiting a little before we can re-toggle the Aiming
-                if (AimToggleTimer.ElapsedMilliseconds > UserSettings.AimToggleRetoggleDelay)
-                {
-                    //TODO make it dynamic so the L2 doesnt have to be the AIM key
-                    if (IsVirtualKeyPressed(VirtualKey.L2)  && HasAimButtonBeenReleased)
-                    {
-                        HasAimButtonBeenReleased = false;
-                        IsAiming = !IsAiming;
-                    }
-                }
-
-
-                if (IsAiming)
-                {
-                    CurrentState.L2 = 255;
-                }
-                else
-                {
-                    CurrentState.L2 = 0;
-                }
-
-
-                // we should only reset the timer once per release of aim button
-                // 
-                // we could have said ` !IsVirtualKeyPressed(VirtualKey.L2) `
-                // however that would mean as soon as you release RightMouse/L2 then you restart the timer
-                // and keep restarting the timer, so that the AimToggleRetoggleDelay is never met
-                if (!IsVirtualKeyPressed(VirtualKey.L2) && !HasAimButtonBeenReleased)
-                {
-                    HasAimButtonBeenReleased = true;
-                   
-                    AimToggleTimer.Restart();
-                }
-            }
+            MouseWheelProcessor = new MouseWheelProcessor();
         }
 
         public Vector2i FeedMouseCoords()
@@ -123,8 +82,50 @@ namespace PS4KeyboardAndMouseAdapter
             return MouseDirectionPrevious;
         }
 
+        public void HandleAimToggle()
+        {
+            if (UserSettings.AimToggle)
+            {
+
+                // waiting a little before we can re-toggle the Aiming
+                if (AimToggleTimer.ElapsedMilliseconds > UserSettings.AimToggleRetoggleDelay)
+                {
+                    //TODO make it dynamic so the L2 doesnt have to be the AIM key
+                    if (IsVirtualKeyPressed(VirtualKey.L2) && HasAimButtonBeenReleased)
+                    {
+                        HasAimButtonBeenReleased = false;
+                        IsAiming = !IsAiming;
+                    }
+                }
+
+
+                if (IsAiming)
+                {
+                    CurrentState.L2 = 255;
+                }
+                else
+                {
+                    CurrentState.L2 = 0;
+                }
+
+
+                // we should only reset the timer once per release of aim button
+                // 
+                // we could have said ` !IsVirtualKeyPressed(VirtualKey.L2) `
+                // however that would mean as soon as you release RightMouse/L2 then you restart the timer
+                // and keep restarting the timer, so that the AimToggleRetoggleDelay is never met
+                if (!IsVirtualKeyPressed(VirtualKey.L2) && !HasAimButtonBeenReleased)
+                {
+                    HasAimButtonBeenReleased = true;
+
+                    AimToggleTimer.Restart();
+                }
+            }
+        }
+
         public void HandleButtonPressed()
         {
+
             // ORDER
             // LEFT -- MIDDLE -- RIGHT of Controller
 
@@ -219,15 +220,11 @@ namespace PS4KeyboardAndMouseAdapter
 
             if (IsVirtualKeyPressed(VirtualKey.R3))
                 CurrentState.R3 = true;
-        
-            ////////////////////////////////////////////
-
-            HandleAimToggle();
         }
 
         public void HandleMouseCursor()
         {
-            bool EnableMouseInput = InstanceSettings.EnableMouseInput && ProcessUtil.IsInForeground(RemotePlayProcess);
+            bool EnableMouseInput = InstanceSettings.EnableMouseInput && ProcessUtil.IsRemotePlayInForeground();
 
             if (EnableMouseInput)
             {
@@ -315,7 +312,7 @@ namespace PS4KeyboardAndMouseAdapter
 
             return false;
         }
-             
+
         public bool IsVirtualKeyPressed(VirtualKey key)
         {
             if (key == VirtualKey.NULL)
@@ -336,7 +333,6 @@ namespace PS4KeyboardAndMouseAdapter
             return false;
         }
 
-
         public void OnReceiveData(ref DualShockState state)
         {
             // Create the default state to modify
@@ -345,14 +341,17 @@ namespace PS4KeyboardAndMouseAdapter
                 CurrentState = new DualShockState() { Battery = 255 };
             }
 
-            if (!ProcessUtil.IsInForeground(RemotePlayProcess))
+            if (!ProcessUtil.IsRemotePlayInForeground())
             {
                 Utility.ShowCursor(true);
                 return;
             }
 
             HandleButtonPressed();
+
+            HandleAimToggle();
             HandleMouseCursor();
+            MouseWheelProcessor.Process(CurrentState);
 
             // Assign the state
             state = CurrentState;

@@ -73,6 +73,8 @@ namespace PS4KeyboardAndMouseAdapter.Config
             }
         }
 
+        public double MouseWheelScrollHoldDuration { get; set; } = 40;
+
         public double MouseXAxisSensitivityAimModifier { get; set; } = 1;
         public double MouseXAxisSensitivityLookModifier { get; set; } = 1;
         public double MouseXAxisSensitivityMax { get; set; } = 100;

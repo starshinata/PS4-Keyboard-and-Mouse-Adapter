@@ -23,7 +23,7 @@ namespace PS4KeyboardAndMouseAdapter
             GamepadProcessor gp = new GamepadProcessor();
             RemotePlayInjector = new RemotePlayInjector(gp);
             RemotePlayInjector.OpenRemotePlayAndInject();
-
+            
             Log.Information("MainViewModel constructor OUT");
         }
 

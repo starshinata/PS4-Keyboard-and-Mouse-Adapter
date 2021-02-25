@@ -54,6 +54,10 @@ Left and right (When Aiming and Aim specific sensitivity is enabled)
 Up and Down (When Aiming and Aim specific sensitivity is enabled)
 
 
+#### Mouse Wheel Scroll Hold Duration
+A scroll on a mouse wheel is instantaneous. However it should be considered as pressing a controller button for X time. This slider is to set how long the button should be held for.
+
+
 #### Mouse distance range
 disclaimer: I recommend just using mouse sensitivity
 
