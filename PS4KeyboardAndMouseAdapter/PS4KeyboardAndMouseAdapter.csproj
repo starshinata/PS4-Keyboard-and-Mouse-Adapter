@@ -268,6 +268,8 @@
     </ApplicationDefinition>
     <Compile Include="AudioManager.cs" />
     <Compile Include="Config\ExtraButtons.cs" />
+    <Compile Include="ListUtil.cs" />
+    <Compile Include="MouseWheelScrollProcessor.cs" />
     <Compile Include="MouseWheelProcessor.cs" />
     <Compile Include="ProcessUtil.cs" />
     <Compile Include="RemotePlayConstants.cs" />

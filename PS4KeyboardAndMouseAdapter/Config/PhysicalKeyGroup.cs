@@ -13,29 +13,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         public override string ToString()
         {
-            string returned = "";
-            if (PhysicalKeys != null)
-            {
-                bool first = true;
-                returned += "[";
-
-                foreach (PhysicalKey pk in PhysicalKeys)
-                {
-                    if (first)
-                    {
-                        first = false;
-                        returned += pk;
-                    }
-                    else
-                    {
-                        returned += ", " + pk;
-                    }
-                }
-
-                returned += "]";
-            }
-
-            return returned;
+            return ListUtil.ListToString(PhysicalKeys);
         }
     }
 }

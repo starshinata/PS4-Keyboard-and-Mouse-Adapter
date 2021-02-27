@@ -17,7 +17,7 @@ namespace PS4KeyboardAndMouseAdapter
 
         private readonly Queue<MouseEventArgs> MouseWheelQueue;
 
-        private VirtualKey LastVirtualKey;
+        private List<VirtualKey> LastVirtualKeys;
 
         public MouseWheelProcessor()
         {
@@ -26,57 +26,35 @@ namespace PS4KeyboardAndMouseAdapter
             HookGlobalEvents = Hook.GlobalEvents();
             HookGlobalEvents.MouseWheel += HandleMouseWheel;
 
-            LastVirtualKey = VirtualKey.NULL;
-
             MouseWheelQueue = new Queue<MouseEventArgs>();
         }
 
-        private ExtraButtons GetScrollAction(MouseEventArgs e)
+        private List<VirtualKey> GetVirtualKeys(ExtraButtons scrollAction)
         {
-            if (e != null)
-            {
-                if (e.Delta > 0)
-                {
-                    Console.WriteLine("Wheel positive");
-                    return ExtraButtons.MouseWheelUp;
-                }
+            List<VirtualKey> foundVirtualKeys = new List<VirtualKey>();
 
-                if (e.Delta == 0)
-                {
-                    Console.WriteLine("Wheel nuetral ");
-                }
-
-                if (e.Delta < 0)
-                {
-                    Console.WriteLine("Wheel negative");
-                    return ExtraButtons.MouseWheelDown;
-                }
-            }
-
-            return ExtraButtons.Unknown;
-        }
-
-        private VirtualKey GetVirtualKey(ExtraButtons scrollAction)
-        {
-            Console.WriteLine("scrollAction   " + scrollAction);
             if (ExtraButtons.Unknown != scrollAction)
             {
-                if (scrollAction == ExtraButtons.MouseWheelUp)
+                UserSettings settings = UserSettings.GetInstance();
+                if (settings.Mappings != null)
                 {
-                    Console.WriteLine("Wheel Triangle");
-                    return VirtualKey.Triangle;
-                }
-
-
-                if (scrollAction == ExtraButtons.MouseWheelDown)
-                {
-                    Console.WriteLine("Wheel X");
-                    return VirtualKey.Cross;
+                    foreach (VirtualKey virtualKey in settings.Mappings.Keys)
+                    {
+                        if (settings.Mappings[virtualKey].PhysicalKeys != null)
+                        {
+                            foreach (PhysicalKey physicalKey in settings.Mappings[virtualKey].PhysicalKeys)
+                            {
+                                if (physicalKey.ExtraValue == scrollAction && !foundVirtualKeys.Contains(virtualKey))
+                                {
+                                    foundVirtualKeys.Add(virtualKey);
+                                }
+                            }
+                        }
+                    }
                 }
             }
 
-            Console.WriteLine("Wheel NULL");
-            return VirtualKey.NULL;
+            return foundVirtualKeys;
         }
 
         private void HandleMouseWheel(object sender, MouseEventArgs e)
@@ -84,8 +62,18 @@ namespace PS4KeyboardAndMouseAdapter
             // we only want mouse wheel events when remoteplay is foreground application
             if (ProcessUtil.IsRemotePlayInForeground())
             {
-                Console.WriteLine(DateTime.Now + string.Format("   Wheel={0:000}", e.Delta));
                 MouseWheelQueue.Enqueue(e);
+            }
+        }
+
+        private void HandleVirtualKeys(DualShockState dualShockState, List<VirtualKey> virtualKeys)
+        {
+            if (virtualKeys != null)
+            {
+                foreach (VirtualKey virtualKey in virtualKeys)
+                {
+                    HandleVirtualKey(dualShockState, virtualKey);
+                }
             }
         }
 
@@ -196,23 +184,23 @@ namespace PS4KeyboardAndMouseAdapter
         {
             if (AimToggleTimer.ElapsedMilliseconds > UserSettings.GetInstance().MouseWheelScrollHoldDuration)
             {
-                LastVirtualKey = VirtualKey.NULL;
+                LastVirtualKeys = null;
             }
 
-            if (LastVirtualKey == VirtualKey.NULL)
+            if (LastVirtualKeys == null)
             {
                 // Queue.Count because "Dequeue" and "Peek" will block/wait until there is an event in the queue
                 if (MouseWheelQueue.Count > 0)
                 {
                     MouseEventArgs e = MouseWheelQueue.Dequeue();
-                    ExtraButtons scrollAction = GetScrollAction(e);
-                    LastVirtualKey = GetVirtualKey(scrollAction);
-                    Console.WriteLine(DateTime.Now + " Process SET " + LastVirtualKey);
+                    ExtraButtons scrollAction = MouseWheelScrollProcessor.GetScrollAction(e);
+                    LastVirtualKeys = GetVirtualKeys(scrollAction);
+                    Console.WriteLine(DateTime.Now + " Process SET " + ListUtil.ListToString(LastVirtualKeys));
                     AimToggleTimer.Restart();
                 }
             }
 
-            HandleVirtualKey(state, LastVirtualKey);
+            HandleVirtualKeys(state, LastVirtualKeys);
         }
     }
 }

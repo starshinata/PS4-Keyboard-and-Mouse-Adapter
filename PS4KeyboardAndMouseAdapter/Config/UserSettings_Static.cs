@@ -178,8 +178,8 @@ namespace PS4KeyboardAndMouseAdapter.Config
             Console.WriteLine("UserSettings.Print()");
             StaticLogger.Information("UserSettings.Print()");
 
-            Console.WriteLine("mappings");
-            StaticLogger.Information("mappings");
+            Console.WriteLine("print mappings");
+            StaticLogger.Information("print mappings");
             List<VirtualKey> virtualKeys = KeyUtility.GetVirtualKeyValues();
             foreach (VirtualKey key in virtualKeys)
             {
@@ -187,19 +187,18 @@ namespace PS4KeyboardAndMouseAdapter.Config
                 StaticLogger.Information("print Mappings:{VirtKey:" + key + ", PhysicalKeyGroup: " + settings.Mappings[key] + "}");
             }
 
-
-            Console.WriteLine("values");
-            StaticLogger.Information("values");
+            Console.WriteLine("print values");
+            StaticLogger.Information("print values");
             Type t = settings.GetType();
             PropertyInfo[] properties = t.GetProperties();
             foreach (PropertyInfo prop in properties)
             {
-                if (prop.Name != "Mappings")
+                if (prop.Name != "KeyboardMappings" && prop.Name != "Mappings")
                 {
                     MethodInfo getter = prop.GetGetMethod();
                     if (getter != null)
                     {
-                        var value = getter.Invoke(settings, new object[] { });
+                        object value = getter.Invoke(settings, new object[] { });
 
                         Console.WriteLine("print " + prop + ":" + value);
                         StaticLogger.Information("print " + prop + ":" + value);

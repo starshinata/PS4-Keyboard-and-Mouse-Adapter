@@ -13,7 +13,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
             if (virtualKeyList == null)
             {
                 Array virtualKeyArray = System.Enum.GetValues(typeof(VirtualKey));
-                virtualKeyList = (List<VirtualKey>)virtualKeyArray.OfType<VirtualKey>().ToList();
+                virtualKeyList = virtualKeyArray.OfType<VirtualKey>().ToList();
                 virtualKeyList.Remove(VirtualKey.NULL);
             }
             return virtualKeyList;

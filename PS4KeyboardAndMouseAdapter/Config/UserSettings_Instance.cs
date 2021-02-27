@@ -13,16 +13,12 @@ namespace PS4KeyboardAndMouseAdapter.Config
         //Note this property will not be serialised (see the save method)
         public Dictionary<VirtualKey, PhysicalKey> KeyboardMappings { get; set; } = new Dictionary<VirtualKey, PhysicalKey>();
 
+
+        public Dictionary<VirtualKey, PhysicalKeyGroup> Mappings { get; set; } = new Dictionary<VirtualKey, PhysicalKeyGroup>();
+
         //
         // REMINDER if you add a new property, be sure to add it to ImportValues method
         //
-
-        // false if we need to migrate
-        // true means we can ignore
-        // default is false until we find a value
-        public bool Version_2_0_0_OrGreater { get; set; } = false;
-
-        public Dictionary<VirtualKey, PhysicalKeyGroup> Mappings { get; set; } = new Dictionary<VirtualKey, PhysicalKeyGroup>();
 
         public int AdvancedMappingPage_MappingsToShow { get; set; } = 4;
 
@@ -88,11 +84,17 @@ namespace PS4KeyboardAndMouseAdapter.Config
         //TODO do we still need this ?
         public double XYRatio { get; set; } = 1;
 
+
+        // false if we need to migrate
+        // true means we can ignore
+        // default is false until we find a value
+        public bool Version_2_0_0_OrGreater { get; set; } = false;
+
         //
         // REMINDER if you add a new property, be sure to add it to ImportValues method
         //
 
-      
+
         ////////////////////////////////////////////////////////////////////////////
 
 
