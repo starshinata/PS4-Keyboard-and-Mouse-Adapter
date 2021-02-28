@@ -1,5 +1,16 @@
 # Version History
 
+
+### v 2.1.0
+* Stuff users will appreciate
+  * support for adding bindings to mouse wheel
+  * made the switches/toggles for Mouse controls analog stick Left/Right more explicit and obvious
+  * Toggles now use black/green to signify off/on (previously we used system colours, and if you had a system colour near black the toggle did not make sense)
+
+* under the hood stuff
+  * updated build version management (so there is only a single truth for what is the current version)
+
+
 ### v 2.0.0
 <ul>
 
