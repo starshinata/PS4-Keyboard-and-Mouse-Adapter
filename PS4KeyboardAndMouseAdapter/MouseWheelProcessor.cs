@@ -10,8 +10,8 @@ namespace PS4KeyboardAndMouseAdapter
 {
     class MouseWheelProcessor
     {
-        // timer to know how long it has been since Aim button has been released
-        private readonly Stopwatch AimToggleTimer = new Stopwatch();
+        // timer to know how long the button associated with mouse scroll has been held for
+        private readonly Stopwatch MouseButtonHoldTimer;
 
         private readonly IKeyboardMouseEvents HookGlobalEvents;
 
@@ -21,7 +21,8 @@ namespace PS4KeyboardAndMouseAdapter
 
         public MouseWheelProcessor()
         {
-            AimToggleTimer.Start();
+            MouseButtonHoldTimer = new Stopwatch();
+            MouseButtonHoldTimer.Start();
 
             HookGlobalEvents = Hook.GlobalEvents();
             HookGlobalEvents.MouseWheel += HandleMouseWheel;
@@ -59,7 +60,7 @@ namespace PS4KeyboardAndMouseAdapter
 
         private void HandleMouseWheel(object sender, MouseEventArgs e)
         {
-            // we only want mouse wheel events when remoteplay is foreground application
+            // we only want mouse wheel events when remote play is foreground application
             if (ProcessUtil.IsRemotePlayInForeground())
             {
                 MouseWheelQueue.Enqueue(e);
@@ -182,7 +183,7 @@ namespace PS4KeyboardAndMouseAdapter
 
         public void Process(DualShockState state)
         {
-            if (AimToggleTimer.ElapsedMilliseconds > UserSettings.GetInstance().MouseWheelScrollHoldDuration)
+            if (MouseButtonHoldTimer.ElapsedMilliseconds > UserSettings.GetInstance().MouseWheelScrollHoldDuration)
             {
                 LastVirtualKeys = null;
             }
@@ -196,7 +197,7 @@ namespace PS4KeyboardAndMouseAdapter
                     ExtraButtons scrollAction = MouseWheelScrollProcessor.GetScrollAction(e);
                     LastVirtualKeys = GetVirtualKeys(scrollAction);
                     Console.WriteLine(DateTime.Now + " Process SET " + ListUtil.ListToString(LastVirtualKeys));
-                    AimToggleTimer.Restart();
+                    MouseButtonHoldTimer.Restart();
                 }
             }
 
