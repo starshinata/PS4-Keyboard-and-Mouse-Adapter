@@ -24,10 +24,12 @@ namespace PS4KeyboardAndMouseAdapter
             MouseButtonHoldTimer = new Stopwatch();
             MouseButtonHoldTimer.Start();
 
-            HookGlobalEvents = Hook.GlobalEvents();
-            HookGlobalEvents.MouseWheel += HandleMouseWheel;
-
             MouseWheelQueue = new Queue<MouseEventArgs>();
+
+            HookGlobalEvents = Hook.GlobalEvents();
+            // adding mouse wheel handler is intentionally last
+            // we only want to listen for stuff when we are ready
+            HookGlobalEvents.MouseWheel += HandleMouseWheel;
         }
 
         private List<VirtualKey> GetVirtualKeys(ExtraButtons scrollAction)
