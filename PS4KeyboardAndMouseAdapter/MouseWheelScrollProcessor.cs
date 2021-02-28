@@ -3,6 +3,8 @@
 namespace PS4KeyboardAndMouseAdapter
 {
     // the two methods in this class are intentionally similar
+    // notice the different input parameter type
+    // I couldnt easilly cast either of these  into the other
     class MouseWheelScrollProcessor
     {
 
