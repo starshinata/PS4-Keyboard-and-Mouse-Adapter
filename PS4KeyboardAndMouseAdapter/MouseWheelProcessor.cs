@@ -1,7 +1,6 @@
 ﻿using Gma.System.MouseKeyHook;
 using PS4KeyboardAndMouseAdapter.Config;
 using PS4RemotePlayInterceptor;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Forms;
@@ -27,6 +26,7 @@ namespace PS4KeyboardAndMouseAdapter
             MouseWheelQueue = new Queue<MouseEventArgs>();
 
             HookGlobalEvents = Hook.GlobalEvents();
+
             // adding mouse wheel handler is intentionally last
             // we only want to listen for stuff when we are ready
             HookGlobalEvents.MouseWheel += HandleMouseWheel;
