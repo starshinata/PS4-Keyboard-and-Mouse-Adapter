@@ -198,7 +198,6 @@ namespace PS4KeyboardAndMouseAdapter
                     MouseEventArgs e = MouseWheelQueue.Dequeue();
                     ExtraButtons scrollAction = MouseWheelScrollProcessor.GetScrollAction(e);
                     LastVirtualKeys = GetVirtualKeys(scrollAction);
-                    Console.WriteLine(DateTime.Now + " Process SET " + ListUtil.ListToString(LastVirtualKeys));
                     MouseButtonHoldTimer.Restart();
                 }
             }
