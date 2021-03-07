@@ -7,9 +7,7 @@
 
 3. Write update notes
 
-4. Have we updated the version number at 
-   * ` AssemblyInfo.cs `
-   * ` build.ps1 `
+4. Have we updated the version number at ` build.ps1 `
 
 5. Is this version number unique, and not previously released?
 
@@ -21,7 +19,7 @@
 
 9. Have we update the documentation screenshots (using the default profile)
 
-10. If everything committed to git ?
+10. Is everything committed to git ?
 
 11. Verify things are digitally signed
    * AppData\Local\PS4KeyboardAndMouseAdapter\VERSION\PS4KeyboardAndMouseAdapter.exe 
