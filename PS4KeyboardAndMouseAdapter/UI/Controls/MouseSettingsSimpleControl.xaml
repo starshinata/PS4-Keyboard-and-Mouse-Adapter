@@ -25,9 +25,9 @@
             <RowDefinition Height="32px" />
             <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
-            <RowDefinition Height="21px" />
 
             <!-- row 10 -->
+            <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
 
@@ -64,11 +64,13 @@
 
         <TextBlock 
             Grid.Row="2"
+            Grid.RowSpan="2"
             Grid.Column="0"
             FontSize="10"
             HorizontalAlignment="Left"
             Text="This will also hide the mouse cursor in 'PS Remote Play'"
-            VerticalAlignment="Top" Height="13" Grid.RowSpan="2" Width="243" />
+            VerticalAlignment="Top"
+            />
 
         <TextBlock 
             Grid.Row="3"
@@ -76,8 +78,8 @@
             FontSize="10"
             HorizontalAlignment="Left"
             Text="Tip: You can press alt+tab to switch between windows once the mouse is hidden."
-            VerticalAlignment="Center" Height="13"
-             />
+            VerticalAlignment="Center"
+            />
 
         <!-- Row 4 empty -->
 
@@ -90,18 +92,18 @@
             Text="Mouse controls LEFT analog stick"/>
 
         <wpfspark:ToggleSwitch 
-                Grid.Row="5"
-                Grid.Column="1"
-                Grid.ColumnSpan="2"
-                Background="black"
-                BorderThickness="2px"
-                IsChecked="{Binding Path=UserSettings.MouseControlsL3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                Height="30"
-                HorizontalAlignment="Right"
-                Margin="0,2,1,-4"
-                Style="{StaticResource {ComponentResourceKey ResourceId=ToggleSwitch.iOS.Light.Style, TypeInTargetAssembly={x:Type wpfspark:ToggleSwitch}}}"
-                VerticalAlignment="Center"
-                Width="60" />
+            Grid.Row="5"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Background="black"
+            BorderThickness="2px"
+            IsChecked="{Binding Path=UserSettings.MouseControlsL3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Height="30"
+            HorizontalAlignment="Right"
+            Margin="0,2,1,-4"
+            Style="{StaticResource {ComponentResourceKey ResourceId=ToggleSwitch.iOS.Light.Style, TypeInTargetAssembly={x:Type wpfspark:ToggleSwitch}}}"
+            VerticalAlignment="Center"
+            Width="60" />
 
         <TextBlock
             Grid.Row="7"
@@ -125,7 +127,7 @@
         <!-- Row 7 empty -->
 
         <controls:SliderV
-               x:Name="xSlider"
+            x:Name="xSlider"
             Grid.Row="9"
             Description="Mouse Look X axis sensitivity"
             Minimum="1" 

@@ -16,7 +16,7 @@
              MouseWheel="Handler_AddMapping_OnMouseScroll"
              >
     <!-- 
-    notes above element         ^^^
+    notes for above element    ^^^
     
     pancakeslp 2020.12.26
     MouseDown does not include left click ... I dunno why O.o
