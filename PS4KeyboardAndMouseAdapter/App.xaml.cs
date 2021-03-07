@@ -36,6 +36,7 @@ namespace PS4KeyboardAndMouseAdapter
             SetupLogger();
             Console.WriteLine("app/adapter started");
             Console.WriteLine("for more about what has happened in this app, see logs/log.txt");
+            Log.Information("PS4KMA v{0} started", VersionUtil.GetVersion());
 
             // cause not having a cursor is a pain in the ass
             Utility.ShowCursor(true);

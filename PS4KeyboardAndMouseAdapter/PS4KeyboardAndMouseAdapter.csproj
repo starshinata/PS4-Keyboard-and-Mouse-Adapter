@@ -276,6 +276,7 @@
     <Compile Include="UI\Controls\MiscellaneousSettingsControl.xaml.cs">
       <DependentUpon>MiscellaneousSettingsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VersionUtil.cs" />
     <Compile Include="WindowUtil.cs" />
     <Compile Include="Config\KeyUtility.cs" />
     <Compile Include="Config\MouseButton.cs" />

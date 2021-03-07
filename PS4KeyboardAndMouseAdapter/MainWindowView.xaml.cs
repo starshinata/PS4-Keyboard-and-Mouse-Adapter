@@ -1,6 +1,5 @@
 ﻿using PS4KeyboardAndMouseAdapter.Config;
 using System;
-using System.Diagnostics;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 
 namespace PS4KeyboardAndMouseAdapter
