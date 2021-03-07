@@ -1,27 +1,27 @@
 # PS4 Keyboard and Mouse Adapter 
 Disclaimer: This project is not endorsed or certified by Sony, Playstation or any of their partners.
 
+
 ## UI
 
 Click the images for bigger views
 
-<a href="documentation/example-ui-1.png" target="_blank"><img src="documentation/example-ui-1.png" alt="example UI Tab 1" width="200"/></a>
-<a href="documentation/example-ui-2.png" target="_blank"><img src="documentation/example-ui-2.png" alt="example UI Tab 2" width="200"/></a>
-<a href="documentation/example-ui-3.png" target="_blank"><img src="documentation/example-ui-3.png" alt="example UI Tab 3" width="200"/></a>
-<a href="documentation/example-ui-4.png" target="_blank"><img src="documentation/example-ui-4.png" alt="example UI Tab 4" width="200"/></a>
+<a href="documentation/example-ui-1.png" target="_blank"><img src="documentation/example-ui-1.png" alt="example UI Tab 1" width="280"/></a>
+<a href="documentation/example-ui-2.png" target="_blank"><img src="documentation/example-ui-2.png" alt="example UI Tab 2" width="280"/></a>
+<a href="documentation/example-ui-3.png" target="_blank"><img src="documentation/example-ui-3.png" alt="example UI Tab 3" width="280"/></a>
+<a href="documentation/example-ui-4.png" target="_blank"><img src="documentation/example-ui-4.png" alt="example UI Tab 4" width="280"/></a>
+<a href="documentation/example-ui-4.png" target="_blank"><img src="documentation/example-ui-5.png" alt="example UI Tab 4" width="280"/></a>
 
 
 ## DOWNLOAD
-:rocket: Click --> [here (v1.0.11)](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/1.0.11/Setup.exe) <-- to Download!
+:rocket: Click Download!--> [here (v2.0.0)](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/2.0.0/Setup.exe)
+
+## Troubleshooting
+see [here](documentation/troubleshooting.md)
 
 
-## How to use
-1. Do NOT plug your DS4 controller into your PC while using this tool. If it is plugged already, unplug it because it will interfere with the device emulation.
-2. Make sure you've enabled remote play from your PS4's settings menu. To do that:
-  * Go to your PS4, select (Settings) -> [Remote Play Connection Settings], and then select the checkbox for [Enable Remote Play].
-  * To activate it as your primary PS4, select  (Settings) -> [Account Management] -> [Activate as Your Primary PS4] -> [Activate].
-3. Download and run the setup from the download link above. It will automatically do all the configuration stuff for you
-4. If you want 0 lag, connect your PS4 to your TV/Monitor and watch the game from there (thus NOT from the Remote Play app)
+## Frequently Asked Questions
+see [here](documentation/frequently-asked-questions.md)
 
 
 ## DISCORD
@@ -40,12 +40,8 @@ Try our discord here https://discord.gg/zH4b8p4 where you can either suggest ide
 * support chaikis
 
 
-## Frequently Asked Questions
-see [here](documentation/frequently-asked-questions.md)
-
-
 ## Documentation
-All documenation [here](documentation/)
+All documentation [here](documentation/)
 
 But some popular topics are
 * [Glossary and Terms](documentation/glossary-and-terms.md)

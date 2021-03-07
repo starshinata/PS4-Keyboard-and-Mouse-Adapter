@@ -3,12 +3,17 @@
 
 ### v 2.1.0
 * Stuff users will appreciate
-  * support for adding bindings to mouse wheel
-  * made the switches/toggles for Mouse controls analog stick Left/Right more explicit and obvious
-  * Toggles now use black/green to signify off/on (previously we used system colours, and if you had a system colour near black the toggle did not make sense)
+  * support for adding bindings to mouse wheel scroll
+  * switches/toggles for which analog stick is controlled by mouse
 
-* under the hood stuff
-  * updated build version management (so there is only a single truth for what is the current version)
+    * Added to "Mouse Advanced Config" tab,
+    * On "Simple Config" tab, relocated the switches (bottom right with the other mouse things)
+    * On "Simple Config" tab, added text, so the switches should be more obvious
+  * Switches/toggles now use black/green to signify off/on (previously we used system colours, and if you had a system colour near black the toggle was a little confusing)
+
+* Under the hood stuff
+  * updated build version management (so there is only a single truth for what the current version is)
+  * Fixed some bugs in the "advances mappings" screen, which hindered users from setting bindings
 
 
 ### v 2.0.0
