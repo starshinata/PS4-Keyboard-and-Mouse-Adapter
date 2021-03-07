@@ -13,8 +13,7 @@ $ErrorActionPreference = "Stop"
 ## might need configuring
 $CERT_DIRECTORY="D:\workspace\##certificates\github.com-pancakeslp"
 
-## TODO get this to read from the assembly file
-$VERSION="2.0.0"
+$VERSION="2.1.0"
 
 ################################
 ################################
@@ -133,9 +132,11 @@ function manually-sign-file {
   error-on-bad-return-code	
 }
 
+
 function nuget {
   manualBuild\nuget\nuget.exe $args
 }
+
 
 function remove {
   $FILE_NAME = $args[0]
@@ -205,6 +206,16 @@ function test-vstest {
 }
 
 
+function update-asembly-info {
+  manualBuild\c-sharp-assembly-info-util\AssemblyInfoUtil.exe -set:$VERSION "PS4KeyboardAndMouseAdapter\Properties\AssemblyInfo.cs"
+
+  if ( $LASTEXITCODE -ne 0) {
+    echo "AssemblyInfoUtil.ex failed"
+    exit $LASTEXITCODE 
+  }
+}
+
+
 function valid-xaml-xmllint {
   echo ""
   echo "validating xamls xmllint"
@@ -236,6 +247,7 @@ dependencies-nuget
 
 valid-xaml-xmllint
 
+update-asembly-info
 build-msbuild
 
 test-vstest

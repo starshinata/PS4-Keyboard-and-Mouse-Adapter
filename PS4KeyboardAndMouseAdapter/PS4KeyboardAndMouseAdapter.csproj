@@ -126,6 +126,9 @@
     <Reference Include="FlaUI.UIA2, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FlaUI.UIA2.3.0.0\lib\net45\FlaUI.UIA2.dll</HintPath>
     </Reference>
+    <Reference Include="Gma.System.MouseKeyHook, Version=5.6.130.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MouseKeyHook.5.6.0\lib\net40\Gma.System.MouseKeyHook.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WPFSpark.1.4.0\lib\net461\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
@@ -264,11 +267,16 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AudioManager.cs" />
+    <Compile Include="Config\ExtraButtons.cs" />
+    <Compile Include="ListUtil.cs" />
+    <Compile Include="MouseWheelScrollProcessor.cs" />
+    <Compile Include="MouseWheelProcessor.cs" />
     <Compile Include="ProcessUtil.cs" />
     <Compile Include="RemotePlayConstants.cs" />
     <Compile Include="UI\Controls\MiscellaneousSettingsControl.xaml.cs">
       <DependentUpon>MiscellaneousSettingsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VersionUtil.cs" />
     <Compile Include="WindowUtil.cs" />
     <Compile Include="Config\KeyUtility.cs" />
     <Compile Include="Config\MouseButton.cs" />

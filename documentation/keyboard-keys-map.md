@@ -53,7 +53,6 @@ If you are interested in what is a specific value of a key, see the below listin
   Menu = 45,
   LBracket = 46,
   RBracket = 47,
-  Semicolon = 48,
   SemiColon = 48,
   Comma = 49,
   Period = 50,

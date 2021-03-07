@@ -1,18 +1,18 @@
-﻿<UserControl x:Class="PS4KeyboardAndMouseAdapter.UI.Controls.GamepadMappingController"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+﻿<UserControl 
+    x:Class="PS4KeyboardAndMouseAdapter.UI.Controls.GamepadMappingController"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                
-             d:DesignHeight="390"
-             d:DesignWidth="700"
-             mc:Ignorable="d"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    d:DesignHeight="360"
+    d:DesignWidth="700"
+    mc:Ignorable="d"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 
-             xmlns:config="clr-namespace:PS4KeyboardAndMouseAdapter.Config"
-             xmlns:controls="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Controls"
-             xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
-             xmlns:wpfspark="clr-namespace:WPFSpark;assembly=WPFSpark">
-
+    xmlns:config="clr-namespace:PS4KeyboardAndMouseAdapter.Config"
+    xmlns:controls="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Controls"
+    xmlns:svgc="http://sharpvectors.codeplex.com/svgc/">
+    
     <Grid>
 
         <Grid.Resources>
@@ -52,7 +52,7 @@
                 Text="or Escape to cancel" 
                 VerticalAlignment="Center" 
                 />
-            
+
         </StackPanel>
 
         <Grid Grid.Column="1"
@@ -75,26 +75,23 @@
             <Grid.RowDefinitions>
                 <!-- 0 -->
                 <RowDefinition Height="10"/>
-                <!-- 1 -->
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
+
                 <!-- 5 -->
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="1*" />
+
                 <!-- 10 -->
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="1*" />
-
-                <!-- 14 -->
-                <!-- explicit size for the toggle switches -->
-                <RowDefinition Height="38px" />
+                <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
 
             <Image x:Name="JoystickImage"
@@ -191,28 +188,6 @@
                 Grid.ColumnSpan="3"
                 Margin="0,24,0,18"
                 StickContext="LEFT"/>
-
-            <!-- https://www.codeproject.com/Articles/1060961/WPFSpark-v -->
-            <wpfspark:ToggleSwitch 
-                Grid.Row="15"
-                Grid.Column="1"
-                Grid.ColumnSpan="2"
-                IsChecked="{Binding Path=UserSettings.MouseControlsL3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                Height="30"
-                HorizontalAlignment="Right"
-                Margin="0,2,1,-4"
-                Style="{StaticResource {ComponentResourceKey ResourceId=ToggleSwitch.UWP.Dark.Style, TypeInTargetAssembly={x:Type wpfspark:ToggleSwitch}}}"
-                VerticalAlignment="Center"
-                Width="60" />
-
-            <!-- left stick -> Mouse image -->
-            <svgc:SvgViewbox
-                Grid.Row="14"
-                Grid.Column="3"                
-                Margin="2,7,406,2"
-                Source="pack://application:,,,/mouse-move.svg" 
-                Stretch="Fill"
-                />
 
             <!-- MIDDLE of controller -->
             <Button 
@@ -331,28 +306,6 @@
                 Margin="0,24,0,18"
                 StickContext="RIGHT"/>
 
-            <!-- right stick -> Mouse image -->
-            <svgc:SvgViewbox
-                Grid.Row="14"
-                Grid.Column="3"
-                Margin="407,7,1,1" 
-                Stretch="Fill"
-                Source="pack://application:,,,/mouse-move.svg" >
-
-            </svgc:SvgViewbox>
-
-            <!-- https://www.codeproject.com/Articles/1060961/WPFSpark-v -->
-            <wpfspark:ToggleSwitch
-                Grid.Row="14"
-                Grid.Column="4"
-                Grid.ColumnSpan="2"
-                IsChecked="{Binding Path=UserSettings.MouseControlsR3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                Height="30"
-                HorizontalAlignment="Right"
-                Style="{StaticResource {ComponentResourceKey ResourceId=ToggleSwitch.UWP.Dark.Style, TypeInTargetAssembly={x:Type wpfspark:ToggleSwitch}}}"
-                Margin="0,7,3,1"
-                VerticalAlignment="Center"
-                Width="60"/>
         </Grid>
     </Grid>
 </UserControl>

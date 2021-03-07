@@ -1,11 +1,10 @@
-﻿using System;
+﻿using PS4KeyboardAndMouseAdapter.Config;
+using SFML.Window;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-
-using PS4KeyboardAndMouseAdapter.Config;
-using SFML.Window;
 using Button = System.Windows.Controls.Button;
 using Keyboard = SFML.Window.Keyboard;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
@@ -21,7 +20,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
         public AdvancedMappingsPage()
         {
             InitializeComponent();
-            WaitForKeyPress_1.Opacity = 0;
+            WaitingForKeyPress_Hide();
 
             Settings = UserSettings.GetInstance();
             PopulateWithMappings();
@@ -39,7 +38,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
             WaitingForKeyPress_Show(button);
         }
 
-        private void Handler_AddMapping_GenericKeyDown(Keyboard.Key keyboardValue, MouseButton mouseValue)
+        private void Handler_AddMapping_GenericKeyDown(ExtraButtons extraValue, Keyboard.Key keyboardValue, MouseButton mouseValue)
         {
 
             if (lastClickedButton != null && lastClickedButton.Parent != null)
@@ -64,6 +63,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
                         }
 
                         PhysicalKey valueNew = new PhysicalKey();
+                        valueNew.ExtraValue = extraValue;
                         valueNew.KeyboardValue = keyboardValue;
                         valueNew.MouseValue = mouseValue;
 
@@ -77,6 +77,17 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
             }
         }
 
+        private void Handler_AddMapping_OnKeyboardKeyDown(object sender, KeyEventArgs e)
+        {
+            foreach (Keyboard.Key key in Enum.GetValues(typeof(Keyboard.Key)).Cast<Keyboard.Key>())
+            {
+                if (Keyboard.IsKeyPressed(key))
+                {
+                    Handler_AddMapping_GenericKeyDown(ExtraButtons.Unknown, key, MouseButton.Unknown);
+                }
+            }
+        }
+
         private void Handler_AddMapping_OnMouseDown(object sender, RoutedEventArgs e)
         {
             Array mouseButtons = Enum.GetValues(typeof(Mouse.Button));
@@ -85,25 +96,24 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
                 if (Mouse.IsButtonPressed(button))
                 {
                     MouseButton mouseButton = (MouseButton)button;
-                    Handler_AddMapping_GenericKeyDown(Keyboard.Key.Unknown, mouseButton);
+                    Handler_AddMapping_GenericKeyDown(ExtraButtons.Unknown, Keyboard.Key.Unknown, mouseButton);
                 }
             }
         }
 
         private void Handler_AddMapping_OnMouseLeftButtonUp(object sender, RoutedEventArgs e)
         {
-            Handler_AddMapping_GenericKeyDown(Keyboard.Key.Unknown, MouseButton.Left);
+            Handler_AddMapping_GenericKeyDown(ExtraButtons.Unknown, Keyboard.Key.Unknown, MouseButton.Left);
         }
 
-        private void Handler_AddMapping_OnKeyboardKeyDown(object sender, KeyEventArgs e)
+        private void Handler_AddMapping_OnMouseScroll(object sender, RoutedEventArgs e)
         {
-            foreach (Keyboard.Key key in Enum.GetValues(typeof(Keyboard.Key)).Cast<Keyboard.Key>())
-            {
-                if (Keyboard.IsKeyPressed(key))
-                {
-                    Handler_AddMapping_GenericKeyDown(key, MouseButton.Unknown);
-                }
-            }
+            Console.WriteLine("Handler_AddMapping_OnMouseScroll");
+            Console.WriteLine(DateTime.Now);
+
+            System.Windows.Input.MouseWheelEventArgs mwea = (System.Windows.Input.MouseWheelEventArgs)e;
+            ExtraButtons scrollAction = MouseWheelScrollProcessor.GetScrollAction(mwea);
+            Handler_AddMapping_GenericKeyDown(scrollAction, Keyboard.Key.Unknown, MouseButton.Unknown);
         }
 
         private void PopulateWithMappings()
@@ -118,7 +128,8 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
                 stackPanel.Orientation = Orientation.Horizontal;
                 stackPanel.Tag = vk;
 
-                TextBlock textblock = new TextBlock() {
+                TextBlock textblock = new TextBlock()
+                {
                     FontWeight = FontWeights.Bold
                 };
                 textblock.Text = vk.ToString();
@@ -149,7 +160,6 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
             {
                 // assume unmapped first
                 button.Content = "set mapping";
-                button.IsEnabled = true;
                 button.Opacity = OpacityUnMappedButton;
 
                 if (button != null && button.Tag != null)
@@ -186,38 +196,26 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
         {
             lastClickedButton = sender;
 
-            foreach (Button button in UITools.FindVisualChildren<Button>(this))
-            {
-                button.Opacity = UIConstants.LowVisibility;
-                button.IsEnabled = false;
-            }
+            scrollViewer.Visibility = Visibility.Hidden;
 
-            foreach (TextBlock textBlock in UITools.FindVisualChildren<TextBlock>(this))
-            {
-                textBlock.Opacity = UIConstants.LowVisibility;
-            }
+            // if mappingHolder is enabled then buttons are still clickable
+            // EVEN if you set button.IsEnabled = false
+            mappingHolder.IsEnabled = false;
 
-            Panel.SetZIndex(WaitForKeyPress_1, 10);
-            WaitForKeyPress_1.Opacity = 1;
-            WaitForKeyPress_2.Opacity = 1;
-            WaitForKeyPress_3.Opacity = 1;
-            WaitForKeyPress_4.Opacity = 1;
+            WaitForKeyPress_1.Visibility = Visibility.Visible;
+
+            // WaitForKeyPress_2 is the stack panel
+            // if we dont focus it then keyboard key presses might not register
+            WaitForKeyPress_2.Focus();
         }
 
         private void WaitingForKeyPress_Hide()
         {
-            Panel.SetZIndex(WaitForKeyPress_1, 0);
-            WaitForKeyPress_1.Opacity = 0;
-            WaitForKeyPress_2.Opacity = 0;
-            WaitForKeyPress_3.Opacity = 0;
-            WaitForKeyPress_4.Opacity = 0;
+            WaitForKeyPress_1.Visibility = Visibility.Hidden;
+            mappingHolder.IsEnabled = true;
+            scrollViewer.Visibility = Visibility.Visible;
 
             RefreshButtonContents();
-            foreach (TextBlock textBlock in UITools.FindVisualChildren<TextBlock>(this))
-            {
-                textBlock.Opacity = 1;
-            }
         }
-
     }
 }

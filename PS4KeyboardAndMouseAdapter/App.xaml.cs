@@ -1,11 +1,12 @@
-﻿using System;
+﻿using PS4KeyboardAndMouseAdapter.Config;
+using PS4RemotePlayInjection;
+using Serilog;
+using Serilog.Core;
+using Squirrel;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
-using PS4KeyboardAndMouseAdapter.Config;
-using PS4RemotePlayInjection;
-using Serilog;
-using Squirrel;
 
 namespace PS4KeyboardAndMouseAdapter
 {
@@ -17,6 +18,8 @@ namespace PS4KeyboardAndMouseAdapter
 
         private void OnAppExit(object sender, ExitEventArgs e)
         {
+
+            Console.WriteLine("App OnAppExit");
             InstanceSettings.GetInstance().EnableMouseInput = false;
 
             // cause not having a cursor is a pain in the ass
@@ -33,6 +36,7 @@ namespace PS4KeyboardAndMouseAdapter
             SetupLogger();
             Console.WriteLine("app/adapter started");
             Console.WriteLine("for more about what has happened in this app, see logs/log.txt");
+            Log.Information("PS4KMA v{0} started", VersionUtil.GetVersion());
 
             // cause not having a cursor is a pain in the ass
             Utility.ShowCursor(true);
@@ -44,7 +48,7 @@ namespace PS4KeyboardAndMouseAdapter
 
         private void SetupLogger()
         {
-            var log = new LoggerConfiguration()
+            Logger log = new LoggerConfiguration()
                 .WriteTo.File("logs/log.txt")
                 .CreateLogger();
 

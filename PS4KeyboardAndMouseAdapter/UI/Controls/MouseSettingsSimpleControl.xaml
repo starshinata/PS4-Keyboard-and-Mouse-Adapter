@@ -1,12 +1,10 @@
 ﻿<UserControl x:Class="PS4KeyboardAndMouseAdapter.UI.Controls.MouseSettingsSimpleControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+
              xmlns:controls="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Controls"
              xmlns:wpfspark="clr-namespace:WPFSpark;assembly=WPFSpark" 
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="500">
+             >
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -16,28 +14,29 @@
         <Grid.RowDefinitions>
             <!-- row 0 -->
             <RowDefinition Height="30px" />
-
-            <!-- row 1 -->
             <RowDefinition Height="30px" />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition Height="5px" />
+            <RowDefinition Height="15px" />
+            <RowDefinition Height="15px" />
+            <RowDefinition Height="15px" />
 
-            <!-- row 5-->
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
+            <!-- row 5 -->
+            <RowDefinition Height="32px" />
+            <RowDefinition Height="8px" />
+            <RowDefinition Height="32px" />
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="21px" />
+
             <!-- row 10 -->
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="21px" />
 
         </Grid.RowDefinitions>
 
         <TextBlock
             Grid.Row="0"
             Grid.Column="0"
+            Grid.ColumnSpan="5"
             FontSize="16"
             FontWeight="Bold"
             HorizontalAlignment="Center"
@@ -54,21 +53,24 @@
         <!-- https://www.codeproject.com/Articles/1060961/WPFSpark-v -->
         <wpfspark:ToggleSwitch
             Grid.Row="1"
-            Grid.Column="5"
+            Background="black"
+            BorderThickness="2px"
             IsChecked="{Binding Path=InstanceSettings.EnableMouseInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             Height="30"
             HorizontalAlignment="Right"
-            Style="{StaticResource {ComponentResourceKey ResourceId=ToggleSwitch.UWP.Dark.Style, TypeInTargetAssembly={x:Type wpfspark:ToggleSwitch}}}" 
+            Style="{StaticResource {ComponentResourceKey ResourceId=ToggleSwitch.iOS.Light.Style, TypeInTargetAssembly={x:Type wpfspark:ToggleSwitch}}}" 
             VerticalAlignment="Top"
             Width="60"/>
 
         <TextBlock 
             Grid.Row="2"
+            Grid.RowSpan="2"
             Grid.Column="0"
             FontSize="10"
             HorizontalAlignment="Left"
             Text="This will also hide the mouse cursor in 'PS Remote Play'"
-            VerticalAlignment="Top" />
+            VerticalAlignment="Top"
+            />
 
         <TextBlock 
             Grid.Row="3"
@@ -76,13 +78,57 @@
             FontSize="10"
             HorizontalAlignment="Left"
             Text="Tip: You can press alt+tab to switch between windows once the mouse is hidden."
-            VerticalAlignment="Center" />
+            VerticalAlignment="Center"
+            />
 
         <!-- Row 4 empty -->
 
-        <controls:SliderV
-               x:Name="xSlider"
+        <!-- https://www.codeproject.com/Articles/1060961/WPFSpark-v -->
+        <TextBlock
             Grid.Row="5"
+            Grid.Column="0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Text="Mouse controls LEFT analog stick"/>
+
+        <wpfspark:ToggleSwitch 
+            Grid.Row="5"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Background="black"
+            BorderThickness="2px"
+            IsChecked="{Binding Path=UserSettings.MouseControlsL3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Height="30"
+            HorizontalAlignment="Right"
+            Margin="0,2,1,-4"
+            Style="{StaticResource {ComponentResourceKey ResourceId=ToggleSwitch.iOS.Light.Style, TypeInTargetAssembly={x:Type wpfspark:ToggleSwitch}}}"
+            VerticalAlignment="Center"
+            Width="60" />
+
+        <TextBlock
+            Grid.Row="7"
+            Grid.Column="0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Text="Mouse controls RIGHT analog stick"/>
+
+        <!-- https://www.codeproject.com/Articles/1060961/WPFSpark-v -->
+        <wpfspark:ToggleSwitch
+            Grid.Row="7"
+            Background="black"
+            BorderThickness="2px"
+            IsChecked="{Binding Path=UserSettings.MouseControlsR3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Height="30"
+            HorizontalAlignment="Right"
+            Style="{StaticResource {ComponentResourceKey ResourceId=ToggleSwitch.iOS.Light.Style, TypeInTargetAssembly={x:Type wpfspark:ToggleSwitch}}}" 
+            VerticalAlignment="Top"
+            Width="60"/>
+
+        <!-- Row 7 empty -->
+
+        <controls:SliderV
+            x:Name="xSlider"
+            Grid.Row="9"
             Description="Mouse Look X axis sensitivity"
             Minimum="1" 
             Maximum="{Binding UserSettings.MouseXAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -90,7 +136,7 @@
             Value="{Binding UserSettings.MouseXAxisSensitivityLookModifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <controls:SliderV
-            Grid.Row="6"
+            Grid.Row="10"
             Description="Mouse Look Y axis sensitivity"
             Minimum="1" 
             Maximum="{Binding Path=UserSettings.MouseYAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"

@@ -4,25 +4,32 @@ namespace PS4KeyboardAndMouseAdapter.Config
 {
     public class PhysicalKey
     {
+        public ExtraButtons ExtraValue = ExtraButtons.Unknown;
         public Key KeyboardValue = Key.Unknown;
         public MouseButton MouseValue = MouseButton.Unknown;
+
+        public string ExtraButtonToString(ExtraButtons key)
+        {
+            return key.ToString();
+        }
 
         public string KeyboardButtonToString(Key key)
         {
 
-            var displayValue = key.ToString();
+            string displayValue = key.ToString();
 
             if (displayValue.Contains("Num"))
                 displayValue = displayValue.Replace("Num", "");
 
-            if (key == Key.F1) 
+            if (key == Key.F1)
                 displayValue = "F1";
-            
+
             if (key == Key.F2)
                 displayValue = "F2";
 
             if (key == Key.F3)
                 displayValue = "F3";
+
             if (key == Key.F4)
                 displayValue = "F4";
 
@@ -67,15 +74,21 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         public override string ToString()
         {
-            if (MouseValue != MouseButton.Unknown)
+            if (ExtraValue != ExtraButtons.Unknown)
             {
-                return MouseButtonToString(  MouseValue);
+                return ExtraButtonToString(ExtraValue);
             }
 
             if (KeyboardValue != Key.Unknown)
             {
                 return KeyboardButtonToString(KeyboardValue);
             }
+
+            if (MouseValue != MouseButton.Unknown)
+            {
+                return MouseButtonToString(MouseValue);
+            }
+
 
             return "";
         }

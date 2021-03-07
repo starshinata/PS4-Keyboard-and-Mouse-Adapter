@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PS4KeyboardAndMouseAdapter.Config;
+using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
@@ -23,6 +24,11 @@ namespace PS4KeyboardAndMouseAdapter
                 return false;
 
             return true;
+        }
+
+        public static bool IsRemotePlayInForeground()
+        {
+            return IsInForeground(InstanceSettings.GetInstance().RemotePlayProcess);
         }
     }
 }
