@@ -33,6 +33,14 @@ Source: https://www.playstation.com/en-us/legal/softwarelicense/
 Because this software is not authorised by SIE LLC (Sony), this may technically " invalidate your PlayStation system warranty"
 
 
+### Does my PS4 need to be modded to use this?
+No!
+
+
+### How do I connect to my PS4 on my home network
+see https://manuals.playstation.net/document/gb/psvita/ps4link/viaprivate.html#:~:text=%E2%84%A2%20system%202.-,On%20your%20system%2C%20select%20(PS4%20Link)%20%3E%20%5BStart,%E2%84%A2%20system%20from%20rest%20mode.
+
+
 ### How do I increase mouse sensitivity so I can quickly turn 180 degress?
 You cant
 
@@ -47,6 +55,10 @@ Goto `%AppData%\..\Local\PS4KeyboardAndMouseAdapter` in windows explorer and del
 We do this in our free time, and we normally have 9-5 day jobs to contend with.
 
 I would like to remind you this application is **free**.
+
+
+### Is Dualsense or PS5 supported?
+Not currently, and I dont have a PS5 so no ETA on that support arriving.
 
 
 ### Is using a mouse and keyboard cheating?
