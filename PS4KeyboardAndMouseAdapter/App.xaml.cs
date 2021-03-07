@@ -1,15 +1,12 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
-using System.Windows;
-
-
-using Gma.System.MouseKeyHook;
-using PS4KeyboardAndMouseAdapter.Config;
+﻿using PS4KeyboardAndMouseAdapter.Config;
 using PS4RemotePlayInjection;
 using Serilog;
 using Serilog.Core;
 using Squirrel;
+using System;
+using System.IO;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace PS4KeyboardAndMouseAdapter
 {
