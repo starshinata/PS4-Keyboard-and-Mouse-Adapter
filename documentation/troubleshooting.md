@@ -1,4 +1,4 @@
-# Troubleshooing
+# Troubleshooting
 
 
 ## Recommended user environment
@@ -39,7 +39,7 @@
 #### (Installation) Could not write to "C:\Users\XYZ\AppData\Local\PS4KeyboardAndMouseAdapter"
 Can you check two things,
 * PS4KeyboardAndMouseAdapter.exe is not running
-* your antivirus hasnt quantined PS4KeyboardAndMouseAdapter.exe (we have been flagged as a virus because we arent vetted by a big/known/trusted corporation). <br> We submit executable scans to https://www.virustotal.com/ for every release, and they have yet to detect a real threat.
+* your antivirus hasnt quarantined PS4KeyboardAndMouseAdapter.exe (we have been flagged as a virus because we arent vetted by a big/known/trusted corporation). <br> We submit executable scans to https://www.virustotal.com/ for every release, and they have yet to detect a real threat.
 
 #### (Runtime) Application says "need to install remote play" but I already have it installed
 If you are on PS4KeyboardAndMouseAdapter v1.0.7 or lower, you need to upgrade to a newer version. Sometime in October 2020 Sony issued a new version of "PS Remote Play" to support PS5, that broke some things in older versions of our application.
