@@ -3,7 +3,7 @@
 Questions ordered alphabetically
 
 
-### Can I get a profile for <INSERT GAME>
+### Can I get a profile for *INSERT GAME*
 
 We have a short list of profiles at 
 https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/blob/master/profiles/
@@ -15,7 +15,7 @@ If you are curious how settings can depend on the user please have a read of  ht
 
 
 ### Can I get banned from PSN for using this application? 
-I cannot find a specific text saying this is a bannable offense. But strictly because it is an unauthorised third party I would not be surprised if SIE LLC (Sony) claimed that using this is a banable offense.
+I cannot find a specific text saying this is a bannable offense. But strictly because it is an unauthorised third party application I would not be surprised if Sony claimed that using this is a banable offense.
 
 **No one has reported being banned for it.**
 
@@ -30,7 +30,7 @@ Source: https://www.playstation.com/en-us/legal/softwarelicense/
 8. USE OF UNAUTHORIZED PRODUCTS. The use of software, peripherals or other products not authorized by SIE LLC may damage your PlayStation system and invalidate your PlayStation system warranty. Only official or licensed software and peripherals should be used with your PlayStation system (e.g., in the controller ports and memory card slots).
 `
 
-Because this software is not authorised by SIE LLC (Sony), this may technically " invalidate your PlayStation system warranty"
+Because this software is not authorised by Sony, this may technically "invalidate your PlayStation system warranty"
 
 
 ### Does my PS4 need to be modded to use this?
@@ -41,11 +41,43 @@ No!
 see https://manuals.playstation.net/document/gb/psvita/ps4link/viaprivate.html#:~:text=%E2%84%A2%20system%202.-,On%20your%20system%2C%20select%20(PS4%20Link)%20%3E%20%5BStart,%E2%84%A2%20system%20from%20rest%20mode.
 
 
-### How do I increase mouse sensitivity so I can quickly turn 180 degress?
+### How do I increase mouse sensitivity so I can quickly turn 180 degrees?
 You cant
 
 This is a limitation of console controllers. For a better explanation watch the first minute of https://youtu.be/KtBHArN3QW0 
 
+
+### How do I make this work on PS5?
+AKA 
+* How do I make DualSense controller work
+* Is Dualsense supported?
+* Is PS5 supported?
+
+If you want to play a PS5 game on a PS5, the PS4KMA does not work, and I do not have a PS5 console to test this on.
+
+If you want to play a PS4 game on PS5, as long as the game has "legacy controller support", PS4KMA should work
+
+
+Source: https://blog.playstation.com/2020/08/03/playstation-5-answering-your-questions-on-compatible-ps4-peripherals-accessories/#sf236479110
+
+```
+Which existing PS4 peripherals/accessories will work on PS5?
+
+Specialty peripherals, such as officially licensed racing wheels, arcade 
+sticks, and flight sticks, will work with PS5 games and supported PS4 games.
+...
+The DualShock 4 wireless controller and PlayStation officially licensed 
+third-party gamepad controllers will work with supported PS4 games. 
+
+```
+
+```
+Will DualShock 4 work with PS5 games?
+
+No, we believe that PS5 games should take advantage of the new capabilities
+and features we’re bringing to the platform, including the features of 
+DualSense wireless controller.
+```
 
 ### How do I uninstall PS4 KMA?
 Goto `%AppData%\..\Local\PS4KeyboardAndMouseAdapter` in windows explorer and delete everything there
@@ -55,10 +87,6 @@ Goto `%AppData%\..\Local\PS4KeyboardAndMouseAdapter` in windows explorer and del
 We do this in our free time, and we normally have 9-5 day jobs to contend with.
 
 I would like to remind you this application is **free**.
-
-
-### Is Dualsense or PS5 supported?
-Not currently, and I dont have a PS5 so no ETA on that support arriving.
 
 
 ### Is using a mouse and keyboard cheating?
@@ -77,4 +105,3 @@ Assumption: we do not expect you to be playing Valorant, while you have PS4KMA (
 Vanguard is running all the time. Vanguard anticheat should not be triggered by our adapter. If it is triggered by our adapter (and the above assumption holds true) then there are much bigger privacy concerns about running the Vanguard Anticheat.
 
 If you play Valorant with PS4KMA active then it *may* detect you as trying to cheat. It could be considered on par to using Discord's voice overlay (the overlay to see who is speaking). We dont see how capturing keyboard and mouse input could be used for cheating, but Vanguard is proprietary and we cannot look at it's inner workings.
-
