@@ -14,7 +14,7 @@ Click the images for bigger views
 
 
 ## DOWNLOAD
-:rocket: Click Download!--> [here (v2.0.0)](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/2.0.0/Setup.exe)
+:rocket: Click Download!--> [here (v2.1.0)](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/2.1.0/Setup.exe)
 
 
 ## Troubleshooting
