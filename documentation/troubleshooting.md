@@ -3,6 +3,10 @@
 
 ## Recommended user environment
 
+* If you have Rewasd installed, please uninstall it <br>
+  https://www.rewasd.com/ <br>
+  Rewasd being installed can cause interference with this application
+
 * Make sure that "PS Remote Play" is closed before starting the adapter <br>
   (PS4KeyboardAndMouseAdapter will start "PS Remote Play" once we detect where is it installed)
 
