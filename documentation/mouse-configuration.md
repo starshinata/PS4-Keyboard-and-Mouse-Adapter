@@ -23,6 +23,11 @@ How many times a second do you want the application to measure mouse input and f
   
 Be aware that increasing this number will make it more responsive, but may mean that your sensitivity needs to be increased; this is because we do not have mouse smoothing (as in gaming people generally appear to prefar Raw Input over Mouse Smoothed input).
 
+If you set the rate to 10, then it will poll 10 times every second, which is likely too slow.
+If you set the rate to 100, then it will poll 100 times every second.
+If you set the rate to 250, then it will poll 250 times every second.
+There is no point going above 250 as this is the maximum polling rate of a PS4 controller.
+
 
 #### Mouse Look X axis sensitivity
 Left and right
