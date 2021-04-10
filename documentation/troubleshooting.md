@@ -47,7 +47,7 @@ Can you check three things,
 * PS Remote play is not running
 * your antivirus hasnt quarantined PS4KeyboardAndMouseAdapter.exe (we have been flagged as a virus because we arent vetted by a big/known/trusted corporation). <br> We submit executable scans to https://www.virustotal.com/ for every release, and they have yet to detect a real threat.
 
-If that doesnt resolve it, please delete the folder "C:\Users\\{USER}\AppData\Local\PS4KeyboardAndMouseAdapter", then try again
+If that doesnt resolve it, please delete the folder "C:\Users\\{USER}\AppData\Local\PS4KeyboardAndMouseAdapter", restart your PC, then try again
 
 
 #### (Runtime) Application says "need to install remote play" but I already have it installed
