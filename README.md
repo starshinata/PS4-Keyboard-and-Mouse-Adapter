@@ -38,7 +38,7 @@ Try our discord here https://discord.gg/zH4b8p4 where you can either suggest ide
 * support for analog input like from a controller stick, controller trigger, or Steering wheel
 * supporting ps5
 * support linux/mac 
-* support chaikis
+* support chiaki https://git.sr.ht/~thestr4ng3r/chiaki
 
 
 ## Documentation
