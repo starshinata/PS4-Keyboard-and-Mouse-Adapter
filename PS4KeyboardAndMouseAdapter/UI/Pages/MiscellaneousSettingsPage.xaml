@@ -5,7 +5,13 @@
              xmlns:controls="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Controls"
              >
 
+
     <Grid>
-        <controls:MiscellaneousSettingsControl/>
+        <ScrollViewer
+            HorizontalScrollBarVisibility="Auto"
+            VerticalScrollBarVisibility="Auto"
+            x:Name="scrollViewer">
+            <controls:MiscellaneousSettingsControl/>
+        </ScrollViewer>
     </Grid>
 </UserControl>
