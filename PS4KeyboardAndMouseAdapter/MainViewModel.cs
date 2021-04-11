@@ -1,5 +1,6 @@
 ﻿using PS4KeyboardAndMouseAdapter.Config;
 using Serilog;
+using System;
 
 namespace PS4KeyboardAndMouseAdapter
 {
@@ -10,25 +11,23 @@ namespace PS4KeyboardAndMouseAdapter
 
         public UserSettings UserSettings { get; set; } = UserSettings.GetInstance();
 
-        public RemotePlayInjector RemotePlayInjector;
+        public GamepadProcessor GamepadProcessor;
 
         public string WindowTitle { get; set; } = "PS4 Keyboard&Mouse Adapter v" + VersionUtil.GetVersion();
 
         public MainViewModel()
         {
             Log.Information("MainViewModel constructor IN");
-
-            GamepadProcessor gp = new GamepadProcessor();
-            RemotePlayInjector = new RemotePlayInjector(gp);
-            RemotePlayInjector.OpenRemotePlayAndInject();
-
+            GamepadProcessor = new GamepadProcessor();
             Log.Information("MainViewModel constructor OUT");
         }
 
         public void RefreshData()
         {
+            Console.WriteLine("MainViewModel RefreshData IN");
             InstanceSettings.BroadcastRefresh();
             UserSettings.BroadcastRefresh();
+            Console.WriteLine("MainViewModel RefreshData IN");
         }
 
     }

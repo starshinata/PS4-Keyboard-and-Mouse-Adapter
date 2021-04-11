@@ -19,11 +19,13 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
 
         public AdvancedMappingsPage()
         {
+            Console.WriteLine("AdvancedMappingsPage init IN");
             InitializeComponent();
             WaitingForKeyPress_Hide();
 
             Settings = UserSettings.GetInstance();
             PopulateWithMappings();
+            Console.WriteLine("AdvancedMappingsPage init OUT");
         }
 
         private void GotFocusLocal(object sender, RoutedEventArgs e)

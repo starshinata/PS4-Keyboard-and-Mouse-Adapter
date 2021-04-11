@@ -49,9 +49,7 @@ namespace PS4KeyboardAndMouseAdapter
 
         private bool OpenRemotePlay()
         {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
-
-            string exeLocation = path + @"\Sony\PS Remote Play\RemotePlay.exe";
+            string exeLocation = ApplicationSettings.GetInstance().RemotePlayPath;
 
             if (File.Exists(exeLocation))
             {

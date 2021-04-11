@@ -26,6 +26,7 @@ namespace PS4KeyboardAndMouseAdapter
             Utility.ShowCursor(true);
 
             UserSettings.Save(UserSettings.PROFILE_PREVIOUS);
+            ApplicationSettings.Save();
 
             //TODO: hardcoded, fix.
             //Injector.FindProcess("RemotePlay").Kill();
@@ -41,6 +42,7 @@ namespace PS4KeyboardAndMouseAdapter
             // cause not having a cursor is a pain in the ass
             Utility.ShowCursor(true);
 
+            ApplicationSettings.Load();
             UserSettings.LoadPrevious();
 
             await UpdateIfAvailable();
@@ -62,7 +64,7 @@ namespace PS4KeyboardAndMouseAdapter
             try
             {
                 Log.Information("App.UpdateIfAvailable() trying GitHubUpdateManager");
-                using (var mgr = await UpdateManager.GitHubUpdateManager("https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter"))
+                using (UpdateManager mgr = await UpdateManager.GitHubUpdateManager("https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter"))
                 {
                     Log.Information("App.UpdateIfAvailable() trying UpdateApp");
                     await mgr.UpdateApp();

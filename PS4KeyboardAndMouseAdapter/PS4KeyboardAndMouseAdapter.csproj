@@ -245,59 +245,48 @@
     <Reference Include="WPFSpark, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\WPFSpark.1.4.0\lib\net461\WPFSpark.dll</HintPath>
     </Reference>
-    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Extended.Wpf.Toolkit.3.8.1\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
-    </Reference>
-    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Extended.Wpf.Toolkit.3.8.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
-    </Reference>
-    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Extended.Wpf.Toolkit.3.8.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
-    </Reference>
-    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Extended.Wpf.Toolkit.3.8.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
-    </Reference>
-    <Reference Include="Xceed.Wpf.Toolkit, Version=3.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Extended.Wpf.Toolkit.3.8.1\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AudioManager.cs" />
-    <Compile Include="Config\ExtraButtons.cs" />
-    <Compile Include="ListUtil.cs" />
-    <Compile Include="MouseWheelScrollProcessor.cs" />
-    <Compile Include="MouseWheelProcessor.cs" />
-    <Compile Include="ProcessUtil.cs" />
-    <Compile Include="RemotePlayConstants.cs" />
+    <Compile Include="backend\AudioManager.cs" />
+    <Compile Include="backend\Config\ExtraButtons.cs" />
+    <Compile Include="backend\Config\ApplicationSettings.cs" />
+    <Compile Include="backend\ListUtil.cs" />
+    <Compile Include="backend\MouseWheelScrollProcessor.cs" />
+    <Compile Include="backend\MouseWheelProcessor.cs" />
+    <Compile Include="backend\ProcessUtil.cs" />
+    <Compile Include="backend\RemotePlayConstants.cs" />
     <Compile Include="UI\Controls\MiscellaneousSettingsControl.xaml.cs">
       <DependentUpon>MiscellaneousSettingsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="VersionUtil.cs" />
-    <Compile Include="WindowUtil.cs" />
-    <Compile Include="Config\KeyUtility.cs" />
-    <Compile Include="Config\MouseButton.cs" />
-    <Compile Include="Config\PhysicalKeyGroup.cs" />
-    <Compile Include="Config\PhysicalKey.cs" />
-    <Compile Include="Config\InstanceSettings.cs" />
-    <Compile Include="Config\UserSettings_1_0_11.cs" />
-    <Compile Include="Config\UserSettings.cs" />
-    <Compile Include="Config\UserSettings_Instance.cs" />
-    <Compile Include="Config\UserSettings_Static.cs" />
-    <Compile Include="Config\VirtualKey.cs" />
-    <Compile Include="Dll\Rect.cs" />
-    <Compile Include="Dll\User32.cs" />
-    <Compile Include="GamepadProcessor.cs" />
-    <Compile Include="RemotePlayInjector.cs" />
-    <Compile Include="MouseAnchor.cs" />
+    <Compile Include="backend\VersionUtil.cs" />
+    <Compile Include="backend\WindowUtil.cs" />
+    <Compile Include="backend\Config\KeyUtility.cs" />
+    <Compile Include="backend\Config\MouseButton.cs" />
+    <Compile Include="backend\Config\PhysicalKeyGroup.cs" />
+    <Compile Include="backend\Config\PhysicalKey.cs" />
+    <Compile Include="backend\Config\InstanceSettings.cs" />
+    <Compile Include="backend\Config\UserSettings_1_0_11.cs" />
+    <Compile Include="backend\Config\UserSettings.cs" />
+    <Compile Include="backend\Config\UserSettings_Instance.cs" />
+    <Compile Include="backend\Config\UserSettings_Static.cs" />
+    <Compile Include="backend\Config\VirtualKey.cs" />
+    <Compile Include="backend\Dll\Rect.cs" />
+    <Compile Include="backend\Dll\User32.cs" />
+    <Compile Include="backend\GamepadProcessor.cs" />
+    <Compile Include="backend\RemotePlayInjector.cs" />
+    <Compile Include="backend\MouseAnchor.cs" />
     <Compile Include="UI\Controls\GamepadMappingController.xaml.cs">
       <DependentUpon>GamepadMappingController.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\MouseSettingsSimpleControl.xaml.cs">
       <DependentUpon>MouseSettingsSimpleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\Welcome\RemotePlayConnectedControl.xaml.cs">
+      <DependentUpon>RemotePlayConnectedControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Pages\SimpleConfigPage.xaml.cs">
       <DependentUpon>SimpleConfigPage.xaml</DependentUpon>
@@ -329,9 +318,19 @@
     <Compile Include="UI\Pages\MiscellaneousSettingsPage.xaml.cs">
       <DependentUpon>MiscellaneousSettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Controls\Welcome\PlaystationControl.xaml.cs">
+      <DependentUpon>PlaystationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\WelcomePage.xaml.cs">
+      <DependentUpon>WelcomePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\UIConstants.cs" />
     <Compile Include="UI\UITools.cs" />
-    <Page Include="MainWindowView.xaml">
+    <Page Include="UI\Controls\Welcome\RemotePlayConnectedControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\MainWindowView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -340,7 +339,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MainViewModel.cs" />
-    <Compile Include="MainWindowView.xaml.cs">
+    <Compile Include="UI\MainWindowView.xaml.cs">
       <DependentUpon>MainWindowView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -393,6 +392,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Pages\MiscellaneousSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Controls\Welcome\PlaystationControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\WelcomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

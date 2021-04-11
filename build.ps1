@@ -13,7 +13,7 @@ $ErrorActionPreference = "Stop"
 ## might need configuring
 $CERT_DIRECTORY="D:\workspace\##certificates\github.com-pancakeslp"
 
-$VERSION="2.1.0"
+$VERSION="2.2.0"
 
 ################################
 ################################
