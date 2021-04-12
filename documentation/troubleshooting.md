@@ -7,8 +7,11 @@
   https://www.rewasd.com/ <br>
   Rewasd being installed can cause interference with this application
 
-* Make sure that "PS Remote Play" is closed before starting the adapter <br>
-  (PS4KeyboardAndMouseAdapter will start "PS Remote Play" once we detect where is it installed)
+* Make sure that "PS Remote Play" is closed before starting the adapter
+
+* Do not start "PS Remote Play" yourself <br>
+  If you start "PS Remote Play" yourself, the adapter be able to connect to that instance of remote play <br>
+  (PS4KeyboardAndMouseAdapter will start "PS Remote Play" once we detect where it is installed)  
 
 * If you have a DS4 or DS5 controller/gamepad, unplug it from computer <br>
   Either being plugged in can cause interference with this application
