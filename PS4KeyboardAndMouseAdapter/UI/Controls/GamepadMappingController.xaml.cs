@@ -61,11 +61,11 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
             lastClickedButton = sender;
 
             WaitForKeyPress.Opacity = 0.7;
-            JoystickImage.Opacity = UIConstants.LowVisibility;
+            JoystickImage.Opacity = UIConstants.LOW_VISIBILITY;
 
             foreach (Button button in UITools.FindVisualChildren<Button>(this))
             {
-                button.Opacity = UIConstants.LowVisibility;
+                button.Opacity = UIConstants.LOW_VISIBILITY;
                 button.IsEnabled = false;
             }
         }

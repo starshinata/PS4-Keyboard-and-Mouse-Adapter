@@ -253,8 +253,9 @@ build-msbuild
 test-vstest
 
 echo ""
-Copy-Item                   profiles\default-profile.json            PS4KeyboardAndMouseAdapter\bin\Release\profile-previous.json
-Copy-Item  -recurse -Force  profiles                                 PS4KeyboardAndMouseAdapter\bin\Release\profiles              
+Copy-Item                   profiles\default-profile.json                           PS4KeyboardAndMouseAdapter\bin\Release\profile-previous.json
+Copy-Item  -recurse -Force  profiles                                                PS4KeyboardAndMouseAdapter\bin\Release\profiles              
+Copy-Item                   PS4KeyboardAndMouseAdapter\application-settings.json    PS4KeyboardAndMouseAdapter\bin\Release\application-settings.json
 
 sign-executables
 

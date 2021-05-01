@@ -252,6 +252,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="backend\AudioManager.cs" />
+    <Compile Include="backend\PlaystationControllerDetector.cs" />
+    <Compile Include="backend\RewasdDetector.cs" />
     <Compile Include="backend\Config\ExtraButtons.cs" />
     <Compile Include="backend\Config\ApplicationSettings.cs" />
     <Compile Include="backend\ListUtil.cs" />
@@ -428,6 +430,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="application-settings.json" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">

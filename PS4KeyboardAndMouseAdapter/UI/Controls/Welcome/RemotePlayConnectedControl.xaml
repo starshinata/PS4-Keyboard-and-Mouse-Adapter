@@ -4,8 +4,25 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="200" d:DesignWidth="400">
+             d:DesignHeight="100" d:DesignWidth="600">
     <StackPanel>
+        <TextBlock 
+            HorizontalAlignment="Center"
+            TextWrapping="Wrap">
+            We just started 'PS Remote Play' for you. In the remote play window, please connect to your PS4.
+        </TextBlock>
+
+        <!-- used as spacer -->
+        <TextBlock/>
+
+        <TextBlock 
+            HorizontalAlignment="Center"
+            TextWrapping="Wrap">
+            Once you have connected to your PS4, click the button below</TextBlock>
+
+        <!-- used as spacer -->
+        <TextBlock/>
+
         <Button 
             Click="Button_Click"
             Content="Connect Adapter"

@@ -4,9 +4,23 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="200" d:DesignWidth="700">
+             d:DesignHeight="700" d:DesignWidth="700">
     <StackPanel>
+        
+        <TextBlock />
+        
+        <TextBlock FontWeight="Bold" FontSize="16">Check 1</TextBlock>
+        <TextBlock TextWrapping="Wrap">Check reWASD is not installed?</TextBlock>
+        <TextBlock TextWrapping="Wrap">reWASD is known to conflict with this application, if it is detected, please uninstall reWASD,</TextBlock>
+        <TextBlock 
+            Visibility="Hidden"
+            x:Name="ErrorTextBox_Rewasd"
+            />
 
+        <!-- used as a spacer -->
+        <TextBlock />
+
+        <TextBlock FontWeight="Bold" FontSize="16">Check 2</TextBlock>
         <TextBlock TextWrapping="Wrap">Where is 'PS RemotePlay' installed?</TextBlock>
 
         <Button
@@ -20,7 +34,13 @@
             Text="placeholder - C:\Program Files (x86)\Sony\PS Remote Play\RemotePlay.exe - placeholder"
             x:Name="RemotePlayTextBox"
             />
-
+        
+        <Button
+            Click="Handle_CheckRemoteRemotePlayPath"
+            Content="Check Path"
+            HorizontalAlignment="Left"
+            Width="200px"
+            />
         <TextBlock 
             Foreground="Red"
             Visibility="Hidden"
@@ -36,15 +56,38 @@
         <RadioButton Content="PS5" />
         -->
 
+        <TextBlock FontWeight="Bold" FontSize="16">Check 3</TextBlock>
+        <TextBlock TextWrapping="Wrap">Is a  Playstation Controller already connected?</TextBlock>
+        <TextBlock TextWrapping="Wrap">If a  Playstation Controller is connected, either disconnect it or select NO for emulate</TextBlock>
+            
+        <Button
+            Content="Recheck for Playstation Controller"
+            HorizontalAlignment="Left"
+            Width="200px" Click="Handle_DetectPlaystationController"
+            />
+        
+        <TextBlock 
+            Visibility="Hidden"
+             x:Name="ErrorTextBox_PlaystationController"
+            />
+        
+        <!--
         <TextBlock TextWrapping="Wrap">Emulate the controller?</TextBlock>
         <RadioButton Content="Yes" />
         <RadioButton Content="No" />
+        -->
 
+        <!-- used as a spacer -->
+        <TextBlock />
+        
+        <!-- used as a spacer -->
+        <TextBlock />
+        
         <Button 
             Click="Handle_LaunchRemotePlay"
             Content="Validate settings, and Launch RemotePlay"
             Width="250px"
             />
-        
+
     </StackPanel>
 </UserControl>

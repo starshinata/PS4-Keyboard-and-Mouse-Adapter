@@ -1,4 +1,5 @@
-﻿using PS4KeyboardAndMouseAdapter.Config;
+﻿using PS4KeyboardAndMouseAdapter.backend;
+using PS4KeyboardAndMouseAdapter.Config;
 using Serilog;
 using System;
 using System.IO;
@@ -13,21 +14,65 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
         {
             InitializeComponent();
 
+            ResetErrorMessages();
             RemotePlayTextBox.Text = ApplicationSettings.GetInstance().RemotePlayPath;
+            ValidateRewasdUninstalled();
+            DetectPlaystationController();
+            ValidateRemotePlayPath();
+        }
+
+        private void DetectPlaystationController()
+        {
+            PlaystationControllerDetector.DetectControllers();
+            bool isConnected = PlaystationControllerDetector.IsPlaystationControllerConnected();
+            if (isConnected)
+            {
+                ErrorTextBox_PlaystationController.Foreground = UIConstants.TEXTBOX_COLOUR_RED;
+                ErrorTextBox_PlaystationController.Text = "Warning: PS4 controller connected!";
+                ErrorTextBox_PlaystationController.Visibility = UIConstants.VISIBILITY_VISIBLE;
+            }
+            else
+            {
+                ErrorTextBox_PlaystationController.Foreground = UIConstants.TEXTBOX_COLOUR_GREEN;
+                ErrorTextBox_PlaystationController.Text = "Success: no PS4 controller connected";
+                ErrorTextBox_PlaystationController.Visibility = UIConstants.VISIBILITY_VISIBLE;
+            }
+        }
+
+        private void Handle_CheckRemoteRemotePlayPath(object sender, RoutedEventArgs e)
+        {
+            ValidateRemotePlayPath();
+        }
+
+        private void Handle_DetectPlaystationController(object sender, RoutedEventArgs e)
+        {
+            DetectPlaystationController();
         }
 
         private void Handle_LaunchRemotePlay(object sender, RoutedEventArgs e)
         {
             ResetErrorMessages();
 
-            if (!File.Exists(RemotePlayTextBox.Text))
+            //This one is just a warning, as I suspect that other PS4 controllers might have other Ids
+            DetectPlaystationController();
+
+            bool IsGoodRemotePlayPath = ValidateRemotePlayPath();
+            bool IsGoodRewasd = ValidateRewasdUninstalled();
+
+            if (!IsGoodRemotePlayPath)
             {
-                ErrorTextBox_RemotePlayPath.Text = "Error: Path doesn't exist!";
-                ErrorTextBox_RemotePlayPath.Visibility = UIConstants.VisibilityVisible;
+                return;
+            }
+
+            if (!IsGoodRewasd)
+            {
                 return;
             }
 
             ApplicationSettings.GetInstance().RemotePlayPath = RemotePlayTextBox.Text;
+
+            Window window = System.Windows.Application.Current.MainWindow;
+            ((MainWindowView)window).WelcomeStep1Done();
 
             GamepadProcessor gp = ((MainViewModel)DataContext).GamepadProcessor;
             Console.WriteLine("gp " + gp);
@@ -50,7 +95,6 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
                     RemotePlayTextBox.Text = openFileDialog.FileName;
                 }
             }
-
             catch (Exception ex)
             {
                 Log.Logger.Error("HandleLoad failed: " + ex.Message);
@@ -59,11 +103,60 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
             }
         }
 
-
         private void ResetErrorMessages()
         {
+            ErrorTextBox_PlaystationController.Text = "";
+            ErrorTextBox_PlaystationController.Visibility = UIConstants.VISIBILITY_HIDDEN;
+
+            ErrorTextBox_Rewasd.Text = "";
+            ErrorTextBox_Rewasd.Visibility = UIConstants.VISIBILITY_HIDDEN;
+
             ErrorTextBox_RemotePlayPath.Text = "";
-            ErrorTextBox_RemotePlayPath.Visibility = UIConstants.VisibilityHidden;
+            ErrorTextBox_RemotePlayPath.Visibility = UIConstants.VISIBILITY_HIDDEN;
+        }
+
+        /// <returns>
+        /// returns true if rewasd is not installed
+        /// </returns>
+        private bool ValidateRewasdUninstalled()
+        {
+            string rewasdPath = RewasdDetector.GetExistingRewadPath();
+            if (rewasdPath == null)
+            {
+                ErrorTextBox_Rewasd.Foreground = UIConstants.TEXTBOX_COLOUR_GREEN;
+                ErrorTextBox_Rewasd.Text = "Success: reWASD was not detected";
+                ErrorTextBox_Rewasd.Visibility = UIConstants.VISIBILITY_VISIBLE;
+                return true;
+            }
+            else
+            {
+                ErrorTextBox_Rewasd.Foreground = UIConstants.TEXTBOX_COLOUR_RED;
+                ErrorTextBox_Rewasd.Text = "Error: reWASD detected at " + rewasdPath;
+                ErrorTextBox_Rewasd.Visibility = UIConstants.VISIBILITY_VISIBLE;
+                return false;
+            }
+        }
+
+        /// <returns>
+        /// returns true if remote play valid exists
+        /// </returns>
+        private bool ValidateRemotePlayPath()
+        {
+            if (File.Exists(RemotePlayTextBox.Text))
+            {
+
+                ErrorTextBox_RemotePlayPath.Foreground = UIConstants.TEXTBOX_COLOUR_GREEN;
+                ErrorTextBox_RemotePlayPath.Text = "Success: Path exists!";
+                ErrorTextBox_RemotePlayPath.Visibility = UIConstants.VISIBILITY_VISIBLE;
+                return true;
+            }
+            else
+            {
+                ErrorTextBox_RemotePlayPath.Foreground = UIConstants.TEXTBOX_COLOUR_RED;
+                ErrorTextBox_RemotePlayPath.Text = "Error: Path doesn't exist!";
+                ErrorTextBox_RemotePlayPath.Visibility = UIConstants.VISIBILITY_VISIBLE;
+                return false;
+            }
         }
     }
 }

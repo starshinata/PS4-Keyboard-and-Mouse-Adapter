@@ -16,6 +16,9 @@ namespace PS4KeyboardAndMouseAdapter.Config
         public static string PROFILE_PREVIOUS = "profile-previous.json";
 
         private static UserSettings ThisInstance = new UserSettings();
+
+        // TODO why doesnt this logger work 
+        // is it because it is in a partial class ?
         private static readonly ILogger StaticLogger = Log.ForContext(typeof(UserSettings));
 
 

@@ -6,23 +6,15 @@
       
       xmlns:welcome="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Controls.Welcome"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="400"
+      d:DesignHeight="600" 
+      d:DesignWidth="600"
       >
 
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Top">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="7*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="2*" />
-            <RowDefinition Height="1*" />
-        </Grid.RowDefinitions>
+    <StackPanel>
 
         <TextBlock 
             Grid.Row="0"
-            FontSize="20" 
+            FontSize="30" 
             Text="Welcome!"
             HorizontalAlignment="Center"
             />
@@ -33,16 +25,14 @@
             />
 
         <!-- row 2 intentionally empty -->
-        <TextBlock 
-            Grid.Row="2"    
-            Text=""
-            />
+        <TextBlock Text="" />
 
         <Expander 
-            Grid.Row="3"
-            HorizontalContentAlignment="Stretch" IsExpanded="True">
+            HorizontalContentAlignment="Stretch" 
+            IsExpanded="True"
+            x:Name="Expander_Step1">
             <Expander.Header>
-                <TextBlock FontWeight="Bold" Margin="10,0,0,0">Step 1</TextBlock>
+                <TextBlock FontWeight="Bold" FontSize="20" Margin="10,0,0,0">Step 1</TextBlock>
             </Expander.Header>
             <Expander.Content>
                 <welcome:PlaystationControl />
@@ -50,11 +40,16 @@
         </Expander>
 
         <!-- row 4 intentionally empty -->
+        <TextBlock Text="" />
 
         <Expander
-            Grid.Row="5" HorizontalContentAlignment="Stretch" IsExpanded="True">
+            HorizontalContentAlignment="Stretch" 
+            IsEnabled="False"
+            IsExpanded="False"
+            Visibility="Hidden"
+            x:Name="Expander_Step2">
             <Expander.Header>
-                <TextBlock FontWeight="Bold" Margin="10,0,0,0">Step 2</TextBlock>
+                <TextBlock FontWeight="Bold" FontSize="20" Margin="10,0,0,0">Step 2</TextBlock>
             </Expander.Header>
             <Expander.Content>
                 <StackPanel Margin="40,0,0,0">
@@ -63,5 +58,5 @@
             </Expander.Content>
         </Expander>
 
-    </Grid>
+    </StackPanel>
 </UserControl>

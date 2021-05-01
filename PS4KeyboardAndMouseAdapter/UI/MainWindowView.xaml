@@ -36,7 +36,9 @@
                         Width="200px"
                         />
                 </TabItem.Header>
-                <pages:WelcomePage />
+                <pages:WelcomePage
+                    x:Name="pageWelcomePage"
+                    />
             </TabItem>
 
         </TabControl>

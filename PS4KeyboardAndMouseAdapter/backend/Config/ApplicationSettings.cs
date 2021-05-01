@@ -9,10 +9,10 @@ namespace PS4KeyboardAndMouseAdapter.Config
     // a collection of settings are not bound to a specific game
     public class ApplicationSettings : INotifyPropertyChanged
     {
-        private static string APPLICATION_SETTINGS_FILE = "application-settings.json";
+        private static readonly string APPLICATION_SETTINGS_FILE = "application-settings.json";
 
         private static readonly ApplicationSettings ThisInstance = new ApplicationSettings();
-        private static readonly ILogger StaticLogger = Log.ForContext(typeof(UserSettings));
+        private static readonly ILogger StaticLogger = Log.ForContext(typeof(ApplicationSettings));
 
         //////////////////////////////////////////////////////////////////////
 
