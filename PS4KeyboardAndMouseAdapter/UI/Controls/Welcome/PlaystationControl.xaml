@@ -34,13 +34,28 @@
             Text="placeholder - C:\Program Files (x86)\Sony\PS Remote Play\RemotePlay.exe - placeholder"
             x:Name="RemotePlayTextBox"
             />
+
+
+        <StackPanel Orientation="Horizontal">
+            <Button
+                Click="Handle_CheckRemoteRemotePlayPath"
+                Content="Check Path"
+                HorizontalAlignment="Left"
+                Width="200px"
+                />
+            
+            <!-- used as a spacer -->
+            <TextBlock 
+                Width="20px"/>
+            
+            <Button
+                Click="Handle_InstallRemotePlay"
+                Content="Install latest Remote Play version"
+                HorizontalAlignment="Left"
+                Width="200px"
+                />
+        </StackPanel>
         
-        <Button
-            Click="Handle_CheckRemoteRemotePlayPath"
-            Content="Check Path"
-            HorizontalAlignment="Left"
-            Width="200px"
-            />
         <TextBlock 
             Foreground="Red"
             Visibility="Hidden"

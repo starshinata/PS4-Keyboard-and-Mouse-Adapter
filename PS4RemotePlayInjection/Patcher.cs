@@ -18,10 +18,17 @@ namespace PS4RemotePlayInjection
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
             var dll = assemblies?.FirstOrDefault(x => x.FullName.Contains("RemotePlay"));
-            var types = dll?.GetTypes();
+            Type[] types = dll?.GetTypes();
+
+            server.Print("Patcher.DoPatching all types ");
+            foreach (var aType in types)
+            {
+                server.Print("type " + aType);
+            }
 
             // Show toolbar patch
             var type = types?.FirstOrDefault(x => x.Name.Equals("StreamingToolBar"));
+            server.Print("Patcher.DoPatching type " + type);
 
             var showToolBarMethod = AccessTools.Method(type, "ShowToolBar");
             var showToolBarPrefix = SymbolExtensions.GetMethodInfo(() => ShowToolBarPrefix());

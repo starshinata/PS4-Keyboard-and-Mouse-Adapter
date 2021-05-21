@@ -64,7 +64,9 @@ namespace PS4RemotePlayInterceptor
 
         public bool ShouldHideToolbar()
         {
-            return !Utility.IsToolBarVisible;
+            var x = !Utility.IsToolBarVisible;
+            Log.Logger.Information("InjectionInterface.ShouldHideToolbar {0}", x);
+            return x;
         }
 
         /// <summary>

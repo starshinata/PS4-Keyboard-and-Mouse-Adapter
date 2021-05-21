@@ -4,8 +4,8 @@ namespace PS4KeyboardAndMouseAdapter.backend
 {
     class PlaystationControllerDetector
     {
-        private static int PS4CONTROLLER_PRODUCT_ID = 2508;
-        private static int PS4CONTROLLER_VENDOR_ID = 1356;
+        private static readonly int PS4CONTROLLER_PRODUCT_ID = 2508;
+        private static readonly int PS4CONTROLLER_VENDOR_ID = 1356;
 
         private static readonly ILogger StaticLogger = Log.ForContext(typeof(PlaystationControllerDetector));
 

@@ -1,10 +1,13 @@
 ﻿using PS4KeyboardAndMouseAdapter.Config;
 using PS4RemotePlayInjection;
 using PS4RemotePlayInterceptor;
+using Serilog;
 using SFML.System;
 using SFML.Window;
+using System;
 using System.Diagnostics;
 using System.Numerics;
+using System.Text;
 
 namespace PS4KeyboardAndMouseAdapter
 {
@@ -333,6 +336,61 @@ namespace PS4KeyboardAndMouseAdapter
             return false;
         }
 
+        private string DualShockStateToString(ref DualShockState state)
+        {
+            StringBuilder sb = new StringBuilder();
+
+
+            sb.Append(", 'L1':");
+            sb.Append(state.L1);
+            sb.Append(", 'L2':");
+            sb.Append(state.L2);
+            sb.Append(", 'L3':");
+            sb.Append(state.L3);
+
+            sb.Append(", 'Lx':");
+            sb.Append(state.LX);
+            sb.Append(", 'Ly':");
+            sb.Append(state.LY);
+
+            sb.Append(", 'R1':");
+            sb.Append(state.R1);
+            sb.Append(", 'R2':");
+            sb.Append(state.R2);
+            sb.Append(", 'R3':");
+            sb.Append(state.R3);
+
+            sb.Append(", 'Rx':");
+            sb.Append(state.RX);
+            sb.Append(", 'Ry':");
+            sb.Append(state.RY);
+
+            sb.Append(", 'circle':");
+            sb.Append(state.Circle);
+            sb.Append(", 'cross':");
+            sb.Append(state.Cross);
+            sb.Append(", 'square':");
+            sb.Append(state.Square);
+            sb.Append(", 'triangle':");
+            sb.Append(state.Triangle);
+
+            sb.Append(", 'DPad_Up':");
+            sb.Append(state.DPad_Up);
+            sb.Append(", 'DPad_Down':");
+            sb.Append(state.DPad_Down);
+            sb.Append(", 'DPad_Left':");
+            sb.Append(state.DPad_Left);
+            sb.Append(", 'DPad_Right':");
+            sb.Append(state.DPad_Right);
+
+            sb.Append(", 'PS':");
+            sb.Append(state.PS);
+
+            sb.Append("}");
+
+            return sb.ToString();
+        }
+
         public void OnReceiveData(ref DualShockState state)
         {
             // Create the default state to modify
@@ -347,11 +405,16 @@ namespace PS4KeyboardAndMouseAdapter
                 return;
             }
 
+            Guid uuid = Guid.NewGuid();
+            Log.Logger.Error(uuid + " GamepadProcessor.OnReceiveData in");
+
             HandleButtonPressed();
 
             HandleAimToggle();
             HandleMouseCursor();
             MouseWheelProcessor.Process(CurrentState);
+
+            Log.Logger.Error(uuid + " GamepadProcessor.OnReceiveData out " + DualShockStateToString(ref CurrentState));
 
             // Assign the state
             state = CurrentState;

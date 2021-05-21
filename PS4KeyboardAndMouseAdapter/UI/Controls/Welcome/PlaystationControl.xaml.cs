@@ -2,7 +2,9 @@
 using PS4KeyboardAndMouseAdapter.Config;
 using Serilog;
 using System;
+using System.Diagnostics;
 using System.IO;
+using System.Net;
 using System.Windows;
 using System.Windows.Forms;
 
@@ -47,6 +49,11 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
         private void Handle_DetectPlaystationController(object sender, RoutedEventArgs e)
         {
             DetectPlaystationController();
+        }
+
+        private void Handle_InstallRemotePlay(object sender, RoutedEventArgs e)
+        {
+            RunRemotePlaySetup();
         }
 
         private void Handle_LaunchRemotePlay(object sender, RoutedEventArgs e)
@@ -113,6 +120,20 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
 
             ErrorTextBox_RemotePlayPath.Text = "";
             ErrorTextBox_RemotePlayPath.Visibility = UIConstants.VISIBILITY_HIDDEN;
+        }
+
+        private void RunRemotePlaySetup()
+        {
+            string installerName = "RemotePlayInstaller.exe";
+
+            using (WebClient client = new WebClient())
+            {
+                client.DownloadFile("https://remoteplay.dl.playstation.net/remoteplay/module/win/RemotePlayInstaller.exe", installerName);
+            }
+
+            Log.Information("RunRemotePlaySetup - RemotePlay installer started");
+            Process installerProcess = Process.Start(installerName);
+            installerProcess.EnableRaisingEvents = true;
         }
 
         /// <returns>

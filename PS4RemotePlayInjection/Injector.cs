@@ -1,12 +1,11 @@
-﻿using System;
+﻿using EasyHook;
+using Serilog;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels.Ipc;
 using System.Security.Principal;
-using EasyHook;
-using PS4RemotePlayInjection;
-using Serilog;
 
 namespace PS4RemotePlayInterceptor
 {
@@ -27,9 +26,6 @@ namespace PS4RemotePlayInterceptor
         private static IpcServerChannel _ipcServer2;
         private static bool _noGAC = false;
 
-        // Watchdog
-        private static Watchdog m_Watchdog = new Watchdog();
-        public static Watchdog Watchdog => m_Watchdog;
         public static DateTime LastPingTime { get; set; }
 
         // Injection
@@ -54,11 +50,12 @@ namespace PS4RemotePlayInterceptor
 
             // Full path to our dll file
             string injectionLibrary = Path.Combine(Path.GetDirectoryName(typeof(InjectionInterface).Assembly.Location), dllToInject);
+            Log.Information("Injector.Inject() injectionLibrary " + injectionLibrary);
 
+
+            bool shouldInject = false;
             try
             {
-                bool shouldInject = false;
-
                 if (InjectionMode == InjectionMode.Auto)
                 {
                     if (_ipcServer == null)
@@ -66,6 +63,7 @@ namespace PS4RemotePlayInterceptor
                         // Setup remote hooking
                         _channelName = DateTime.Now.ToString("yy-MM-dd hh:mm:ss");
                         _ipcServer = RemoteHooking.IpcCreateServer<InjectionInterface>(ref _channelName, WellKnownObjectMode.Singleton, WellKnownSidType.WorldSid);
+
                         _channelName2 = "dotnethooks";
                         _ipcServer2 = RemoteHooking.IpcCreateServer<InjectionInterface>(ref _channelName2, WellKnownObjectMode.Singleton, WellKnownSidType.WorldSid);
                         shouldInject = true;
@@ -79,6 +77,17 @@ namespace PS4RemotePlayInterceptor
                 //     shouldInject = true;
                 // }
 
+            }
+            catch (Exception ex)
+            {
+                string error = string.Format("Failed to setup IPC server: {0}", ex.Message);
+                Log.Error(error);
+                Log.Error(ex.StackTrace);
+                throw new InterceptorException(error, ex);
+            }
+
+            try
+            {
                 // Inject dll into the process
                 if (shouldInject)
                 {
@@ -99,6 +108,7 @@ namespace PS4RemotePlayInterceptor
             {
                 string error = string.Format("Failed to inject to target: {0}", ex.Message);
                 Log.Error(error);
+                Log.Error(ex.StackTrace);
                 throw new InterceptorException(error, ex);
             }
         }

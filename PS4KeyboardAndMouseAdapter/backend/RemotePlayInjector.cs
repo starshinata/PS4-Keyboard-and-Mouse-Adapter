@@ -2,7 +2,6 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Net;
 using System.Threading;
 using System.Windows;
 using System.Windows.Forms;
@@ -92,19 +91,6 @@ namespace PS4KeyboardAndMouseAdapter
                 {
                     Inject();
                 }
-                else
-                {
-                    Process installerProcess = RunRemotePlaySetup();
-                    installerProcess.EnableRaisingEvents = true;
-                    installerProcess.Exited += (sender, args) =>
-                    {
-                        OpenRemotePlay();
-                        Inject();
-                        waitHandle.Set();
-                    };
-
-                    waitHandle.WaitOne();
-                }
             }
             catch (Exception e)
             {
@@ -122,23 +108,7 @@ namespace PS4KeyboardAndMouseAdapter
             }
         }
 
-        private Process RunRemotePlaySetup()
-        {
-            System.Windows.MessageBox.Show(
-                "In order to play, PS Remote Play is required. Do you want to install it now?",
-                "Install PS Remote play",
-                MessageBoxButton.OK);
 
-            string installerName = "RemotePlayInstaller.exe";
-
-            using (WebClient client = new WebClient())
-            {
-                client.DownloadFile("https://remoteplay.dl.playstation.net/remoteplay/module/win/RemotePlayInstaller.exe", installerName);
-            }
-
-            Log.Information("RemotePlay installer start requested-142");
-            return Process.Start(installerName);
-        }
 
     }
 }

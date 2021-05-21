@@ -153,6 +153,9 @@
     <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\packages\Serilog.2.9.0\lib\net46\Serilog.dll</HintPath>
     </Reference>
+    <Reference Include="Serilog.Sinks.Console, Version=3.1.1.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.Console.3.1.1\lib\net45\Serilog.Sinks.Console.dll</HintPath>
+    </Reference>
     <Reference Include="Serilog.Sinks.File, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\packages\Serilog.Sinks.File.4.1.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
     </Reference>
@@ -219,6 +222,7 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
       <Private>True</Private>
@@ -252,7 +256,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="backend\AudioManager.cs" />
+    <Compile Include="backend\DebugLogging\DebugDump.cs" />
+    <Compile Include="backend\DebugLogging\GetOsVersion.cs" />
+    <Compile Include="backend\DebugLogging\ProcessCommandLine.cs" />
     <Compile Include="backend\PlaystationControllerDetector.cs" />
+    <Compile Include="backend\DebugLogging\ServiceComparerByName.cs" />
+    <Compile Include="backend\DebugLogging\ProcessComparerByName.cs" />
     <Compile Include="backend\RewasdDetector.cs" />
     <Compile Include="backend\Config\ExtraButtons.cs" />
     <Compile Include="backend\Config\ApplicationSettings.cs" />
