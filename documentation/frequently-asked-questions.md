@@ -79,6 +79,12 @@ and features we’re bringing to the platform, including the features of
 DualSense wireless controller.
 ```
 
+
+### How do I set the volume for individual apps on windows?
+https://www.howtogeek.com/244963/how-to-adjust-the-volume-for-individual-apps-in-windows/
+... not a  PS4KMA question, but I have been asked this repeatedly
+
+
 ### How do I uninstall PS4 KMA?
 Goto `%AppData%\..\Local\PS4KeyboardAndMouseAdapter` in windows explorer and delete everything there
 

@@ -3,8 +3,15 @@
 
 ## Recommended user environment
 
-* Make sure that "PS Remote Play" is closed before starting the adapter <br>
-  (PS4KeyboardAndMouseAdapter will start "PS Remote Play" once we detect where is it installed)
+* If you have Rewasd installed, please uninstall it <br>
+  https://www.rewasd.com/ <br>
+  Rewasd being installed can cause interference with this application
+
+* Make sure that "PS Remote Play" is closed before starting the adapter
+
+* Do not start "PS Remote Play" yourself <br>
+  If you start "PS Remote Play" yourself, the adapter be able to connect to that instance of remote play <br>
+  (PS4KeyboardAndMouseAdapter will start "PS Remote Play" once we detect where it is installed)  
 
 * If you have a DS4 or DS5 controller/gamepad, unplug it from computer <br>
   Either being plugged in can cause interference with this application
@@ -30,16 +37,21 @@
   Goto "PS Remote Play" application (without an active console connected) -> "Settings" via the cog symbol -> "Video Quality for Remote Play" tab -> pick either PS4 or PS5 > Resolution set to lowest
 
 
-
-
 ## Problems and fixes
+#### (Installation) "Installation failed"
+<img src="squirrel-installer-failed.png" alt="installer failed" width="280"/>
+
+Click on "Open Setup Log" and look for something meaningful, if you cant find something, then share the log via a github issue (https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/issues), or on our discord (https://discord.gg/zH4b8p4)
 
 
-
-#### (Installation) Could not write to "C:\Users\XYZ\AppData\Local\PS4KeyboardAndMouseAdapter"
-Can you check two things,
+#### (Installation Log) "Could not write to C:\Users\\{USER}\AppData\Local\PS4KeyboardAndMouseAdapter" or "Couldn't write out staging user ID, this user probably shouldn't get beta anything"
+Can you check three things,
 * PS4KeyboardAndMouseAdapter.exe is not running
+* PS Remote play is not running
 * your antivirus hasnt quarantined PS4KeyboardAndMouseAdapter.exe (we have been flagged as a virus because we arent vetted by a big/known/trusted corporation). <br> We submit executable scans to https://www.virustotal.com/ for every release, and they have yet to detect a real threat.
+
+If that doesnt resolve it, please delete the folder "C:\Users\\{USER}\AppData\Local\PS4KeyboardAndMouseAdapter", restart your PC, then try again
+
 
 #### (Runtime) Application says "need to install remote play" but I already have it installed
 If you are on PS4KeyboardAndMouseAdapter v1.0.7 or lower, you need to upgrade to a newer version. Sometime in October 2020 Sony issued a new version of "PS Remote Play" to support PS5, that broke some things in older versions of our application.

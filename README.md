@@ -14,7 +14,7 @@ Click the images for bigger views
 
 
 ## DOWNLOAD
-:rocket: Click Download!--> [here (v2.0.0)](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/2.0.0/Setup.exe)
+:rocket: Click Download!--> [here (v2.1.0)](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/2.1.0/Setup.exe)
 
 
 ## Troubleshooting
@@ -38,7 +38,7 @@ Try our discord here https://discord.gg/zH4b8p4 where you can either suggest ide
 * support for analog input like from a controller stick, controller trigger, or Steering wheel
 * supporting ps5
 * support linux/mac 
-* support chaikis
+* support chiaki https://git.sr.ht/~thestr4ng3r/chiaki
 
 
 ## Documentation
