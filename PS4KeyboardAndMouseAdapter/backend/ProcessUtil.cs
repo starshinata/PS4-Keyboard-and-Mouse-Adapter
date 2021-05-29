@@ -1,4 +1,5 @@
 ﻿using PS4KeyboardAndMouseAdapter.Config;
+using Serilog;
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -15,7 +16,12 @@ namespace PS4KeyboardAndMouseAdapter
             if (process == null)
                 return false;
 
+            Log.Logger.Debug(" ProcessUtil.IsInForeground process a " + process);
+            Log.Logger.Debug(" ProcessUtil.IsInForeground process b " + process.MainWindowHandle);
+
             IntPtr activeWindow = GetForegroundWindow();
+
+            Log.Logger.Debug(" ProcessUtil.IsInForeground activeWindow " + activeWindow);
 
             if (activeWindow == IntPtr.Zero)
                 return false;
@@ -23,6 +29,7 @@ namespace PS4KeyboardAndMouseAdapter
             if (activeWindow != process.MainWindowHandle)
                 return false;
 
+            Log.Logger.Debug(" ProcessUtil.IsInForeground return true");
             return true;
         }
 

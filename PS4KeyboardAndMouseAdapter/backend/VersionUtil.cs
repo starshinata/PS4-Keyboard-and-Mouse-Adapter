@@ -10,5 +10,10 @@ namespace PS4KeyboardAndMouseAdapter
             Version v = Assembly.GetExecutingAssembly().GetName().Version;
             return $"{v.Major}.{v.Minor}.{v.Build}";
         }
+
+        public static string GetVersionWithBuildDate()
+        {
+            return $"{GetVersion()}.{Properties.Resources.BuildDate}";
+        }
     }
 }

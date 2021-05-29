@@ -357,3 +357,4 @@ MigrationBackup/
 /nuget/PS4KeyboardAndMouseAdapter.nuspec
 /manualBuild/nuget/PS4KeyboardAndMouseAdapter.nuspec
 /packages
+/PS4KeyboardAndMouseAdapter/Resources/BuildDate.txt

@@ -393,6 +393,9 @@ namespace PS4KeyboardAndMouseAdapter
 
         public void OnReceiveData(ref DualShockState state)
         {
+            Guid uuid = Guid.NewGuid();
+            Log.Logger.Debug(uuid + " GamepadProcessor.OnReceiveData in a");
+
             // Create the default state to modify
             if (true)//CurrentState == null)
             {
@@ -405,8 +408,7 @@ namespace PS4KeyboardAndMouseAdapter
                 return;
             }
 
-            Guid uuid = Guid.NewGuid();
-            Log.Logger.Error(uuid + " GamepadProcessor.OnReceiveData in");
+            Log.Logger.Debug(uuid + " GamepadProcessor.OnReceiveData in b");
 
             HandleButtonPressed();
 
@@ -414,7 +416,7 @@ namespace PS4KeyboardAndMouseAdapter
             HandleMouseCursor();
             MouseWheelProcessor.Process(CurrentState);
 
-            Log.Logger.Error(uuid + " GamepadProcessor.OnReceiveData out " + DualShockStateToString(ref CurrentState));
+            Log.Logger.Debug(uuid + " GamepadProcessor.OnReceiveData out " + DualShockStateToString(ref CurrentState));
 
             // Assign the state
             state = CurrentState;

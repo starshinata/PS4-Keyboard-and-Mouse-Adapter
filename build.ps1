@@ -13,6 +13,10 @@ $ErrorActionPreference = "Stop"
 ## might need configuring
 $CERT_DIRECTORY="D:\workspace\##certificates\github.com-pancakeslp"
 
+## format s should mean it is sortable aka ISO 8601
+$DATETIME = (get-date -Format s)
+echo $DATETIME > PS4KeyboardAndMouseAdapter\Resources\BuildDate.txt
+
 $VERSION="2.2.0"
 
 ################################

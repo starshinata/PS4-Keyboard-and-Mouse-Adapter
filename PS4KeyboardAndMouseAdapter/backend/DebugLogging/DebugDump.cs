@@ -52,7 +52,10 @@ namespace PS4KeyboardAndMouseAdapter.backend.DebugLogging
             foreach (Process p in processCollection)
             {
                 ProcessCommandLine.Retrieve(p, out string commandLine, ProcessCommandLine.Parameter.CommandLine);
-                Print("{ 'processName':'" + p.ProcessName + "', 'pid': '" + p.Id + "', 'commandLine':'" + commandLine + "' }");
+                Print("{ 'processName': '" + p.ProcessName +
+                    "', 'pid': '" + p.Id +
+                    "', 'mainWindowTitle': '" + p.MainWindowTitle +
+                    "', 'commandLine': '" + commandLine + "' }");
             }
 
             Print("");

@@ -1,4 +1,5 @@
-﻿using PS4KeyboardAndMouseAdapter.Config;
+﻿using PS4KeyboardAndMouseAdapter.backend.DebugLogging;
+using PS4KeyboardAndMouseAdapter.Config;
 using PS4KeyboardAndMouseAdapter.UI.Pages;
 using System;
 using System.Windows;
@@ -79,6 +80,8 @@ namespace PS4KeyboardAndMouseAdapter
 
             // remove the welcome tab
             tabs.Items.RemoveAt(0);
+
+            DebugDump.Dump();
         }
     }
 }

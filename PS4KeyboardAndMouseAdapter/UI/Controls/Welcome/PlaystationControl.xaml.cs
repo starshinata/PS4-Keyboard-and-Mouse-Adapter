@@ -1,4 +1,5 @@
 ﻿using PS4KeyboardAndMouseAdapter.backend;
+using PS4KeyboardAndMouseAdapter.backend.DebugLogging;
 using PS4KeyboardAndMouseAdapter.Config;
 using Serilog;
 using System;
@@ -85,6 +86,8 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
             Console.WriteLine("gp " + gp);
             RemotePlayInjector RemotePlayInjector = new RemotePlayInjector(gp);
             RemotePlayInjector.OpenRemotePlayAndInject();
+
+            DebugDump.Dump();
         }
 
         private void Handle_SetRemoteRemotePlayPath(object sender, RoutedEventArgs e)

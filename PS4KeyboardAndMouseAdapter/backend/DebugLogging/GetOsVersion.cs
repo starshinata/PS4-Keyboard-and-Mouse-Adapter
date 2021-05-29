@@ -41,7 +41,7 @@ namespace PS4KeyboardAndMouseAdapter.backend.DebugLogging
                 process.Start();
 
                 process.WaitForExit();
-                return process.StandardOutput.ReadToEnd();
+                return process.StandardOutput.ReadToEnd().Trim();
             }
             catch (Exception e)
             {
