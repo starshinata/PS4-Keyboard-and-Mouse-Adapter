@@ -4,10 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="600">
+             d:DesignHeight="600" d:DesignWidth="600">
     <StackPanel>
         <TextBlock 
             HorizontalAlignment="Center"
+            TextAlignment="Center"
             TextWrapping="Wrap">
             We just started 'PS Remote Play' for you. In the remote play window, please connect to your PS4.
         </TextBlock>
@@ -15,10 +16,28 @@
         <!-- used as spacer -->
         <TextBlock/>
 
+        <Image 
+            Height="238"
+            Width="400">
+            <Image.Source>
+                <BitmapImage UriSource="pack://application:,,,/images/ps4-home-screen.png"/>
+            </Image.Source>
+        </Image>
+        <!-- used as spacer -->
+        <TextBlock/>
+
         <TextBlock 
             HorizontalAlignment="Center"
+            TextAlignment="Center"
             TextWrapping="Wrap">
-            Once you have connected to your PS4, click the button below</TextBlock>
+            Once you have connected to your PS4, and you can see the homescreen (like the above static image) on "PS Remote Play"
+        </TextBlock>
+        <TextBlock 
+            HorizontalAlignment="Center"
+            TextAlignment="Center"
+            TextWrapping="Wrap">
+            THEN click the button below
+        </TextBlock>
 
         <!-- used as spacer -->
         <TextBlock/>

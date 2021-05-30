@@ -485,6 +485,9 @@
   <ItemGroup>
     <Resource Include="mouse-left-button.svg" />
   </ItemGroup>
+    <ItemGroup>
+    <Resource Include="images/ps4-home-screen.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="mouse-right-button.svg" />
   </ItemGroup>
