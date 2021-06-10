@@ -26,7 +26,7 @@ see [here](documentation/frequently-asked-questions.md)
 
 
 ## DISCORD
-Try our discord here https://discord.gg/zH4b8p4 where you can either suggest ideas or ask other members for help.
+Try our discord here https://discord.gg/zgveKtme5s where you can either suggest ideas or ask other members for help.
 
 
 ## To-do list
