@@ -38,6 +38,8 @@ namespace PS4RemotePlayInterceptor
 
         public static int Inject(string processName, string dllToInject)
         {
+            Log.Logger.Information("Injector.Inject processName " + processName);
+
             // Find the process
             Process process = FindProcess(processName);
             if (process == null)
@@ -56,26 +58,52 @@ namespace PS4RemotePlayInterceptor
             bool shouldInject = false;
             try
             {
-                if (InjectionMode == InjectionMode.Auto)
-                {
-                    if (_ipcServer == null)
-                    {
-                        // Setup remote hooking
-                        _channelName = DateTime.Now.ToString("yy-MM-dd hh:mm:ss");
-                        _ipcServer = RemoteHooking.IpcCreateServer<InjectionInterface>(ref _channelName, WellKnownObjectMode.Singleton, WellKnownSidType.WorldSid);
 
-                        _channelName2 = "dotnethooks";
-                        _ipcServer2 = RemoteHooking.IpcCreateServer<InjectionInterface>(ref _channelName2, WellKnownObjectMode.Singleton, WellKnownSidType.WorldSid);
-                        shouldInject = true;
-                    }
+                //Original from Komefai
+                //
+                //if (InjectionMode == InjectionMode.Auto)
+                //{
+                //    if (_ipcServer == null)
+                //    {
+                //        // Setup remote hooking
+                //        _channelName = DateTime.Now.ToString();
+                //        _ipcServer = RemoteHooking.IpcCreateServer<InjectionInterface>(ref _channelName,
+                //            WellKnownObjectMode.Singleton,
+                //            WellKnownSidType.WorldSid);
+                //
+                //        shouldInject = true;
+                //    }
+                //}
+                //else if (InjectionMode == InjectionMode.Compatibility)
+                //{
+                //    // Setup remote hooking
+                //    _channelName = null;
+                //    _ipcServer = RemoteHooking.IpcCreateServer<InjectionInterface>(ref _channelName, WellKnownObjectMode.Singleton);
+                //    shouldInject = true;
+                //}
+
+
+
+
+                if (_ipcServer == null)
+                {
+                    Log.Debug("Injector.Inject making ipcServer1");
+
+                    // Setup remote hooking
+                    _channelName = DateTime.Now.ToString("yy-MM-dd hh:mm:ss");
+                    _ipcServer = RemoteHooking.IpcCreateServer<InjectionInterface>(ref _channelName, WellKnownObjectMode.Singleton, WellKnownSidType.WorldSid);
+                    Log.Debug("Injector.Inject _ipcServer1 made");
                 }
-                // else if (InjectionMode == InjectionMode.Compatibility)
-                // {
-                //     // Setup remote hooking
-                //     _channelName = null;
-                //     _ipcServer = RemoteHooking.IpcCreateServer<InjectionInterface>(ref _channelName, WellKnownObjectMode.Singleton);
-                //     shouldInject = true;
-                // }
+
+                if (_ipcServer2 == null)
+                {
+                    Log.Debug("Injector.Inject making ipcServer2");
+                    _channelName2 = "dotnethooks";
+                    _ipcServer2 = RemoteHooking.IpcCreateServer<InjectionInterface>(ref _channelName2, WellKnownObjectMode.Singleton, WellKnownSidType.WorldSid);
+                    shouldInject = true;
+                    Log.Debug("Injector.Inject _ipcServer2 made");
+                }
+
 
             }
             catch (Exception ex)
@@ -88,9 +116,11 @@ namespace PS4RemotePlayInterceptor
 
             try
             {
+                Log.Information("Injector.Inject() shouldInject " + shouldInject);
                 // Inject dll into the process
                 if (shouldInject)
                 {
+                    Log.Debug("Injector.Inject RemoteHooking.Inject start");
                     RemoteHooking.Inject(
                         process.Id, // ID of process to inject into
                         (_noGAC ? InjectionOptions.DoNotRequireStrongName : InjectionOptions.Default),
@@ -99,6 +129,7 @@ namespace PS4RemotePlayInterceptor
                         injectionLibrary, // 64-bit version (the same because AnyCPU)
                         _channelName
                     );
+                    Log.Debug("Injector.Inject RemoteHooking.Inject done");
                 }
 
                 // Success
@@ -115,11 +146,18 @@ namespace PS4RemotePlayInterceptor
 
         public static void StopInjection()
         {
-            if (_ipcServer == null)
-                return;
+            if (_ipcServer != null)
+            {
+                _ipcServer.StopListening(null);
+                _ipcServer = null;
+            }
 
-            _ipcServer.StopListening(null);
-            _ipcServer = null;
+            if (_ipcServer2 != null)
+            {
+                _ipcServer2.StopListening(null);
+                _ipcServer2 = null;
+            }
+
         }
 
         public static Process FindProcess(string processName)

@@ -31,6 +31,7 @@ namespace PS4KeyboardAndMouseAdapter
             {
                 Thread.Sleep(3100);
                 int remotePlayProcessId = Injector.Inject(RemotePlayConstants.TARGET_PROCESS_NAME, RemotePlayConstants.INJECT_DLL_NAME);
+                Log.Logger.Information("RemotePlayInjector.Inject remotePlayProcessId " + remotePlayProcessId);
                 Process RemotePlayProcess = Process.GetProcessById(remotePlayProcessId);
                 RemotePlayProcess.EnableRaisingEvents = true;
                 RemotePlayProcess.Exited += (sender, args) => { Utility.ShowCursor(true); };
@@ -53,7 +54,7 @@ namespace PS4KeyboardAndMouseAdapter
             if (File.Exists(exeLocation))
             {
                 Process.Start(exeLocation);
-                Log.Information("RemotePlay start requested-57");
+                Log.Information("RemotePlayInjector.OpenRemotePlay start requested-57");
                 return true;
             }
 
@@ -69,7 +70,7 @@ namespace PS4KeyboardAndMouseAdapter
                     return false;
 
                 Process.Start(shortcutPath);
-                Log.Information("RemotePlay start requested-73");
+                Log.Information("RemotePlayInjector.OpenRemotePlay start requested-73");
                 return true;
             }
             catch (Exception e)
@@ -94,7 +95,7 @@ namespace PS4KeyboardAndMouseAdapter
             }
             catch (Exception e)
             {
-                Log.Logger.Error("MainViewModel OpenRemotePlayAndInject() fatal error" + e.Message);
+                Log.Logger.Error("RemotePlayInjector.OpenRemotePlayAndInject() fatal error" + e.Message);
                 Log.Logger.Error("" + e.GetType());
                 Log.Logger.Error(e.StackTrace);
 

@@ -87,7 +87,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
             RemotePlayInjector RemotePlayInjector = new RemotePlayInjector(gp);
             RemotePlayInjector.OpenRemotePlayAndInject();
 
-            DebugDump.Dump();
+            //DebugDump.Dump();
         }
 
         private void Handle_SetRemoteRemotePlayPath(object sender, RoutedEventArgs e)

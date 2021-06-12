@@ -20,7 +20,8 @@
             Height="238"
             Width="400">
             <Image.Source>
-                <BitmapImage UriSource="pack://application:,,,/images/ps4-home-screen.png"/>
+                <BitmapImage 
+                    UriSource="pack://application:,,,/images/ps4-home-screen.png"/>
             </Image.Source>
         </Image>
         <!-- used as spacer -->

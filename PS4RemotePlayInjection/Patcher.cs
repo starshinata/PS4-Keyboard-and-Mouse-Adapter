@@ -20,11 +20,11 @@ namespace PS4RemotePlayInjection
             var dll = assemblies?.FirstOrDefault(x => x.FullName.Contains("RemotePlay"));
             Type[] types = dll?.GetTypes();
 
-            server.Print("Patcher.DoPatching all types ");
-            foreach (var aType in types)
-            {
-                server.Print("type " + aType);
-            }
+            //server.Print("Patcher.DoPatching all types ");
+            //foreach (var aType in types)
+            //{
+            //    server.Print("Patcher.DoPatching type " + aType);
+            //}
 
             // Show toolbar patch
             var type = types?.FirstOrDefault(x => x.Name.Equals("StreamingToolBar"));
@@ -36,6 +36,7 @@ namespace PS4RemotePlayInjection
             // in general, add null checks here (new HarmonyMethod() does it for you too)
 
             harmony.Patch(showToolBarMethod, new HarmonyMethod(showToolBarPrefix), new HarmonyMethod(showToolBarPostfix));
+            server.Print("Patcher.DoPatching patched showToolBarMethod");
 
             // Hide toolbar patch
             var hideToolBarMethod = AccessTools.Method(type, "HideToolBar");
@@ -43,11 +44,12 @@ namespace PS4RemotePlayInjection
             var hideToolBarPostfix = SymbolExtensions.GetMethodInfo(() => HideToolBarPostfix());
 
             harmony.Patch(hideToolBarMethod, new HarmonyMethod(hideToolBarPrefix), new HarmonyMethod(hideToolBarPostfix));
+            server.Print("Patcher.DoPatching patched hideToolBarMethod");
         }
 
         public static bool ShowToolBarPrefix()
         {
-            var showToolbar = !server.ShouldHideToolbar();
+            var showToolbar = server.ShouldShowToolbar();
 
             if (showToolbar)
                 isToolbarShown = true;
@@ -62,7 +64,7 @@ namespace PS4RemotePlayInjection
 
         public static bool HideToolBarPrefix()
         {
-            var dontHideHud = !server.ShouldHideToolbar();
+            var dontHideHud = server.ShouldShowToolbar();
 
             if (dontHideHud || (!dontHideHud && isToolbarShown))
             {

@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using mscoree;
+using Serilog;
 
 namespace PS4RemotePlayInjection
 {
     public class Utility
     {
         public static bool IsCursorVisible = true;
-        
+
         //TODO make a toggle for this
         public static bool IsToolBarVisible = false;
 
@@ -90,6 +91,8 @@ namespace PS4RemotePlayInjection
             }
             catch (Exception e)
             {
+                Log.Logger.Error("GetAppDomains" + e.ToString());
+                Log.Logger.Error("GetAppDomains" + e.Message);
                 Console.WriteLine(e.ToString());
                 return null;
             }

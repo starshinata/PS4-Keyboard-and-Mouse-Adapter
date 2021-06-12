@@ -33,6 +33,37 @@ namespace PS4KeyboardAndMouseAdapter.backend.DebugLogging
 
             Dump_RemotePlay();
 
+            Dump_ApplicationFolder();
+            Dump_CurrentCulture();
+            Dump_EnvironmentVariables();
+
+            Dump_ListProcesses();
+            Dump_ListServices();
+        }
+
+        private static void Dump_ApplicationFolder()
+        {
+            Print("");
+
+            try
+            {
+                var applicationDirectory = Path.GetFullPath(".");
+                var files = Directory.GetFiles(applicationDirectory);
+                foreach (var file in files)
+                {
+                    Log.Logger.Information("local file " + file);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Error("DebugDump.Dump_ApplicationFolder failed" + ex.Message);
+            }
+        }
+
+        private static void Dump_CurrentCulture()
+        {
+
+
             Print("");
             CultureInfo cc = CultureInfo.CurrentCulture;
             Print("Default Language Info:");
@@ -42,30 +73,6 @@ namespace PS4KeyboardAndMouseAdapter.backend.DebugLogging
             Print("* 2-letter ISO Name: " + cc.TwoLetterISOLanguageName);
             Print("* 3-letter ISO Name: " + cc.ThreeLetterISOLanguageName);
             Print("* 3-letter Win32 API Name: " + cc.ThreeLetterWindowsLanguageName);
-
-            Dump_EnvironmentVariables();
-
-            Print("");
-
-            Process[] processCollection = Process.GetProcesses();
-            Array.Sort(processCollection, new ProcessComparerByName());
-            foreach (Process p in processCollection)
-            {
-                ProcessCommandLine.Retrieve(p, out string commandLine, ProcessCommandLine.Parameter.CommandLine);
-                Print("{ 'processName': '" + p.ProcessName +
-                    "', 'pid': '" + p.Id +
-                    "', 'mainWindowTitle': '" + p.MainWindowTitle +
-                    "', 'commandLine': '" + commandLine + "' }");
-            }
-
-            Print("");
-
-            System.ServiceProcess.ServiceController[] services = System.ServiceProcess.ServiceController.GetServices();
-            Array.Sort(services, new ServiceComparerByName());
-            foreach (System.ServiceProcess.ServiceController service in services)
-            {
-                Print("{ 'ServiceName':'" + service.ServiceName + "', 'DisplayName': '" + service.DisplayName + "', 'Status':'" + service.Status + "' }");
-            }
         }
 
         private static void Dump_EnvironmentVariables()
@@ -90,6 +97,34 @@ namespace PS4KeyboardAndMouseAdapter.backend.DebugLogging
             foreach (KeyValuePair<string, string> e in envArray)
             {
                 Print("env " + e.Key + "=" + e.Value);
+            }
+        }
+
+        private static void Dump_ListProcesses()
+        {
+            Print("");
+
+            Process[] processCollection = Process.GetProcesses();
+            Array.Sort(processCollection, new ProcessComparerByName());
+            foreach (Process p in processCollection)
+            {
+                ProcessCommandLine.Retrieve(p, out string commandLine, ProcessCommandLine.Parameter.CommandLine);
+                Print("{ 'processName': '" + p.ProcessName +
+                    "', 'pid': '" + p.Id +
+                    "', 'mainWindowTitle': '" + p.MainWindowTitle +
+                    "', 'commandLine': '" + commandLine + "' }");
+            }
+        }
+
+        private static void Dump_ListServices()
+        {
+            Print("");
+
+            System.ServiceProcess.ServiceController[] services = System.ServiceProcess.ServiceController.GetServices();
+            Array.Sort(services, new ServiceComparerByName());
+            foreach (System.ServiceProcess.ServiceController service in services)
+            {
+                Print("{ 'ServiceName':'" + service.ServiceName + "', 'DisplayName': '" + service.DisplayName + "', 'Status':'" + service.Status + "' }");
             }
         }
 

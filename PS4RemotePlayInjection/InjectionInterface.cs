@@ -50,6 +50,7 @@ namespace PS4RemotePlayInterceptor
         {
             // Store timestamp
             Injector.LastPingTime = DateTime.Now;
+            Print("InjectionInterface.Ping");
         }
 
         public void Print(string msg)
@@ -62,9 +63,9 @@ namespace PS4RemotePlayInterceptor
             Log.Logger.Error(e, msg);
         }
 
-        public bool ShouldHideToolbar()
+        public bool ShouldShowToolbar()
         {
-            var x = !Utility.IsToolBarVisible;
+            var x = Utility.IsToolBarVisible;
             Log.Logger.Information("InjectionInterface.ShouldHideToolbar {0}", x);
             return x;
         }
@@ -75,8 +76,10 @@ namespace PS4RemotePlayInterceptor
         /// <param name="message"></param>
         public void ReportLog(string message)
         {
+            Log.Logger.Information(message);
             try
             {
+                Log.Logger.Debug("ReportLog {0}", message);
                 Console.WriteLine("ReportLog {0}", message);
             }
             catch (Exception) { }
@@ -88,8 +91,10 @@ namespace PS4RemotePlayInterceptor
         /// <param name="e"></param>
         public void ReportException(Exception e)
         {
+            Log.Logger.Error(e.Message);
             try
             {
+                Log.Logger.Debug("ReportException {0}", e.Message);
                 Console.WriteLine("ReportException {0}", e.Message);
             }
             catch (Exception) { }
@@ -100,6 +105,7 @@ namespace PS4RemotePlayInterceptor
 
         public void OnCreateFile(string filename, string mode)
         {
+            Log.Logger.Debug("OnCreateFile {0} | {1}", filename, mode);
             //Console.WriteLine("OnCreateFile {0} | {1}", filename, mode);
         }
 
@@ -133,12 +139,14 @@ namespace PS4RemotePlayInterceptor
         {
             try
             {
+                Log.Logger.Debug("InjectionInterface.OnReadFile filename " + filename);
                 //Console.WriteLine("OnReadFile {0}", filename);
                 //if((printFrequency++)%30 == 0)
                 //  PrintAnalogSticksAsDegrees(inputReport.Skip(1).Take(4).ToArray());
                 // Expect inputReport to be modified
                 if (Injector.Callback != null)
                 {
+                    Log.Logger.Debug("InjectionInterface.OnReadFile Injector.Callback " + Injector.Callback.ToString());
                     // Parse the state
                     var state = DualShockState.ParseFromDualshockRaw(inputReport);
 

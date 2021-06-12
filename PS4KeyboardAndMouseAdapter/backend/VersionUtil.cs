@@ -13,7 +13,7 @@ namespace PS4KeyboardAndMouseAdapter
 
         public static string GetVersionWithBuildDate()
         {
-            return $"{GetVersion()}.{Properties.Resources.BuildDate}";
+            return $"{GetVersion()}.{Properties.Resources.BuildDate}".Trim();
         }
     }
 }
