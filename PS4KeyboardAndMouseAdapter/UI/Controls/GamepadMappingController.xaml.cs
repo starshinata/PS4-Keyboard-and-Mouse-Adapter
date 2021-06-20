@@ -16,11 +16,11 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
 
         public GamepadMappingController()
         {
-            Log.Information("GamepadMappingController constructor IN");
+            Log.Debug("GamepadMappingController constructor IN");
             InitializeComponent();
 
             WaitingForKeyPress_Hide();
-            Log.Information("GamepadMappingController constructor OUT");
+            Log.Debug("GamepadMappingController constructor OUT");
         }
 
         private void Handler_ButtonClicked(object sender, RoutedEventArgs e)

@@ -13,43 +13,43 @@ namespace PS4RemotePlayInjection
 
         public static void DoPatching()
         {
-            var harmony = new Harmony("com.example.patch");
+            Harmony harmony = new Harmony("com.example.patch");
 
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            System.Reflection.Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
-            var dll = assemblies?.FirstOrDefault(x => x.FullName.Contains("RemotePlay"));
+            System.Reflection.Assembly dll = assemblies?.FirstOrDefault(x => x.FullName.Contains("RemotePlay"));
             Type[] types = dll?.GetTypes();
 
             //server.Print("Patcher.DoPatching all types ");
-            //foreach (var aType in types)
-            //{
-            //    server.Print("Patcher.DoPatching type " + aType);
-            //}
+            foreach (Type aType in types)
+            {
+                server.LogDebug("Patcher.DoPatching type " + aType);
+            }
 
             // Show toolbar patch
-            var type = types?.FirstOrDefault(x => x.Name.Equals("StreamingToolBar"));
-            server.Print("Patcher.DoPatching type " + type);
+            Type type = types?.FirstOrDefault(x => x.Name.Equals("StreamingToolBar"));
+            server.LogDebug("Patcher.DoPatching type " + type);
 
-            var showToolBarMethod = AccessTools.Method(type, "ShowToolBar");
-            var showToolBarPrefix = SymbolExtensions.GetMethodInfo(() => ShowToolBarPrefix());
-            var showToolBarPostfix = SymbolExtensions.GetMethodInfo(() => ShowToolBarPostfix());
+            System.Reflection.MethodInfo showToolBarMethod = AccessTools.Method(type, "ShowToolBar");
+            System.Reflection.MethodInfo showToolBarPrefix = SymbolExtensions.GetMethodInfo(() => ShowToolBarPrefix());
+            System.Reflection.MethodInfo showToolBarPostfix = SymbolExtensions.GetMethodInfo(() => ShowToolBarPostfix());
             // in general, add null checks here (new HarmonyMethod() does it for you too)
 
             harmony.Patch(showToolBarMethod, new HarmonyMethod(showToolBarPrefix), new HarmonyMethod(showToolBarPostfix));
-            server.Print("Patcher.DoPatching patched showToolBarMethod");
+            server.LogDebug("Patcher.DoPatching patched showToolBarMethod");
 
             // Hide toolbar patch
-            var hideToolBarMethod = AccessTools.Method(type, "HideToolBar");
-            var hideToolBarPrefix = SymbolExtensions.GetMethodInfo(() => HideToolBarPrefix());
-            var hideToolBarPostfix = SymbolExtensions.GetMethodInfo(() => HideToolBarPostfix());
+            System.Reflection.MethodInfo hideToolBarMethod = AccessTools.Method(type, "HideToolBar");
+            System.Reflection.MethodInfo hideToolBarPrefix = SymbolExtensions.GetMethodInfo(() => HideToolBarPrefix());
+            System.Reflection.MethodInfo hideToolBarPostfix = SymbolExtensions.GetMethodInfo(() => HideToolBarPostfix());
 
             harmony.Patch(hideToolBarMethod, new HarmonyMethod(hideToolBarPrefix), new HarmonyMethod(hideToolBarPostfix));
-            server.Print("Patcher.DoPatching patched hideToolBarMethod");
+            server.LogDebug("Patcher.DoPatching patched hideToolBarMethod");
         }
 
         public static bool ShowToolBarPrefix()
         {
-            var showToolbar = server.ShouldShowToolbar();
+            bool showToolbar = server.ShouldShowToolbar();
 
             if (showToolbar)
                 isToolbarShown = true;
@@ -64,7 +64,7 @@ namespace PS4RemotePlayInjection
 
         public static bool HideToolBarPrefix()
         {
-            var dontHideHud = server.ShouldShowToolbar();
+            bool dontHideHud = server.ShouldShowToolbar();
 
             if (dontHideHud || (!dontHideHud && isToolbarShown))
             {

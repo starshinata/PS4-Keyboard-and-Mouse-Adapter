@@ -12,24 +12,17 @@ namespace PS4KeyboardAndMouseAdapter.backend.DebugLogging
     class DebugDump
     {
 
-        private static void Print(string message)
-        {
-            Log.Information(message);
-            //Console.WriteLine(message);
-        }
-
         public static void Dump()
         {
+            Log.Debug("");
+            Log.Debug("DebugDump");
+            Log.Debug("DebugDump");
+            Log.Debug("DebugDump");
 
-            Print("");
-            Print("DebugDump");
-            Print("DebugDump");
-            Print("DebugDump");
+            Log.Debug("");
 
-            Print("");
-
-            Print("OS " + GetOsVersion.Get());
-            Print("Is64BitOperatingSystem " + Environment.Is64BitOperatingSystem);
+            Log.Debug("OS " + GetOsVersion.Get());
+            Log.Debug("Is64BitOperatingSystem " + Environment.Is64BitOperatingSystem);
 
             Dump_RemotePlay();
 
@@ -39,24 +32,25 @@ namespace PS4KeyboardAndMouseAdapter.backend.DebugLogging
 
             Dump_ListProcesses();
             Dump_ListServices();
+            HidFacade.get();
         }
 
         private static void Dump_ApplicationFolder()
         {
-            Print("");
+            Log.Debug("");
 
             try
             {
-                var applicationDirectory = Path.GetFullPath(".");
-                var files = Directory.GetFiles(applicationDirectory);
-                foreach (var file in files)
+                string applicationDirectory = Path.GetFullPath(".");
+                string[] files = Directory.GetFiles(applicationDirectory);
+                foreach (string file in files)
                 {
-                    Log.Logger.Information("local file " + file);
+                    Log.Debug("local file " + file);
                 }
             }
             catch (Exception ex)
             {
-                Log.Logger.Error("DebugDump.Dump_ApplicationFolder failed" + ex.Message);
+                Log.Error("DebugDump.Dump_ApplicationFolder failed " + ex.Message);
             }
         }
 
@@ -64,20 +58,20 @@ namespace PS4KeyboardAndMouseAdapter.backend.DebugLogging
         {
 
 
-            Print("");
+            Log.Debug("");
             CultureInfo cc = CultureInfo.CurrentCulture;
-            Print("Default Language Info:");
-            Print("* Name: " + cc.Name);
-            Print("* Display Name: " + cc.DisplayName);
-            Print("* English Name: " + cc.EnglishName);
-            Print("* 2-letter ISO Name: " + cc.TwoLetterISOLanguageName);
-            Print("* 3-letter ISO Name: " + cc.ThreeLetterISOLanguageName);
-            Print("* 3-letter Win32 API Name: " + cc.ThreeLetterWindowsLanguageName);
+            Log.Debug("Default Language Info:");
+            Log.Debug("* Name: " + cc.Name);
+            Log.Debug("* Display Name: " + cc.DisplayName);
+            Log.Debug("* English Name: " + cc.EnglishName);
+            Log.Debug("* 2-letter ISO Name: " + cc.TwoLetterISOLanguageName);
+            Log.Debug("* 3-letter ISO Name: " + cc.ThreeLetterISOLanguageName);
+            Log.Debug("* 3-letter Win32 API Name: " + cc.ThreeLetterWindowsLanguageName);
         }
 
         private static void Dump_EnvironmentVariables()
         {
-            Print("");
+            Log.Debug("");
 
             List<KeyValuePair<string, string>> envArray = new List<KeyValuePair<string, string>>();
 
@@ -96,20 +90,20 @@ namespace PS4KeyboardAndMouseAdapter.backend.DebugLogging
 
             foreach (KeyValuePair<string, string> e in envArray)
             {
-                Print("env " + e.Key + "=" + e.Value);
+                Log.Debug("env " + e.Key + "=" + e.Value);
             }
         }
 
         private static void Dump_ListProcesses()
         {
-            Print("");
+            Log.Debug("");
 
             Process[] processCollection = Process.GetProcesses();
             Array.Sort(processCollection, new ProcessComparerByName());
             foreach (Process p in processCollection)
             {
                 ProcessCommandLine.Retrieve(p, out string commandLine, ProcessCommandLine.Parameter.CommandLine);
-                Print("{ 'processName': '" + p.ProcessName +
+                Log.Debug("{ 'processName': '" + p.ProcessName +
                     "', 'pid': '" + p.Id +
                     "', 'mainWindowTitle': '" + p.MainWindowTitle +
                     "', 'commandLine': '" + commandLine + "' }");
@@ -118,19 +112,19 @@ namespace PS4KeyboardAndMouseAdapter.backend.DebugLogging
 
         private static void Dump_ListServices()
         {
-            Print("");
+            Log.Debug("");
 
             System.ServiceProcess.ServiceController[] services = System.ServiceProcess.ServiceController.GetServices();
             Array.Sort(services, new ServiceComparerByName());
             foreach (System.ServiceProcess.ServiceController service in services)
             {
-                Print("{ 'ServiceName':'" + service.ServiceName + "', 'DisplayName': '" + service.DisplayName + "', 'Status':'" + service.Status + "' }");
+                Log.Debug("{ 'ServiceName':'" + service.ServiceName + "', 'DisplayName': '" + service.DisplayName + "', 'Status':'" + service.Status + "' }");
             }
         }
 
         private static void Dump_RemotePlay()
         {
-            Print("");
+            Log.Debug("");
             string remotePlayVersion = "unknown";
 
             try
@@ -149,10 +143,10 @@ namespace PS4KeyboardAndMouseAdapter.backend.DebugLogging
             }
             catch (Exception ex)
             {
-                Log.Logger.Error("DebugDump.Dump_RemotePlay failed" + ex.Message);
+                Log.Error("DebugDump.Dump_RemotePlay failed" + ex.Message);
             }
 
-            Print("remote play version " + remotePlayVersion);
+            Log.Debug("remote play version " + remotePlayVersion);
         }
     }
 }

@@ -6,10 +6,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="700">
     <StackPanel>
-        
+
         <TextBlock />
-        
-        <TextBlock FontWeight="Bold" FontSize="16">Check 1</TextBlock>
+
+        <TextBlock FontWeight="Bold" FontSize="16">Step 1</TextBlock>
         <TextBlock TextWrapping="Wrap">Check reWASD is not installed?</TextBlock>
         <TextBlock TextWrapping="Wrap">reWASD is known to conflict with this application, if it is detected, please uninstall reWASD,</TextBlock>
         <TextBlock 
@@ -20,7 +20,7 @@
         <!-- used as a spacer -->
         <TextBlock />
 
-        <TextBlock FontWeight="Bold" FontSize="16">Check 2</TextBlock>
+        <TextBlock FontWeight="Bold" FontSize="16">Step 2</TextBlock>
         <TextBlock TextWrapping="Wrap">Where is 'PS RemotePlay' installed?</TextBlock>
 
         <Button
@@ -43,11 +43,11 @@
                 HorizontalAlignment="Left"
                 Width="200px"
                 />
-            
+
             <!-- used as a spacer -->
             <TextBlock 
                 Width="20px"/>
-            
+
             <Button
                 Click="Handle_InstallRemotePlay"
                 Content="Install latest Remote Play version"
@@ -55,7 +55,7 @@
                 Width="200px"
                 />
         </StackPanel>
-        
+
         <TextBlock 
             Foreground="Red"
             Visibility="Hidden"
@@ -71,21 +71,22 @@
         <RadioButton Content="PS5" />
         -->
 
-        <TextBlock FontWeight="Bold" FontSize="16">Check 3</TextBlock>
+        <TextBlock FontWeight="Bold" FontSize="16">Step 3</TextBlock>
         <TextBlock TextWrapping="Wrap">Is a  Playstation Controller already connected?</TextBlock>
         <TextBlock TextWrapping="Wrap">If a  Playstation Controller is connected, either disconnect it or select NO for emulate</TextBlock>
-            
+
         <Button
+            Click="Handle_DetectPlaystationController"
             Content="Recheck for Playstation Controller"
             HorizontalAlignment="Left"
-            Width="200px" Click="Handle_DetectPlaystationController"
+            Width="200px"
             />
-        
+
         <TextBlock 
             Visibility="Hidden"
              x:Name="ErrorTextBox_PlaystationController"
             />
-        
+
         <!--
         <TextBlock TextWrapping="Wrap">Emulate the controller?</TextBlock>
         <RadioButton Content="Yes" />
@@ -94,10 +95,26 @@
 
         <!-- used as a spacer -->
         <TextBlock />
-        
+
+        <TextBlock FontWeight="Bold" FontSize="16">Step 4</TextBlock>
+        <TextBlock TextWrapping="Wrap">What logging level ?</TextBlock>
+        <TextBlock TextWrapping="Wrap">Ignore this unless advised by a developer, trying to debug an issue</TextBlock>
+        <ComboBox 
+            HorizontalAlignment="Left"
+            Name="Combo_LogLevel"
+            SelectionChanged="Handle_LogLevelChanged"
+            Width="100px">
+            <ComboBoxItem Content="Default" IsSelected="True"/>
+            <ComboBoxItem Content="Debug"/>
+            <ComboBoxItem Content="Verbose"/>
+        </ComboBox>
+
         <!-- used as a spacer -->
         <TextBlock />
-        
+
+        <!-- used as a spacer -->
+        <TextBlock />
+
         <Button 
             Click="Handle_LaunchRemotePlay"
             Content="Validate settings, and Launch RemotePlay"

@@ -17,6 +17,9 @@ $CERT_DIRECTORY="D:\workspace\##certificates\github.com-pancakeslp"
 $DATETIME = (get-date -Format s)
 echo $DATETIME > PS4KeyboardAndMouseAdapter\Resources\BuildDate.txt
 
+$MS_BUILD_CONFIG="Debug"
+##$MS_BUILD_CONFIG="Release"
+
 $VERSION="2.2.0"
 
 ################################
@@ -49,7 +52,7 @@ function build-msbuild {
   echo "msbuild-ing"
       
   MSBuild.exe PS4KeyboardAndMouseAdapter.sln `
-    -p:Configuration=Release                 `
+    -p:Configuration=$MS_BUILD_CONFIG        `
     -p:VersionNumber=$VERSION
 
   if ( $LASTEXITCODE -ne 0) {
@@ -154,7 +157,7 @@ function remove {
 function sign-executables {
   echo ""
   echo "sign-ing executables" 
-  manually-sign-file  "PS4KeyboardAndMouseAdapter\bin\Release\PS4KeyboardAndMouseAdapter.exe"
+  manually-sign-file  "PS4KeyboardAndMouseAdapter\bin\$MS_BUILD_CONFIG\PS4KeyboardAndMouseAdapter.exe"
   echo "signed executables"
 }
 
@@ -189,7 +192,7 @@ function squirrel {
 function test-vstest {
 
   echo "vstest-ing"
-  $UNIT_TEST_DLL="UnitTests\bin\Release\UnitTests.dll"
+  $UNIT_TEST_DLL="UnitTests\bin\$MS_BUILD_CONFIG\UnitTests.dll"
 
   if (!(Test-Path $UNIT_TEST_DLL )) {
     echo "UnitTests.dll missing! ... path $UNIT_TEST_DLL"
@@ -199,7 +202,7 @@ function test-vstest {
   vstest.console.exe $UNIT_TEST_DLL --ListTests
   echo ""
 
-  vstest.console.exe $UNIT_TEST_DLL UnitTests\bin\Release\csfml-Window.dll
+  vstest.console.exe $UNIT_TEST_DLL UnitTests\bin\$MS_BUILD_CONFIG\csfml-Window.dll
   
   if ( $LASTEXITCODE -ne 0) {
     echo "vstest failed"
@@ -257,17 +260,20 @@ build-msbuild
 test-vstest
 
 echo ""
-Copy-Item                   profiles\default-profile.json                           PS4KeyboardAndMouseAdapter\bin\Release\profile-previous.json
-Copy-Item  -recurse -Force  profiles                                                PS4KeyboardAndMouseAdapter\bin\Release\profiles              
-Copy-Item                   PS4KeyboardAndMouseAdapter\application-settings.json    PS4KeyboardAndMouseAdapter\bin\Release\application-settings.json
+Copy-Item                   profiles\default-profile.json                           PS4KeyboardAndMouseAdapter\bin\$MS_BUILD_CONFIG\profile-previous.json
+Copy-Item  -recurse -Force  profiles                                                PS4KeyboardAndMouseAdapter\bin\$MS_BUILD_CONFIG\profiles              
+Copy-Item                   PS4KeyboardAndMouseAdapter\application-settings.json    PS4KeyboardAndMouseAdapter\bin\$MS_BUILD_CONFIG\application-settings.json
 
 sign-executables
 
 echo ""
 
-make-nuget-package
 
-squirrel
+if( $MS_BUILD_CONFIG -eq "Release" ){
+  make-nuget-package
 
-sign-installer
+  squirrel
+
+  sign-installer
+}
 

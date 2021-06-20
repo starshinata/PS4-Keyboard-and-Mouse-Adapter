@@ -8,9 +8,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              
-             GotFocus="GotFocusLocal"
-             
              KeyDown="Handler_AddMapping_OnKeyboardKeyDown"
+             Loaded="Handler_Loaded"
              MouseDown="Handler_AddMapping_OnMouseDown"
              MouseLeftButtonUp="Handler_AddMapping_OnMouseLeftButtonUp"
              MouseWheel="Handler_AddMapping_OnMouseScroll"

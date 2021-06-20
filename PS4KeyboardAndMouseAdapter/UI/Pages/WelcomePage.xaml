@@ -6,8 +6,8 @@
       
       xmlns:welcome="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Controls.Welcome"
       mc:Ignorable="d" 
-      d:DesignHeight="600" 
-      d:DesignWidth="600"
+      d:DesignHeight="700" 
+      d:DesignWidth="728"
       >
 
     <StackPanel>
@@ -32,7 +32,7 @@
             IsExpanded="True"
             x:Name="Expander_Step1">
             <Expander.Header>
-                <TextBlock FontWeight="Bold" FontSize="20" Margin="10,0,0,0">Step 1</TextBlock>
+                <TextBlock FontWeight="Bold" FontSize="20" Margin="10,0,0,0">Setup</TextBlock>
             </Expander.Header>
             <Expander.Content>
                 <welcome:PlaystationControl />
@@ -49,7 +49,7 @@
             Visibility="Hidden"
             x:Name="Expander_Step2">
             <Expander.Header>
-                <TextBlock FontWeight="Bold" FontSize="20" Margin="10,0,0,0">Step 2</TextBlock>
+                <TextBlock FontWeight="Bold" FontSize="20" Margin="10,0,0,0">Connect</TextBlock>
             </Expander.Header>
             <Expander.Content>
                 <StackPanel Margin="40,0,0,0">

@@ -1,6 +1,5 @@
 ﻿using PS4KeyboardAndMouseAdapter.Config;
 using Serilog;
-using System;
 
 namespace PS4KeyboardAndMouseAdapter
 {
@@ -24,10 +23,10 @@ namespace PS4KeyboardAndMouseAdapter
 
         public void RefreshData()
         {
-            Console.WriteLine("MainViewModel RefreshData IN");
+            Log.Debug("MainViewModel RefreshData IN");
             InstanceSettings.BroadcastRefresh();
             UserSettings.BroadcastRefresh();
-            Console.WriteLine("MainViewModel RefreshData IN");
+            Log.Debug("MainViewModel RefreshData IN");
         }
 
     }

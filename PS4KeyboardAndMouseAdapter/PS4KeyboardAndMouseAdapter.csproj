@@ -258,8 +258,8 @@
     <Compile Include="backend\AudioManager.cs" />
     <Compile Include="backend\DebugLogging\DebugDump.cs" />
     <Compile Include="backend\DebugLogging\GetOsVersion.cs" />
+    <Compile Include="backend\DebugLogging\HidFacade.cs" />
     <Compile Include="backend\DebugLogging\ProcessCommandLine.cs" />
-    <Compile Include="backend\PlaystationControllerDetector.cs" />
     <Compile Include="backend\DebugLogging\ServiceComparerByName.cs" />
     <Compile Include="backend\DebugLogging\ProcessComparerByName.cs" />
     <Compile Include="backend\RewasdDetector.cs" />
@@ -268,6 +268,7 @@
     <Compile Include="backend\ListUtil.cs" />
     <Compile Include="backend\MouseWheelScrollProcessor.cs" />
     <Compile Include="backend\MouseWheelProcessor.cs" />
+    <Compile Include="backend\PlaystationControllerDetector.cs" />
     <Compile Include="backend\ProcessUtil.cs" />
     <Compile Include="backend\RemotePlayConstants.cs" />
     <Compile Include="UI\Controls\MiscellaneousSettingsControl.xaml.cs">
@@ -329,8 +330,8 @@
     <Compile Include="UI\Pages\MiscellaneousSettingsPage.xaml.cs">
       <DependentUpon>MiscellaneousSettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Controls\Welcome\PlaystationControl.xaml.cs">
-      <DependentUpon>PlaystationControl.xaml</DependentUpon>
+    <Compile Include="UI\Controls\Welcome\WelcomeSetupControl.xaml.cs">
+      <DependentUpon>WelcomeSetupControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Pages\WelcomePage.xaml.cs">
       <DependentUpon>WelcomePage.xaml</DependentUpon>
@@ -406,7 +407,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Controls\Welcome\PlaystationControl.xaml">
+    <Page Include="UI\Controls\Welcome\WelcomeSetupControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -485,7 +486,7 @@
   <ItemGroup>
     <Resource Include="mouse-left-button.svg" />
   </ItemGroup>
-    <ItemGroup>
+  <ItemGroup>
     <Resource Include="images/ps4-home-screen.png" />
   </ItemGroup>
   <ItemGroup>

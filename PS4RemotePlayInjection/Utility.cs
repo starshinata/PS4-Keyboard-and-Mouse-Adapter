@@ -91,9 +91,8 @@ namespace PS4RemotePlayInjection
             }
             catch (Exception e)
             {
-                Log.Logger.Error("GetAppDomains" + e.ToString());
-                Log.Logger.Error("GetAppDomains" + e.Message);
-                Console.WriteLine(e.ToString());
+                Log.Error("GetAppDomains error" + e.ToString());
+                Log.Error("GetAppDomains error" + e.Message);
                 return null;
             }
             finally

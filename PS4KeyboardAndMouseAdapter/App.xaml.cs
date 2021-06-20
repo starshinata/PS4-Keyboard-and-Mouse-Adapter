@@ -3,6 +3,7 @@ using PS4KeyboardAndMouseAdapter.Config;
 using PS4RemotePlayInjection;
 using Serilog;
 using Serilog.Core;
+using Serilog.Events;
 using Squirrel;
 using System;
 using System.IO;
@@ -18,6 +19,9 @@ namespace PS4KeyboardAndMouseAdapter
     /// </summary>
     public partial class App : Application
     {
+        bool isAddedConsole = false;
+        LoggingLevelSwitch levelSwitch;
+
         // http://msdn.microsoft.com/en-us/library/ms681944(VS.85).aspx
         /// <summary>
         /// Allocates a new console for the calling process.
@@ -45,7 +49,7 @@ namespace PS4KeyboardAndMouseAdapter
         private void OnAppExit(object sender, ExitEventArgs e)
         {
 
-            Console.WriteLine("App OnAppExit");
+            Log.Debug("App OnAppExit");
             InstanceSettings.GetInstance().EnableMouseInput = false;
 
             // cause not having a cursor is a pain in the ass
@@ -57,13 +61,14 @@ namespace PS4KeyboardAndMouseAdapter
             //TODO: hardcoded, fix.
             //Injector.FindProcess("RemotePlay").Kill();
 
-            FreeConsole();
+            if (isAddedConsole)
+            {
+                FreeConsole();
+            }
         }
 
         private async void OnAppStartup(object sender, StartupEventArgs e)
         {
-            AllocConsole();
-
             SetupLogger();
             Console.WriteLine("app/adapter started");
             Console.WriteLine("for more about what has happened in this app, see logs/log.txt");
@@ -75,15 +80,32 @@ namespace PS4KeyboardAndMouseAdapter
             ApplicationSettings.Load();
             UserSettings.LoadPrevious();
 
-            DebugDump.Dump();
-
             await UpdateIfAvailable();
+        }
+
+        public void SetLoggingLevel(LogEventLevel level)
+        {
+            Log.Information("Logger level set to " + level);
+            levelSwitch.MinimumLevel = level;
+
+            if (!isAddedConsole)
+            {
+                if (LogEventLevel.Debug == level || LogEventLevel.Verbose == level)
+                {
+                    Log.Information("Debug console added");
+                    AllocConsole();
+                    isAddedConsole = true;
+                }
+            }
         }
 
         private void SetupLogger()
         {
+            levelSwitch = new LoggingLevelSwitch();
+            levelSwitch.MinimumLevel = LogEventLevel.Information;
+
             Logger log = new LoggerConfiguration()
-                .MinimumLevel.Debug()
+                .MinimumLevel.ControlledBy(levelSwitch)
                 .WriteTo.Console()
                 .WriteTo.File("logs/log.txt")
                 .CreateLogger();

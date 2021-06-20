@@ -276,8 +276,8 @@ namespace PS4KeyboardAndMouseAdapter
 
                 // if (scaledX != 127 && scaledY != 127)
                 // {
-                //     Console.WriteLine("scaledX" + scaledX);
-                //     Console.WriteLine("scaledY" + scaledY);
+                //     Log.Debug("scaledX" + scaledX);
+                //     Log.Debug("scaledY" + scaledY);
                 // }
 
                 if (UserSettings.MouseControlsL3)
@@ -340,7 +340,6 @@ namespace PS4KeyboardAndMouseAdapter
         {
             StringBuilder sb = new StringBuilder();
 
-
             sb.Append(", 'L1':");
             sb.Append(state.L1);
             sb.Append(", 'L2':");
@@ -394,7 +393,7 @@ namespace PS4KeyboardAndMouseAdapter
         public void OnReceiveData(ref DualShockState state)
         {
             Guid uuid = Guid.NewGuid();
-            Log.Logger.Debug(uuid + " GamepadProcessor.OnReceiveData in a");
+            Log.Verbose(uuid + " GamepadProcessor.OnReceiveData in a");
 
             // Create the default state to modify
             if (true)//CurrentState == null)
@@ -408,7 +407,7 @@ namespace PS4KeyboardAndMouseAdapter
                 return;
             }
 
-            Log.Logger.Debug(uuid + " GamepadProcessor.OnReceiveData in b");
+            Log.Verbose(uuid + " GamepadProcessor.OnReceiveData in b");
 
             HandleButtonPressed();
 
@@ -416,7 +415,7 @@ namespace PS4KeyboardAndMouseAdapter
             HandleMouseCursor();
             MouseWheelProcessor.Process(CurrentState);
 
-            Log.Logger.Debug(uuid + " GamepadProcessor.OnReceiveData out " + DualShockStateToString(ref CurrentState));
+            Log.Verbose(uuid + " GamepadProcessor.OnReceiveData out " + DualShockStateToString(ref CurrentState));
 
             // Assign the state
             state = CurrentState;

@@ -29,6 +29,7 @@ using System.Text;
 using AppDomainToolkit;
 using EasyHook;
 using PS4RemotePlayInterceptor;
+using static PInvoke.SetupApi;
 
 namespace PS4RemotePlayInjection
 {
@@ -83,20 +84,20 @@ namespace PS4RemotePlayInjection
 
             // Connect to server object using provided channel name
             _server = EasyHook.RemoteHooking.IpcConnectClient<InjectionInterface>(channelName);
-            _server.Print("InjectionInterface for " + channelName + " made");
+            _server.LogDebug("InjectionInterface for " + channelName + " made");
             // If Ping fails then the Run method will be not be called
             _server.Ping();
         }
 
         public void DotNetHooks()
         {
-            _server.Print("Hooks.DotNetHooks IN");
+            _server.LogDebug("Hooks.DotNetHooks IN");
 
             IList<AppDomain> appDomains = Utility.GetAppDomains();
-            _server.Print("Hooks.DotNetHooks appDomains " + appDomains.Count);
+            _server.LogDebug("Hooks.DotNetHooks appDomains " + appDomains.Count);
             foreach (AppDomain appDomain in appDomains)
             {
-                _server.Print("Hooks.DotNetHooks appDomain.FriendlyName " + appDomain.FriendlyName);
+                _server.LogDebug("Hooks.DotNetHooks appDomain.FriendlyName " + appDomain.FriendlyName);
             }
 
             AppDomain remotePlayDomain = appDomains[0];
@@ -117,15 +118,15 @@ namespace PS4RemotePlayInjection
                 }
                 catch (Exception e)
                 {
-                    _server.Print(e, "Error when executing remote AppDomain code");
+                    _server.LogError(e, "Error when executing remote AppDomain code");
                 }
 
             }
             catch (Exception e)
             {
-                _server.Print(e, "Error Hooks.124");
+                _server.LogError(e, "Error Hooks.124");
             }
-            _server.Print("Hooks.DotNetHooks OUT");
+            _server.LogDebug("Hooks.DotNetHooks OUT");
         }
 
         /// <summary>
@@ -139,24 +140,24 @@ namespace PS4RemotePlayInjection
             EasyHook.RemoteHooking.IContext context,
             string channelName)
         {
-            _server.Print("Hooks.Run " + context + " " + channelName + " IN");
+            _server.LogDebug("Hooks.Run " + context + " " + channelName + " IN");
 
             // Injection is now complete and the server interface is connected
             _server.OnInjectionSuccess(EasyHook.RemoteHooking.GetCurrentProcessId());
 
             bool isX64Process = EasyHook.RemoteHooking.IsX64Process(EasyHook.RemoteHooking.GetCurrentProcessId());
-            _server.Print("Hooks.Run " + context + " " + channelName + " RemoteHooking Remote process is a " + (isX64Process ? "64" : "32") + "-bit process.");
+            _server.LogDebug("Hooks.Run " + context + " " + channelName + " RemoteHooking Remote process is a " + (isX64Process ? "64" : "32") + "-bit process.");
 
-            _server.Print("Hooks.Run " + context + " " + channelName + " RemoteHooking IsAdministrator " + RemoteHooking.IsAdministrator);
+            _server.LogDebug("Hooks.Run " + context + " " + channelName + " RemoteHooking IsAdministrator " + RemoteHooking.IsAdministrator);
 
             try
             {
                 DotNetHooks();
-                _server.Print("Hooks.Run " + context + " " + channelName + " Dotnet hooks created.");
+                _server.LogDebug("Hooks.Run " + context + " " + channelName + " Dotnet hooks created.");
             }
             catch (Exception e)
             {
-                _server.Print(e, "Hooks.Run " + context + " " + channelName + " Problem creating dotnet hooks");
+                _server.LogError(e, "Hooks.Run " + context + " " + channelName + " Problem creating dotnet hooks");
             }
 
 
@@ -166,7 +167,7 @@ namespace PS4RemotePlayInjection
             // With controller emulation
             if (_server.ShouldEmulateController())
             {
-                _server.Print("Hooks.Run " + channelName + " " + channelName + " with emulation");
+                _server.LogDebug("Hooks.Run " + channelName + " " + channelName + " with emulation");
 
                 // CreateFile https://msdn.microsoft.com/en-us/library/windows/desktop/aa363858(v=vs.85).aspx
                 var createFileHook = EasyHook.LocalHook.Create(
@@ -260,28 +261,11 @@ namespace PS4RemotePlayInjection
                 hooks.Add(HidP_GetCapsHook);
                 hooks.Add(HidP_GetValueCapsHook);
 
-               
-                    _server.Print("Hooks.Run " + channelName + "  make hook SetupDiGetDeviceInterfaceDetail");
-                    var x = EasyHook.LocalHook.GetProcAddress("SetupApi.dll", "SetupDiGetDeviceInterfaceDetailW");
-                    _server.Print("Hooks.Run " + channelName + " " + x);
-
-             /*   unsafe { 
-                var SetupDiGetDeviceInterfaceDetailHook = EasyHook.LocalHook.Create(
-                        x,
-                        new SetupDiGetDeviceInterfaceDetail_Delegate(SetupDiGetDeviceInterfaceDetail_Hook),
-                        this);
-                    _server.Print("Hooks.Run SetupDiGetDeviceInterfaceDetailHook" + SetupDiGetDeviceInterfaceDetailHook);
-                    hooks.Add(SetupDiGetDeviceInterfaceDetailHook);
-                    _server.Print("Hooks.Run SetupDiGetDeviceInterfaceDetailHook 271");
-                }
-             */
-
-
             }
             // Without controller emulation
             else
             {
-                _server.Print("Hooks.Run " + channelName + " " + channelName + " without emulation");
+                _server.LogDebug("Hooks.Run " + channelName + " " + channelName + " without emulation");
                 // ReadFile https://msdn.microsoft.com/en-us/library/windows/desktop/aa365467(v=vs.85).aspx
                 var readFileHook = EasyHook.LocalHook.Create(
                     EasyHook.LocalHook.GetProcAddress("kernel32.dll", "ReadFile"),
@@ -291,13 +275,13 @@ namespace PS4RemotePlayInjection
                 hooks.Add(readFileHook);
             }
 
-            _server.Print("Hooks.Run " + channelName + " activating hooks");
+            _server.LogDebug("Hooks.Run " + channelName + " activating hooks");
             // Activate hooks on all threads except the current thread
-            foreach (var h in hooks)
+            foreach (LocalHook h in hooks)
             {
                 h.ThreadACL.SetExclusiveACL(new Int32[] { 0 });
             }
-            _server.Print("Hooks.Run " + channelName + " activated hooks");
+            _server.LogDebug("Hooks.Run " + channelName + " activated hooks");
 
             // Wake up the process (required if using RemoteHooking.CreateAndInject)
             EasyHook.RemoteHooking.WakeUpProcess();
@@ -308,28 +292,28 @@ namespace PS4RemotePlayInjection
                 while (true)
                 {
                     System.Threading.Thread.Sleep(100);
-                    _server.Print("Hooks.Run " + channelName + " " + channelName + " ping");
+                    _server.LogVerbose("Hooks.Run " + channelName + " " + channelName + " ping");
                     _server.Ping();
                 }
             }
             catch (Exception e)
             {
                 // Ping() will raise an exception if host is unreachable
-                _server.Print("Hooks.Run " + channelName + " " + channelName + " remote server is unreachable");
-                _server.Print(e.ToString());
+                _server.LogError("Hooks.Run " + channelName + " " + channelName + " remote server is unreachable");
+                _server.LogError(e.ToString());
             }
 
-            _server.Print("Hooks.Run " + channelName + " removing hooks");
+            _server.LogDebug("Hooks.Run " + channelName + " removing hooks");
             // Remove hooks
             foreach (var h in hooks)
             {
                 h.Dispose();
             }
-            _server.Print("Hooks.Run " + channelName + " removed hooks");
+            _server.LogDebug("Hooks.Run " + channelName + " removed hooks");
 
             // Finalise cleanup of hooks
             EasyHook.LocalHook.Release();
-            _server.Print("Hooks.Run " + channelName + " OUT");
+            _server.LogDebug("Hooks.Run " + channelName + " OUT");
         }
 
         /// <summary>
@@ -414,10 +398,12 @@ namespace PS4RemotePlayInjection
             UInt32 flagsAndAttributes,
             IntPtr templateFile)
         {
+
+            _server.LogVerbose("Hooks.CreateFile_Hook - file " + filename);
             // SPOOF
             if (filename != null && filename.StartsWith(@"\\?\hid#"))
             {
-                _server.Print("Hooks.CreateFile_Hook Spoofing file " + filename);
+                _server.LogVerbose("Hooks.CreateFile_Hook Spoofing file " + filename);
                 return _dummyHandle;
             }
 
@@ -452,9 +438,6 @@ namespace PS4RemotePlayInjection
                         mode = "TRUNCATE_EXISTING";
                         break;
                 }
-
-                // Send to server
-                _server.OnCreateFile(filename.ToString(), result.ToString());
             }
             catch (Exception e)
             {
@@ -462,8 +445,8 @@ namespace PS4RemotePlayInjection
                 // (so that any issues caused by this code do not crash target process)
                 // but now i want exceptions logged
 
-                _server.Print("Hooks.432 exception");
-                _server.Print(e.ToString());
+                _server.LogError("Hooks.432 exception");
+                _server.LogError(e.ToString());
             }
 
             // now call the original API...
@@ -535,11 +518,12 @@ namespace PS4RemotePlayInjection
             {
                 if (_server.ShouldEmulateController())
                 {
-                    _server.Print("Hooks.ReadFile_Hook emulatedController");
+                    _server.LogVerbose("Hooks.ReadFile_Hook emulatedController");
                     // SPOOF
                     result = true;
                     try
                     {
+
                         // Call original for any other files
                         if (hFile != _dummyHandle)
                         {
@@ -549,10 +533,11 @@ namespace PS4RemotePlayInjection
                         // Retrieve filename from the file handle
                         StringBuilder filename = new StringBuilder(255);
                         GetFinalPathNameByHandle(hFile, filename, 255, 0);
+                        _server.LogVerbose("Hooks.ReadFile_Hook file " + filename.ToString());
 
-                        _server.Print("Hooks.ReadFile_Hook file " + filename.ToString());
                         if (hFile == _dummyHandle && nNumberOfBytesToRead == 2048 && lpNumberOfBytesRead == 0)
                         {
+                            _server.LogVerbose("Hooks.ReadFile_Hook dummyHandle");
                             lpNumberOfBytesRead = bufferSize;
 
                             // Create fake report buffer
@@ -582,13 +567,13 @@ namespace PS4RemotePlayInjection
                         // (so that any issues caused by this code do not crash target process)
                         // but now i want exceptions logged
 
-                        _server.Print("Hooks.550 exception");
-                        _server.Print(e.ToString());
+                        _server.LogError("Hooks.550 exception");
+                        _server.LogError(e.ToString());
                     }
                 }
                 else
                 {
-                    _server.Print("Hooks.ReadFile_Hook realController");
+                    _server.LogVerbose("Hooks.ReadFile_Hook realController");
 
                     // Call original first so we have a value for lpNumberOfBytesRead
                     result = ReadFile(hFile, lpBuffer, nNumberOfBytesToRead, out lpNumberOfBytesRead, lpOverlapped);
@@ -598,6 +583,7 @@ namespace PS4RemotePlayInjection
                         // Retrieve filename from the file handle
                         StringBuilder filename = new StringBuilder(255);
                         GetFinalPathNameByHandle(hFile, filename, 255, 0);
+                        _server.LogVerbose("Hooks.ReadFile_Hook file " + filename.ToString());
 
                         //// Log for debug
                         //_server.ReportLog(
@@ -628,8 +614,8 @@ namespace PS4RemotePlayInjection
                         // (so that any issues caused by this code do not crash target process)
                         // but now i want exceptions logged
 
-                        _server.Print("Hooks.595 exception");
-                        _server.Print(e.ToString());
+                        _server.LogError("Hooks.595 exception");
+                        _server.LogError(e.ToString());
                     }
                 }
             }
@@ -639,8 +625,8 @@ namespace PS4RemotePlayInjection
                 // (so that any issues caused by this code do not crash target process)
                 // but now i want exceptions logged
 
-                _server.Print("Hooks.605 exception");
-                _server.Print(e.ToString());
+                _server.LogError("Hooks.605 exception");
+                _server.LogError(e.ToString());
             }
 
             return result;
@@ -718,8 +704,8 @@ namespace PS4RemotePlayInjection
                 // (so that any issues caused by this code do not crash target process)
                 // but now i want exceptions logged
 
-                _server.Print("Hooks.684 exception");
-                _server.Print(e.ToString());
+                _server.LogError("Hooks.684 exception");
+                _server.LogError(e.ToString());
             }
 
             return result;
@@ -749,7 +735,7 @@ namespace PS4RemotePlayInjection
 
             try
             {
-                _server.Print("Hooks.HidD_GetAttributes_Hook");
+                _server.LogVerbose("Hooks.HidD_GetAttributes_Hook");
                 if (_server.ShouldEmulateController())
                 {
                     // SPOOF
@@ -771,8 +757,8 @@ namespace PS4RemotePlayInjection
                 // (so that any issues caused by this code do not crash target process)
                 // but now i want exceptions logged
 
-                _server.Print("Hooks.736 exception");
-                _server.Print(e.ToString());
+                _server.LogError("Hooks.736 exception");
+                _server.LogError(e.ToString());
             }
 
             return result;
@@ -792,7 +778,7 @@ namespace PS4RemotePlayInjection
 
             try
             {
-                _server.Print("Hooks.HidD_GetFeature_Hook");
+                _server.LogVerbose("Hooks.HidD_GetFeature_Hook");
 
                 if (_server.ShouldEmulateController())
                 {
@@ -848,8 +834,8 @@ namespace PS4RemotePlayInjection
                 // (so that any issues caused by this code do not crash target process)
                 // but now i want exceptions logged
 
-                _server.Print("Hooks.811 exception");
-                _server.Print(e.ToString());
+                _server.LogError("Hooks.811 exception");
+                _server.LogError(e.ToString());
             }
 
             return result;
@@ -869,7 +855,7 @@ namespace PS4RemotePlayInjection
 
             try
             {
-                _server.Print("Hooks.HidD_SetFeature_Hook");
+                _server.LogVerbose("Hooks.HidD_SetFeature_Hook");
                 if (_server.ShouldEmulateController())
                 {
                     // SPOOF
@@ -887,8 +873,8 @@ namespace PS4RemotePlayInjection
                 // (so that any issues caused by this code do not crash target process)
                 // but now i want exceptions logged
 
-                _server.Print("Hooks.849 exception");
-                _server.Print(e.ToString());
+                _server.LogError("Hooks.849 exception");
+                _server.LogError(e.ToString());
             }
 
             return result;
@@ -908,7 +894,7 @@ namespace PS4RemotePlayInjection
 
             try
             {
-                _server.Print("Hooks.HidD_GetPreparsedData_Hook");
+                _server.LogVerbose("Hooks.HidD_GetPreparsedData_Hook");
 
                 if (_server.ShouldEmulateController())
                 {
@@ -927,8 +913,8 @@ namespace PS4RemotePlayInjection
                 // (so that any issues caused by this code do not crash target process)
                 // but now i want exceptions logged
 
-                _server.Print("Hooks.887 exception");
-                _server.Print(e.ToString());
+                _server.LogError("Hooks.887 exception");
+                _server.LogError(e.ToString());
             }
 
             return result;
@@ -948,7 +934,7 @@ namespace PS4RemotePlayInjection
 
             try
             {
-                _server.Print("Hooks.HidD_FreePreparsedData_Hook");
+                _server.LogVerbose("Hooks.HidD_FreePreparsedData_Hook");
 
                 if (_server.ShouldEmulateController())
                 {
@@ -967,8 +953,8 @@ namespace PS4RemotePlayInjection
                 // (so that any issues caused by this code do not crash target process)
                 // but now i want exceptions logged
 
-                _server.Print("Hooks.921 exception");
-                _server.Print(e.ToString());
+                _server.LogError("Hooks.921 exception");
+                _server.LogError(e.ToString());
             }
 
             return result;
@@ -988,7 +974,7 @@ namespace PS4RemotePlayInjection
 
             try
             {
-                _server.Print("Hooks.HidD_GetManufacturerString_Hook");
+                _server.LogVerbose("Hooks.HidD_GetManufacturerString_Hook");
 
                 if (_server.ShouldEmulateController())
                 {
@@ -1027,8 +1013,8 @@ namespace PS4RemotePlayInjection
                 // (so that any issues caused by this code do not crash target process)
                 // but now i want exceptions logged
 
-                _server.Print("Hooks.983 exception");
-                _server.Print(e.ToString());
+                _server.LogError("Hooks.983 exception");
+                _server.LogError(e.ToString());
             }
             return result;
         }
@@ -1047,7 +1033,7 @@ namespace PS4RemotePlayInjection
 
             try
             {
-                _server.Print("Hooks.HidD_GetProductString_Hook");
+                _server.LogVerbose("Hooks.HidD_GetProductString_Hook");
 
                 if (_server.ShouldEmulateController())
                 {
@@ -1089,8 +1075,8 @@ namespace PS4RemotePlayInjection
                 // (so that any issues caused by this code do not crash target process)
                 // but now i want exceptions logged
 
-                _server.Print("Hooks.1043 exception");
-                _server.Print(e.ToString());
+                _server.LogError("Hooks.1043 exception");
+                _server.LogError(e.ToString());
             }
 
             return result;
@@ -1110,7 +1096,7 @@ namespace PS4RemotePlayInjection
 
             try
             {
-                _server.Print("Hooks.HidD_GetSerialNumberString_Hook");
+                _server.LogVerbose("Hooks.HidD_GetSerialNumberString_Hook");
 
                 if (_server.ShouldEmulateController())
                 {
@@ -1132,8 +1118,8 @@ namespace PS4RemotePlayInjection
                 // (so that any issues caused by this code do not crash target process)
                 // but now i want exceptions logged
 
-                _server.Print("Hooks.1084 exception");
-                _server.Print(e.ToString());
+                _server.LogError("Hooks.1084 exception");
+                _server.LogError(e.ToString());
             }
 
             return result;
@@ -1175,7 +1161,7 @@ namespace PS4RemotePlayInjection
 
             try
             {
-                _server.Print("Hooks.HidP_GetCaps_Hook");
+                _server.LogVerbose("Hooks.HidP_GetCaps_Hook");
 
                 if (_server.ShouldEmulateController())
                 {
@@ -1210,8 +1196,8 @@ namespace PS4RemotePlayInjection
                 // (so that any issues caused by this code do not crash target process)
                 // but now i want exceptions logged
 
-                _server.Print("Hooks.1160 exception");
-                _server.Print(e.ToString());
+                _server.LogError("Hooks.1160 exception");
+                _server.LogError(e.ToString());
             }
 
             return result;
@@ -1326,7 +1312,7 @@ namespace PS4RemotePlayInjection
 
             try
             {
-                _server.Print("Hooks.HidP_GetValueCaps_Hook");
+                _server.LogVerbose("Hooks.HidP_GetValueCaps_Hook");
                 if (_server.ShouldEmulateController())
                 {
                     // SPOOF
@@ -1440,14 +1426,14 @@ namespace PS4RemotePlayInjection
                 // (so that any issues caused by this code do not crash target process)
                 // but now i want exceptions logged
 
-                _server.Print("Hooks.HidP_GetValueCaps_Hook exception");
-                _server.Print(e.ToString());
+                _server.LogError("Hooks.HidP_GetValueCaps_Hook exception");
+                _server.LogError(e.ToString());
             }
 
             return result;
         }
 
-        /*
+
         [UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode, SetLastError = true)]
         unsafe delegate bool SetupDiGetDeviceInterfaceDetail_Delegate(SafeDeviceInfoSetHandle deviceInfoSet,
             ref SP_DEVICE_INTERFACE_DATA deviceInterfaceData,
@@ -1456,7 +1442,7 @@ namespace PS4RemotePlayInjection
             int* requiredSize,
             SP_DEVINFO_DATA* deviceInfoData);
 
-        
+
         [DllImport("setupapi.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern unsafe bool SetupDiGetDeviceInterfaceDetail(
@@ -1478,7 +1464,7 @@ namespace PS4RemotePlayInjection
 
             try
             {
-                _server.Print("Hooks.SetupDiGetDeviceInterfaceDetail_Hook");
+                _server.LogVerbose("Hooks.SetupDiGetDeviceInterfaceDetail_Hook");
 
                 // Call original first so we get the result
                 result = SetupDiGetDeviceInterfaceDetail(
@@ -1496,13 +1482,13 @@ namespace PS4RemotePlayInjection
                 // (so that any issues caused by this code do not crash target process)
                 // but now i want exceptions logged
 
-                _server.Print("Hooks.SetupDiGetDeviceInterfaceDetail_Hook exception");
-                _server.Print(e.ToString());
+                _server.LogError("Hooks.SetupDiGetDeviceInterfaceDetail_Hook exception");
+                _server.LogError(e.ToString());
             }
 
             return result;
         }
-        */
+
         #endregion
     }
 }

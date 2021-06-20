@@ -1,5 +1,4 @@
-﻿using PS4KeyboardAndMouseAdapter.backend.DebugLogging;
-using PS4KeyboardAndMouseAdapter.Config;
+﻿using PS4KeyboardAndMouseAdapter.Config;
 using PS4KeyboardAndMouseAdapter.UI.Pages;
 using System;
 using System.Windows;
@@ -66,6 +65,7 @@ namespace PS4KeyboardAndMouseAdapter
         public void WelcomeDone()
         {
             RefreshRemotePlayProcess();
+            ApplicationSettings.Save();
             InstanceSettings.GetInstance().EnableMouseInput = true;
 
             simpleConfigPage = new SimpleConfigPage();
@@ -81,7 +81,17 @@ namespace PS4KeyboardAndMouseAdapter
             // remove the welcome tab
             tabs.Items.RemoveAt(0);
 
-            //DebugDump.Dump();
+
+            // to ensure advancedMappingsPage isnt blank
+            //
+            System.Threading.Thread.Sleep(1000);
+            ((MainViewModel)DataContext).RefreshData();
+            //TabControl tabs;
+            //tabs.Items.F
+            
+            UserSettings.BroadcastRefresh();
+            System.Threading.Thread.Sleep(1000);
+            advancedMappingsPage.RefreshButtonContents();
         }
     }
 }
