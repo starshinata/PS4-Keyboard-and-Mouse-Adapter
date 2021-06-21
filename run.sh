@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-## be error tollerant for process killing
+## be error tolerant for process killing
 set +e
 
 echo "killing RemotePlay"
@@ -14,7 +14,7 @@ set -e
 
 
 BINARY_FOLDER="PS4KeyboardAndMouseAdapter/bin/Debug"
-##BINARY_FOLDER="PS4KeyboardAndMouseAdapter/bin/Release"
+BINARY_FOLDER="PS4KeyboardAndMouseAdapter/bin/Release"
 cp profiles/pancakes-destiny-profile.json $BINARY_FOLDER/profile-previous.json
 
 echo "if you want to see the logs"

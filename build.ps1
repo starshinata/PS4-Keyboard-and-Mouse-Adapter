@@ -18,7 +18,7 @@ $DATETIME = (get-date -Format s)
 echo $DATETIME > PS4KeyboardAndMouseAdapter\Resources\BuildDate.txt
 
 $MS_BUILD_CONFIG="Debug"
-##$MS_BUILD_CONFIG="Release"
+$MS_BUILD_CONFIG="Release"
 
 $VERSION="2.2.0"
 

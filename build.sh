@@ -2,7 +2,7 @@
 
 ## cause i keep forgetting to write powershell infront of the ps1 file
 
-## be error tollerant for process killing
+## be error tolerant for process killing
 set +e
 
 echo "killing RemotePlay"
