@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows.Controls;
 using PS4KeyboardAndMouseAdapter.Config;
+using PS4RemotePlayInjection;
+using Serilog;
 
 namespace PS4KeyboardAndMouseAdapter.UI.Controls
 {
@@ -27,5 +29,10 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
             WindowUtil.ResetWindowLocation(RemotePlayConstants.WINDOW_NAME);
         }
 
+        private void Handler_Ps4ToolBarVisibleToggle(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Log.Debug("MiscellaneousSettingsControl.Handler_Ps4ToolBarVisibleToggle");
+            Utility.IsToolBarVisible = !Utility.IsToolBarVisible ;
+        }
     }
 }
