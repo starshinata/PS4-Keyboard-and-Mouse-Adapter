@@ -29,7 +29,6 @@ using System.Text;
 using AppDomainToolkit;
 using EasyHook;
 using PS4RemotePlayInterceptor;
-using static PInvoke.SetupApi;
 
 namespace PS4RemotePlayInjection
 {
@@ -1427,62 +1426,6 @@ namespace PS4RemotePlayInjection
                 // but now i want exceptions logged
 
                 _server.LogError("Hooks.HidP_GetValueCaps_Hook exception");
-                _server.LogError(e.ToString());
-            }
-
-            return result;
-        }
-
-
-        [UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode, SetLastError = true)]
-        unsafe delegate bool SetupDiGetDeviceInterfaceDetail_Delegate(SafeDeviceInfoSetHandle deviceInfoSet,
-            ref SP_DEVICE_INTERFACE_DATA deviceInterfaceData,
-            SP_DEVICE_INTERFACE_DETAIL_DATA* deviceInterfaceDetailData,
-            int deviceInterfaceDetailDataSize,
-            int* requiredSize,
-            SP_DEVINFO_DATA* deviceInfoData);
-
-
-        [DllImport("setupapi.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern unsafe bool SetupDiGetDeviceInterfaceDetail(
-            SafeDeviceInfoSetHandle deviceInfoSet,
-            ref SP_DEVICE_INTERFACE_DATA deviceInterfaceData,
-            SP_DEVICE_INTERFACE_DETAIL_DATA* deviceInterfaceDetailData,
-            int deviceInterfaceDetailDataSize,
-            int* requiredSize,
-            SP_DEVINFO_DATA* deviceInfoData);
-
-        unsafe bool SetupDiGetDeviceInterfaceDetail_Hook(SafeDeviceInfoSetHandle deviceInfoSet,
-            ref SP_DEVICE_INTERFACE_DATA deviceInterfaceData,
-            SP_DEVICE_INTERFACE_DETAIL_DATA* deviceInterfaceDetailData,
-            int deviceInterfaceDetailDataSize,
-            int* requiredSize,
-            SP_DEVINFO_DATA* deviceInfoData)
-        {
-            bool result = false;
-
-            try
-            {
-                _server.LogVerbose("Hooks.SetupDiGetDeviceInterfaceDetail_Hook");
-
-                // Call original first so we get the result
-                result = SetupDiGetDeviceInterfaceDetail(
-                        deviceInfoSet,
-                        ref deviceInterfaceData,
-                        deviceInterfaceDetailData,
-                        deviceInterfaceDetailDataSize,
-                        requiredSize,
-                        deviceInfoData);
-
-            }
-            catch (Exception e)
-            {
-                // originally this was a catch, and throw away
-                // (so that any issues caused by this code do not crash target process)
-                // but now i want exceptions logged
-
-                _server.LogError("Hooks.SetupDiGetDeviceInterfaceDetail_Hook exception");
                 _server.LogError(e.ToString());
             }
 
