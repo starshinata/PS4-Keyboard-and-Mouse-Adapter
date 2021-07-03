@@ -9,8 +9,6 @@ namespace PS4RemotePlayInjection
     public class Utility
     {
         public static bool IsCursorVisible = true;
-
-        //TODO make a toggle for this
         public static bool IsToolBarVisible = false;
 
         [DllImport("user32.dll")]
