@@ -83,9 +83,10 @@ namespace PS4RemotePlayInterceptor
             try
             {
                 Log.Logger.Verbose("InjectionInterface.OnReadFile filename " + filename);
-                //Log.Debug("OnReadFile {0}", filename);
+
                 //if((printFrequency++)%30 == 0)
                 //  PrintAnalogSticksAsDegrees(inputReport.Skip(1).Take(4).ToArray());
+
                 // Expect inputReport to be modified
                 if (Injector.Callback != null)
                 {
@@ -144,7 +145,7 @@ namespace PS4RemotePlayInterceptor
         public bool ShouldShowToolbar()
         {
             bool x = Utility.IsToolBarVisible;
-            Log.Logger.Information("InjectionInterface.ShouldHideToolbar {0}", x);
+            Log.Logger.Information("InjectionInterface.ShouldShowToolbar {0}", x);
             return x;
         }
     }
