@@ -31,19 +31,18 @@
 
             <!-- row 0 -->
             <RowDefinition Height="30px" />
-
-            <!-- row 1 -->
             <RowDefinition Height="21px" />
             <RowDefinition Height="30px" />
             <RowDefinition Height="15px" />
             <RowDefinition Height="21px" />
-            
+
             <!-- row 5 -->
             <RowDefinition Height="21px" />
             <RowDefinition Height="15px" />
             <RowDefinition Height="15px" />
             <RowDefinition Height="21px" />
             <RowDefinition Height="30px" />
+
             <!-- row 10 -->
             <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
