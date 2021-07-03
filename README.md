@@ -6,6 +6,12 @@ Disclaimer: This project is not endorsed or certified by Sony, Playstation or an
 
 Click the images for bigger views
 
+Welcome Screen <br>
+<a href="documentation/welcome-1.png" target="_blank"><img src="documentation/welcome-1.png" alt="example UI Tab 1" width="280"/></a>
+<a href="documentation/welcome-2.png" target="_blank"><img src="documentation/welcome-2.png" alt="example UI Tab 1" width="280"/></a>
+
+
+Main Adapter <br>
 <a href="documentation/example-ui-1.png" target="_blank"><img src="documentation/example-ui-1.png" alt="example UI Tab 1" width="280"/></a>
 <a href="documentation/example-ui-2.png" target="_blank"><img src="documentation/example-ui-2.png" alt="example UI Tab 2" width="280"/></a>
 <a href="documentation/example-ui-3.png" target="_blank"><img src="documentation/example-ui-3.png" alt="example UI Tab 3" width="280"/></a>

@@ -37,6 +37,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 		documentation\release-checklist.md = documentation\release-checklist.md
 		documentation\troubleshooting.md = documentation\troubleshooting.md
 		documentation\version-history.md = documentation\version-history.md
+		documentation\welcome-1.png = documentation\welcome-1.png
+		documentation\welcome-2.png = documentation\welcome-2.png
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "profiles", "profiles", "{3A058E3E-00BF-404D-A7CC-F69777503A76}"
