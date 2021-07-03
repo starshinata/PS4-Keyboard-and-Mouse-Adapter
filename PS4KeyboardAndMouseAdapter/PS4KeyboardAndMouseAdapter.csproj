@@ -262,6 +262,7 @@
     <Compile Include="backend\DebugLogging\ProcessCommandLine.cs" />
     <Compile Include="backend\DebugLogging\ServiceComparerByName.cs" />
     <Compile Include="backend\DebugLogging\ProcessComparerByName.cs" />
+    <Compile Include="backend\LogUtility.cs" />
     <Compile Include="backend\RewasdDetector.cs" />
     <Compile Include="backend\Config\ExtraButtons.cs" />
     <Compile Include="backend\Config\ApplicationSettings.cs" />

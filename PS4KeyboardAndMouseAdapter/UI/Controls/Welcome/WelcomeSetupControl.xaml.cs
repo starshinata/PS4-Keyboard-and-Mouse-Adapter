@@ -90,13 +90,13 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
             DebugDump.Dump();
         }
 
+        private void Handle_LogFileLocationOpen(object sender, RoutedEventArgs e)
+        {
+            Process.Start("explorer.exe", LogUtility.GetLogDirectoryAbsolute());
+        }
+
         private void Handle_LogLevelChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            //ComboBox c;
-            //ComboBoxItem cc;
-            //cc.
-            //string x = c.SelectedText;
-            //string value = Combo_LogLevel.SelectedValue.C;
             if (Combo_LogLevel.SelectedValue != null)
             {
                 string value = ((ComboBoxItem)Combo_LogLevel.SelectedValue).Content.ToString();

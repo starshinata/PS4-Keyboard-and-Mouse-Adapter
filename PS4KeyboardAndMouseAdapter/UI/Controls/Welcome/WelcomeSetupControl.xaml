@@ -99,6 +99,7 @@
         <TextBlock FontWeight="Bold" FontSize="16">Step 4</TextBlock>
         <TextBlock TextWrapping="Wrap">What logging level ?</TextBlock>
         <TextBlock TextWrapping="Wrap">Ignore this unless advised by a developer, trying to debug an issue</TextBlock>
+        
         <ComboBox 
             HorizontalAlignment="Left"
             Name="Combo_LogLevel"
@@ -108,6 +109,13 @@
             <ComboBoxItem Content="Debug"/>
             <ComboBoxItem Content="Verbose"/>
         </ComboBox>
+
+        <Button
+            Click="Handle_LogFileLocationOpen"
+            Content="Open log file location"
+            HorizontalAlignment="Left"
+            Width="200px"
+            />
 
         <!-- used as a spacer -->
         <TextBlock />
