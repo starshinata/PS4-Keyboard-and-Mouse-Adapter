@@ -1,6 +1,13 @@
 # Version History
 
 
+### v 2.2.0
+* Virus disclaimer - 1/68 checks done by Virus total says we are untrustworthy :( https://www.virustotal.com/gui/file/24bffc022f043899dc19ad65f651b1348ae7badef34df24500a64df76095e5c2/detection I suspect this is due to the extra logging we have added to diagnose issues.
+
+* Added Welcome screen to adapter (this is to highlight fixes to users for some of the most common problems they have)
+* Added much more detailed logging (thus when you submit an issue with logs it should help us analyse it)
+
+
 ### v 2.1.0
 * Stuff users will appreciate
 
