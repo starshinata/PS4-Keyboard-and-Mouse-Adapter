@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using mscoree;
+using Serilog;
 
 namespace PS4RemotePlayInjection
 {
     public class Utility
     {
         public static bool IsCursorVisible = true;
+        public static bool IsToolBarVisible = false;
 
         [DllImport("user32.dll")]
         private static extern IntPtr LoadCursorFromFile(string lpFileName);
@@ -87,7 +89,8 @@ namespace PS4RemotePlayInjection
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString());
+                Log.Error("GetAppDomains error" + e.ToString());
+                Log.Error("GetAppDomains error" + e.Message);
                 return null;
             }
             finally

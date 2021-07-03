@@ -26,53 +26,21 @@
         </Style>
     </Window.Resources>
 
-    <!-- -->
     <Grid>
-        <TabControl>
-            <TabItem>
+        <TabControl x:Name="tabs">
+
+            <TabItem x:Name="tabWelcomePage">
                 <TabItem.Header>
                     <TextBlock 
-                        Text="Simple Config" 
-                        Width="150px"
+                        Text="Welcome" 
+                        Width="200px"
                         />
                 </TabItem.Header>
-                
-                <pages:SimpleConfigPage
-                    x:Name="simpleConfigPage"/>
+                <pages:WelcomePage
+                    x:Name="pageWelcomePage"
+                    />
             </TabItem>
 
-            <TabItem>
-                <TabItem.Header>
-                    <TextBlock 
-                        Text="Advanced mappings" 
-                        Width="150px"
-                        />
-                </TabItem.Header>
-
-                <pages:AdvancedMappingsPage />
-            </TabItem>
-            
-            <TabItem>
-                <TabItem.Header>
-                    <TextBlock 
-                        Text="Mouse Advanced Config" 
-                        Width="150px"
-                        />
-                </TabItem.Header>
-
-                <pages:MouseAdvancedConfigPage />
-            </TabItem>
-
-            <TabItem>
-                <TabItem.Header>
-                    <TextBlock 
-                        Text="Miscellaneous Settings" 
-                        Width="150px"
-                        />
-                </TabItem.Header>
-
-                <pages:MiscellaneousSettingsPage/>
-            </TabItem>
         </TabControl>
     </Grid>
 </Window>

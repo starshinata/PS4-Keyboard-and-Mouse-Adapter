@@ -11,7 +11,7 @@ namespace UnitTests.KeyboardAndMouseAdapter.Config.UserSettingsTest
     public class ImportValuesTest
     {
         private static readonly string PROJECT_ROOT = "..\\..\\..\\";
-        private static readonly string PROFILE_DIRECTORY = PROJECT_ROOT + "UnitTests\\KeyboardAndMouseAdapter\\Config\\UserSettings\\";
+        private static readonly string PROFILE_DIRECTORY = PROJECT_ROOT + "UnitTests\\KeyboardAndMouseAdapter\\backend\\Config\\UserSettings\\";
 
         private UserSettings ReadExpectedFile(string file)
         {

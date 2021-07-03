@@ -35,86 +35,29 @@ namespace PS4RemotePlayInterceptor
     /// </summary>
     class InjectionInterface : MarshalByRefObject
     {
-        /// <summary>
-        /// Called when the hook has been injected successfully
-        /// </summary>
-        public void OnInjectionSuccess(int clientPID)
+
+        public void LogError(string msg)
         {
-            Log.Logger.Information("OnInjectionSuccess clientPID {0}", clientPID);
+            Log.Logger.Error(msg);
         }
 
-        /// <summary>
-        /// Called to confirm that the IPC channel is still open / host application has not closed
-        /// </summary>
-        public void Ping()
-        {
-            // Store timestamp
-            Injector.LastPingTime = DateTime.Now;
-        }
-
-        public void Print(string msg)
-        {
-            Log.Logger.Information(msg);
-        }
-
-        public void Print(Exception e, string msg)
+        public void LogError(Exception e, string msg)
         {
             Log.Logger.Error(e, msg);
         }
 
-        public bool ShouldHideToolbar()
+        public void LogDebug(string msg)
         {
-            return !Utility.IsCursorVisible;
+            Log.Logger.Debug(msg);
         }
 
-        /// <summary>
-        /// Report log
-        /// </summary>
-        /// <param name="message"></param>
-        public void ReportLog(string message)
+        public void LogInformation(string msg)
         {
-            try
-            {
-                Console.WriteLine("ReportLog {0}", message);
-            }
-            catch (Exception) { }
+            Log.Logger.Information(msg);
         }
-
-        /// <summary>
-        /// Report exception
-        /// </summary>
-        /// <param name="e"></param>
-        public void ReportException(Exception e)
+        public void LogVerbose(string msg)
         {
-            try
-            {
-                Console.WriteLine("ReportException {0}", e.Message);
-            }
-            catch (Exception) { }
-        }
-
-
-        /* Interface for hooks */
-
-        public void OnCreateFile(string filename, string mode)
-        {
-            //Console.WriteLine("OnCreateFile {0} | {1}", filename, mode);
-        }
-
-        public void PrintAnalogSticksAsDegrees(byte[] bytes)
-        {
-            bytes = bytes.Skip(1).Take(4).ToArray();
-            var sb = new StringBuilder("new byte[] { ");
-            //foreach (var b in bytes)
-            //{
-            //     map(b - 128, 0, 255, 0, 359).ToString().PadLeft(3, ' ') + ", ");
-            //}
-            sb.Append((int)(Math.Atan2(mapByteTo0to1(bytes[1]), mapByteTo0to1(bytes[0])) * 180d / Math.PI));
-            sb.Append(", ");
-            sb.Append((int)(Math.Atan2(mapByteTo0to1(bytes[3]), mapByteTo0to1(bytes[2])) * 180d / Math.PI));
-
-            sb.Append("}");
-            Console.WriteLine(sb.ToString());
+            Log.Logger.Verbose(msg);
         }
 
         double mapByteTo0to1(byte b)
@@ -127,18 +70,29 @@ namespace PS4RemotePlayInterceptor
             return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
         }
 
+        /// <summary>
+        /// Called when the hook has been injected successfully
+        /// </summary>
+        public void OnInjectionSuccess(int clientPID)
+        {
+            Log.Logger.Information("OnInjectionSuccess clientPID {0}", clientPID);
+        }
+
         public void OnReadFile(string filename, ref byte[] inputReport)
         {
             try
             {
-                //Console.WriteLine("OnReadFile {0}", filename);
+                Log.Logger.Verbose("InjectionInterface.OnReadFile filename " + filename);
+
                 //if((printFrequency++)%30 == 0)
                 //  PrintAnalogSticksAsDegrees(inputReport.Skip(1).Take(4).ToArray());
+
                 // Expect inputReport to be modified
                 if (Injector.Callback != null)
                 {
+                    Log.Logger.Verbose("InjectionInterface.OnReadFile Injector.Callback " + Injector.Callback.ToString());
                     // Parse the state
-                    var state = DualShockState.ParseFromDualshockRaw(inputReport);
+                    DualShockState state = DualShockState.ParseFromDualshockRaw(inputReport);
 
                     // Skip if state is invalid
                     if (state == null)
@@ -157,19 +111,42 @@ namespace PS4RemotePlayInterceptor
             }
         }
 
-        public void OnWriteFile(string filename, ref byte[] outputReport)
+        /// <summary>
+        /// Called to confirm that the IPC channel is still open / host application has not closed
+        /// </summary>
+        public void Ping()
         {
-            try
-            {
-                //Console.WriteLine("OnWriteFile {0}", filename);
-            }
-            catch (Exception) { }
+            // Store timestamp
+            Injector.LastPingTime = DateTime.Now;
+            LogVerbose("InjectionInterface.Ping");
         }
 
-        /* Config Wrappers */
+        public void PrintAnalogSticksAsDegrees(byte[] bytes)
+        {
+            bytes = bytes.Skip(1).Take(4).ToArray();
+            var sb = new StringBuilder("new byte[] { ");
+            //foreach (var b in bytes)
+            //{
+            //     map(b - 128, 0, 255, 0, 359).ToString().PadLeft(3, ' ') + ", ");
+            //}
+            sb.Append((int)(Math.Atan2(mapByteTo0to1(bytes[1]), mapByteTo0to1(bytes[0])) * 180d / Math.PI));
+            sb.Append(", ");
+            sb.Append((int)(Math.Atan2(mapByteTo0to1(bytes[3]), mapByteTo0to1(bytes[2])) * 180d / Math.PI));
+
+            sb.Append("}");
+            Log.Debug(sb.ToString());
+        }
+
         public bool ShouldEmulateController()
         {
             return Injector.EmulateController;
+        }
+
+        public bool ShouldShowToolbar()
+        {
+            bool x = Utility.IsToolBarVisible;
+            Log.Logger.Information("InjectionInterface.ShouldShowToolbar {0}", x);
+            return x;
         }
     }
 }

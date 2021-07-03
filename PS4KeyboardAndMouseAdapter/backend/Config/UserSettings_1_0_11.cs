@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using Serilog;
+﻿using Serilog;
 using SFML.Window;
+using System.Collections.Generic;
 
 namespace PS4KeyboardAndMouseAdapter.Config
 {

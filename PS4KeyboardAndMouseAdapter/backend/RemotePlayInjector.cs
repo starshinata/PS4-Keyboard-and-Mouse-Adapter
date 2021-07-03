@@ -2,7 +2,6 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Net;
 using System.Threading;
 using System.Windows;
 using System.Windows.Forms;
@@ -32,6 +31,7 @@ namespace PS4KeyboardAndMouseAdapter
             {
                 Thread.Sleep(3100);
                 int remotePlayProcessId = Injector.Inject(RemotePlayConstants.TARGET_PROCESS_NAME, RemotePlayConstants.INJECT_DLL_NAME);
+                Log.Logger.Information("RemotePlayInjector.Inject remotePlayProcessId " + remotePlayProcessId);
                 Process RemotePlayProcess = Process.GetProcessById(remotePlayProcessId);
                 RemotePlayProcess.EnableRaisingEvents = true;
                 RemotePlayProcess.Exited += (sender, args) => { Utility.ShowCursor(true); };
@@ -49,14 +49,12 @@ namespace PS4KeyboardAndMouseAdapter
 
         private bool OpenRemotePlay()
         {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
-
-            string exeLocation = path + @"\Sony\PS Remote Play\RemotePlay.exe";
+            string exeLocation = ApplicationSettings.GetInstance().RemotePlayPath;
 
             if (File.Exists(exeLocation))
             {
                 Process.Start(exeLocation);
-                Log.Information("RemotePlay start requested-57");
+                Log.Information("RemotePlayInjector.OpenRemotePlay start requested-57");
                 return true;
             }
 
@@ -72,7 +70,7 @@ namespace PS4KeyboardAndMouseAdapter
                     return false;
 
                 Process.Start(shortcutPath);
-                Log.Information("RemotePlay start requested-73");
+                Log.Information("RemotePlayInjector.OpenRemotePlay start requested-73");
                 return true;
             }
             catch (Exception e)
@@ -94,23 +92,10 @@ namespace PS4KeyboardAndMouseAdapter
                 {
                     Inject();
                 }
-                else
-                {
-                    Process installerProcess = RunRemotePlaySetup();
-                    installerProcess.EnableRaisingEvents = true;
-                    installerProcess.Exited += (sender, args) =>
-                    {
-                        OpenRemotePlay();
-                        Inject();
-                        waitHandle.Set();
-                    };
-
-                    waitHandle.WaitOne();
-                }
             }
             catch (Exception e)
             {
-                Log.Logger.Error("MainViewModel OpenRemotePlayAndInject() fatal error" + e.Message);
+                Log.Logger.Error("RemotePlayInjector.OpenRemotePlayAndInject() fatal error" + e.Message);
                 Log.Logger.Error("" + e.GetType());
                 Log.Logger.Error(e.StackTrace);
 
@@ -124,23 +109,7 @@ namespace PS4KeyboardAndMouseAdapter
             }
         }
 
-        private Process RunRemotePlaySetup()
-        {
-            System.Windows.MessageBox.Show(
-                "In order to play, PS Remote Play is required. Do you want to install it now?",
-                "Install PS Remote play",
-                MessageBoxButton.OK);
 
-            string installerName = "RemotePlayInstaller.exe";
-
-            using (WebClient client = new WebClient())
-            {
-                client.DownloadFile("https://remoteplay.dl.playstation.net/remoteplay/module/win/RemotePlayInstaller.exe", installerName);
-            }
-
-            Log.Information("RemotePlay installer start requested-142");
-            return Process.Start(installerName);
-        }
 
     }
 }

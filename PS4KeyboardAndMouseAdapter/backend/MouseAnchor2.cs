@@ -1,17 +1,20 @@
-﻿using System;
-using PS4KeyboardAndMouseAdapter.Dll;
+﻿using PS4KeyboardAndMouseAdapter.Dll;
 using Serilog;
 using SFML.System;
+using SFML.Window;
+using System;
 
 namespace PS4KeyboardAndMouseAdapter
 {
 
-    public class MouseAnchor
+    public class MouseAnchor2
     {
         // Anchor is relative to the top left of the primary monitor
         private static Vector2i AnchorFallback { get; set; } = new Vector2i(900, 500);
 
-        private static readonly ILogger StaticLogger = Log.ForContext(typeof(MouseAnchor));
+        private static readonly ILogger StaticLogger = Log.ForContext(typeof(MouseAnchor2));
+
+        private static readonly int windowMargin = 30;
 
         public static Vector2i CalculateAnchor()
         {
@@ -40,15 +43,31 @@ namespace PS4KeyboardAndMouseAdapter
                 return AnchorFallback;
             }
 
-            return new Vector2i(
-                GetMiddle(RectResult.Left, RectResult.Right),
-                GetMiddle(RectResult.Top, RectResult.Bottom));
+
+            Vector2i tempAnchor = Mouse.GetPosition();
+
+            if (tempAnchor.X < RectResult.Left + windowMargin)
+            {
+                tempAnchor.X = RectResult.Left + windowMargin;
+            }
+            if (tempAnchor.X > RectResult.Right - windowMargin)
+            {
+                tempAnchor.X = RectResult.Right - windowMargin;
+            }
+
+
+            if (tempAnchor.Y < RectResult.Top + windowMargin)
+            {
+                tempAnchor.Y = RectResult.Top + windowMargin;
+            }
+            if (tempAnchor.Y > RectResult.Bottom - windowMargin)
+            {
+                tempAnchor.Y = RectResult.Bottom - windowMargin;
+            }
+
+            return tempAnchor;
         }
 
-        private static int GetMiddle(int small, int big)
-        {
-            return ((big - small) / 2) + small;
-        }
 
         private static void printRect(RECT R)
         {

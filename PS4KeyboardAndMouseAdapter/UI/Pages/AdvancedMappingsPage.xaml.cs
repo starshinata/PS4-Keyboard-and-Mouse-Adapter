@@ -1,4 +1,5 @@
 ﻿using PS4KeyboardAndMouseAdapter.Config;
+using Serilog;
 using SFML.Window;
 using System;
 using System.Collections.Generic;
@@ -19,23 +20,13 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
 
         public AdvancedMappingsPage()
         {
+            Log.Debug("AdvancedMappingsPage init IN");
             InitializeComponent();
             WaitingForKeyPress_Hide();
 
             Settings = UserSettings.GetInstance();
             PopulateWithMappings();
-        }
-
-        private void GotFocusLocal(object sender, RoutedEventArgs e)
-        {
-            ((MainViewModel)DataContext).RefreshData();
-            RefreshButtonContents();
-        }
-
-        private void Handler_ButtonClicked(object sender, RoutedEventArgs e)
-        {
-            Button button = (Button)sender;
-            WaitingForKeyPress_Show(button);
+            Log.Debug("AdvancedMappingsPage init OUT");
         }
 
         private void Handler_AddMapping_GenericKeyDown(ExtraButtons extraValue, Keyboard.Key keyboardValue, MouseButton mouseValue)
@@ -108,12 +99,24 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
 
         private void Handler_AddMapping_OnMouseScroll(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("Handler_AddMapping_OnMouseScroll");
-            Console.WriteLine(DateTime.Now);
+            Log.Debug("Handler_AddMapping_OnMouseScroll");
+            Log.Debug(DateTime.Now.ToString());
 
             System.Windows.Input.MouseWheelEventArgs mwea = (System.Windows.Input.MouseWheelEventArgs)e;
             ExtraButtons scrollAction = MouseWheelScrollProcessor.GetScrollAction(mwea);
             Handler_AddMapping_GenericKeyDown(scrollAction, Keyboard.Key.Unknown, MouseButton.Unknown);
+        }
+
+        private void Handler_ButtonClicked(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            WaitingForKeyPress_Show(button);
+        }
+
+        private void Handler_Loaded(object sender, RoutedEventArgs e)
+        {
+            Log.Debug("AdvancedMappingsPage.LOADED");
+            RefreshButtonContents();
         }
 
         private void PopulateWithMappings()
@@ -156,6 +159,8 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
 
         public void RefreshButtonContents()
         {
+            Log.Debug("AdvancedMappingsPage.RefreshButtonContents IN");
+            Log.Debug("AdvancedMappingsPage.RefreshButtonContents Button Count " + UITools.FindVisualChildren<Button>(this).Count());
             foreach (Button button in UITools.FindVisualChildren<Button>(this))
             {
                 // assume unmapped first
@@ -189,6 +194,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
                     }
                 }
             }
+            Log.Debug("AdvancedMappingsPage.RefreshButtonContents OUT");
         }
 
         // Needs to public
@@ -217,5 +223,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
 
             RefreshButtonContents();
         }
+
+
     }
 }

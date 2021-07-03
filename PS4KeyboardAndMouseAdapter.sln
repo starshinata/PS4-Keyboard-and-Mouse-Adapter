@@ -15,8 +15,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		build-and-run.sh = build-and-run.sh
 		build.ps1 = build.ps1
+		build.sh = build.sh
 		LICENSE = LICENSE
 		README.md = README.md
+		run.sh = run.sh
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{0439F286-1E5F-4B55-B902-F7EF43C7B22B}"

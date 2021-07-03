@@ -78,7 +78,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
         public double MouseYAxisSensitivityAimModifier { get; set; } = 1;
         public double MouseYAxisSensitivityLookModifier { get; set; } = 1;
         public double MouseYAxisSensitivityMax { get; set; } = 100;
-        
+
         public float RemotePlayVolume { get; set; } = 100;
 
         //TODO do we still need this ?
@@ -110,7 +110,8 @@ namespace PS4KeyboardAndMouseAdapter.Config
             return JsonConvert.DeserializeObject<UserSettings>(json);
         }
 
-        public bool MappingsContainsKey(VirtualKey vk) {
+        public bool MappingsContainsKey(VirtualKey vk)
+        {
             return Mappings.ContainsKey(vk) && Mappings[vk] != null;
         }
 

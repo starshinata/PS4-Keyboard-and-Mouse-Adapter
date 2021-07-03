@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="PS4KeyboardAndMouseAdapter.UI.Controls.Welcome.RemotePlayConnectedControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="700">
+    <StackPanel>
+        <TextBlock 
+            HorizontalAlignment="Center"
+            TextAlignment="Center"
+            TextWrapping="Wrap">
+            We just started 'PS Remote Play' for you.
+        </TextBlock>
+        <TextBlock 
+            HorizontalAlignment="Center"
+            TextAlignment="Center"
+            TextWrapping="Wrap">
+             In the remote play window, please connect to your PS4.
+        </TextBlock>
+
+        <!-- used as spacer -->
+        <TextBlock/>
+
+        <Image 
+            Height="238"
+            Width="400">
+            <Image.Source>
+                <BitmapImage 
+                    UriSource="pack://application:,,,/images/ps4-home-screen.png"/>
+            </Image.Source>
+        </Image>
+
+        <!-- used as spacer -->
+        <TextBlock/>
+
+
+        <TextBlock 
+            HorizontalAlignment="Center"
+            TextAlignment="Center"
+            TextWrapping="Wrap">
+            Once you have connected to your PS4
+        </TextBlock>
+        <TextBlock 
+            HorizontalAlignment="Center"
+            TextAlignment="Center"
+            TextWrapping="Wrap">
+            and you can see the homescreen (like the above static image) on "PS Remote Play"
+        </TextBlock>
+        <TextBlock 
+            HorizontalAlignment="Center"
+            TextAlignment="Center"
+            TextWrapping="Wrap">
+            THEN click the button below
+        </TextBlock>
+
+        <!-- used as spacer -->
+        <TextBlock/>
+
+        <Button 
+            Click="Button_Click"
+            Content="Connect Adapter"
+            Width="150px"
+            />
+    </StackPanel>
+</UserControl>

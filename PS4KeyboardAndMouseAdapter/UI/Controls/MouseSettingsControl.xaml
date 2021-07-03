@@ -19,28 +19,28 @@
 
             <!-- row 0 -->
             <RowDefinition Height="30px" />
-            <RowDefinition Height="30px" />
             <RowDefinition Height="21px" />
+            <RowDefinition Height="30px" />
             <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
 
             <!-- row 5-->
+            <RowDefinition Height="21px" />
             <RowDefinition Height="30px" />
             <RowDefinition Height="8px" />
             <RowDefinition Height="30px" />
-            <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
 
             <!-- row 10 -->
             <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
-            <RowDefinition Height="30px" />
             <RowDefinition Height="21px" />
+            <RowDefinition Height="30px" />
             <RowDefinition Height="21px" />
 
             <!-- row 15 -->
-            <RowDefinition Height="30px" />
             <RowDefinition Height="21px" />
+            <RowDefinition Height="30px" />
             <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
@@ -49,8 +49,8 @@
             <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
-            <RowDefinition Height="30px" />
             <RowDefinition Height="21px" />
+            <RowDefinition Height="30px" />
 
             <!-- row 25 -->
             <RowDefinition Height="21px" />
@@ -70,6 +70,7 @@
             <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
+            <RowDefinition Height="21px" />
 
         </Grid.RowDefinitions>
 
@@ -84,7 +85,7 @@
             />
 
         <TextBlock
-            Grid.Row="1"
+            Grid.Row="2"
             Grid.Column="0"
             HorizontalAlignment="Left"
             Text="Enable mouse input in 'PS Remote Play'"
@@ -93,7 +94,7 @@
 
         <!-- https://www.codeproject.com/Articles/1060961/WPFSpark-v -->
         <wpfspark:ToggleSwitch
-            Grid.Row="1"
+            Grid.Row="2"
             Background="black"
             BorderThickness="2px"
             IsChecked="{Binding Path=InstanceSettings.EnableMouseInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -105,7 +106,7 @@
             />
 
         <TextBlock 
-            Grid.Row="2"
+            Grid.Row="3"
             Grid.Column="0"
             HorizontalAlignment="Left"
             Text="This will also hide the mouse cursor in 'PS Remote Play'"
@@ -113,7 +114,7 @@
             />
 
         <TextBlock 
-            Grid.Row="3"
+            Grid.Row="4"
             Grid.Column="0"
             HorizontalAlignment="Left"
             Text="Tip: You can press alt+tab to switch between windows once the mouse is hidden."
@@ -124,7 +125,7 @@
 
         <!-- https://www.codeproject.com/Articles/1060961/WPFSpark-v -->
         <TextBlock
-            Grid.Row="5"
+            Grid.Row="6"
             Grid.Column="0"
             HorizontalAlignment="Left"
             Text="Mouse controls LEFT analog stick"
@@ -132,7 +133,7 @@
             />
 
         <wpfspark:ToggleSwitch 
-            Grid.Row="5"
+            Grid.Row="6"
             Grid.Column="1"
             Grid.ColumnSpan="2"
             Background="black"
@@ -148,7 +149,7 @@
         <!-- Row 6 intentionally empty -->
 
         <TextBlock
-            Grid.Row="7"
+            Grid.Row="8"
             Grid.Column="0"
             HorizontalAlignment="Left"
             Text="Mouse controls RIGHT analog stick"
@@ -156,7 +157,7 @@
 
         <!-- https://www.codeproject.com/Articles/1060961/WPFSpark-v -->
         <wpfspark:ToggleSwitch
-            Grid.Row="7"
+            Grid.Row="8"
             Background="black"
             BorderThickness="2px"
             IsChecked="{Binding Path=UserSettings.MouseControlsR3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -170,7 +171,7 @@
         <!-- Row 8 intentionally empty -->
 
         <controls:SliderV
-            Grid.Row="9"
+            Grid.Row="10"
             Description="Mouse polling rate"
             Minimum="10" 
             Maximum="250"
@@ -179,7 +180,7 @@
             />
 
         <TextBlock 
-            Grid.Row="10"
+            Grid.Row="11"
             Grid.Column="0"
             HorizontalAlignment="Left"
             Text="How many times a second should we poll the mouse for an update?"
@@ -189,7 +190,7 @@
         <!-- Row 11 intentionally empty -->
 
         <controls:SliderV
-            Grid.Row="12"
+            Grid.Row="13"
             Description="Mouse Look X axis sensitivity"
             Minimum="1" 
             Maximum="{Binding UserSettings.MouseXAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -198,7 +199,7 @@
             />
 
         <controls:SliderV
-            Grid.Row="13"
+            Grid.Row="14"
             Description="Mouse Look Y axis sensitivity"
             Minimum="1" 
             Maximum="{Binding Path=UserSettings.MouseYAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -209,7 +210,7 @@
         <!-- Row 14 intentionally empty -->
 
         <TextBlock
-            Grid.Row="15"
+            Grid.Row="16"
             Grid.Column="0"
             HorizontalAlignment="Left"
             Text="'Aim' Toggle?"
@@ -218,7 +219,7 @@
 
         <!-- https://www.codeproject.com/Articles/1060961/WPFSpark-v -->
         <wpfspark:ToggleSwitch
-            Grid.Row="15"
+            Grid.Row="16"
             Background="black"
             BorderThickness="2px"
             IsChecked="{Binding Path=UserSettings.AimToggle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -229,7 +230,7 @@
             Width="60"/>
 
         <TextBlock 
-            Grid.Row="16"
+            Grid.Row="17"
             Grid.Column="0"
             HorizontalAlignment="Left"
             Text="In an FPS, when you are aiming, do you want to hold down the right mouse button (default),"
@@ -237,7 +238,7 @@
             />
 
         <TextBlock 
-            Grid.Row="17"
+            Grid.Row="18"
             Grid.Column="0"
             HorizontalAlignment="Left"
             Text="or click it once to toggle aiming ?"
@@ -245,7 +246,7 @@
             />
 
         <controls:SliderV
-            Grid.Row="19"
+            Grid.Row="20"
             Description="Aim Toggle, Re-Toggle Delay (milliseconds)"
             Minimum="0" 
             Maximum="5000"
@@ -253,7 +254,7 @@
             Value="{Binding Path=UserSettings.AimToggleRetoggleDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <TextBlock 
-            Grid.Row="20"
+            Grid.Row="21"
             Grid.Column="0"
             HorizontalAlignment="Left"
             Text="How long should we delay before toggling aim / no aim?"
@@ -261,7 +262,7 @@
             />
 
         <TextBlock 
-            Grid.Row="21"
+            Grid.Row="22"
             Grid.Column="0"
             HorizontalAlignment="Left"
             Text="Set it too low, and you may be constantly toggling between aiming and not aiming"
@@ -271,7 +272,7 @@
         <!-- Row 20 intentionally empty -->
 
         <TextBlock
-            Grid.Row="23"
+            Grid.Row="24"
             Grid.Column="0"
             HorizontalAlignment="Left"
             Text="Enable 'Aim' specific sensitivity?"
@@ -280,7 +281,7 @@
 
         <!-- https://www.codeproject.com/Articles/1060961/WPFSpark-v -->
         <wpfspark:ToggleSwitch
-            Grid.Row="23"
+            Grid.Row="24"
             Background="black"
             BorderThickness="2px"
             IsChecked="{Binding Path=UserSettings.MouseAimSensitivityEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -292,7 +293,7 @@
             />
 
         <TextBlock
-            Grid.Row="24"
+            Grid.Row="25"
             Grid.Column="0"            
             HorizontalAlignment="Left"
             Text="Right Mouse is aim"
@@ -303,7 +304,7 @@
         <!-- to improve readability of what row 18 relates to -->
 
         <controls:SliderV
-            Grid.Row="26"
+            Grid.Row="27"
             Description="Mouse Aim X axis sensitivity"
             Minimum="1" 
             Maximum="{Binding Path=UserSettings.MouseXAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -312,7 +313,7 @@
             />
 
         <controls:SliderV
-            Grid.Row="27"
+            Grid.Row="28"
             Description="Mouse Aim Y axis sensitivity"
             Minimum="1" 
             Maximum="{Binding Path=UserSettings.MouseYAxisSensitivityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -323,7 +324,7 @@
         <!-- Row 26 intentionally empty -->
 
         <controls:SliderV
-            Grid.Row="29"
+            Grid.Row="30"
             Description="Mouse wheel scroll hold duration (milliseconds)"
             Minimum="1" 
             Maximum="1000"
@@ -332,7 +333,7 @@
             />
 
         <TextBlock 
-            Grid.Row="30"
+            Grid.Row="31"
             Grid.Column="0"
             HorizontalAlignment="Left"
             Text="A scroll on a mouse wheel is instantaneous."
@@ -340,7 +341,7 @@
             />
 
         <TextBlock 
-            Grid.Row="31"
+            Grid.Row="32"
             Grid.Column="0"
             HorizontalAlignment="Left"
             Text="However it should be considered as pressing a controller button for X time."
@@ -348,7 +349,7 @@
             />
 
         <TextBlock 
-            Grid.Row="32"
+            Grid.Row="33"
             Grid.Column="0"
             HorizontalAlignment="Left"
             Text="This slider is to set how long the button should be held for."
@@ -358,7 +359,7 @@
         <!-- Row 30 intentionally empty -->
 
         <controls:RangeSlider            
-            Grid.Row="34"
+            Grid.Row="35"
             Description="Mouse distance range"
             LowerValue="{Binding Path=UserSettings.MouseDistanceLowerRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             Minimum="0" 
@@ -368,7 +369,7 @@
             />
 
         <controls:RangeSlider 
-            Grid.Row="35" 
+            Grid.Row="36" 
             Description="Analog stick range (in %)" 
             LowerValue="{Binding Path=UserSettings.AnalogStickLowerRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             Minimum="0"  
@@ -377,7 +378,7 @@
             x:Name="AnalogStickRangeSlider" />
 
         <controls:SliderV 
-            Grid.Row="36"
+            Grid.Row="37"
             Description="Horizontal/Vertical ratio" 
             Minimum="0.1" 
             Maximum="1" 

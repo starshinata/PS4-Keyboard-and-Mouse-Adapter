@@ -16,11 +16,11 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
 
         public GamepadMappingController()
         {
-            Log.Information("GamepadMappingController constructor IN");
+            Log.Debug("GamepadMappingController constructor IN");
             InitializeComponent();
 
             WaitingForKeyPress_Hide();
-            Log.Information("GamepadMappingController constructor OUT");
+            Log.Debug("GamepadMappingController constructor OUT");
         }
 
         private void Handler_ButtonClicked(object sender, RoutedEventArgs e)
@@ -61,11 +61,11 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
             lastClickedButton = sender;
 
             WaitForKeyPress.Opacity = 0.7;
-            JoystickImage.Opacity = UIConstants.LowVisibility;
+            JoystickImage.Opacity = UIConstants.LOW_VISIBILITY;
 
             foreach (Button button in UITools.FindVisualChildren<Button>(this))
             {
-                button.Opacity = UIConstants.LowVisibility;
+                button.Opacity = UIConstants.LOW_VISIBILITY;
                 button.IsEnabled = false;
             }
         }

@@ -16,6 +16,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
         public static string PROFILE_PREVIOUS = "profile-previous.json";
 
         private static UserSettings ThisInstance = new UserSettings();
+
         private static readonly ILogger StaticLogger = Log.ForContext(typeof(UserSettings));
 
 
@@ -175,19 +176,19 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         public static void Print(UserSettings settings)
         {
-            Console.WriteLine("UserSettings.Print()");
+            Log.Debug("UserSettings.Print()");
             StaticLogger.Information("UserSettings.Print()");
 
-            Console.WriteLine("print mappings");
+            Log.Debug("print mappings");
             StaticLogger.Information("print mappings");
             List<VirtualKey> virtualKeys = KeyUtility.GetVirtualKeyValues();
             foreach (VirtualKey key in virtualKeys)
             {
-                Console.WriteLine("print Mappings:{VirtKey:" + key + ", PhysicalKeyGroup: " + settings.Mappings[key] + "}");
+                Log.Debug("print Mappings:{VirtKey:" + key + ", PhysicalKeyGroup: " + settings.Mappings[key] + "}");
                 StaticLogger.Information("print Mappings:{VirtKey:" + key + ", PhysicalKeyGroup: " + settings.Mappings[key] + "}");
             }
 
-            Console.WriteLine("print values");
+            Log.Debug("print values");
             StaticLogger.Information("print values");
             Type t = settings.GetType();
             PropertyInfo[] properties = t.GetProperties();
@@ -200,7 +201,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
                     {
                         object value = getter.Invoke(settings, new object[] { });
 
-                        Console.WriteLine("print " + prop + ":" + value);
+                        Log.Debug("print " + prop + ":" + value);
                         StaticLogger.Information("print " + prop + ":" + value);
                     }
                 }
