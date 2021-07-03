@@ -86,7 +86,7 @@ function dependencies-nuget {
   nuget install PS4RemotePlayInjection\packages.config     -OutputDirectory packages
   error-on-bad-return-code	
 
-  nuget install UnitTests\packages.config -OutputDirectory packages
+  nuget install UnitTests\packages.config                  -OutputDirectory packages
   error-on-bad-return-code	
 }
 
