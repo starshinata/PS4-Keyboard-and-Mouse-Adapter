@@ -81,16 +81,7 @@ namespace PS4KeyboardAndMouseAdapter
             // remove the welcome tab
             tabs.Items.RemoveAt(0);
 
-
-            // to ensure advancedMappingsPage isnt blank
-            //
-            System.Threading.Thread.Sleep(1000);
-            ((MainViewModel)DataContext).RefreshData();
-            //TabControl tabs;
-            //tabs.Items.F
-            
-            UserSettings.BroadcastRefresh();
-            System.Threading.Thread.Sleep(1000);
+            // Refresh to ensure advancedMappingsPage isnt blank
             advancedMappingsPage.RefreshButtonContents();
         }
     }
