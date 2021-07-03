@@ -1,5 +1,4 @@
-﻿using PS4KeyboardAndMouseAdapter.backend.DebugLogging;
-using PS4KeyboardAndMouseAdapter.Config;
+﻿using PS4KeyboardAndMouseAdapter.Config;
 using PS4RemotePlayInjection;
 using Serilog;
 using Serilog.Core;
@@ -7,7 +6,6 @@ using Serilog.Events;
 using Squirrel;
 using System;
 using System.IO;
-using System.Runtime.InteropServices;
 
 using System.Threading.Tasks;
 using System.Windows;
