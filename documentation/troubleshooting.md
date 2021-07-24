@@ -30,7 +30,11 @@
   PS4 -> select (Settings) -> [Account Management] -> [Activate as Your Primary PS4] -> [Activate].
 
 * PS Remote Play connects via a code <br>
-  see [playstation.net : Using remote play on a home network](https://manuals.playstation.net/document/gb/psvita/ps4link/viaprivate.html#:~:text=%E2%84%A2%20system%202.-,On%20your%20system%2C%20select%20(PS4%20Link)%20%3E%20%5BStart,%E2%84%A2%20system%20from%20rest%20mode)
+  see [Playstation 4: add a device](https://manuals.playstation.net/document/en/ps4/settings/adddevice.html) <br>
+  This should mean you are using your local network, instead of going over the internet <br>
+  <br>
+  To confirm this, on your PS4 `Settings -> Remote Play Connection Settings --> Connection History --> select a connection` <br>
+  After selecting a connection, you will see "Connection Method". If it says "Nearby" instead of "Via Internet", that should be local network.
 
 * PS Remote Play application has its video settings set to the lowest <br>
   (This should reduce the the amount of data your PS4 has to send, and how much your Remote Play application has to receive) <br>
