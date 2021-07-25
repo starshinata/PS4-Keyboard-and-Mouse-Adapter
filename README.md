@@ -37,8 +37,7 @@ Try our discord here https://discord.gg/zgveKtme5s where you can either suggest 
 
 ## To-do list
 * Explicit error message box for when mappings.json is missing or invalid <br> Currently it (kinda) silently fails unless you open it via a command line.
-* Detect when the user does have a DS4 controller plugged in ... and ask user to unplug it
-* some game need to detect you shaking the controller, need to figure out how to handle/emulate that
+* some games need to detect you shaking the controller, need to figure out how to handle/emulate that
 * touchpad needs more work :(
 * make DS4 emulation optional
 * support for analog input like from a controller stick, controller trigger, or Steering wheel
