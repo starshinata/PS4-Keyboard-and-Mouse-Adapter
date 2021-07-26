@@ -13,10 +13,6 @@ $ErrorActionPreference = "Stop"
 ## might need configuring
 $CERT_DIRECTORY="D:\workspace\##certificates\github.com-pancakeslp"
 
-## format s means sortable aka ISO 8601
-$DATETIME = (get-date -Format s)
-echo $DATETIME > PS4KeyboardAndMouseAdapter\Resources\BuildDate.txt
-
 #$MS_BUILD_CONFIG="Debug"
 $MS_BUILD_CONFIG="Release"
 
@@ -46,6 +42,14 @@ $GENERATED_INSTALLER_PATH="SquirrelReleases"
 
 ################################
 ################################
+
+function add-build-date {
+  make-dir PS4KeyboardAndMouseAdapter\Resources\
+
+  ## format s means sortable aka ISO 8601
+  $DATETIME = (get-date -Format s)
+  echo $DATETIME > PS4KeyboardAndMouseAdapter\Resources\BuildDate.txt
+}
 
 function build-msbuild {
 
@@ -99,6 +103,15 @@ function error-on-bad-return-code {
 }
 
 
+function make-dir {
+  $PATH = $args[0]
+  
+  if (!(Test-Path $PATH)) {
+    New-Item -ItemType directory -Path $PATH
+  }
+}
+
+
 function make-nuget-package {
   echo ""
 
@@ -125,8 +138,7 @@ function make-extract-me-installer {
 
   $EXTRACTED_PATH="$GENERATED_INSTALLER_PATH\extract-temp\"
 
-  ## aka mkdir
-  New-Item -ItemType directory -Path $EXTRACTED_PATH
+  make-dir $EXTRACTED_PATH
 
   Copy-Item  -Force           PS4KeyboardAndMouseAdapter\bin\Release\*         $EXTRACTED_PATH\app-$VERSION
   Copy-Item  -Force -Recurse  PS4KeyboardAndMouseAdapter\bin\Release\profiles  $EXTRACTED_PATH\app-$VERSION\profiles
@@ -278,6 +290,8 @@ function valid-xaml-xmllint {
 ################################
 ################################
 
+
+add-build-date
 
 cleanup
 
