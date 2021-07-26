@@ -5,10 +5,13 @@
 ## be error tolerant for process killing
 set +e
 
-echo "killing RemotePlay"
-## documentation says /im but mingw no likey
-taskkill.exe -im RemotePlay* -f
+## documentation says ` taskkill /im ` but mingw no likey
 
+echo "killing RemotePlay"
+taskkill.exe -im "RemotePlay*" -f
+
+echo "killing PS4KeyboardAndMouseAdapter"
+taskkill.exe -im "PS4KeyboardAndMouseAdapter*" -f
 
 ## stops the execution of the script if a command or pipeline has an error
 set -e
