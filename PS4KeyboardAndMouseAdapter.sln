@@ -53,6 +53,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "v1.0.11", "v1.0.11", "{F223
 		profiles\v1.0.11\pancakes-destiny-profile.json = profiles\v1.0.11\pancakes-destiny-profile.json
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "manualBuild", "manualBuild", "{60A1671E-B17D-48D6-8515-D21D96B6CFD3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{679B8A6C-1FB2-474D-B69F-211D69F2D79C}"
+	ProjectSection(SolutionItems) = preProject
+		manualBuild\nuget\nuget.exe = manualBuild\nuget\nuget.exe
+		manualBuild\nuget\PS4KeyboardAndMouseAdapter.nuspec = manualBuild\nuget\PS4KeyboardAndMouseAdapter.nuspec
+		manualBuild\nuget\PS4KeyboardAndMouseAdapter.nuspec.template.xml = manualBuild\nuget\PS4KeyboardAndMouseAdapter.nuspec.template.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +102,8 @@ Global
 		{0439F286-1E5F-4B55-B902-F7EF43C7B22B} = {9FF1BB60-DFEF-4108-A4A6-945C22D8882C}
 		{3A058E3E-00BF-404D-A7CC-F69777503A76} = {9FF1BB60-DFEF-4108-A4A6-945C22D8882C}
 		{F22313AC-E19E-475C-B025-AB90BA36D0C7} = {3A058E3E-00BF-404D-A7CC-F69777503A76}
+		{60A1671E-B17D-48D6-8515-D21D96B6CFD3} = {9FF1BB60-DFEF-4108-A4A6-945C22D8882C}
+		{679B8A6C-1FB2-474D-B69F-211D69F2D79C} = {60A1671E-B17D-48D6-8515-D21D96B6CFD3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {215189D4-FCF7-4F3E-BC57-0EA3347DD037}

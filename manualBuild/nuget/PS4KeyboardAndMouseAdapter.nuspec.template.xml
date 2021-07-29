@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
 <package>
-  <metadata>
-    <id>PS4KeyboardAndMouseAdapter</id>
-    <version>REPLACE_VERSION_REPLACE</version>
-    <authors>Me</authors>
-    <owners>Me</owners>
-	<!-- The description will appear as the program name when viewed in the list of installed programs within the Control Panel -->
-    <description>PS4KeyboardAndMouseAdapter</description>
-	<dependencies>
-      <group targetFramework=".NETFramework4.6.1" />
-    </dependencies>
-    <releaseNotes>a release note</releaseNotes>
-  </metadata>
-  <files>
-    <file src="..\..\PS4KeyboardandMouseAdapter\bin\Release\*.*" target="lib\net461\" exclude="*.pdb;*.vshost.*"/>
-  </files>
+	<metadata>
+		<id>PS4KeyboardAndMouseAdapter</id>
+		<version>REPLACE_VERSION_REPLACE</version>
+		<authors>Me</authors>
+		<owners>Me</owners>
+		<!-- The description will appear as the program name when viewed in the list of installed programs within the Control Panel -->
+		<description>PS4KeyboardAndMouseAdapter</description>
+		<dependencies>
+			<group targetFramework=".NETFramework4.6.1" />
+		</dependencies>
+		<releaseNotes>a release note</releaseNotes>
+	</metadata>
+	<files>
+		<file src="..\..\PS4KeyboardandMouseAdapter\bin\Release\**\**" target="lib\net461\" exclude="*.pdb;*.vshost.*"/>
+	</files>
 </package>
