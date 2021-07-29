@@ -13,10 +13,6 @@ $ErrorActionPreference = "Stop"
 ## might need configuring
 $CERT_DIRECTORY="D:\workspace\##certificates\github.com-pancakeslp"
 
-## format s should mean it is sortable aka ISO 8601
-$DATETIME = (get-date -Format s)
-echo $DATETIME > PS4KeyboardAndMouseAdapter\Resources\BuildDate.txt
-
 #$MS_BUILD_CONFIG="Debug"
 $MS_BUILD_CONFIG="Release"
 
@@ -46,6 +42,14 @@ $GENERATED_INSTALLER_PATH="SquirrelReleases"
 
 ################################
 ################################
+
+function add-build-date {
+  make-dir PS4KeyboardAndMouseAdapter\Resources\
+
+  ## format s means sortable aka ISO 8601
+  $DATETIME = (get-date -Format s)
+  echo $DATETIME > PS4KeyboardAndMouseAdapter\Resources\BuildDate.txt
+}
 
 function build-msbuild {
 
@@ -99,13 +103,49 @@ function error-on-bad-return-code {
 }
 
 
+function make-dir {
+  $PATH = $args[0]
+
+  if (!(Test-Path $PATH)) {
+    New-Item -ItemType directory -Path $PATH
+  }
+}
+
+
+function make-extract-me-installer {
+
+  echo ""
+  echo "making extractable installer"
+
+  $EXTRACTED_PATH="$GENERATED_INSTALLER_PATH\extract-temp\"
+
+  make-dir $EXTRACTED_PATH
+
+  Copy-Item  -Force           PS4KeyboardAndMouseAdapter\bin\Release\*         $EXTRACTED_PATH\app-$VERSION
+  Copy-Item  -Force -Recurse  PS4KeyboardAndMouseAdapter\bin\Release\profiles  $EXTRACTED_PATH\app-$VERSION\profiles
+  Copy-Item  -Force           manualBuild\extract-me-bin\*                     $EXTRACTED_PATH
+
+  $compress = @{
+    Path = "$EXTRACTED_PATH\*"
+    DestinationPath = "$GENERATED_INSTALLER_PATH\application-extract-me.zip"
+  }
+  Compress-Archive @compress
+  error-on-bad-return-code
+
+  remove $EXTRACTED_PATH
+
+  echo "made extract-me-installer"
+}
+
+
 function make-nuget-package {
+  echo ""
 
   $FIND="<version>REPLACE_VERSION_REPLACE</version>"
   $REPLACE="<version>$VERSION</version>"
   $SOURCE_NUSPEC_FILE="manualBuild\nuget\PS4KeyboardAndMouseAdapter.nuspec.template.xml"
   $TARGET_NUSPEC_FILE="manualBuild\nuget\PS4KeyboardAndMouseAdapter.nuspec"
-  
+
   remove $TARGET_NUSPEC_FILE
 
   Copy-Item $SOURCE_NUSPEC_FILE -Destination $TARGET_NUSPEC_FILE
@@ -116,22 +156,6 @@ function make-nuget-package {
   error-on-bad-return-code
 }
 
-function make-extract-me-installer {
-  
-  echo "making extract-me-installer"
-
-  ## aka mkdir
-  New-Item -ItemType directory -Path $GENERATED_INSTALLER_PATH
-
-  $compress = @{
-    Path = "PS4KeyboardAndMouseAdapter\bin\Release\"
-    DestinationPath = "$GENERATED_INSTALLER_PATH\application-extract-me.zip"
-  }
-  Compress-Archive @compress
-
-  echo "made extract-me-installer"
-  echo ""
-}
 
 function manually-sign-file {
   $FILE_NAME = $args[0]
@@ -197,10 +221,11 @@ function squirrel {
   powershell.exe -ExecutionPolicy Bypass -Command "$COMMAND | Write-Output"
   error-on-bad-return-code	
 
-  ## squirrel makes an MSI, but the MSI seems to do nothing
+  ## squirrel makes an MSI
+  ## but the MSI seems to do nothing, so lets delete it
   remove $GENERATED_INSTALLER_PATH\setup.msi
 
-  ## move setup.exe as we have to setup files (one a exe one a zip) 
+  ## move setup.exe as we have two setup files (one a exe one a zip)
   Move-Item -Path $GENERATED_INSTALLER_PATH\setup.exe -Destination $GENERATED_INSTALLER_PATH\application-setup.exe
 
   echo "squirrel-ed package!"
@@ -266,6 +291,8 @@ function valid-xaml-xmllint {
 ################################
 
 
+add-build-date
+
 cleanup
 
 dependencies-nuget
@@ -287,8 +314,8 @@ sign-executables
 echo ""
 
 
-if( $MS_BUILD_CONFIG -eq "Release" ){
-  make-extract-me-installer 
+if( $MS_BUILD_CONFIG -eq "Release" ) {
+  make-extract-me-installer
 
   make-nuget-package
 

@@ -30,7 +30,11 @@
   PS4 -> select (Settings) -> [Account Management] -> [Activate as Your Primary PS4] -> [Activate].
 
 * PS Remote Play connects via a code <br>
-  see [playstation.net : Using remote play on a home network](https://manuals.playstation.net/document/gb/psvita/ps4link/viaprivate.html#:~:text=%E2%84%A2%20system%202.-,On%20your%20system%2C%20select%20(PS4%20Link)%20%3E%20%5BStart,%E2%84%A2%20system%20from%20rest%20mode)
+  see [Playstation 4: add a device](https://manuals.playstation.net/document/en/ps4/settings/adddevice.html) <br>
+  This should mean you are using your local network, instead of going over the internet <br>
+  <br>
+  To confirm this, on your PS4 `Settings -> Remote Play Connection Settings --> Connection History --> select a connection` <br>
+  After selecting a connection, you will see "Connection Method". If it says "Nearby" instead of "Via Internet", that should be local network.
 
 * PS Remote Play application has its video settings set to the lowest <br>
   (This should reduce the the amount of data your PS4 has to send, and how much your Remote Play application has to receive) <br>
@@ -38,8 +42,14 @@
 
 
 ## Problems and fixes
-#### (Installation) "Installation failed"
-<img src="squirrel-installer-failed.png" alt="installer failed" width="280"/>
+#### (Installation) "Installation has failed - Failed to extract installer"
+<img src="squirrel-installer-failed-to-extract.png" alt="Failed to extract installer" width="280px"/>
+Sounds like your Anti virus doesnt like the installer. <br>
+Either disable your anti virus for the duration of the install, or look for a "application-extract-me.zip" in the latest release, for example  https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/2.2.0/application-extract-me.zip
+
+
+#### (Installation) "Installation has failed - something with log"
+<img src="squirrel-installer-failed.png" alt="installer failed" width="280px"/>
 
 Click on "Open Setup Log" and look for something meaningful, if you cant find something, then share the log via a github issue (https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/issues), or on our discord (https://discord.gg/zH4b8p4)
 

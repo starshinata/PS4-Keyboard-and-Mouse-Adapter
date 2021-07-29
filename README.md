@@ -7,20 +7,20 @@ Disclaimer: This project is not endorsed or certified by Sony, Playstation or an
 Click the images for bigger views
 
 Welcome Screen <br>
-<a href="documentation/welcome-1.png" target="_blank"><img src="documentation/welcome-1.png" alt="example UI Tab 1" width="280"/></a>
-<a href="documentation/welcome-2.png" target="_blank"><img src="documentation/welcome-2.png" alt="example UI Tab 1" width="280"/></a>
+<a href="documentation/welcome-1.png" target="_blank"><img src="documentation/welcome-1.png" alt="example welcome screen 1" width="280px"/></a>
+<a href="documentation/welcome-2.png" target="_blank"><img src="documentation/welcome-2.png" alt="example welcome screen 2" width="280px"/></a>
 
 
 Main Adapter <br>
-<a href="documentation/example-ui-1.png" target="_blank"><img src="documentation/example-ui-1.png" alt="example UI Tab 1" width="280"/></a>
-<a href="documentation/example-ui-2.png" target="_blank"><img src="documentation/example-ui-2.png" alt="example UI Tab 2" width="280"/></a>
-<a href="documentation/example-ui-3.png" target="_blank"><img src="documentation/example-ui-3.png" alt="example UI Tab 3" width="280"/></a>
-<a href="documentation/example-ui-4.png" target="_blank"><img src="documentation/example-ui-4.png" alt="example UI Tab 4" width="280"/></a>
-<a href="documentation/example-ui-4.png" target="_blank"><img src="documentation/example-ui-5.png" alt="example UI Tab 4" width="280"/></a>
+<a href="documentation/example-ui-1.png" target="_blank"><img src="documentation/example-ui-1.png" alt="example UI Tab 1" width="280px"/></a>
+<a href="documentation/example-ui-2.png" target="_blank"><img src="documentation/example-ui-2.png" alt="example UI Tab 2" width="280px"/></a>
+<a href="documentation/example-ui-3.png" target="_blank"><img src="documentation/example-ui-3.png" alt="example UI Tab 3a" width="280px"/></a>
+<a href="documentation/example-ui-4.png" target="_blank"><img src="documentation/example-ui-4.png" alt="example UI Tab 3b" width="280px"/></a>
+<a href="documentation/example-ui-4.png" target="_blank"><img src="documentation/example-ui-5.png" alt="example UI Tab 4" width="280px"/></a>
 
 
 ## DOWNLOAD
-:rocket: Click Download!--> [here (v2.1.0)](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/2.1.0/Setup.exe)
+:rocket: Click Download!--> [here (v2.2.0)](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/2.2.0/application-setup.exe)
 
 
 ## Troubleshooting
@@ -37,8 +37,7 @@ Try our discord here https://discord.gg/zgveKtme5s where you can either suggest 
 
 ## To-do list
 * Explicit error message box for when mappings.json is missing or invalid <br> Currently it (kinda) silently fails unless you open it via a command line.
-* Detect when the user does have a DS4 controller plugged in ... and ask user to unplug it
-* some game need to detect you shaking the controller, need to figure out how to handle/emulate that
+* some games need to detect you shaking the controller, need to figure out how to handle/emulate that
 * touchpad needs more work :(
 * make DS4 emulation optional
 * support for analog input like from a controller stick, controller trigger, or Steering wheel
