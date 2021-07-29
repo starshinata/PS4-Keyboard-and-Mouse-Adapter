@@ -17,10 +17,10 @@ $CERT_DIRECTORY="D:\workspace\##certificates\github.com-pancakeslp"
 $DATETIME = (get-date -Format s)
 echo $DATETIME > PS4KeyboardAndMouseAdapter\Resources\BuildDate.txt
 
-$MS_BUILD_CONFIG="Debug"
+#$MS_BUILD_CONFIG="Debug"
 $MS_BUILD_CONFIG="Release"
 
-$VERSION="2.2.0"
+$VERSION="2.2.2"
 
 ################################
 ################################
@@ -114,9 +114,24 @@ function make-nuget-package {
 
   nuget pack $TARGET_NUSPEC_FILE
   error-on-bad-return-code
-
 }
 
+function make-extract-me-installer {
+  
+  echo "making extract-me-installer"
+
+  ## aka mkdir
+  New-Item -ItemType directory -Path $GENERATED_INSTALLER_PATH
+
+  $compress = @{
+    Path = "PS4KeyboardAndMouseAdapter\bin\Release\"
+    DestinationPath = "$GENERATED_INSTALLER_PATH\application-extract-me.zip"
+  }
+  Compress-Archive @compress
+
+  echo "made extract-me-installer"
+  echo ""
+}
 
 function manually-sign-file {
   $FILE_NAME = $args[0]
@@ -166,7 +181,7 @@ function sign-installer {
   echo ""
   echo "sign-ing installer" 
   
-  manually-sign-file  $GENERATED_INSTALLER_PATH\setup.exe
+  manually-sign-file  $GENERATED_INSTALLER_PATH\application-setup.exe
 
   echo "signed installer"
 }
@@ -184,6 +199,9 @@ function squirrel {
 
   ## squirrel makes an MSI, but the MSI seems to do nothing
   remove $GENERATED_INSTALLER_PATH\setup.msi
+
+  ## move setup.exe as we have to setup files (one a exe one a zip) 
+  Move-Item -Path $GENERATED_INSTALLER_PATH\setup.exe -Destination $GENERATED_INSTALLER_PATH\application-setup.exe
 
   echo "squirrel-ed package!"
 }
@@ -270,6 +288,8 @@ echo ""
 
 
 if( $MS_BUILD_CONFIG -eq "Release" ){
+  make-extract-me-installer 
+
   make-nuget-package
 
   squirrel
