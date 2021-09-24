@@ -103,6 +103,11 @@ Sony has licensed Hori products https://www.playstation.com/en-us/explore/access
 If you are using an application to improve you aim or response time, that could be considered cheating. The developers of this application consider this a accessibility aid for people who have issues using a controller (I personally have RSI and cannot play with a controller for long periods of time, but can use a mouse and keyboard all day).
 
 
+### What are the best settings to play an FPS game
+Read https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/blob/master/documentation/mouse-to-analog-stick-notes.md
+Try https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/blob/master/profiles/pancakes-destiny-profile.json
+
+
 ### Will this trigger Riot Valorant's Vanguard Anti Cheat?
 https://support-valorant.riotgames.com/hc/en-us/articles/360046160933-What-is-Vanguard-
 

@@ -42,8 +42,14 @@
 
 
 ## Problems and fixes
-#### (Installation) "Installation failed"
-<img src="squirrel-installer-failed.png" alt="installer failed" width="280"/>
+#### (Installation) "Installation has failed - Failed to extract installer"
+<img src="squirrel-installer-failed-to-extract.png" alt="Failed to extract installer" width="280px"/>
+Sounds like your Anti virus doesnt like the installer. <br>
+Either disable your anti virus for the duration of the install, or look for a "application-extract-me.zip" in the latest release, for example  https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/2.2.0/application-extract-me.zip
+
+
+#### (Installation) "Installation has failed - something with log"
+<img src="squirrel-installer-failed.png" alt="installer failed" width="280px"/>
 
 Click on "Open Setup Log" and look for something meaningful, if you cant find something, then share the log via a github issue (https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/issues), or on our discord (https://discord.gg/zH4b8p4)
 

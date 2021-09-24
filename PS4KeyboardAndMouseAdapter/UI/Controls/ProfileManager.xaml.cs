@@ -17,6 +17,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
 
         public void HandleLoad(object sender, RoutedEventArgs e)
         {
+            Log.Debug("ProfileManager.HandleLoad");
             try
             {
                 OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -48,11 +49,13 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
 
         public void HandleReset(object sender, RoutedEventArgs e)
         {
+            Log.Debug("ProfileManager.HandleReset");
             UserSettings.LoadDefault();
         }
 
         public void HandleSave(object sender, RoutedEventArgs e)
         {
+            Log.Debug("ProfileManager.HandleSave");
             try
             {
                 SaveFileDialog saveFileDialog = new SaveFileDialog();

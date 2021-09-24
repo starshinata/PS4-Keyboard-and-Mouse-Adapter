@@ -48,5 +48,5 @@ using System.Windows;
 //
 // assume the below values are GENERATED
 // see build.ps1 for version management
-[assembly: AssemblyVersion("2.2.0")]
-[assembly: AssemblyFileVersion("2.2.0")]
+[assembly: AssemblyVersion("2.2.2")]
+[assembly: AssemblyFileVersion("2.2.2")]

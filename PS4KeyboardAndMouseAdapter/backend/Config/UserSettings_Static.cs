@@ -17,8 +17,6 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         private static UserSettings ThisInstance = new UserSettings();
 
-        private static readonly ILogger StaticLogger = Log.ForContext(typeof(UserSettings));
-
 
         ////////////////////////////////////////////////////////////////////////////
 
@@ -54,7 +52,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         public static void ImportValuesCurrent(UserSettings newSettings)
         {
-            StaticLogger.Information("UserSettings.ImportValuesCurrent()");
+            Log.Information("UserSettings.ImportValuesCurrent()");
 
             //reminder we want to import stuff into variable **thisInstance**
 
@@ -123,17 +121,17 @@ namespace PS4KeyboardAndMouseAdapter.Config
                     }
                     catch (Exception ex)
                     {
-                        StaticLogger.Error("UserSettings.IsLegacyConfig error(a): " + ex.Message);
-                        StaticLogger.Error(ex.GetType().ToString());
-                        StaticLogger.Error(ex.StackTrace);
+                        Log.Error("UserSettings.IsLegacyConfig error(a): " + ex.Message);
+                        Log.Error(ex.GetType().ToString());
+                        Log.Error(ex.StackTrace);
                     }
                 }
             }
             catch (Exception ex)
             {
-                StaticLogger.Error("UserSettings.IsLegacyConfig error(b): " + ex.Message);
-                StaticLogger.Error(ex.GetType().ToString());
-                StaticLogger.Error(ex.StackTrace);
+                Log.Error("UserSettings.IsLegacyConfig error(b): " + ex.Message);
+                Log.Error(ex.GetType().ToString());
+                Log.Error(ex.StackTrace);
             }
 
             return true;
@@ -142,7 +140,8 @@ namespace PS4KeyboardAndMouseAdapter.Config
         public static void Load(string file)
         {
             string fullFilePath = Path.GetFullPath(file);
-            StaticLogger.Information("UserSettings.Load: " + fullFilePath);
+            Log.Debug("UserSettings.load fullFilePath={0}", fullFilePath);
+
             ImportValues(fullFilePath);
 
             ThisInstance.GetKeyboardMappings();
@@ -152,44 +151,45 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         public static void LoadWithCatch(string file)
         {
+            Log.Information("UserSettings.LoadWithCatch file={0}", file);
+
             try
             {
                 Load(file);
             }
             catch (Exception ex)
             {
-                StaticLogger.Error("UserSettings.LoadWithCatch failed: " + ex.Message);
-                StaticLogger.Error(ex.GetType().ToString());
-                StaticLogger.Error(ex.StackTrace);
+                Log.Error("UserSettings.LoadWithCatch failed: " + ex.Message);
+                Log.Error(ex.GetType().ToString());
+                Log.Error(ex.StackTrace);
             }
         }
 
         public static void LoadDefault()
         {
+            Log.Information("UserSettings.LoadDefault");
             LoadWithCatch(PROFILE_DEFAULT);
         }
 
         public static void LoadPrevious()
         {
+            Log.Information("UserSettings.LoadPrevious");
             LoadWithCatch(PROFILE_PREVIOUS);
         }
 
         public static void Print(UserSettings settings)
         {
-            Log.Debug("UserSettings.Print()");
-            StaticLogger.Information("UserSettings.Print()");
+            Log.Information("UserSettings.Print()");
 
-            Log.Debug("print mappings");
-            StaticLogger.Information("print mappings");
+
+            Log.Information("print mappings");
             List<VirtualKey> virtualKeys = KeyUtility.GetVirtualKeyValues();
             foreach (VirtualKey key in virtualKeys)
             {
-                Log.Debug("print Mappings:{VirtKey:" + key + ", PhysicalKeyGroup: " + settings.Mappings[key] + "}");
-                StaticLogger.Information("print Mappings:{VirtKey:" + key + ", PhysicalKeyGroup: " + settings.Mappings[key] + "}");
+                Log.Information("print Mappings:{VirtKey:" + key + ", PhysicalKeyGroup: " + settings.Mappings[key] + "}");
             }
 
-            Log.Debug("print values");
-            StaticLogger.Information("print values");
+            Log.Information("print values");
             Type t = settings.GetType();
             PropertyInfo[] properties = t.GetProperties();
             foreach (PropertyInfo prop in properties)
@@ -201,8 +201,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
                     {
                         object value = getter.Invoke(settings, new object[] { });
 
-                        Log.Debug("print " + prop + ":" + value);
-                        StaticLogger.Information("print " + prop + ":" + value);
+                        Log.Information("print " + prop + ":" + value);
                     }
                 }
             }
@@ -210,7 +209,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         public static void Save(string file)
         {
-            StaticLogger.Information("UserSettings.Save: " + file);
+            Log.Information("UserSettings.Save: " + file);
 
             UserSettings instanceForSaving = ThisInstance.Clone();
             // removing KeyboardMappings, as these are generated after each key remapping
@@ -222,7 +221,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         public static void SetMapping(VirtualKey key, PhysicalKey valueOld, PhysicalKey valueNew)
         {
-            StaticLogger.Information("MainViewModel.SetMapping {VirtualKey:" + key + ", PhysicalKey: '" + valueOld + " -> " + valueNew + "'}");
+            Log.Information("MainViewModel.SetMapping {VirtualKey:" + key + ", PhysicalKey: '" + valueOld + " -> " + valueNew + "'}");
 
             if (!ThisInstance.MappingsContainsKey(key))
             {
