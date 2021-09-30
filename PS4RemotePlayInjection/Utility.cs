@@ -8,8 +8,6 @@ namespace PS4RemotePlayInjection
 {
     public class Utility
     {
-        public static bool IsCursorVisible = true;
-        public static bool IsToolBarVisible = false;
 
         [DllImport("user32.dll")]
         private static extern IntPtr LoadCursorFromFile(string lpFileName);
@@ -35,7 +33,7 @@ namespace PS4RemotePlayInjection
             // these actions are expensive - it was the cause of issue https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/issues/27
             // so we should check to see if there is a difference between requested value and current value
             // then execute if there is a difference
-            if (show != IsCursorVisible)
+            if (show != UtilityData.IsCursorVisible)
             {
                 if (!show)
                 {
@@ -49,7 +47,7 @@ namespace PS4RemotePlayInjection
                     SystemParametersInfo(0x0057, 0, null, 0);
                 }
 
-                IsCursorVisible = show;
+                UtilityData.IsCursorVisible = show;
             }
         }
 

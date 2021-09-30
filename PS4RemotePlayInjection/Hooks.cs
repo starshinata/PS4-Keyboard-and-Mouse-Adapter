@@ -24,6 +24,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 using AppDomainToolkit;
@@ -60,7 +61,7 @@ namespace PS4RemotePlayInjection
             unsafe
             {
                 byte* ptr = (byte*)pointer.ToPointer();
-                for (var i = 0; i < size; i++)
+                for (int i = 0; i < size; i++)
                 {
                     ptr[i] = managedArray[i];
                 }
@@ -126,6 +127,39 @@ namespace PS4RemotePlayInjection
                 _server.LogError(e, "Error Hooks.124");
             }
             _server.LogDebug("Hooks.DotNetHooks OUT");
+        }
+
+        public static readonly string TARGET_PROCESS_NAME = "RemotePlay";
+
+        public bool IsRemotePlayRunning()
+        {
+            _server.LogDebug("Hooks.IsRemotePlayRunning  UtilityData.pid: " + UtilityData.pid);
+            _server.LogDebug("Hooks.IsRemotePlayRunning  UtilityData.remotePlayPid: " + UtilityData.RemotePlayProcess);
+            _server.LogDebug("Hooks.IsRemotePlayRunning  current pid " + Process.GetCurrentProcess());
+            _server.LogDebug("Hooks.IsRemotePlayRunning  current pid " + Process.GetCurrentProcess().Id);
+
+            var process = UtilityData.RemotePlayProcess;
+            if (process == null)
+            {
+                process = Injector.FindProcess(TARGET_PROCESS_NAME);
+                UtilityData.RemotePlayProcess = process;
+            }
+
+            if (process != null)
+            {
+                _server.LogDebug("Hooks.IsRemotePlayRunning  process: " + process.Id);
+
+                Process[] processCollection = Process.GetProcesses();
+                foreach (Process p in processCollection)
+                {
+                    if (p.Id == process.Id)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+
         }
 
         /// <summary>
@@ -399,7 +433,8 @@ namespace PS4RemotePlayInjection
         {
 
             _server.LogVerbose("Hooks.CreateFile_Hook - file " + filename);
-            // SPOOF
+            // SPOOF the PS4 controller
+            //if (filename != null && filename.StartsWith(@"\\?\hid#vid_046d&pid_c231"))
             if (filename != null && filename.StartsWith(@"\\?\hid#"))
             {
                 _server.LogVerbose("Hooks.CreateFile_Hook Spoofing file " + filename);
@@ -515,30 +550,40 @@ namespace PS4RemotePlayInjection
 
             try
             {
+
+
+                _server.LogVerbose("Hooks.ReadFile_Hook isPSRemoteRunning? " + IsRemotePlayRunning());
                 if (_server.ShouldEmulateController())
                 {
-                    _server.LogVerbose("Hooks.ReadFile_Hook emulatedController");
+                    _server.LogVerbose("Hooks.ReadFile_Hook 541 emulatedController");
                     // SPOOF
                     result = true;
                     try
                     {
-
+                        _server.LogVerbose("Hooks.ReadFile_Hook 546");
                         // Call original for any other files
                         if (hFile != _dummyHandle)
                         {
+                            _server.LogVerbose("Hooks.ReadFile_Hook 550");
                             result = ReadFile(hFile, lpBuffer, nNumberOfBytesToRead, out lpNumberOfBytesRead, lpOverlapped);
                         }
 
+                        _server.LogVerbose("Hooks.ReadFile_Hook 554");
                         // Retrieve filename from the file handle
                         StringBuilder filename = new StringBuilder(255);
+
+                        _server.LogVerbose("Hooks.ReadFile_Hook 558");
                         GetFinalPathNameByHandle(hFile, filename, 255, 0);
                         _server.LogVerbose("Hooks.ReadFile_Hook file " + filename.ToString());
+                        _server.LogVerbose("Hooks.ReadFile_Hook 561");
 
                         if (hFile == _dummyHandle && nNumberOfBytesToRead == 2048 && lpNumberOfBytesRead == 0)
                         {
+                            _server.LogVerbose("Hooks.ReadFile_Hook 565");
                             _server.LogVerbose("Hooks.ReadFile_Hook dummyHandle");
                             lpNumberOfBytesRead = bufferSize;
 
+                            _server.LogVerbose("Hooks.ReadFile_Hook 569");
                             // Create fake report buffer
                             byte[] fakeReport = fakeReport = new byte[bufferSize]
                             {
@@ -547,15 +592,20 @@ namespace PS4RemotePlayInjection
                                 0, 0, 0, 128, 0, 0, 0, 128, 0, 0, 0, 0, 128, 0
                             };
 
+                            _server.LogVerbose("Hooks.ReadFile_Hook 578");
+
                             // Assign the spoofed frame counter
                             __frameCounter++;
                             fakeReport[7] = (byte)((__frameCounter << 2) & 0xFF);
+                            _server.LogVerbose("Hooks.ReadFile_Hook 583");
 
                             // Send to server
                             _server.OnReadFile(filename.ToString(), ref fakeReport);
+                            _server.LogVerbose("Hooks.ReadFile_Hook 587");
 
                             // Restore managedArray back to unmanaged array
                             RestoreUnmanagedArray(lpBuffer, fakeReport.Length, fakeReport);
+                            _server.LogVerbose("Hooks.ReadFile_Hook 591");
 
                             return result;
                         }
@@ -627,6 +677,8 @@ namespace PS4RemotePlayInjection
                 _server.LogError("Hooks.605 exception");
                 _server.LogError(e.ToString());
             }
+
+            _server.LogVerbose("Hooks.ReadFile_Hook 664");
 
             return result;
         }
@@ -777,7 +829,7 @@ namespace PS4RemotePlayInjection
 
             try
             {
-                _server.LogVerbose("Hooks.HidD_GetFeature_Hook");
+                _server.LogVerbose("Hooks.HidD_GetFeature_Hook hidDeviceObject: " + hidDeviceObject);
 
                 if (_server.ShouldEmulateController())
                 {
@@ -793,6 +845,7 @@ namespace PS4RemotePlayInjection
 
                             if (lpReportBuffer == 0x12)
                             {
+                                _server.LogVerbose("Hooks.HidD_GetFeature_Hook 848");
                                 byte[] report =
                                 {
                                     18, 198, 3, 170, 95, 27, 64, 8, 37, 0, 172, 252, 74, 74, 71, 168
@@ -801,6 +854,7 @@ namespace PS4RemotePlayInjection
                             }
                             else if (lpReportBuffer == 0xA3)
                             {
+                                _server.LogVerbose("Hooks.HidD_GetFeature_Hook 857");
                                 byte[] report =
                                 {
                                     163, 77, 97, 121, 32, 49, 55, 32, 50, 48, 49, 54, 0, 0, 0, 0, 0, 48, 54, 58,
@@ -811,6 +865,7 @@ namespace PS4RemotePlayInjection
                             }
                             else if (lpReportBuffer == 0x02)
                             {
+                                _server.LogVerbose("Hooks.HidD_GetFeature_Hook 868");
                                 byte[] report =
                                 {
                                     2, 6, 0, 3, 0, 252, 255, 133, 34, 133, 221, 237, 34, 31, 221, 228, 35, 13,

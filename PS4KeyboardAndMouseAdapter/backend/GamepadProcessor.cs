@@ -8,6 +8,7 @@ using System;
 using System.Diagnostics;
 using System.Numerics;
 using System.Text;
+using System.Windows.Forms;
 
 namespace PS4KeyboardAndMouseAdapter
 {
@@ -47,6 +48,9 @@ namespace PS4KeyboardAndMouseAdapter
         // timer to know how long it has been since we last polled the mouse for an update
         private readonly Stopwatch MouseInputTimer = new Stopwatch();
 
+        private int RequestsPerSecondCounter = 0;
+        private readonly Stopwatch RequestsPerSecondTimer = new Stopwatch();
+
         private readonly MouseWheelProcessor MouseWheelProcessor;
 
         ////////////////////////////////////////////////////////////////////////////
@@ -55,6 +59,7 @@ namespace PS4KeyboardAndMouseAdapter
         {
             AimToggleTimer.Start();
             MouseInputTimer.Start();
+            RequestsPerSecondTimer.Start();
 
             MouseWheelProcessor = new MouseWheelProcessor();
         }
@@ -72,6 +77,11 @@ namespace PS4KeyboardAndMouseAdapter
 
                 Mouse.SetPosition(Anchor);
                 MouseInputTimer.Restart();
+                Log.Verbose("GamepadProcessor.FeedMouseCoords new rawX={0}, rawY={1}", MouseDirectionPrevious.X, MouseDirectionPrevious.Y);
+            }
+            else
+            {
+                Log.Verbose("GamepadProcessor.FeedMouseCoords old rawX={0}, rawY={1}", MouseDirectionPrevious.X, MouseDirectionPrevious.Y);
             }
 
             // pancakeslp 2020.12.27
@@ -235,19 +245,25 @@ namespace PS4KeyboardAndMouseAdapter
 
                 // mouse displacement relative to the anchor
                 MouseDirection = FeedMouseCoords();
+                // Log.Verbose("GamepadProcessor.HandleMouseCursor rawX={0}, rawY={1}", MouseDirection.X, MouseDirection.Y);
 
                 if (IsAimingWithAimSpecificSensitivity())
                 {
+                    // Log.Verbose("GamepadProcessor.HandleMouseCursor MouseXAxisSensitivity_AIM_Modifier " + UserSettings.MouseXAxisSensitivityAimModifier);
                     MouseDirection = new Vector2i(
                         (int)(MouseDirection.X * UserSettings.MouseXAxisSensitivityAimModifier),
                         (int)(MouseDirection.Y * UserSettings.MouseYAxisSensitivityAimModifier));
                 }
                 else
                 {
+                    // Log.Verbose("GamepadProcessor.HandleMouseCursor MouseXAxisSensitivity_LOOK_Modifier " + UserSettings.MouseXAxisSensitivityLookModifier);
                     MouseDirection = new Vector2i(
                         (int)(MouseDirection.X * UserSettings.MouseXAxisSensitivityLookModifier),
                         (int)(MouseDirection.Y * UserSettings.MouseYAxisSensitivityLookModifier));
                 }
+                // Log.Verbose("GamepadProcessor.HandleMouseCursor modifiedX={0}, modifiedY={1}", MouseDirection.X, MouseDirection.Y);
+
+
                 Vector2 direction = new Vector2(MouseDirection.X, MouseDirection.Y);
 
                 // Cap length to fit range.
@@ -274,11 +290,10 @@ namespace PS4KeyboardAndMouseAdapter
                     scaledY = 127;
                 }
 
-                // if (scaledX != 127 && scaledY != 127)
-                // {
-                //     Log.Debug("scaledX" + scaledX);
-                //     Log.Debug("scaledY" + scaledY);
-                // }
+                if (scaledX != 127 && scaledY != 127)
+                {
+                    // Log.Verbose("GamepadProcessor.HandleMouseCursor scaledX={0} scaledY={1}", scaledX, scaledY);
+                }
 
                 if (UserSettings.MouseControlsL3)
                 {
@@ -299,7 +314,7 @@ namespace PS4KeyboardAndMouseAdapter
             return IsAiming && UserSettings.MouseAimSensitivityEnabled;
         }
 
-        public bool IsPhysicalKeyPressed(PhysicalKey key)
+        private bool IsPhysicalKeyPressed(PhysicalKey key)
         {
             if (Keyboard.IsKeyPressed(key.KeyboardValue))
                 return true;
@@ -316,7 +331,7 @@ namespace PS4KeyboardAndMouseAdapter
             return false;
         }
 
-        public bool IsVirtualKeyPressed(VirtualKey key)
+        private bool IsVirtualKeyPressed(VirtualKey key)
         {
             if (key == VirtualKey.NULL)
                 return false;
@@ -392,8 +407,21 @@ namespace PS4KeyboardAndMouseAdapter
 
         public void OnReceiveData(ref DualShockState state)
         {
+
+            string screenWidth = Screen.PrimaryScreen.Bounds.Width.ToString();
+            string screenHeight = Screen.PrimaryScreen.Bounds.Height.ToString();
+            Log.Verbose(" GamepadProcessor.OnReceiveData screen width={0} height={1}", screenWidth, screenHeight);
+
+            RequestsPerSecondCounter++;
+            if (RequestsPerSecondTimer.ElapsedMilliseconds >= 1000)
+            {
+                Log.Verbose("GamepadProcessor.OnReceiveData  RequestsPerSecondCounter={0}", RequestsPerSecondCounter);
+                RequestsPerSecondTimer.Restart();
+                RequestsPerSecondCounter = 0;
+            }
+
             Guid uuid = Guid.NewGuid();
-            Log.Verbose(uuid + " GamepadProcessor.OnReceiveData in a");
+            // Log.Verbose(uuid + " GamepadProcessor.OnReceiveData in a");
 
             // Create the default state to modify
             if (true)//CurrentState == null)
@@ -407,7 +435,13 @@ namespace PS4KeyboardAndMouseAdapter
                 return;
             }
 
-            Log.Verbose(uuid + " GamepadProcessor.OnReceiveData in b");
+
+
+
+            //Stopwatch OnReceiveDataTimer = new Stopwatch();
+            //OnReceiveDataTimer.Start();
+
+            // Log.Verbose(uuid + " GamepadProcessor.OnReceiveData in b");
 
             HandleButtonPressed();
 
@@ -415,7 +449,10 @@ namespace PS4KeyboardAndMouseAdapter
             HandleMouseCursor();
             MouseWheelProcessor.Process(CurrentState);
 
-            Log.Verbose(uuid + " GamepadProcessor.OnReceiveData out " + DualShockStateToString(ref CurrentState));
+            //Log.Verbose(uuid + " GamepadProcessor.OnReceiveData out " + DualShockStateToString(ref CurrentState));
+
+            //Log.Verbose(uuid + " GamepadProcessor.OnReceiveData OnReceiveDataTimer {0} ms ", + OnReceiveDataTimer.ElapsedMilliseconds);
+            //OnReceiveDataTimer.Stop();
 
             // Assign the state
             state = CurrentState;

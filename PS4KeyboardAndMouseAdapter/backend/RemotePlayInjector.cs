@@ -36,7 +36,7 @@ namespace PS4KeyboardAndMouseAdapter
                 RemotePlayProcess.EnableRaisingEvents = true;
                 RemotePlayProcess.Exited += (sender, args) => { Utility.ShowCursor(true); };
 
-                InstanceSettings.GetInstance().RemotePlayProcess = RemotePlayProcess;
+                InstanceSettings.GetInstance().SetRemotePlayProcess(RemotePlayProcess);
 
                 Injector.Callback += gamepadProcessor.OnReceiveData;
             }

@@ -35,15 +35,18 @@ namespace PS4RemotePlayInterceptor
     /// </summary>
     class InjectionInterface : MarshalByRefObject
     {
-
+        //TODO write something the uses each log level as injector init
         public void LogError(string msg)
         {
-            Log.Logger.Error(msg);
+            // maybe error is bad when injected?
+            Log.Logger.Debug("ERROR" + msg);
         }
 
         public void LogError(Exception e, string msg)
         {
-            Log.Logger.Error(e, msg);
+            // maybe error is bad when injected?
+            Log.Logger.Debug("ERROR" + msg);
+            Log.Logger.Debug(e, "");
         }
 
         public void LogDebug(string msg)
@@ -55,7 +58,12 @@ namespace PS4RemotePlayInterceptor
         {
             Log.Logger.Information(msg);
         }
+
         public void LogVerbose(string msg)
+        {
+            //Log.Logger.Verbose(msg);
+        }
+        public void LogVerboseForControllerIO(string msg)
         {
             Log.Logger.Verbose(msg);
         }
@@ -144,7 +152,7 @@ namespace PS4RemotePlayInterceptor
 
         public bool ShouldShowToolbar()
         {
-            bool x = Utility.IsToolBarVisible;
+            bool x = UtilityData.IsToolBarVisible;
             Log.Logger.Information("InjectionInterface.ShouldShowToolbar {0}", x);
             return x;
         }

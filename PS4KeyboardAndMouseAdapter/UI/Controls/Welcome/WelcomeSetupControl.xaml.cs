@@ -32,13 +32,13 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
             if (isConnected)
             {
                 ErrorTextBox_PlaystationController.Foreground = UIConstants.TEXTBOX_COLOUR_RED;
-                ErrorTextBox_PlaystationController.Text = "Warning: PS4 controller connected!";
+                ErrorTextBox_PlaystationController.Text = "Warning: PS controller connected!";
                 ErrorTextBox_PlaystationController.Visibility = UIConstants.VISIBILITY_VISIBLE;
             }
             else
             {
                 ErrorTextBox_PlaystationController.Foreground = UIConstants.TEXTBOX_COLOUR_GREEN;
-                ErrorTextBox_PlaystationController.Text = "Success: no PS4 controller connected";
+                ErrorTextBox_PlaystationController.Text = "Success: no PS controller connected";
                 ErrorTextBox_PlaystationController.Visibility = UIConstants.VISIBILITY_VISIBLE;
             }
         }

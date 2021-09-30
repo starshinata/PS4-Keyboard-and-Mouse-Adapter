@@ -31,6 +31,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 		documentation\example-ui-5.png = documentation\example-ui-5.png
 		documentation\frequently-asked-questions.md = documentation\frequently-asked-questions.md
 		documentation\glossary-and-terms.md = documentation\glossary-and-terms.md
+		documentation\hid-lookup-table.txt = documentation\hid-lookup-table.txt
 		documentation\keyboard-keys-map.md = documentation\keyboard-keys-map.md
 		documentation\known-game-issues.md = documentation\known-game-issues.md
 		documentation\mouse-configuration.md = documentation\mouse-configuration.md

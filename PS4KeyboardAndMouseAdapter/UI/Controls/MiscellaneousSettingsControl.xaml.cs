@@ -18,9 +18,9 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
 
         private void Handler_RemotePlayVolumeChange(object sender, EventArgs e)
         {
-            if (InstanceSettings.GetInstance().RemotePlayProcess != null)
+            if (InstanceSettings.GetInstance().GetRemotePlayProcess() != null)
             {
-                AudioManager.SetApplicationVolume(InstanceSettings.GetInstance().RemotePlayProcess.Id, UserSettings.GetInstance().RemotePlayVolume);
+                AudioManager.SetApplicationVolume(InstanceSettings.GetInstance().GetRemotePlayProcess().Id, UserSettings.GetInstance().RemotePlayVolume);
             }
         }
 
@@ -32,7 +32,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
         private void Handler_Ps4ToolBarVisibleToggle(object sender, System.Windows.RoutedEventArgs e)
         {
             Log.Debug("MiscellaneousSettingsControl.Handler_Ps4ToolBarVisibleToggle");
-            Utility.IsToolBarVisible = !Utility.IsToolBarVisible ;
+            UtilityData.IsToolBarVisible = !UtilityData.IsToolBarVisible;
         }
     }
 }

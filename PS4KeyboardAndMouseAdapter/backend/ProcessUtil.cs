@@ -13,29 +13,45 @@ namespace PS4KeyboardAndMouseAdapter
 
         public static bool IsInForeground(Process process)
         {
-            if (process == null)
+            try
+            {
+                if (process == null)
+                    return false;
+
+                Log.Verbose(" ProcessUtil.IsInForeground process a " + process);
+
+                if (process.MainWindowHandle == null)
+                    return false;
+
+                Log.Verbose(" ProcessUtil.IsInForeground process b " + process.MainWindowHandle);
+
+                IntPtr activeWindow = GetForegroundWindow();
+
+                Log.Verbose(" ProcessUtil.IsInForeground activeWindow " + activeWindow);
+
+                if (activeWindow == IntPtr.Zero)
+                    return false;
+
+                if (activeWindow != process.MainWindowHandle)
+                    return false;
+
+                Log.Verbose(" ProcessUtil.IsInForeground return true");
+                return true;
+            }
+            catch (Exception e)
+            {
+                Log.Error("ProcessUtil.IsInForeground Error: " + e.Message);
+                Log.Error(e.GetType().ToString());
+                Log.Error(e.StackTrace);
+
                 return false;
-
-            Log.Verbose(" ProcessUtil.IsInForeground process a " + process);
-            Log.Verbose(" ProcessUtil.IsInForeground process b " + process.MainWindowHandle);
-
-            IntPtr activeWindow = GetForegroundWindow();
-
-            Log.Verbose(" ProcessUtil.IsInForeground activeWindow " + activeWindow);
-
-            if (activeWindow == IntPtr.Zero)
-                return false;
-
-            if (activeWindow != process.MainWindowHandle)
-                return false;
-
-            Log.Verbose(" ProcessUtil.IsInForeground return true");
-            return true;
+            }
         }
 
         public static bool IsRemotePlayInForeground()
         {
-            return IsInForeground(InstanceSettings.GetInstance().RemotePlayProcess);
+            return IsInForeground(InstanceSettings.GetInstance().GetRemotePlayProcess());
         }
+
     }
 }

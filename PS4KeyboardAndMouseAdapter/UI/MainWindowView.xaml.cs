@@ -51,9 +51,9 @@ namespace PS4KeyboardAndMouseAdapter
 
         private void RefreshRemotePlayProcess()
         {
-            if (InstanceSettings.GetInstance().RemotePlayProcess != null)
+            if (InstanceSettings.GetInstance().GetRemotePlayProcess() != null)
             {
-                InstanceSettings.GetInstance().RemotePlayProcess.Refresh();
+                InstanceSettings.GetInstance().GetRemotePlayProcess().Refresh();
             }
         }
 

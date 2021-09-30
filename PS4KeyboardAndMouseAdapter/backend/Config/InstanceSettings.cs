@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using PS4RemotePlayInjection;
+using Serilog;
+using System.ComponentModel;
 using System.Diagnostics;
 
 namespace PS4KeyboardAndMouseAdapter.Config
@@ -24,7 +26,24 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         public bool EnableMouseInput { get; set; } = false;
 
-        public Process RemotePlayProcess;
+        public Process GetRemotePlayProcess()
+        {
+            return UtilityData.RemotePlayProcess;
+        }
+
+        public void SetRemotePlayProcess(Process newProcess)
+        {
+            Log.Error("InstanceSettings.SetRemotePlayProcess (UtilityData.RemotePlayProcess) set " + newProcess.Id);
+            UtilityData.RemotePlayProcess = newProcess;
+            UtilityData.pid = newProcess.Id;
+
+            Log.Error("InstanceSettings.SetRemotePlayProcess (UtilityData.RemotePlayProcess) get a " + UtilityData.RemotePlayProcess);
+            Log.Error("InstanceSettings.SetRemotePlayProcess (UtilityData.RemotePlayProcess) get b " + UtilityData.RemotePlayProcess.Id);
+            Log.Error("InstanceSettings.SetRemotePlayProcess (UtilityData.RemotePlayProcess) get c " + UtilityData.pid);
+            Log.Error("InstanceSettings.SetRemotePlayProcess (UtilityData.RemotePlayProcess) get d " + Process.GetCurrentProcess());
+            Log.Error("InstanceSettings.SetRemotePlayProcess (UtilityData.RemotePlayProcess) get d " + Process.GetCurrentProcess().Id);
+        }
 
     }
 }
+

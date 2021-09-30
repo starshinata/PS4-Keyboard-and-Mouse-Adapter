@@ -16,16 +16,13 @@ $CERT_DIRECTORY="D:\workspace\##certificates\github.com-pancakeslp"
 #$MS_BUILD_CONFIG="Debug"
 $MS_BUILD_CONFIG="Release"
 
-$VERSION="2.2.2"
+$VERSION="2.2.3"
 
 ################################
 ################################
 
 ## Path for MSBuild.exe
 $env:Path += ";C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\amd64\"
-
-## Path for MSTest.exe
-##$env:Path += ";C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE"
 
 ## Path for signtool.exe
 $env:Path += ";C:\Program Files (x86)\Windows Kits\10\bin\10.0.17763.0\x64\"
@@ -63,6 +60,11 @@ function build-msbuild {
     echo "msbuild failed"
     exit $LASTEXITCODE 
   }
+
+  echo "msbuild sleep"
+  ## sleep cause sometimes this step returns too early
+  ## wait to make sure nothing errors
+  Start-Sleep -Milliseconds 500
 
   echo "msbuild done"
 }
