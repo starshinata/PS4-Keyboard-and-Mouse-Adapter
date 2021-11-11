@@ -1,0 +1,291 @@
+{
+  "KeyboardMappings": null,
+  "Mappings": {
+    "Share": {
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 47,
+          "MouseValue": -1
+        }
+      ]
+    },
+    "Options": {
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 54,
+          "MouseValue": -1
+        }
+      ]
+    },
+    "TouchButton": {
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 60,
+          "MouseValue": -1
+        }
+      ]
+    },
+    "PlaystationButton": {
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 37,
+          "MouseValue": -1
+        }
+      ]
+    },
+    "DPadLeft": {
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 79,
+          "MouseValue": -1
+        }
+      ]
+    },
+    "DPadRight": {
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 81,
+          "MouseValue": -1
+        }
+      ]
+    },
+    "DPadUp": {
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 83,
+          "MouseValue": -1
+        }
+      ]
+    },
+    "DPadDown": {
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 77,
+          "MouseValue": -1
+        },
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 77,
+          "MouseValue": -1
+        }
+      ]
+    },
+    "Triangle": {
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 27,
+          "MouseValue": -1
+        },
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 28,
+          "MouseValue": -1
+        }
+      ]
+    },
+    "Circle": {
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 38,
+          "MouseValue": -1
+        }
+      ]
+    },
+    "Cross": {
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 57,
+          "MouseValue": -1
+        }
+      ]
+    },
+    "Square": {
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 17,
+          "MouseValue": -1
+        }
+      ]
+    },
+    "L1": {
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 16,
+          "MouseValue": -1
+        },
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": -1,
+          "MouseValue": 3
+        }
+      ]
+    },
+    "L2": {
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": -1,
+          "MouseValue": 1
+        },
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 20,
+          "MouseValue": -1
+        }
+      ]
+    },
+    "L3": {
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 23,
+          "MouseValue": -1
+        }
+      ]
+    },
+    "R1": {
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 4,
+          "MouseValue": -1
+        },
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": -1,
+          "MouseValue": 4
+        }
+      ]
+    },
+    "R2": {
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": -1,
+          "MouseValue": 0
+        },
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 14,
+          "MouseValue": -1
+        }
+      ]
+    },
+    "R3": {
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 21,
+          "MouseValue": -1
+        }
+      ]
+    },
+    "LeftStickLeft": {
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 0,
+          "MouseValue": -1
+        }
+      ]
+    },
+    "LeftStickRight": {
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 3,
+          "MouseValue": -1
+        }
+      ]
+    },
+    "LeftStickUp": {
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 22,
+          "MouseValue": -1
+        }
+      ]
+    },
+    "LeftStickDown": {
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 18,
+          "MouseValue": -1
+        }
+      ]
+    },
+    "RightStickLeft": {
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 9,
+          "MouseValue": -1
+        }
+      ]
+    },
+    "RightStickRight": {
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 11,
+          "MouseValue": -1
+        }
+      ]
+    },
+    "RightStickUp": {
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 8,
+          "MouseValue": -1
+        }
+      ]
+    },
+    "RightStickDown": {
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 10,
+          "MouseValue": -1
+        }
+      ]
+    }
+  },
+  "AdvancedMappingPage_MappingsToShow": 4,
+  "AimToggle": false,
+  "AimToggleRetoggleDelay": 0,
+  "AnalogStickLowerRange": 30,
+  "AnalogStickUpperRange": 95,
+  "MouseAimSensitivityEnabled": true,
+  "MouseControlsL3": false,
+  "MouseControlsR3": true,
+  "MouseDistanceLowerRange": 5.0,
+  "MouseDistanceUpperRange": 96.0,
+  "MouseMaxDistance": 960.0,
+  "MousePollingRate": 100,
+  "MouseWheelScrollHoldDuration": 1.0,
+  "MouseXAxisSensitivityAimModifier": 1.0,
+  "MouseXAxisSensitivityLookModifier": 4.2,
+  "MouseXAxisSensitivityMax": 100.0,
+  "MouseYAxisSensitivityAimModifier": 1.0,
+  "MouseYAxisSensitivityLookModifier": 4.4,
+  "MouseYAxisSensitivityMax": 100.0,
+  "RemotePlayVolume": 100.0,
+  "XYRatio": 1.0,
+  "Version_2_0_0_OrGreater": true
+}
