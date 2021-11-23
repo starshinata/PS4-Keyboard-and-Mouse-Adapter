@@ -26,25 +26,37 @@ namespace PS4RemotePlayInjection
                 server.LogDebug("Patcher.DoPatching type " + aType);
             }
 
-            // Show toolbar patch
             Type type = types?.FirstOrDefault(x => x.Name.Equals("StreamingToolBar"));
             server.LogDebug("Patcher.DoPatching type " + type);
 
-            System.Reflection.MethodInfo showToolBarMethod = AccessTools.Method(type, "ShowToolBar");
-            System.Reflection.MethodInfo showToolBarPrefix = SymbolExtensions.GetMethodInfo(() => ShowToolBarPrefix());
-            System.Reflection.MethodInfo showToolBarPostfix = SymbolExtensions.GetMethodInfo(() => ShowToolBarPostfix());
-            // in general, add null checks here (new HarmonyMethod() does it for you too)
+            // Show toolbar patch
+            try { 
+                server.LogDebug("Patcher.DoPatching patching showToolBarMethod");
 
-            harmony.Patch(showToolBarMethod, new HarmonyMethod(showToolBarPrefix), new HarmonyMethod(showToolBarPostfix));
-            server.LogDebug("Patcher.DoPatching patched showToolBarMethod");
+                System.Reflection.MethodInfo showToolBarMethod = AccessTools.Method(type, "ShowToolBar");
+                System.Reflection.MethodInfo showToolBarPrefix = SymbolExtensions.GetMethodInfo(() => ShowToolBarPrefix());
+                System.Reflection.MethodInfo showToolBarPostfix = SymbolExtensions.GetMethodInfo(() => ShowToolBarPostfix());
+                // in general, add null checks here (new HarmonyMethod() does it for you too)
+
+                harmony.Patch(showToolBarMethod, new HarmonyMethod(showToolBarPrefix), new HarmonyMethod(showToolBarPostfix));
+                server.LogDebug("Patcher.DoPatching patched showToolBarMethod");
+            } catch (Exception e) {
+                server.LogError(e, "Patcher.DoPatching patching failed showToolBarMethod");
+            }
 
             // Hide toolbar patch
-            System.Reflection.MethodInfo hideToolBarMethod = AccessTools.Method(type, "HideToolBar");
-            System.Reflection.MethodInfo hideToolBarPrefix = SymbolExtensions.GetMethodInfo(() => HideToolBarPrefix());
-            System.Reflection.MethodInfo hideToolBarPostfix = SymbolExtensions.GetMethodInfo(() => HideToolBarPostfix());
+            try { 
+                server.LogDebug("Patcher.DoPatching patching hideToolBarMethod");
+                
+                System.Reflection.MethodInfo hideToolBarMethod = AccessTools.Method(type, "HideToolBar");
+                System.Reflection.MethodInfo hideToolBarPrefix = SymbolExtensions.GetMethodInfo(() => HideToolBarPrefix());
+                System.Reflection.MethodInfo hideToolBarPostfix = SymbolExtensions.GetMethodInfo(() => HideToolBarPostfix());
 
-            harmony.Patch(hideToolBarMethod, new HarmonyMethod(hideToolBarPrefix), new HarmonyMethod(hideToolBarPostfix));
-            server.LogDebug("Patcher.DoPatching patched hideToolBarMethod");
+                harmony.Patch(hideToolBarMethod, new HarmonyMethod(hideToolBarPrefix), new HarmonyMethod(hideToolBarPostfix));
+                server.LogDebug("Patcher.DoPatching patched hideToolBarMethod");
+            } catch (Exception e) {
+                server.LogError(e, "Patcher.DoPatching patching failed hideToolBarMethod");
+            }
         }
 
         public static bool ShowToolBarPrefix()

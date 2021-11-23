@@ -256,6 +256,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="backend\AppUpdater.cs" />
     <Compile Include="backend\AudioManager.cs" />
     <Compile Include="backend\DebugLogging\DebugDump.cs" />
     <Compile Include="backend\DebugLogging\GetOsVersion.cs" />

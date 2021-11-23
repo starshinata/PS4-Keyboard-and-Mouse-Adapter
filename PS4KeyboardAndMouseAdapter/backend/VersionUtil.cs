@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NuGet;
+using System;
 using System.Reflection;
 
 namespace PS4KeyboardAndMouseAdapter
@@ -9,6 +10,12 @@ namespace PS4KeyboardAndMouseAdapter
         {
             Version v = Assembly.GetExecutingAssembly().GetName().Version;
             return $"{v.Major}.{v.Minor}.{v.Build}";
+        }
+
+        public static SemanticVersion GetSemanticVersion()
+        {
+            Version v = Assembly.GetExecutingAssembly().GetName().Version;
+            return new SemanticVersion(v.Major, v.Minor, v.Build, v.Revision);
         }
 
         public static string GetVersionWithBuildDate()

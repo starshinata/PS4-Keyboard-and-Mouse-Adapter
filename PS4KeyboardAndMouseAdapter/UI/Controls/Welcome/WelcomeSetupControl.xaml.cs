@@ -80,6 +80,9 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
 
             ApplicationSettings.GetInstance().RemotePlayPath = RemotePlayTextBox.Text;
 
+            // if this is before the injection does this finish before injector ?
+            DebugDump.Dump();
+
             Window window = System.Windows.Application.Current.MainWindow;
             ((MainWindowView)window).WelcomeStep1Done();
 
@@ -87,7 +90,6 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
             RemotePlayInjector RemotePlayInjector = new RemotePlayInjector(gp);
             RemotePlayInjector.OpenRemotePlayAndInject();
 
-            DebugDump.Dump();
         }
 
         private void Handle_LogFileLocationOpen(object sender, RoutedEventArgs e)
