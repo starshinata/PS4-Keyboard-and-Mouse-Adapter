@@ -1,10 +1,27 @@
 # Version History
 
 
-### v 2.2.0
-* Virus disclaimer - 1/68 checks done by Virus total says we are untrustworthy :( https://www.virustotal.com/gui/file/24bffc022f043899dc19ad65f651b1348ae7badef34df24500a64df76095e5c2/detection I suspect this is due to the extra logging we have added to diagnose issues.
+### v 2.2.3
+* Virus disclaimer - 1/69 checks done by Virus total says we are untrustworthy :( Feel free to browse the source code and make your own opinion.
 
-* Added Welcome screen to adapter (this is to highlight fixes to users for some of the most common problems they have)
+* blargh
+
+### v 2.2.2
+* Virus disclaimer - 1/69 checks done by Virus total says we are untrustworthy :( Feel free to browse the source code and make your own opinion.
+
+* fixing load default profile not working
+
+### v 2.2.1
+* Virus disclaimer - 1/69 checks done by Virus total says we are untrustworthy :( Feel free to browse the source code and make your own opinion.
+
+* adding a second option for installing
+  * application-extract-me.zip
+  * application-setup.exe
+
+### v 2.2.0
+* Virus disclaimer - 1/68 checks done by Virus total says we are untrustworthy :( Feel free to browse the source code and make your own opinion. <br> https://www.virustotal.com/gui/file/24bffc022f043899dc19ad65f651b1348ae7badef34df24500a64df76095e5c2/detection I suspect this is due to the extra logging we have added to diagnose issues.
+
+* Added Welcome screen to adapter (this is to highlight common fixes to users (for some of the most common problems observed))
 * Added much more detailed logging (thus when you submit an issue with logs it should help us analyse it)
 
 
