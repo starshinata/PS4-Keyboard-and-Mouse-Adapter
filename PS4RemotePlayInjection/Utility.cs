@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using mscoree;
+using Pizza;
 using Serilog;
 
 namespace PS4RemotePlayInjection
@@ -89,8 +90,7 @@ namespace PS4RemotePlayInjection
             }
             catch (Exception e)
             {
-                Log.Error("GetAppDomains error" + e.ToString());
-                Log.Error("GetAppDomains error" + e.Message);
+                ExceptionLogger.LogException("GetAppDomains error" , e);
                 return null;
             }
             finally

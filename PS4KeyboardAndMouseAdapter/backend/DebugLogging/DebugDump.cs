@@ -1,4 +1,5 @@
-﻿using PS4KeyboardAndMouseAdapter.Config;
+﻿using Pizza;
+using PS4KeyboardAndMouseAdapter.Config;
 using Serilog;
 using System;
 using System.Collections;
@@ -14,25 +15,32 @@ namespace PS4KeyboardAndMouseAdapter.backend.DebugLogging
 
         public static void Dump()
         {
-            Log.Debug("");
-            Log.Debug("DebugDump");
-            Log.Debug("DebugDump");
-            Log.Debug("DebugDump");
+            try
+            {
+                Log.Debug("");
+                Log.Debug("DebugDump");
+                Log.Debug("DebugDump");
+                Log.Debug("DebugDump");
 
-            Log.Debug("");
+                Log.Debug("");
 
-            Log.Debug("OS " + GetOsVersion.Get());
-            Log.Debug("Is64BitOperatingSystem " + Environment.Is64BitOperatingSystem);
+                Log.Debug("OS " + GetOsVersion.Get());
+                Log.Debug("Is64BitOperatingSystem " + Environment.Is64BitOperatingSystem);
 
-            Dump_RemotePlay();
+                Dump_RemotePlay();
 
-            Dump_ApplicationFolder();
-            Dump_CurrentCulture();
-            Dump_EnvironmentVariables();
+                Dump_ApplicationFolder();
+                Dump_CurrentCulture();
+                Dump_EnvironmentVariables();
 
-            Dump_ListProcesses();
-            Dump_ListServices();
-            HidFacade.get();
+                Dump_ListProcesses();
+                Dump_ListServices();
+                HidFacade.get();
+            }
+            catch (Exception ex)
+            {
+                ExceptionLogger.LogException("DebugDump.Dump failed " , ex);
+            }
         }
 
         private static void Dump_ApplicationFolder()

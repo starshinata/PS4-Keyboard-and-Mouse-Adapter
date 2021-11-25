@@ -16,7 +16,7 @@ $CERT_DIRECTORY="D:\workspace\##certificates\github.com-pancakeslp"
 #$MS_BUILD_CONFIG="Debug"
 $MS_BUILD_CONFIG="Release"
 
-$VERSION="2.2.2"
+$VERSION="2.2.3"
 
 ################################
 ################################
@@ -315,6 +315,7 @@ echo ""
 
 
 if( $MS_BUILD_CONFIG -eq "Release" ) {
+
   make-extract-me-installer
 
   make-nuget-package

@@ -5,6 +5,7 @@ using System.IO;
 using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Pizza;
 using Serilog;
 
 namespace PS4KeyboardAndMouseAdapter.Config
@@ -121,17 +122,13 @@ namespace PS4KeyboardAndMouseAdapter.Config
                     }
                     catch (Exception ex)
                     {
-                        Log.Error("UserSettings.IsLegacyConfig error(a): " + ex.Message);
-                        Log.Error(ex.GetType().ToString());
-                        Log.Error(ex.StackTrace);
+                        ExceptionLogger.LogException("UserSettings.IsLegacyConfig error(a): " , ex);
                     }
                 }
             }
             catch (Exception ex)
             {
-                Log.Error("UserSettings.IsLegacyConfig error(b): " + ex.Message);
-                Log.Error(ex.GetType().ToString());
-                Log.Error(ex.StackTrace);
+                ExceptionLogger.LogException("UserSettings.IsLegacyConfig error(b): " , ex);
             }
 
             return true;
@@ -159,9 +156,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
             }
             catch (Exception ex)
             {
-                Log.Error("UserSettings.LoadWithCatch failed: " + ex.Message);
-                Log.Error(ex.GetType().ToString());
-                Log.Error(ex.StackTrace);
+                ExceptionLogger.LogException("UserSettings.LoadWithCatch failed: " , ex);
             }
         }
 

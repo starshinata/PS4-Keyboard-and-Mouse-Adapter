@@ -79,15 +79,19 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
             }
 
             ApplicationSettings.GetInstance().RemotePlayPath = RemotePlayTextBox.Text;
+            
+            DebugDump.Dump();
 
             Window window = System.Windows.Application.Current.MainWindow;
             ((MainWindowView)window).WelcomeStep1Done();
 
             GamepadProcessor gp = ((MainViewModel)DataContext).GamepadProcessor;
+
+            //////////////////////////////////////////////////////////////////
+
+            // the injector is kinda ASYNC so do stuff prior to this async action
             RemotePlayInjector RemotePlayInjector = new RemotePlayInjector(gp);
             RemotePlayInjector.OpenRemotePlayAndInject();
-
-            DebugDump.Dump();
         }
 
         private void Handle_LogFileLocationOpen(object sender, RoutedEventArgs e)
