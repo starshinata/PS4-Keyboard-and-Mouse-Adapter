@@ -53,36 +53,14 @@ AKA
 * Is Dualsense supported?
 * Is PS5 supported?
 
-If you want to play a PS5 game on a PS5, the PS4KMA does not work, and I do not have a PS5 console to test this on.
+I do not have a PS5 console to test this myself, but it should work <br>
+I do expect some bugs to be raised - originally PS5 was not going to let you use PS4 controllers for PS5 games and vice versa.
 
-If you want to play a PS4 game on PS5, as long as the game has "legacy controller support", PS4KMA should work
-
-
-Source: https://blog.playstation.com/2020/08/03/playstation-5-answering-your-questions-on-compatible-ps4-peripherals-accessories/#sf236479110
-
-```
-Which existing PS4 peripherals/accessories will work on PS5?
-
-Specialty peripherals, such as officially licensed racing wheels, arcade 
-sticks, and flight sticks, will work with PS5 games and supported PS4 games.
-...
-The DualShock 4 wireless controller and PlayStation officially licensed 
-third-party gamepad controllers will work with supported PS4 games. 
-
-```
-
-```
-Will DualShock 4 work with PS5 games?
-
-No, we believe that PS5 games should take advantage of the new capabilities
-and features we’re bringing to the platform, including the features of 
-DualSense wireless controller.
-```
 
 
 ### How do I set the volume for individual apps on windows?
+Not a PS4KMA specific question, but have you tried 
 https://www.howtogeek.com/244963/how-to-adjust-the-volume-for-individual-apps-in-windows/
-... not a  PS4KMA question, but I have been asked this repeatedly
 
 
 ### How do I uninstall PS4 KMA?
