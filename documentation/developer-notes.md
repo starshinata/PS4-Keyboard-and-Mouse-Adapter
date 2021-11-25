@@ -14,7 +14,7 @@ visual studio 2019
 Workloads ?
 * .net Development
 * Windows and web develoment
-  (Specifically "ClickOnce Publishing Tools"
+  (Specifically "ClickOnce Publishing Tools")
 
 
 ## Build
