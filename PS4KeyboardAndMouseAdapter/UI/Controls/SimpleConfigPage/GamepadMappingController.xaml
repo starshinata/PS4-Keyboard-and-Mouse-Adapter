@@ -105,6 +105,7 @@
                 </Image.Source>
             </Image>
 
+            
             <!-- LEFT half of controller -->
             <Button 
                 Grid.Row="2"
