@@ -260,6 +260,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="backend\ApplicationStartUp.cs" />
+    <Compile Include="backend\AppUpdater.cs" />
     <Compile Include="backend\AudioManager.cs" />
     <Compile Include="backend\DebugLogging\DebugDump.cs" />
     <Compile Include="backend\DebugLogging\GetOsVersion.cs" />

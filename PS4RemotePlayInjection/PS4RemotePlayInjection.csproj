@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DualShockState.cs" />
+    <Compile Include="ExceptionLogger.cs" />
     <Compile Include="Hooks.cs" />
     <Compile Include="InjectionInterface.cs" />
     <Compile Include="Injector.cs" />

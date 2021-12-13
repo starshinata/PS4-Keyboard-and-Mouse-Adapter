@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Pizza;
 using Serilog;
 using System;
 using System.ComponentModel;
@@ -43,9 +44,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
             }
             catch (Exception ex)
             {
-                StaticLogger.Error("ApplicationSettings.Load failed: " + ex.Message);
-                StaticLogger.Error(ex.GetType().ToString());
-                StaticLogger.Error(ex.StackTrace);
+                ExceptionLogger.LogException("ApplicationSettings.Load failed: ",  ex);
             }
 
 

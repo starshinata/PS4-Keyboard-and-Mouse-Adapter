@@ -1,4 +1,6 @@
 ﻿using EasyHook;
+using Pizza;
+using PS4RemotePlayInjection;
 using Serilog;
 using System;
 using System.Diagnostics;
@@ -109,8 +111,7 @@ namespace PS4RemotePlayInterceptor
             catch (Exception ex)
             {
                 string error = string.Format("Failed to setup IPC server: {0}", ex.Message);
-                Log.Error(error);
-                Log.Error(ex.StackTrace);
+                ExceptionLogger.LogException(error , ex);
                 throw new InterceptorException(error, ex);
             }
 
@@ -138,8 +139,7 @@ namespace PS4RemotePlayInterceptor
             catch (Exception ex)
             {
                 string error = string.Format("Failed to inject to target: {0}", ex.Message);
-                Log.Error(error);
-                Log.Error(ex.StackTrace);
+                ExceptionLogger.LogException(error , ex);
                 throw new InterceptorException(error, ex);
             }
         }

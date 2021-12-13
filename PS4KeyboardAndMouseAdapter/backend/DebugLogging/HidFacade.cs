@@ -1,4 +1,5 @@
 ﻿
+using Pizza;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -10,17 +11,24 @@ namespace PS4KeyboardAndMouseAdapter.backend.DebugLogging
     {
         public static void get()
         {
-            List<DeviceInfo> usbDevices = GetUSBDevices();
+            try { 
+                List<DeviceInfo> usbDevices = GetUSBDevices();
 
-            foreach (DeviceInfo device in usbDevices)
+                foreach (DeviceInfo device in usbDevices)
+                {
+                    Log.Verbose("Device ID: {0}, PNP Device ID: {1}, Description: {2}, InstallDate: {3}, LastErrorCode: {4}, Manufacturer: {5}",
+                        device.DeviceID,
+                        device.PnpDeviceID,
+                        device.Description,
+                        device.InstallDate,
+                        device.LastErrorCode,
+                        device.Manufacturer);
+                }
+    
+            }
+            catch (Exception ex)
             {
-                Log.Verbose("Device ID: {0}, PNP Device ID: {1}, Description: {2}, InstallDate: {3}, LastErrorCode: {4}, Manufacturer: {5}",
-                    device.DeviceID,
-                    device.PnpDeviceID,
-                    device.Description,
-                    device.InstallDate,
-                    device.LastErrorCode,
-                    device.Manufacturer);
+                 ExceptionLogger.LogException("HidFacade.get failed " , ex);
             }
         }
 

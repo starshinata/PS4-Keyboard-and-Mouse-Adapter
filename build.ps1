@@ -317,6 +317,7 @@ echo ""
 
 
 if( $MS_BUILD_CONFIG -eq "Release" ) {
+
   make-extract-me-installer
 
   make-nuget-package

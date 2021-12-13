@@ -83,6 +83,10 @@ namespace PS4RemotePlayInterceptor
         /// </summary>
         public void OnInjectionSuccess(int clientPID)
         {
+            // printing at all four levels to confirm what logging it working
+            Log.Logger.Error("(NOT AN ERROR) OnInjectionSuccess clientPID {0}", clientPID);
+            Log.Logger.Verbose("OnInjectionSuccess clientPID {0}", clientPID);
+            Log.Logger.Debug("OnInjectionSuccess clientPID {0}", clientPID);
             Log.Logger.Information("OnInjectionSuccess clientPID {0}", clientPID);
         }
 
