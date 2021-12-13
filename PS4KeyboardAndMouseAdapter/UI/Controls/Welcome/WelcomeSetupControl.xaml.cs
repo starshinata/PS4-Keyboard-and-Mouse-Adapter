@@ -84,9 +84,10 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
             ((MainWindowView)window).WelcomeStep1Done();
 
             GamepadProcessor gp = ((MainViewModel)DataContext).GamepadProcessor;
-            RemotePlayInjector RemotePlayInjector = new RemotePlayInjector(gp);
-            RemotePlayInjector.OpenRemotePlayAndInject();
-
+            //RemotePlayInjector RemotePlayInjector = new RemotePlayInjector(gp);
+            //RemotePlayInjector.OpenRemotePlayAndInject();
+            RemotePlayStarter rps = new RemotePlayStarter();
+            rps.OpenRemotePlayAndInject();
             DebugDump.Dump();
         }
 

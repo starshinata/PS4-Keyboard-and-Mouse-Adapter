@@ -145,6 +145,9 @@
     <Reference Include="Mono.Cecil.Rocks, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\packages\Mono.Cecil.0.9.6.4\lib\net45\Mono.Cecil.Rocks.dll</HintPath>
     </Reference>
+    <Reference Include="Nefarius.ViGEm.Client, Version=1.17.178.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nefarius.ViGEm.Client.1.17.178\lib\net452\Nefarius.ViGEm.Client.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -256,6 +259,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="backend\ApplicationStartUp.cs" />
     <Compile Include="backend\AudioManager.cs" />
     <Compile Include="backend\DebugLogging\DebugDump.cs" />
     <Compile Include="backend\DebugLogging\GetOsVersion.cs" />
@@ -264,6 +268,7 @@
     <Compile Include="backend\DebugLogging\ServiceComparerByName.cs" />
     <Compile Include="backend\DebugLogging\ProcessComparerByName.cs" />
     <Compile Include="backend\LogUtility.cs" />
+    <Compile Include="backend\RemotePlayStarter.cs" />
     <Compile Include="backend\RewasdDetector.cs" />
     <Compile Include="backend\Config\ExtraButtons.cs" />
     <Compile Include="backend\Config\ApplicationSettings.cs" />
@@ -273,6 +278,8 @@
     <Compile Include="backend\PlaystationControllerDetector.cs" />
     <Compile Include="backend\ProcessUtil.cs" />
     <Compile Include="backend\RemotePlayConstants.cs" />
+    <Compile Include="backend\vigem\VigemInjector.cs" />
+    <Compile Include="DS4Windows\DS4State.cs" />
     <Compile Include="UI\Controls\MiscellaneousSettingsControl.xaml.cs">
       <DependentUpon>MiscellaneousSettingsControl.xaml</DependentUpon>
     </Compile>
@@ -293,10 +300,10 @@
     <Compile Include="backend\GamepadProcessor.cs" />
     <Compile Include="backend\RemotePlayInjector.cs" />
     <Compile Include="backend\MouseAnchor.cs" />
-    <Compile Include="UI\Controls\GamepadMappingController.xaml.cs">
+    <Compile Include="UI\Controls\SimpleConfigPage\GamepadMappingController.xaml.cs">
       <DependentUpon>GamepadMappingController.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Controls\MouseSettingsSimpleControl.xaml.cs">
+    <Compile Include="UI\Controls\SimpleConfigPage\MouseSettingsSimpleControl.xaml.cs">
       <DependentUpon>MouseSettingsSimpleControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\Welcome\RemotePlayConnectedControl.xaml.cs">
@@ -311,22 +318,22 @@
     <Compile Include="UI\Pages\AdvancedMappingsPage.xaml.cs">
       <DependentUpon>AdvancedMappingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Controls\ProfileManager.xaml.cs">
+    <Compile Include="UI\Controls\SimpleConfigPage\ProfileManager.xaml.cs">
       <DependentUpon>ProfileManager.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Controls\AnalogStickBindings.xaml.cs">
+    <Compile Include="UI\Controls\SimpleConfigPage\AnalogStickBindings.xaml.cs">
       <DependentUpon>AnalogStickBindings.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\AnalogStickVisualizer.xaml.cs">
       <DependentUpon>AnalogStickVisualizer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Controls\RangeSlider.xaml.cs">
+    <Compile Include="UI\Controls\Common\RangeSlider.xaml.cs">
       <DependentUpon>RangeSlider.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\MouseSettingsControl.xaml.cs">
       <DependentUpon>MouseSettingsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Controls\SliderV.xaml.cs">
+    <Compile Include="UI\Controls\Common\SliderV.xaml.cs">
       <DependentUpon>SliderV.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Pages\MiscellaneousSettingsPage.xaml.cs">
@@ -357,7 +364,7 @@
       <DependentUpon>MainWindowView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UI\Controls\AnalogStickBindings.xaml">
+    <Page Include="UI\Controls\SimpleConfigPage\AnalogStickBindings.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -369,11 +376,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Controls\ProfileManager.xaml">
+    <Page Include="UI\Controls\SimpleConfigPage\ProfileManager.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Controls\RangeSlider.xaml">
+    <Page Include="UI\Controls\Common\RangeSlider.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -381,15 +388,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Controls\SliderV.xaml">
+    <Page Include="UI\Controls\Common\SliderV.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Controls\GamepadMappingController.xaml">
+    <Page Include="UI\Controls\SimpleConfigPage\GamepadMappingController.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Controls\MouseSettingsSimpleControl.xaml">
+    <Page Include="UI\Controls\SimpleConfigPage\MouseSettingsSimpleControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

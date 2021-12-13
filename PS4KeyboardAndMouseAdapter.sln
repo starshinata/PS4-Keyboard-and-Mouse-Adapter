@@ -36,6 +36,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 		documentation\known-game-issues.md = documentation\known-game-issues.md
 		documentation\mouse-configuration.md = documentation\mouse-configuration.md
 		documentation\release-checklist.md = documentation\release-checklist.md
+		documentation\technical notes - needs a better name.txt = documentation\technical notes - needs a better name.txt
 		documentation\troubleshooting.md = documentation\troubleshooting.md
 		documentation\version-history.md = documentation\version-history.md
 		documentation\welcome-1.png = documentation\welcome-1.png

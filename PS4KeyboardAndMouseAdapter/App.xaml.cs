@@ -1,4 +1,5 @@
-﻿using PS4KeyboardAndMouseAdapter.Config;
+﻿using PS4KeyboardAndMouseAdapter.backend;
+using PS4KeyboardAndMouseAdapter.Config;
 using PS4RemotePlayInjection;
 using Serilog;
 using Serilog.Core;
@@ -6,7 +7,6 @@ using Serilog.Events;
 using Squirrel;
 using System;
 using System.IO;
-
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -31,6 +31,9 @@ namespace PS4KeyboardAndMouseAdapter
             UserSettings.Save(UserSettings.PROFILE_PREVIOUS);
             ApplicationSettings.Save();
 
+            VigemInjector vig = InstanceSettings.GetInstance().GetVigemInjector();
+            vig.stop();
+
             //TODO: hardcoded, fix.
             //Injector.FindProcess("RemotePlay").Kill();
         }
@@ -45,11 +48,11 @@ namespace PS4KeyboardAndMouseAdapter
             // cause not having a cursor is a pain in the ass
             Utility.ShowCursor(true);
 
-            ApplicationSettings.Load();
-            UserSettings.LoadPrevious();
+            ApplicationStartUp.OnAppStartup();
 
             await UpdateIfAvailable();
         }
+
 
         public void SetLoggingLevel(LogEventLevel level)
         {

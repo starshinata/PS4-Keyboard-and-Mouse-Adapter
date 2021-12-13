@@ -5,6 +5,7 @@ hex VID  vendor name
 046D     Logitech
 054C     Sony
 062A     MosArt Semiconductor Corp. (gamepads)
+0B0E     GN Netcom (aka Jabra)
 1038     SteelSeries
 187C     Alienware
 2386     Raydium Corporation (Touch Systems)

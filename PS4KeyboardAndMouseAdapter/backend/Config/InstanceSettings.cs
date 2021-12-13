@@ -26,6 +26,10 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         public bool EnableMouseInput { get; set; } = false;
 
+        private VigemInjector vigemInjector = null;
+
+        //////////////////////////////////////////////////////////////////////
+
         public Process GetRemotePlayProcess()
         {
             return UtilityData.RemotePlayProcess;
@@ -44,6 +48,15 @@ namespace PS4KeyboardAndMouseAdapter.Config
             Log.Error("InstanceSettings.SetRemotePlayProcess (UtilityData.RemotePlayProcess) get d " + Process.GetCurrentProcess().Id);
         }
 
+        public VigemInjector GetVigemInjector()
+        {
+            return vigemInjector;
+        }
+
+        public void SetVigemInjector(VigemInjector value)
+        {
+            vigemInjector = value;
+        }
     }
 }
 
