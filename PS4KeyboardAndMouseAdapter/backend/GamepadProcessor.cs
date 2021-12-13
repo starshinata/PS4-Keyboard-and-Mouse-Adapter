@@ -407,21 +407,25 @@ namespace PS4KeyboardAndMouseAdapter
 
         public void OnReceiveData(ref DualShockState state)
         {
+            state = GetState();
+        }
 
+        public DualShockState GetState()
+        {
             string screenWidth = Screen.PrimaryScreen.Bounds.Width.ToString();
             string screenHeight = Screen.PrimaryScreen.Bounds.Height.ToString();
-            Log.Verbose(" GamepadProcessor.OnReceiveData screen width={0} height={1}", screenWidth, screenHeight);
+            Log.Verbose(" GamepadProcessor.GetState screen width={0} height={1}", screenWidth, screenHeight);
 
             RequestsPerSecondCounter++;
             if (RequestsPerSecondTimer.ElapsedMilliseconds >= 1000)
             {
-                Log.Verbose("GamepadProcessor.OnReceiveData  RequestsPerSecondCounter={0}", RequestsPerSecondCounter);
+                Log.Verbose("GamepadProcessor.GetState  RequestsPerSecondCounter={0}", RequestsPerSecondCounter);
                 RequestsPerSecondTimer.Restart();
                 RequestsPerSecondCounter = 0;
             }
 
             Guid uuid = Guid.NewGuid();
-            // Log.Verbose(uuid + " GamepadProcessor.OnReceiveData in a");
+            // Log.Verbose(uuid + " GamepadProcessor.GetState in a");
 
             // Create the default state to modify
             if (true)//CurrentState == null)
@@ -431,17 +435,15 @@ namespace PS4KeyboardAndMouseAdapter
 
             if (!ProcessUtil.IsRemotePlayInForeground())
             {
+                Log.Verbose(uuid + "GamepadProcessor.GetState return null");
                 Utility.ShowCursor(true);
-                return;
+                return null;
             }
-
-
-
 
             //Stopwatch OnReceiveDataTimer = new Stopwatch();
             //OnReceiveDataTimer.Start();
 
-            // Log.Verbose(uuid + " GamepadProcessor.OnReceiveData in b");
+            // Log.Verbose(uuid + " GamepadProcessor.GetState in b");
 
             HandleButtonPressed();
 
@@ -449,13 +451,13 @@ namespace PS4KeyboardAndMouseAdapter
             HandleMouseCursor();
             MouseWheelProcessor.Process(CurrentState);
 
-            //Log.Verbose(uuid + " GamepadProcessor.OnReceiveData out " + DualShockStateToString(ref CurrentState));
+            //Log.Verbose(uuid + " GamepadProcessor.GetState out " + DualShockStateToString(ref CurrentState));
 
-            //Log.Verbose(uuid + " GamepadProcessor.OnReceiveData OnReceiveDataTimer {0} ms ", + OnReceiveDataTimer.ElapsedMilliseconds);
+            //Log.Verbose(uuid + " GamepadProcessor.GetState OnReceiveDataTimer {0} ms ", + OnReceiveDataTimer.ElapsedMilliseconds);
             //OnReceiveDataTimer.Stop();
 
-            // Assign the state
-            state = CurrentState;
+            Log.Verbose(uuid + "GamepadProcessor.GetState return THING");
+            return CurrentState;
         }
     }
 }

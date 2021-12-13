@@ -1,13 +1,12 @@
-﻿
+﻿using PS4KeyboardAndMouseAdapter.Config;
+using PS4RemotePlayInterceptor;
+using Serilog;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Windows;
 using System.Windows.Forms;
-using PS4KeyboardAndMouseAdapter.Config;
-using PS4RemotePlayInterceptor;
-using Serilog;
 
 namespace PS4KeyboardAndMouseAdapter
 {
@@ -20,15 +19,39 @@ namespace PS4KeyboardAndMouseAdapter
             Injector.FindProcess(RemotePlayConstants.TARGET_PROCESS_NAME)?.Kill();
         }
 
+        public void OpenRemotePlay()
+        {
+            try
+            {
+                EventWaitHandle waitHandle = new ManualResetEvent(initialState: false);
 
-        private bool OpenRemotePlay()
+                OpenRemotePlayInternal();
+                RefreshRemotePlayProcess();
+            }
+            catch (Exception e)
+            {
+                Log.Logger.Error("RemotePlayStarter.OpenRemotePlay() fatal error" + e.Message);
+                Log.Logger.Error("" + e.GetType());
+                Log.Logger.Error(e.StackTrace);
+
+                System.Windows.MessageBox.Show(
+                    "Fatal error, program closing",
+                    "fatal",
+                    (MessageBoxButton)MessageBoxButtons.OK,
+                    (MessageBoxImage)MessageBoxIcon.Error);
+
+                throw e;
+            }
+        }
+
+        protected bool OpenRemotePlayInternal()
         {
             string exeLocation = ApplicationSettings.GetInstance().RemotePlayPath;
 
             if (File.Exists(exeLocation))
             {
                 Process.Start(exeLocation);
-                Log.Information("RemotePlayStarter.OpenRemotePlay start requested-57");
+                Log.Information("RemotePlayStarter.OpenRemotePlayInternal start requested-54");
                 return true;
             }
 
@@ -55,32 +78,11 @@ namespace PS4KeyboardAndMouseAdapter
             return false;
         }
 
-        public void OpenRemotePlayAndInject()
+        protected void RefreshRemotePlayProcess()
         {
-            try
-            {
-                EventWaitHandle waitHandle = new ManualResetEvent(initialState: false);
-
-                OpenRemotePlay();
-
-            }
-            catch (Exception e)
-            {
-                Log.Logger.Error("RemotePlayStarter.OpenRemotePlayAndInject() fatal error" + e.Message);
-                Log.Logger.Error("" + e.GetType());
-                Log.Logger.Error(e.StackTrace);
-
-                System.Windows.MessageBox.Show(
-                    "Fatal error, program closing",
-                    "fatal",
-                    (MessageBoxButton)MessageBoxButtons.OK,
-                    (MessageBoxImage)MessageBoxIcon.Error);
-
-                throw e;
-            }
+            Process RemotePlayProcess = Injector.FindProcess(RemotePlayConstants.TARGET_PROCESS_NAME);
+            InstanceSettings.GetInstance().SetRemotePlayProcess(RemotePlayProcess);
         }
-
-
 
     }
 }

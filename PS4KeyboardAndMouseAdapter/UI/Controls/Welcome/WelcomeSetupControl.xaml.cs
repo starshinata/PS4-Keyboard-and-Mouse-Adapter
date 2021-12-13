@@ -93,7 +93,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
 
             if (true) {
                 RemotePlayStarter rps = new RemotePlayStarter();
-                rps.OpenRemotePlayAndInject();
+                rps.OpenRemotePlay();
             } else {
                 RemotePlayInjector RemotePlayInjector = new RemotePlayInjector(gp);
                 RemotePlayInjector.OpenRemotePlayAndInject();

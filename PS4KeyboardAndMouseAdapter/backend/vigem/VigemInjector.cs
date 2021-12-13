@@ -1,11 +1,12 @@
 ﻿using Nefarius.ViGEm.Client;
 using Nefarius.ViGEm.Client.Targets;
 using Nefarius.ViGEm.Client.Targets.DualShock4;
-using System;
 
+using Pizza.backend;
 
-using DS4Windows;
 using Serilog;
+using System;
+using System.Threading.Tasks;
 
 namespace PS4KeyboardAndMouseAdapter
 {
@@ -15,14 +16,9 @@ namespace PS4KeyboardAndMouseAdapter
 
     public class VigemInjector
     {
-        //todo use centralised const
-        //                                   aka HEX 054C
-        private static readonly int VENDOR_ID_SONY = 1356;
-        private static readonly int PRODUCT_ID_PS4_CONTROLLER_A = 1476;
 
-
-        public static ushort VENDOR_ID = (ushort)VENDOR_ID_SONY;
-        public static ushort PRODUCT_ID = (ushort)PRODUCT_ID_PS4_CONTROLLER_A;
+        public static ushort VENDOR_ID = (ushort)HidConstants.VENDOR_ID_SONY;
+        public static ushort PRODUCT_ID = (ushort)HidConstants.PRODUCT_ID_PS4_CONTROLLER_A;
 
         private ViGEmClient vigemClient;
         private IDualShock4Controller controller;
@@ -38,6 +34,7 @@ namespace PS4KeyboardAndMouseAdapter
             ushort tempButtons = 0;
             DualShock4DPadDirection tempDPad = DualShock4DPadDirection.None;
             ushort tempSpecial = 0;
+
             unchecked
             {
                 if (state.Share) tempButtons |= DualShock4Button.Share.Value;
@@ -86,10 +83,27 @@ namespace PS4KeyboardAndMouseAdapter
             controller.SubmitReport();
         }
 
+
+        public void listen()
+        {
+            Task.Factory.StartNew(() =>
+            {
+                GamepadProcessor gp = new GamepadProcessor();
+                while (true)
+                {
+                    gp.GetState();
+                    
+                    //TODO make this config, and more than 10 times a second
+                    System.Threading.Thread.Sleep(100);
+                }
+            });
+        }
+
         public void start()
         {
             start_ViGEm();
             start_controller();
+            listen();
         }
 
         private void start_controller()

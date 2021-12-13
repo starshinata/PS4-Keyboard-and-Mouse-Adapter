@@ -1,19 +1,16 @@
-﻿
+﻿using PS4RemotePlayInjection;
+using PS4RemotePlayInterceptor;
+using Serilog;
 using System;
 using System.Diagnostics;
-using System.IO;
 using System.Threading;
 using System.Windows;
 using System.Windows.Forms;
-using PS4KeyboardAndMouseAdapter.Config;
-using PS4RemotePlayInjection;
-using PS4RemotePlayInterceptor;
-using Serilog;
 
 namespace PS4KeyboardAndMouseAdapter
 {
 
-    public class RemotePlayInjector
+    public class RemotePlayInjector : RemotePlayStarter
     {
 
         private GamepadProcessor gamepadProcessor;
@@ -25,7 +22,7 @@ namespace PS4KeyboardAndMouseAdapter
             Injector.FindProcess(RemotePlayConstants.TARGET_PROCESS_NAME)?.Kill();
         }
 
-        public void Inject()
+        private void Inject()
         {
             try
             {
@@ -36,7 +33,7 @@ namespace PS4KeyboardAndMouseAdapter
                 RemotePlayProcess.EnableRaisingEvents = true;
                 RemotePlayProcess.Exited += (sender, args) => { Utility.ShowCursor(true); };
 
-                InstanceSettings.GetInstance().SetRemotePlayProcess(RemotePlayProcess);
+                RefreshRemotePlayProcess();
 
                 Injector.Callback += gamepadProcessor.OnReceiveData;
             }
@@ -47,47 +44,13 @@ namespace PS4KeyboardAndMouseAdapter
             }
         }
 
-        private bool OpenRemotePlay()
-        {
-            string exeLocation = ApplicationSettings.GetInstance().RemotePlayPath;
-
-            if (File.Exists(exeLocation))
-            {
-                Process.Start(exeLocation);
-                Log.Information("RemotePlayInjector.OpenRemotePlay start requested-57");
-                return true;
-            }
-
-            try
-            {
-                //TODO: hardcoded currently, so it doesn't work when OS is set to non-default system language.
-                string shortcutPath = @"C:\ProgramData\Microsoft\Windows\Start Menu\Programs\PS Remote Play.lnk";
-                IWshRuntimeLibrary.IWshShell wsh = new IWshRuntimeLibrary.WshShellClass();
-                IWshRuntimeLibrary.IWshShortcut sc = (IWshRuntimeLibrary.IWshShortcut)wsh.CreateShortcut(shortcutPath);
-                shortcutPath = sc.TargetPath;
-
-                if (string.IsNullOrEmpty(shortcutPath))
-                    return false;
-
-                Process.Start(shortcutPath);
-                Log.Information("RemotePlayInjector.OpenRemotePlay start requested-73");
-                return true;
-            }
-            catch (Exception e)
-            {
-                Log.Logger.Error("Cannot open RemotePlay: " + e.Message);
-            }
-
-            return false;
-        }
-
         public void OpenRemotePlayAndInject()
         {
             try
             {
                 EventWaitHandle waitHandle = new ManualResetEvent(initialState: false);
 
-                bool success = OpenRemotePlay();
+                bool success = OpenRemotePlayInternal();
                 if (success)
                 {
                     Inject();
@@ -108,8 +71,6 @@ namespace PS4KeyboardAndMouseAdapter
                 throw e;
             }
         }
-
-
 
     }
 }

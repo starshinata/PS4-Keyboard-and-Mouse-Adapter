@@ -269,6 +269,7 @@
     <Compile Include="backend\DebugLogging\ServiceComparerByName.cs" />
     <Compile Include="backend\DebugLogging\ProcessComparerByName.cs" />
     <Compile Include="backend\LogUtility.cs" />
+    <Compile Include="backend\HidConstants.cs" />
     <Compile Include="backend\RemotePlayStarter.cs" />
     <Compile Include="backend\RewasdDetector.cs" />
     <Compile Include="backend\Config\ExtraButtons.cs" />
@@ -280,7 +281,7 @@
     <Compile Include="backend\ProcessUtil.cs" />
     <Compile Include="backend\RemotePlayConstants.cs" />
     <Compile Include="backend\vigem\VigemInjector.cs" />
-    <Compile Include="DS4Windows\DS4State.cs" />
+    <Compile Include="backend\DS4State.cs" />
     <Compile Include="UI\Controls\MiscellaneousSettingsControl.xaml.cs">
       <DependentUpon>MiscellaneousSettingsControl.xaml</DependentUpon>
     </Compile>
@@ -497,6 +498,9 @@
     <Resource Include="mouse-left-button.svg" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="images\" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="images/ps4-home-screen.png" />
   </ItemGroup>
   <ItemGroup>
@@ -523,7 +527,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
