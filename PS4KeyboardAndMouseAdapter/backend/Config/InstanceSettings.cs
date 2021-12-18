@@ -1,4 +1,5 @@
-﻿using PS4RemotePlayInjection;
+﻿using Pizza.backend.vigem;
+using PS4RemotePlayInjection;
 using Serilog;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -26,7 +27,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         public bool EnableMouseInput { get; set; } = false;
 
-        private VigemInjector vigemInjector = null;
+        private VigemManager vigemInjector = null;
 
         //////////////////////////////////////////////////////////////////////
 
@@ -48,12 +49,12 @@ namespace PS4KeyboardAndMouseAdapter.Config
             Log.Error("InstanceSettings.SetRemotePlayProcess (UtilityData.RemotePlayProcess) get d " + Process.GetCurrentProcess().Id);
         }
 
-        public VigemInjector GetVigemInjector()
+        public VigemManager GetVigemInjector()
         {
             return vigemInjector;
         }
 
-        public void SetVigemInjector(VigemInjector value)
+        public void SetVigemInjector(VigemManager value)
         {
             vigemInjector = value;
         }

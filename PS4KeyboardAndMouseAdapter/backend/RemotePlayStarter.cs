@@ -1,4 +1,5 @@
-﻿using PS4KeyboardAndMouseAdapter.Config;
+﻿using Pizza;
+using PS4KeyboardAndMouseAdapter.Config;
 using PS4RemotePlayInterceptor;
 using Serilog;
 using System;
@@ -30,9 +31,7 @@ namespace PS4KeyboardAndMouseAdapter
             }
             catch (Exception e)
             {
-                Log.Logger.Error("RemotePlayStarter.OpenRemotePlay() fatal error" + e.Message);
-                Log.Logger.Error("" + e.GetType());
-                Log.Logger.Error(e.StackTrace);
+                ExceptionLogger.LogException("RemotePlayStarter.OpenRemotePlay() fatal error", e);
 
                 System.Windows.MessageBox.Show(
                     "Fatal error, program closing",

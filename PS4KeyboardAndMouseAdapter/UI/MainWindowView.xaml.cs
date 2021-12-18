@@ -65,6 +65,7 @@ namespace PS4KeyboardAndMouseAdapter
         public void WelcomeDone()
         {
             RefreshRemotePlayProcess();
+
             ApplicationSettings.Save();
             InstanceSettings.GetInstance().EnableMouseInput = true;
 

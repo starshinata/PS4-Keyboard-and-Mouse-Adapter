@@ -268,6 +268,7 @@
     <Compile Include="backend\DebugLogging\ProcessCommandLine.cs" />
     <Compile Include="backend\DebugLogging\ServiceComparerByName.cs" />
     <Compile Include="backend\DebugLogging\ProcessComparerByName.cs" />
+    <Compile Include="backend\vigem\GamepadConverter.cs" />
     <Compile Include="backend\LogUtility.cs" />
     <Compile Include="backend\HidConstants.cs" />
     <Compile Include="backend\RemotePlayStarter.cs" />
@@ -280,7 +281,7 @@
     <Compile Include="backend\PlaystationControllerDetector.cs" />
     <Compile Include="backend\ProcessUtil.cs" />
     <Compile Include="backend\RemotePlayConstants.cs" />
-    <Compile Include="backend\vigem\VigemInjector.cs" />
+    <Compile Include="backend\vigem\VigemManager.cs" />
     <Compile Include="backend\DS4State.cs" />
     <Compile Include="UI\Controls\MiscellaneousSettingsControl.xaml.cs">
       <DependentUpon>MiscellaneousSettingsControl.xaml</DependentUpon>
@@ -497,9 +498,7 @@
   <ItemGroup>
     <Resource Include="mouse-left-button.svg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="images\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="images/ps4-home-screen.png" />
   </ItemGroup>

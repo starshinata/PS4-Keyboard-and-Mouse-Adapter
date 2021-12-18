@@ -1,5 +1,6 @@
-﻿using PS4KeyboardAndMouseAdapter.Config;
-using Serilog;
+﻿using Pizza;
+using Pizza.backend.vigem;
+using PS4KeyboardAndMouseAdapter.Config;
 using System;
 using System.Windows;
 using System.Windows.Forms;
@@ -16,13 +17,13 @@ namespace PS4KeyboardAndMouseAdapter.backend
 
             try
             {
-                VigemInjector vig = new VigemInjector();
+                VigemManager vig = new VigemManager();
                 vig.start();
                 InstanceSettings.GetInstance().SetVigemInjector(vig);
             }
             catch (Nefarius.ViGEm.Client.Exceptions.VigemBusNotFoundException e)
             {
-                logException(e);
+                ExceptionLogger.LogException("ApplicationStartUp.OnAppStartup", e);
 
                 System.Windows.MessageBox.Show("Vigembus not installed!",
                     "Error reading file",
@@ -32,7 +33,8 @@ namespace PS4KeyboardAndMouseAdapter.backend
             }
             catch (Exception e)
             {
-                logException(e);
+                ExceptionLogger.LogException("ApplicationStartUp.OnAppStartup", e);
+
                 System.Windows.MessageBox.Show("whoops! tell the developer he failed",
                     "Error reading file",
                     (MessageBoxButton)MessageBoxButtons.OK,
@@ -40,14 +42,6 @@ namespace PS4KeyboardAndMouseAdapter.backend
                 System.Windows.Forms.Application.Exit();
             }
 
-
-        }
-
-        private static void logException(Exception ex)
-        {
-            Log.Logger.Error("HandleLoad failed: " + ex.Message);
-            Log.Logger.Error(ex.GetType().ToString());
-            Log.Logger.Error(ex.StackTrace);
         }
     }
 }

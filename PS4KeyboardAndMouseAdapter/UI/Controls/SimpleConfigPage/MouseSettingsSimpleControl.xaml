@@ -33,14 +33,7 @@
 
         </Grid.RowDefinitions>
         <!-- LEFT half of controller -->
-        <Button 
-                Grid.Row="0"
-                
-                Grid.Column="0"
-                 
-                Content="SEND X"
-                Visibility="Visible" Click="Button_Click"
-/>
+    
 <!--
         <TextBlock
             Grid.Row="0"

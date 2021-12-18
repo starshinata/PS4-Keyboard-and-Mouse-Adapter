@@ -351,7 +351,7 @@ namespace PS4KeyboardAndMouseAdapter
             return false;
         }
 
-        private string DualShockStateToString(ref DualShockState state)
+        public string DualShockStateToString(ref DualShockState state)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -414,7 +414,7 @@ namespace PS4KeyboardAndMouseAdapter
         {
             string screenWidth = Screen.PrimaryScreen.Bounds.Width.ToString();
             string screenHeight = Screen.PrimaryScreen.Bounds.Height.ToString();
-            Log.Verbose(" GamepadProcessor.GetState screen width={0} height={1}", screenWidth, screenHeight);
+            Log.Verbose("GamepadProcessor.GetState screen width={0} height={1}", screenWidth, screenHeight);
 
             RequestsPerSecondCounter++;
             if (RequestsPerSecondTimer.ElapsedMilliseconds >= 1000)

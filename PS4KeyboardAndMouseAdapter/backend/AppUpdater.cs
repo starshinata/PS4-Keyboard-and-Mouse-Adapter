@@ -1,4 +1,5 @@
 ﻿using NuGet;
+using Pizza;
 using Serilog;
 using Squirrel;
 using System;
@@ -32,6 +33,19 @@ namespace PS4KeyboardAndMouseAdapter.backend
             return newerVersion;
         }
 
+        private void PrintCurrentlyInstalledNugetVersion(UpdateManager mgr)
+        {
+            try
+            {
+                SemanticVersion nugetCurrentVersion = mgr.CurrentlyInstalledVersion();
+                Log.Information("AppUpdater.printCurrentlyInstalledNugetVersion() " + nugetCurrentVersion.Version.ToString());
+            }
+            catch (Exception ex)
+            {
+                Log.Information("AppUpdater.printCurrentlyInstalledNugetVersion() unavailable ({0})", ex.Message);
+            }
+        }
+
         private void RemoveNewShortcuts()
         {
             try
@@ -63,8 +77,7 @@ namespace PS4KeyboardAndMouseAdapter.backend
                     UpdateInfo updateResult = await mgr.CheckForUpdate();
                     Log.Information("AppUpdater.UpdateIfAvailable() update check returned");
 
-                    SemanticVersion nugetCurrentVersion = mgr.CurrentlyInstalledVersion();
-                    Log.Information("AppUpdater.UpdateIfAvailable() nugetCurrentVersion " + nugetCurrentVersion.Version.ToString());
+                    PrintCurrentlyInstalledNugetVersion(mgr);
 
                     bool newerVersion = IsNewerVersionAvailable(updateResult.ReleasesToApply);
 
@@ -83,7 +96,7 @@ namespace PS4KeyboardAndMouseAdapter.backend
             }
             catch (Exception ex)
             {
-                Log.Logger.Error("AppUpdater.UpdateIfAvailable() Github Update failed: " + ex.Message);
+                ExceptionLogger.LogException("AppUpdater.UpdateIfAvailable() Github Update failed: ", ex);
             }
             Log.Information("AppUpdater.UpdateIfAvailable() update check completed");
         }

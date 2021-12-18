@@ -1,9 +1,11 @@
-﻿using PS4KeyboardAndMouseAdapter.backend;
+﻿using Pizza.backend.vigem;
+using PS4KeyboardAndMouseAdapter.backend;
 using PS4KeyboardAndMouseAdapter.Config;
 using PS4RemotePlayInjection;
 using Serilog;
 using Serilog.Core;
 using Serilog.Events;
+
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -28,7 +30,7 @@ namespace PS4KeyboardAndMouseAdapter
             UserSettings.Save(UserSettings.PROFILE_PREVIOUS);
             ApplicationSettings.Save();
 
-            VigemInjector vig = InstanceSettings.GetInstance().GetVigemInjector();
+            VigemManager vig = InstanceSettings.GetInstance().GetVigemInjector();
             vig.stop();
 
             //TODO: hardcoded, fix.
