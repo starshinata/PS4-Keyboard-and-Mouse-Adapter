@@ -20,7 +20,7 @@ Main Adapter <br>
 
 
 ## DOWNLOAD
-:rocket: Click Download!--> [here (v2.2.2)](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/2.2.2/application-setup.exe)
+:rocket: Click Download!--> [here (v2.2.3)](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/2.2.3/application-setup.exe)
 
 
 ## Troubleshooting
