@@ -61,7 +61,11 @@ namespace PS4KeyboardAndMouseAdapter
         {
             pageWelcomePage.CompleteStep1();
         }
-
+        
+        public void WelcomeRemotePlayLaunched() {
+            pageWelcomePage.CompleteStep2();
+        }
+        
         public void WelcomeDone()
         {
             RefreshRemotePlayProcess();

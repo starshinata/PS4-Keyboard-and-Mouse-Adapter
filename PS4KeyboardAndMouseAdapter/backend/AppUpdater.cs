@@ -38,7 +38,14 @@ namespace PS4KeyboardAndMouseAdapter.backend
             try
             {
                 SemanticVersion nugetCurrentVersion = mgr.CurrentlyInstalledVersion();
-                Log.Information("AppUpdater.printCurrentlyInstalledNugetVersion() " + nugetCurrentVersion.Version.ToString());
+                if (nugetCurrentVersion != null)
+                {
+                    Log.Information("AppUpdater.printCurrentlyInstalledNugetVersion() " + nugetCurrentVersion.Version.ToString());
+                }
+                else
+                {
+                    Log.Information("AppUpdater.printCurrentlyInstalledNugetVersion() null");
+                }
             }
             catch (Exception ex)
             {

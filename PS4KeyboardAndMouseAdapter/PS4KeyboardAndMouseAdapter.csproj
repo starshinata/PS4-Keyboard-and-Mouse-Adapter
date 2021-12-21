@@ -268,6 +268,7 @@
     <Compile Include="backend\DebugLogging\ProcessCommandLine.cs" />
     <Compile Include="backend\DebugLogging\ServiceComparerByName.cs" />
     <Compile Include="backend\DebugLogging\ProcessComparerByName.cs" />
+    <Compile Include="backend\LogManager.cs" />
     <Compile Include="backend\vigem\GamepadConverter.cs" />
     <Compile Include="backend\LogUtility.cs" />
     <Compile Include="backend\HidConstants.cs" />
@@ -283,6 +284,9 @@
     <Compile Include="backend\RemotePlayConstants.cs" />
     <Compile Include="backend\vigem\VigemManager.cs" />
     <Compile Include="backend\DS4State.cs" />
+    <Compile Include="UI\Controls\Common\LogControl.xaml.cs">
+      <DependentUpon>LogControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\MiscellaneousSettingsControl.xaml.cs">
       <DependentUpon>MiscellaneousSettingsControl.xaml</DependentUpon>
     </Compile>
@@ -308,6 +312,9 @@
     </Compile>
     <Compile Include="UI\Controls\SimpleConfigPage\MouseSettingsSimpleControl.xaml.cs">
       <DependentUpon>MouseSettingsSimpleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\Welcome\RemotePlayLaunchedControl.xaml.cs">
+      <DependentUpon>RemotePlayLaunchedControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\Welcome\RemotePlayConnectedControl.xaml.cs">
       <DependentUpon>RemotePlayConnectedControl.xaml</DependentUpon>
@@ -350,6 +357,14 @@
     </Compile>
     <Compile Include="UI\UIConstants.cs" />
     <Compile Include="UI\UITools.cs" />
+    <Page Include="UI\Controls\Common\LogControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Controls\Welcome\RemotePlayLaunchedControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UI\Controls\Welcome\RemotePlayConnectedControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -432,6 +447,8 @@
     <Content Include="..\packages\CSFML.2.5.0\runtimes\win-x86\native\csfml-Window.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="images\ps4-home-screen.png" />
+    <Resource Include="images\ps4-remote-play-connect.png" />
     <None Include="Resources\BuildDate.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -499,9 +516,6 @@
     <Resource Include="mouse-left-button.svg" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Resource Include="images/ps4-home-screen.png" />
-  </ItemGroup>
   <ItemGroup>
     <Resource Include="mouse-right-button.svg" />
   </ItemGroup>

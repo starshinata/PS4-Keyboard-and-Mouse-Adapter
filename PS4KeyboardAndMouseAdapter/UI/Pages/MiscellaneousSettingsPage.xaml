@@ -5,7 +5,6 @@
              xmlns:controls="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Controls"
              >
 
-
     <Grid>
         <ScrollViewer
             HorizontalScrollBarVisibility="Auto"

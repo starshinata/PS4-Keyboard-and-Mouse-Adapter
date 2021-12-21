@@ -1,4 +1,5 @@
 ﻿using Pizza.backend.vigem;
+using PS4KeyboardAndMouseAdapter.backend;
 using PS4RemotePlayInjection;
 using Serilog;
 using System.ComponentModel;
@@ -27,9 +28,20 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         public bool EnableMouseInput { get; set; } = false;
 
+        private LogManager logManager = null;
         private VigemManager vigemInjector = null;
 
         //////////////////////////////////////////////////////////////////////
+
+        public LogManager GetLogManager()
+        {
+            return logManager;
+        }
+
+        public void SetLogManager(LogManager value)
+        {
+            logManager = value;
+        }
 
         public Process GetRemotePlayProcess()
         {

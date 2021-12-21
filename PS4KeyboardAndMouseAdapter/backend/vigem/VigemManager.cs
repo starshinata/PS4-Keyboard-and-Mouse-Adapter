@@ -29,11 +29,11 @@ namespace Pizza.backend.vigem
         public void listen()
         {
             Log.Information("VigemManager.listen");
+
+
+            GamepadProcessor gp = new GamepadProcessor();
             Task.Factory.StartNew(() =>
             {
-
-                GamepadProcessor gp = new GamepadProcessor();
-
                 while (true)
                 {
                     try
@@ -47,18 +47,19 @@ namespace Pizza.backend.vigem
                     }
                     catch (Exception ex)
                     {
-                        ExceptionLogger.LogException("VigemManager.listen L54", ex);
+                        ExceptionLogger.LogException("VigemManager.listen L49", ex);
                     }
 
                     int MillisecondsPerInput = 1000 / UserSettings.GetInstance().MousePollingRate;
                     System.Threading.Thread.Sleep(MillisecondsPerInput);
                 }
             });
+
         }
 
         public void start()
         {
-            Log.Information("PS4KeyboardAndMouseAdapter.start");
+            Log.Information("VigemManager.start");
             start_ViGEm();
             start_controller();
             listen();
@@ -66,7 +67,7 @@ namespace Pizza.backend.vigem
 
         private void start_controller()
         {
-            Log.Information("PS4KeyboardAndMouseAdapter.start_controller");
+            Log.Information("VigemManager.start_controller");
             controller = vigemClient.CreateDualShock4Controller(VENDOR_ID, PRODUCT_ID);
             controller.Connect();
             connected = true;
@@ -74,9 +75,9 @@ namespace Pizza.backend.vigem
 
         private void start_ViGEm()
         {
-            Log.Information("PS4KeyboardAndMouseAdapter.start_ViGEm");
+            Log.Information("VigemManager.start_ViGEm");
             vigemClient = new ViGEmClient();
-            System.Threading.Thread.Sleep(1000);
+            //System.Threading.Thread.Sleep(1000);        }
         }
 
         public void stop()

@@ -7,9 +7,11 @@
     mc:Ignorable="d"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             
+
+    xmlns:common="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Controls.Common"
     xmlns:controls="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Controls"
-    xmlns:wpfspark="clr-namespace:WPFSpark;assembly=WPFSpark">
+    xmlns:wpfspark="clr-namespace:WPFSpark;assembly=WPFSpark"
+    >
 
     <Grid >
         <Grid.ColumnDefinitions>
@@ -46,7 +48,10 @@
             <!-- row 10 -->
             <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
-
+            <RowDefinition Height="100px" />
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="21px" />
+            
         </Grid.RowDefinitions>
 
         <TextBlock
@@ -59,6 +64,8 @@
             VerticalAlignment="Center"
             Text="Misc Settings"/>
 
+        <!-- row 1 intentionally empty -->
+        
         <TextBlock 
             Grid.Row="2"
             Grid.Column="0"
@@ -82,7 +89,7 @@
             Text="Sometimes when you have enabled mouse input for RemotePlay, then sometimes you can drag the RemotePlay window offscreen"
             />
 
-        <!-- row 3 intentionally empty -->
+        <!-- row 4 intentionally empty -->
 
         <controls:SliderV
             Grid.Row="5"
@@ -109,7 +116,7 @@
             Text="By editing the value of the slider, the volume will be remembered when you restart RemotePlay"
             />
 
-        <!-- row 7 intentionally empty -->
+        <!-- row 8 intentionally empty -->
 
         <TextBlock 
             Grid.Row="9"
@@ -140,6 +147,13 @@
             FontSize="10"
             Text="By default we disable this bar as it can be annoying - it will appear if you move your mouse over the remote play window"
             />
+        
+        <!-- row 11 intentionally empty -->
+
+        <common:LogControl
+            Grid.Row="12"
+            Grid.Column="0" >
+        </common:LogControl>
 
     </Grid>
 </UserControl>

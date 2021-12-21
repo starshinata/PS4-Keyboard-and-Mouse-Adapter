@@ -19,5 +19,15 @@ namespace PS4KeyboardAndMouseAdapter.UI.Pages
             Expander_Step2.IsExpanded = true;
         }
 
+        public void CompleteStep2()
+        {
+            Expander_Step2.IsEnabled = false;
+            Expander_Step2.IsExpanded = false;
+
+            Expander_Step3.Visibility = UIConstants.VISIBILITY_VISIBLE;
+            Expander_Step3.IsEnabled = true;
+            Expander_Step3.IsExpanded = true;
+        }
+
     }
 }

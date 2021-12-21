@@ -3,8 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+           
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="700">
+             d:DesignHeight="700" d:DesignWidth="680"
+             xmlns:common="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Controls.Common"
+             xmlns:controls="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Controls"
+             >
+    
     <StackPanel>
 
         <TextBlock />
@@ -34,7 +39,6 @@
             Text="placeholder - C:\Program Files (x86)\Sony\PS Remote Play\RemotePlay.exe - placeholder"
             x:Name="RemotePlayTextBox"
             />
-
 
         <StackPanel Orientation="Horizontal">
             <Button
@@ -97,25 +101,8 @@
         <TextBlock />
 
         <TextBlock FontWeight="Bold" FontSize="16">Step 4</TextBlock>
-        <TextBlock TextWrapping="Wrap">What logging level ?</TextBlock>
-        <TextBlock TextWrapping="Wrap">Ignore this unless advised by a developer, trying to debug an issue</TextBlock>
-        
-        <ComboBox 
-            HorizontalAlignment="Left"
-            Name="Combo_LogLevel"
-            SelectionChanged="Handle_LogLevelChanged"
-            Width="100px">
-            <ComboBoxItem Content="Default" IsSelected="True"/>
-            <ComboBoxItem Content="Debug"/>
-            <ComboBoxItem Content="Verbose"/>
-        </ComboBox>
 
-        <Button
-            Click="Handle_LogFileLocationOpen"
-            Content="Open log file location"
-            HorizontalAlignment="Left"
-            Width="200px"
-            />
+        <common:LogControl/>
 
         <!-- used as a spacer -->
         <TextBlock />

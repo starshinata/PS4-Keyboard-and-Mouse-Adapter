@@ -2,6 +2,7 @@
 using Pizza.backend.vigem;
 using PS4KeyboardAndMouseAdapter.Config;
 using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 
@@ -15,11 +16,21 @@ namespace PS4KeyboardAndMouseAdapter.backend
             ApplicationSettings.Load();
             UserSettings.LoadPrevious();
 
+            woop();
+        }
+
+        public static void woop()
+        {
             try
             {
+                // wraping in task as it can lag the window
+                //TODO test that if we dont have vigem service installed does the error still get propegated 
+
+                System.Threading.Thread.Sleep(1000);
                 VigemManager vig = new VigemManager();
                 vig.start();
                 InstanceSettings.GetInstance().SetVigemInjector(vig);
+
             }
             catch (Nefarius.ViGEm.Client.Exceptions.VigemBusNotFoundException e)
             {

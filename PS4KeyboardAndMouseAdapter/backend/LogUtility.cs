@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 
 namespace PS4KeyboardAndMouseAdapter
 {
@@ -15,5 +16,11 @@ namespace PS4KeyboardAndMouseAdapter
         {
             return $"{LOGS_DIRECTORY}/log.txt";
         }
+
+        public static void LogFileLocationOpen()
+        {
+            Process.Start("explorer.exe", GetLogDirectoryAbsolute());
+        }
+       
     }
 }

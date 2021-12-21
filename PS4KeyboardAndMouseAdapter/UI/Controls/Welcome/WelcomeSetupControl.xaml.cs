@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Forms;
 
 namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
@@ -97,31 +96,6 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
             } else {
                 RemotePlayInjector RemotePlayInjector = new RemotePlayInjector(gp);
                 RemotePlayInjector.OpenRemotePlayAndInject();
-            }
-        }
-
-        private void Handle_LogFileLocationOpen(object sender, RoutedEventArgs e)
-        {
-            Process.Start("explorer.exe", LogUtility.GetLogDirectoryAbsolute());
-        }
-
-        private void Handle_LogLevelChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            if (Combo_LogLevel.SelectedValue != null)
-            {
-                string value = ((ComboBoxItem)Combo_LogLevel.SelectedValue).Content.ToString();
-                if ("Default" == value)
-                {
-                    ((PS4KeyboardAndMouseAdapter.App)System.Windows.Application.Current).SetLoggingLevel(Serilog.Events.LogEventLevel.Information);
-                }
-                else if ("Debug" == value)
-                {
-                    ((PS4KeyboardAndMouseAdapter.App)System.Windows.Application.Current).SetLoggingLevel(Serilog.Events.LogEventLevel.Debug);
-                }
-                else if ("Verbose" == value)
-                {
-                    ((PS4KeyboardAndMouseAdapter.App)System.Windows.Application.Current).SetLoggingLevel(Serilog.Events.LogEventLevel.Verbose);
-                }
             }
         }
 
