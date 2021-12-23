@@ -56,7 +56,7 @@
 
         <Button 
             Click="Button_Click"
-            Content="Remote Play Connected"
+            Content="I have clicked the BLUE button in 'Remote Play'"
             Width="150px"
             />
     </StackPanel>

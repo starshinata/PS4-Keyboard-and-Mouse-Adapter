@@ -11,7 +11,14 @@ namespace Pizza.backend.vigem
         // DS4State from Nefarius.ViGEm.Client.Targets
         public static void ConvertandSendReport(IDualShock4Controller controller, DS4State state)
         {
-            controller.ResetReport();
+            // 2021.12.21 pancakeslp
+            // ` controller.ResetReport(); `
+            // it might make sense to reset the controller/report
+            // but sometimes the report might auto submit, resulting in what looks like a twitch 
+            //
+            // this is most easilly observed with having the ADS toggle on,
+            // and then ADSing and taking your hand off the mouse 
+
             ushort tempButtons = 0;
             DualShock4DPadDirection tempDPad = DualShock4DPadDirection.None;
             ushort tempSpecial = 0;
@@ -55,8 +62,14 @@ namespace Pizza.backend.vigem
         // DualShockState from PS4RemotePlayInjection
         public static void ConvertandSendReport(IDualShock4Controller controller, DualShockState state)
         {
-            controller.ResetReport();
 
+            // 2021.12.21 pancakeslp
+            // ` controller.ResetReport(); `
+            // it might make sense to reset the controller/report
+            // but sometimes the report might auto submit, resulting in what looks like a twitch 
+            //
+            // this is most easilly observed with having the ADS toggle on,
+            // and then ADSing and taking your hand off the mouse 
 
             //Left 
             controller.SetButtonState(DualShock4Button.ShoulderLeft, state.L1);

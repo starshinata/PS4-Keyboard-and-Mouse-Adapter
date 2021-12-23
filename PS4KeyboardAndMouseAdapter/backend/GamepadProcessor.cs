@@ -290,7 +290,7 @@ namespace PS4KeyboardAndMouseAdapter
                     scaledY = 127;
                 }
 
-                if (scaledX != 127 && scaledY != 127)
+                if (scaledX != 127 && scaledX != 128 && scaledY != 127 && scaledY != 128)
                 {
                     // Log.Verbose("GamepadProcessor.HandleMouseCursor scaledX={0} scaledY={1}", scaledX, scaledY);
                 }

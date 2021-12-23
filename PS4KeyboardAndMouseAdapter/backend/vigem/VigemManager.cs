@@ -5,11 +5,11 @@ using PS4KeyboardAndMouseAdapter;
 using PS4KeyboardAndMouseAdapter.Config;
 using Serilog;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace Pizza.backend.vigem
 {
-    using PVIGEM_TARGET = IntPtr;
 
     //thanks https://github.com/Ryochan7/DS4Windows/blob/2f1d8d353253d7f2ab7edadd70888658f1dacd7c/DS4Windows/DS4Control/ControlService.cs
 
@@ -21,9 +21,7 @@ namespace Pizza.backend.vigem
 
         private ViGEmClient vigemClient;
         private IDualShock4Controller controller;
-        private bool connected;
 
-        protected PVIGEM_TARGET NativeHandle { get; set; }
         public object GamepadConverer { get; private set; }
 
         public void listen()
@@ -32,8 +30,20 @@ namespace Pizza.backend.vigem
 
 
             GamepadProcessor gp = new GamepadProcessor();
+
+            int RequestsPerSecondCounter = 0;
+
+            Stopwatch RequestsPerSecondTimer = new Stopwatch();
+            RequestsPerSecondTimer.Start();
+
+
+            Stopwatch SleepTimer = new Stopwatch();
+            SleepTimer.Start();
+
             Task.Factory.StartNew(() =>
             {
+                controller.ResetReport();
+
                 while (true)
                 {
                     try
@@ -41,20 +51,55 @@ namespace Pizza.backend.vigem
                         PS4RemotePlayInterceptor.DualShockState x = gp.GetState();
                         if (x != null)
                         {
+                            //Log.Information("ds" + gp.DualShockStateToString(ref x));
                             GamepadConverter.ConvertandSendReport(controller, x);
                         }
-
                     }
                     catch (Exception ex)
                     {
                         ExceptionLogger.LogException("VigemManager.listen L49", ex);
                     }
 
-                    int MillisecondsPerInput = 1000 / UserSettings.GetInstance().MousePollingRate;
-                    System.Threading.Thread.Sleep(MillisecondsPerInput);
+                    SleepTimer.Restart();
+                    int MillisecondsPerInput = 0; // 1000 / UserSettings.GetInstance().MousePollingRate;
+                    sleep(MillisecondsPerInput);
+                    var sleepDuration = SleepTimer.ElapsedMilliseconds;
+
+                    Log.Information("MillisecondsPerInput {0}", MillisecondsPerInput);
+                    Log.Information("sleepDuration {0}", sleepDuration);
+                    RequestsPerSecondCounter++;
+
+                    SleepTimer.Restart();
+
+                    if (RequestsPerSecondTimer.ElapsedMilliseconds >= 1000)
+                    {
+                        //Log.Information("MillisecondsPerInput {0}", MillisecondsPerInput);
+                        Log.Information("VigemManager.listen  RequestsPerSecondCounter={0}", RequestsPerSecondCounter);
+                        RequestsPerSecondTimer.Restart();
+                        RequestsPerSecondCounter = 0;
+                    }
                 }
             });
 
+        }
+
+        public void sleep(int sleepDuration)
+        {
+            // 2021.12.22 pancakeslp
+            // 15ms as that seems to be roughly the minimum amount of time Thread.Sleep can sleep for on Windows
+            // it seems unix will honour sleep(1) to sleep for 1 ms
+            //
+            // for more reading see 
+            // https://stackoverflow.com/questions/19066900/thread-sleep1-takes-longer-than-1ms
+            // https://stackoverflow.com/questions/8860803/pause-a-thread-for-less-than-one-millisecond
+            // https://stackoverflow.com/questions/85122/how-to-make-thread-sleep-less-than-a-millisecond-on-windows/11456112#11456112
+
+            int revisedSleepDuration = sleepDuration - 15;
+            if (revisedSleepDuration < 0)
+            {
+                revisedSleepDuration = 0;
+            }
+            System.Threading.Thread.Sleep(revisedSleepDuration);
         }
 
         public void start()
@@ -70,7 +115,6 @@ namespace Pizza.backend.vigem
             Log.Information("VigemManager.start_controller");
             controller = vigemClient.CreateDualShock4Controller(VENDOR_ID, PRODUCT_ID);
             controller.Connect();
-            connected = true;
         }
 
         private void start_ViGEm()

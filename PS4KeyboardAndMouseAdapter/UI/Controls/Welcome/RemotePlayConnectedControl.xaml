@@ -50,7 +50,7 @@
 
         <Button 
             Click="Button_Click"
-            Content="Connect Adapter"
+            Content="I see a familiar screen from my PlayStation"
             Width="150px"
             />
     </StackPanel>
