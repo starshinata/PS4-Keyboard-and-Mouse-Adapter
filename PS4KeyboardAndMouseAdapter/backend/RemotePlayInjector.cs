@@ -13,16 +13,12 @@ namespace PS4KeyboardAndMouseAdapter
     public class RemotePlayInjector : RemotePlayStarter
     {
 
-        private GamepadProcessor gamepadProcessor;
-
-        public RemotePlayInjector(GamepadProcessor gamepadProcessor)
+        public RemotePlayInjector()
         {
-            this.gamepadProcessor = gamepadProcessor;
-
             Injector.FindProcess(RemotePlayConstants.TARGET_PROCESS_NAME)?.Kill();
         }
 
-        private void Inject()
+        private void Inject(GamepadProcessor gamepadProcessor)
         {
             try
             {
@@ -39,12 +35,12 @@ namespace PS4KeyboardAndMouseAdapter
             }
             catch (Exception e)
             {
-                Log.Logger.Error("MainViewModel Inject error: " + e.Message);
+                Log.Logger.Error("RemotePlayInjector.Inject error: " + e.Message);
                 Log.Logger.Error(e.StackTrace);
             }
         }
 
-        public void OpenRemotePlayAndInject()
+        public void OpenRemotePlayAndInject(GamepadProcessor gamepadProcessor)
         {
             try
             {
@@ -53,7 +49,7 @@ namespace PS4KeyboardAndMouseAdapter
                 bool success = OpenRemotePlayInternal();
                 if (success)
                 {
-                    Inject();
+                    Inject(gamepadProcessor);
                 }
             }
             catch (Exception e)

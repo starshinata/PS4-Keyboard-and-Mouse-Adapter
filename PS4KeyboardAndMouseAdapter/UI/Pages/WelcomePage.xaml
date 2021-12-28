@@ -7,7 +7,7 @@
       xmlns:welcome="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Controls.Welcome"
       mc:Ignorable="d" 
       d:DesignHeight="700" 
-      d:DesignWidth="728"
+      d:DesignWidth="700"
       >
 
     <StackPanel>
@@ -35,7 +35,7 @@
                 <TextBlock FontWeight="Bold" FontSize="20" Margin="10,0,0,0">Setup</TextBlock>
             </Expander.Header>
             <Expander.Content>
-                <welcome:PlaystationControl />
+                <welcome:WelcomeSetupControl />
             </Expander.Content>
         </Expander>
 
@@ -76,6 +76,6 @@
                 </StackPanel>
             </Expander.Content>
         </Expander>
-        
     </StackPanel>
+
 </UserControl>

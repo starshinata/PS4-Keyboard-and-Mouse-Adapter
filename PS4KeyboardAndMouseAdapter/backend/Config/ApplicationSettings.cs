@@ -31,6 +31,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
             ApplicationSettings NewSettings = JsonConvert.DeserializeObject<ApplicationSettings>(json);
 
             ThisInstance.EmulateController = NewSettings.EmulateController;
+            ThisInstance.EmulationMode = NewSettings.EmulationMode;
             ThisInstance.RemotePlayPath = NewSettings.RemotePlayPath;
         }
 
@@ -44,7 +45,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
             }
             catch (Exception ex)
             {
-                ExceptionLogger.LogException("ApplicationSettings.Load failed: ",  ex);
+                ExceptionLogger.LogException("ApplicationSettings.Load failed: ", ex);
             }
 
 
@@ -84,6 +85,8 @@ namespace PS4KeyboardAndMouseAdapter.Config
         //
 
         public bool EmulateController { get; set; } = false;
+        
+        public string EmulationMode;
 
         public string RemotePlayPath;
 

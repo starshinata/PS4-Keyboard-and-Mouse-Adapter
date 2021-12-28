@@ -22,18 +22,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using Pizza;
+using PS4RemotePlayInjection;
+using Serilog;
 using System;
 using System.Linq;
 using System.Text;
-using PS4RemotePlayInjection;
-using Serilog;
 
 namespace PS4RemotePlayInterceptor
 {
     /// <summary>
     /// Provides an interface for communicating from the client (target) to the server (injector)
     /// </summary>
-    class InjectionInterface : MarshalByRefObject
+    public class InjectionInterface : MarshalByRefObject
     {
         //TODO write something the uses each log level as injector init
         public void LogError(string msg)
@@ -119,7 +120,7 @@ namespace PS4RemotePlayInterceptor
             }
             catch (Exception ex)
             {
-                Log.Logger.Error("Problem in OnReadFile: " + ex.Message);
+                ExceptionLogger.LogException("Problem in OnReadFile: ", ex);
             }
         }
 

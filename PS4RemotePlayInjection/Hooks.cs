@@ -112,8 +112,8 @@ namespace PS4RemotePlayInjection
                         domainContext.Domain,
                         () =>
                         {
-                            Patcher.server = EasyHook.RemoteHooking.IpcConnectClient<InjectionInterface>("dotnethooks");
-                            Patcher.DoPatching();
+                            PatcherRemoteplayToolbar.server = EasyHook.RemoteHooking.IpcConnectClient<InjectionInterface>("dotnethooks");
+                            PatcherRemoteplayToolbar.DoPatching();
                         });
                 }
                 catch (Exception e)

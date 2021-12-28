@@ -90,11 +90,12 @@
   <ItemGroup>
     <Compile Include="DualShockState.cs" />
     <Compile Include="ExceptionLogger.cs" />
+    <Compile Include="PatcherGamepad.cs" />
     <Compile Include="Hooks.cs" />
     <Compile Include="InjectionInterface.cs" />
     <Compile Include="Injector.cs" />
     <Compile Include="InterceptorException.cs" />
-    <Compile Include="Patcher.cs" />
+    <Compile Include="PatcherRemoteplayToolbar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UtilityData.cs" />
     <Compile Include="Utility.cs" />

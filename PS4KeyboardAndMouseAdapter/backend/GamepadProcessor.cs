@@ -407,7 +407,11 @@ namespace PS4KeyboardAndMouseAdapter
 
         public void OnReceiveData(ref DualShockState state)
         {
-            state = GetState();
+            DualShockState newState = GetState();
+            if (newState != null)
+            {
+                state = newState;
+            }
         }
 
         public DualShockState GetState()

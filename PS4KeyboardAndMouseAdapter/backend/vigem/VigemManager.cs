@@ -63,10 +63,10 @@ namespace Pizza.backend.vigem
                     SleepTimer.Restart();
                     int MillisecondsPerInput = 0; // 1000 / UserSettings.GetInstance().MousePollingRate;
                     sleep(MillisecondsPerInput);
-                    var sleepDuration = SleepTimer.ElapsedMilliseconds;
+                    long sleepDuration = SleepTimer.ElapsedMilliseconds;
 
-                    Log.Information("MillisecondsPerInput {0}", MillisecondsPerInput);
-                    Log.Information("sleepDuration {0}", sleepDuration);
+                    //Log.Information("MillisecondsPerInput {0}", MillisecondsPerInput);
+                    //Log.Information("sleepDuration {0}", sleepDuration);
                     RequestsPerSecondCounter++;
 
                     SleepTimer.Restart();
@@ -74,7 +74,7 @@ namespace Pizza.backend.vigem
                     if (RequestsPerSecondTimer.ElapsedMilliseconds >= 1000)
                     {
                         //Log.Information("MillisecondsPerInput {0}", MillisecondsPerInput);
-                        Log.Information("VigemManager.listen  RequestsPerSecondCounter={0}", RequestsPerSecondCounter);
+                        //Log.Information("VigemManager.listen  RequestsPerSecondCounter={0}", RequestsPerSecondCounter);
                         RequestsPerSecondTimer.Restart();
                         RequestsPerSecondCounter = 0;
                     }

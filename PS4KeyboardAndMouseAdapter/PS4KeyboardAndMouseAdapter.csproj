@@ -268,7 +268,9 @@
     <Compile Include="backend\DebugLogging\ProcessCommandLine.cs" />
     <Compile Include="backend\DebugLogging\ServiceComparerByName.cs" />
     <Compile Include="backend\DebugLogging\ProcessComparerByName.cs" />
+    <Compile Include="backend\EmulationConstants.cs" />
     <Compile Include="backend\LogManager.cs" />
+    <Compile Include="backend\RemotePlayInstaller.cs" />
     <Compile Include="backend\vigem\GamepadConverter.cs" />
     <Compile Include="backend\LogUtility.cs" />
     <Compile Include="backend\HidConstants.cs" />
@@ -313,6 +315,9 @@
     <Compile Include="UI\Controls\SimpleConfigPage\MouseSettingsSimpleControl.xaml.cs">
       <DependentUpon>MouseSettingsSimpleControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Controls\Welcome\EmulationPickerControl.xaml.cs">
+      <DependentUpon>EmulationPickerControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\Welcome\RemotePlayLaunchedControl.xaml.cs">
       <DependentUpon>RemotePlayLaunchedControl.xaml</DependentUpon>
     </Compile>
@@ -351,6 +356,7 @@
     </Compile>
     <Compile Include="UI\Controls\Welcome\WelcomeSetupControl.xaml.cs">
       <DependentUpon>WelcomeSetupControl.xaml</DependentUpon>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\Pages\WelcomePage.xaml.cs">
       <DependentUpon>WelcomePage.xaml</DependentUpon>
@@ -360,6 +366,10 @@
     <Page Include="UI\Controls\Common\LogControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Controls\Welcome\EmulationPickerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Controls\Welcome\RemotePlayLaunchedControl.xaml">
       <Generator>MSBuild:Compile</Generator>

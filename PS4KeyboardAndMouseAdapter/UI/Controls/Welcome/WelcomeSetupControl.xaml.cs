@@ -3,17 +3,15 @@ using PS4KeyboardAndMouseAdapter.backend.DebugLogging;
 using PS4KeyboardAndMouseAdapter.Config;
 using Serilog;
 using System;
-using System.Diagnostics;
 using System.IO;
-using System.Net;
 using System.Windows;
 using System.Windows.Forms;
 
 namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
 {
-    public partial class PlaystationControl : System.Windows.Controls.UserControl
+    public partial class WelcomeSetupControl : System.Windows.Controls.UserControl
     {
-        public PlaystationControl()
+        public WelcomeSetupControl()
         {
             InitializeComponent();
 
@@ -54,7 +52,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
 
         private void Handle_InstallRemotePlay(object sender, RoutedEventArgs e)
         {
-            RunRemotePlaySetup();
+            RemotePlayInstaller.RunRemotePlaySetup();
         }
 
         private void Handle_LaunchRemotePlay(object sender, RoutedEventArgs e)
@@ -84,19 +82,13 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
             Window window = System.Windows.Application.Current.MainWindow;
             ((MainWindowView)window).WelcomeStep1Done();
 
-            GamepadProcessor gp = ((MainViewModel)DataContext).GamepadProcessor;
+            //element defined in xaml
+            emulationPickerControl.GetValueAndSaveValueInApplicationSettings();
 
             //////////////////////////////////////////////////////////////////
 
-            // the injector is kinda ASYNC so do stuff prior to this async action
-
-            if (true) {
-                RemotePlayStarter rps = new RemotePlayStarter();
-                rps.OpenRemotePlay();
-            } else {
-                RemotePlayInjector RemotePlayInjector = new RemotePlayInjector(gp);
-                RemotePlayInjector.OpenRemotePlayAndInject();
-            }
+            // the below is kinda ASYNC so be sure to do this last
+            StartRemotePlayAndConditionallyInject();
         }
 
         private void Handle_SetRemoteRemotePlayPath(object sender, RoutedEventArgs e)
@@ -134,18 +126,21 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
             ErrorTextBox_RemotePlayPath.Visibility = UIConstants.VISIBILITY_HIDDEN;
         }
 
-        private void RunRemotePlaySetup()
+        private void StartRemotePlayAndConditionallyInject()
         {
-            string installerName = "RemotePlayInstaller.exe";
 
-            using (WebClient client = new WebClient())
+            if (EmulationConstants.ONLY_VIGEM.Equals(ApplicationSettings.GetInstance().EmulationMode))
             {
-                client.DownloadFile("https://remoteplay.dl.playstation.net/remoteplay/module/win/RemotePlayInstaller.exe", installerName);
+                RemotePlayStarter rps = new RemotePlayStarter();
+                rps.OpenRemotePlay();
             }
-
-            Log.Information("RunRemotePlaySetup - RemotePlay installer started");
-            Process installerProcess = Process.Start(installerName);
-            installerProcess.EnableRaisingEvents = true;
+            else
+            {
+                GamepadProcessor gp = ((MainViewModel)DataContext).GamepadProcessor;
+                //TODO move gp to OpenRemotePlayAndInject()
+                RemotePlayInjector RemotePlayInjector = new RemotePlayInjector(gp);
+                RemotePlayInjector.OpenRemotePlayAndInject();
+            }
         }
 
         /// <returns>

@@ -6,11 +6,14 @@
         xmlns:PS4KeyboardAndMouseAdapter="clr-namespace:PS4KeyboardAndMouseAdapter"
         
         Title="{Binding WindowTitle}"
-        Width="700" 
+        
         Height="728" 
-        ResizeMode="CanMinimize"
+        Width="700" 
+        
         Activated="MainWindowView_OnActivated"
-        Deactivated="MainWindowView_OnDeactivated">
+        Deactivated="MainWindowView_OnDeactivated"
+        ResizeMode="CanMinimize"
+        >
 
     <Window.DataContext>
         <PS4KeyboardAndMouseAdapter:MainViewModel />
