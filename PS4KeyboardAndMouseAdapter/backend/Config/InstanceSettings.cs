@@ -28,10 +28,22 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         public bool EnableMouseInput { get; set; } = false;
 
+        private GamepadProcessor gamepadprocessor = null;
+
         private LogManager logManager = null;
         private VigemManager vigemInjector = null;
 
         //////////////////////////////////////////////////////////////////////
+
+        public GamepadProcessor GetGamepadProcessor()
+        {
+            return gamepadprocessor;
+        }
+
+        public void SetGamepadProcessor(GamepadProcessor value)
+        {
+            gamepadprocessor = value;
+        }
 
         public LogManager GetLogManager()
         {

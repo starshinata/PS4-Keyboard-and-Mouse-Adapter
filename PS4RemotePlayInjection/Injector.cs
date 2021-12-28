@@ -1,6 +1,5 @@
 ﻿using EasyHook;
 using Pizza;
-using PS4RemotePlayInjection;
 using Serilog;
 using System;
 using System.Diagnostics;

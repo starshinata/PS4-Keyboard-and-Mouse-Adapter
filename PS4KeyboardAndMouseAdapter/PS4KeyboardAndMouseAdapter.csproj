@@ -523,20 +523,20 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="mouse-left-button.svg" />
+    <Resource Include="images\mouse-left-button.svg" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Resource Include="mouse-right-button.svg" />
+    <Resource Include="images\mouse-right-button.svg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="mouse-move.svg" />
+    <Resource Include="images\mouse-move.svg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ds4.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ds4_final_layout.png" />
+    <Resource Include="images\ds4_final_layout.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">

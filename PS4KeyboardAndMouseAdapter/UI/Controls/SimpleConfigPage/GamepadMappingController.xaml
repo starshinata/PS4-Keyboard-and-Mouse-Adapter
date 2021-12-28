@@ -101,7 +101,7 @@
                 Grid.RowSpan="14"
                 Margin="0,0,0,18">
                 <Image.Source>
-                    <BitmapImage UriSource="pack://application:,,,/ds4_final_layout.png"/>
+                    <BitmapImage UriSource="pack://application:,,,/images/ds4_final_layout.png"/>
                 </Image.Source>
             </Image>
 
@@ -124,7 +124,7 @@
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
                 Margin="-6,17,26,3"
-                Source="pack://application:,,,/mouse-right-button.svg"
+                Source="pack://application:,,,/images/mouse-right-button.svg"
                 Stretch="Uniform"
                 />
 
@@ -247,7 +247,7 @@
                 Grid.Column="5"
                 Grid.ColumnSpan="2"
                 Margin="12,17,-22,3"
-                Source="pack://application:,,,/mouse-left-button.svg" 
+                Source="pack://application:,,,/images/mouse-left-button.svg" 
                 Stretch="Uniform"/>
 
             <Button

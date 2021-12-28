@@ -137,9 +137,8 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
             else
             {
                 GamepadProcessor gp = ((MainViewModel)DataContext).GamepadProcessor;
-                //TODO move gp to OpenRemotePlayAndInject()
-                RemotePlayInjector RemotePlayInjector = new RemotePlayInjector(gp);
-                RemotePlayInjector.OpenRemotePlayAndInject();
+                RemotePlayInjector RemotePlayInjector = new RemotePlayInjector();
+                RemotePlayInjector.OpenRemotePlayAndInject(gp);
             }
         }
 
