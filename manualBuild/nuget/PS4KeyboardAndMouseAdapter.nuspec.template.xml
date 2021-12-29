@@ -13,6 +13,6 @@
 		<releaseNotes>a release note</releaseNotes>
 	</metadata>
 	<files>
-		<file src="..\..\PS4KeyboardandMouseAdapter\bin\Release\**\**" target="lib\net461\" exclude="*.pdb;*.vshost.*"/>
+		<file src="..\..\code\PS4KeyboardandMouseAdapter\bin\Release\**\**" target="lib\net461\" exclude="*.pdb;*.vshost.*"/>
 	</files>
 </package>

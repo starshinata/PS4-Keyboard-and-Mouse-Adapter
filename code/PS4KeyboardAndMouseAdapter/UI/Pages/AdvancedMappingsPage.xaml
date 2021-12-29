@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="PS4KeyboardAndMouseAdapter.UI.Pages.AdvancedMappingsPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             
+             d:DesignHeight="700" 
+             d:DesignWidth="680"
+             mc:Ignorable="d" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             
+             KeyDown="Handler_AddMapping_OnKeyboardKeyDown"
+             Loaded="Handler_Loaded"
+             MouseDown="Handler_AddMapping_OnMouseDown"
+             MouseLeftButtonUp="Handler_AddMapping_OnMouseLeftButtonUp"
+             MouseWheel="Handler_AddMapping_OnMouseScroll"
+             >
+    <!-- 
+    notes for above element    ^^^
+    
+    pancakeslp 2020.12.26
+    MouseDown does not include left click ... I dunno why O.o
+    
+    pancakeslp 2021.02.25
+    The event handlers are here for simplicity
+    They can be elsewhere in this file/class, but SIMPLICITY
+    If you want to move them from here be sure to check that all the handlers are fired especially from the near the edges of the black area
+    
+    -->
+
+    <Grid>
+        <Border 
+            Background="Black"
+            BorderBrush="Crimson"
+            BorderThickness="3" 
+            CornerRadius="6"
+            Height="640px"
+            x:Name="WaitForKeyPress_1"
+            >
+
+            <StackPanel 
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Focusable="True"
+                x:Name="WaitForKeyPress_2"
+                >
+
+                <TextBlock 
+                    FontFamily="consolas"
+                    FontSize="30"
+                    FontWeight="Bold" 
+                    Foreground="Crimson" 
+                    HorizontalAlignment="Center" 
+                    Text="Press any key to map" 
+                    x:Name="WaitForKeyPress_3"
+                    />
+
+                <TextBlock 
+                    FontFamily="consolas"
+                    FontSize="15"
+                    FontWeight="Bold" 
+                    Foreground="Crimson" 
+                    HorizontalAlignment="Center" 
+                    Text="(mouse or keyboard)" 
+                    x:Name="WaitForKeyPress_4"
+                    />
+
+                <TextBlock 
+                    FontFamily="consolas"
+                    FontSize="30"
+                    FontWeight="Bold" 
+                    Foreground="Crimson" 
+                    HorizontalAlignment="Center" 
+                    Text="or Escape to cancel" 
+                    x:Name="WaitForKeyPress_5"
+                    />
+            </StackPanel>
+        </Border>
+
+        <ScrollViewer
+            HorizontalScrollBarVisibility="Auto"
+            VerticalScrollBarVisibility="Auto"
+            x:Name="scrollViewer">
+
+            <StackPanel 
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                x:Name="mappingHolder"/>
+
+        </ScrollViewer>
+    </Grid>
+
+</UserControl>

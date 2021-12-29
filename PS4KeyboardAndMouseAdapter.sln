@@ -3,12 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PS4KeyboardAndMouseAdapter", "PS4KeyboardAndMouseAdapter\PS4KeyboardAndMouseAdapter.csproj", "{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}"
+
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "code\Common\Common.csproj", "{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PS4RemotePlayInjection", "PS4RemotePlayInjection\PS4RemotePlayInjection.csproj", "{D3D6F621-7CB9-4992-80AC-FF9745D974EC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PS4KeyboardAndMouseAdapter", "code\PS4KeyboardAndMouseAdapter\PS4KeyboardAndMouseAdapter.csproj", "{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{7B4800EE-D943-4299-90FD-DFCE48662774}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PS4RemotePlayInjection", "code\PS4RemotePlayInjection\PS4RemotePlayInjection.csproj", "{D3D6F621-7CB9-4992-80AC-FF9745D974EC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "code\UnitTests\UnitTests.csproj", "{7B4800EE-D943-4299-90FD-DFCE48662774}"
+EndProject
+
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9FF1BB60-DFEF-4108-A4A6-945C22D8882C}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
@@ -39,6 +43,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 		documentation\technical notes - needs a better name.txt = documentation\technical notes - needs a better name.txt
 		documentation\troubleshooting.md = documentation\troubleshooting.md
 		documentation\version-history.md = documentation\version-history.md
+		documentation\vigem.md = documentation\vigem.md
 		documentation\welcome-1.png = documentation\welcome-1.png
 		documentation\welcome-2.png = documentation\welcome-2.png
 	EndProjectSection
@@ -64,8 +69,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{679B8A6C
 		manualBuild\nuget\PS4KeyboardAndMouseAdapter.nuspec.template.xml = manualBuild\nuget\PS4KeyboardAndMouseAdapter.nuspec.template.xml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}"
-EndProject
+
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Clean|Any CPU = Clean|Any CPU

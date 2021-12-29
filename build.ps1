@@ -37,15 +37,23 @@ $CERT_PFX="${CERT_DIRECTORY}\github.com-pancakeslp.pfx"
 
 $GENERATED_INSTALLER_PATH="SquirrelReleases"
 
+$PROJECT_DIRECTORY_COMMON="code\common"
+$PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER="code\PS4KeyboardAndMouseAdapter"
+$PROJECT_DIRECTORY_PS4_REMOTE_PLAY_INJECTION="code\PS4RemotePlayInjection"
+$PROJECT_DIRECTORY_UNIT_TESTS="code\UnitTests"
+
+$DIRECTORY_PACKAGES="code\packages"
+
+
 ################################
 ################################
 
 function add-build-date {
-  make-dir PS4KeyboardAndMouseAdapter\Resources\
+  make-dir $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\Resources\
 
   ## format s means sortable aka ISO 8601
   $DATETIME = (get-date -Format s)
-  echo $DATETIME > PS4KeyboardAndMouseAdapter\Resources\BuildDate.txt
+  echo $DATETIME > $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\Resources\BuildDate.txt
 }
 
 function build-msbuild {
@@ -70,33 +78,37 @@ function build-msbuild {
 }
 
 
-function cleanup {
+function cleanup-prebuild {
   remove $GENERATED_INSTALLER_PATH
   
   remove PS4KeyboardAndMouseAdapter.*.nupkg
   
-  remove PS4KeyboardAndMouseAdapter\bin\
-  remove PS4KeyboardAndMouseAdapter\logs\
-  remove PS4KeyboardAndMouseAdapter\obj\
+  remove $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\
+  remove $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\logs\
+  remove $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\obj\
   
-  remove PS4RemotePlayInjection\bin\
-  remove PS4RemotePlayInjection\obj\
+  remove $PROJECT_DIRECTORY_PS4_REMOTE_PLAY_INJECTION\bin\
+  remove $PROJECT_DIRECTORY_PS4_REMOTE_PLAY_INJECTION\obj\
 
+  remove TestResults
+}
+
+function cleanup-postbuild {
   remove TestResults
 }
 
 function dependencies-nuget {
 
-  nuget install Common\packages.config                     -OutputDirectory packages
+  nuget install $PROJECT_DIRECTORY_COMMON\packages.config                         -OutputDirectory $DIRECTORY_PACKAGES 
   error-on-bad-return-code	
 
-  nuget install PS4KeyboardAndMouseAdapter\packages.config -OutputDirectory packages
+  nuget install $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\packages.config -OutputDirectory $DIRECTORY_PACKAGES 
   error-on-bad-return-code	
 
-  nuget install PS4RemotePlayInjection\packages.config     -OutputDirectory packages
+  nuget install $PROJECT_DIRECTORY_PS4_REMOTE_PLAY_INJECTION\packages.config      -OutputDirectory $DIRECTORY_PACKAGES 
   error-on-bad-return-code	
 
-  nuget install UnitTests\packages.config                  -OutputDirectory packages
+  nuget install $PROJECT_DIRECTORY_UNIT_TESTS\packages.config                     -OutputDirectory $DIRECTORY_PACKAGES 
   error-on-bad-return-code	
 }
 
@@ -121,15 +133,15 @@ function make-dir {
 function make-extract-me-installer {
 
   echo ""
-  echo "making extractable installer"
+  echo "making extract-me-installer"
 
   $EXTRACTED_PATH="$GENERATED_INSTALLER_PATH\extract-temp\"
 
   make-dir $EXTRACTED_PATH
 
-  Copy-Item  -Force           PS4KeyboardAndMouseAdapter\bin\Release\*         $EXTRACTED_PATH\app-$VERSION
-  Copy-Item  -Force -Recurse  PS4KeyboardAndMouseAdapter\bin\Release\profiles  $EXTRACTED_PATH\app-$VERSION\profiles
-  Copy-Item  -Force           manualBuild\extract-me-bin\*                     $EXTRACTED_PATH
+  Copy-Item  -Force           $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\Release\*         $EXTRACTED_PATH\app-$VERSION
+  Copy-Item  -Force -Recurse  $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\Release\profiles  $EXTRACTED_PATH\app-$VERSION\profiles
+  Copy-Item  -Force           manualBuild\extract-me-bin\*                                            $EXTRACTED_PATH
 
   $compress = @{
     Path = "$EXTRACTED_PATH\*"
@@ -146,6 +158,7 @@ function make-extract-me-installer {
 
 function make-nuget-package {
   echo ""
+  echo "making nuget-package"
 
   $FIND="<version>REPLACE_VERSION_REPLACE</version>"
   $REPLACE="<version>$VERSION</version>"
@@ -160,6 +173,7 @@ function make-nuget-package {
 
   nuget pack $TARGET_NUSPEC_FILE
   error-on-bad-return-code
+  echo "made nuget-package"
 }
 
 
@@ -202,7 +216,7 @@ function remove {
 function sign-executables {
   echo ""
   echo "sign-ing executables" 
-  manually-sign-file  "PS4KeyboardAndMouseAdapter\bin\$MS_BUILD_CONFIG\PS4KeyboardAndMouseAdapter.exe"
+  manually-sign-file  "$PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\PS4KeyboardAndMouseAdapter.exe"
   echo "signed executables"
 }
 
@@ -221,8 +235,7 @@ function squirrel {
   echo ""
   echo "squirrel-ing package ..."
   
-  ## in powershell uses ` to denote continues on next line
-  $COMMAND=" packages\squirrel.windows.1.9.1\tools\Squirrel.exe  --releasify \`"PS4KeyboardAndMouseAdapter.${VERSION}.nupkg\`"  --releaseDir $GENERATED_INSTALLER_PATH "
+    $COMMAND=" ${DIRECTORY_PACKAGES}\squirrel.windows.1.9.1\tools\Squirrel.exe  --releasify \`"PS4KeyboardAndMouseAdapter.${VERSION}.nupkg\`"  --releaseDir $GENERATED_INSTALLER_PATH "
   
   powershell.exe -ExecutionPolicy Bypass -Command "$COMMAND | Write-Output"
   error-on-bad-return-code	
@@ -241,7 +254,7 @@ function squirrel {
 function test-vstest {
 
   echo "vstest-ing"
-  $UNIT_TEST_DLL="UnitTests\bin\$MS_BUILD_CONFIG\UnitTests.dll"
+  $UNIT_TEST_DLL="$PROJECT_DIRECTORY_UNIT_TESTS\bin\$MS_BUILD_CONFIG\UnitTests.dll"
 
   if (!(Test-Path $UNIT_TEST_DLL )) {
     echo "UnitTests.dll missing! ... path $UNIT_TEST_DLL"
@@ -251,7 +264,7 @@ function test-vstest {
   vstest.console.exe $UNIT_TEST_DLL --ListTests
   echo ""
 
-  vstest.console.exe $UNIT_TEST_DLL UnitTests\bin\$MS_BUILD_CONFIG\csfml-Window.dll
+  vstest.console.exe $UNIT_TEST_DLL $PROJECT_DIRECTORY_UNIT_TESTS\bin\$MS_BUILD_CONFIG\csfml-Window.dll
   
   if ( $LASTEXITCODE -ne 0) {
     echo "vstest failed"
@@ -263,7 +276,7 @@ function test-vstest {
 
 
 function update-asembly-info {
-  manualBuild\c-sharp-assembly-info-util\AssemblyInfoUtil.exe -set:$VERSION "PS4KeyboardAndMouseAdapter\Properties\AssemblyInfo.cs"
+  manualBuild\c-sharp-assembly-info-util\AssemblyInfoUtil.exe -set:$VERSION "$PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\Properties\AssemblyInfo.cs"
 
   if ( $LASTEXITCODE -ne 0) {
     echo "AssemblyInfoUtil.ex failed"
@@ -299,7 +312,7 @@ function valid-xaml-xmllint {
 
 add-build-date
 
-cleanup
+cleanup-prebuild
 
 dependencies-nuget
 
@@ -311,9 +324,9 @@ build-msbuild
 test-vstest
 
 echo ""
-Copy-Item                   profiles\default-profile.json                           PS4KeyboardAndMouseAdapter\bin\$MS_BUILD_CONFIG\profile-previous.json
-Copy-Item  -recurse -Force  profiles                                                PS4KeyboardAndMouseAdapter\bin\$MS_BUILD_CONFIG\profiles              
-Copy-Item                   PS4KeyboardAndMouseAdapter\application-settings.json    PS4KeyboardAndMouseAdapter\bin\$MS_BUILD_CONFIG\application-settings.json
+Copy-Item                   profiles\default-profile.json                                                $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\profile-previous.json
+Copy-Item  -recurse -Force  profiles                                                                     $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\profiles              
+Copy-Item                   $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\application-settings.json  $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\application-settings.json
 
 sign-executables
 
@@ -330,4 +343,7 @@ if( $MS_BUILD_CONFIG -eq "Release" ) {
 
   sign-installer
 }
+
+
+cleanup-postbuild
 
