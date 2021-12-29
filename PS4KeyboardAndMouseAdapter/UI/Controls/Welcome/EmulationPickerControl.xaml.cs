@@ -1,7 +1,7 @@
 ﻿using Pizza.Common;
-using PS4KeyboardAndMouseAdapter.backend;
 using PS4KeyboardAndMouseAdapter.Config;
 using Serilog;
+using System;
 using System.Linq;
 using System.Windows.Controls;
 
@@ -9,20 +9,26 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
 {
     public partial class EmulationPickerControl : System.Windows.Controls.UserControl
     {
+
+
+        public static readonly int ONLY_PROCESS_INJECTION = 1; //EmulationConstants.ONLY_PROCESS_INJECTION;
+        public static readonly int ONLY_VIGEM = 2;//EmulationConstants.ONLY_VIGEM;
+        public static readonly int VIGEM_AND_PROCESS_INJECTION = 3; // EmulationConstants.VIGEM_AND_PROCESS_INJECTION;
+
         public EmulationPickerControl()
         {
             InitializeComponent();
             SetInitialChecked();
         }
 
-        private string GetValue()
+        private int GetValue()
         {
             RadioButton checkedRadioButton = RadioButtonGroup.Children.OfType<RadioButton>().
                 Where(n => n.IsChecked == true).First();
 
             if (checkedRadioButton != null && checkedRadioButton.Tag != null)
             {
-                string tag = checkedRadioButton.Tag.ToString();
+                int tag = Int32.Parse(checkedRadioButton.Tag.ToString());
                 if (EmulationConstants.IsValidValue(tag))
                 {
                     Log.Information("EmulationPickerControl tag is " + tag);
@@ -30,7 +36,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
                 }
             }
             Log.Information("EmulationPickerControl tag is null");
-            return null;
+            return -1;
         }
 
         public void GetValueAndSaveValueInApplicationSettings()
@@ -38,15 +44,15 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
             SaveValueInApplicationSettings(GetValue());
         }
 
-        private void SaveValueInApplicationSettings(string value)
+        private void SaveValueInApplicationSettings(int value)
         {
             ApplicationSettings.GetInstance().EmulationMode = value;
         }
 
         private void SetInitialChecked()
         {
-            string initialTag = ApplicationSettings.GetInstance().EmulationMode;
-            if (initialTag != null && EmulationConstants.IsValidValue(initialTag))
+            int initialTag = ApplicationSettings.GetInstance().EmulationMode;
+            if (EmulationConstants.IsValidValue(initialTag))
             {
                 SetCheckedForTag(initialTag);
             }
@@ -56,10 +62,10 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
             }
         }
 
-        private void SetCheckedForTag(string tag)
+        private void SetCheckedForTag(int tag)
         {
             RadioButtonGroup.Children.OfType<RadioButton>().
-             Where(n => n.Tag.ToString().Equals(tag)).ToList().
+             Where(n => Int32.Parse(n.Tag.ToString()) == tag).ToList().
              ForEach(n => n.IsChecked = true);
         }
 

@@ -2,16 +2,33 @@
 {
     public class EmulationConstants
     {
-        //TODO make ints
-        public static readonly string ONLY_PROCESS_INJECTION = "ONLY_PROCESS_INJECTION";
-        public static readonly string ONLY_VIGEM = "ONLY_VIGEM";
-        public static readonly string VIGEM_AND_PROCESS_INJECTION = "VIGEM_AND_PROCESS_INJECTION";
+        public static readonly int ONLY_PROCESS_INJECTION = 1;
+        public static readonly int ONLY_VIGEM = 2;
+        public static readonly int VIGEM_AND_PROCESS_INJECTION = 3;
 
-        public static bool IsValidValue(string value)
+        public static bool IsValidValue(int value)
         {
-            return ONLY_VIGEM.Equals(value) ||
-                ONLY_PROCESS_INJECTION.Equals(value) ||
-                VIGEM_AND_PROCESS_INJECTION.Equals(value);
+            return ONLY_VIGEM == value ||
+                ONLY_PROCESS_INJECTION == value ||
+                VIGEM_AND_PROCESS_INJECTION == value;
+        }
+
+        public static string ToString(int value)
+        {
+            if (ONLY_VIGEM == value)
+            {
+                return "ONLY_VIGEM";
+            }
+            if (ONLY_PROCESS_INJECTION == value)
+            {
+                return "ONLY_PROCESS_INJECTION";
+            }
+            if (VIGEM_AND_PROCESS_INJECTION == value)
+            {
+                return "VIGEM_AND_PROCESS_INJECTION";
+            }
+
+            return "UNKNOWN";
         }
     }
 }

@@ -86,7 +86,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
 
         public bool EmulateController { get; set; } = false;
         
-        public string EmulationMode;
+        public int EmulationMode;
 
         public string RemotePlayPath;
 

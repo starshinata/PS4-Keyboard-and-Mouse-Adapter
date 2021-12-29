@@ -32,14 +32,19 @@ namespace PS4RemotePlayInterceptor
         // Injection
         public static InjectionMode InjectionMode = InjectionMode.Auto;
         // Emulation
-        public static string EmulationMode = null;
+        public static int EmulationMode = -1;
 
         // Delegate
         public static InterceptionDelegate Callback { get; set; }
 
-        public static int Inject(string emulationMode, string processName, string dllToInject)
+        public static int Inject(int emulationMode, string processName, string dllToInject)
         {
-            Log.Logger.Information("Injector.Inject {emulationMode:{0}, processName:{1},  dllToInject:{2}", emulationMode, processName, dllToInject);
+
+            Log.Logger.Information("Injector.Inject {emulationMode:{0}||{1}, processName:{2},  dllToInject:{3}",
+                emulationMode,
+                EmulationConstants.ToString(emulationMode),
+                processName,
+                dllToInject);
 
             EmulationMode = emulationMode;
 

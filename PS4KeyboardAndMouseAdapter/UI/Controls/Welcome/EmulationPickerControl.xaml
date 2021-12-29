@@ -6,14 +6,17 @@
              
              mc:Ignorable="d" 
              d:DesignHeight="350"
-             d:DesignWidth="680">
-    
+             d:DesignWidth="680"
+             
+             xmlns:welcome="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Controls.Welcome"
+             >
+
     <StackPanel>
 
         <TextBlock>
             Controller Emulation Settings
         </TextBlock>
-        
+
         <!-- spacer -->
         <TextBlock />
 
@@ -22,11 +25,11 @@
                 TextWrapping="Wrap">
                 ViGEm driver is not detected, for instructions goto vigem.
             </TextBlock>
-        
+
             <!-- spacer -->
             <TextBlock />
         </StackPanel>
-        
+
         <TextBlock
              TextWrapping="Wrap">
             Until v3.0.0 we used process injection to 'fake' a PS4 controller, with 3.0.0 we now have the option of 
@@ -41,7 +44,7 @@
              TextWrapping="Wrap">
             If you get random unexplained crashes the process injection might be the culprit.
         </TextBlock>
-        
+
         <!-- spacer -->
         <TextBlock />
 
@@ -57,7 +60,7 @@
         <StackPanel
             x:Name="RadioButtonGroup">
             <RadioButton
-                Tag="ONLY_VIGEM">
+                Tag="{x:Static welcome:EmulationPickerControl.ONLY_VIGEM}">
                 ViGEm and NO process injection for the bottom toolbar
             </RadioButton>
 
@@ -65,7 +68,7 @@
             <TextBlock />
 
             <RadioButton
-                Tag="VIGEM_AND_PROCESS_INJECTION">
+                Tag="{x:Static welcome:EmulationPickerControl.VIGEM_AND_PROCESS_INJECTION}">
                 ViGEm and process injection for the bottom toolbar
             </RadioButton>
 
@@ -81,7 +84,7 @@
             <TextBlock />
 
             <RadioButton
-                Tag="ONLY_PROCESS_INJECTION">
+                Tag="{x:Static welcome:EmulationPickerControl.ONLY_PROCESS_INJECTION}">
                 NO ViGEm, just process injection
             </RadioButton>
 
