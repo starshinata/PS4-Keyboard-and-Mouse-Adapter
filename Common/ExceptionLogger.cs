@@ -1,7 +1,7 @@
 ﻿using Serilog;
 using System;
 
-namespace Pizza
+namespace Pizza.Common
 {
     public class ExceptionLogger
     {

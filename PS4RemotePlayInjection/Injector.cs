@@ -1,5 +1,5 @@
 ﻿using EasyHook;
-using Pizza;
+using Pizza.Common;
 using Serilog;
 using System;
 using System.Diagnostics;
@@ -32,14 +32,16 @@ namespace PS4RemotePlayInterceptor
         // Injection
         public static InjectionMode InjectionMode = InjectionMode.Auto;
         // Emulation
-        public static bool EmulateController = true;
+        public static string EmulationMode = null;
 
         // Delegate
         public static InterceptionDelegate Callback { get; set; }
 
-        public static int Inject(string processName, string dllToInject)
+        public static int Inject(string emulationMode, string processName, string dllToInject)
         {
-            Log.Logger.Information("Injector.Inject processName " + processName);
+            Log.Logger.Information("Injector.Inject {emulationMode:{0}, processName:{1},  dllToInject:{2}", emulationMode, processName, dllToInject);
+
+            EmulationMode = emulationMode;
 
             // Find the process
             Process process = FindProcess(processName);
@@ -48,7 +50,6 @@ namespace PS4RemotePlayInterceptor
                 string error = string.Format("{0} not found in list of processes", processName);
                 Log.Error(error);
                 throw new InterceptorException(error);
-
             }
 
             // Full path to our dll file
@@ -84,8 +85,6 @@ namespace PS4RemotePlayInterceptor
                 //}
 
 
-
-
                 if (_ipcServer == null)
                 {
                     Log.Debug("Injector.Inject making ipcServer1");
@@ -110,7 +109,7 @@ namespace PS4RemotePlayInterceptor
             catch (Exception ex)
             {
                 string error = string.Format("Failed to setup IPC server: {0}", ex.Message);
-                ExceptionLogger.LogException(error , ex);
+                ExceptionLogger.LogException(error, ex);
                 throw new InterceptorException(error, ex);
             }
 
@@ -138,7 +137,7 @@ namespace PS4RemotePlayInterceptor
             catch (Exception ex)
             {
                 string error = string.Format("Failed to inject to target: {0}", ex.Message);
-                ExceptionLogger.LogException(error , ex);
+                ExceptionLogger.LogException(error, ex);
                 throw new InterceptorException(error, ex);
             }
         }
@@ -163,7 +162,9 @@ namespace PS4RemotePlayInterceptor
         {
             Process[] processes = Process.GetProcessesByName(processName);
             foreach (Process process in processes)
+            {
                 return process;
+            }
 
             return null;
         }

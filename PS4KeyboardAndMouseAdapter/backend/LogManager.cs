@@ -26,7 +26,7 @@ namespace PS4KeyboardAndMouseAdapter.backend
             levelSwitch = new LoggingLevelSwitch();
             levelSwitch.MinimumLevel = LogEventLevel.Information;
 
-            // 2021.012.23
+            // 2021.12.23
             // notes
             // * that fff in timestamp means miliseconds, but logs might not flush in sub seconds times.
             // * in theory max disk space should be 3 gb at worst (but thats unlikely unless we have very verbose logging)

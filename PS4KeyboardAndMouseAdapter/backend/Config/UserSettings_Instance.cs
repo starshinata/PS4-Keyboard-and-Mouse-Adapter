@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using SFML.Window;
+using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace PS4KeyboardAndMouseAdapter.Config
 {

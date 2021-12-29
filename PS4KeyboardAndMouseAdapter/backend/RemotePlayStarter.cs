@@ -1,4 +1,4 @@
-﻿using Pizza;
+﻿using Pizza.Common;
 using PS4KeyboardAndMouseAdapter.Config;
 using PS4RemotePlayInterceptor;
 using Serilog;

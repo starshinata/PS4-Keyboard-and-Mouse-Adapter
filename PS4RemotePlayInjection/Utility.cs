@@ -1,9 +1,8 @@
-﻿using System;
+﻿using mscoree;
+using Pizza.Common;
+using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using mscoree;
-using Pizza;
-using Serilog;
 
 namespace PS4RemotePlayInjection
 {

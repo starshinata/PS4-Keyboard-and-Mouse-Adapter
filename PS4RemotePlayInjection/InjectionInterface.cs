@@ -22,7 +22,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using Pizza;
+
+using Pizza.Common;
 using PS4RemotePlayInjection;
 using Serilog;
 using System;
@@ -152,12 +153,15 @@ namespace PS4RemotePlayInterceptor
 
         public bool ShouldEmulateController()
         {
-            return Injector.EmulateController;
+            return EmulationConstants.ONLY_PROCESS_INJECTION.Equals(Injector.EmulationMode);
         }
 
         public bool ShouldShowToolbar()
         {
-            bool x = UtilityData.IsToolBarVisible;
+            bool x = (EmulationConstants.ONLY_PROCESS_INJECTION.Equals(Injector.EmulationMode) ||
+                EmulationConstants.VIGEM_AND_PROCESS_INJECTION.Equals(Injector.EmulationMode)) &&
+                UtilityData.IsToolBarVisible;
+
             Log.Logger.Information("InjectionInterface.ShouldShowToolbar {0}", x);
             return x;
         }

@@ -1,8 +1,7 @@
 ﻿using Nefarius.ViGEm.Client;
 using Nefarius.ViGEm.Client.Targets;
-using Nefarius.ViGEm.Client.Targets.DualShock4;
+using Pizza.Common;
 using PS4KeyboardAndMouseAdapter;
-using PS4KeyboardAndMouseAdapter.Config;
 using Serilog;
 using System;
 using System.Diagnostics;

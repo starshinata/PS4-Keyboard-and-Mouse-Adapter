@@ -1,8 +1,7 @@
-﻿using Pizza;
-using Pizza.backend.vigem;
+﻿using Pizza.backend.vigem;
+using Pizza.Common;
 using PS4KeyboardAndMouseAdapter.Config;
 using System;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 

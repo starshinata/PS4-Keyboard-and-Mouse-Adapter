@@ -268,7 +268,6 @@
     <Compile Include="backend\DebugLogging\ProcessCommandLine.cs" />
     <Compile Include="backend\DebugLogging\ServiceComparerByName.cs" />
     <Compile Include="backend\DebugLogging\ProcessComparerByName.cs" />
-    <Compile Include="backend\EmulationConstants.cs" />
     <Compile Include="backend\LogManager.cs" />
     <Compile Include="backend\RemotePlayInstaller.cs" />
     <Compile Include="backend\vigem\GamepadConverter.cs" />
@@ -492,6 +491,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{7fbd8f7b-99da-400d-b5c6-5da010d8213f}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PS4RemotePlayInjection\PS4RemotePlayInjection.csproj">
       <Project>{d3d6f621-7cb9-4992-80ac-ff9745d974ec}</Project>
       <Name>PS4RemotePlayInjection</Name>

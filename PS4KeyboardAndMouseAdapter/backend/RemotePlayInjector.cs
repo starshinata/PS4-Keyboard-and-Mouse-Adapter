@@ -1,4 +1,5 @@
-﻿using PS4RemotePlayInjection;
+﻿using PS4KeyboardAndMouseAdapter.Config;
+using PS4RemotePlayInjection;
 using PS4RemotePlayInterceptor;
 using Serilog;
 using System;
@@ -23,7 +24,11 @@ namespace PS4KeyboardAndMouseAdapter
             try
             {
                 Thread.Sleep(3100);
-                int remotePlayProcessId = Injector.Inject(RemotePlayConstants.TARGET_PROCESS_NAME, RemotePlayConstants.INJECT_DLL_NAME);
+                int remotePlayProcessId = Injector.Inject(
+                    ApplicationSettings.GetInstance().EmulationMode,
+                    RemotePlayConstants.TARGET_PROCESS_NAME,
+                    RemotePlayConstants.INJECT_DLL_NAME);
+
                 Log.Logger.Information("RemotePlayInjector.Inject remotePlayProcessId " + remotePlayProcessId);
                 Process RemotePlayProcess = Process.GetProcessById(remotePlayProcessId);
                 RemotePlayProcess.EnableRaisingEvents = true;

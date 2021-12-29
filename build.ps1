@@ -86,6 +86,10 @@ function cleanup {
 }
 
 function dependencies-nuget {
+
+  nuget install Common\packages.config                     -OutputDirectory packages
+  error-on-bad-return-code	
+
   nuget install PS4KeyboardAndMouseAdapter\packages.config -OutputDirectory packages
   error-on-bad-return-code	
 
