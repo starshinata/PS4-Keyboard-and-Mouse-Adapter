@@ -42,7 +42,11 @@ $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER="code\PS4KeyboardAndMouseAdapt
 $PROJECT_DIRECTORY_PS4_REMOTE_PLAY_INJECTION="code\PS4RemotePlayInjection"
 $PROJECT_DIRECTORY_UNIT_TESTS="code\UnitTests"
 
-$DIRECTORY_PACKAGES="code\packages"
+## yes there are two package folders
+## /code/pacakges
+## /packages
+## for MSBUILD we care about code/packages
+$DIRECTORY_PACKAGES="code/packages"
 
 
 ################################
@@ -59,10 +63,10 @@ function add-build-date {
 function build-msbuild {
 
   echo "msbuild-ing"
-      
+
   MSBuild.exe PS4KeyboardAndMouseAdapter.sln `
     -p:Configuration=$MS_BUILD_CONFIG        `
-    -p:VersionNumber=$VERSION
+    -p:VersionNumber=$VERSION 
 
   if ( $LASTEXITCODE -ne 0) {
     echo "msbuild failed"
@@ -110,6 +114,7 @@ function dependencies-nuget {
 
   nuget install $PROJECT_DIRECTORY_UNIT_TESTS\packages.config                     -OutputDirectory $DIRECTORY_PACKAGES 
   error-on-bad-return-code	
+  
 }
 
 
@@ -270,6 +275,14 @@ function test-vstest {
     echo "vstest failed"
     exit $LASTEXITCODE 
   }
+
+   
+
+  ##manualBuild\NUnit.Console-3.13.0\bin\net35\nunit3-console.exe NunitTests\bin\Release\net461\NunitTests.dll 
+  ##if ( $LASTEXITCODE -ne 0) {
+  ##  echo "nunit tests failed"
+  ##  exit $LASTEXITCODE 
+  ##}
 
   echo "vstest done"
 }

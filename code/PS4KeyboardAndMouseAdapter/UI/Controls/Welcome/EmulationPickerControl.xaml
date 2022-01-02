@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              
              mc:Ignorable="d" 
-             d:DesignHeight="350"
+             d:DesignHeight="450"
              d:DesignWidth="680"
              
              xmlns:welcome="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Controls.Welcome"
@@ -20,10 +20,22 @@
         <!-- spacer -->
         <TextBlock />
 
-        <StackPanel>
+        <StackPanel
+            x:Name="Panel_VigemNotInstalled">
+
+            <TextBlock
+                FontWeight="Bold" 
+                Foreground="Red"
+                TextWrapping="Wrap">
+                ViGEm driver is not detected!
+            </TextBlock>
             <TextBlock
                 TextWrapping="Wrap">
-                ViGEm driver is not detected, for instructions goto 
+                For installation instructions goto
+            </TextBlock>
+            <TextBlock
+                TextWrapping="Wrap">
+                
                 <Hyperlink 
                     NavigateUri="https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/blob/master/documentation/vigem.md"
                     RequestNavigate="Hyperlink_RequestNavigate">
@@ -31,6 +43,14 @@
                 </Hyperlink>
             </TextBlock>
 
+            <!-- spacer -->
+            <TextBlock />
+
+            <TextBlock
+                Foreground="Red"
+                TextWrapping="Wrap">
+                Because we cannot detect ViGEm driver, the ViGEm options are disabled.
+            </TextBlock>
             <!-- spacer -->
             <TextBlock />
         </StackPanel>
@@ -58,12 +78,11 @@
             I advise you picking the recommended option unless you know what you are doing, especially if the above wall of text doesnt make sense.
         </TextBlock>
 
-
         <!-- spacer -->
         <TextBlock />
 
         <StackPanel
-            x:Name="RadioButtonGroup">
+            x:Name="Panel_RadioButtonGroup">
             <RadioButton
                 Tag="{x:Static welcome:EmulationPickerControl.ONLY_VIGEM}">
                 ViGEm and NO process injection for the bottom toolbar

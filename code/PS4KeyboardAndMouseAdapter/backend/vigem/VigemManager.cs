@@ -23,7 +23,32 @@ namespace Pizza.backend.vigem
 
         public object GamepadConverer { get; private set; }
 
-        public void listen()
+        public virtual bool IsVigemDriverInstalled()
+        {
+            Log.Information("VigemManager.IsVigemDriverInstalled");
+
+            try
+            {
+                start();
+                System.Threading.Thread.Sleep(1000);
+                stop();
+            }
+            catch (Nefarius.ViGEm.Client.Exceptions.VigemBusNotFoundException e)
+            {
+                ExceptionLogger.LogException("VigemManager.IsVigemDriverInstalled a", e);
+                return false;
+            }
+            catch (Exception e)
+            {
+                ExceptionLogger.LogException("VigemManager.IsVigemDriverInstalled b", e);
+                return false;
+            }
+
+            // didnt error, sooo hopefully ok
+            return true;
+        }
+
+        private void listen()
         {
             Log.Information("VigemManager.listen");
 
@@ -101,12 +126,20 @@ namespace Pizza.backend.vigem
             System.Threading.Thread.Sleep(revisedSleepDuration);
         }
 
-        public void start()
+        public void startAndListen()
         {
-            Log.Information("VigemManager.start");
+            Log.Information("VigemManager.startAndListen");
             start_ViGEm();
             start_controller();
             listen();
+        }
+
+        public void start()
+        {
+            Log.Information("VigemManager.startAndListen");
+            start_ViGEm();
+            start_controller();
+
         }
 
         private void start_controller()

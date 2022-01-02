@@ -1,9 +1,8 @@
-using System;
-using System.IO;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using PS4KeyboardAndMouseAdapter.Config;
+using System.IO;
 
 namespace UnitTests.KeyboardAndMouseAdapter.Config.UserSettingsTest
 {

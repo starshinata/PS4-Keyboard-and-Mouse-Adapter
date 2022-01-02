@@ -1,4 +1,5 @@
-﻿using Pizza.Common;
+﻿using Pizza.backend.vigem;
+using Pizza.Common;
 using PS4KeyboardAndMouseAdapter.Config;
 using Serilog;
 using System;
@@ -16,15 +17,21 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
         public static readonly int ONLY_VIGEM = EmulationConstants.ONLY_VIGEM;
         public static readonly int VIGEM_AND_PROCESS_INJECTION = EmulationConstants.VIGEM_AND_PROCESS_INJECTION;
 
+        private bool IsVigemInstalled = false;
+
         public EmulationPickerControl()
         {
+
             InitializeComponent();
-            SetInitialChecked();
+
+            VigemManager vigemManager = new VigemManager();
+            ShouldShowVigemInstallWarning(vigemManager);
+            SetInitialRadioChecked();
         }
 
-        private int GetValue()
+        public int GetValue()
         {
-            RadioButton checkedRadioButton = RadioButtonGroup.Children.OfType<RadioButton>().
+            RadioButton checkedRadioButton = Panel_RadioButtonGroup.Children.OfType<RadioButton>().
                 Where(n => n.IsChecked == true).First();
 
             if (checkedRadioButton != null && checkedRadioButton.Tag != null)
@@ -56,25 +63,58 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
             ApplicationSettings.GetInstance().EmulationMode = value;
         }
 
-        private void SetInitialChecked()
+        public void SetInitialRadioChecked()
         {
-            int initialTag = ApplicationSettings.GetInstance().EmulationMode;
-            if (EmulationConstants.IsValidValue(initialTag))
+            // if vigem is installed there are no restrictions
+            // use the last known setting (assuming the are valid)
+            if (IsVigemInstalled)
             {
-                SetCheckedForTag(initialTag);
+                int initialTag = ApplicationSettings.GetInstance().EmulationMode;
+                if (EmulationConstants.IsValidValue(initialTag))
+                {
+                    SetRadioCheckedForTag(initialTag);
+                }
+                else
+                {
+                    SetRadioCheckedForTag(EmulationConstants.VIGEM_AND_PROCESS_INJECTION);
+                }
             }
+            // if vigem isnt installed then we can only do process injection
             else
             {
-                SetCheckedForTag(EmulationConstants.VIGEM_AND_PROCESS_INJECTION);
+                SetRadioCheckedForTag(EmulationConstants.ONLY_PROCESS_INJECTION);
             }
         }
 
-        private void SetCheckedForTag(int tag)
+        private void SetRadioCheckedForTag(int tag)
         {
-            RadioButtonGroup.Children.OfType<RadioButton>().
+            Panel_RadioButtonGroup.Children.OfType<RadioButton>().
              Where(n => Int32.Parse(n.Tag.ToString()) == tag).ToList().
              ForEach(n => n.IsChecked = true);
         }
 
+        public void ShouldShowVigemInstallWarning(VigemManager vigemManager)
+        {
+            Panel_VigemNotInstalled.Visibility = UIConstants.VISIBILITY_COLLAPSED;
+
+            IsVigemInstalled = vigemManager.IsVigemDriverInstalled();
+            if (!IsVigemInstalled)
+            {
+                Panel_VigemNotInstalled.Visibility = UIConstants.VISIBILITY_VISIBLE;
+            }
+        }
+
+
+        #region testonly
+        public bool testonly_isVisible_Panel_VigemNotInstalled()
+        {
+            return Panel_VigemNotInstalled.Visibility == UIConstants.VISIBILITY_VISIBLE;
+        }
+
+        public void testonly_setIsVigemInstalled(bool value)
+        {
+            IsVigemInstalled = value;
+        }
+        #endregion
     }
 }

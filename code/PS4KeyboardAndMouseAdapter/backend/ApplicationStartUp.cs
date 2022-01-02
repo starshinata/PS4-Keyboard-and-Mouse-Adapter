@@ -18,6 +18,7 @@ namespace PS4KeyboardAndMouseAdapter.backend
             woop();
         }
 
+        //TODO need better name
         public static void woop()
         {
             try
@@ -27,7 +28,7 @@ namespace PS4KeyboardAndMouseAdapter.backend
 
                 System.Threading.Thread.Sleep(1000);
                 VigemManager vig = new VigemManager();
-                vig.start();
+                vig.startAndListen();
                 InstanceSettings.GetInstance().SetVigemInjector(vig);
 
             }
