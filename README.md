@@ -20,7 +20,7 @@ Main Adapter <br>
 
 
 ## DOWNLOAD
-:rocket: Click Download!--> [here (v2.2.2)](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/2.2.2/application-setup.exe)
+:rocket: Click Download!--> [here (v2.2.3)](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/2.2.3/application-setup.exe)
 
 
 ## Troubleshooting
@@ -62,5 +62,6 @@ But some popular topics are
 - [PS4RemotePlayInterceptor](https://github.com/komefai/PS4RemotePlayInterceptor) a module by Komefai used in PS4Macro
 - [EasyHook](https://easyhook.github.io) - The best tool for Windows API hooking. Works flawlessly - from the assembly injection, to the hook trampoline code. ~~I haven't had a single problem with it~~ I had one but that doesn't make EasyHook any less cool
 - [Jays2Kings/DS4Windows](https://github.com/Jays2Kings/DS4Windows) - don't need to explain that one
+- [Ryochan7/DS4Windows](https://github.com/Ryochan7/DS4Windows) - don't need to explain that one
 - [soulehshaikh9](https://github.com/soulehshaikh99/self-signed-certificate-generator) for pfx certificate generator
 
