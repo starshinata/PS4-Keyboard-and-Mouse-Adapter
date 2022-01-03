@@ -14,7 +14,6 @@ namespace PS4KeyboardAndMouseAdapter
 
         private void OnAppExit(object sender, ExitEventArgs e)
         {
-
             Log.Debug("App OnAppExit");
             InstanceSettings.GetInstance().EnableMouseInput = false;
 
@@ -24,8 +23,7 @@ namespace PS4KeyboardAndMouseAdapter
             UserSettings.Save(UserSettings.PROFILE_PREVIOUS);
             ApplicationSettings.Save();
 
-            VigemManager vig = InstanceSettings.GetInstance().GetVigemInjector();
-            vig.stop();
+            VigemManager.Stop(InstanceSettings.GetInstance());
 
             //TODO: hardcoded, fix.
             //Injector.FindProcess("RemotePlay").Kill();
@@ -44,7 +42,8 @@ namespace PS4KeyboardAndMouseAdapter
             // cause not having a cursor is a pain in the ass
             Utility.ShowCursor(true);
 
-            ApplicationStartUp.OnAppStartup();
+            ApplicationSettings.Load();
+            UserSettings.LoadPrevious();
 
             AppUpdater appUpdater = new AppUpdater();
 

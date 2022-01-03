@@ -81,7 +81,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
             DebugDump.Dump();
 
             Window window = System.Windows.Application.Current.MainWindow;
-            ((MainWindowView)window).WelcomeStep1Done();
+            ((MainWindowView)window).WelcomeStep1Done_SetupChecked();
 
             //element defined in xaml
             emulationPickerControl.GetValueAndSaveValueInApplicationSettings();

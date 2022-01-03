@@ -12,41 +12,15 @@ namespace Pizza.backend.vigem
 
     //thanks https://github.com/Ryochan7/DS4Windows/blob/2f1d8d353253d7f2ab7edadd70888658f1dacd7c/DS4Windows/DS4Control/ControlService.cs
 
-    public class VigemManager
+    public class VigemInternals
     {
 
         public static ushort VENDOR_ID = (ushort)HidConstants.VENDOR_ID_SONY;
         public static ushort PRODUCT_ID = (ushort)HidConstants.PRODUCT_ID_PS4_CONTROLLER_A;
 
         private ViGEmClient vigemClient;
+
         private IDualShock4Controller controller;
-
-        public object GamepadConverer { get; private set; }
-
-        public virtual bool IsVigemDriverInstalled()
-        {
-            Log.Information("VigemManager.IsVigemDriverInstalled");
-
-            try
-            {
-                start();
-                System.Threading.Thread.Sleep(1000);
-                stop();
-            }
-            catch (Nefarius.ViGEm.Client.Exceptions.VigemBusNotFoundException e)
-            {
-                ExceptionLogger.LogException("VigemManager.IsVigemDriverInstalled a", e);
-                return false;
-            }
-            catch (Exception e)
-            {
-                ExceptionLogger.LogException("VigemManager.IsVigemDriverInstalled b", e);
-                return false;
-            }
-
-            // didnt error, sooo hopefully ok
-            return true;
-        }
 
         private void listen()
         {

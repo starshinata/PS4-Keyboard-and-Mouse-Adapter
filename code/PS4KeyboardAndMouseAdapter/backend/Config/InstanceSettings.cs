@@ -31,7 +31,8 @@ namespace PS4KeyboardAndMouseAdapter.Config
         private GamepadProcessor gamepadprocessor = null;
 
         private LogManager logManager = null;
-        private VigemManager vigemInjector = null;
+
+        private VigemInternals vigemInternals = null;
 
         //////////////////////////////////////////////////////////////////////
 
@@ -73,14 +74,14 @@ namespace PS4KeyboardAndMouseAdapter.Config
             Log.Error("InstanceSettings.SetRemotePlayProcess (UtilityData.RemotePlayProcess) get d " + Process.GetCurrentProcess().Id);
         }
 
-        public VigemManager GetVigemInjector()
+        public VigemInternals GetVigemInternals()
         {
-            return vigemInjector;
+            return vigemInternals;
         }
 
-        public void SetVigemInjector(VigemManager value)
+        public void SetVigemInternals(VigemInternals value)
         {
-            vigemInjector = value;
+            vigemInternals = value;
         }
     }
 }

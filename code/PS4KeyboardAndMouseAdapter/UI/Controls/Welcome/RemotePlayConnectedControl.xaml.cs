@@ -13,7 +13,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Window window = Application.Current.MainWindow;
-            ((MainWindowView)window).WelcomeDone();
+            ((MainWindowView)window).WelcomeStep3Done_ConnectAdapter();
         }
     }
 }

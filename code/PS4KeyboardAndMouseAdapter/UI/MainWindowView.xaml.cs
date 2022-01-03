@@ -1,4 +1,6 @@
-﻿using PS4KeyboardAndMouseAdapter.Config;
+﻿using Pizza.backend.vigem;
+using Pizza.Common;
+using PS4KeyboardAndMouseAdapter.Config;
 using PS4KeyboardAndMouseAdapter.UI.Pages;
 using System;
 using System.Windows;
@@ -57,17 +59,24 @@ namespace PS4KeyboardAndMouseAdapter
             }
         }
 
-        public void WelcomeStep1Done()
+        public void WelcomeStep1Done_SetupChecked()
         {
             pageWelcomePage.CompleteStep1();
         }
-        
-        public void WelcomeRemotePlayLaunched() {
+
+        public void WelcomeStep2Done_RemotePlayStarted()
+        {
             pageWelcomePage.CompleteStep2();
         }
-        
-        public void WelcomeDone()
+
+        public void WelcomeStep3Done_ConnectAdapter()
         {
+            if (ApplicationSettings.GetInstance().EmulationMode == EmulationConstants.ONLY_VIGEM ||
+                ApplicationSettings.GetInstance().EmulationMode == EmulationConstants.VIGEM_AND_PROCESS_INJECTION)
+            {
+                VigemManager.Start();
+            }
+
             RefreshRemotePlayProcess();
 
             ApplicationSettings.Save();
@@ -89,5 +98,6 @@ namespace PS4KeyboardAndMouseAdapter
             // Refresh to ensure advancedMappingsPage isnt blank
             advancedMappingsPage.RefreshButtonContents();
         }
+
     }
 }

@@ -259,7 +259,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="backend\ApplicationStartUp.cs" />
     <Compile Include="backend\AppUpdater.cs" />
     <Compile Include="backend\AudioManager.cs" />
     <Compile Include="backend\DebugLogging\DebugDump.cs" />
@@ -283,7 +282,8 @@
     <Compile Include="backend\PlaystationControllerDetector.cs" />
     <Compile Include="backend\ProcessUtil.cs" />
     <Compile Include="backend\RemotePlayConstants.cs" />
-    <Compile Include="backend\vigem\VigemManager.cs" />
+    <Compile Include="backend\vigem\VigemManger.cs" />
+    <Compile Include="backend\vigem\VigemInternals.cs" />
     <Compile Include="backend\DS4State.cs" />
     <Compile Include="UI\Controls\Common\LogControl.xaml.cs">
       <DependentUpon>LogControl.xaml</DependentUpon>
