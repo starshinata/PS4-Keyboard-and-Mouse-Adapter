@@ -135,6 +135,7 @@
     <Compile Include="KeyboardAndMouseAdapter\backend\Config\UserSettings\IsLegacyConfigTest.cs" />
     <Compile Include="KeyboardAndMouseAdapter\UI\Controls\Welcome\EmulationPickerControl\SetInitialRadioChecked\WhenVigemInstalledTest.cs" />
     <Compile Include="KeyboardAndMouseAdapter\UI\Controls\Welcome\EmulationPickerControl\SetInitialRadioChecked\WhenVigemNotInstalledTest.cs" />
+    <Compile Include="KeyboardAndMouseAdapter\UI\Controls\Welcome\EmulationPickerControl\DisableUnavailableRadioButtonsTest.cs" />
     <Compile Include="KeyboardAndMouseAdapter\UI\Controls\Welcome\EmulationPickerControl\ShouldShowVigemInstallWarningTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

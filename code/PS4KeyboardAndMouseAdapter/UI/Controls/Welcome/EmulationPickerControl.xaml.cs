@@ -3,6 +3,7 @@ using Pizza.Common;
 using PS4KeyboardAndMouseAdapter.Config;
 using Serilog;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Controls;
@@ -21,12 +22,23 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
 
         public EmulationPickerControl()
         {
-
             InitializeComponent();
 
             VigemManager vigemManager = new VigemManager();
             ShouldShowVigemInstallWarning(vigemManager);
             SetInitialRadioChecked();
+            DisableUnavailableRadioButtons();
+        }
+
+        public void DisableUnavailableRadioButtons()
+        {
+            // if vigem isnt installed then we can only do process injection
+            // so disable the other options
+            if (!IsVigemInstalled)
+            {
+                SetRadioDisabledForTag(VIGEM_AND_PROCESS_INJECTION);
+                SetRadioDisabledForTag(ONLY_VIGEM);
+            }
         }
 
         public int GetValue()
@@ -93,6 +105,13 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
              ForEach(n => n.IsChecked = true);
         }
 
+        private void SetRadioDisabledForTag(int tag)
+        {
+            Panel_RadioButtonGroup.Children.OfType<RadioButton>().
+             Where(n => Int32.Parse(n.Tag.ToString()) == tag).ToList().
+             ForEach(n => n.IsEnabled = false);
+        }
+
         public void ShouldShowVigemInstallWarning(VigemManager vigemManager)
         {
             Panel_VigemNotInstalled.Visibility = UIConstants.VISIBILITY_COLLAPSED;
@@ -106,6 +125,12 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
 
 
         #region testonly
+
+        public List<RadioButton> testonly_getRadioButtons()
+        {
+            return Panel_RadioButtonGroup.Children.OfType<RadioButton>().ToList();
+        }
+
         public bool testonly_isVisible_Panel_VigemNotInstalled()
         {
             return Panel_VigemNotInstalled.Visibility == UIConstants.VISIBILITY_VISIBLE;
@@ -115,6 +140,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
         {
             IsVigemInstalled = value;
         }
+
         #endregion
     }
 }
