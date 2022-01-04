@@ -352,9 +352,10 @@ MigrationBackup/
 ###############
 .idea
 
-/SquirrelReleases
-/PS4KeyboardAndMouseAdapter/RemotePlayInstaller.exe
+/code/package
+/code/PS4KeyboardAndMouseAdapter/Resources/BuildDate.txt
 /nuget/PS4KeyboardAndMouseAdapter.nuspec
 /manualBuild/nuget/PS4KeyboardAndMouseAdapter.nuspec
+
 /packages
-/PS4KeyboardAndMouseAdapter/Resources/BuildDate.txt
+/SquirrelReleases
