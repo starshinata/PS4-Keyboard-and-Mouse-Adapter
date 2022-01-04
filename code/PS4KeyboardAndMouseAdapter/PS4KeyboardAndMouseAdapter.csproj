@@ -288,8 +288,11 @@
     <Compile Include="UI\Controls\Common\LogControl.xaml.cs">
       <DependentUpon>LogControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Controls\MiscellaneousSettingsControl.xaml.cs">
-      <DependentUpon>MiscellaneousSettingsControl.xaml</DependentUpon>
+    <Compile Include="UI\Controls\MiscellaneousSettingPage\RemotePlayToolbarSettingsControl.xaml.cs">
+      <DependentUpon>RemotePlayToolbarSettingsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\MiscellaneousSettingPage\MiscellaneousSettingsGeneralControl.xaml.cs">
+      <DependentUpon>MiscellaneousSettingsGeneralControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="backend\VersionUtil.cs" />
     <Compile Include="backend\WindowUtil.cs" />
@@ -366,6 +369,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="UI\Controls\MiscellaneousSettingPage\RemotePlayToolbarSettingsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UI\Controls\Welcome\EmulationPickerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -399,7 +406,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Controls\MiscellaneousSettingsControl.xaml">
+    <Page Include="UI\Controls\MiscellaneousSettingPage\MiscellaneousSettingsGeneralControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

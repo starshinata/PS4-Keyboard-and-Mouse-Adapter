@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Pizza.Common;
 using PS4KeyboardAndMouseAdapter.Config;
 using PS4KeyboardAndMouseAdapter.UI.Controls.Welcome;
 using System.Collections.Generic;

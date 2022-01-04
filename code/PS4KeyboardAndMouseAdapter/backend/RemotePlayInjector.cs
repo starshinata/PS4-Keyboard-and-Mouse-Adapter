@@ -1,4 +1,5 @@
-﻿using PS4KeyboardAndMouseAdapter.Config;
+﻿using Pizza.Common;
+using PS4KeyboardAndMouseAdapter.Config;
 using PS4RemotePlayInjection;
 using PS4RemotePlayInterceptor;
 using Serilog;
@@ -16,7 +17,15 @@ namespace PS4KeyboardAndMouseAdapter
 
         public RemotePlayInjector()
         {
-            Injector.FindProcess(RemotePlayConstants.TARGET_PROCESS_NAME)?.Kill();
+            try
+            {
+                Injector.FindProcess(RemotePlayConstants.TARGET_PROCESS_NAME)?.Kill();
+            }
+            catch (Exception e)
+            {
+                ExceptionLogger.LogException("RemotePlayInjector.init error", e);
+
+            }
         }
 
         private void Inject(GamepadProcessor gamepadProcessor)
@@ -40,8 +49,7 @@ namespace PS4KeyboardAndMouseAdapter
             }
             catch (Exception e)
             {
-                Log.Logger.Error("RemotePlayInjector.Inject error: " + e.Message);
-                Log.Logger.Error(e.StackTrace);
+                ExceptionLogger.LogException("RemotePlayInjector.Inject error", e);
             }
         }
 
@@ -59,9 +67,7 @@ namespace PS4KeyboardAndMouseAdapter
             }
             catch (Exception e)
             {
-                Log.Logger.Error("RemotePlayInjector.OpenRemotePlayAndInject() fatal error" + e.Message);
-                Log.Logger.Error("" + e.GetType());
-                Log.Logger.Error(e.StackTrace);
+                ExceptionLogger.LogException("RemotePlayInjector.OpenRemotePlayAndInject() fatal error", e);
 
                 System.Windows.MessageBox.Show(
                     "Fatal error, program closing",
