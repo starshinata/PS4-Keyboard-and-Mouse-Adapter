@@ -64,7 +64,7 @@ namespace PS4KeyboardAndMouseAdapter.backend
             }
             catch (Exception ex)
             {
-                Log.Error("Shortcut deletion failed:" + ex.Message);
+                ExceptionLogger.LogException("AppUpdater.RemoveNewShortcuts Shortcut deletion failed", ex);
             }
         }
 

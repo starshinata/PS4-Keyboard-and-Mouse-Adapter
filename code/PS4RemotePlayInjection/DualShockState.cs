@@ -22,6 +22,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using Pizza.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -501,7 +502,9 @@ namespace PS4RemotePlayInterceptor
                     }
                 }
             }
-            catch { }
+            catch (Exception e) {
+                ExceptionLogger.LogException("DualShockState failed L506", e);
+            }
         }
 
         /// <summary>

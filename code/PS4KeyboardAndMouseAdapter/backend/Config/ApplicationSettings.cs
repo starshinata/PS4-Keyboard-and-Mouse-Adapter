@@ -45,7 +45,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
             }
             catch (Exception ex)
             {
-                ExceptionLogger.LogException("ApplicationSettings.Load failed: ", ex);
+                ExceptionLogger.LogException("ApplicationSettings.Load failed", ex);
             }
 
 

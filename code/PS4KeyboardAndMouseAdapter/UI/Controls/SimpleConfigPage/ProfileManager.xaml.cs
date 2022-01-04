@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using Pizza.Common;
 using PS4KeyboardAndMouseAdapter.Config;
 using Serilog;
 
@@ -33,7 +34,8 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
             }
             catch (JsonReaderException ex)
             {
-                Log.Logger.Error("HandleLoad failed: json read  exception " + ex.Message);
+                ExceptionLogger.LogException("ProfileManager.HandleLoad failed: json read exception", ex);
+
                 System.Windows.MessageBox.Show("That file didnt appear to be json!",
                     "Error reading file",
                     (MessageBoxButton)MessageBoxButtons.OK,
@@ -41,9 +43,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
             }
             catch (Exception ex)
             {
-                Log.Logger.Error("HandleLoad failed: " + ex.Message);
-                Log.Logger.Error(ex.GetType().ToString());
-                Log.Logger.Error(ex.StackTrace);
+                ExceptionLogger.LogException("ProfileManager.HandleLoad failed: unexpected exception", ex); 
             }
         }
 
@@ -70,9 +70,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls
             }
             catch (Exception ex)
             {
-                Log.Logger.Error("HandleSave failed: " + ex.Message);
-                Log.Logger.Error(ex.GetType().ToString());
-                Log.Logger.Error(ex.StackTrace);
+                ExceptionLogger.LogException("ProfileManager.HandleSave failed", ex);
             }
         }
 

@@ -24,7 +24,6 @@ namespace PS4KeyboardAndMouseAdapter
             catch (Exception e)
             {
                 ExceptionLogger.LogException("RemotePlayInjector.init error", e);
-
             }
         }
 

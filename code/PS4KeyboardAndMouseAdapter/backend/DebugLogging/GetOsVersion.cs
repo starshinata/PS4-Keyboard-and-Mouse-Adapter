@@ -1,4 +1,5 @@
-﻿using Serilog;
+﻿using Pizza.Common;
+using Serilog;
 using System;
 using System.Diagnostics;
 
@@ -45,8 +46,7 @@ namespace PS4KeyboardAndMouseAdapter.backend.DebugLogging
             }
             catch (Exception e)
             {
-                StaticLogger.Error("GetOsVersion.Get() failed: " + e.Message);
-                StaticLogger.Error(e.StackTrace);
+                ExceptionLogger.LogException("GetOsVersion.Get() failed", e);
                 return "unknown";
             }
         }

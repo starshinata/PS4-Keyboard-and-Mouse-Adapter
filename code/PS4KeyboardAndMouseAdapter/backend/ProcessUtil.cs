@@ -1,4 +1,5 @@
-﻿using PS4KeyboardAndMouseAdapter.Config;
+﻿using Pizza.Common;
+using PS4KeyboardAndMouseAdapter.Config;
 using Serilog;
 using System;
 using System.Diagnostics;
@@ -40,10 +41,7 @@ namespace PS4KeyboardAndMouseAdapter
             }
             catch (Exception e)
             {
-                Log.Error("ProcessUtil.IsInForeground Error: " + e.Message);
-                Log.Error(e.GetType().ToString());
-                Log.Error(e.StackTrace);
-
+                ExceptionLogger.LogException("ProcessUtil.IsInForeground failed", e);
                 return false;
             }
         }

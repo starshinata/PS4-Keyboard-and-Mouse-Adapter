@@ -71,7 +71,7 @@ namespace PS4KeyboardAndMouseAdapter
             }
             catch (Exception e)
             {
-                Log.Logger.Error("Cannot open RemotePlay: " + e.Message);
+                ExceptionLogger.LogException("RemotePlayStarter.OpenRemotePlayInternal Cannot open RemotePlay", e);
             }
 
             return false;

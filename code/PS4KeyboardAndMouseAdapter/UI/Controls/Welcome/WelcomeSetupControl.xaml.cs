@@ -109,9 +109,7 @@ namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
             }
             catch (Exception ex)
             {
-                Log.Logger.Error("HandleLoad failed: " + ex.Message);
-                Log.Logger.Error(ex.GetType().ToString());
-                Log.Logger.Error(ex.StackTrace);
+                ExceptionLogger.LogException("WelcomeSetupControl.Handle_SetRemoteRemotePlayPath failed", ex);
             }
         }
 

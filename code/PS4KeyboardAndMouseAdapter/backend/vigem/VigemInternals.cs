@@ -55,7 +55,7 @@ namespace Pizza.backend.vigem
                     }
                     catch (Exception ex)
                     {
-                        ExceptionLogger.LogException("VigemManager.listen L49", ex);
+                        ExceptionLogger.LogException("VigemManager.listen L58", ex);
                     }
 
                     SleepTimer.Restart();

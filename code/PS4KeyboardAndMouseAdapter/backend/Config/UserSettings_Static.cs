@@ -122,13 +122,13 @@ namespace PS4KeyboardAndMouseAdapter.Config
                     }
                     catch (Exception ex)
                     {
-                        ExceptionLogger.LogException("UserSettings.IsLegacyConfig error(a): " , ex);
+                        ExceptionLogger.LogException("UserSettings.IsLegacyConfig error(a)" , ex);
                     }
                 }
             }
             catch (Exception ex)
             {
-                ExceptionLogger.LogException("UserSettings.IsLegacyConfig error(b): " , ex);
+                ExceptionLogger.LogException("UserSettings.IsLegacyConfig error(b)" , ex);
             }
 
             return true;
@@ -156,7 +156,7 @@ namespace PS4KeyboardAndMouseAdapter.Config
             }
             catch (Exception ex)
             {
-                ExceptionLogger.LogException("UserSettings.LoadWithCatch failed: " , ex);
+                ExceptionLogger.LogException("UserSettings.LoadWithCatch failed" , ex);
             }
         }
 

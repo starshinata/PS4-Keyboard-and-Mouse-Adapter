@@ -39,7 +39,7 @@ namespace PS4KeyboardAndMouseAdapter.backend.DebugLogging
             }
             catch (Exception ex)
             {
-                ExceptionLogger.LogException("DebugDump.Dump failed " , ex);
+                ExceptionLogger.LogException("DebugDump.Dump failed", ex);
             }
         }
 
@@ -58,7 +58,7 @@ namespace PS4KeyboardAndMouseAdapter.backend.DebugLogging
             }
             catch (Exception ex)
             {
-                Log.Error("DebugDump.Dump_ApplicationFolder failed " + ex.Message);
+                ExceptionLogger.LogException("DebugDump.Dump_ApplicationFolder failed", ex);
             }
         }
 
@@ -151,7 +151,7 @@ namespace PS4KeyboardAndMouseAdapter.backend.DebugLogging
             }
             catch (Exception ex)
             {
-                Log.Error("DebugDump.Dump_RemotePlay failed" + ex.Message);
+                ExceptionLogger.LogException("DebugDump.Dump_RemotePlay failed", ex);
             }
 
             Log.Debug("remote play version " + remotePlayVersion);
