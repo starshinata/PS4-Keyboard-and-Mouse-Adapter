@@ -1,16 +1,15 @@
-﻿<UserControl x:Class="PS4KeyboardAndMouseAdapter.UI.Controls.MiscellaneousSettings.MiscellaneousSettingsGeneralControl"
+﻿<UserControl
+    x:Class="PS4KeyboardAndMouseAdapter.UI.Controls.MiscellaneousSettings.MiscellaneousSettingsGeneralControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 
     d:DesignHeight="360"
-    d:DesignWidth="700"
+    d:DesignWidth="640"
     mc:Ignorable="d"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 
-    
     xmlns:controls="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Controls"
-    xmlns:wpfspark="clr-namespace:WPFSpark;assembly=WPFSpark"
     >
 
     <Grid >
@@ -27,21 +26,19 @@
 
             <!-- Heading 30px -->
             <!-- Regular line 21px -->
-            <!-- subtext line 15px -->
             <!-- Toggle 30px -->
-
 
             <!-- row 0 -->
             <RowDefinition Height="30px" />
             <RowDefinition Height="21px" />
             <RowDefinition Height="30px" />
-            <RowDefinition Height="15px" />
+            <RowDefinition Height="42px" />
             <RowDefinition Height="21px" />
 
             <!-- row 5 -->
             <RowDefinition Height="21px" />
-            <RowDefinition Height="15px" />
-            <RowDefinition Height="15px" />
+            <RowDefinition Height="21px" />
+            <RowDefinition Height="21px" />
             
         </Grid.RowDefinitions>
 
@@ -76,8 +73,8 @@
             Grid.Row="3"
             Grid.Column="0"
             Grid.ColumnSpan="5"
-            FontSize="10"
             Text="Sometimes when you have enabled mouse input for RemotePlay, then sometimes you can drag the RemotePlay window offscreen"
+            TextWrapping="Wrap"
             />
 
         <!-- row 4 intentionally empty -->
@@ -96,18 +93,14 @@
         <TextBlock 
             Grid.Row="6"
             Grid.ColumnSpan="5"
-            FontSize="10"
             Text="Because RemotePlay always seems reset to 100% volume on restart"
             />
 
         <TextBlock 
             Grid.Row="7"
             Grid.ColumnSpan="5"
-            FontSize="10"
             Text="By editing the value of the slider, the volume will be remembered when you restart RemotePlay"
             />
-
-        <!-- row 8 intentionally empty -->
 
     </Grid>
 </UserControl>

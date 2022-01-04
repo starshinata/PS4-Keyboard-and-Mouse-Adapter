@@ -6,7 +6,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 
     d:DesignHeight="150"
-    d:DesignWidth="700"
+    d:DesignWidth="680"
     mc:Ignorable="d"
 
     xmlns:wpfspark="clr-namespace:WPFSpark;assembly=WPFSpark"
@@ -57,12 +57,13 @@
         <TextBlock 
             Foreground="Red"
             Text="'Show RemotePlay toolbar' is disabled because you did not select an emulation option with process injection"
+            TextWrapping="Wrap"
             x:Name="Element_TextBlock_Warning"
             />
         
         <TextBlock 
-            FontSize="10"
             Text="By default we disable this bar as it can be annoying - it will appear if you move your mouse over the remote play window"
+            TextWrapping="Wrap"
             x:Name="Element_TextBlock_Description"
             />
 

@@ -12,7 +12,7 @@
         VerticalScrollBarVisibility="Auto"
         x:Name="scrollViewer">
 
-        <StackPanel>
+        <StackPanel Width="650">
             
             <page:MiscellaneousSettingsGeneralControl/>
             
