@@ -1,11 +1,11 @@
 ﻿using Gma.System.MouseKeyHook;
-using PS4KeyboardAndMouseAdapter.Config;
+using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using PS4RemotePlayInterceptor;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Forms;
 
-namespace PS4KeyboardAndMouseAdapter
+namespace Pizza.KeyboardAndMouseAdapter.Backend
 {
     class MouseWheelProcessor
     {

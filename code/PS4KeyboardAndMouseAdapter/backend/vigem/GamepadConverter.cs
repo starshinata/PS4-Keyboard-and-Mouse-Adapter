@@ -3,7 +3,7 @@ using Nefarius.ViGEm.Client.Targets.DualShock4;
 
 using PS4RemotePlayInterceptor;
 
-namespace Pizza.backend.vigem
+namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
 {
     public class GamepadConverter
     {

@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.IO;
 
-namespace PS4KeyboardAndMouseAdapter
+namespace Pizza.KeyboardAndMouseAdapter.Backend
 {
     public class LogUtility
     {

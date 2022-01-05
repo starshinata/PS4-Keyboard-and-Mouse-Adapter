@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace PS4KeyboardAndMouseAdapter.UI.Controls
+namespace Pizza.KeyboardAndMouseAdapter.UI.Controls
 {
 
     public partial class SliderV : UserControl

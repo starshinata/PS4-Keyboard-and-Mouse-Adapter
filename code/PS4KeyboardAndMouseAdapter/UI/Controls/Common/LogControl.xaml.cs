@@ -1,12 +1,12 @@
-﻿using PS4KeyboardAndMouseAdapter.backend;
-using PS4KeyboardAndMouseAdapter.Config;
+﻿using Pizza.KeyboardAndMouseAdapter.Backend;
+using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using Serilog;
 using Serilog.Events;
 using System;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace PS4KeyboardAndMouseAdapter.UI.Controls.Common
+namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.Common
 {
     public partial class LogControl : System.Windows.Controls.UserControl
     {

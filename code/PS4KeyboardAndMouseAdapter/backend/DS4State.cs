@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Pizza.backend
+namespace Pizza.KeyboardAndMouseAdapter.Backend
 {
     //thanks https://github.com/Ryochan7/DS4Windows/blob/jay/DS4Windows/DS4Library/DS4State.cs
 

@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Net;
 
-namespace PS4KeyboardAndMouseAdapter
+namespace Pizza.KeyboardAndMouseAdapter.Backend
 {
     public class RemotePlayInstaller
     {

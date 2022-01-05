@@ -1,6 +1,6 @@
-﻿using PS4KeyboardAndMouseAdapter.Config;
+﻿using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 
-namespace PS4KeyboardAndMouseAdapter
+namespace Pizza.KeyboardAndMouseAdapter.Backend
 {
     // The two methods in this class are intentionally similar
     // But notice the different input parameter type

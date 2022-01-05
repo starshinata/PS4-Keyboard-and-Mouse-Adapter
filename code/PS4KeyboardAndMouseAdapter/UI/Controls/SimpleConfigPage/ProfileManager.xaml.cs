@@ -3,10 +3,10 @@ using System.Windows;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using Pizza.Common;
-using PS4KeyboardAndMouseAdapter.Config;
+using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using Serilog;
 
-namespace PS4KeyboardAndMouseAdapter.UI.Controls
+namespace Pizza.KeyboardAndMouseAdapter.UI.Controls
 {
     public partial class ProfileManager : System.Windows.Controls.UserControl
     {

@@ -5,7 +5,7 @@ using System;
 using System.ComponentModel;
 using System.IO;
 
-namespace PS4KeyboardAndMouseAdapter.Config
+namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 {
     // a collection of settings are not bound to a specific game
     public class ApplicationSettings : INotifyPropertyChanged

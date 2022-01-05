@@ -1,5 +1,5 @@
 ﻿<UserControl 
-    x:Class="PS4KeyboardAndMouseAdapter.UI.Controls.GamepadMappingController"
+    x:Class="Pizza.KeyboardAndMouseAdapter.UI.Controls.GamepadMappingController"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                
@@ -9,8 +9,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 
-    xmlns:config="clr-namespace:PS4KeyboardAndMouseAdapter.Config"
-    xmlns:controls="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Controls"
+    xmlns:config="clr-namespace:Pizza.KeyboardAndMouseAdapter.Backend.Config"
+    xmlns:controls="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls"
     xmlns:svgc="http://sharpvectors.codeplex.com/svgc/">
     
     <Grid>

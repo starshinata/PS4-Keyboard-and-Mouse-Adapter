@@ -1,6 +1,6 @@
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PS4KeyboardAndMouseAdapter.Config;
+using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 
 namespace UnitTests.KeyboardAndMouseAdapter.Config.UserSettingsTest
 {

@@ -1,14 +1,14 @@
 ﻿using Pizza.Common;
-using PS4KeyboardAndMouseAdapter.backend;
-using PS4KeyboardAndMouseAdapter.backend.DebugLogging;
-using PS4KeyboardAndMouseAdapter.Config;
+using Pizza.KeyboardAndMouseAdapter.Backend;
+using Pizza.KeyboardAndMouseAdapter.Backend.DebugLogging;
+using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using Serilog;
 using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Forms;
 
-namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
+namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.Welcome
 {
     public partial class WelcomeSetupControl : System.Windows.Controls.UserControl
     {

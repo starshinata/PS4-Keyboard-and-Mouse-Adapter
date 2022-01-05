@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PS4KeyboardAndMouseAdapter.Config
+namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 {
     class KeyUtility
     {

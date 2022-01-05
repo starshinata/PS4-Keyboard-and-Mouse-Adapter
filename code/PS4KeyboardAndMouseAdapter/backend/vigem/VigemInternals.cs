@@ -1,13 +1,12 @@
 ﻿using Nefarius.ViGEm.Client;
 using Nefarius.ViGEm.Client.Targets;
 using Pizza.Common;
-using PS4KeyboardAndMouseAdapter;
 using Serilog;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace Pizza.backend.vigem
+namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
 {
 
     //thanks https://github.com/Ryochan7/DS4Windows/blob/2f1d8d353253d7f2ab7edadd70888658f1dacd7c/DS4Windows/DS4Control/ControlService.cs

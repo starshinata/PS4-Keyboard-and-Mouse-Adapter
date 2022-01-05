@@ -8,7 +8,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Reflection;
 
-namespace PS4KeyboardAndMouseAdapter.Config
+namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 {
     public partial class UserSettings : INotifyPropertyChanged
     {

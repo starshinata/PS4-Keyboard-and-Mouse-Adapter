@@ -1,4 +1,4 @@
-﻿namespace PS4KeyboardAndMouseAdapter
+﻿namespace Pizza.KeyboardAndMouseAdapter.Backend
 {
     public class RemotePlayConstants
     {

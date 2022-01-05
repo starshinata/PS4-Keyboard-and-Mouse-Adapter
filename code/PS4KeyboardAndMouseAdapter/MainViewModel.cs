@@ -1,7 +1,8 @@
-﻿using PS4KeyboardAndMouseAdapter.Config;
+﻿using Pizza.KeyboardAndMouseAdapter.Backend;
+using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using Serilog;
 
-namespace PS4KeyboardAndMouseAdapter
+namespace Pizza.KeyboardAndMouseAdapter
 {
 
     public class MainViewModel

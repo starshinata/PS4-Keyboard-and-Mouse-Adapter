@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using PS4RemotePlayInjection;
 
-namespace PS4KeyboardAndMouseAdapter.UI.Controls
+namespace Pizza.KeyboardAndMouseAdapter.UI.Controls
 {
     /// <summary>
     /// Interaction logic for AnalogStickVisualizer.xaml

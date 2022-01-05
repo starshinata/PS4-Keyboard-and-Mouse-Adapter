@@ -1,7 +1,7 @@
-﻿using PS4KeyboardAndMouseAdapter.Config;
+﻿using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using System.Collections.Generic;
 
-namespace PS4KeyboardAndMouseAdapter
+namespace Pizza.KeyboardAndMouseAdapter.Backend
 {
     class ListUtil
     {

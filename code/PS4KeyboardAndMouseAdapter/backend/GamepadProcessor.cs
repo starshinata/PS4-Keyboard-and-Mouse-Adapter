@@ -1,4 +1,4 @@
-﻿using PS4KeyboardAndMouseAdapter.Config;
+﻿using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using PS4RemotePlayInjection;
 using PS4RemotePlayInterceptor;
 using Serilog;
@@ -10,7 +10,7 @@ using System.Numerics;
 using System.Text;
 using System.Windows.Forms;
 
-namespace PS4KeyboardAndMouseAdapter
+namespace Pizza.KeyboardAndMouseAdapter.Backend
 {
 
     public class GamepadProcessor

@@ -1,11 +1,11 @@
 ﻿using Pizza.Common;
-using PS4KeyboardAndMouseAdapter.Config;
+using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using Serilog;
 using System;
 using System.Windows;
 using System.Windows.Forms;
 
-namespace Pizza.backend.vigem
+namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
 {
     public class VigemManager
     {

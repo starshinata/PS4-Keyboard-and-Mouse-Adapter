@@ -1,22 +1,23 @@
-﻿<Window x:Class="PS4KeyboardAndMouseAdapter.MainWindowView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+﻿<Window
+    x:Class="Pizza.KeyboardAndMouseAdapter.UI.MainWindowView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 
-        xmlns:pages="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Pages"
-        xmlns:PS4KeyboardAndMouseAdapter="clr-namespace:PS4KeyboardAndMouseAdapter"
-        
-        Title="{Binding WindowTitle}"
-        
-        Height="728" 
-        Width="700" 
-        
-        Activated="MainWindowView_OnActivated"
-        Deactivated="MainWindowView_OnDeactivated"
-        ResizeMode="CanMinimize"
-        >
+    xmlns:keyboardAndMouseAdapter="clr-namespace:Pizza.KeyboardAndMouseAdapter"
+    xmlns:pages="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Pages"
+
+    Title="{Binding WindowTitle}"
+
+    Height="728" 
+    Width="700" 
+
+    Activated="MainWindowView_OnActivated"
+    Deactivated="MainWindowView_OnDeactivated"
+    ResizeMode="CanMinimize"
+    >
 
     <Window.DataContext>
-        <PS4KeyboardAndMouseAdapter:MainViewModel />
+        <keyboardAndMouseAdapter:MainViewModel />
     </Window.DataContext>
 
     <Window.Style>

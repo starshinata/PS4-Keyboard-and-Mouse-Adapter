@@ -1,7 +1,7 @@
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
-using PS4KeyboardAndMouseAdapter.Config;
+using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using System.IO;
 
 namespace UnitTests.KeyboardAndMouseAdapter.Config.UserSettingsTest

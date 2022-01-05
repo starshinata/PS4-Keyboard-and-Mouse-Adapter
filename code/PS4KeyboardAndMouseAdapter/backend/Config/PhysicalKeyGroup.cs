@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PS4KeyboardAndMouseAdapter.Config
+namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 {
     public class PhysicalKeyGroup
     {

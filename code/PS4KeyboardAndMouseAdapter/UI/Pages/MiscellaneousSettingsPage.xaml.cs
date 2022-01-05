@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace PS4KeyboardAndMouseAdapter.UI.Pages
+namespace Pizza.KeyboardAndMouseAdapter.UI.Pages
 {
     public partial class MiscellaneousSettingsPage : UserControl
     {

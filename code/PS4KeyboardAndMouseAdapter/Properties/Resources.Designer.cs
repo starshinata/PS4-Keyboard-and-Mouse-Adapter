@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PS4KeyboardAndMouseAdapter.Properties {
+namespace Pizza.KeyboardAndMouseAdapter.Backend.Properties {
     using System;
     
     

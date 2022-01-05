@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Media;
 
-namespace PS4KeyboardAndMouseAdapter.UI
+namespace Pizza.KeyboardAndMouseAdapter.UI
 {
     public class UIConstants
     {

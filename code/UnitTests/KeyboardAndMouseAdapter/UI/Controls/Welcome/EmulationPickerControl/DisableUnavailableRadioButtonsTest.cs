@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PS4KeyboardAndMouseAdapter.Config;
-using PS4KeyboardAndMouseAdapter.UI.Controls.Welcome;
+using Pizza.KeyboardAndMouseAdapter.Backend.Config;
+using Pizza.KeyboardAndMouseAdapter.UI.Controls.Welcome;
 using System.Collections.Generic;
 
 namespace UnitTests.KeyboardAndMouseAdapter.UI.Controls.Welcome.EmulationPickerControlTest

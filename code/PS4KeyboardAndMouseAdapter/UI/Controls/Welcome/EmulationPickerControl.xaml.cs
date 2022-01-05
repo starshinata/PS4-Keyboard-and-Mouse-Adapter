@@ -1,6 +1,6 @@
-﻿using Pizza.backend.vigem;
+﻿using Pizza.KeyboardAndMouseAdapter.Backend.Vigem;
 using Pizza.Common;
-using PS4KeyboardAndMouseAdapter.Config;
+using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 
-namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
+namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.Welcome
 {
     public partial class EmulationPickerControl : System.Windows.Controls.UserControl
     {

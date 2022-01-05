@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace PS4KeyboardAndMouseAdapter.Dll
+namespace Pizza.KeyboardAndMouseAdapter.Backend.Dll
 {
 
     public class User32

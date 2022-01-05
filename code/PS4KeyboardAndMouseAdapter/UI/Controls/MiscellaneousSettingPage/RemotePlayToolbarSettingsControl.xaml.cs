@@ -1,11 +1,11 @@
 ﻿using Pizza.Common;
-using PS4KeyboardAndMouseAdapter.Config;
+using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using PS4RemotePlayInjection;
 using Serilog;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace PS4KeyboardAndMouseAdapter.UI.Controls.MiscellaneousSettings
+namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.MiscellaneousSettings
 {
     public partial class RemotePlayToolbarSettingsControl : UserControl
     {

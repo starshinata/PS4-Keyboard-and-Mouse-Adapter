@@ -1,4 +1,4 @@
-﻿namespace Pizza.backend
+﻿namespace Pizza.KeyboardAndMouseAdapter.Backend
 {
     class HidConstants
     {

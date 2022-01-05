@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace PS4KeyboardAndMouseAdapter.backend
+namespace Pizza.KeyboardAndMouseAdapter.Backend
 {
     class AppUpdater
     {

@@ -259,32 +259,32 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="backend\AppUpdater.cs" />
-    <Compile Include="backend\AudioManager.cs" />
-    <Compile Include="backend\DebugLogging\DebugDump.cs" />
-    <Compile Include="backend\DebugLogging\GetOsVersion.cs" />
-    <Compile Include="backend\DebugLogging\HidFacade.cs" />
-    <Compile Include="backend\DebugLogging\ProcessCommandLine.cs" />
-    <Compile Include="backend\DebugLogging\ServiceComparerByName.cs" />
-    <Compile Include="backend\DebugLogging\ProcessComparerByName.cs" />
-    <Compile Include="backend\LogManager.cs" />
-    <Compile Include="backend\RemotePlayInstaller.cs" />
-    <Compile Include="backend\vigem\GamepadConverter.cs" />
-    <Compile Include="backend\LogUtility.cs" />
-    <Compile Include="backend\HidConstants.cs" />
-    <Compile Include="backend\RemotePlayStarter.cs" />
-    <Compile Include="backend\RewasdDetector.cs" />
-    <Compile Include="backend\Config\ExtraButtons.cs" />
-    <Compile Include="backend\Config\ApplicationSettings.cs" />
-    <Compile Include="backend\ListUtil.cs" />
-    <Compile Include="backend\MouseWheelScrollProcessor.cs" />
-    <Compile Include="backend\MouseWheelProcessor.cs" />
-    <Compile Include="backend\PlaystationControllerDetector.cs" />
-    <Compile Include="backend\ProcessUtil.cs" />
-    <Compile Include="backend\RemotePlayConstants.cs" />
-    <Compile Include="backend\vigem\VigemManger.cs" />
-    <Compile Include="backend\vigem\VigemInternals.cs" />
-    <Compile Include="backend\DS4State.cs" />
+    <Compile Include="Backend\AppUpdater.cs" />
+    <Compile Include="Backend\AudioManager.cs" />
+    <Compile Include="Backend\DebugLogging\DebugDump.cs" />
+    <Compile Include="Backend\DebugLogging\GetOsVersion.cs" />
+    <Compile Include="Backend\DebugLogging\HidFacade.cs" />
+    <Compile Include="Backend\DebugLogging\ProcessCommandLine.cs" />
+    <Compile Include="Backend\DebugLogging\ServiceComparerByName.cs" />
+    <Compile Include="Backend\DebugLogging\ProcessComparerByName.cs" />
+    <Compile Include="Backend\LogManager.cs" />
+    <Compile Include="Backend\RemotePlayInstaller.cs" />
+    <Compile Include="Backend\Vigem\GamepadConverter.cs" />
+    <Compile Include="Backend\LogUtility.cs" />
+    <Compile Include="Backend\HidConstants.cs" />
+    <Compile Include="Backend\RemotePlayStarter.cs" />
+    <Compile Include="Backend\RewasdDetector.cs" />
+    <Compile Include="Backend\Config\ExtraButtons.cs" />
+    <Compile Include="Backend\Config\ApplicationSettings.cs" />
+    <Compile Include="Backend\ListUtil.cs" />
+    <Compile Include="Backend\MouseWheelScrollProcessor.cs" />
+    <Compile Include="Backend\MouseWheelProcessor.cs" />
+    <Compile Include="Backend\PlaystationControllerDetector.cs" />
+    <Compile Include="Backend\ProcessUtil.cs" />
+    <Compile Include="Backend\RemotePlayConstants.cs" />
+    <Compile Include="Backend\Vigem\VigemManger.cs" />
+    <Compile Include="Backend\Vigem\VigemInternals.cs" />
+    <Compile Include="Backend\DS4State.cs" />
     <Compile Include="UI\Controls\Common\LogControl.xaml.cs">
       <DependentUpon>LogControl.xaml</DependentUpon>
     </Compile>
@@ -294,23 +294,23 @@
     <Compile Include="UI\Controls\MiscellaneousSettingPage\MiscellaneousSettingsGeneralControl.xaml.cs">
       <DependentUpon>MiscellaneousSettingsGeneralControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="backend\VersionUtil.cs" />
-    <Compile Include="backend\WindowUtil.cs" />
-    <Compile Include="backend\Config\KeyUtility.cs" />
-    <Compile Include="backend\Config\MouseButton.cs" />
-    <Compile Include="backend\Config\PhysicalKeyGroup.cs" />
-    <Compile Include="backend\Config\PhysicalKey.cs" />
-    <Compile Include="backend\Config\InstanceSettings.cs" />
-    <Compile Include="backend\Config\UserSettings_1_0_11.cs" />
-    <Compile Include="backend\Config\UserSettings.cs" />
-    <Compile Include="backend\Config\UserSettings_Instance.cs" />
-    <Compile Include="backend\Config\UserSettings_Static.cs" />
-    <Compile Include="backend\Config\VirtualKey.cs" />
-    <Compile Include="backend\Dll\Rect.cs" />
-    <Compile Include="backend\Dll\User32.cs" />
-    <Compile Include="backend\GamepadProcessor.cs" />
-    <Compile Include="backend\RemotePlayInjector.cs" />
-    <Compile Include="backend\MouseAnchor.cs" />
+    <Compile Include="Backend\VersionUtil.cs" />
+    <Compile Include="Backend\WindowUtil.cs" />
+    <Compile Include="Backend\Config\KeyUtility.cs" />
+    <Compile Include="Backend\Config\MouseButton.cs" />
+    <Compile Include="Backend\Config\PhysicalKeyGroup.cs" />
+    <Compile Include="Backend\Config\PhysicalKey.cs" />
+    <Compile Include="Backend\Config\InstanceSettings.cs" />
+    <Compile Include="Backend\Config\UserSettings_1_0_11.cs" />
+    <Compile Include="Backend\Config\UserSettings.cs" />
+    <Compile Include="Backend\Config\UserSettings_Instance.cs" />
+    <Compile Include="Backend\Config\UserSettings_Static.cs" />
+    <Compile Include="Backend\Config\VirtualKey.cs" />
+    <Compile Include="Backend\Dll\Rect.cs" />
+    <Compile Include="Backend\Dll\User32.cs" />
+    <Compile Include="Backend\GamepadProcessor.cs" />
+    <Compile Include="Backend\RemotePlayInjector.cs" />
+    <Compile Include="Backend\MouseAnchor.cs" />
     <Compile Include="UI\Controls\SimpleConfigPage\GamepadMappingController.xaml.cs">
       <DependentUpon>GamepadMappingController.xaml</DependentUpon>
     </Compile>

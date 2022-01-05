@@ -1,8 +1,9 @@
-﻿using PS4KeyboardAndMouseAdapter.Config;
+﻿using Pizza.KeyboardAndMouseAdapter.Backend;
+using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using System;
 using System.Windows.Controls;
 
-namespace PS4KeyboardAndMouseAdapter.UI.Controls.MiscellaneousSettings
+namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.MiscellaneousSettings
 {
     public partial class MiscellaneousSettingsGeneralControl : UserControl
     {

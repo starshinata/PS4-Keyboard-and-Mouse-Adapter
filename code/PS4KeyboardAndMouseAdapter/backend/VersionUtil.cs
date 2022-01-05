@@ -2,7 +2,7 @@
 using System;
 using System.Reflection;
 
-namespace PS4KeyboardAndMouseAdapter
+namespace Pizza.KeyboardAndMouseAdapter.Backend
 {
     class VersionUtil
     {

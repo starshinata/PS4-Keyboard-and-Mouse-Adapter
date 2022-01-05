@@ -1,7 +1,6 @@
-﻿using System;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
-namespace PS4KeyboardAndMouseAdapter.Dll
+namespace Pizza.KeyboardAndMouseAdapter.Backend.Dll
 {
     [StructLayout(LayoutKind.Sequential)]
     public struct RECT

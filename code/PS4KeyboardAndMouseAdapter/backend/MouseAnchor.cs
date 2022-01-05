@@ -1,9 +1,9 @@
-﻿using System;
-using PS4KeyboardAndMouseAdapter.Dll;
+﻿using Pizza.KeyboardAndMouseAdapter.Backend.Dll;
 using Serilog;
 using SFML.System;
+using System;
 
-namespace PS4KeyboardAndMouseAdapter
+namespace Pizza.KeyboardAndMouseAdapter.Backend
 {
 
     public class MouseAnchor

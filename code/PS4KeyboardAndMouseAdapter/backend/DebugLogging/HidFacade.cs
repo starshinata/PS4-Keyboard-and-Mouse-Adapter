@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Management;
 
-namespace PS4KeyboardAndMouseAdapter.backend.DebugLogging
+namespace Pizza.KeyboardAndMouseAdapter.Backend.DebugLogging
 {
     class HidFacade
     {

@@ -1,8 +1,8 @@
-﻿<UserControl x:Class="PS4KeyboardAndMouseAdapter.UI.Controls.MouseSettingsSimpleControl"
+﻿<UserControl x:Class="Pizza.KeyboardAndMouseAdapter.UI.Controls.MouseSettingsSimpleControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 
-             xmlns:controls="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Controls"
+             xmlns:controls="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls"
              xmlns:wpfspark="clr-namespace:WPFSpark;assembly=WPFSpark" 
              >
 

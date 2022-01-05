@@ -2,7 +2,7 @@
 using System;
 using System.IO;
 
-namespace PS4KeyboardAndMouseAdapter.backend
+namespace Pizza.KeyboardAndMouseAdapter.Backend
 {
     public class RewasdDetector
     {

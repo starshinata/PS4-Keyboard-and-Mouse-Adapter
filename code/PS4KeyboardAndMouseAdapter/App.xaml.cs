@@ -1,14 +1,13 @@
-﻿using Pizza.backend.vigem;
-using PS4KeyboardAndMouseAdapter.backend;
-using PS4KeyboardAndMouseAdapter.Config;
+﻿using Pizza.KeyboardAndMouseAdapter.Backend;
+using Pizza.KeyboardAndMouseAdapter.Backend.Config;
+using Pizza.KeyboardAndMouseAdapter.Backend.Vigem;
 using PS4RemotePlayInjection;
 using Serilog;
 using System;
 using System.Windows;
 
-namespace PS4KeyboardAndMouseAdapter
+namespace Pizza.KeyboardAndMouseAdapter
 {
-
     public partial class App : Application
     {
 

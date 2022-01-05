@@ -1,13 +1,13 @@
-﻿using Pizza.backend.vigem;
-using Pizza.Common;
-using PS4KeyboardAndMouseAdapter.Config;
-using PS4KeyboardAndMouseAdapter.UI.Pages;
+﻿using Pizza.Common;
+using Pizza.KeyboardAndMouseAdapter.Backend.Config;
+using Pizza.KeyboardAndMouseAdapter.Backend.Vigem;
+using Pizza.KeyboardAndMouseAdapter.UI.Pages;
 using System;
 using System.Windows;
 using System.Windows.Controls;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 
-namespace PS4KeyboardAndMouseAdapter
+namespace Pizza.KeyboardAndMouseAdapter.UI
 {
     public partial class MainWindowView : Window
     {

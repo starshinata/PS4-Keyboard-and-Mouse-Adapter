@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PS4KeyboardAndMouseAdapter.backend;
+using Pizza.KeyboardAndMouseAdapter.Backend;
 using System;
 
 namespace UnitTests.KeyboardAndMouseAdapter.backend.Config

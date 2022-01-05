@@ -1,8 +1,8 @@
-﻿<UserControl x:Class="PS4KeyboardAndMouseAdapter.UI.Pages.MouseAdvancedConfigPage"
+﻿<UserControl x:Class="Pizza.KeyboardAndMouseAdapter.UI.Pages.MouseAdvancedConfigPage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              
-             xmlns:controls="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Controls"
+             xmlns:controls="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls"
 
              GotFocus="GotFocusLocal"
              >

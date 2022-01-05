@@ -2,7 +2,7 @@
 using SFML.Window;
 using System.Collections.Generic;
 
-namespace PS4KeyboardAndMouseAdapter.Config
+namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 {
     public class UserSettings_1_0_11
     {

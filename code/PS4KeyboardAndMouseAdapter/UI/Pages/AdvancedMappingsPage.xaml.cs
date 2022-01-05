@@ -1,4 +1,5 @@
-﻿using PS4KeyboardAndMouseAdapter.Config;
+﻿using Pizza.KeyboardAndMouseAdapter.Backend;
+using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using Serilog;
 using SFML.Window;
 using System;
@@ -10,7 +11,7 @@ using Button = System.Windows.Controls.Button;
 using Keyboard = SFML.Window.Keyboard;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 
-namespace PS4KeyboardAndMouseAdapter.UI.Pages
+namespace Pizza.KeyboardAndMouseAdapter.UI.Pages
 {
     public partial class AdvancedMappingsPage : UserControl
     {

@@ -1,11 +1,11 @@
 ﻿using Pizza.Common;
-using PS4KeyboardAndMouseAdapter.Config;
+using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using Serilog;
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace PS4KeyboardAndMouseAdapter
+namespace Pizza.KeyboardAndMouseAdapter.Backend
 {
     class ProcessUtil
     {

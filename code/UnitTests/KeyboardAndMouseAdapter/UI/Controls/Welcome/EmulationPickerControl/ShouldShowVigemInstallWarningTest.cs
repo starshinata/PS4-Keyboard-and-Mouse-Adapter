@@ -1,8 +1,8 @@
 ﻿using Autofac.Extras.Moq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Pizza.backend.vigem;
-using PS4KeyboardAndMouseAdapter.UI.Controls.Welcome;
+using Pizza.KeyboardAndMouseAdapter.Backend.Vigem;
+using Pizza.KeyboardAndMouseAdapter.UI.Controls.Welcome;
 
 namespace UnitTests.KeyboardAndMouseAdapter.UI.Controls.Welcome.EmulationPickerControlTest
 {

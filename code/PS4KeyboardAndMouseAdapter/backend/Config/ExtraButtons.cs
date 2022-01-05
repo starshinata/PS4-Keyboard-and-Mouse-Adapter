@@ -1,4 +1,4 @@
-﻿namespace PS4KeyboardAndMouseAdapter.Config
+﻿namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 {
     public enum ExtraButtons
     {

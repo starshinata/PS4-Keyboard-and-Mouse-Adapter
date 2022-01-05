@@ -1,5 +1,5 @@
 ﻿using Pizza.Common;
-using PS4KeyboardAndMouseAdapter.Config;
+using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using Serilog;
 using System;
 using System.Collections;
@@ -8,7 +8,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 
-namespace PS4KeyboardAndMouseAdapter.backend.DebugLogging
+namespace Pizza.KeyboardAndMouseAdapter.Backend.DebugLogging
 {
     class DebugDump
     {

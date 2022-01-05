@@ -1,7 +1,6 @@
-﻿using Pizza.backend;
-using Serilog;
+﻿using Serilog;
 
-namespace PS4KeyboardAndMouseAdapter.backend
+namespace Pizza.KeyboardAndMouseAdapter.Backend
 {
     class PlaystationControllerDetector
     {

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="PS4KeyboardAndMouseAdapter.UI.Controls.Welcome.EmulationPickerControl"
+﻿<UserControl x:Class="Pizza.KeyboardAndMouseAdapter.UI.Controls.Welcome.EmulationPickerControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -8,7 +8,7 @@
              d:DesignHeight="450"
              d:DesignWidth="680"
              
-             xmlns:welcome="clr-namespace:PS4KeyboardAndMouseAdapter.UI.Controls.Welcome"
+             xmlns:welcome="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls.Welcome"
              >
 
     <StackPanel>

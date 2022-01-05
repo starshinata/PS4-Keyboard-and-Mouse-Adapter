@@ -1,13 +1,11 @@
 ﻿using Pizza.Common;
-using Serilog;
 using System;
 using System.Diagnostics;
 
-namespace PS4KeyboardAndMouseAdapter.backend.DebugLogging
+namespace Pizza.KeyboardAndMouseAdapter.Backend.DebugLogging
 {
     class GetOsVersion
     {
-        private static readonly ILogger StaticLogger = Log.ForContext(typeof(GetOsVersion));
 
         public static string Get()
         {

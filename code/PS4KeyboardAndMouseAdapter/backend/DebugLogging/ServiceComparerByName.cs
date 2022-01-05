@@ -1,8 +1,7 @@
 ﻿using System.Collections;
-using System.Diagnostics;
 using System.ServiceProcess;
 
-namespace PS4KeyboardAndMouseAdapter.backend
+namespace Pizza.KeyboardAndMouseAdapter.Backend.DebugLogging
 {
     class ServiceComparerByName : IComparer
     {

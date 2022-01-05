@@ -1,11 +1,10 @@
-﻿using Pizza.backend.vigem;
-using PS4KeyboardAndMouseAdapter.backend;
+﻿using Pizza.KeyboardAndMouseAdapter.Backend.Vigem;
 using PS4RemotePlayInjection;
 using Serilog;
 using System.ComponentModel;
 using System.Diagnostics;
 
-namespace PS4KeyboardAndMouseAdapter.Config
+namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 {
     // a collection of settings that will die when application is closed
     public class InstanceSettings : INotifyPropertyChanged

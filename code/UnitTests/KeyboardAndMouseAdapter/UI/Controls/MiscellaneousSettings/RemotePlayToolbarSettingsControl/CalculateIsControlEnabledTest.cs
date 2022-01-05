@@ -1,8 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Pizza.Common;
-using PS4KeyboardAndMouseAdapter.Config;
-using PS4KeyboardAndMouseAdapter.UI;
-using PS4KeyboardAndMouseAdapter.UI.Controls.MiscellaneousSettings;
+using Pizza.KeyboardAndMouseAdapter.Backend.Config;
+using Pizza.KeyboardAndMouseAdapter.UI;
+using Pizza.KeyboardAndMouseAdapter.UI.Controls.MiscellaneousSettings;
 
 namespace UnitTests.KeyboardAndMouseAdapter.UI.Controls.RemotePlayToolbarSettingsControlTest
 {

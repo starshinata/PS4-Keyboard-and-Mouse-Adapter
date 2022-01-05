@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 
-namespace PS4KeyboardAndMouseAdapter.backend
+namespace Pizza.KeyboardAndMouseAdapter.Backend.DebugLogging
 {
     // class sourced from https://github.com/sonicmouse/ProcCmdLine/blob/master/ManagedProcessCommandLine/ProcessCommandLine.cs
 

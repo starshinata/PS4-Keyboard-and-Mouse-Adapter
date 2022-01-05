@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace PS4KeyboardAndMouseAdapter.UI.Controls.Welcome
+namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.Welcome
 {
     public partial class RemotePlayLaunchedControl : UserControl
     {
