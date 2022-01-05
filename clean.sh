@@ -10,8 +10,8 @@ echo "nupkg"
 rm -rf PS4KeyboardAndMouseAdapter.*.nupkg
 
 echo "common"
-rm -rf PROJECT_DIRECTORY_COMMON/bin
-rm -rf PROJECT_DIRECTORY_COMMON/obj
+rm -rf $PROJECT_DIRECTORY_COMMON/bin
+rm -rf $PROJECT_DIRECTORY_COMMON/obj
 
 echo "ps4 kma"
 rm -rf $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER/bin
@@ -23,8 +23,8 @@ rm -rf $PROJECT_DIRECTORY_PS4_REMOTE_PLAY_INJECTION/bin
 rm -rf $PROJECT_DIRECTORY_PS4_REMOTE_PLAY_INJECTION/obj
 
 echo "unit test"
-rm -rf PROJECT_DIRECTORY_UNIT_TESTS/bin
-rm -rf PROJECT_DIRECTORY_UNIT_TESTS/obj
+rm -rf $PROJECT_DIRECTORY_UNIT_TESTS/bin
+rm -rf $PROJECT_DIRECTORY_UNIT_TESTS/obj
 
 echo "packages"
 ## yes there are two package folders
