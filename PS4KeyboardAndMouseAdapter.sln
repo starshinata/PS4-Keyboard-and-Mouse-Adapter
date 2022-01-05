@@ -24,7 +24,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		run.sh = run.sh
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{0439F286-1E5F-4B55-B902-F7EF43C7B22B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "documentation", "documentation", "{0439F286-1E5F-4B55-B902-F7EF43C7B22B}"
 	ProjectSection(SolutionItems) = preProject
 		documentation\developer-notes.md = documentation\developer-notes.md
 		documentation\example-ui-1.png = documentation\example-ui-1.png
@@ -66,6 +66,24 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{679B8A6C
 		manualBuild\nuget\nuget.exe = manualBuild\nuget\nuget.exe
 		manualBuild\nuget\PS4KeyboardAndMouseAdapter.nuspec = manualBuild\nuget\PS4KeyboardAndMouseAdapter.nuspec
 		manualBuild\nuget\PS4KeyboardAndMouseAdapter.nuspec.template.xml = manualBuild\nuget\PS4KeyboardAndMouseAdapter.nuspec.template.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "installers", "installers", "{6852A938-F1C8-4D31-A2E1-419C08CC42DA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "remotePlay", "remotePlay", "{89924932-08BA-4A52-A21B-EB3D418436AA}"
+	ProjectSection(SolutionItems) = preProject
+		installers\remotePlay\RemotePlayInstaller-3.0.0.9250.exe = installers\remotePlay\RemotePlayInstaller-3.0.0.9250.exe
+		installers\remotePlay\RemotePlayInstaller-4.0.0.9240.exe = installers\remotePlay\RemotePlayInstaller-4.0.0.9240.exe
+		installers\remotePlay\RemotePlayInstaller-4.1.0.4020.exe = installers\remotePlay\RemotePlayInstaller-4.1.0.4020.exe
+		installers\remotePlay\RemotePlayInstaller-4.5.0.8250.exe = installers\remotePlay\RemotePlayInstaller-4.5.0.8250.exe
+		installers\remotePlay\RemotePlayInstaller-4.5.0.8250_Win32.msi = installers\remotePlay\RemotePlayInstaller-4.5.0.8250_Win32.msi
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "vigemBusDriver", "vigemBusDriver", "{F10F9F23-C09E-454C-A783-A56F8451911C}"
+	ProjectSection(SolutionItems) = preProject
+		installers\vigemBusDriver\version.txt = installers\vigemBusDriver\version.txt
+		installers\vigemBusDriver\ViGEmBusSetup_x64.msi = installers\vigemBusDriver\ViGEmBusSetup_x64.msi
+		installers\vigemBusDriver\ViGEmBusSetup_x86.msi = installers\vigemBusDriver\ViGEmBusSetup_x86.msi
 	EndProjectSection
 EndProject
 Global
@@ -136,6 +154,9 @@ Global
 		{F22313AC-E19E-475C-B025-AB90BA36D0C7} = {3A058E3E-00BF-404D-A7CC-F69777503A76}
 		{60A1671E-B17D-48D6-8515-D21D96B6CFD3} = {9FF1BB60-DFEF-4108-A4A6-945C22D8882C}
 		{679B8A6C-1FB2-474D-B69F-211D69F2D79C} = {60A1671E-B17D-48D6-8515-D21D96B6CFD3}
+		{6852A938-F1C8-4D31-A2E1-419C08CC42DA} = {9FF1BB60-DFEF-4108-A4A6-945C22D8882C}
+		{89924932-08BA-4A52-A21B-EB3D418436AA} = {6852A938-F1C8-4D31-A2E1-419C08CC42DA}
+		{F10F9F23-C09E-454C-A783-A56F8451911C} = {6852A938-F1C8-4D31-A2E1-419C08CC42DA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {215189D4-FCF7-4F3E-BC57-0EA3347DD037}
