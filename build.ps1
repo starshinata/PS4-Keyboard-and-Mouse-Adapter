@@ -46,7 +46,7 @@ $PROJECT_DIRECTORY_UNIT_TESTS="code\UnitTests"
 ## /code/pacakges
 ## /packages
 ## for MSBUILD we care about code/packages
-$DIRECTORY_PACKAGES="code/packages"
+$DIRECTORY_PACKAGES="code\packages"
 
 
 ################################
@@ -59,6 +59,7 @@ function add-build-date {
   $DATETIME = (get-date -Format s)
   echo $DATETIME > $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\Resources\BuildDate.txt
 }
+
 
 function build-msbuild {
 
@@ -97,9 +98,12 @@ function cleanup-prebuild {
   remove TestResults
 }
 
+
 function cleanup-postbuild {
+  remove PS4KeyboardAndMouseAdapter.*.nupkg
   remove TestResults
 }
+
 
 function dependencies-nuget {
 
