@@ -1,0 +1,40 @@
+{
+  "KeyboardMappings": null,
+  "MouseControlsL3": false,
+  "MouseControlsR3": false,
+  "MouseXAxisSensitivityMax": 100.0,
+  "MouseXAxisSensitivityLookModifier": 2.0,
+  "MouseYAxisSensitivityMax": 100.0,
+  "MouseYAxisSensitivityLookModifier": 1.0,
+  "MousePollingRate": 10,
+  "MouseAimSensitivityEnabled": false,
+  "MouseXAxisSensitivityAimModifier": 2.0,
+  "MouseYAxisSensitivityAimModifier": 1.0,
+  "Version_2_0_0_OrGreater": true,
+  "Mappings": {
+    "L2": {
+      "PhysicalKeys": [
+        {
+          "KeyboardValue": -1,
+          "MouseValue": 1
+        }
+      ]
+    },
+    
+    "R2": {
+      "PhysicalKeys": [
+        {
+          "KeyboardValue": -1,
+          "MouseValue": 0
+        }
+      ]
+    }   
+  },
+  "AdvancedMappingPage_MappingsToShow": 4,
+  "AnalogStickLowerRange": 40,
+  "AnalogStickUpperRange": 95,
+  "MouseDistanceLowerRange": 5.0,
+  "MouseDistanceUpperRange": 96.0,
+  "MouseMaxDistance": 960.0,
+  "XYRatio": 1
+}
