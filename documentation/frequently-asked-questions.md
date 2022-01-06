@@ -53,8 +53,8 @@ AKA
 * Is Dualsense supported?
 * Is PS5 supported?
 
-I do not have a PS5 console to test this myself, but it should work <br>
-I do expect some bugs to be raised - originally PS5 was not going to let you use PS4 controllers for PS5 games and vice versa.
+It does (or atleast I have had several people say it works) <br>
+But I do not have a PS5 console to test this myself, so I do expect some bugs to be raised. Note originally PS5 was not going to let you use PS4 controllers for PS5 games and vice versa.
 
 
 
@@ -74,7 +74,7 @@ I would like to remind you this application is **free**.
 
 
 ### Is using a mouse and keyboard cheating?
-No.
+IMO No.
 
 Sony has licensed Hori products https://www.playstation.com/en-us/explore/accessories/specialty-controllers/, and Hori has provided mouse and keyboard options https://www.amazon.co.uk/HORI-Tactical-Assault-Commander-Pro/dp/B01K7JEII8
 

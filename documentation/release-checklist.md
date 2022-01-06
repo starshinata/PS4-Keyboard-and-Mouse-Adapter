@@ -1,7 +1,8 @@
 # Release checklist
 
 
-1. If you have updated any dependencies, then delete the packages folder and do a fresh build to check everything is ok.
+1. If you have updated any dependencies, then delete the packages folder and do a fresh build to check everything is ok.<br>
+ ` ./clean.sh ; ./build.sh `
 
 2. Have we enabled the auto update logic in ` AppUpdater.cs `
 

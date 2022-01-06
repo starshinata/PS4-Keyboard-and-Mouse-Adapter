@@ -10,7 +10,7 @@ https://github.com/MysteryDash/Offline-PS4-Remote-Play
 https://github.com/Ryochan7/DS4Windows (newer than Jays2Kings/DS4Windows)
 
 Other resources and things
-https://github.com/de4dot/de4dot
+https://github.com/de4dot/de4dot .NET deobfuscator and unpacker.
 https://github.com/spazzarama/SharedMemory
 
 Controller em
