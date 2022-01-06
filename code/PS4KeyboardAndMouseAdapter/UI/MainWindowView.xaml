@@ -9,11 +9,15 @@
     Title="{Binding WindowTitle}"
 
     Height="728" 
+    MinHeight="400"
+        
     Width="700" 
-
+    MinWidth="700"
+    MaxWidth="900"
+    
     Activated="MainWindowView_OnActivated"
     Deactivated="MainWindowView_OnDeactivated"
-    ResizeMode="CanMinimize"
+    ResizeMode="CanResizeWithGrip"
     >
 
     <Window.DataContext>
@@ -40,6 +44,7 @@
                         Width="200px"
                         />
                 </TabItem.Header>
+                
                 <pages:WelcomePage
                     x:Name="pageWelcomePage"
                     />

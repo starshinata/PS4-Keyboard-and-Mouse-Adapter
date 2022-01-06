@@ -1,8 +1,7 @@
 ﻿using Pizza.Common;
 using Pizza.KeyboardAndMouseAdapter.Backend;
-using Pizza.KeyboardAndMouseAdapter.Backend.DebugLogging;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
-using Serilog;
+using Pizza.KeyboardAndMouseAdapter.Backend.DebugLogging;
 using System;
 using System.IO;
 using System.Windows;
@@ -116,13 +115,13 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.Welcome
         private void ResetErrorMessages()
         {
             ErrorTextBox_PlaystationController.Text = "";
-            ErrorTextBox_PlaystationController.Visibility = UIConstants.VISIBILITY_HIDDEN;
+            ErrorTextBox_PlaystationController.Visibility = UIConstants.VISIBILITY_COLLAPSED;
 
             ErrorTextBox_Rewasd.Text = "";
-            ErrorTextBox_Rewasd.Visibility = UIConstants.VISIBILITY_HIDDEN;
+            ErrorTextBox_Rewasd.Visibility = UIConstants.VISIBILITY_COLLAPSED;
 
             ErrorTextBox_RemotePlayPath.Text = "";
-            ErrorTextBox_RemotePlayPath.Visibility = UIConstants.VISIBILITY_HIDDEN;
+            ErrorTextBox_RemotePlayPath.Visibility = UIConstants.VISIBILITY_COLLAPSED;
         }
 
         private void StartRemotePlayAndConditionallyInject()

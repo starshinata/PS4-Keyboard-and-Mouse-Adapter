@@ -13,128 +13,116 @@
     xmlns:welcome="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls.Welcome"
     >
 
-    <ScrollViewer
-        Height="530px" 
-        HorizontalScrollBarVisibility="Auto"
-        VerticalScrollBarVisibility="Auto"
-        Width="670px"
-        >
+    <StackPanel
+        Width="640px">
 
-        <StackPanel 
-            Width="640px">
+        <TextBlock />
 
-            <TextBlock />
+        <TextBlock FontWeight="Bold" FontSize="16">Step 1</TextBlock>
 
-            <TextBlock FontWeight="Bold" FontSize="16">Step 1</TextBlock>
+        <welcome:EmulationPickerControl
+            x:Name="emulationPickerControl"/>
 
-            <welcome:EmulationPickerControl
-                  x:Name="emulationPickerControl"/>
+        <!-- used as a spacer -->
+        <TextBlock />
 
-            <!-- used as a spacer -->
-            <TextBlock />
-
-            <TextBlock FontWeight="Bold" FontSize="16">Step 2</TextBlock>
-            <TextBlock TextWrapping="Wrap">Check reWASD is not installed?</TextBlock>
-            <TextBlock TextWrapping="Wrap">reWASD is known to conflict with this application, if it is detected, please uninstall reWASD,</TextBlock>
-            <TextBlock 
-            Visibility="Hidden"
+        <TextBlock FontWeight="Bold" FontSize="16">Step 2</TextBlock>
+        <TextBlock TextWrapping="Wrap">Check reWASD is not installed?</TextBlock>
+        <TextBlock TextWrapping="Wrap">reWASD is known to conflict with this application, if it is detected, please uninstall reWASD,</TextBlock>
+        
+        <TextBlock 
+            Visibility="Collapsed"
             x:Name="ErrorTextBox_Rewasd"
             />
 
-            <!-- used as a spacer -->
-            <TextBlock />
+        <!-- used as a spacer -->
+        <TextBlock />
 
-            <TextBlock FontWeight="Bold" FontSize="16">Step 3</TextBlock>
-            <TextBlock TextWrapping="Wrap">Where is 'PS RemotePlay' installed?</TextBlock>
+        <TextBlock FontWeight="Bold" FontSize="16">Step 3</TextBlock>
+        <TextBlock TextWrapping="Wrap">Where is 'PS RemotePlay' installed?</TextBlock>
 
-            <Button
+        <Button
             Click="Handle_SetRemoteRemotePlayPath"
             Content="Set Path"
             HorizontalAlignment="Left"
             Width="200px"
             />
 
-            <TextBox 
+        <TextBox 
             Text="placeholder - C:\Program Files (x86)\Sony\PS Remote Play\RemotePlay.exe - placeholder"
             x:Name="RemotePlayTextBox"
             />
 
-            <StackPanel Orientation="Horizontal">
-                <Button
+        <StackPanel Orientation="Horizontal">
+            <Button
                 Click="Handle_CheckRemoteRemotePlayPath"
                 Content="Check Path"
                 HorizontalAlignment="Left"
                 Width="200px"
                 />
 
-                <!-- used as a spacer -->
-                <TextBlock 
+            <!-- used as a spacer -->
+            <TextBlock 
                 Width="20px"/>
 
-                <Button
+            <Button
                 Click="Handle_InstallRemotePlay"
                 Content="Install latest Remote Play version"
                 HorizontalAlignment="Left"
                 Width="200px"
                 />
-            </StackPanel>
+        </StackPanel>
 
-            <TextBlock 
+        <TextBlock 
             Foreground="Red"
             Visibility="Hidden"
              x:Name="ErrorTextBox_RemotePlayPath"
             />
 
-            <!-- used as a spacer -->
-            <TextBlock />
+        <!-- used as a spacer -->
+        <TextBlock />
 
-            <!--
+        <!--
         <TextBlock TextWrapping="Wrap">What Playstation are we connecting to?</TextBlock>
         <RadioButton Content="PS4" />
         <RadioButton Content="PS5" />
         -->
 
-            <TextBlock FontWeight="Bold" FontSize="16">Step 4</TextBlock>
-            <TextBlock TextWrapping="Wrap">Is a  Playstation Controller already connected?</TextBlock>
-            <TextBlock TextWrapping="Wrap">If a  Playstation Controller is connected, either disconnect it or select NO for emulate</TextBlock>
+        <TextBlock FontWeight="Bold" FontSize="16">Step 4</TextBlock>
+        <TextBlock TextWrapping="Wrap">Is a Playstation Controller already connected?</TextBlock>
+        <TextBlock TextWrapping="Wrap">If it is connected please disconnect it</TextBlock>
 
-            <Button
+        <Button
             Click="Handle_DetectPlaystationController"
             Content="Recheck for Playstation Controller"
             HorizontalAlignment="Left"
             Width="200px"
             />
 
-            <TextBlock 
+        <TextBlock 
             Visibility="Hidden"
              x:Name="ErrorTextBox_PlaystationController"
             />
 
-            <!--
-        <TextBlock TextWrapping="Wrap">Emulate the controller?</TextBlock>
-        <RadioButton Content="Yes" />
-        <RadioButton Content="No" />
-        -->
+        <!-- used as a spacer -->
+        <TextBlock />
 
-            <!-- used as a spacer -->
-            <TextBlock />
+        <TextBlock FontWeight="Bold" FontSize="16">Step 5</TextBlock>
 
-            <TextBlock FontWeight="Bold" FontSize="16">Step 5</TextBlock>
+        <common:LogControl/>
 
-            <common:LogControl/>
+        <!-- used as a spacer -->
+        <TextBlock />
 
-            <!-- used as a spacer -->
-            <TextBlock />
+        <!-- used as a spacer -->
+        <TextBlock />
 
-            <!-- used as a spacer -->
-            <TextBlock />
-
-            <Button 
+        <Button 
             Click="Handle_LaunchRemotePlay"
             Content="Validate settings, and Launch RemotePlay"
             Width="250px"
             />
 
-        </StackPanel>
-    </ScrollViewer>
+    </StackPanel>
+
 </UserControl>

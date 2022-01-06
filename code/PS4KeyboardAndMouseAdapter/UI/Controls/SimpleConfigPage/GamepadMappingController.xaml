@@ -207,6 +207,7 @@
                 Tag="{x:Static config:VirtualKey.TouchButton}"
                 Content="{Binding Path=UserSettings.KeyboardMappings[(config:VirtualKey)TouchButton],  UpdateSourceTrigger=PropertyChanged}"
                 Margin="164,1,162,0" 
+                MaxWidth="100px"
                 Visibility="Visible"
                 />
 
@@ -225,7 +226,8 @@
                 Grid.Column="3"
                 Tag="{x:Static config:VirtualKey.PlaystationButton}"
                 Content="{Binding Path=UserSettings.KeyboardMappings[(config:VirtualKey)PlaystationButton], UpdateSourceTrigger=PropertyChanged}"
-                Margin="164,21,162,5" 
+                Margin="164,21,162,5"
+                MaxWidth="100px"
                 Visibility="Visible"
                 />
 

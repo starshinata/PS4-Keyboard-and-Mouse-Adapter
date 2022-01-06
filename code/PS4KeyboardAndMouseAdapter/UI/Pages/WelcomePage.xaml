@@ -11,72 +11,74 @@
     d:DesignWidth="700"
     >
 
-    <StackPanel>
+    <!-- if you change the immediate child of ScrollViewer check mouse wheel scroll works for Expander elements -->
+    <ScrollViewer
+          x:Name="ScrollViewer1">
+        <StackPanel>
 
-        <TextBlock 
-            Grid.Row="0"
-            FontSize="30" 
-            Text="Welcome!"
-            HorizontalAlignment="Center"
-            />
+            <TextBlock 
+                FontSize="30" 
+                Text="Welcome!"
+                HorizontalAlignment="Center"
+                />
 
-        <TextBlock 
-            Grid.Row="1"    
-            Text="Here are some settings that if you want to change, you will need to restart the app, so let's set them now"
-            />
+            <TextBlock 
+                Text="Here are some settings that if you want to change, you will need to restart the app, so let's set them now"
+                />
 
-        <!-- intentionally empty -->
-        <TextBlock Text="" />
+            <!-- intentionally empty -->
+            <TextBlock Text="" />
 
-        <Expander 
-            HorizontalContentAlignment="Stretch" 
-            IsExpanded="True"
-            x:Name="Expander_Step1">
-            <Expander.Header>
-                <TextBlock FontWeight="Bold" FontSize="20" Margin="10,0,0,0">Setup</TextBlock>
-            </Expander.Header>
-            <Expander.Content>
-                <welcome:WelcomeSetupControl />
-            </Expander.Content>
-        </Expander>
+            <Expander
+                IsExpanded="True"
+                PreviewMouseWheel="Handler_ExpanderProgegateScroll"
+                x:Name="Expander_Step1">
+                <Expander.Header >
+                    <TextBlock FontWeight="Bold" FontSize="20" Margin="10,0,0,0">Setup</TextBlock>
+                </Expander.Header>
+                <Expander.Content >
+                    <welcome:WelcomeSetupControl />
+                </Expander.Content>
+            </Expander>
 
-        <!-- intentionally empty -->
-        <TextBlock Text="" />
+            <!-- intentionally empty -->
+            <TextBlock Text="" />
 
-        <Expander
-            HorizontalContentAlignment="Stretch" 
-            IsEnabled="False"
-            IsExpanded="False"
-            Visibility="Hidden"
-            x:Name="Expander_Step2">
-            <Expander.Header>
-                <TextBlock FontWeight="Bold" FontSize="20" Margin="10,0,0,0">Start Remote Play</TextBlock>
-            </Expander.Header>
-            <Expander.Content>
-                <StackPanel Margin="40,0,0,0">
-                    <welcome:RemotePlayLaunchedControl />
-                </StackPanel>
-            </Expander.Content>
-        </Expander>
+            <Expander
+                IsEnabled="False"
+                IsExpanded="False"
+                PreviewMouseWheel="Handler_ExpanderProgegateScroll"
+                Visibility="Hidden"
+                x:Name="Expander_Step2">
+                <Expander.Header>
+                    <TextBlock FontWeight="Bold" FontSize="20" Margin="10,0,0,0">Start Remote Play</TextBlock>
+                </Expander.Header>
+                <Expander.Content>
+                    <StackPanel>
+                        <welcome:RemotePlayLaunchedControl />
+                    </StackPanel>
+                </Expander.Content>
+            </Expander>
 
-        <!-- intentionally empty -->
-        <TextBlock Text="" />
+            <!-- intentionally empty -->
+            <TextBlock Text="" />
 
-        <Expander
-            HorizontalContentAlignment="Stretch" 
-            IsEnabled="False"
-            IsExpanded="False"
-            Visibility="Hidden"
-            x:Name="Expander_Step3">
-            <Expander.Header>
-                <TextBlock FontWeight="Bold" FontSize="20" Margin="10,0,0,0">Connect to Remote Play</TextBlock>
-            </Expander.Header>
-            <Expander.Content>
-                <StackPanel Margin="40,0,0,0">
-                    <welcome:RemotePlayConnectedControl />
-                </StackPanel>
-            </Expander.Content>
-        </Expander>
-    </StackPanel>
+            <Expander
+                IsEnabled="False"
+                IsExpanded="False"
+                PreviewMouseWheel="Handler_ExpanderProgegateScroll"
+                Visibility="Hidden"
+                x:Name="Expander_Step3">
+                <Expander.Header>
+                    <TextBlock FontWeight="Bold" FontSize="20" Margin="10,0,0,0">Connect to Remote Play</TextBlock>
+                </Expander.Header>
+                <Expander.Content>
+                    <StackPanel>
+                        <welcome:RemotePlayConnectedControl />
+                    </StackPanel>
+                </Expander.Content>
+            </Expander>
 
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

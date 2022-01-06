@@ -10,7 +10,9 @@
     d:DesignWidth="680"
     >
 
-    <StackPanel>
+    <StackPanel
+        Width="640px">
+
         <TextBlock 
             HorizontalAlignment="Center"
             TextAlignment="Center"
@@ -64,5 +66,11 @@
             Content="I have clicked the BLUE button in 'Remote Play'"
             Width="300px"
             />
+
+        <!-- used as a spacer -->
+        <TextBlock />
+        <!-- used as a spacer -->
+        <TextBlock />
+        
     </StackPanel>
 </UserControl>

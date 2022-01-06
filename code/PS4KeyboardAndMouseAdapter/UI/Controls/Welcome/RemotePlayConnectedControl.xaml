@@ -10,8 +10,9 @@
     d:DesignWidth="680"
     >
 
-    <StackPanel>
-
+    <StackPanel
+        Width="640px">
+        
         <Image 
             Height="238"
             Width="400">
@@ -57,5 +58,10 @@
             Width="300px"
             />
 
+        <!-- used as a spacer -->
+        <TextBlock />
+        <!-- used as a spacer -->
+        <TextBlock />
+        
     </StackPanel>
 </UserControl>

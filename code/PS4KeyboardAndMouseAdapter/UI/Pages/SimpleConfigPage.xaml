@@ -7,35 +7,39 @@
 
     GotFocus="GotFocusLocal">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="360px" />
-            <RowDefinition Height="30px" />
-            <RowDefinition Height="280px" />
-        </Grid.RowDefinitions>
+    <ScrollViewer>
+        <Grid>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20px" />
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="30px"/>
-            <ColumnDefinition Width="5*"/>
-            <ColumnDefinition Width="20px" />
-        </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="360px" />
+                <RowDefinition Height="30px" />
+                <RowDefinition Height="280px" />
+            </Grid.RowDefinitions>
 
-        <controls:GamepadMappingController
-            x:Name="gamepadMappingControllerInner"
-            Grid.Row="0"  
-            Grid.Column="1"  
-            Grid.ColumnSpan="3"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20px" />
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="30px"/>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="20px" />
+            </Grid.ColumnDefinitions>
 
-        <controls:ProfileManager
-            Grid.Row="2"  
-            Grid.Column="1" />
+            <controls:GamepadMappingController
+                x:Name="gamepadMappingControllerInner"
+                Grid.Row="0"  
+                Grid.Column="1"  
+                Grid.ColumnSpan="3"/>
 
-        <controls:MouseSettingsSimpleControl
-            x:Name="mouseSettingsSimpleControl"
-            Grid.Row="2"  
-            Grid.Column="3" />
+            <controls:ProfileManager
+                Grid.Row="2"  
+                Grid.Column="1" />
 
-    </Grid>
+            <controls:MouseSettingsSimpleControl
+                x:Name="mouseSettingsSimpleControl"
+                Grid.Row="2"  
+                Grid.Column="3" />
+
+        </Grid>
+    </ScrollViewer>
+
 </UserControl>
