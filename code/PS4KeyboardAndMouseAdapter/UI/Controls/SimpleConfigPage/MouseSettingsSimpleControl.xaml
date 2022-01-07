@@ -8,7 +8,7 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="5*" />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -20,21 +20,16 @@
             <RowDefinition Height="15px" />
 
             <!-- row 5 -->
-            <RowDefinition Height="32px" />
-            <RowDefinition Height="8px" />
-            <RowDefinition Height="32px" />
-            <RowDefinition Height="21px" />
+            <RowDefinition Height="30px" />
+            <RowDefinition Height="8" />
+            <RowDefinition Height="30px" />
+            <RowDefinition Height="10" />
             <RowDefinition Height="21px" />
 
             <!-- row 10 -->
             <RowDefinition Height="21px" />
-            <RowDefinition Height="21px" />
-            <RowDefinition Height="21px" />
-
         </Grid.RowDefinitions>
-        <!-- LEFT half of controller -->
     
-<!--
         <TextBlock
             Grid.Row="0"
             Grid.Column="0"
@@ -44,7 +39,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Text="Mouse Settings"/>
--->
+
         <TextBlock
             Grid.Row="1"
             Grid.Column="0"

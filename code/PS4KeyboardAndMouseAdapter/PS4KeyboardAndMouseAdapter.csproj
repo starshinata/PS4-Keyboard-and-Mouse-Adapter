@@ -460,6 +460,11 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+  <Content Include="profile-previous.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+	  </ItemGroup>
+  <ItemGroup>
     <Content Include="..\packages\CSFML.2.5.0\runtimes\win-x86\native\csfml-Window.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

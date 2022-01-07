@@ -7,37 +7,34 @@
 
     GotFocus="GotFocusLocal">
 
-    <ScrollViewer>
+    <ScrollViewer Margin="0,0,0,0">
         <Grid>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="360px" />
-                <RowDefinition Height="30px" />
-                <RowDefinition Height="280px" />
+                <RowDefinition Height="350px" />
+                <RowDefinition Height="15px" />
+                <RowDefinition Height="230px" />
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="20px" />
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="62*"/>
                 <ColumnDefinition Width="30px"/>
-                <ColumnDefinition Width="5*"/>
-                <ColumnDefinition Width="20px" />
+                <ColumnDefinition Width="129*"/>
             </Grid.ColumnDefinitions>
 
             <controls:GamepadMappingController
                 x:Name="gamepadMappingControllerInner"
                 Grid.Row="0"  
-                Grid.Column="1"  
+                Grid.Column="0"  
                 Grid.ColumnSpan="3"/>
 
             <controls:ProfileManager
-                Grid.Row="2"  
-                Grid.Column="1" />
+                Grid.Row="2" />
 
             <controls:MouseSettingsSimpleControl
                 x:Name="mouseSettingsSimpleControl"
                 Grid.Row="2"  
-                Grid.Column="3" />
+                Grid.Column="2" />
 
         </Grid>
     </ScrollViewer>
