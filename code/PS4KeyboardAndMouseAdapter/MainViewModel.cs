@@ -17,17 +17,13 @@ namespace Pizza.KeyboardAndMouseAdapter
 
         public MainViewModel()
         {
-            Log.Information("MainViewModel constructor IN");
             GamepadProcessor = new GamepadProcessor();
-            Log.Information("MainViewModel constructor OUT");
         }
 
         public void RefreshData()
         {
-            Log.Debug("MainViewModel RefreshData IN");
             InstanceSettings.BroadcastRefresh();
             UserSettings.BroadcastRefresh();
-            Log.Debug("MainViewModel RefreshData IN");
         }
 
     }
