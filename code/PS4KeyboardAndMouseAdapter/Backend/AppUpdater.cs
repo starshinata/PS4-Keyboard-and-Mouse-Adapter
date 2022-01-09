@@ -103,7 +103,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
             }
             catch (Exception ex)
             {
-                ExceptionLogger.LogException("AppUpdater.UpdateIfAvailable() Github Update failed: ", ex);
+                ExceptionLogger.LogException("AppUpdater.UpdateIfAvailable() Github Update failed", ex);
             }
             Log.Information("AppUpdater.UpdateIfAvailable() update check completed");
         }
