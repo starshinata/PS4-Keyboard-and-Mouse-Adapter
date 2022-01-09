@@ -49,7 +49,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
             }
             catch (Exception ex)
             {
-                Log.Information("AppUpdater.printCurrentlyInstalledNugetVersion() unavailable ({0})", ex.Message);
+                ExceptionLogger.LogException("AppUpdater.RemoveNewShortcuts Shortcut deletion failed", ex);
             }
         }
 
