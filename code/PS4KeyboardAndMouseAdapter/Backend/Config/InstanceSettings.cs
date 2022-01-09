@@ -27,23 +27,11 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 
         public bool EnableMouseInput { get; set; } = false;
 
-        private GamepadProcessor gamepadprocessor = null;
-
         private LogManager logManager = null;
 
         private VigemInternals vigemInternals = null;
 
         //////////////////////////////////////////////////////////////////////
-
-        public GamepadProcessor GetGamepadProcessor()
-        {
-            return gamepadprocessor;
-        }
-
-        public void SetGamepadProcessor(GamepadProcessor value)
-        {
-            gamepadprocessor = value;
-        }
 
         public LogManager GetLogManager()
         {
