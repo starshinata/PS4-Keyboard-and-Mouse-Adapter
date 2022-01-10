@@ -21,9 +21,9 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
 
         private IDualShock4Controller controller;
 
-        private void listen()
+        private void Listen()
         {
-            Log.Information("VigemManager.listen");
+            Log.Information("VigemInternals.Listen");
 
 
             GamepadProcessor gp = new GamepadProcessor();
@@ -54,12 +54,12 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
                     }
                     catch (Exception ex)
                     {
-                        ExceptionLogger.LogException("VigemManager.listen L58", ex);
+                        ExceptionLogger.LogException("VigemInternals.Listen L58", ex);
                     }
 
                     SleepTimer.Restart();
                     int MillisecondsPerInput = 0; // 1000 / UserSettings.GetInstance().MousePollingRate;
-                    sleep(MillisecondsPerInput);
+                    Sleep(MillisecondsPerInput);
                     long sleepDuration = SleepTimer.ElapsedMilliseconds;
 
                     //Log.Information("MillisecondsPerInput {0}", MillisecondsPerInput);
@@ -71,7 +71,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
                     if (RequestsPerSecondTimer.ElapsedMilliseconds >= 1000)
                     {
                         //Log.Information("MillisecondsPerInput {0}", MillisecondsPerInput);
-                        //Log.Information("VigemManager.listen  RequestsPerSecondCounter={0}", RequestsPerSecondCounter);
+                        //Log.Information("VigemInternals.listen  RequestsPerSecondCounter={0}", RequestsPerSecondCounter);
                         RequestsPerSecondTimer.Restart();
                         RequestsPerSecondCounter = 0;
                     }
@@ -80,7 +80,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
 
         }
 
-        public void sleep(int sleepDuration)
+        public void Sleep(int sleepDuration)
         {
             // 2021.12.22 pancakeslp
             // 15ms as that seems to be roughly the minimum amount of time Thread.Sleep can sleep for on Windows
@@ -99,48 +99,49 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
             System.Threading.Thread.Sleep(revisedSleepDuration);
         }
 
-        public void startAndListen()
+        public void StartAndListen()
         {
-            Log.Information("VigemManager.startAndListen");
-            start_ViGEm();
-            start_controller();
-            listen();
+            Log.Information("VigemInternals.StartAndListen");
+            Start_ViGEm();
+            Start_controller();
+            Listen();
         }
 
-        public void start()
+        public void Start()
         {
-            Log.Information("VigemManager.startAndListen");
-            start_ViGEm();
-            start_controller();
+            Log.Information("VigemInternals.Start");
+            Start_ViGEm();
+            Start_controller();
 
         }
 
-        private void start_controller()
+        private void Start_controller()
         {
-            Log.Information("VigemManager.start_controller");
+            Log.Information("VigemInternals.Start_controller");
             controller = vigemClient.CreateDualShock4Controller(VENDOR_ID, PRODUCT_ID);
             controller.Connect();
         }
 
-        private void start_ViGEm()
+        private void Start_ViGEm()
         {
-            Log.Information("VigemManager.start_ViGEm");
+            Log.Information("VigemInternals.Start_ViGEm");
             vigemClient = new ViGEmClient();
             //System.Threading.Thread.Sleep(1000);        }
         }
 
-        public void stop()
+        public void Stop()
         {
-            stop_controller();
-            stop_ViGEm();
+            Log.Information("VigemInternals.Stop");
+            Stop_controller();
+            Stop_ViGEm();
         }
 
-        private void stop_controller()
+        private void Stop_controller()
         {
             controller.Disconnect();
         }
 
-        private void stop_ViGEm()
+        private void Stop_ViGEm()
         {
             if (vigemClient != null)
             {

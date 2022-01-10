@@ -18,9 +18,9 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
             try
             {
                 VigemInternals vig = new VigemInternals();
-                vig.start();
+                vig.Start();
                 System.Threading.Thread.Sleep(1000);
-                vig.stop();
+                vig.Stop();
             }
             catch (Nefarius.ViGEm.Client.Exceptions.VigemBusNotFoundException e)
             {
@@ -48,7 +48,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
                 System.Threading.Thread.Sleep(1000);
                 VigemInternals vig = new VigemInternals();
                 InstanceSettings.GetInstance().SetVigemInternals(vig);
-                vig.startAndListen();
+                vig.StartAndListen();
             }
             catch (Nefarius.ViGEm.Client.Exceptions.VigemBusNotFoundException e)
             {
@@ -84,7 +84,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
                     VigemInternals vig = instanceSettings.GetVigemInternals();
                     if (vig != null)
                     {
-                        vig.stop();
+                        vig.Stop();
                     }
                 }
             }
