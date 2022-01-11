@@ -8,7 +8,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
     {
         private readonly int THREE_HUNDRED_MB_AS_BYTES = 300 * 1024 * 1024;
 
-        LoggingLevelSwitch levelSwitch;
+        private LoggingLevelSwitch levelSwitch;
 
         public LogEventLevel GetLoggingLevel()
         {

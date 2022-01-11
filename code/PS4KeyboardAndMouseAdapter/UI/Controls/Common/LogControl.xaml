@@ -8,6 +8,8 @@
     mc:Ignorable="d" 
     d:DesignHeight="100" 
     d:DesignWidth="680"
+
+    xmlns:common="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls.Common"
     >
 
     <StackPanel>
@@ -20,9 +22,9 @@
             Name="Combo_LogLevel"
             SelectionChanged="Handle_LogLevelChanged"
             Width="100px">
-            <ComboBoxItem Tag="0">Default</ComboBoxItem>
-            <ComboBoxItem Tag="1">Debug</ComboBoxItem>
-            <ComboBoxItem Tag="2">Verbose</ComboBoxItem>
+            <ComboBoxItem Tag="{x:Static common:LogControl.TAG_LOG_DEFAULT}">Default</ComboBoxItem>
+            <ComboBoxItem Tag="{x:Static common:LogControl.TAG_LOG_DEBUG}">Debug</ComboBoxItem>
+            <ComboBoxItem Tag="{x:Static common:LogControl.TAG_LOG_VERBOSE}">Verbose</ComboBoxItem>
         </ComboBox>
 
         <Button

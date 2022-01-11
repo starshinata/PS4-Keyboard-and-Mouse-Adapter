@@ -126,7 +126,6 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
         {
             Log.Information("VigemInternals.Start_ViGEm");
             vigemClient = new ViGEmClient();
-            //System.Threading.Thread.Sleep(1000);        }
         }
 
         public void Stop()
