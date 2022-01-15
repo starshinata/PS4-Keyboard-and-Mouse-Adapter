@@ -1,6 +1,7 @@
 ﻿using Nefarius.ViGEm.Client;
 using Nefarius.ViGEm.Client.Targets;
 using Pizza.Common;
+using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using Serilog;
 using System;
 using System.Diagnostics;
@@ -58,7 +59,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
                     }
 
                     SleepTimer.Restart();
-                    int MillisecondsPerInput = 0; // 1000 / UserSettings.GetInstance().MousePollingRate;
+                    int MillisecondsPerInput = 1000 / UserSettings.GetInstance().MousePollingRate;
                     Sleep(MillisecondsPerInput);
                     long sleepDuration = SleepTimer.ElapsedMilliseconds;
 
