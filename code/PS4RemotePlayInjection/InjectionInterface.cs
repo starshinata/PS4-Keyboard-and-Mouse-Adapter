@@ -37,37 +37,33 @@ namespace PS4RemotePlayInterceptor
     /// </summary>
     public class InjectionInterface : MarshalByRefObject
     {
-        //TODO write something the uses each log level as injector init
+
         public void LogError(string msg)
         {
             // maybe error is bad when injected?
-            Log.Logger.Debug("ERROR" + msg);
+            Log.Debug("ERROR" + msg);
         }
 
         public void LogError(Exception e, string msg)
         {
             // maybe error is bad when injected?
-            Log.Logger.Debug("ERROR" + msg);
-            Log.Logger.Debug(e, "");
+            Log.Debug("ERROR" + msg);
+            Log.Debug(e, "");
         }
 
         public void LogDebug(string msg)
         {
-            Log.Logger.Debug(msg);
+            Log.Debug(msg);
         }
 
         public void LogInformation(string msg)
         {
-            Log.Logger.Information(msg);
+            Log.Information(msg);
         }
 
         public void LogVerbose(string msg)
         {
-            //Log.Logger.Verbose(msg);
-        }
-        public void LogVerboseForControllerIO(string msg)
-        {
-            Log.Logger.Verbose(msg);
+            Log.Verbose(msg);
         }
 
         double mapByteTo0to1(byte b)
@@ -86,17 +82,17 @@ namespace PS4RemotePlayInterceptor
         public void OnInjectionSuccess(int clientPID)
         {
             // printing at all four levels to confirm what logging it working
-            Log.Logger.Error("(NOT AN ERROR) OnInjectionSuccess clientPID {0}", clientPID);
-            Log.Logger.Verbose("OnInjectionSuccess clientPID {0}", clientPID);
-            Log.Logger.Debug("OnInjectionSuccess clientPID {0}", clientPID);
-            Log.Logger.Information("OnInjectionSuccess clientPID {0}", clientPID);
+            Log.Error("(NOT AN ERROR) OnInjectionSuccess clientPID {0}", clientPID);
+            Log.Verbose("OnInjectionSuccess clientPID {0}", clientPID);
+            Log.Debug("OnInjectionSuccess clientPID {0}", clientPID);
+            Log.Information("OnInjectionSuccess clientPID {0}", clientPID);
         }
 
         public void OnReadFile(string filename, ref byte[] inputReport)
         {
             try
             {
-                Log.Logger.Verbose("InjectionInterface.OnReadFile filename " + filename);
+                Log.Verbose("InjectionInterface.OnReadFile filename " + filename);
 
                 //if((printFrequency++)%30 == 0)
                 //  PrintAnalogSticksAsDegrees(inputReport.Skip(1).Take(4).ToArray());
@@ -104,7 +100,7 @@ namespace PS4RemotePlayInterceptor
                 // Expect inputReport to be modified
                 if (Injector.Callback != null)
                 {
-                    Log.Logger.Verbose("InjectionInterface.OnReadFile Injector.Callback " + Injector.Callback.ToString());
+                    Log.Verbose("InjectionInterface.OnReadFile Injector.Callback " + Injector.Callback.ToString());
                     // Parse the state
                     DualShockState state = DualShockState.ParseFromDualshockRaw(inputReport);
 
@@ -121,7 +117,7 @@ namespace PS4RemotePlayInterceptor
             }
             catch (Exception ex)
             {
-                ExceptionLogger.LogException("Problem in OnReadFile: ", ex);
+                ExceptionLogger.LogException("InjectionInterface.OnReadFile error", ex);
             }
         }
 
@@ -162,7 +158,7 @@ namespace PS4RemotePlayInterceptor
                 EmulationConstants.VIGEM_AND_PROCESS_INJECTION.Equals(Injector.EmulationMode)) &&
                 UtilityData.IsToolBarVisible;
 
-            Log.Logger.Information("InjectionInterface.ShouldShowToolbar {0}", x);
+            Log.Information("InjectionInterface.ShouldShowToolbar {0}", x);
             return x;
         }
     }
