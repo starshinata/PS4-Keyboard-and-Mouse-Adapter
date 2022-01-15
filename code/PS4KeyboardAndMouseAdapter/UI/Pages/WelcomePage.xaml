@@ -4,11 +4,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      
-    xmlns:welcome="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls.Welcome"
+
     mc:Ignorable="d" 
     d:DesignHeight="700" 
     d:DesignWidth="700"
+
+    xmlns:welcome="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls.Welcome"
     >
 
     <!-- if you change the immediate child of ScrollViewer check mouse wheel scroll works for Expander elements -->
