@@ -1,6 +1,6 @@
-﻿using Pizza.KeyboardAndMouseAdapter.Backend.Vigem;
-using Pizza.Common;
+﻿using Pizza.Common;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
+using Pizza.KeyboardAndMouseAdapter.Backend.Vigem;
 using Serilog;
 using System;
 using System.Collections.Generic;
