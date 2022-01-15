@@ -23,6 +23,7 @@
 // THE SOFTWARE.
 
 using EasyHook;
+using Pizza.Common;
 using PS4RemotePlayInterceptor;
 using System;
 using System.Collections.Generic;
@@ -56,8 +57,6 @@ namespace PS4RemotePlayInjection
             _server = server;
         }
 
-
-
         private static byte[] ToManagedArray(IntPtr pointer, int size)
         {
             byte[] managedArray = new byte[size];
@@ -80,10 +79,10 @@ namespace PS4RemotePlayInjection
 
         private bool IsRemotePlayRunning()
         {
-            _server.LogDebug("PatcherGamepad.IsRemotePlayRunning  UtilityData.pid: " + UtilityData.pid);
-            _server.LogDebug("PatcherGamepad.IsRemotePlayRunning  UtilityData.remotePlayPid: " + UtilityData.RemotePlayProcess);
-            _server.LogDebug("PatcherGamepad.IsRemotePlayRunning  current pid " + Process.GetCurrentProcess());
-            _server.LogDebug("PatcherGamepad.IsRemotePlayRunning  current pid " + Process.GetCurrentProcess().Id);
+            _server.LogDebug("PatcherGamepad.IsRemotePlayRunning UtilityData.pid: " + UtilityData.pid);
+            _server.LogDebug("PatcherGamepad.IsRemotePlayRunning UtilityData.remotePlayPid: " + UtilityData.RemotePlayProcess);
+            _server.LogDebug("PatcherGamepad.IsRemotePlayRunning current pid " + Process.GetCurrentProcess());
+            _server.LogDebug("PatcherGamepad.IsRemotePlayRunning current pid " + Process.GetCurrentProcess().Id);
 
             var process = UtilityData.RemotePlayProcess;
             if (process == null)
@@ -94,7 +93,7 @@ namespace PS4RemotePlayInjection
 
             if (process != null)
             {
-                _server.LogDebug("PatcherGamepad.IsRemotePlayRunning  process: " + process.Id);
+                _server.LogDebug("PatcherGamepad.IsRemotePlayRunning process: " + process.Id);
 
                 Process[] processCollection = Process.GetProcesses();
                 foreach (Process p in processCollection)
@@ -376,12 +375,7 @@ namespace PS4RemotePlayInjection
             }
             catch (Exception e)
             {
-                // originally this was a catch, and throw away
-                // (so that any issues caused by this code do not crash target process)
-                // but now i want exceptions logged
-
-                _server.LogError("PatcherGamepad.432 exception");
-                _server.LogError(e.ToString());
+                ExceptionLogger.LogException("PatcherGamepad.CreateFile_Hook error L378", e);
             }
 
             // now call the original API...
@@ -456,35 +450,35 @@ namespace PS4RemotePlayInjection
                 _server.LogVerbose("PatcherGamepad.ReadFile_Hook isPSRemoteRunning? " + IsRemotePlayRunning());
                 if (_server.ShouldEmulateController())
                 {
-                    _server.LogVerbose("PatcherGamepad.ReadFile_Hook 541 emulatedController");
+                    _server.LogVerbose("PatcherGamepad.ReadFile_Hook emulatedController");
                     // SPOOF
                     result = true;
                     try
                     {
-                        _server.LogVerbose("PatcherGamepad.ReadFile_Hook 546");
+                        _server.LogVerbose("PatcherGamepad.ReadFile_Hook L458");
                         // Call original for any other files
                         if (hFile != _dummyHandle)
                         {
-                            _server.LogVerbose("PatcherGamepad.ReadFile_Hook 550");
+                            _server.LogVerbose("PatcherGamepad.ReadFile_Hook L462");
                             result = ReadFile(hFile, lpBuffer, nNumberOfBytesToRead, out lpNumberOfBytesRead, lpOverlapped);
                         }
 
-                        _server.LogVerbose("PatcherGamepad.ReadFile_Hook 554");
+                        _server.LogVerbose("PatcherGamepad.ReadFile_Hook L466");
                         // Retrieve filename from the file handle
                         StringBuilder filename = new StringBuilder(255);
 
-                        _server.LogVerbose("PatcherGamepad.ReadFile_Hook 558");
+                        _server.LogVerbose("PatcherGamepad.ReadFile_Hook L470");
                         GetFinalPathNameByHandle(hFile, filename, 255, 0);
                         _server.LogVerbose("PatcherGamepad.ReadFile_Hook file " + filename.ToString());
-                        _server.LogVerbose("PatcherGamepad.ReadFile_Hook 561");
+                        _server.LogVerbose("PatcherGamepad.ReadFile_Hook L473");
 
                         if (hFile == _dummyHandle && nNumberOfBytesToRead == 2048 && lpNumberOfBytesRead == 0)
                         {
-                            _server.LogVerbose("PatcherGamepad.ReadFile_Hook 565");
+                            _server.LogVerbose("PatcherGamepad.ReadFile_Hook L477");
                             _server.LogVerbose("PatcherGamepad.ReadFile_Hook dummyHandle");
                             lpNumberOfBytesRead = bufferSize;
 
-                            _server.LogVerbose("PatcherGamepad.ReadFile_Hook 569");
+                            _server.LogVerbose("PatcherGamepad.ReadFile_Hook L481");
                             // Create fake report buffer
                             byte[] fakeReport = fakeReport = new byte[bufferSize]
                             {
@@ -493,32 +487,27 @@ namespace PS4RemotePlayInjection
                                 0, 0, 0, 128, 0, 0, 0, 128, 0, 0, 0, 0, 128, 0
                             };
 
-                            _server.LogVerbose("PatcherGamepad.ReadFile_Hook 578");
+                            _server.LogVerbose("PatcherGamepad.ReadFile_Hook L490");
 
                             // Assign the spoofed frame counter
                             __frameCounter++;
                             fakeReport[7] = (byte)((__frameCounter << 2) & 0xFF);
-                            _server.LogVerbose("PatcherGamepad.ReadFile_Hook 583");
+                            _server.LogVerbose("PatcherGamepad.ReadFile_Hook L495");
 
                             // Send to server
                             _server.OnReadFile(filename.ToString(), ref fakeReport);
-                            _server.LogVerbose("PatcherGamepad.ReadFile_Hook 587");
+                            _server.LogVerbose("PatcherGamepad.ReadFile_Hook L499");
 
                             // Restore managedArray back to unmanaged array
                             RestoreUnmanagedArray(lpBuffer, fakeReport.Length, fakeReport);
-                            _server.LogVerbose("PatcherGamepad.ReadFile_Hook 591");
+                            _server.LogVerbose("PatcherGamepad.ReadFile_Hook L503");
 
                             return result;
                         }
                     }
                     catch (Exception e)
                     {
-                        // originally this was a catch, and throw away
-                        // (so that any issues caused by this code do not crash target process)
-                        // but now i want exceptions logged
-
-                        _server.LogError("PatcherGamepad.550 exception");
-                        _server.LogError(e.ToString());
+                        ExceptionLogger.LogException("PatcherGamepad.ReadFile_Hook error L510", e);
                     }
                 }
                 else
@@ -560,26 +549,16 @@ namespace PS4RemotePlayInjection
                     }
                     catch (Exception e)
                     {
-                        // originally this was a catch, and throw away
-                        // (so that any issues caused by this code do not crash target process)
-                        // but now i want exceptions logged
-
-                        _server.LogError("PatcherGamepad.595 exception");
-                        _server.LogError(e.ToString());
+                        ExceptionLogger.LogException("PatcherGamepad.ReadFile_Hook error L552", e);
                     }
                 }
             }
             catch (Exception e)
             {
-                // originally this was a catch, and throw away
-                // (so that any issues caused by this code do not crash target process)
-                // but now i want exceptions logged
-
-                _server.LogError("PatcherGamepad.605 exception");
-                _server.LogError(e.ToString());
+                ExceptionLogger.LogException("PatcherGamepad.ReadFile_Hook error L558", e);
             }
 
-            _server.LogVerbose("PatcherGamepad.ReadFile_Hook 664");
+            _server.LogVerbose("PatcherGamepad.ReadFile_Hook L561");
 
             return result;
         }
@@ -652,12 +631,7 @@ namespace PS4RemotePlayInjection
             }
             catch (Exception e)
             {
-                // originally this was a catch, and throw away
-                // (so that any issues caused by this code do not crash target process)
-                // but now i want exceptions logged
-
-                _server.LogError("PatcherGamepad.684 exception");
-                _server.LogError(e.ToString());
+                ExceptionLogger.LogException("PatcherGamepad.WriteFile_Hook error L634", e);
             }
 
             return result;
@@ -705,12 +679,7 @@ namespace PS4RemotePlayInjection
             }
             catch (Exception e)
             {
-                // originally this was a catch, and throw away
-                // (so that any issues caused by this code do not crash target process)
-                // but now i want exceptions logged
-
-                _server.LogError("PatcherGamepad.736 exception");
-                _server.LogError(e.ToString());
+                ExceptionLogger.LogException("PatcherGamepad.HidD_GetAttributes_Hook error L682", e);
             }
 
             return result;
@@ -746,7 +715,7 @@ namespace PS4RemotePlayInjection
 
                             if (lpReportBuffer == 0x12)
                             {
-                                _server.LogVerbose("PatcherGamepad.HidD_GetFeature_Hook 848");
+                                _server.LogVerbose("PatcherGamepad.HidD_GetFeature_Hook L718");
                                 byte[] report =
                                 {
                                     18, 198, 3, 170, 95, 27, 64, 8, 37, 0, 172, 252, 74, 74, 71, 168
@@ -755,7 +724,7 @@ namespace PS4RemotePlayInjection
                             }
                             else if (lpReportBuffer == 0xA3)
                             {
-                                _server.LogVerbose("PatcherGamepad.HidD_GetFeature_Hook 857");
+                                _server.LogVerbose("PatcherGamepad.HidD_GetFeature_Hook L727");
                                 byte[] report =
                                 {
                                     163, 77, 97, 121, 32, 49, 55, 32, 50, 48, 49, 54, 0, 0, 0, 0, 0, 48, 54, 58,
@@ -766,7 +735,7 @@ namespace PS4RemotePlayInjection
                             }
                             else if (lpReportBuffer == 0x02)
                             {
-                                _server.LogVerbose("PatcherGamepad.HidD_GetFeature_Hook 868");
+                                _server.LogVerbose("PatcherGamepad.HidD_GetFeature_Hook L738");
                                 byte[] report =
                                 {
                                     2, 6, 0, 3, 0, 252, 255, 133, 34, 133, 221, 237, 34, 31, 221, 228, 35, 13,
@@ -785,12 +754,7 @@ namespace PS4RemotePlayInjection
             }
             catch (Exception e)
             {
-                // originally this was a catch, and throw away
-                // (so that any issues caused by this code do not crash target process)
-                // but now i want exceptions logged
-
-                _server.LogError("PatcherGamepad.811 exception");
-                _server.LogError(e.ToString());
+                ExceptionLogger.LogException("PatcherGamepad.HidD_GetFeature_Hook error L757", e);
             }
 
             return result;
@@ -824,12 +788,7 @@ namespace PS4RemotePlayInjection
             }
             catch (Exception e)
             {
-                // originally this was a catch, and throw away
-                // (so that any issues caused by this code do not crash target process)
-                // but now i want exceptions logged
-
-                _server.LogError("PatcherGamepad.849 exception");
-                _server.LogError(e.ToString());
+                ExceptionLogger.LogException("PatcherGamepad.HidD_SetFeature_Hook error L791", e);
             }
 
             return result;
@@ -864,12 +823,7 @@ namespace PS4RemotePlayInjection
             }
             catch (Exception e)
             {
-                // originally this was a catch, and throw away
-                // (so that any issues caused by this code do not crash target process)
-                // but now i want exceptions logged
-
-                _server.LogError("PatcherGamepad.887 exception");
-                _server.LogError(e.ToString());
+                ExceptionLogger.LogException("PatcherGamepad.HidD_GetPreparsedData_Hook error L826", e);
             }
 
             return result;
@@ -904,12 +858,7 @@ namespace PS4RemotePlayInjection
             }
             catch (Exception e)
             {
-                // originally this was a catch, and throw away
-                // (so that any issues caused by this code do not crash target process)
-                // but now i want exceptions logged
-
-                _server.LogError("PatcherGamepad.921 exception");
-                _server.LogError(e.ToString());
+                ExceptionLogger.LogException("PatcherGamepad.HidD_FreePreparsedData_Hook error L861", e);
             }
 
             return result;
@@ -964,12 +913,7 @@ namespace PS4RemotePlayInjection
             }
             catch (Exception e)
             {
-                // originally this was a catch, and throw away
-                // (so that any issues caused by this code do not crash target process)
-                // but now i want exceptions logged
-
-                _server.LogError("PatcherGamepad.983 exception");
-                _server.LogError(e.ToString());
+                ExceptionLogger.LogException("PatcherGamepad.HidD_GetManufacturerString_Hook error L916", e);
             }
             return result;
         }
@@ -1026,12 +970,7 @@ namespace PS4RemotePlayInjection
             }
             catch (Exception e)
             {
-                // originally this was a catch, and throw away
-                // (so that any issues caused by this code do not crash target process)
-                // but now i want exceptions logged
-
-                _server.LogError("PatcherGamepad.1043 exception");
-                _server.LogError(e.ToString());
+                ExceptionLogger.LogException("PatcherGamepad.HidD_GetProductString_Hook error L973", e);
             }
 
             return result;
@@ -1069,12 +1008,7 @@ namespace PS4RemotePlayInjection
             }
             catch (Exception e)
             {
-                // originally this was a catch, and throw away
-                // (so that any issues caused by this code do not crash target process)
-                // but now i want exceptions logged
-
-                _server.LogError("PatcherGamepad.1084 exception");
-                _server.LogError(e.ToString());
+                ExceptionLogger.LogException("PatcherGamepad.HidD_GetSerialNumberString_Hook error L1011", e);
             }
 
             return result;
@@ -1147,12 +1081,7 @@ namespace PS4RemotePlayInjection
             }
             catch (Exception e)
             {
-                // originally this was a catch, and throw away
-                // (so that any issues caused by this code do not crash target process)
-                // but now i want exceptions logged
-
-                _server.LogError("PatcherGamepad.1160 exception");
-                _server.LogError(e.ToString());
+                ExceptionLogger.LogException("PatcherGamepad.HidP_GetCaps_Hook error L1084", e);
             }
 
             return result;
@@ -1377,12 +1306,7 @@ namespace PS4RemotePlayInjection
             }
             catch (Exception e)
             {
-                // originally this was a catch, and throw away
-                // (so that any issues caused by this code do not crash target process)
-                // but now i want exceptions logged
-
-                _server.LogError("PatcherGamepad.HidP_GetValueCaps_Hook exception");
-                _server.LogError(e.ToString());
+                ExceptionLogger.LogException("PatcherGamepad.HidP_GetValueCaps_Hook error L1309", e);
             }
 
             return result;

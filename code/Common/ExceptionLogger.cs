@@ -5,13 +5,13 @@ namespace Pizza.Common
 {
     public class ExceptionLogger
     {
-        private static readonly ILogger StaticLogger = Log.ForContext(typeof(ExceptionLogger));
+        //private static readonly ILogger StaticLogger = Log.ForContext(typeof(ExceptionLogger));
 
         public static void LogException(string message, Exception e)
         {
-            StaticLogger.Error(message + e.Message);
-            StaticLogger.Error(e.GetType().ToString());
-            StaticLogger.Error(e.StackTrace);
+            Log.Error(message + e.Message);
+            Log.Error(e.GetType().ToString());
+            Log.Error(e.StackTrace);
         }
     }
 }
