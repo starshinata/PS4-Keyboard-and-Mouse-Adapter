@@ -24,12 +24,12 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
             }
             catch (Nefarius.ViGEm.Client.Exceptions.VigemBusNotFoundException e)
             {
-                ExceptionLogger.LogException("VigemManager.IsVigemDriverInstalled a", e);
+                ExceptionLogger.LogException("VigemManager.IsVigemDriverInstalled error L27", e);
                 return false;
             }
             catch (Exception e)
             {
-                ExceptionLogger.LogException("VigemManager.IsVigemDriverInstalled b", e);
+                ExceptionLogger.LogException("VigemManager.IsVigemDriverInstalled error L32", e);
                 return false;
             }
 
@@ -52,20 +52,20 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
             }
             catch (Nefarius.ViGEm.Client.Exceptions.VigemBusNotFoundException e)
             {
-                ExceptionLogger.LogException("VigemManager.Start", e);
+                ExceptionLogger.LogException("VigemManager.Start error L55", e);
 
                 System.Windows.MessageBox.Show("Vigembus not installed!",
-                    "Error reading file",
+                    "Fatal Error",
                     (MessageBoxButton)MessageBoxButtons.OK,
                     (MessageBoxImage)MessageBoxIcon.Error);
                 System.Windows.Forms.Application.Exit();
             }
             catch (Exception e)
             {
-                ExceptionLogger.LogException("VigemManager.Start", e);
+                ExceptionLogger.LogException("VigemManager.Start error L65", e);
 
                 System.Windows.MessageBox.Show("whoops! tell the developer he failed",
-                    "Error reading file",
+                    "Fatal Error",
                     (MessageBoxButton)MessageBoxButtons.OK,
                     (MessageBoxImage)MessageBoxIcon.Error);
                 System.Windows.Forms.Application.Exit();
@@ -93,11 +93,11 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
             // so there it no point to call application exit
             catch (Nefarius.ViGEm.Client.Exceptions.VigemBusNotFoundException e)
             {
-                ExceptionLogger.LogException("VigemManager.Stop", e);
+                ExceptionLogger.LogException("VigemManager.Stop error L96", e);
             }
             catch (Exception e)
             {
-                ExceptionLogger.LogException("VigemManager.Stop", e);
+                ExceptionLogger.LogException("VigemManager.Stop error L100", e);
             }
         }
 
