@@ -11,14 +11,13 @@
 
 ### v 2.2.3
 
-* Fix for "application-extract-me.zip" sometime corrupting itself on first run
+* Fix for "application-extract-me.zip" sometimes corrupting itself on first run
 
-* Made update logic smarter so it doesnt try to install an update, if we are already running that version <br>
+* Made 'update logic' smarter so it doesnt try to double install an update <br>
+  As in it wont try to install the version we are currently running<br>
   For example if we are on v10.20.30 it wont update / redownload v10.20.30
 
-* More try catches to catch and log exceptions
-
-* Better logging for exceptions
+* Better exception management, and exception logging
 
 
 ### v 2.2.2
