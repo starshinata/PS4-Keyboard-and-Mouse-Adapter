@@ -41,14 +41,12 @@ namespace PS4RemotePlayInterceptor
         public void LogError(string msg)
         {
             // maybe error is bad when injected?
-            Log.Debug("ERROR" + msg);
+            Log.Error("ERROR" + msg);
         }
 
         public void LogError(Exception e, string msg)
         {
-            // maybe error is bad when injected?
-            Log.Debug("ERROR" + msg);
-            Log.Debug(e, "");
+            ExceptionLogger.LogException(msg, e);
         }
 
         public void LogDebug(string msg)
