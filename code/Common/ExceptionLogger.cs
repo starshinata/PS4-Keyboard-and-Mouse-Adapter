@@ -5,8 +5,6 @@ namespace Pizza.Common
 {
     public class ExceptionLogger
     {
-        //private static readonly ILogger StaticLogger = Log.ForContext(typeof(ExceptionLogger));
-
         public static void LogException(string message, Exception e)
         {
             Log.Error(message + e.Message);
