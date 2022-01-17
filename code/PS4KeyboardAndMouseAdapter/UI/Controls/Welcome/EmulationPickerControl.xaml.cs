@@ -32,12 +32,18 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.Welcome
 
         public void DisableUnavailableRadioButtons()
         {
+            // reset the radio buttons to enabled first
+            SetRadioEnabledDisabledForTag(ONLY_PROCESS_INJECTION, true);
+            SetRadioEnabledDisabledForTag(ONLY_VIGEM, true);
+            SetRadioEnabledDisabledForTag(VIGEM_AND_PROCESS_INJECTION, true);
+
             // if vigem isnt installed then we can only do process injection
             // so disable the other options
             if (!IsVigemInstalled)
             {
-                SetRadioDisabledForTag(VIGEM_AND_PROCESS_INJECTION);
-                SetRadioDisabledForTag(ONLY_VIGEM);
+                SetRadioEnabledDisabledForTag(ONLY_PROCESS_INJECTION, true);
+                SetRadioEnabledDisabledForTag(ONLY_VIGEM, false);
+                SetRadioEnabledDisabledForTag(VIGEM_AND_PROCESS_INJECTION, false);
             }
         }
 
@@ -105,11 +111,11 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.Welcome
              ForEach(n => n.IsChecked = true);
         }
 
-        private void SetRadioDisabledForTag(int tag)
+        private void SetRadioEnabledDisabledForTag(int tag, bool enabled)
         {
             Panel_RadioButtonGroup.Children.OfType<RadioButton>().
              Where(n => Int32.Parse(n.Tag.ToString()) == tag).ToList().
-             ForEach(n => n.IsEnabled = false);
+             ForEach(n => n.IsEnabled = enabled);
         }
 
         public void ShouldShowVigemInstallWarning(VigemManager vigemManager)
