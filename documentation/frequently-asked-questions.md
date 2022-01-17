@@ -67,6 +67,10 @@ https://www.howtogeek.com/244963/how-to-adjust-the-volume-for-individual-apps-in
 Goto `%AppData%\..\Local\PS4KeyboardAndMouseAdapter` in windows explorer and delete everything there
 
 
+### How do I uninstall ViGEm?
+see <a href="vigem.md">vigem.md</a>
+
+
 ### I have a question or issue, why havent you replied?
 We do this in our free time, and we normally have 9-5 day jobs to contend with.
 

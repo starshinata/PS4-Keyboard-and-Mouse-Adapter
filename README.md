@@ -17,7 +17,7 @@ Main Adapter <br>
 <a href="documentation/example-ui-2.png" target="_blank"><img src="documentation/example-ui-2.png" alt="example UI Tab 2" width="280px"/></a>
 <a href="documentation/example-ui-3.png" target="_blank"><img src="documentation/example-ui-3.png" alt="example UI Tab 3a" width="280px"/></a>
 <a href="documentation/example-ui-4.png" target="_blank"><img src="documentation/example-ui-4.png" alt="example UI Tab 3b" width="280px"/></a>
-<a href="documentation/example-ui-4.png" target="_blank"><img src="documentation/example-ui-5.png" alt="example UI Tab 4" width="280px"/></a>
+<a href="documentation/example-ui-5.png" target="_blank"><img src="documentation/example-ui-5.png" alt="example UI Tab 4" width="280px"/></a>
 
 
 ## DOWNLOAD
