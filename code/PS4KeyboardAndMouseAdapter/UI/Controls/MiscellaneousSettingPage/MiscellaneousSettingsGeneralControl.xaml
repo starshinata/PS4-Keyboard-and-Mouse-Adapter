@@ -59,6 +59,7 @@
             Grid.Column="0"
             Grid.ColumnSpan="3"
             Text="Reset RemotePlay window location"
+            VerticalAlignment="Center"
             />
 
         <Button 
@@ -101,6 +102,6 @@
             Grid.ColumnSpan="5"
             Text="By editing the value of the slider, the volume will be remembered when you restart RemotePlay"
             />
-
+      
     </Grid>
 </UserControl>

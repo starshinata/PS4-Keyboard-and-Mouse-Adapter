@@ -288,6 +288,9 @@
     <Compile Include="UI\Controls\Common\LogControl.xaml.cs">
       <DependentUpon>LogControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Controls\MiscellaneousSettingPage\GamepadUpdaterNoSleepControl.xaml.cs">
+      <DependentUpon>GamepadUpdaterNoSleepControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\MiscellaneousSettingPage\RemotePlayToolbarSettingsControl.xaml.cs">
       <DependentUpon>RemotePlayToolbarSettingsControl.xaml</DependentUpon>
     </Compile>
@@ -366,6 +369,10 @@
     <Compile Include="UI\UIConstants.cs" />
     <Compile Include="UI\UITools.cs" />
     <Page Include="UI\Controls\Common\LogControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Controls\MiscellaneousSettingPage\GamepadUpdaterNoSleepControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -460,10 +467,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-  <Content Include="profile-previous.json">
+    <Content Include="profile-previous.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-	  </ItemGroup>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="..\packages\CSFML.2.5.0\runtimes\win-x86\native\csfml-Window.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

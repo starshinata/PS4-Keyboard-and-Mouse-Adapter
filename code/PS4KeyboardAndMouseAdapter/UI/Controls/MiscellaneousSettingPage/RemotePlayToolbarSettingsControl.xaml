@@ -33,6 +33,7 @@
                 Grid.Column="0"
                 Grid.ColumnSpan="3"
                 Text="Show RemotePlay toolbar"
+                VerticalAlignment="Center"
                 />
 
             <!-- https://www.codeproject.com/Articles/1060961/WPFSpark-v -->
@@ -62,7 +63,7 @@
             />
         
         <TextBlock 
-            Text="By default we disable this bar as it can be annoying - it will appear if you move your mouse over the remote play window"
+            Text="By default we hide this bar as it can be annoying - as it will appear if you move your mouse over the remote play window"
             TextWrapping="Wrap"
             x:Name="Element_TextBlock_Description"
             />

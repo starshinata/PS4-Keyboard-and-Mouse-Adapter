@@ -55,13 +55,15 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
         {
             Log.Information("UserSettings.ImportValuesCurrent()");
 
-            //reminder we want to import stuff into variable **thisInstance**
+            //reminder we want to import stuff into variable **ThisInstance**
 
             ThisInstance.AimToggle = newSettings.AimToggle;
             ThisInstance.AimToggleRetoggleDelay = newSettings.AimToggleRetoggleDelay;
 
             ThisInstance.AnalogStickLowerRange = newSettings.AnalogStickLowerRange;
             ThisInstance.AnalogStickUpperRange = newSettings.AnalogStickUpperRange;
+            
+            ThisInstance.GamepadUpdaterNoSleep = newSettings.GamepadUpdaterNoSleep;
 
             ThisInstance.MouseAimSensitivityEnabled = newSettings.MouseAimSensitivityEnabled;
 

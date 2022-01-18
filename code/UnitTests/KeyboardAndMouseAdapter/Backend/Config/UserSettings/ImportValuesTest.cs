@@ -88,6 +88,19 @@ namespace UnitTests.KeyboardAndMouseAdapter.Config.UserSettingsTest
 
             AssertionExtensions.Should(actual).BeEquivalentTo(expected);
         }
+              
+        [TestMethod]
+        public void ShouldImport_Property_GamepadUpdaterNoSleep()
+        {
+            string inputFile = PROFILE_DIRECTORY + "ImportValues--property-GamepadUpdaterNoSleep--input.json";
+            string expectedFile = PROFILE_DIRECTORY + "ImportValues--property-GamepadUpdaterNoSleep--expected.json";
+            UserSettings.ImportValues(inputFile);
+            UserSettings actual = UserSettings.GetInstance();
+            actual.KeyboardMappings = null;
+            UserSettings expected = ReadExpectedFile(expectedFile);
+
+            AssertionExtensions.Should(actual).BeEquivalentTo(expected);
+        }
 
         [TestMethod]
         public void ShouldImport_Property_MouseAimSensitivityEnabled()

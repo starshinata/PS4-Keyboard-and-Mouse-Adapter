@@ -22,10 +22,12 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
 
         private IDualShock4Controller controller;
 
+        private Stopwatch SleepTimer = new Stopwatch();
+
         private void Listen()
         {
             Log.Information("VigemInternals.Listen");
-
+            SleepTimer.Start();
 
             GamepadProcessor gp = new GamepadProcessor();
 
@@ -33,10 +35,6 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
 
             Stopwatch RequestsPerSecondTimer = new Stopwatch();
             RequestsPerSecondTimer.Start();
-
-
-            Stopwatch SleepTimer = new Stopwatch();
-            SleepTimer.Start();
 
             Task.Factory.StartNew(() =>
             {
@@ -58,16 +56,9 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
                         ExceptionLogger.LogException("VigemInternals.Listen L58", ex);
                     }
 
-                    SleepTimer.Restart();
-                    int MillisecondsPerInput = 1000 / UserSettings.GetInstance().MousePollingRate;
-                    Sleep(MillisecondsPerInput);
-                    long sleepDuration = SleepTimer.ElapsedMilliseconds;
+                    Sleep();
 
-                    //Log.Information("MillisecondsPerInput {0}", MillisecondsPerInput);
-                    //Log.Information("sleepDuration {0}", sleepDuration);
                     RequestsPerSecondCounter++;
-
-                    SleepTimer.Restart();
 
                     if (RequestsPerSecondTimer.ElapsedMilliseconds >= 1000)
                     {
@@ -81,10 +72,19 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
 
         }
 
-        public void Sleep(int sleepDuration)
+        public void Sleep()
         {
+            //SleepTimer.Restart();
+
+            int sleepDuration = 0;
+            if (!UserSettings.GetInstance().GamepadUpdaterNoSleep)
+            {
+                sleepDuration = 1000 / UserSettings.GetInstance().MousePollingRate;
+            }
+
             // 2021.12.22 pancakeslp
-            // 15ms as that seems to be roughly the minimum amount of time Thread.Sleep can sleep for on Windows
+            // on window you can specify a sleep of 5ms, but it will probably 15ms
+            // as 15ms is roughly the minimum amount of time Thread.Sleep can sleep for
             // it seems unix will honour sleep(1) to sleep for 1 ms
             //
             // for more reading see 
@@ -92,12 +92,12 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
             // https://stackoverflow.com/questions/8860803/pause-a-thread-for-less-than-one-millisecond
             // https://stackoverflow.com/questions/85122/how-to-make-thread-sleep-less-than-a-millisecond-on-windows/11456112#11456112
 
-            int revisedSleepDuration = sleepDuration - 15;
-            if (revisedSleepDuration < 0)
-            {
-                revisedSleepDuration = 0;
-            }
-            System.Threading.Thread.Sleep(revisedSleepDuration);
+            System.Threading.Thread.Sleep(sleepDuration);
+
+            //long actualSleepDuration = SleepTimer.ElapsedMilliseconds;
+
+            //Log.Information("sleepDuration {0}", sleepDuration);
+            //Log.Information("actualSleepDuration {0}", actualSleepDuration);
         }
 
         public void StartAndListen()
@@ -113,7 +113,6 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
             Log.Information("VigemInternals.Start");
             Start_ViGEm();
             Start_controller();
-
         }
 
         private void Start_controller()

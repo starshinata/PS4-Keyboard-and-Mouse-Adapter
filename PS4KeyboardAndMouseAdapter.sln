@@ -51,6 +51,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "documentation", "documentat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "profiles", "profiles", "{3A058E3E-00BF-404D-A7CC-F69777503A76}"
 	ProjectSection(SolutionItems) = preProject
+		profiles\BaterFLY-call_of_duty.json = profiles\BaterFLY-call_of_duty.json
 		profiles\default-profile.json = profiles\default-profile.json
 		profiles\pancakes-destiny-profile.json = profiles\pancakes-destiny-profile.json
 	EndProjectSection

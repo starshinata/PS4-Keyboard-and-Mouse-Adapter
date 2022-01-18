@@ -121,6 +121,8 @@
     <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--profile-1.0.11-default--expected.json" />
     <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--profile-1.0.11-default--input.json" />
     <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--profile-2.0.0-default--expected.json" />
+    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--property-GamepadUpdaterNoSleep--expected.json" />
+    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--property-GamepadUpdaterNoSleep--input.json" />
     <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--property-RemotePlayVolume--expected.json" />
     <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--property-AimToggleRetoggleDelay--expected.json" />
     <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--property-RemotePlayVolume--input.json" />
@@ -137,6 +139,7 @@
     <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\IsLegacyConfig--profile-1.0.11-default.json" />
     <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\IsLegacyConfig--profile-2.0.0-provisional.json" />
     <Compile Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\IsLegacyConfigTest.cs" />
+    <Compile Include="KeyboardAndMouseAdapter\UI\Controls\MiscellaneousSettings\GamepadUpdaterNoSleepControl\CalculateIsControlEnabledTest.cs" />
     <Compile Include="KeyboardAndMouseAdapter\UI\Controls\MiscellaneousSettings\RemotePlayToolbarSettingsControl\CalculateIsControlEnabledTest.cs" />
     <Compile Include="KeyboardAndMouseAdapter\UI\Controls\Welcome\EmulationPickerControl\SetInitialRadioChecked\WhenVigemInstalledTest.cs" />
     <Compile Include="KeyboardAndMouseAdapter\UI\Controls\Welcome\EmulationPickerControl\SetInitialRadioChecked\WhenVigemNotInstalledTest.cs" />

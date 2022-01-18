@@ -45,7 +45,7 @@
             <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
-
+            
             <!-- row 20 -->
             <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
@@ -59,14 +59,14 @@
             <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
-
+            
             <!-- row 30 -->
             <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
-
+            
             <!-- row 35 -->
             <RowDefinition Height="21px" />
             <RowDefinition Height="21px" />
@@ -188,7 +188,8 @@
             VerticalAlignment="Center"
             />
 
-        <!-- Row 11 intentionally empty -->
+
+        <!-- Row 14 intentionally empty -->
 
         <controls:SliderV
             Grid.Row="13"

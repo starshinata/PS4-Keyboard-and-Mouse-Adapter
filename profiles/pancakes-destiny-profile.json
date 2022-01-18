@@ -236,6 +236,7 @@
   "AimToggleRetoggleDelay": 100,
   "AnalogStickLowerRange": 31,
   "AnalogStickUpperRange": 95,
+  "GamepadUpdaterNoSleep": true,
   "MouseAimSensitivityEnabled": true,
   "MouseControlsL3": false,
   "MouseControlsR3": true,

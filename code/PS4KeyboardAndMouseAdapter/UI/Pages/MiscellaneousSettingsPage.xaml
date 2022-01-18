@@ -27,6 +27,12 @@
             <TextBlock/>
             
             <common:LogControl/>
+
+            <!-- spacer -->
+            <TextBlock/>
+            <TextBlock/>
+
+            <page:GamepadUpdaterNoSleepControl/>
         </StackPanel>
 
     </ScrollViewer>

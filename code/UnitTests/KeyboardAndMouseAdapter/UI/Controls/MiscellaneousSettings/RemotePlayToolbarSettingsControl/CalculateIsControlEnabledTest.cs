@@ -12,7 +12,7 @@ namespace UnitTests.KeyboardAndMouseAdapter.UI.Controls.RemotePlayToolbarSetting
     {
 
         [TestMethod]
-        public void WhenEmulationMode__ONLY_PROCESS_INJECTION__ShouldAssumeRemotePlayProcessInjection()
+        public void WhenEmulationMode__ONLY_PROCESS_INJECTION__ShouldEnableTheControl()
         {
             ApplicationSettings.GetInstance().EmulationMode = EmulationConstants.ONLY_PROCESS_INJECTION;
 
@@ -25,7 +25,7 @@ namespace UnitTests.KeyboardAndMouseAdapter.UI.Controls.RemotePlayToolbarSetting
         }
 
         [TestMethod]
-        public void WhenEmulationMode__ONLY_VIGEM__ShouldAssumeRemotePlayProcessInjection()
+        public void WhenEmulationMode__ONLY_VIGEM__ShouldDisableTheControl()
         {
             ApplicationSettings.GetInstance().EmulationMode = EmulationConstants.ONLY_VIGEM;
 
@@ -38,7 +38,7 @@ namespace UnitTests.KeyboardAndMouseAdapter.UI.Controls.RemotePlayToolbarSetting
         }
 
         [TestMethod]
-        public void WhenEmulationMode__Unknown__ShouldAssumeRemotePlayProcessInjection()
+        public void WhenEmulationMode__Unknown__ShouldEnableTheControl()
         {
             ApplicationSettings.GetInstance().EmulationMode = -1;
 
@@ -51,7 +51,7 @@ namespace UnitTests.KeyboardAndMouseAdapter.UI.Controls.RemotePlayToolbarSetting
         }
 
         [TestMethod]
-        public void WhenEmulationMode__VIGEM_AND_PROCESS_INJECTION__ShouldAssumeRemotePlayProcessInjection()
+        public void WhenEmulationMode__VIGEM_AND_PROCESS_INJECTION__ShouldEnableTheControl()
         {
             ApplicationSettings.GetInstance().EmulationMode = EmulationConstants.VIGEM_AND_PROCESS_INJECTION;
 
