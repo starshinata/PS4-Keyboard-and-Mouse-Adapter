@@ -118,11 +118,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="KeyboardAndMouseAdapter\Backend\Config\ApplicationSettings\ImportValues--Empty--expected.json" />
+    <None Include="KeyboardAndMouseAdapter\Backend\Config\ApplicationSettings\ImportValues--Empty--input.json" />
     <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--profile-1.0.11-default--expected.json" />
     <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--profile-1.0.11-default--input.json" />
     <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--profile-2.0.0-default--expected.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--property-GamepadUpdaterNoSleep--expected.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--property-GamepadUpdaterNoSleep--input.json" />
+    <None Include="KeyboardAndMouseAdapter\Backend\Config\ApplicationSettings\ImportValues--property-GamepadUpdaterNoSleep--expected.json" />
+    <None Include="KeyboardAndMouseAdapter\Backend\Config\ApplicationSettings\ImportValues--property-GamepadUpdaterNoSleep--input.json" />
     <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--property-RemotePlayVolume--expected.json" />
     <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--property-AimToggleRetoggleDelay--expected.json" />
     <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--property-RemotePlayVolume--input.json" />
@@ -134,6 +136,7 @@
     <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--property-AimToggle--input.json" />
     <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--profile-empty--input.json" />
     <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--profile-2.0.0-default--input.json" />
+    <Compile Include="KeyboardAndMouseAdapter\Backend\Config\ApplicationSettings\ImportValuesTest.cs" />
     <Compile Include="KeyboardAndMouseAdapter\Backend\RewasdDetector\PathsTest.cs" />
     <Compile Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValuesTest.cs" />
     <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\IsLegacyConfig--profile-1.0.11-default.json" />

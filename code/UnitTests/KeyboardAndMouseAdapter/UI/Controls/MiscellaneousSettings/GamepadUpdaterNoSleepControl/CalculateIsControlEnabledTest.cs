@@ -10,8 +10,7 @@ namespace UnitTests.KeyboardAndMouseAdapter.UI.Controls.GamepadUpdaterNoSleepCon
     [TestClass]
     public class CalculateIsControlEnabledTest
     {
-        //ShouldEnableTheControl
-        //ShouldDisableTheControl
+
         [TestMethod]
         public void WhenEmulationMode__ONLY_PROCESS_INJECTION__ShouldDisableTheControl()
         {

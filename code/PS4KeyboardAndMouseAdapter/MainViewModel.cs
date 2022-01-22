@@ -7,6 +7,8 @@ namespace Pizza.KeyboardAndMouseAdapter
 
     public class MainViewModel
     {
+        public ApplicationSettings ApplicationSettings { get; set; } = ApplicationSettings.GetInstance(); 
+
         public InstanceSettings InstanceSettings { get; set; } = InstanceSettings.GetInstance();
 
         public UserSettings UserSettings { get; set; } = UserSettings.GetInstance();

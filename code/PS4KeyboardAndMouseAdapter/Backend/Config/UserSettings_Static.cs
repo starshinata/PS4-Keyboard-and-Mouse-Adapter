@@ -51,51 +51,49 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
             ImportValuesCurrent(newSettings);
         }
 
-        public static void ImportValuesCurrent(UserSettings newSettings)
+        public static void ImportValuesCurrent(UserSettings NewSettings)
         {
             Log.Information("UserSettings.ImportValuesCurrent()");
 
             //reminder we want to import stuff into variable **ThisInstance**
 
-            ThisInstance.AimToggle = newSettings.AimToggle;
-            ThisInstance.AimToggleRetoggleDelay = newSettings.AimToggleRetoggleDelay;
+            ThisInstance.AimToggle = NewSettings.AimToggle;
+            ThisInstance.AimToggleRetoggleDelay = NewSettings.AimToggleRetoggleDelay;
 
-            ThisInstance.AnalogStickLowerRange = newSettings.AnalogStickLowerRange;
-            ThisInstance.AnalogStickUpperRange = newSettings.AnalogStickUpperRange;
-            
-            ThisInstance.GamepadUpdaterNoSleep = newSettings.GamepadUpdaterNoSleep;
+            ThisInstance.AnalogStickLowerRange = NewSettings.AnalogStickLowerRange;
+            ThisInstance.AnalogStickUpperRange = NewSettings.AnalogStickUpperRange;
 
-            ThisInstance.MouseAimSensitivityEnabled = newSettings.MouseAimSensitivityEnabled;
+            ThisInstance.MouseAimSensitivityEnabled = NewSettings.MouseAimSensitivityEnabled;
 
-            ThisInstance.MouseControlsL3 = newSettings.MouseControlsL3;
-            ThisInstance.MouseControlsR3 = newSettings.MouseControlsR3;
+            ThisInstance.MouseControlsL3 = NewSettings.MouseControlsL3;
+            ThisInstance.MouseControlsR3 = NewSettings.MouseControlsR3;
 
-            ThisInstance.MouseDistanceLowerRange = newSettings.MouseDistanceLowerRange;
-            ThisInstance.MouseDistanceUpperRange = newSettings.MouseDistanceUpperRange;
-            ThisInstance.MouseMaxDistance = newSettings.MouseMaxDistance;
+            ThisInstance.MouseDistanceLowerRange = NewSettings.MouseDistanceLowerRange;
+            ThisInstance.MouseDistanceUpperRange = NewSettings.MouseDistanceUpperRange;
+            ThisInstance.MouseMaxDistance = NewSettings.MouseMaxDistance;
 
-            ThisInstance.MousePollingRate = newSettings.MousePollingRate;
+            ThisInstance.MousePollingRate = NewSettings.MousePollingRate;
 
-            ThisInstance.MouseWheelScrollHoldDuration = newSettings.MouseWheelScrollHoldDuration;
+            ThisInstance.MouseWheelScrollHoldDuration = NewSettings.MouseWheelScrollHoldDuration;
 
-            ThisInstance.MouseXAxisSensitivityAimModifier = newSettings.MouseXAxisSensitivityAimModifier;
-            ThisInstance.MouseXAxisSensitivityLookModifier = newSettings.MouseXAxisSensitivityLookModifier;
-            ThisInstance.MouseXAxisSensitivityMax = newSettings.MouseXAxisSensitivityMax;
+            ThisInstance.MouseXAxisSensitivityAimModifier = NewSettings.MouseXAxisSensitivityAimModifier;
+            ThisInstance.MouseXAxisSensitivityLookModifier = NewSettings.MouseXAxisSensitivityLookModifier;
+            ThisInstance.MouseXAxisSensitivityMax = NewSettings.MouseXAxisSensitivityMax;
 
-            ThisInstance.MouseYAxisSensitivityAimModifier = newSettings.MouseYAxisSensitivityAimModifier;
-            ThisInstance.MouseYAxisSensitivityLookModifier = newSettings.MouseYAxisSensitivityLookModifier;
-            ThisInstance.MouseYAxisSensitivityMax = newSettings.MouseYAxisSensitivityMax;
+            ThisInstance.MouseYAxisSensitivityAimModifier = NewSettings.MouseYAxisSensitivityAimModifier;
+            ThisInstance.MouseYAxisSensitivityLookModifier = NewSettings.MouseYAxisSensitivityLookModifier;
+            ThisInstance.MouseYAxisSensitivityMax = NewSettings.MouseYAxisSensitivityMax;
 
-            ThisInstance.RemotePlayVolume = newSettings.RemotePlayVolume;
+            ThisInstance.RemotePlayVolume = NewSettings.RemotePlayVolume;
 
-            ThisInstance.XYRatio = newSettings.XYRatio;
+            ThisInstance.XYRatio = NewSettings.XYRatio;
 
             List<VirtualKey> virtualKeys = KeyUtility.GetVirtualKeyValues();
             foreach (VirtualKey key in virtualKeys)
             {
-                if (newSettings.MappingsContainsKey(key))
+                if (NewSettings.MappingsContainsKey(key))
                 {
-                    ThisInstance.Mappings[key] = newSettings.Mappings[key];
+                    ThisInstance.Mappings[key] = NewSettings.Mappings[key];
                 }
             }
 
@@ -124,13 +122,13 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
                     }
                     catch (Exception ex)
                     {
-                        ExceptionLogger.LogException("UserSettings.IsLegacyConfig error(a)" , ex);
+                        ExceptionLogger.LogException("UserSettings.IsLegacyConfig error(a)", ex);
                     }
                 }
             }
             catch (Exception ex)
             {
-                ExceptionLogger.LogException("UserSettings.IsLegacyConfig error(b)" , ex);
+                ExceptionLogger.LogException("UserSettings.IsLegacyConfig error(b)", ex);
             }
 
             return true;
@@ -158,7 +156,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
             }
             catch (Exception ex)
             {
-                ExceptionLogger.LogException("UserSettings.LoadWithCatch failed" , ex);
+                ExceptionLogger.LogException("UserSettings.LoadWithCatch failed", ex);
             }
         }
 

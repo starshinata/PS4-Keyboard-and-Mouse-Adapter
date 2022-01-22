@@ -30,8 +30,6 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
         public int AnalogStickLowerRange { get; set; } = 40;
         public int AnalogStickUpperRange { get; set; } = 95;
 
-        public bool GamepadUpdaterNoSleep { get; set; } = false;
-
         public bool MouseAimSensitivityEnabled { get; set; } = false;
 
         public bool MouseControlsL3 { get; set; } = false;

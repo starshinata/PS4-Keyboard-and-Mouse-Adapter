@@ -22,20 +22,21 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
 
         private IDualShock4Controller controller;
 
+        private Stopwatch RequestsPerSecondTimer = new Stopwatch();
+        private int RequestsPerSecondCounter = 0;
         private Stopwatch SleepTimer = new Stopwatch();
+
+        private bool logSleepDuration = false;
+        private bool logRequestPerSecond = false;
 
         private void Listen()
         {
             Log.Information("VigemInternals.Listen");
             SleepTimer.Start();
-
-            GamepadProcessor gp = new GamepadProcessor();
-
-            int RequestsPerSecondCounter = 0;
-
-            Stopwatch RequestsPerSecondTimer = new Stopwatch();
             RequestsPerSecondTimer.Start();
 
+            GamepadProcessor gp = new GamepadProcessor();
+            
             Task.Factory.StartNew(() =>
             {
                 controller.ResetReport();
@@ -53,20 +54,10 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
                     }
                     catch (Exception ex)
                     {
-                        ExceptionLogger.LogException("VigemInternals.Listen L58", ex);
+                        ExceptionLogger.LogException("VigemInternals.Listen L57", ex);
                     }
 
                     Sleep();
-
-                    RequestsPerSecondCounter++;
-
-                    if (RequestsPerSecondTimer.ElapsedMilliseconds >= 1000)
-                    {
-                        //Log.Information("MillisecondsPerInput {0}", MillisecondsPerInput);
-                        //Log.Information("VigemInternals.listen  RequestsPerSecondCounter={0}", RequestsPerSecondCounter);
-                        RequestsPerSecondTimer.Restart();
-                        RequestsPerSecondCounter = 0;
-                    }
                 }
             });
 
@@ -74,10 +65,13 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
 
         public void Sleep()
         {
-            //SleepTimer.Restart();
+            if (logSleepDuration)
+            {
+                SleepTimer.Restart();
+            }
 
             int sleepDuration = 0;
-            if (!UserSettings.GetInstance().GamepadUpdaterNoSleep)
+            if (!ApplicationSettings.GetInstance().GamepadUpdaterNoSleep)
             {
                 sleepDuration = 1000 / UserSettings.GetInstance().MousePollingRate;
             }
@@ -94,10 +88,25 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
 
             System.Threading.Thread.Sleep(sleepDuration);
 
-            //long actualSleepDuration = SleepTimer.ElapsedMilliseconds;
+            if (logSleepDuration)
+            {
+                long actualSleepDuration = SleepTimer.ElapsedMilliseconds;
+                Log.Information("VigemInternals.Sleep: requested sleepDuration {0}", sleepDuration);
+                Log.Information("VigemInternals.Sleep: actualSleepDuration {0}", actualSleepDuration);
+            }
 
-            //Log.Information("sleepDuration {0}", sleepDuration);
-            //Log.Information("actualSleepDuration {0}", actualSleepDuration);
+            if (logRequestPerSecond)
+            {
+                RequestsPerSecondCounter++;
+
+                if (RequestsPerSecondTimer.ElapsedMilliseconds >= 1000)
+                {
+                    Log.Information("VigemInternals.Sleep: requested sleepDuration {0}", sleepDuration);
+                    Log.Information("VigemInternals.Sleep:  RequestsPerSecondCounter={0}", RequestsPerSecondCounter);
+                    RequestsPerSecondTimer.Restart();
+                    RequestsPerSecondCounter = 0;
+                }
+            }
         }
 
         public void StartAndListen()

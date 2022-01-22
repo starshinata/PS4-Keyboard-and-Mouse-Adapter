@@ -10,9 +10,11 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
     // a collection of settings are not bound to a specific game
     public class ApplicationSettings : INotifyPropertyChanged
     {
+
+        #region static
         private static readonly string APPLICATION_SETTINGS_FILE = "application-settings.json";
 
-        private static readonly ApplicationSettings ThisInstance = new ApplicationSettings();
+        private static ApplicationSettings ThisInstance = new ApplicationSettings();
         private static readonly ILogger StaticLogger = Log.ForContext(typeof(ApplicationSettings));
 
         //////////////////////////////////////////////////////////////////////
@@ -30,6 +32,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 
             ApplicationSettings NewSettings = JsonConvert.DeserializeObject<ApplicationSettings>(json);
 
+            ThisInstance.GamepadUpdaterNoSleep = NewSettings.GamepadUpdaterNoSleep;
             ThisInstance.EmulateController = NewSettings.EmulateController;
             ThisInstance.EmulationMode = NewSettings.EmulationMode;
             ThisInstance.RemotePlayPath = NewSettings.RemotePlayPath;
@@ -77,16 +80,26 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
             return JsonConvert.DeserializeObject<ApplicationSettings>(json);
         }
 
-        //////////////////////////////////////////////////////////////////////
+        public static void TestOnly_ResetApplicationSettings()
+        {
+            ThisInstance = new ApplicationSettings();
+        }
+
+        #endregion static
+
+
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
 
         //
         // REMINDER if you add a new property, be sure to add it to ImportValues method
         //
 
         public bool EmulateController { get; set; } = false;
-        
+
         public int EmulationMode;
+
+        public bool GamepadUpdaterNoSleep { get; set; } = false;
 
         public string RemotePlayPath;
 

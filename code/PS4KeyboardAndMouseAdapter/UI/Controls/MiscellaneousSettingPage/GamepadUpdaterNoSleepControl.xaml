@@ -28,7 +28,7 @@
             <wpfspark:ToggleSwitch
                 Background="black"
                 BorderThickness="2px"
-                IsChecked="{Binding Path=UserSettings.GamepadUpdaterNoSleep, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                IsChecked="{Binding Path=ApplicationSettings.GamepadUpdaterNoSleep, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Height="30"
                 HorizontalAlignment="Right"
                 Style="{StaticResource {ComponentResourceKey ResourceId=ToggleSwitch.iOS.Light.Style, TypeInTargetAssembly={x:Type wpfspark:ToggleSwitch}}}" 
