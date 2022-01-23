@@ -23,9 +23,12 @@
 10. Is everything committed to git ?
 
 11. Verify things are digitally signed
-   * AppData\Local\PS4KeyboardAndMouseAdapter\VERSION\PS4KeyboardAndMouseAdapter.exe 
-   * starshinata\PS4-Keyboard-and-Mouse-Adapter\PS4KeyboardAndMouseAdapter\bin\Release\PS4KeyboardAndMouseAdapter.exe 
-   * starshinata\PS4-Keyboard-and-Mouse-Adapter\SquirrelReleases\setup.exe
+
+  * AppData\Local\PS4KeyboardAndMouseAdapter\VERSION\PS4KeyboardAndMouseAdapter.exe 
+
+  * starshinata\PS4-Keyboard-and-Mouse-Adapter\PS4KeyboardAndMouseAdapter\bin\Release\PS4KeyboardAndMouseAdapter.exe 
+
+  * starshinata\PS4-Keyboard-and-Mouse-Adapter\SquirrelReleases\application-setup.exe
 
 12. Do antivirus scans of via [https://www.virustotal.com/](https://www.virustotal.com/)
    * AppData\Local\PS4KeyboardAndMouseAdapter\VERSION\PS4KeyboardAndMouseAdapter.exe 
