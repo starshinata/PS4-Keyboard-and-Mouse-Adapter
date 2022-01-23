@@ -1,0 +1,55 @@
+﻿<Window
+    x:Class="Pizza.KeyboardAndMouseAdapter.UI.MainWindowView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
+    xmlns:keyboardAndMouseAdapter="clr-namespace:Pizza.KeyboardAndMouseAdapter"
+    xmlns:pages="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Pages"
+
+    Title="{Binding WindowTitle}"
+
+    Height="720" 
+    MinHeight="400"
+        
+    Width="700" 
+    MinWidth="700"
+    MaxWidth="900"
+    
+    Activated="MainWindowView_OnActivated"
+    Deactivated="MainWindowView_OnDeactivated"
+    ResizeMode="CanResizeWithGrip"
+    >
+
+    <Window.DataContext>
+        <keyboardAndMouseAdapter:MainViewModel />
+    </Window.DataContext>
+
+    <Window.Style>
+        <Style TargetType="Window" BasedOn="{StaticResource {x:Type Window}}"/>
+    </Window.Style>
+
+    <Window.Resources>
+        <Style TargetType="Image">
+            <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality" />
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <TabControl x:Name="tabs">
+
+            <TabItem x:Name="tabWelcomePage">
+                <TabItem.Header>
+                    <TextBlock 
+                        Text="Welcome" 
+                        Width="200px"
+                        />
+                </TabItem.Header>
+                
+                <pages:WelcomePage
+                    x:Name="pageWelcomePage"
+                    />
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+</Window>

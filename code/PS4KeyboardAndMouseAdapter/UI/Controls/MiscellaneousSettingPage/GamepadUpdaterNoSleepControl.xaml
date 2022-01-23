@@ -1,0 +1,57 @@
+﻿<UserControl
+    x:Class="Pizza.KeyboardAndMouseAdapter.UI.Controls.MiscellaneousSettings.GamepadUpdaterNoSleepControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
+    d:DesignHeight="200"
+    d:DesignWidth="640"
+    mc:Ignorable="d"
+
+    xmlns:wpfspark="clr-namespace:WPFSpark;assembly=WPFSpark" 
+    >
+
+    <StackPanel>
+
+        <TextBlock
+            Text="No Sleep gamepad updates"/>
+
+        <Grid>
+            <TextBlock
+                HorizontalAlignment="Left"
+                Text="Make analogue movements feel smoother, BUT turning this on will increase CPU usage!"
+                VerticalAlignment="Center"
+                />
+
+            <!-- https://www.codeproject.com/Articles/1060961/WPFSpark-v -->
+            <wpfspark:ToggleSwitch
+                Background="black"
+                BorderThickness="2px"
+                IsChecked="{Binding Path=ApplicationSettings.GamepadUpdaterNoSleep, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Height="30"
+                HorizontalAlignment="Right"
+                Style="{StaticResource {ComponentResourceKey ResourceId=ToggleSwitch.iOS.Light.Style, TypeInTargetAssembly={x:Type wpfspark:ToggleSwitch}}}" 
+                VerticalAlignment="Center"
+                Width="60"
+                x:Name="Element_Toggle"
+                />
+        </Grid>
+
+        <TextBlock 
+            Foreground="Red"
+            Text="'No Sleep gamepad updates' is disabled because you did not select an emulation option with ViGEm"
+            TextWrapping="Wrap"
+            x:Name="Element_TextBlock_Warning"
+            />
+
+        <TextBlock
+            HorizontalAlignment="Left"
+            Text="This will be most noticeable with mice, but it is not limited to mice"
+            VerticalAlignment="Center"
+            TextWrapping="Wrap"
+            x:Name="Element_TextBlock_Description"
+            />
+
+    </StackPanel>
+</UserControl>

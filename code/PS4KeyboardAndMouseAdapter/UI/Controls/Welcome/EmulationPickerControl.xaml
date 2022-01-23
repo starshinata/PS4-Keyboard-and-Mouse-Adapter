@@ -1,0 +1,129 @@
+﻿<UserControl
+     x:Class="Pizza.KeyboardAndMouseAdapter.UI.Controls.Welcome.EmulationPickerControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             
+    mc:Ignorable="d" 
+    d:DesignHeight="450"
+    d:DesignWidth="680"
+             
+    xmlns:welcome="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls.Welcome"
+    >
+
+    <StackPanel>
+
+        <TextBlock>
+            Controller Emulation Settings
+        </TextBlock>
+
+        <!-- spacer -->
+        <TextBlock />
+
+        <StackPanel
+            x:Name="Panel_VigemNotInstalled">
+
+            <TextBlock
+                FontWeight="Bold" 
+                Foreground="Red"
+                TextWrapping="Wrap">
+                ViGEm driver is not detected!
+            </TextBlock>
+            <TextBlock
+                TextWrapping="Wrap">
+                For installation instructions goto
+            </TextBlock>
+            <TextBlock
+                TextWrapping="Wrap">
+                
+                <Hyperlink 
+                    NavigateUri="https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/blob/master/documentation/vigem.md"
+                    RequestNavigate="Hyperlink_RequestNavigate">
+                    https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/blob/master/documentation/vigem.md
+                </Hyperlink>
+            </TextBlock>
+
+            <!-- spacer -->
+            <TextBlock />
+
+            <TextBlock
+                Foreground="Red"
+                TextWrapping="Wrap">
+                Because we cannot detect ViGEm driver, the ViGEm options are disabled.
+            </TextBlock>
+            <!-- spacer -->
+            <TextBlock />
+        </StackPanel>
+
+        <TextBlock
+             TextWrapping="Wrap">
+            Until v3.0.0 we used process injection to 'fake' a PS4 controller, with 3.0.0 we now have the option of 
+            formally emulating a PS4 controller with ViGEm. However with the ViGEm method you need to make sure you have
+            the ViGEm driver installed.
+        </TextBlock>
+        <TextBlock
+             TextWrapping="Wrap">
+            Also when you are connected to your PS via Remote Play, if you move the mouse a bottom toolbar will appear. We suppress this by doing another process injection.
+        </TextBlock>
+        <TextBlock
+             TextWrapping="Wrap">
+            If you get random unexplained crashes the process injection might be the culprit.
+        </TextBlock>
+
+        <!-- spacer -->
+        <TextBlock />
+
+        <TextBlock
+            TextWrapping="Wrap">
+            I advise you picking the recommended option unless you know what you are doing, especially if the above wall of text doesnt make sense.
+        </TextBlock>
+
+        <!-- spacer -->
+        <TextBlock />
+
+        <StackPanel
+            x:Name="Panel_RadioButtonGroup">
+            <RadioButton
+                Tag="{x:Static welcome:EmulationPickerControl.ONLY_VIGEM}">
+                ViGEm and NO process injection for the bottom toolbar
+            </RadioButton>
+
+            <!-- spacer -->
+            <TextBlock />
+
+            <RadioButton
+                Tag="{x:Static welcome:EmulationPickerControl.VIGEM_AND_PROCESS_INJECTION}">
+                ViGEm and process injection for the bottom toolbar
+            </RadioButton>
+
+            <TextBlock 
+                HorizontalAlignment="Left"
+                FontWeight="Bold"
+                TextAlignment="Center"
+                TextWrapping="Wrap">
+                * recommended *
+            </TextBlock>
+
+            <!-- spacer -->
+            <TextBlock />
+
+            <RadioButton
+                Tag="{x:Static welcome:EmulationPickerControl.ONLY_PROCESS_INJECTION}">
+                NO ViGEm, just process injection
+            </RadioButton>
+
+            <TextBlock 
+                HorizontalAlignment="Left"
+                TextAlignment="Center"
+                TextWrapping="Wrap">
+                (This would have been the default in PS4KMA version 1.x.x and 2.x.x)
+            </TextBlock>
+
+        </StackPanel>
+
+        <!-- spacer -->
+        <TextBlock />
+
+    </StackPanel>
+</UserControl>

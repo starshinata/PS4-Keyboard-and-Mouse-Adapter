@@ -1,0 +1,76 @@
+﻿<UserControl
+    x:Class="Pizza.KeyboardAndMouseAdapter.UI.Controls.Welcome.RemotePlayLaunchedControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
+    mc:Ignorable="d" 
+    d:DesignHeight="700"
+    d:DesignWidth="680"
+    >
+
+    <StackPanel
+        Width="640px">
+
+        <TextBlock 
+            HorizontalAlignment="Center"
+            TextAlignment="Center"
+            TextWrapping="Wrap">
+            We just started 'PS Remote Play' for you.
+        </TextBlock>
+
+        <!-- used as spacer -->
+        <TextBlock/>
+
+        <Image 
+            Height="232"
+            Width="433">
+            <Image.Source>
+                <BitmapImage 
+                    UriSource="pack://application:,,,/images/ps4-remote-play-connect.png"/>
+            </Image.Source>
+        </Image>
+
+        <!-- used as spacer -->
+        <TextBlock/>
+
+        <TextBlock 
+            HorizontalAlignment="Center"
+            TextAlignment="Center"
+            TextWrapping="Wrap">
+             Please wait for "PS Remote Play" to finish starting,  once it looks like the above static image,
+        </TextBlock>
+        <TextBlock 
+            HorizontalAlignment="Center"
+            TextAlignment="Center"
+            TextWrapping="Wrap">
+             THEN hit the blue PS4-XXX or PS5-XXX button.
+        </TextBlock>
+
+        <!-- used as spacer -->
+        <TextBlock/>
+
+        <TextBlock 
+            HorizontalAlignment="Center"
+            TextAlignment="Center"
+            TextWrapping="Wrap">
+            Once you have clicked the blue button, THEN click the button below
+        </TextBlock>
+
+        <!-- used as spacer -->
+        <TextBlock/>
+
+        <Button 
+            Click="Button_Click"
+            Content="I have clicked the BLUE button in 'Remote Play'"
+            Width="300px"
+            />
+
+        <!-- used as a spacer -->
+        <TextBlock />
+        <!-- used as a spacer -->
+        <TextBlock />
+        
+    </StackPanel>
+</UserControl>

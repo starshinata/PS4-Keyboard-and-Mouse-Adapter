@@ -13,8 +13,9 @@ taskkill.exe -im RemotePlay* -f
 set -e
 
 
-BINARY_FOLDER="PS4KeyboardAndMouseAdapter/bin/Debug"
-BINARY_FOLDER="PS4KeyboardAndMouseAdapter/bin/Release"
+BINARY_FOLDER="code/PS4KeyboardAndMouseAdapter/bin/Debug"
+BINARY_FOLDER="code/PS4KeyboardAndMouseAdapter/bin/Release"
+
 cp profiles/pancakes-destiny-profile.json $BINARY_FOLDER/profile-previous.json
 
 echo "if you want to see the logs"

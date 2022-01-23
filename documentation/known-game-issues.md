@@ -1,5 +1,5 @@
 # Known Game Issues
-(newest update for a game at the top)
+**(newest news for a game at the top)**
 
 ## Destiny 2
 2021.01.19 <br>
@@ -11,3 +11,8 @@ Button mappings are messed up https://www.bungie.net/en/Forums/Post/257510223 <b
 
 ## Last of us
 Requires you to shake the controller to activate flash light. Our adapter doesnt have a shake function.
+
+
+## Spiderman PS4
+2021.09.20 <br>
+Some users have trouble moving diagonally

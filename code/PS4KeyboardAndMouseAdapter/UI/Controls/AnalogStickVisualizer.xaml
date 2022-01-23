@@ -1,0 +1,33 @@
+﻿<UserControl
+    x:Class="Pizza.KeyboardAndMouseAdapter.UI.Controls.AnalogStickVisualizer"
+    x:Name="This"
+
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
+    mc:Ignorable="d" 
+    d:DesignHeight="100" 
+    d:DesignWidth="100"
+    
+    Loaded="OnControlLoaded"
+    >
+    
+    <Grid>
+        <Canvas x:Name="canvas" Grid.Column="0">
+            <Ellipse x:Name="circle"
+                Width="{Binding Diameter, ElementName=This}"
+                Height="{Binding Diameter, ElementName=This}"
+                Fill="Transparent"
+                Stroke="#f0f0f0"
+                Canvas.Left="0"
+                Canvas.Top="0" />
+
+            <Ellipse x:Name="dot"
+                Fill="#f0f0f0" 
+                Width="5"
+                Height="5"/>
+        </Canvas>
+    </Grid>
+</UserControl>

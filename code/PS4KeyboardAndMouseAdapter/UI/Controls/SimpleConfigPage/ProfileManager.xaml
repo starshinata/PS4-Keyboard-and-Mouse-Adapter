@@ -1,0 +1,67 @@
+﻿<UserControl 
+    x:Class="Pizza.KeyboardAndMouseAdapter.UI.Controls.ProfileManager"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="7*" />
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <!-- row 0 -->
+            <RowDefinition Height="30px" />
+            <RowDefinition Height="15px" />
+
+            <!-- row 2 -->
+            <RowDefinition />
+            <RowDefinition Height="15px" />
+
+            <!-- row 4 -->
+            <RowDefinition />
+            <RowDefinition Height="15px" />
+
+            <!-- row 6 -->
+            <RowDefinition />
+
+        </Grid.RowDefinitions>
+
+        <!-- row 0 -->
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="1"
+            FontSize="16"
+            FontWeight="Bold"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="Profile Management"
+            />
+
+        <!-- row 2 -->
+        <Button
+            Grid.Row="2" 
+            Grid.Column="1"
+            Click="HandleSave"
+            Content="Save / Export"
+            />
+
+        <!-- row 4 -->
+        <Button
+            Grid.Row="4"
+            Grid.Column="1"
+            Click="HandleLoad"
+            Content="Load / Import"
+            />
+
+        <!-- row 6 -->
+        <Button
+            Grid.Row="6"
+            Grid.Column="1"
+            Click="HandleReset"
+            Content="Reset to Default"
+            />
+
+    </Grid>
+</UserControl>

@@ -35,7 +35,7 @@ we can thank soulehshaikh9 for their pfx certificate generator https://github.co
 (in order which they seem most prevalent for me)
 
 #### BadImageFormatException when Debugging
-System.TypeInitializationException: 'The type initializer for 'PS4KeyboardAndMouseAdapter.Config.UserSettings' threw an exception.'
+System.TypeInitializationException: 'The type initializer for 'Pizza.KeyboardAndMouseAdapter.Backend.Config.UserSettings' threw an exception.'
 BadImageFormatException: An attempt was made to load a program with an incorrect format. (Exception from HRESULT: 0x8007000B)
 
 1. make sure your nuget packages are installed

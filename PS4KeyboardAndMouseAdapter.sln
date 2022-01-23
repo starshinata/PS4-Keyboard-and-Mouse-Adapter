@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PS4KeyboardAndMouseAdapter", "PS4KeyboardAndMouseAdapter\PS4KeyboardAndMouseAdapter.csproj", "{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "code\Common\Common.csproj", "{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PS4RemotePlayInjection", "PS4RemotePlayInjection\PS4RemotePlayInjection.csproj", "{D3D6F621-7CB9-4992-80AC-FF9745D974EC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PS4KeyboardAndMouseAdapter", "code\PS4KeyboardAndMouseAdapter\PS4KeyboardAndMouseAdapter.csproj", "{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{7B4800EE-D943-4299-90FD-DFCE48662774}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PS4RemotePlayInjection", "code\PS4RemotePlayInjection\PS4RemotePlayInjection.csproj", "{D3D6F621-7CB9-4992-80AC-FF9745D974EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "code\UnitTests\UnitTests.csproj", "{7B4800EE-D943-4299-90FD-DFCE48662774}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9FF1BB60-DFEF-4108-A4A6-945C22D8882C}"
 	ProjectSection(SolutionItems) = preProject
@@ -16,12 +18,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		build-and-run.sh = build-and-run.sh
 		build.ps1 = build.ps1
 		build.sh = build.sh
+		clean.sh = clean.sh
 		LICENSE = LICENSE
 		README.md = README.md
 		run.sh = run.sh
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{0439F286-1E5F-4B55-B902-F7EF43C7B22B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "documentation", "documentation", "{0439F286-1E5F-4B55-B902-F7EF43C7B22B}"
 	ProjectSection(SolutionItems) = preProject
 		documentation\developer-notes.md = documentation\developer-notes.md
 		documentation\example-ui-1.png = documentation\example-ui-1.png
@@ -31,18 +34,24 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 		documentation\example-ui-5.png = documentation\example-ui-5.png
 		documentation\frequently-asked-questions.md = documentation\frequently-asked-questions.md
 		documentation\glossary-and-terms.md = documentation\glossary-and-terms.md
+		documentation\hid-lookup-table.txt = documentation\hid-lookup-table.txt
 		documentation\keyboard-keys-map.md = documentation\keyboard-keys-map.md
 		documentation\known-game-issues.md = documentation\known-game-issues.md
 		documentation\mouse-configuration.md = documentation\mouse-configuration.md
 		documentation\release-checklist.md = documentation\release-checklist.md
+		documentation\technical notes - needs a better name.txt = documentation\technical notes - needs a better name.txt
 		documentation\troubleshooting.md = documentation\troubleshooting.md
 		documentation\version-history.md = documentation\version-history.md
+		documentation\vigem.md = documentation\vigem.md
 		documentation\welcome-1.png = documentation\welcome-1.png
 		documentation\welcome-2.png = documentation\welcome-2.png
+		documentation\welcome-3.png = documentation\welcome-3.png
+		documentation\welcome-4.png = documentation\welcome-4.png
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "profiles", "profiles", "{3A058E3E-00BF-404D-A7CC-F69777503A76}"
 	ProjectSection(SolutionItems) = preProject
+		profiles\BaterFLY-call_of_duty.json = profiles\BaterFLY-call_of_duty.json
 		profiles\default-profile.json = profiles\default-profile.json
 		profiles\pancakes-destiny-profile.json = profiles\pancakes-destiny-profile.json
 	EndProjectSection
@@ -62,14 +71,50 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{679B8A6C
 		manualBuild\nuget\PS4KeyboardAndMouseAdapter.nuspec.template.xml = manualBuild\nuget\PS4KeyboardAndMouseAdapter.nuspec.template.xml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "installers", "installers", "{6852A938-F1C8-4D31-A2E1-419C08CC42DA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "remotePlay", "remotePlay", "{89924932-08BA-4A52-A21B-EB3D418436AA}"
+	ProjectSection(SolutionItems) = preProject
+		installers\remotePlay\RemotePlayInstaller-3.0.0.9250.exe = installers\remotePlay\RemotePlayInstaller-3.0.0.9250.exe
+		installers\remotePlay\RemotePlayInstaller-4.0.0.9240.exe = installers\remotePlay\RemotePlayInstaller-4.0.0.9240.exe
+		installers\remotePlay\RemotePlayInstaller-4.1.0.4020.exe = installers\remotePlay\RemotePlayInstaller-4.1.0.4020.exe
+		installers\remotePlay\RemotePlayInstaller-4.5.0.8250.exe = installers\remotePlay\RemotePlayInstaller-4.5.0.8250.exe
+		installers\remotePlay\RemotePlayInstaller-4.5.0.8250_Win32.msi = installers\remotePlay\RemotePlayInstaller-4.5.0.8250_Win32.msi
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "vigemBusDriver", "vigemBusDriver", "{F10F9F23-C09E-454C-A783-A56F8451911C}"
+	ProjectSection(SolutionItems) = preProject
+		installers\vigemBusDriver\version.txt = installers\vigemBusDriver\version.txt
+		installers\vigemBusDriver\ViGEmBusSetup_x64.msi = installers\vigemBusDriver\ViGEmBusSetup_x64.msi
+		installers\vigemBusDriver\ViGEmBusSetup_x86.msi = installers\vigemBusDriver\ViGEmBusSetup_x86.msi
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Clean|Any CPU = Clean|Any CPU
+		Clean|x64 = Clean|x64
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}.Clean|Any CPU.ActiveCfg = Clean|Any CPU
+		{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}.Clean|Any CPU.Build.0 = Clean|Any CPU
+		{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}.Clean|x64.ActiveCfg = Clean|x64
+		{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}.Clean|x64.Build.0 = Clean|x64
+		{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}.Debug|x64.ActiveCfg = Debug|x64
+		{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}.Debug|x64.Build.0 = Debug|x64
+		{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}.Release|x64.ActiveCfg = Release|x64
+		{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}.Release|x64.Build.0 = Release|x64
+		{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}.Clean|Any CPU.ActiveCfg = Clean|Any CPU
+		{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}.Clean|Any CPU.Build.0 = Clean|Any CPU
+		{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}.Clean|x64.ActiveCfg = Clean|x64
+		{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}.Clean|x64.Build.0 = Clean|x64
 		{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}.Debug|x64.ActiveCfg = Debug|x64
@@ -78,6 +123,10 @@ Global
 		{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}.Release|x64.ActiveCfg = Release|x64
 		{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}.Release|x64.Build.0 = Release|x64
+		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Clean|Any CPU.ActiveCfg = Clean|Any CPU
+		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Clean|Any CPU.Build.0 = Clean|Any CPU
+		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Clean|x64.ActiveCfg = Clean|x64
+		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Clean|x64.Build.0 = Clean|x64
 		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Debug|x64.ActiveCfg = Debug|x64
@@ -86,6 +135,10 @@ Global
 		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Release|x64.ActiveCfg = Release|x64
 		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Release|x64.Build.0 = Release|x64
+		{7B4800EE-D943-4299-90FD-DFCE48662774}.Clean|Any CPU.ActiveCfg = Release|Any CPU
+		{7B4800EE-D943-4299-90FD-DFCE48662774}.Clean|Any CPU.Build.0 = Release|Any CPU
+		{7B4800EE-D943-4299-90FD-DFCE48662774}.Clean|x64.ActiveCfg = Release|Any CPU
+		{7B4800EE-D943-4299-90FD-DFCE48662774}.Clean|x64.Build.0 = Release|Any CPU
 		{7B4800EE-D943-4299-90FD-DFCE48662774}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7B4800EE-D943-4299-90FD-DFCE48662774}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B4800EE-D943-4299-90FD-DFCE48662774}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -104,6 +157,9 @@ Global
 		{F22313AC-E19E-475C-B025-AB90BA36D0C7} = {3A058E3E-00BF-404D-A7CC-F69777503A76}
 		{60A1671E-B17D-48D6-8515-D21D96B6CFD3} = {9FF1BB60-DFEF-4108-A4A6-945C22D8882C}
 		{679B8A6C-1FB2-474D-B69F-211D69F2D79C} = {60A1671E-B17D-48D6-8515-D21D96B6CFD3}
+		{6852A938-F1C8-4D31-A2E1-419C08CC42DA} = {9FF1BB60-DFEF-4108-A4A6-945C22D8882C}
+		{89924932-08BA-4A52-A21B-EB3D418436AA} = {6852A938-F1C8-4D31-A2E1-419C08CC42DA}
+		{F10F9F23-C09E-454C-A783-A56F8451911C} = {6852A938-F1C8-4D31-A2E1-419C08CC42DA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {215189D4-FCF7-4F3E-BC57-0EA3347DD037}
