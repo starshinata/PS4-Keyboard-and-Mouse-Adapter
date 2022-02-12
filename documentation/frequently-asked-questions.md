@@ -33,11 +33,14 @@ Source: https://www.playstation.com/en-us/legal/softwarelicense/
 Because this software is not authorised by Sony, this may technically "invalidate your PlayStation system warranty"
 
 
-### Does my PS4 need to be modded to use this?
+### Does my PS need to be modded or jail breaked to use this?
 No!
 
+### If I have modded or jail breaked my PS, can I still use this?
+We have been informed you can, and no extra action is needed from normal (assuming you have a PS remote play that connects to your modded PS
 
-### How do I connect to my PS4 on my home network
+
+### How do I connect to my PS on my home network
 see https://manuals.playstation.net/document/gb/psvita/ps4link/viaprivate.html#:~:text=%E2%84%A2%20system%202.-,On%20your%20system%2C%20select%20(PS4%20Link)%20%3E%20%5BStart,%E2%84%A2%20system%20from%20rest%20mode.
 
 
