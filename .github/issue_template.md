@@ -1,14 +1,23 @@
-## Is this an issue, an enhancement suggestion, or something else ?
-* [ ] Issue - something is wrong
+### Is this an problem, an enhancement suggestion, or something else ?
+* [ ] problem - something is wrong
 * [ ] Enhancement suggestion - i have an idea to make something better
 * [ ] Other
 
-## What Console are you using
+### What Console are you using
 * [ ] PS5
 * [ ] PS4
 * [ ] Other
 
-## Describe your issue/idea
+### What version of PS4KMA are you using ?
 
 
-## If issue how can someone else replicate this?
+### What emuilation method are you using ?
+* [ ] 
+* [ ] 
+* [ ] 
+
+
+### Describe your issue/idea
+
+
+### If issue how can someone else replicate this?
