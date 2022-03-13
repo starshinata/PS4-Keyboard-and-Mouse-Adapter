@@ -72,8 +72,10 @@ function build-msbuild {
 
   echo "msbuild-ing"
 
+  ## "-p:UseSharedCompilation=false" for CodeQL
   MSBuild.exe PS4KeyboardAndMouseAdapter.sln `
     -p:Configuration=$MS_BUILD_CONFIG        `
+    -p:UseSharedCompilation=false            `
     -p:VersionNumber=$VERSION 
 
   if ( $LASTEXITCODE -ne 0) {
