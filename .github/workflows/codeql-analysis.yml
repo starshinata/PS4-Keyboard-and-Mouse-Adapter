@@ -22,7 +22,7 @@ jobs:
 
     ## Environment variable
     env:
-    ACTIONS_ALLOW_UNSECURE_COMMANDS: true  
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: true  
       
     runs-on: windows-2019
     permissions:
