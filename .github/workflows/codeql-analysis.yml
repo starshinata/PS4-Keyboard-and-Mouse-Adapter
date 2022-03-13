@@ -20,6 +20,10 @@ jobs:
     ## 2022.03.13  "windows-latest" yields "Windows Server 2022"
     ## A fatal error occurred: It looks like you are running Windows Server 2022. The CodeQL build tracer does not currently support this OS version.
 
+    ## Environment variable
+    env:
+    ACTIONS_ALLOW_UNSECURE_COMMANDS: true  
+      
     runs-on: windows-2019
     permissions:
       actions: read
