@@ -1,14 +1,7 @@
-# For most projects, this workflow file will not need changing; you simply need
-# to commit it to your repository.
-#
-# You may wish to alter this file to override the set of languages analyzed,
-# or to provide custom queries or build logic.
-#
-# ******** NOTE ********
-# We have attempted to detect the languages in your repository. Please check
-# the `language` matrix defined below to confirm you have the correct set of
-# supported CodeQL languages.
-#
+## original file was auto generated
+## but was then customised for this specific project
+##
+
 name: "CodeQL"
 
 on:
@@ -45,10 +38,16 @@ jobs:
       uses: actions/checkout@v2
 
     ##
-    - name: Setup dotnet
+    - name: Setup dotnet Framework 
+      uses: auycro/netframework-action-template@v0.0.2
+
+
+    ##
+    - name: Setup dotnet CORE
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '4.6.1'
+        ## working versions [ '2.1.x', '3.1.x', '5.0.x' ]
+        dotnet-version: '2.1.x'
 
     ## Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
