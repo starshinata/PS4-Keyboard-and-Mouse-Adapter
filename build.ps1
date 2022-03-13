@@ -5,11 +5,13 @@
 ## `  powershell Set-ExecutionPolicy Unrestricted  `
 
 ## param needs to be first non comment line of file
-param ([string]$justTest='FALSE')
+param ([string]$execGenerateArtefact='TRUE', [string]$execTest='TRUE')
 
 echo "ARGS IN"
-echo "justTest '$justTest'"
+echo "execTest '$execTest'"
+echo "execGenerateArtefact '$execGenerateArtefact'"
 echo "ARGS OUT"
+echo ""
 
 ################################
 ################################
@@ -128,7 +130,7 @@ function dependencies-nuget {
 
 
 function error-on-bad-return-code {
-  if ( $LASTEXITCODE -ne 0) {
+  if ( $LASTEXITCODE -ne 0 ) {
     echo "error-on-bad-return-code!"
     exit $LASTEXITCODE 
   }
@@ -148,35 +150,45 @@ function main_exec {
     update-asembly-info
     build-msbuild
 
-    test-vstest
-
-
-    if( $justTest -eq "TRUE" ) {
-      return 0
-    }
-
-
+    
     echo ""
-    Copy-Item                   profiles\default-profile.json                                                $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\profile-previous.json
-    Copy-Item  -recurse -Force  profiles                                                                     $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\profiles              
-    Copy-Item                   $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\application-settings.json  $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\application-settings.json
-
-    sign-executables
-
+    if ( $execTest -eq "TRUE" ) {
+        test-vstest  
+    } else {
+        echo "tests SKIPPED, because arg execTest was '$execTest'"
+    }
     echo ""
 
+    if ( $execGenerateArtefact  -eq "TRUE" ) {
 
-    if( $MS_BUILD_CONFIG -eq "Release" ) {
+        echo "artefact generation STARTED"
 
-      make-extract-me-installer
+        echo ""
+        Copy-Item                   profiles\default-profile.json                                                $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\profile-previous.json
+        Copy-Item  -recurse -Force  profiles                                                                     $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\profiles              
+        Copy-Item                   $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\application-settings.json  $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\application-settings.json
 
-      make-nuget-package
+        sign-executables
 
-      squirrel
+        echo ""
 
-      sign-installer
+
+        if( $MS_BUILD_CONFIG -eq "Release" ) {
+
+          make-extract-me-installer
+
+          make-nuget-package
+
+          squirrel
+
+          sign-installer
+        }
+
+        echo "artefact generation FINISHED"
+
+    } else {
+        echo "artefact generation SKIPPED, because arg execGenerateArtefact was '$execGenerateArtefact'"
     }
-
 
     cleanup-postbuild
 }
