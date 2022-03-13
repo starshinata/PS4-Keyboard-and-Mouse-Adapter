@@ -64,7 +64,7 @@ jobs:
 
 
     - name: Run ./build.ps1
-    - run: |
+      run: |
        powershell ./build.ps1 -justTest TRUE
 
 
