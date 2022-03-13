@@ -42,13 +42,15 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    ##
-    #- name: Setup dotnet Framework 
-    #- name: Setup MSBuild Path
-     # uses: warrenbuckley/Setup-MSBuild@v1
+
+    - name: Setup Path MSBuild 
+      uses: warrenbuckley/Setup-MSBuild@v1
 
 
-    ##
+    - name: Setup Path VSTest
+      uses: darenm/Setup-VSTest@v1
+
+
     - name: Setup dotnet CORE
       uses: actions/setup-dotnet@v1
       with:
@@ -56,8 +58,7 @@ jobs:
         dotnet-version: '2.1.x'
 
 
-    ## Initializes the CodeQL tools for scanning.
-    - name: Initialize CodeQL
+    - name: Initialize CodeQL tools for scanning.
       uses: github/codeql-action/init@v1
       with:
         languages: ${{ matrix.language }}
