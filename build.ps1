@@ -4,6 +4,17 @@
 ## if that doesnt work try 
 ## `  powershell Set-ExecutionPolicy Unrestricted  `
 
+## param needs to be first non comment line of file
+param ([string]$justTest='FALSE')
+
+echo "ARGS IN"
+echo "justTest '$justTest'"
+echo "ARGS OUT"
+
+################################
+################################
+
+
 ## exit on first error
 $ErrorActionPreference = "Stop"
 
@@ -30,11 +41,6 @@ $env:Path += ";C:\Program Files (x86)\Windows Kits\10\bin\10.0.17763.0\x64\"
 ## Path for vstest.console.exe
 $env:Path += ";C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\TestWindow"
 
-
-## type is the windows equivalent of cat
-$CERT_PASSWORD=$( type ${CERT_DIRECTORY}\cert-password.txt )
-$CERT_PFX="${CERT_DIRECTORY}\github.com-pancakeslp.pfx"
-
 $GENERATED_INSTALLER_PATH="SquirrelReleases"
 
 $PROJECT_DIRECTORY_COMMON="code\common"
@@ -47,7 +53,6 @@ $PROJECT_DIRECTORY_UNIT_TESTS="code\UnitTests"
 ## /packages
 ## for MSBUILD we care about code/packages
 $DIRECTORY_PACKAGES="code\packages"
-
 
 ################################
 ################################
@@ -130,6 +135,53 @@ function error-on-bad-return-code {
 }
 
 
+function main_exec {
+
+    add-build-date
+
+    cleanup-prebuild
+
+    dependencies-nuget
+
+    valid-xaml-xmllint
+
+    update-asembly-info
+    build-msbuild
+
+    test-vstest
+
+
+    if( $justTest -eq "TRUE" ) {
+      return 0
+    }
+
+
+    echo ""
+    Copy-Item                   profiles\default-profile.json                                                $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\profile-previous.json
+    Copy-Item  -recurse -Force  profiles                                                                     $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\profiles              
+    Copy-Item                   $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\application-settings.json  $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\application-settings.json
+
+    sign-executables
+
+    echo ""
+
+
+    if( $MS_BUILD_CONFIG -eq "Release" ) {
+
+      make-extract-me-installer
+
+      make-nuget-package
+
+      squirrel
+
+      sign-installer
+    }
+
+
+    cleanup-postbuild
+}
+
+
 function make-dir {
   $PATH = $args[0]
 
@@ -188,6 +240,10 @@ function make-nuget-package {
 
 function manually-sign-file {
   $FILE_NAME = $args[0]
+  
+  ## type is the windows equivalent of cat
+  $CERT_PASSWORD=$( type ${CERT_DIRECTORY}\cert-password.txt )
+  $CERT_PFX="${CERT_DIRECTORY}\github.com-pancakeslp.pfx"
 
   if(![System.IO.File]::Exists($FILE_NAME)) {
     Write-Error "file $FILE_NAME missing!" 
@@ -327,40 +383,4 @@ function valid-xaml-xmllint {
 ################################
 
 
-add-build-date
-
-cleanup-prebuild
-
-dependencies-nuget
-
-valid-xaml-xmllint
-
-update-asembly-info
-build-msbuild
-
-test-vstest
-
-echo ""
-Copy-Item                   profiles\default-profile.json                                                $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\profile-previous.json
-Copy-Item  -recurse -Force  profiles                                                                     $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\profiles              
-Copy-Item                   $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\application-settings.json  $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\application-settings.json
-
-sign-executables
-
-echo ""
-
-
-if( $MS_BUILD_CONFIG -eq "Release" ) {
-
-  make-extract-me-installer
-
-  make-nuget-package
-
-  squirrel
-
-  sign-installer
-}
-
-
-cleanup-postbuild
-
+main_exec
