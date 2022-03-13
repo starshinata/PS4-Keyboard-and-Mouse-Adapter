@@ -82,7 +82,7 @@ jobs:
     - run: |
        dir
     - run: |
-       powershell  build.ps1
+       powershell ./build.ps1
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
