@@ -4,6 +4,19 @@
 ## if that doesnt work try 
 ## `  powershell Set-ExecutionPolicy Unrestricted  `
 
+## param needs to be first non comment line of file
+param ([string]$execGenerateArtefact='TRUE', [string]$execTest='TRUE')
+
+echo "ARGS IN"
+echo "execTest '$execTest'"
+echo "execGenerateArtefact '$execGenerateArtefact'"
+echo "ARGS OUT"
+echo ""
+
+################################
+################################
+
+
 ## exit on first error
 $ErrorActionPreference = "Stop"
 
@@ -30,11 +43,6 @@ $env:Path += ";C:\Program Files (x86)\Windows Kits\10\bin\10.0.17763.0\x64\"
 ## Path for vstest.console.exe
 $env:Path += ";C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\TestWindow"
 
-
-## type is the windows equivalent of cat
-$CERT_PASSWORD=$( type ${CERT_DIRECTORY}\cert-password.txt )
-$CERT_PFX="${CERT_DIRECTORY}\github.com-pancakeslp.pfx"
-
 $GENERATED_INSTALLER_PATH="SquirrelReleases"
 
 $PROJECT_DIRECTORY_COMMON="code\common"
@@ -43,7 +51,6 @@ $PROJECT_DIRECTORY_PS4_REMOTE_PLAY_INJECTION="code\PS4RemotePlayInjection"
 $PROJECT_DIRECTORY_UNIT_TESTS="code\UnitTests"
 
 $NUGET_PACKAGE_PATH="${env:HOME}\.nuget\packages\"
-
 
 ################################
 ################################
@@ -61,9 +68,11 @@ function build-msbuild {
 
   echo "msbuild-ing"
 
+  ## "-p:UseSharedCompilation=false" for CodeQL
   MSBuild.exe PS4KeyboardAndMouseAdapter.sln `
     -p:Configuration=$MS_BUILD_CONFIG        `
-    -p:VersionNumber=$VERSION 
+    -p:UseSharedCompilation=false            `
+    -p:VersionNumber=$VERSION
 
   if ( $LASTEXITCODE -ne 0) {
     echo "msbuild failed"
@@ -105,15 +114,72 @@ function dependencies-nuget {
   ## was a nuget command when using packages.config
   ## now we use dotnet for dependencies defined via "packageref"
   dotnet restore
-  error-on-bad-return-code	
+  error-on-bad-return-code
 }
 
 
 function error-on-bad-return-code {
-  if ( $LASTEXITCODE -ne 0) {
+  if ( $LASTEXITCODE -ne 0 ) {
     echo "error-on-bad-return-code!"
     exit $LASTEXITCODE 
   }
+}
+
+
+function main_exec {
+
+    add-build-date
+
+    cleanup-prebuild
+
+    dependencies-nuget
+
+    valid-xaml-xmllint
+
+    update-asembly-info
+    build-msbuild
+
+
+    echo ""
+    if ( $execTest -eq "TRUE" ) {
+        test-vstest
+    } else {
+        echo "tests SKIPPED, because arg execTest was '$execTest'"
+    }
+    echo ""
+
+    if ( $execGenerateArtefact  -eq "TRUE" ) {
+
+        echo "artefact generation STARTED"
+
+        echo ""
+        Copy-Item                   profiles\default-profile.json                                                $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\profile-previous.json
+        Copy-Item  -recurse -Force  profiles                                                                     $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\profiles
+        Copy-Item                   $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\application-settings.json  $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\application-settings.json
+
+        sign-executables
+
+        echo ""
+
+
+        if( $MS_BUILD_CONFIG -eq "Release" ) {
+
+          make-extract-me-installer
+
+          make-nuget-package
+
+          squirrel
+
+          sign-installer
+        }
+
+        echo "artefact generation FINISHED"
+
+    } else {
+        echo "artefact generation SKIPPED, because arg execGenerateArtefact was '$execGenerateArtefact'"
+    }
+
+    cleanup-postbuild
 }
 
 
@@ -176,6 +242,10 @@ function make-nuget-package {
 function manually-sign-file {
   $FILE_NAME = $args[0]
 
+  ## type is the windows equivalent of cat
+  $CERT_PASSWORD=$( type ${CERT_DIRECTORY}\cert-password.txt )
+  $CERT_PFX="${CERT_DIRECTORY}\github.com-pancakeslp.pfx"
+
   if(![System.IO.File]::Exists($FILE_NAME)) {
     Write-Error "file $FILE_NAME missing!" 
     exit 1
@@ -231,7 +301,7 @@ function squirrel {
   echo ""
   echo "squirrel-ing package ..."
   
-  
+
   $SQUIRREL_PATH="$NUGET_PACKAGE_PATH\squirrel.windows\1.9.1"
 
   $COMMAND=" ${SQUIRREL_PATH}\tools\Squirrel.exe  --releasify \`"PS4KeyboardAndMouseAdapter.${VERSION}.nupkg\`"  --releaseDir $GENERATED_INSTALLER_PATH "
@@ -317,38 +387,4 @@ function valid-xaml-xmllint {
 ################################
 
 
-add-build-date
-
-cleanup-prebuild
-
-dependencies-nuget
-
-valid-xaml-xmllint
-
-update-asembly-info
-build-msbuild
-
-test-vstest
-
-echo ""
-Copy-Item  -recurse -Force  profiles                        $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\profiles              
-
-sign-executables
-
-echo ""
-
-
-if( $MS_BUILD_CONFIG -eq "Release" ) {
-
-  make-extract-me-installer
-
-  make-nuget-package
-
-  squirrel
-
-  sign-installer
-}
-
-
-cleanup-postbuild
-
+main_exec
