@@ -106,9 +106,23 @@
     <PackageReference Include="AppDomainToolkit">
       <Version>1.0.4.3</Version>
     </PackageReference>
+
+	<Content Include="$(HOME)\.nuget\packages\easyhook\2.7.7097\content\net40\EasyHook32.dll">
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+	<Content Include="$(HOME)\.nuget\packages\easyhook\2.7.7097\content\net40\EasyHook64.dll">
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+	<Content Include="$(HOME)\.nuget\packages\easyhook\2.7.7097\content\net40\EasyLoad32.dll">
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+	<Content Include="$(HOME)\.nuget\packages\easyhook\2.7.7097\content\net40\EasyLoad64.dll">
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>	
     <PackageReference Include="EasyHook">
       <Version>2.7.7097</Version>
     </PackageReference>
+	
     <PackageReference Include="Lib.Harmony">
       <Version>2.0.0.10</Version>
     </PackageReference>
