@@ -438,7 +438,7 @@
 			<Version>1.14.0</Version>
 		</PackageReference>
 	
-		<Content Include="$(HOME)\.nuget\packages\csfml\2.5.0\runtimes\win-x86\native\csfml-Window.dll">
+		<Content Include="C:\Users\$(USERNAME)\.nuget\packages\csfml\2.5.0\runtimes\win-x86\native\csfml-Window.dll">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<PackageReference Include="CSFML">
