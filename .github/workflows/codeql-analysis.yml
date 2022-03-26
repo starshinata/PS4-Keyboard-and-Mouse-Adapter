@@ -39,6 +39,11 @@ jobs:
 
 
     steps:
+    
+    - name: Run ./env.ps1
+      run: |
+       powershell ./env.ps1
+       
     - name: Checkout repository
       uses: actions/checkout@v2
 
@@ -67,6 +72,8 @@ jobs:
     - name: Run ./build.ps1
       run: |
        powershell ./build.ps1 -execTest FALSE -execGenerateArtefact FALSE
+       
+       
 
 
     - name: Perform CodeQL Analysis
