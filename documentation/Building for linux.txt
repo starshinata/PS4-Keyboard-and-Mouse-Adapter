@@ -1,0 +1,35 @@
+Building for Linux
+
+See Avalonia https://github.com/AvaloniaUI/Avalonia
+
+Get VisualStudio and install extension "Avalonia Extension"
+
+Make a new project (Avalonia Application)
+
+https://de.mathworks.com/help/compiler_sdk/dotnet/create-a-dotnet-core-application-that-runs-on-linux-and-macos.html
+
+## windows
+dotnet publish --configuration Release  --self-contained true 
+## linux
+dotnet publish --configuration Release --runtime linux-x64 --self-contained true 
+## macos
+dotnet publish --configuration Release --runtime osx.10.11-x64 --self-contained true 
+
+
+
+
+
+
+Note: You should replace your "Mac OS" with your own virtual Machine
+Code for Virtualbox 6.x:
+
+cd "C:\Program Files\Oracle\VirtualBox\"
+VBoxManage.exe modifyvm "MacOS" --cpuidset 00000001 000106e5 00100800 0098e3fd bfebfbff
+VBoxManage setextradata "MacOS" "VBoxInternal/Devices/efi/0/Config/DmiSystemProduct" "iMac11,3"
+VBoxManage setextradata "MacOS" "VBoxInternal/Devices/efi/0/Config/DmiSystemVersion" "1.0"
+VBoxManage setextradata "MacOS" "VBoxInternal/Devices/efi/0/Config/DmiBoardProduct" "Iloveapple"
+VBoxManage setextradata "MacOS" "VBoxInternal/Devices/smc/0/Config/DeviceKey" "ourhardworkbythesewordsguardedpleasedontsteal(c)AppleComputerInc"
+VBoxManage setextradata "MacOS" "VBoxInternal/Devices/smc/0/Config/GetKeyFromRealSMC" 1
+
+
+https://www.nosware.com/macos-sierra-iso-download/19801/
