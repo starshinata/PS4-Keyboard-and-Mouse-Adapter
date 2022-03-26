@@ -1,4 +1,4 @@
-echo "test"
+echo "test1"
 
 
 dir env:
