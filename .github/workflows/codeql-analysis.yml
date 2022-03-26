@@ -6,10 +6,10 @@ name: "CodeQL"
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, develop-pancakeslp ]
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: [ master ]
+    branches: [ master, develop-pancakeslp ]
   schedule:
     - cron: '37 7 * * 4'
 
@@ -39,6 +39,7 @@ jobs:
 
 
     steps:
+
     - name: Checkout repository
       uses: actions/checkout@v2
 
@@ -67,6 +68,8 @@ jobs:
     - name: Run ./build.ps1
       run: |
        powershell ./build.ps1 -execTest FALSE -execGenerateArtefact FALSE
+       
+       
 
 
     - name: Perform CodeQL Analysis
