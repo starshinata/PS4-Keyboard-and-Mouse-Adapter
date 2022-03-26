@@ -1,1 +1,4 @@
+echo "test"
+
+
 dir env:
