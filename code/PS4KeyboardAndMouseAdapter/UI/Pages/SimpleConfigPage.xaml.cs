@@ -14,6 +14,11 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Pages
             gamepadMappingController = gamepadMappingControllerInner;
         }
 
+        public void ChangeScheme(System.Uri colourScheme)
+        {
+            gamepadMappingController.ChangeScheme(colourScheme);
+        }
+
         private void GotFocusLocal(object sender, RoutedEventArgs e)
         {
             ((MainViewModel)DataContext).RefreshData();

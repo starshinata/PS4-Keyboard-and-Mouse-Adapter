@@ -21,7 +21,8 @@
             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
                 <EventSetter Event="Click" Handler="Handler_ButtonClicked" />
             </Style>
-
+            
+<!-- TODO can i remove --> 
             <Style TargetType="Image">
                 <Setter Property="RenderOptions.BitmapScalingMode"
                         Value="HighQuality" />
@@ -131,9 +132,14 @@
                     Margin="0,10"
                     Stretch="Uniform"
                     x:Name="JoystickImage"
+                    
                     >
-                    <Image.Source>
-                        <BitmapImage UriSource="pack://application:,,,/images/ds4_final_layout.png"/>
+                    <Image.Source
+                        >
+                        <BitmapImage 
+                            UriSource="pack://application:,,,/images/ds4_dark_theme.png"
+                            
+                            x:Name="imageGamepad"/>
                     </Image.Source>
                 </Image>
             </StackPanel>

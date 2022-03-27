@@ -33,6 +33,14 @@ namespace Pizza.KeyboardAndMouseAdapter.UI
             tabs.Items.Add(tabItem);
         }
 
+        public void ChangeScheme(Uri colourScheme)
+        {
+            if (simpleConfigPage != null)
+            {
+                simpleConfigPage.ChangeScheme(colourScheme);
+            }
+        }
+
         private void MainWindowView_OnActivated(object sender, EventArgs e)
         {
             RefreshRemotePlayProcess();

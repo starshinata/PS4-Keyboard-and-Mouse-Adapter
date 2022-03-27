@@ -146,6 +146,7 @@
     </ApplicationDefinition>
     <Compile Include="Backend\AppUpdater.cs" />
     <Compile Include="Backend\AudioManager.cs" />
+    <Compile Include="Backend\ColourSchemeChanger.cs" />
     <Compile Include="Backend\DebugLogging\DebugDump.cs" />
     <Compile Include="Backend\DebugLogging\GetOsVersion.cs" />
     <Compile Include="Backend\DebugLogging\HidFacade.cs" />
@@ -175,6 +176,9 @@
     </Compile>
     <Compile Include="UI\Controls\MiscellaneousSettingPage\GamepadUpdaterNoSleepControl.xaml.cs">
       <DependentUpon>GamepadUpdaterNoSleepControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\MiscellaneousSettingPage\ColourSchemeToggleControl.xaml.cs">
+      <DependentUpon>ColourSchemeToggleControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\MiscellaneousSettingPage\RemotePlayToolbarSettingsControl.xaml.cs">
       <DependentUpon>RemotePlayToolbarSettingsControl.xaml</DependentUpon>
@@ -258,6 +262,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\Controls\MiscellaneousSettingPage\GamepadUpdaterNoSleepControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Controls\MiscellaneousSettingPage\ColourSchemeToggleControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -529,7 +537,10 @@
     <Resource Include="ds4.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\ds4_final_layout.png" />
+    <Resource Include="images\ds4_dark_theme.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ds4_light_theme.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">

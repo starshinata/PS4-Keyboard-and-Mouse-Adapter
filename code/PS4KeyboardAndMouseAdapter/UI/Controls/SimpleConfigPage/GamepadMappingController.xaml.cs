@@ -1,9 +1,11 @@
-﻿using Pizza.KeyboardAndMouseAdapter.Backend.Config;
+﻿using AdonisUI;
+using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using Serilog;
 using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 using Button = System.Windows.Controls.Button;
 using Keyboard = SFML.Window.Keyboard;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
@@ -14,13 +16,40 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls
     {
         private Button lastClickedButton;
 
+
+        BitmapImage imageGamepadDark;
+        BitmapImage imageGamepadLight;
+
         public GamepadMappingController()
         {
             Log.Debug("GamepadMappingController constructor IN");
             InitializeComponent();
 
             WaitingForKeyPress_Hide();
+
+            imageGamepadDark = new BitmapImage();
+            imageGamepadDark.BeginInit();
+            imageGamepadDark.UriSource = new Uri("pack://application:,,,/images/ds4_dark_theme.png");
+            imageGamepadDark.EndInit();
+
+            imageGamepadLight = new BitmapImage();
+            imageGamepadLight.BeginInit();
+            imageGamepadLight.UriSource = new Uri("pack://application:,,,/images/ds4_light_theme.png");
+            imageGamepadLight.EndInit();
+
             Log.Debug("GamepadMappingController constructor OUT");
+        }
+
+        public void ChangeScheme(Uri colourScheme)
+        {
+            if (colourScheme == ResourceLocator.LightColorScheme)
+            {
+                JoystickImage.Source = imageGamepadLight;
+            }
+            else if (colourScheme == ResourceLocator.DarkColorScheme)
+            {
+                JoystickImage.Source = imageGamepadDark;
+            }
         }
 
         private void Handler_ButtonClicked(object sender, RoutedEventArgs e)
