@@ -36,6 +36,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
             ThisInstance.EmulateController = NewSettings.EmulateController;
             ThisInstance.EmulationMode = NewSettings.EmulationMode;
             ThisInstance.RemotePlayPath = NewSettings.RemotePlayPath;
+            ThisInstance.ThemeIsLight = NewSettings.ThemeIsLight;
         }
 
         public static void Load()
@@ -102,6 +103,8 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
         public bool GamepadUpdaterNoSleep { get; set; } = false;
 
         public string RemotePlayPath;
+
+        public bool ThemeIsLight { get; set; } = false;
 
         //
         // REMINDER if you add a new property, be sure to add it to ImportValues method

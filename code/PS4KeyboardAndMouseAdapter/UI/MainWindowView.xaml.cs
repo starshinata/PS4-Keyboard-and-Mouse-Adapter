@@ -1,4 +1,6 @@
-﻿using Pizza.Common;
+﻿using AdonisUI;
+using Pizza.Common;
+using Pizza.KeyboardAndMouseAdapter.Backend;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using Pizza.KeyboardAndMouseAdapter.Backend.Vigem;
 using Pizza.KeyboardAndMouseAdapter.UI.Pages;
@@ -18,6 +20,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI
         {
             InitializeComponent();
             KeyDown += MainWindowView_OnKeyDown;
+            ChangeScheme(ApplicationSettings.GetInstance().ThemeIsLight);
         }
 
         private void AddTab(string tabText, UserControl control)
@@ -33,8 +36,11 @@ namespace Pizza.KeyboardAndMouseAdapter.UI
             tabs.Items.Add(tabItem);
         }
 
-        public void ChangeScheme(Uri colourScheme)
+        public void ChangeScheme(bool newValue)
         {
+            System.Uri colourScheme = newValue ? ResourceLocator.LightColorScheme : ResourceLocator.DarkColorScheme;
+            ResourceLocator.SetColorScheme(Application.Current.Resources, colourScheme);
+
             if (simpleConfigPage != null)
             {
                 simpleConfigPage.ChangeScheme(colourScheme);

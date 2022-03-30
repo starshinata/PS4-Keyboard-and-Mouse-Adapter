@@ -1,4 +1,5 @@
-﻿using PS4KeyboardAndMouseAdapter.Backend;
+﻿using Pizza.KeyboardAndMouseAdapter.Backend;
+using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -10,6 +11,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.MiscellaneousSettings
         public ColourSchemeToggleControl()
         {
             InitializeComponent();
+            IsLight = ApplicationSettings.GetInstance().ThemeIsLight;
         }
 
         public bool IsLight
@@ -22,7 +24,9 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.MiscellaneousSettings
 
         private static void OnIsLightChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ColourSchemeChanger.Change((bool)e.NewValue);
+            bool newValue = (bool)e.NewValue;
+            ApplicationSettings.GetInstance().ThemeIsLight = newValue;
+            ColourSchemeChanger.Change(newValue);
         }
 
     }

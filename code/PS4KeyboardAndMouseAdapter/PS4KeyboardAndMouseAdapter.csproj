@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>PS4KeyboardAndMouseAdapter</RootNamespace>
+    <RootNamespace>Pizza.KeyboardAndMouseAdapter</RootNamespace>
     <AssemblyName>PS4KeyboardAndMouseAdapter</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <RuntimeIdentifier>win</RuntimeIdentifier>
@@ -435,7 +435,6 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="AdonisUI">
       <Version>1.14.0</Version>

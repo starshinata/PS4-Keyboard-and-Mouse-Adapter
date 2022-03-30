@@ -25,10 +25,10 @@ namespace UnitTests.KeyboardAndMouseAdapter.Config.ApplicationSettingsTest
         }
 
         [TestMethod]
-        public void ShouldImport_Empty()
+        public void ShouldImport_EmptyDefault()
         {
             string inputFile = PROFILE_DIRECTORY + "ImportValues--Empty--input.json";
-            string expectedFile = PROFILE_DIRECTORY + "ImportValues--Empty--expected.json";
+            string expectedFile = PROFILE_DIRECTORY + "ImportValues--Empty--expected-default.json";
             ApplicationSettings.ImportValues(inputFile);
             ApplicationSettings actual = ApplicationSettings.GetInstance();
             ApplicationSettings expected = ReadExpectedFile(expectedFile);
@@ -41,6 +41,18 @@ namespace UnitTests.KeyboardAndMouseAdapter.Config.ApplicationSettingsTest
         {
             string inputFile = PROFILE_DIRECTORY + "ImportValues--property-GamepadUpdaterNoSleep--input.json";
             string expectedFile = PROFILE_DIRECTORY + "ImportValues--property-GamepadUpdaterNoSleep--expected.json";
+            ApplicationSettings.ImportValues(inputFile);
+            ApplicationSettings actual = ApplicationSettings.GetInstance();
+            ApplicationSettings expected = ReadExpectedFile(expectedFile);
+
+            AssertionExtensions.Should(actual).BeEquivalentTo(expected);
+        }
+
+        [TestMethod]
+        public void ShouldImport_Property_ThemeIsLight()
+        {
+            string inputFile = PROFILE_DIRECTORY + "ImportValues--property-ThemeIsLight--input.json";
+            string expectedFile = PROFILE_DIRECTORY + "ImportValues--property-ThemeIsLight--expected.json";
             ApplicationSettings.ImportValues(inputFile);
             ApplicationSettings actual = ApplicationSettings.GetInstance();
             ApplicationSettings expected = ReadExpectedFile(expectedFile);

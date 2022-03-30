@@ -1,20 +1,22 @@
-﻿using AdonisUI;
-using Pizza.KeyboardAndMouseAdapter.UI;
+﻿using Pizza.KeyboardAndMouseAdapter.UI;
+using Serilog;
 using System.Windows;
 
-namespace PS4KeyboardAndMouseAdapter.Backend
+namespace Pizza.KeyboardAndMouseAdapter.Backend
 {
     public class ColourSchemeChanger
     {
         public static void Change(bool newValue)
         {
-            System.Uri colourScheme = newValue ? ResourceLocator.LightColorScheme : ResourceLocator.DarkColorScheme;
-
-            ResourceLocator.SetColorScheme(Application.Current.Resources, colourScheme);
-
             Window window = Application.Current.MainWindow;
-            ((MainWindowView)window).ChangeScheme(colourScheme);
+            if (window != null)
+            {
+                ((MainWindowView)window).ChangeScheme(newValue);
+            }
+            else
+            {
+                Log.Information("ColourSchemeChanger.Change() called but window is null");
+            }
         }
-
     }
 }
