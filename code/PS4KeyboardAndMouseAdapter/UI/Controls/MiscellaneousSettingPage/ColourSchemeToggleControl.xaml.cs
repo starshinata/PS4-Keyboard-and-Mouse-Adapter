@@ -22,7 +22,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.MiscellaneousSettings
 
         private static void OnIsLightChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ColourSchemeChanger.Change((bool)e.OldValue);
+            ColourSchemeChanger.Change((bool)e.NewValue);
         }
 
     }

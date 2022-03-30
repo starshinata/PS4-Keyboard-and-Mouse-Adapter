@@ -435,9 +435,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\mouse-left-button.svg" />
-  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="AdonisUI">
       <Version>1.14.0</Version>
@@ -528,19 +526,25 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\mouse-right-button.svg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\mouse-move.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="ds4.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\ds4_dark_theme.png" />
+    <Resource Include="images\mouse-left-button-dark-theme.svg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\ds4_light_theme.png" />
+    <Resource Include="images\mouse-left-button-light-theme.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\mouse-right-button-dark-theme.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\mouse-right-button-light-theme.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ds4-dark-theme.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ds4-light-theme.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">

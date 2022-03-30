@@ -10,6 +10,7 @@
     mc:Ignorable="d"
     
     xmlns:local="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls.MiscellaneousSettings"
+    xmlns:wpfspark="clr-namespace:WPFSpark;assembly=WPFSpark" 
     >
 
     <StackPanel>
@@ -22,10 +23,27 @@
                 Text="Dark"
                 VerticalAlignment="Center" />
 
-            <ToggleButton 
-                IsChecked="{Binding IsLight, RelativeSource={RelativeSource FindAncestor, AncestorType=local:ColourSchemeToggleControl}}"
-                Content="Click"/>
+            <!-- spacer -->
+            <TextBlock
+                Width="10px"/>
             
+            <!-- https://www.codeproject.com/Articles/1060961/WPFSpark-v -->
+            <wpfspark:ToggleSwitch
+                Background="black"
+                BorderThickness="2px"
+                IsChecked="{Binding IsLight, RelativeSource={RelativeSource FindAncestor, AncestorType=local:ColourSchemeToggleControl}}"
+                Height="30"
+                HorizontalAlignment="Right"
+                Style="{StaticResource {ComponentResourceKey ResourceId=ToggleSwitch.iOS.Light.Style, TypeInTargetAssembly={x:Type wpfspark:ToggleSwitch}}}" 
+                VerticalAlignment="Center"
+                Width="60"
+                x:Name="Element_Toggle"
+                />
+
+            <!-- spacer -->
+            <TextBlock
+                Width="10px"/>
+
             <TextBlock 
                 Text="Light"
                 VerticalAlignment="Center" />
