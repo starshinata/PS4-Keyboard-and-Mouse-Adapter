@@ -32,11 +32,11 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 
             ApplicationSettings NewSettings = JsonConvert.DeserializeObject<ApplicationSettings>(json);
 
-            ThisInstance.GamepadUpdaterNoSleep = NewSettings.GamepadUpdaterNoSleep;
+            ThisInstance.ColourSchemeIsLight = NewSettings.ColourSchemeIsLight; 
             ThisInstance.EmulateController = NewSettings.EmulateController;
             ThisInstance.EmulationMode = NewSettings.EmulationMode;
+            ThisInstance.GamepadUpdaterNoSleep = NewSettings.GamepadUpdaterNoSleep; 
             ThisInstance.RemotePlayPath = NewSettings.RemotePlayPath;
-            ThisInstance.ThemeIsLight = NewSettings.ThemeIsLight;
         }
 
         public static void Load()
@@ -74,6 +74,11 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 
         //////////////////////////////////////////////////////////////////////
 
+        public string GetAsJson()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
+
         public ApplicationSettings Clone()
         {
             // cloning by (serilise to string then deserialise)
@@ -96,6 +101,8 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
         // REMINDER if you add a new property, be sure to add it to ImportValues method
         //
 
+        public bool ColourSchemeIsLight { get; set; } = false;
+
         public bool EmulateController { get; set; } = false;
 
         public int EmulationMode;
@@ -103,8 +110,6 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
         public bool GamepadUpdaterNoSleep { get; set; } = false;
 
         public string RemotePlayPath;
-
-        public bool ThemeIsLight { get; set; } = false;
 
         //
         // REMINDER if you add a new property, be sure to add it to ImportValues method

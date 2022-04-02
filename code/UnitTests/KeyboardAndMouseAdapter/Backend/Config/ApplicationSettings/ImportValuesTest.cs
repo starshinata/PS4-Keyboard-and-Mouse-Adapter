@@ -1,7 +1,6 @@
-using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
+using Pizza.TestTools;
 using System.IO;
 
 namespace UnitTests.KeyboardAndMouseAdapter.Config.ApplicationSettingsTest
@@ -12,10 +11,9 @@ namespace UnitTests.KeyboardAndMouseAdapter.Config.ApplicationSettingsTest
         private static readonly string PROJECT_ROOT = "..\\..\\..\\";
         private static readonly string PROFILE_DIRECTORY = PROJECT_ROOT + "UnitTests\\KeyboardAndMouseAdapter\\backend\\Config\\ApplicationSettings\\";
 
-        private ApplicationSettings ReadExpectedFile(string file)
+        private string ReadExpectedFile(string file)
         {
-            string json = File.ReadAllText(file);
-            return JsonConvert.DeserializeObject<ApplicationSettings>(json);
+            return File.ReadAllText(file);
         }
 
         [TestInitialize]
@@ -25,15 +23,27 @@ namespace UnitTests.KeyboardAndMouseAdapter.Config.ApplicationSettingsTest
         }
 
         [TestMethod]
-        public void ShouldImport_EmptyDefault()
+        public void ShouldImport_Default_whenEmpty()
         {
-            string inputFile = PROFILE_DIRECTORY + "ImportValues--Empty--input.json";
-            string expectedFile = PROFILE_DIRECTORY + "ImportValues--Empty--expected-default.json";
+            string inputFile = PROFILE_DIRECTORY + "ImportValues--Default_whenEmpty--input.json";
+            string expectedFile = PROFILE_DIRECTORY + "ImportValues--Default_whenEmpty--expected.json";
             ApplicationSettings.ImportValues(inputFile);
-            ApplicationSettings actual = ApplicationSettings.GetInstance();
-            ApplicationSettings expected = ReadExpectedFile(expectedFile);
+            string actual = ApplicationSettings.GetInstance().GetAsJson();
+            string expected = ReadExpectedFile(expectedFile);
 
-            AssertionExtensions.Should(actual).BeEquivalentTo(expected);
+            ExtendedAsserts.JsonsBeEquivalent(actual, expected);
+        }
+
+        [TestMethod]
+        public void ShouldImport_Property_ColourSchemeIsLight()
+        {
+            string inputFile = PROFILE_DIRECTORY + "ImportValues--property-ColourSchemeIsLight--input.json";
+            string expectedFile = PROFILE_DIRECTORY + "ImportValues--property-ColourSchemeIsLight--expected.json";
+            ApplicationSettings.ImportValues(inputFile);
+            string actual = ApplicationSettings.GetInstance().GetAsJson();
+            string expected = ReadExpectedFile(expectedFile);
+
+            ExtendedAsserts.JsonsBeEquivalent(actual, expected);
         }
 
         [TestMethod]
@@ -42,22 +52,10 @@ namespace UnitTests.KeyboardAndMouseAdapter.Config.ApplicationSettingsTest
             string inputFile = PROFILE_DIRECTORY + "ImportValues--property-GamepadUpdaterNoSleep--input.json";
             string expectedFile = PROFILE_DIRECTORY + "ImportValues--property-GamepadUpdaterNoSleep--expected.json";
             ApplicationSettings.ImportValues(inputFile);
-            ApplicationSettings actual = ApplicationSettings.GetInstance();
-            ApplicationSettings expected = ReadExpectedFile(expectedFile);
+            string actual = ApplicationSettings.GetInstance().GetAsJson();
+            string expected = ReadExpectedFile(expectedFile);
 
-            AssertionExtensions.Should(actual).BeEquivalentTo(expected);
-        }
-
-        [TestMethod]
-        public void ShouldImport_Property_ThemeIsLight()
-        {
-            string inputFile = PROFILE_DIRECTORY + "ImportValues--property-ThemeIsLight--input.json";
-            string expectedFile = PROFILE_DIRECTORY + "ImportValues--property-ThemeIsLight--expected.json";
-            ApplicationSettings.ImportValues(inputFile);
-            ApplicationSettings actual = ApplicationSettings.GetInstance();
-            ApplicationSettings expected = ReadExpectedFile(expectedFile);
-
-            AssertionExtensions.Should(actual).BeEquivalentTo(expected);
+            ExtendedAsserts.JsonsBeEquivalent(actual, expected);
         }
 
     }

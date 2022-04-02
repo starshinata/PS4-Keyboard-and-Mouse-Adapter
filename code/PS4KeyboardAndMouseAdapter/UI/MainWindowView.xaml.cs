@@ -20,7 +20,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI
         {
             InitializeComponent();
             KeyDown += MainWindowView_OnKeyDown;
-            ChangeScheme(ApplicationSettings.GetInstance().ThemeIsLight);
+            ChangeColourScheme(ApplicationSettings.GetInstance().ColourSchemeIsLight);
         }
 
         private void AddTab(string tabText, UserControl control)
@@ -36,9 +36,9 @@ namespace Pizza.KeyboardAndMouseAdapter.UI
             tabs.Items.Add(tabItem);
         }
 
-        public void ChangeScheme(bool newValue)
+        public void ChangeColourScheme(bool isLight)
         {
-            System.Uri colourScheme = newValue ? ResourceLocator.LightColorScheme : ResourceLocator.DarkColorScheme;
+            System.Uri colourScheme = isLight ? ResourceLocator.LightColorScheme : ResourceLocator.DarkColorScheme;
             ResourceLocator.SetColorScheme(Application.Current.Resources, colourScheme);
 
             if (simpleConfigPage != null)

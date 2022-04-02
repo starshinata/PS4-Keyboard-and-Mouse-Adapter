@@ -11,7 +11,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.MiscellaneousSettings
         public ColourSchemeToggleControl()
         {
             InitializeComponent();
-            IsLight = ApplicationSettings.GetInstance().ThemeIsLight;
+            IsLight = ApplicationSettings.GetInstance().ColourSchemeIsLight;
         }
 
         public bool IsLight
@@ -25,7 +25,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.MiscellaneousSettings
         private static void OnIsLightChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             bool newValue = (bool)e.NewValue;
-            ApplicationSettings.GetInstance().ThemeIsLight = newValue;
+            ApplicationSettings.GetInstance().ColourSchemeIsLight = newValue;
             ColourSchemeChanger.Change(newValue);
         }
 

@@ -11,7 +11,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
             Window window = Application.Current.MainWindow;
             if (window != null)
             {
-                ((MainWindowView)window).ChangeScheme(newValue);
+                ((MainWindowView)window).ChangeColourScheme(newValue);
             }
             else
             {
