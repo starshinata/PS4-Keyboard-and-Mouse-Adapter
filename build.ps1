@@ -111,7 +111,7 @@ function cleanup-postbuild {
 
 
 function dependencies-nuget {
-  ## was a nuget command when using packages.config
+  ## this was a nuget command when using packages.config
   ## now we use dotnet for dependencies defined via "packageref"
   dotnet restore
   error-on-bad-return-code
@@ -136,7 +136,7 @@ function main_exec {
 
     valid-xaml-xmllint
 
-    update-asembly-info
+    update-assembly-info
     build-msbuild
 
 
@@ -352,7 +352,7 @@ function test-vstest {
 }
 
 
-function update-asembly-info {
+function update-assembly-info {
   manualBuild\c-sharp-assembly-info-util\AssemblyInfoUtil.exe -set:$VERSION "$PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\Properties\AssemblyInfo.cs"
 
   if ( $LASTEXITCODE -ne 0) {
