@@ -1,8 +1,10 @@
 # Release checklist
 
 
-1. If you have updated any dependencies, then delete the packages folder and do a fresh build to check everything is ok.<br>
+1. Done a clean build ?<br>
  ` ./clean.sh ; ./build.sh `
+
+1. Does Debug still work?
 
 1. Have we enabled the auto update logic in ` AppUpdater.cs `
 
@@ -13,8 +15,6 @@
 1. Is this version number unique, and not previously released?
 
 1. Does the installer install to the version we expect?
-
-1. Does Debug still work?
 
 1. CPU analysis, are we still using only 1% of the CPU?
 
@@ -27,8 +27,6 @@
 1. Verify things are digitally signed
 
   * AppData\Local\PS4KeyboardAndMouseAdapter\VERSION\PS4KeyboardAndMouseAdapter.exe 
-
-  * starshinata\PS4-Keyboard-and-Mouse-Adapter\PS4KeyboardAndMouseAdapter\bin\Release\PS4KeyboardAndMouseAdapter.exe 
 
   * starshinata\PS4-Keyboard-and-Mouse-Adapter\SquirrelReleases\application-setup.exe
 
