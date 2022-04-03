@@ -139,6 +139,11 @@ namespace PS4RemotePlayInterceptor
                 // Success
                 return process.Id;
             }
+            catch (DllNotFoundException ex)
+            {
+                ExceptionLogger.LogException("DllNotFoundException, this looks fatal", ex);
+                throw ex;
+            }
             catch (Exception ex)
             {
                 string error = string.Format("Failed to inject to target: {0}", ex.Message);

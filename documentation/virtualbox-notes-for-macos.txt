@@ -1,0 +1,25 @@
+Follow guide from https://www.youtube.com/watch?v=qxYq8R8rOTA
+
+download ISO from https://www.nosware.com/macos-sierra-iso-download/19801/
+
+
+Assuming you have Virtualbox 6.x installed
+make a vm named "MacOS" (if you choose something different repalce MacOS with you vmname in the below commands)
+And make sure it has a HDD attached (ive used 20gb)
+
+in a Command window run the following commands
+  cd "C:\Program Files\Oracle\VirtualBox\"
+  VBoxManage.exe modifyvm "MacOS" --cpuidset 00000001 000106e5 00100800 0098e3fd bfebfbff
+  VBoxManage setextradata "MacOS" "VBoxInternal/Devices/efi/0/Config/DmiSystemProduct" "iMac11,3"
+  VBoxManage setextradata "MacOS" "VBoxInternal/Devices/efi/0/Config/DmiSystemVersion" "1.0"
+  VBoxManage setextradata "MacOS" "VBoxInternal/Devices/efi/0/Config/DmiBoardProduct" "Iloveapple"
+  VBoxManage setextradata "MacOS" "VBoxInternal/Devices/smc/0/Config/DeviceKey" "ourhardworkbythesewordsguardedpleasedontsteal(c)AppleComputerInc"
+  VBoxManage setextradata "MacOS" "VBoxInternal/Devices/smc/0/Config/GetKeyFromRealSMC" 1
+
+
+###############################################################################
+
+Progress through the installer until you are asked where to install the OS
+If you can only see a DVD then open Utilites from the top bar,
+  then goto disk utility
+  find the hdd you attached and erase it (this should remove the existing partitions, and add a new partition suitable for macos

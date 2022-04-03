@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Pizza.KeyboardAndMouseAdapter.Backend.Properties {
+namespace Pizza.KeyboardAndMouseAdapter.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PS4KeyboardAndMouseAdapter.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Pizza.KeyboardAndMouseAdapter.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,7 +61,8 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to 2022-03-30T22:31:46
+        ///.
         /// </summary>
         internal static string BuildDate {
             get {

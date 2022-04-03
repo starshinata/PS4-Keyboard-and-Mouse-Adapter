@@ -1,6 +1,14 @@
 # Version History
 
 
+### v 3.1.0
+* Stuff users will appreciate
+  * Added "Colour Scheme" swapper (pick from Light mode or Dark mode). See "Miscellaneous Settings" tab
+
+* Under the hood stuff
+  * swapping c# dependency system from packages.config to PackageReference
+
+
 ### v 3.0.0
 * New method of controller emulation (ViGEm)
 
@@ -26,7 +34,7 @@
 
 
 ### v 2.2.1
-* Adding a second option for installing
+* Added a second option for installing
   * application-extract-me.zip
   * application-setup.exe
 
@@ -108,7 +116,7 @@
 * Added Keyboard mappings for right stick
 * Added mouse poll rate settings
 * Updated mouse anchoring logic so it is harder for you to click out of 'PS Remote Play' (still theoretically possible to click out of 'PS Remote Play', if you experience this issue try increasing the mouse poll rate, or file an issue). <br> We specifically recognise where 'PS Remote Play' window is and anchor to the centre of that - previously it was a random (not strictly random but it didn't have any obvious significance) point on your primary monitor
-* Added switches to let user set which stick takes input from the mouse.<br> You could technically have move sticks controlled by the mouse ... I WOULD NOT recommend both sticks bound to the mouse!
+* Added switches to let user set which stick takes input from the mouse.<br> You could technically have move both sticks controlled by the mouse ... I WOULD NOT recommend both sticks bound to the mouse!
 * Added more documentation
 * Lots of refactorings to make the code cleaner.
 

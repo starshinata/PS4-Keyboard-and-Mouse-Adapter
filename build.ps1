@@ -29,7 +29,7 @@ $CERT_DIRECTORY="D:\workspace\##certificates\github.com-pancakeslp"
 #$MS_BUILD_CONFIG="Debug"
 $MS_BUILD_CONFIG="Release"
 
-$VERSION="3.0.0"
+$VERSION="3.1.0"
 
 ################################
 ################################
@@ -50,11 +50,7 @@ $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER="code\PS4KeyboardAndMouseAdapt
 $PROJECT_DIRECTORY_PS4_REMOTE_PLAY_INJECTION="code\PS4RemotePlayInjection"
 $PROJECT_DIRECTORY_UNIT_TESTS="code\UnitTests"
 
-## yes there are two package folders
-## /code/pacakges
-## /packages
-## for MSBUILD we care about code/packages
-$DIRECTORY_PACKAGES="code\packages"
+$NUGET_PACKAGE_PATH="${env:HOME}\.nuget\packages\"
 
 ################################
 ################################
@@ -76,7 +72,7 @@ function build-msbuild {
   MSBuild.exe PS4KeyboardAndMouseAdapter.sln `
     -p:Configuration=$MS_BUILD_CONFIG        `
     -p:UseSharedCompilation=false            `
-    -p:VersionNumber=$VERSION 
+    -p:VersionNumber=$VERSION
 
   if ( $LASTEXITCODE -ne 0) {
     echo "msbuild failed"
@@ -115,19 +111,10 @@ function cleanup-postbuild {
 
 
 function dependencies-nuget {
-
-  nuget install $PROJECT_DIRECTORY_COMMON\packages.config                         -OutputDirectory $DIRECTORY_PACKAGES 
-  error-on-bad-return-code	
-
-  nuget install $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\packages.config -OutputDirectory $DIRECTORY_PACKAGES 
-  error-on-bad-return-code	
-
-  nuget install $PROJECT_DIRECTORY_PS4_REMOTE_PLAY_INJECTION\packages.config      -OutputDirectory $DIRECTORY_PACKAGES 
-  error-on-bad-return-code	
-
-  nuget install $PROJECT_DIRECTORY_UNIT_TESTS\packages.config                     -OutputDirectory $DIRECTORY_PACKAGES 
-  error-on-bad-return-code	
-  
+  ## this was a nuget command when using packages.config
+  ## now we use dotnet for dependencies defined via "packageref"
+  dotnet restore
+  error-on-bad-return-code
 }
 
 
@@ -149,13 +136,13 @@ function main_exec {
 
     valid-xaml-xmllint
 
-    update-asembly-info
+    update-assembly-info
     build-msbuild
 
-    
+
     echo ""
     if ( $execTest -eq "TRUE" ) {
-        test-vstest  
+        test-vstest
     } else {
         echo "tests SKIPPED, because arg execTest was '$execTest'"
     }
@@ -167,7 +154,7 @@ function main_exec {
 
         echo ""
         Copy-Item                   profiles\default-profile.json                                                $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\profile-previous.json
-        Copy-Item  -recurse -Force  profiles                                                                     $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\profiles              
+        Copy-Item  -recurse -Force  profiles                                                                     $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\profiles
         Copy-Item                   $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\application-settings.json  $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\application-settings.json
 
         sign-executables
@@ -212,7 +199,7 @@ function make-extract-me-installer {
 
   $EXTRACTED_PATH="$GENERATED_INSTALLER_PATH\extract-temp\"
 
-  make-dir $EXTRACTED_PATH
+  make-dir $EXTRACTED_PATH\app-$VERSION
 
   Copy-Item  -Force           $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\Release\*         $EXTRACTED_PATH\app-$VERSION
   Copy-Item  -Force -Recurse  $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\Release\profiles  $EXTRACTED_PATH\app-$VERSION\profiles
@@ -254,7 +241,7 @@ function make-nuget-package {
 
 function manually-sign-file {
   $FILE_NAME = $args[0]
-  
+
   ## type is the windows equivalent of cat
   $CERT_PASSWORD=$( type ${CERT_DIRECTORY}\cert-password.txt )
   $CERT_PFX="${CERT_DIRECTORY}\github.com-pancakeslp.pfx"
@@ -314,7 +301,10 @@ function squirrel {
   echo ""
   echo "squirrel-ing package ..."
   
-    $COMMAND=" ${DIRECTORY_PACKAGES}\squirrel.windows.1.9.1\tools\Squirrel.exe  --releasify \`"PS4KeyboardAndMouseAdapter.${VERSION}.nupkg\`"  --releaseDir $GENERATED_INSTALLER_PATH "
+
+  $SQUIRREL_PATH="$NUGET_PACKAGE_PATH\squirrel.windows\1.9.1"
+
+  $COMMAND=" ${SQUIRREL_PATH}\tools\Squirrel.exe  --releasify \`"PS4KeyboardAndMouseAdapter.${VERSION}.nupkg\`"  --releaseDir $GENERATED_INSTALLER_PATH "
   
   powershell.exe -ExecutionPolicy Bypass -Command "$COMMAND | Write-Output"
   error-on-bad-return-code	
@@ -362,7 +352,7 @@ function test-vstest {
 }
 
 
-function update-asembly-info {
+function update-assembly-info {
   manualBuild\c-sharp-assembly-info-util\AssemblyInfoUtil.exe -set:$VERSION "$PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\Properties\AssemblyInfo.cs"
 
   if ( $LASTEXITCODE -ne 0) {

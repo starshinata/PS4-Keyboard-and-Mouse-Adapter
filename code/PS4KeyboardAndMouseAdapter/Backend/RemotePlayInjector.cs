@@ -46,6 +46,11 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
 
                 Injector.Callback += gamepadProcessor.OnReceiveData;
             }
+            catch (DllNotFoundException ex)
+            {
+                //Deferr to OpenRemotePlayAndInject()
+                throw ex;
+            }
             catch (Exception e)
             {
                 ExceptionLogger.LogException("RemotePlayInjector.Inject error", e);
@@ -63,6 +68,18 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
                 {
                     Inject(gamepadProcessor);
                 }
+            }
+            catch (DllNotFoundException ex)
+            {
+                ExceptionLogger.LogException("DllNotFoundException, this looks fatal", ex);
+
+                System.Windows.MessageBox.Show("Got a DllNotFoundException and that is 99% bad, please report this to the developer",
+                    "PS4KMA DllNotFoundException",
+                    (MessageBoxButton)MessageBoxButtons.OK,
+                    (MessageBoxImage)MessageBoxIcon.Error);
+
+                Log.Logger.Fatal("Application Exit RemotePlayInjector.Inject() Ref81");
+                throw ex;
             }
             catch (Exception e)
             {

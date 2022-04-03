@@ -1,7 +1,7 @@
 {
-	"ColourSchemeIsLight": false,
+	"ColourSchemeIsLight": true,
 	"EmulateController": false,
 	"EmulationMode": 0,
-	"GamepadUpdaterNoSleep": true,
+	"GamepadUpdaterNoSleep": false,
 	"RemotePlayPath": null,
 }

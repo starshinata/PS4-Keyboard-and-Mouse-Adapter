@@ -33,6 +33,13 @@
             <TextBlock/>
 
             <page:GamepadUpdaterNoSleepControl/>
+
+            <!-- spacer -->
+            <TextBlock/>
+            <TextBlock/>
+
+            <page:ColourSchemeToggleControl/>
+
         </StackPanel>
 
     </ScrollViewer>
