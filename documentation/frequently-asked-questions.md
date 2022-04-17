@@ -1,6 +1,10 @@
 # Frequently Asked Questions
 
-Questions ordered alphabetically
+Questions ordered alphabetically, apart from the first one
+
+
+### I need help
+See our troubleshooting instructions https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/blob/master/documentation/troubleshooting.md
 
 
 ### Can I get a profile for *INSERT GAME*
@@ -85,7 +89,7 @@ IMO No.
 
 Sony has licensed Hori products https://www.playstation.com/en-us/explore/accessories/specialty-controllers/, and Hori has provided mouse and keyboard options https://www.amazon.co.uk/HORI-Tactical-Assault-Commander-Pro/dp/B01K7JEII8
 
-If you are using an application to improve you aim or response time, that could be considered cheating. The developers of this application consider this a accessibility aid for people who have issues using a controller (I personally have RSI and cannot play with a controller for long periods of time, but can use a mouse and keyboard all day).
+If you are using an application to improve you aim or response time, that could be considered cheating. The developers of this application consider this an accessibility aid for people who have issues using a controller (I personally have RSI and cannot play with a controller for long periods of time, but can use a mouse and keyboard all day).
 
 
 ### What are the best settings to play an FPS game
