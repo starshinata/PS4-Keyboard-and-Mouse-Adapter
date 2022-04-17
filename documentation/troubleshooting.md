@@ -7,6 +7,10 @@
   https://www.rewasd.com/ <br>
   Rewasd being installed can cause interference with this application
 
+* If you have Input mapper, please uninstall it <br>
+  https://beta.inputmapper.com/ <br>
+  Input mapper being installed can cause interference with this application
+  
 * Make sure that "PS Remote Play" is closed before starting the adapter
 
 * Do not start "PS Remote Play" yourself <br>
