@@ -21,6 +21,8 @@ namespace Pizza.KeyboardAndMouseAdapter.UI
             InitializeComponent();
             KeyDown += MainWindowView_OnKeyDown;
             ChangeColourScheme(ApplicationSettings.GetInstance().ColourSchemeIsLight);
+            //
+            WelcomeStep3Done_ConnectAdapter();
         }
 
         private void AddTab(string tabText, UserControl control)

@@ -1,5 +1,6 @@
 ﻿using AdonisUI;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
+using Pizza.KeyboardAndMouseAdapter.Backend.Mappings;
 using Serilog;
 using System;
 using System.Linq;

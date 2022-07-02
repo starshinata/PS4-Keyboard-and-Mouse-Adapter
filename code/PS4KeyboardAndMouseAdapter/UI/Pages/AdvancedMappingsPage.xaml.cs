@@ -1,21 +1,16 @@
-﻿using Pizza.KeyboardAndMouseAdapter.Backend;
-using Pizza.KeyboardAndMouseAdapter.Backend.Config;
+﻿using Pizza.KeyboardAndMouseAdapter.Backend.Config;
+using Pizza.KeyboardAndMouseAdapter.Backend.Mappings;
 using Serilog;
-using SFML.Window;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Button = System.Windows.Controls.Button;
-using Keyboard = SFML.Window.Keyboard;
-using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 
 namespace Pizza.KeyboardAndMouseAdapter.UI.Pages
 {
     public partial class AdvancedMappingsPage : UserControl
     {
-        private Button lastClickedButton;
         private readonly double OpacityUnMappedButton = 0.5;
         private readonly UserSettings Settings;
 
@@ -23,95 +18,53 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Pages
         {
             Log.Debug("AdvancedMappingsPage init IN");
             InitializeComponent();
-            WaitingForKeyPress_Hide();
+            EditMapping_Hide();
 
             Settings = UserSettings.GetInstance();
             PopulateWithMappings();
             Log.Debug("AdvancedMappingsPage init OUT");
         }
 
-        private void Handler_AddMapping_GenericKeyDown(ExtraButtons extraValue, Keyboard.Key keyboardValue, MouseButton mouseValue)
+        // Needs to public
+        public void EditMapping_Show(Button button)
         {
+            // TODO Send something to EditMappingControl
 
-            if (lastClickedButton != null && lastClickedButton.Parent != null)
-            {
 
-                StackPanel parentStackPanel = (StackPanel)lastClickedButton.Parent;
-                if (parentStackPanel.Tag != null)
-                {
-                    if (keyboardValue != Keyboard.Key.Escape)
-                    {
-                        VirtualKey vk = (VirtualKey)parentStackPanel.Tag;
+            scrollViewer.Visibility = Visibility.Hidden;
 
-                        int index = (int)lastClickedButton.Tag;
-                        PhysicalKey valueOld = null;
+            // if mappingHolder is enabled then buttons are still clickable
+            // EVEN if you set button.IsEnabled = false
+            mappingHolder.IsEnabled = false;
 
-                        if (Settings.MappingsContainsKey(vk))
-                        {
-                            if (index < Settings.Mappings[vk].PhysicalKeys.Count)
-                            {
-                                valueOld = Settings.Mappings[vk].PhysicalKeys[index];
-                            }
-                        }
+            //TODO
+            //WaitForKeyPress_1.Visibility = Visibility.Visible;
 
-                        PhysicalKey valueNew = new PhysicalKey();
-                        valueNew.ExtraValue = extraValue;
-                        valueNew.KeyboardValue = keyboardValue;
-                        valueNew.MouseValue = mouseValue;
+            // WaitForKeyPress_2 is the stack panel
+            // if we dont focus it then keyboard key presses might not register
 
-                        UserSettings.SetMapping(vk, valueOld, valueNew);
-                    }
+            //TODO
+            //WaitForKeyPress_2.Focus();
 
-                    lastClickedButton = null;
-                    ((MainViewModel)DataContext).RefreshData();
-                    WaitingForKeyPress_Hide();
-                }
-            }
+            editMappingControl.Visibility = Visibility.Visible;
+            mappingHolder.Visibility = Visibility.Collapsed;
         }
 
-        private void Handler_AddMapping_OnKeyboardKeyDown(object sender, KeyEventArgs e)
+        public void EditMapping_Hide()
         {
-            foreach (Keyboard.Key key in Enum.GetValues(typeof(Keyboard.Key)).Cast<Keyboard.Key>())
-            {
-                if (Keyboard.IsKeyPressed(key))
-                {
-                    Handler_AddMapping_GenericKeyDown(ExtraButtons.Unknown, key, MouseButton.Unknown);
-                }
-            }
-        }
+            //TODO
+            //WaitForKeyPress_1.Visibility = Visibility.Hidden;
+            mappingHolder.IsEnabled = true;
+            editMappingControl.Visibility = Visibility.Collapsed;
+            mappingHolder.Visibility = Visibility.Visible;
 
-        private void Handler_AddMapping_OnMouseDown(object sender, RoutedEventArgs e)
-        {
-            Array mouseButtons = Enum.GetValues(typeof(Mouse.Button));
-            foreach (Mouse.Button button in mouseButtons)
-            {
-                if (Mouse.IsButtonPressed(button))
-                {
-                    MouseButton mouseButton = (MouseButton)button;
-                    Handler_AddMapping_GenericKeyDown(ExtraButtons.Unknown, Keyboard.Key.Unknown, mouseButton);
-                }
-            }
-        }
-
-        private void Handler_AddMapping_OnMouseLeftButtonUp(object sender, RoutedEventArgs e)
-        {
-            Handler_AddMapping_GenericKeyDown(ExtraButtons.Unknown, Keyboard.Key.Unknown, MouseButton.Left);
-        }
-
-        private void Handler_AddMapping_OnMouseScroll(object sender, RoutedEventArgs e)
-        {
-            Log.Debug("Handler_AddMapping_OnMouseScroll");
-            Log.Debug(DateTime.Now.ToString());
-
-            System.Windows.Input.MouseWheelEventArgs mwea = (System.Windows.Input.MouseWheelEventArgs)e;
-            ExtraButtons scrollAction = MouseWheelScrollProcessor.GetScrollAction(mwea);
-            Handler_AddMapping_GenericKeyDown(scrollAction, Keyboard.Key.Unknown, MouseButton.Unknown);
+            RefreshButtonContents();
         }
 
         private void Handler_ButtonClicked(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
-            WaitingForKeyPress_Show(button);
+            EditMapping_Show(button);
         }
 
         private void Handler_Loaded(object sender, RoutedEventArgs e)
@@ -197,34 +150,6 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Pages
             }
             Log.Debug("AdvancedMappingsPage.RefreshButtonContents OUT");
         }
-
-        // Needs to public
-        public void WaitingForKeyPress_Show(Button sender)
-        {
-            lastClickedButton = sender;
-
-            scrollViewer.Visibility = Visibility.Hidden;
-
-            // if mappingHolder is enabled then buttons are still clickable
-            // EVEN if you set button.IsEnabled = false
-            mappingHolder.IsEnabled = false;
-
-            WaitForKeyPress_1.Visibility = Visibility.Visible;
-
-            // WaitForKeyPress_2 is the stack panel
-            // if we dont focus it then keyboard key presses might not register
-            WaitForKeyPress_2.Focus();
-        }
-
-        private void WaitingForKeyPress_Hide()
-        {
-            WaitForKeyPress_1.Visibility = Visibility.Hidden;
-            mappingHolder.IsEnabled = true;
-            scrollViewer.Visibility = Visibility.Visible;
-
-            RefreshButtonContents();
-        }
-
 
     }
 }

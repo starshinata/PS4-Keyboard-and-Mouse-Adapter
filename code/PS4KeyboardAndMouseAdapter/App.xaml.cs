@@ -47,6 +47,9 @@ namespace Pizza.KeyboardAndMouseAdapter
             AppUpdater appUpdater = new AppUpdater();
 
             await appUpdater.UpdateIfAvailable();
+
+            //If you want to set the default screen to load
+            // you should instead look at MainWindowView.xaml.cs's init method
         }
 
     }

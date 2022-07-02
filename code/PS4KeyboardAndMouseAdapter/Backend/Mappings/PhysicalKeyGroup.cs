@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
+namespace Pizza.KeyboardAndMouseAdapter.Backend.Mappings
 {
     public class PhysicalKeyGroup
     {

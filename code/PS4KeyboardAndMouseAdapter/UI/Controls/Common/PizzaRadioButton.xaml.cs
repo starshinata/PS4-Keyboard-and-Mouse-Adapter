@@ -5,7 +5,7 @@ using System.Windows.Controls;
 namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.Common
 {
 
-    public partial class SliderV : UserControl
+    public partial class PizzaRadioButton : UserControl
     {
 
         public event EventHandler ValueChanged = delegate { };
@@ -63,7 +63,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.Common
             set => SetValue(TickFrequencyProperty, value);
         }
 
-        public SliderV()
+        public PizzaRadioButton()
         {
             InitializeComponent();
         }

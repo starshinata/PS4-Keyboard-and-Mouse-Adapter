@@ -147,6 +147,7 @@
     <Compile Include="Backend\AppUpdater.cs" />
     <Compile Include="Backend\AudioManager.cs" />
     <Compile Include="Backend\ColourSchemeChanger.cs" />
+    <Compile Include="Backend\Mappings\Mapping.cs" />
     <Compile Include="Backend\DebugLogging\DebugDump.cs" />
     <Compile Include="Backend\DebugLogging\GetOsVersion.cs" />
     <Compile Include="Backend\DebugLogging\HidFacade.cs" />
@@ -160,7 +161,7 @@
     <Compile Include="Backend\HidConstants.cs" />
     <Compile Include="Backend\RemotePlayStarter.cs" />
     <Compile Include="Backend\RewasdDetector.cs" />
-    <Compile Include="Backend\Config\ExtraButtons.cs" />
+    <Compile Include="Backend\Mappings\ExtraButtons.cs" />
     <Compile Include="Backend\Config\ApplicationSettings.cs" />
     <Compile Include="Backend\ListUtil.cs" />
     <Compile Include="Backend\MouseWheelScrollProcessor.cs" />
@@ -171,8 +172,14 @@
     <Compile Include="Backend\Vigem\VigemManger.cs" />
     <Compile Include="Backend\Vigem\VigemInternals.cs" />
     <Compile Include="Backend\DS4State.cs" />
+    <Compile Include="UI\Controls\AdvancedMappingsPage\EditMappingControl.xaml.cs">
+      <DependentUpon>EditMappingControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\Common\LogControl.xaml.cs">
       <DependentUpon>LogControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\Common\PizzaRadioButton.xaml.cs">
+      <DependentUpon>PizzaRadioButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\MiscellaneousSettingPage\GamepadUpdaterNoSleepControl.xaml.cs">
       <DependentUpon>GamepadUpdaterNoSleepControl.xaml</DependentUpon>
@@ -188,16 +195,16 @@
     </Compile>
     <Compile Include="Backend\VersionUtil.cs" />
     <Compile Include="Backend\WindowUtil.cs" />
-    <Compile Include="Backend\Config\KeyUtility.cs" />
-    <Compile Include="Backend\Config\MouseButton.cs" />
-    <Compile Include="Backend\Config\PhysicalKeyGroup.cs" />
-    <Compile Include="Backend\Config\PhysicalKey.cs" />
+    <Compile Include="Backend\Mappings\KeyUtility.cs" />
+    <Compile Include="Backend\Mappings\MouseButton.cs" />
+    <Compile Include="Backend\Mappings\PhysicalKeyGroup.cs" />
+    <Compile Include="Backend\Mappings\PhysicalKey.cs" />
     <Compile Include="Backend\Config\InstanceSettings.cs" />
     <Compile Include="Backend\Config\UserSettings_1_0_11.cs" />
     <Compile Include="Backend\Config\UserSettings.cs" />
     <Compile Include="Backend\Config\UserSettings_Instance.cs" />
     <Compile Include="Backend\Config\UserSettings_Static.cs" />
-    <Compile Include="Backend\Config\VirtualKey.cs" />
+    <Compile Include="Backend\Mappings\VirtualKey.cs" />
     <Compile Include="Backend\Dll\Rect.cs" />
     <Compile Include="Backend\Dll\User32.cs" />
     <Compile Include="Backend\GamepadProcessor.cs" />
@@ -257,7 +264,15 @@
     </Compile>
     <Compile Include="UI\UIConstants.cs" />
     <Compile Include="UI\UITools.cs" />
+    <Page Include="UI\Controls\AdvancedMappingsPage\EditMappingControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UI\Controls\Common\LogControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Controls\Common\PizzaRadioButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -557,5 +572,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

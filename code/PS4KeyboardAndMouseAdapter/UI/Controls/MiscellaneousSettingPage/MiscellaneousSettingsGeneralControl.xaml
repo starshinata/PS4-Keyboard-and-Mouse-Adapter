@@ -9,7 +9,7 @@
     d:DesignWidth="640"
     mc:Ignorable="d"
 
-    xmlns:controls="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls"
+    xmlns:common="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls.Common"
     >
 
     <Grid >
@@ -80,7 +80,7 @@
 
         <!-- row 4 intentionally empty -->
 
-        <controls:SliderV
+        <common:SliderV
             Grid.Row="5"
             Grid.ColumnSpan="5"
             Description="RemotePlay Volume %"

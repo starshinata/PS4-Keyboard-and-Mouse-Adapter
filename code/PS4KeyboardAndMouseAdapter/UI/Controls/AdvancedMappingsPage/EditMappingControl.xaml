@@ -1,0 +1,150 @@
+﻿<UserControl
+    x:Class="Pizza.KeyboardAndMouseAdapter.UI.Controls.AdvancedMappingsPage.EditMappingControl"
+
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
+    d:DesignHeight="700" 
+    d:DesignWidth="680"
+    mc:Ignorable="d" 
+
+    KeyDown="Handler_AddMapping_OnKeyboardKeyDown"
+    Loaded="Handler_Loaded"
+    MouseDown="Handler_AddMapping_OnMouseDown"
+    MouseLeftButtonUp="Handler_AddMapping_OnMouseLeftButtonUp"
+    MouseWheel="Handler_AddMapping_OnMouseScroll"
+    >
+    <!-- 
+    notes for above element    ^^^
+    
+    pancakeslp 2020.12.26
+    MouseDown does not include left click ... I dunno why O.o
+    
+    pancakeslp 2021.02.25
+    The event handlers are here for simplicity
+    They can be elsewhere in this file/class, but SIMPLICITY
+    If you want to move them from here be sure to check that all the handlers are fired especially from the near the edges of the black area
+    
+    -->
+    
+    <Grid
+        Background="HotPink"
+        Height="500"
+        Width="500">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50px" />
+            <RowDefinition Height="50px" />
+
+            <RowDefinition Height="50px" />
+            <RowDefinition Height="50px" />
+            <RowDefinition Height="50px" />
+            
+            <RowDefinition Height="50px" />
+            <RowDefinition Height="50px" />
+            <RowDefinition Height="50px" />
+            <RowDefinition Height="50px" />
+
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="6*" />
+            <ColumnDefinition Width="6*" />
+            <ColumnDefinition Width="6*" />
+            <ColumnDefinition Width="6*" />
+            <ColumnDefinition Width="6*" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock 
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="999"
+        
+            FontFamily="consolas"
+            FontSize="30"
+            FontWeight="Bold" 
+            Foreground="Crimson" 
+            HorizontalAlignment="Center" 
+            Text="Edit mapping" 
+            />
+
+        <TextBlock 
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="999"
+            
+            FontFamily="consolas"
+            FontSize="15"
+            FontWeight="Bold" 
+            Foreground="Crimson" 
+            HorizontalAlignment="Center" 
+            Text="Input" 
+            />
+
+        <StackPanel
+            Grid.Row="3"
+            Grid.Column="0"
+            Grid.ColumnSpan="999"
+            Background="Orange"
+            ></StackPanel>
+
+
+
+        <Button
+            Grid.Row="2"
+            Grid.Column="5"
+            >
+            Add Input
+        </Button>
+
+        <TextBlock 
+            Grid.Row="5"
+            Grid.Column="0"
+            Grid.ColumnSpan="999"
+
+            FontFamily="consolas"
+            FontSize="15"
+            FontWeight="Bold" 
+            Foreground="Crimson" 
+            HorizontalAlignment="Center" 
+            Text="Controller Buttons" 
+            />
+        <Button
+            Grid.Row="5"
+            Grid.Column="5"
+            >
+            Add Controller buttons
+        </Button>
+
+        <StackPanel
+            Grid.Row="6"
+            Grid.Column="0"
+            Grid.ColumnSpan="999"
+            Background="Orange"
+            ></StackPanel>
+
+        <Button
+            Grid.Row="8"
+            Grid.Column="0"
+            >
+            Cancel (Make no changes)
+        </Button>
+
+        <Button    
+            Grid.Row="8"
+            Grid.Column="2"
+            >
+            Remove this mapping
+        </Button>
+
+        <Button    
+            Grid.Row="8"
+            Grid.Column="5"
+            >
+            Save this mapping
+        </Button>
+
+    </Grid>
+</UserControl>

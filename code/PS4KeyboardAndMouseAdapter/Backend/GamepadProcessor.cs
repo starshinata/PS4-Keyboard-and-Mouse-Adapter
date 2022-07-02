@@ -1,4 +1,5 @@
 ﻿using Pizza.KeyboardAndMouseAdapter.Backend.Config;
+using Pizza.KeyboardAndMouseAdapter.Backend.Mappings;
 using PS4RemotePlayInjection;
 using PS4RemotePlayInterceptor;
 using Serilog;

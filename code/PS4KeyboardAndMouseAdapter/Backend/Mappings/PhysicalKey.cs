@@ -1,6 +1,6 @@
 ﻿using static SFML.Window.Keyboard;
 
-namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
+namespace Pizza.KeyboardAndMouseAdapter.Backend.Mappings
 {
     public class PhysicalKey
     {

@@ -1,4 +1,4 @@
-﻿using Pizza.KeyboardAndMouseAdapter.Backend.Config;
+﻿using Pizza.KeyboardAndMouseAdapter.Backend.Mappings;
 using System.Collections.Generic;
 
 namespace Pizza.KeyboardAndMouseAdapter.Backend
