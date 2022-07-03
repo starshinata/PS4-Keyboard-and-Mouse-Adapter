@@ -147,6 +147,7 @@
     <Compile Include="Backend\AppUpdater.cs" />
     <Compile Include="Backend\AudioManager.cs" />
     <Compile Include="Backend\ColourSchemeChanger.cs" />
+    <Compile Include="Backend\Config\UserSettingsV2.cs" />
     <Compile Include="Backend\Mappings\Mapping.cs" />
     <Compile Include="Backend\DebugLogging\DebugDump.cs" />
     <Compile Include="Backend\DebugLogging\GetOsVersion.cs" />
@@ -200,10 +201,8 @@
     <Compile Include="Backend\Mappings\PhysicalKeyGroup.cs" />
     <Compile Include="Backend\Mappings\PhysicalKey.cs" />
     <Compile Include="Backend\Config\InstanceSettings.cs" />
-    <Compile Include="Backend\Config\UserSettings_1_0_11.cs" />
-    <Compile Include="Backend\Config\UserSettings.cs" />
-    <Compile Include="Backend\Config\UserSettings_Instance.cs" />
-    <Compile Include="Backend\Config\UserSettings_Static.cs" />
+    <Compile Include="Backend\Config\UserSettingsV1.cs" />
+    <Compile Include="Backend\Config\UserSettingsContainer.cs" />
     <Compile Include="Backend\Mappings\VirtualKey.cs" />
     <Compile Include="Backend\Dll\Rect.cs" />
     <Compile Include="Backend\Dll\User32.cs" />

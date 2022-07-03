@@ -7,17 +7,16 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Reflection;
 
 namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 {
-    public partial class UserSettings : INotifyPropertyChanged
+    public partial class UserSettingsContainer
     {
 
         public static string PROFILE_DEFAULT = "profiles/default-profile.json";
         public static string PROFILE_PREVIOUS = "profile-previous.json";
 
-        private static UserSettings ThisInstance = new UserSettings();
+        private static UserSettingsV2 ThisInstance = new UserSettingsV2();
 
 
         ////////////////////////////////////////////////////////////////////////////
@@ -26,10 +25,10 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
         public static void BroadcastRefresh()
         {
             ThisInstance.GetKeyboardMappings();
-            ThisInstance.PropertyChanged(ThisInstance, new PropertyChangedEventArgs(""));
+            ThisInstance.BroadcastRefresh();
         }
 
-        public static UserSettings GetInstance()
+        public static UserSettingsV2 GetInstance()
         {
             return ThisInstance;
         }
@@ -38,21 +37,22 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
         {
             string json = File.ReadAllText(file);
 
-            UserSettings newSettings;
-            if (IsLegacyConfig(json))
+            UserSettingsV2 newSettings;
+            if (IsVersion2(json))
             {
-                UserSettings_1_0_11 legacySettings = JsonConvert.DeserializeObject<UserSettings_1_0_11>(json);
-                newSettings = UserSettings_1_0_11.ImportValues(legacySettings);
+
+                newSettings = UserSettingsV2.ImportValues(json);
             }
             else
             {
-                newSettings = JsonConvert.DeserializeObject<UserSettings>(json);
+                newSettings = UserSettingsV1.ImportValues(json);
             }
+
 
             ImportValuesCurrent(newSettings);
         }
 
-        public static void ImportValuesCurrent(UserSettings NewSettings)
+        public static void ImportValuesCurrent(UserSettingsV2 NewSettings)
         {
             Log.Information("UserSettings.ImportValuesCurrent()");
 
@@ -101,7 +101,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
             ThisInstance.Version_2_0_0_OrGreater = true;
         }
 
-        public static bool IsLegacyConfig(string json)
+        public static bool IsVersion3(string json)
         {
 
             try
@@ -134,6 +134,35 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 
             return true;
         }
+        public static bool IsVersion2(string json)
+        {
+
+            try
+            {
+                JObject newSetting2s = JsonConvert.DeserializeObject<JObject>(json);
+
+                foreach (JProperty property in newSetting2s.Properties())
+                {
+                    try
+                    {
+                        if (property.Name == "Version_2_0_0_OrGreater")
+                        {
+                            return (bool)property.Value;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ExceptionLogger.LogException("UserSettings.IsVersion2 error(a)", ex);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLogger.LogException("UserSettings.IsVersion2 error(b)", ex);
+            }
+
+            return false;
+        }
 
         public static void Load(string file)
         {
@@ -143,8 +172,8 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
             ImportValues(fullFilePath);
 
             ThisInstance.GetKeyboardMappings();
-            ThisInstance.PropertyChanged(ThisInstance, new PropertyChangedEventArgs(""));
-            Print(ThisInstance);
+            ThisInstance.BroadcastRefresh();
+            ThisInstance.Print();
         }
 
         public static void LoadWithCatch(string file)
@@ -173,41 +202,12 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
             LoadWithCatch(PROFILE_PREVIOUS);
         }
 
-        public static void Print(UserSettings settings)
-        {
-            Log.Information("UserSettings.Print()");
-
-
-            Log.Information("print mappings");
-            List<VirtualKey> virtualKeys = KeyUtility.GetVirtualKeyValues();
-            foreach (VirtualKey key in virtualKeys)
-            {
-                Log.Information("print Mappings:{VirtKey:" + key + ", PhysicalKeyGroup: " + settings.Mappings[key] + "}");
-            }
-
-            Log.Information("print values");
-            Type t = settings.GetType();
-            PropertyInfo[] properties = t.GetProperties();
-            foreach (PropertyInfo prop in properties)
-            {
-                if (prop.Name != "KeyboardMappings" && prop.Name != "Mappings")
-                {
-                    MethodInfo getter = prop.GetGetMethod();
-                    if (getter != null)
-                    {
-                        object value = getter.Invoke(settings, new object[] { });
-
-                        Log.Information("print " + prop + ":" + value);
-                    }
-                }
-            }
-        }
 
         public static void Save(string file)
         {
             Log.Information("UserSettings.Save: " + file);
 
-            UserSettings instanceForSaving = ThisInstance.Clone();
+            UserSettingsV2 instanceForSaving = ThisInstance.Clone();
             // removing KeyboardMappings, as these are generated after each key remapping
             instanceForSaving.KeyboardMappings = null;
 
@@ -232,12 +232,12 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
             ThisInstance.Mappings[key].PhysicalKeys.Add(valueNew);
 
             Save(PROFILE_PREVIOUS);
-            ThisInstance.PropertyChanged(ThisInstance, new PropertyChangedEventArgs(""));
+            ThisInstance.BroadcastRefresh();
         }
 
         public static void TestOnly_ResetUserSettings()
         {
-            ThisInstance = new UserSettings();
+            ThisInstance = new UserSettingsV2();
         }
     }
 }

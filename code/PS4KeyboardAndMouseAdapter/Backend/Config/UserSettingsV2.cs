@@ -1,15 +1,21 @@
 ﻿using Newtonsoft.Json;
 using Pizza.KeyboardAndMouseAdapter.Backend.Mappings;
+using Serilog;
 using SFML.Window;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Reflection;
 
 namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 {
-    public partial class UserSettings : INotifyPropertyChanged
+    public class UserSettingsV2
     {
-
+        // Only keep this if this is the MOST RECENT VERSION
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
+        ////////////////////////////////////////////////////////////////////////
+
 
         //Note this property will not be serialised (see the save method)
         public Dictionary<VirtualKey, PhysicalKey> KeyboardMappings { get; set; } = new Dictionary<VirtualKey, PhysicalKey>();
@@ -96,19 +102,26 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
         //
 
 
-        ////////////////////////////////////////////////////////////////////////////
 
+        ///////////////////////////////////////////////////////////////////////
+        // INSTANCE
+        ///////////////////////////////////////////////////////////////////////
 
-        protected UserSettings()
+        public UserSettingsV2()
         {
             MousePollingRate = 60;
         }
 
-        public UserSettings Clone()
+        public void BroadcastRefresh()
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(""));
+        }
+
+        public UserSettingsV2 Clone()
         {
             // cloning by (serilise to string then deserialise)
-            string json = JsonConvert.SerializeObject(this, Formatting.Indented);
-            return JsonConvert.DeserializeObject<UserSettings>(json);
+            string json = JsonConvert.SerializeObject(this, Formatting.None);
+            return JsonConvert.DeserializeObject<UserSettingsV2>(json);
         }
 
         public bool MappingsContainsKey(VirtualKey vk)
@@ -137,6 +150,52 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
                 }
             }
         }
+
+        public void Print()
+        {
+            UserSettingsV2.Print(this);
+        }
+
+
+
+        ///////////////////////////////////////////////////////////////////////
+        // STATIC
+        ///////////////////////////////////////////////////////////////////////
+        public static UserSettingsV2 ImportValues(string json)
+        {
+            return JsonConvert.DeserializeObject<UserSettingsV2>(json);
+        }
+
+        public static void Print(UserSettingsV2 settings)
+        {
+            Log.Information("UserSettings.Print()");
+
+
+            Log.Information("print mappings");
+            List<VirtualKey> virtualKeys = KeyUtility.GetVirtualKeyValues();
+            foreach (VirtualKey key in virtualKeys)
+            {
+                Log.Information("print Mappings:{VirtKey:" + key + ", PhysicalKeyGroup: " + settings.Mappings[key] + "}");
+            }
+
+            Log.Information("print values");
+            Type t = settings.GetType();
+            PropertyInfo[] properties = t.GetProperties();
+            foreach (PropertyInfo prop in properties)
+            {
+                if (prop.Name != "KeyboardMappings" && prop.Name != "Mappings")
+                {
+                    MethodInfo getter = prop.GetGetMethod();
+                    if (getter != null)
+                    {
+                        object value = getter.Invoke(settings, new object[] { });
+
+                        Log.Information("print " + prop + ":" + value);
+                    }
+                }
+            }
+        }
+
 
     }
 }

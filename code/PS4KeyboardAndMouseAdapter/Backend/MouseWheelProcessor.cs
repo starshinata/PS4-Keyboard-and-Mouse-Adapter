@@ -39,7 +39,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
 
             if (ExtraButtons.Unknown != scrollAction)
             {
-                UserSettings settings = UserSettings.GetInstance();
+                UserSettingsV2 settings = UserSettingsContainer.GetInstance();
                 if (settings.Mappings != null)
                 {
                     foreach (VirtualKey virtualKey in settings.Mappings.Keys)
@@ -186,7 +186,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
 
         public void Process(DualShockState state)
         {
-            if (MouseButtonHoldTimer.ElapsedMilliseconds > UserSettings.GetInstance().MouseWheelScrollHoldDuration)
+            if (MouseButtonHoldTimer.ElapsedMilliseconds > UserSettingsContainer.GetInstance().MouseWheelScrollHoldDuration)
             {
                 LastVirtualKeys = null;
             }

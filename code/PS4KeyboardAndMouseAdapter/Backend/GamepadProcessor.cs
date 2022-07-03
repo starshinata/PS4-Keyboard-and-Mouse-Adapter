@@ -17,7 +17,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
     public class GamepadProcessor
     {
         private InstanceSettings InstanceSettings { get; set; } = InstanceSettings.GetInstance();
-        private UserSettings UserSettings { get; set; } = UserSettings.GetInstance();
+        private UserSettingsV2 UserSettings { get; set; } = UserSettingsContainer.GetInstance();
 
         ////////////////////////////////////////////////////////////////////////////
 

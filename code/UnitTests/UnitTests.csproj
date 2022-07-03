@@ -71,28 +71,28 @@
     <None Include="KeyboardAndMouseAdapter\Backend\Config\ApplicationSettings\ImportValues--Default_whenEmpty--input.json" />
     <None Include="KeyboardAndMouseAdapter\Backend\Config\ApplicationSettings\ImportValues--property-ColourSchemeIsLight--expected.json" />
     <None Include="KeyboardAndMouseAdapter\Backend\Config\ApplicationSettings\ImportValues--property-ColourSchemeIsLight--input.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--profile-1.0.11-default--expected.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--profile-1.0.11-default--input.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--profile-2.0.0-default--expected.json" />
+    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettingsContainer\ImportValues\ImportValues--profile-1.0.11-default--expected.json" />
+    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettingsContainer\ImportValues\ImportValues--profile-1.0.11-default--input.json" />
+    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettingsContainer\ImportValues\ImportValues--profile-2.0.0-default--expected.json" />
     <None Include="KeyboardAndMouseAdapter\Backend\Config\ApplicationSettings\ImportValues--property-GamepadUpdaterNoSleep--expected.json" />
     <None Include="KeyboardAndMouseAdapter\Backend\Config\ApplicationSettings\ImportValues--property-GamepadUpdaterNoSleep--input.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--property-RemotePlayVolume--expected.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--property-AimToggleRetoggleDelay--expected.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--property-RemotePlayVolume--input.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--property-AimToggleRetoggleDelay--input.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--property-MouseAimSensitivityEnabled--expected.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--property-AimToggle--expected.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--profile-empty--expected.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--property-MouseAimSensitivityEnabled--input.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--property-AimToggle--input.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--profile-empty--input.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--profile-2.0.0-default--input.json" />
+    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettingsContainer\ImportValues\ImportValues--property-RemotePlayVolume--expected.json" />
+    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettingsContainer\ImportValues\ImportValues--property-AimToggleRetoggleDelay--expected.json" />
+    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettingsContainer\ImportValues\ImportValues--property-RemotePlayVolume--input.json" />
+    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettingsContainer\ImportValues\ImportValues--property-AimToggleRetoggleDelay--input.json" />
+    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettingsContainer\ImportValues\ImportValues--property-MouseAimSensitivityEnabled--expected.json" />
+    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettingsContainer\ImportValues\ImportValues--property-AimToggle--expected.json" />
+    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettingsContainer\ImportValues\ImportValues--profile-empty--expected.json" />
+    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettingsContainer\ImportValues\ImportValues--property-MouseAimSensitivityEnabled--input.json" />
+    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettingsContainer\ImportValues\ImportValues--property-AimToggle--input.json" />
+    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettingsContainer\ImportValues\ImportValues--profile-empty--input.json" />
+    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettingsContainer\ImportValues\ImportValues--profile-2.0.0-default--input.json" />
     <Compile Include="KeyboardAndMouseAdapter\Backend\Config\ApplicationSettings\ImportValuesTest.cs" />
     <Compile Include="KeyboardAndMouseAdapter\Backend\RewasdDetector\PathsTest.cs" />
-    <Compile Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValuesTest.cs" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\IsLegacyConfig--profile-1.0.11-default.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\IsLegacyConfig--profile-2.0.0-provisional.json" />
-    <Compile Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\IsLegacyConfigTest.cs" />
+    <Compile Include="KeyboardAndMouseAdapter\Backend\Config\UserSettingsContainer\ImportValues\ImportValuesTest.cs" />
+    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettingsContainer\IsVersion2\profile-v1-default-1.0.11.json" />
+    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettingsContainer\IsVersion2\profile-v2.json" />
+    <Compile Include="KeyboardAndMouseAdapter\Backend\Config\UserSettingsContainer\IsVersion2\IsVersion2Test.cs" />
     <Compile Include="KeyboardAndMouseAdapter\UI\Controls\MiscellaneousSettings\GamepadUpdaterNoSleepControl\CalculateIsControlEnabledTest.cs" />
     <Compile Include="KeyboardAndMouseAdapter\UI\Controls\MiscellaneousSettings\RemotePlayToolbarSettingsControl\CalculateIsControlEnabledTest.cs" />
     <Compile Include="KeyboardAndMouseAdapter\UI\Controls\Welcome\EmulationPickerControl\SetInitialRadioChecked\WhenVigemInstalledTest.cs" />
@@ -159,6 +159,9 @@
     <PackageReference Include="System.ValueTuple">
       <Version>4.4.0</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="KeyboardAndMouseAdapter\Backend\Config\UserSettingsV2\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

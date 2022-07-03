@@ -12,7 +12,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Pages
     public partial class AdvancedMappingsPage : UserControl
     {
         private readonly double OpacityUnMappedButton = 0.5;
-        private readonly UserSettings Settings;
+        private readonly UserSettingsV2 Settings;
 
         public AdvancedMappingsPage()
         {
@@ -20,7 +20,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Pages
             InitializeComponent();
             EditMapping_Hide();
 
-            Settings = UserSettings.GetInstance();
+            Settings = UserSettingsContainer.GetInstance();
             PopulateWithMappings();
             Log.Debug("AdvancedMappingsPage init OUT");
         }

@@ -11,7 +11,7 @@ namespace Pizza.KeyboardAndMouseAdapter
 
         public InstanceSettings InstanceSettings { get; set; } = InstanceSettings.GetInstance();
 
-        public UserSettings UserSettings { get; set; } = UserSettings.GetInstance();
+        public UserSettingsV2 UserSettings { get; set; } = UserSettingsContainer.GetInstance();
 
         public GamepadProcessor GamepadProcessor;
 
@@ -25,7 +25,7 @@ namespace Pizza.KeyboardAndMouseAdapter
         public void RefreshData()
         {
             InstanceSettings.BroadcastRefresh();
-            UserSettings.BroadcastRefresh();
+            UserSettingsContainer.BroadcastRefresh();
         }
 
     }

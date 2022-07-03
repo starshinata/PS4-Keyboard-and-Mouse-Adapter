@@ -19,7 +19,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.AdvancedMappingsPage
 
         private Button lastClickedButton;
         private readonly double OpacityUnMappedButton = 0.5;
-        private readonly UserSettings Settings;
+        private readonly UserSettingsContainer UserSettingsContainer;
 
 
         public EditMappingControl()
@@ -44,11 +44,11 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.AdvancedMappingsPage
                         int index = (int)lastClickedButton.Tag;
                         PhysicalKey valueOld = null;
 
-                        if (Settings.MappingsContainsKey(vk))
+                        if (UserSettingsContainer.GetInstance().MappingsContainsKey(vk))
                         {
-                            if (index < Settings.Mappings[vk].PhysicalKeys.Count)
+                            if (index < UserSettingsContainer.GetInstance().Mappings[vk].PhysicalKeys.Count)
                             {
-                                valueOld = Settings.Mappings[vk].PhysicalKeys[index];
+                                valueOld = UserSettingsContainer.GetInstance().Mappings[vk].PhysicalKeys[index];
                             }
                         }
 
@@ -57,7 +57,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.AdvancedMappingsPage
                         valueNew.KeyboardValue = keyboardValue;
                         valueNew.MouseValue = mouseValue;
 
-                        UserSettings.SetMapping(vk, valueOld, valueNew);
+                        UserSettingsContainer.SetMapping(vk, valueOld, valueNew);
                     }
 
                     lastClickedButton = null;

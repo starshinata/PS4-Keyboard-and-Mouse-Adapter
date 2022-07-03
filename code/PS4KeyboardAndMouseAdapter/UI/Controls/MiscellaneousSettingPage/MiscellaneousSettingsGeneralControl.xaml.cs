@@ -19,7 +19,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.MiscellaneousSettings
         {
             if (InstanceSettings.GetInstance().GetRemotePlayProcess() != null)
             {
-                AudioManager.SetApplicationVolume(InstanceSettings.GetInstance().GetRemotePlayProcess().Id, UserSettings.GetInstance().RemotePlayVolume);
+                AudioManager.SetApplicationVolume(InstanceSettings.GetInstance().GetRemotePlayProcess().Id, UserSettingsContainer.GetInstance().RemotePlayVolume);
             }
         }
 

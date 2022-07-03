@@ -1,16 +1,17 @@
-﻿using Pizza.KeyboardAndMouseAdapter.Backend.Mappings;
+﻿using Newtonsoft.Json;
+using Pizza.KeyboardAndMouseAdapter.Backend.Mappings;
 using Serilog;
 using SFML.Window;
 using System.Collections.Generic;
 
 namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 {
-    public class UserSettings_1_0_11
+    public class UserSettingsV1
     {
         ////////////////////////////////////////////////////////////////////////////
         /// Static props
         ////////////////////////////////////////////////////////////////////////////
-        private static readonly ILogger StaticLogger = Log.ForContext(typeof(UserSettings_1_0_11));
+        private static readonly ILogger StaticLogger = Log.ForContext(typeof(UserSettingsV1));
 
         ////////////////////////////////////////////////////////////////////////////
         /// Instance props
@@ -41,7 +42,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
         /// Static Methods
         ////////////////////////////////////////////////////////////////////////////
 
-        private static void AddManualMouseMapping(UserSettings newSettings, VirtualKey vk, MouseButton mouseButton)
+        private static void AddManualMouseMapping(UserSettingsV2 newSettings, VirtualKey vk, MouseButton mouseButton)
         {
             if (!newSettings.MappingsContainsKey(vk))
             {
@@ -61,11 +62,12 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
             return pkg;
         }
 
-        public static UserSettings ImportValues(UserSettings_1_0_11 legacySettings)
+        public static UserSettingsV2 ImportValues(string json)
         {
             StaticLogger.Information("UserSettings_1_0_11.ImportValues()");
 
-            UserSettings newSettings = UserSettings.GetInstance();
+            UserSettingsV1 legacySettings = JsonConvert.DeserializeObject<UserSettingsV1>(json);
+            UserSettingsV2 newSettings = new UserSettingsV2();
 
             newSettings.AnalogStickLowerRange = legacySettings.AnalogStickLowerRange;
             newSettings.AnalogStickUpperRange = legacySettings.AnalogStickUpperRange;
