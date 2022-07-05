@@ -12,16 +12,25 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Pages
     public partial class AdvancedMappingsPage : UserControl
     {
         private readonly double OpacityUnMappedButton = 0.5;
-        private readonly UserSettingsV2 Settings;
+        private readonly UserSettingsV3 Settings;
+
+        private Thickness buttonMargin;
+
+
+        private int MaxColumnCount = 0;
+        private Dictionary<string, List<Mapping>> CompositeKeyMappings = new Dictionary<string, List<Mapping>>();
 
         public AdvancedMappingsPage()
         {
             Log.Debug("AdvancedMappingsPage init IN");
             InitializeComponent();
+
+            buttonMargin = new Thickness();
+            buttonMargin.Left = 15;
+
+            Settings = UserSettingsContainer.GetInstance(); 
             EditMapping_Hide();
 
-            Settings = UserSettingsContainer.GetInstance();
-            PopulateWithMappings();
             Log.Debug("AdvancedMappingsPage init OUT");
         }
 
@@ -58,7 +67,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Pages
             editMappingControl.Visibility = Visibility.Collapsed;
             mappingHolder.Visibility = Visibility.Visible;
 
-            RefreshButtonContents();
+            PopulateWithMappings();
         }
 
         private void Handler_ButtonClicked(object sender, RoutedEventArgs e)
@@ -70,86 +79,96 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Pages
         private void Handler_Loaded(object sender, RoutedEventArgs e)
         {
             Log.Debug("AdvancedMappingsPage.LOADED");
-            RefreshButtonContents();
+            PopulateWithMappings();
         }
 
-        private void PopulateWithMappings()
+        private void Refresh_Internal_CompositeKeyMappings()
         {
-            Thickness buttonMargin = new Thickness();
-            buttonMargin.Left = 15;
+            int _MaxColumnCount = 0;
 
-            List<VirtualKey> virtualKeys = KeyUtility.GetVirtualKeyValues();
-            foreach (VirtualKey vk in virtualKeys)
+            Dictionary<string, List<Mapping>> _VirtualKeyMappings = new Dictionary<string, List<Mapping>>();
+
+            foreach (Mapping mapping in Settings.Mappings)
             {
-                StackPanel stackPanel = new StackPanel();
-                stackPanel.Orientation = Orientation.Horizontal;
-                stackPanel.Tag = vk;
+                string key = mapping.GetCompositeKeyVirtual();
 
-                TextBlock textblock = new TextBlock()
+                if (!_VirtualKeyMappings.ContainsKey(key))
                 {
-                    FontWeight = FontWeights.Bold
-                };
-                textblock.Text = vk.ToString();
-                textblock.Width = 100;
-                stackPanel.Children.Add(textblock);
-
-                for (int i = 0; i < Settings.AdvancedMappingPage_MappingsToShow; i++)
-                {
-
-                    Button button = new Button();
-                    button.Click += Handler_ButtonClicked;
-                    button.Margin = buttonMargin;
-                    button.Tag = i;
-                    button.Width = 120;
-
-                    stackPanel.Children.Add(button);
+                    _VirtualKeyMappings.Add(key, new List<Mapping>());
                 }
 
-                mappingHolder.Children.Add(stackPanel);
+                _VirtualKeyMappings[key].Add(mapping);
+                if (_VirtualKeyMappings[key].Count > MaxColumnCount)
+                {
+                    _MaxColumnCount = _VirtualKeyMappings[key].Count;
+                }
+
             }
 
-            RefreshButtonContents();
+            MaxColumnCount = _MaxColumnCount;
+
+            CompositeKeyMappings = _VirtualKeyMappings;
         }
 
-        public void RefreshButtonContents()
+        public void PopulateWithMappings()
         {
-            Log.Debug("AdvancedMappingsPage.RefreshButtonContents IN");
-            Log.Debug("AdvancedMappingsPage.RefreshButtonContents Button Count " + UITools.FindVisualChildren<Button>(this).Count());
-            foreach (Button button in UITools.FindVisualChildren<Button>(this))
+
+            //TODO delete all buttons
+
+            Refresh_Internal_CompositeKeyMappings();
+
+            foreach (string vk in CompositeKeyMappings.Keys)
             {
-                // assume unmapped first
+                PopulateWithMappings_CompositKey(vk);
+            }
+
+        }
+
+        private void PopulateWithMappings_CompositKey(string compositeKey)
+        {
+            StackPanel stackPanel = new StackPanel();
+            stackPanel.Orientation = Orientation.Horizontal;
+            stackPanel.Tag = compositeKey;
+
+            TextBlock textblock = new TextBlock()
+            {
+                FontWeight = FontWeights.Bold
+            };
+            textblock.Text = compositeKey;
+            textblock.Width = 100;
+            stackPanel.Children.Add(textblock);
+
+            for (int i = 0; i < MaxColumnCount; i++)
+            {
+                Mapping mapping = CompositeKeyMappings[compositeKey].ElementAt(i);
+                Button button = PopulateWithMappings_GetButton(mapping);
+                stackPanel.Children.Add(button);
+            }
+
+            mappingHolder.Children.Add(stackPanel);
+        }
+
+        private Button PopulateWithMappings_GetButton(Mapping mapping)
+        {
+            Button button = new Button();
+            button.Click += Handler_ButtonClicked;
+            button.Margin = buttonMargin;
+
+            button.Width = 120;
+
+            if (mapping == null)
+            {
                 button.Content = "set mapping";
                 button.Opacity = OpacityUnMappedButton;
-
-                if (button != null && button.Tag != null)
-                {
-                    StackPanel parentStackPanel = (StackPanel)button.Parent;
-                    if (parentStackPanel != null && parentStackPanel.Tag != null)
-                    {
-                        VirtualKey vk = (VirtualKey)parentStackPanel.Tag;
-                        if (Settings.Mappings != null && Settings.MappingsContainsKey(vk))
-                        {
-                            PhysicalKeyGroup pkg = Settings.Mappings[vk];
-                            if (pkg.PhysicalKeys != null)
-                            {
-
-                                int index = (int)button.Tag;
-                                if (index < pkg.PhysicalKeys.Count)
-                                {
-                                    PhysicalKey pk = pkg.PhysicalKeys[index];
-                                    if (pk != null)
-                                    {
-                                        button.Content = pk.ToString();
-                                        button.Opacity = 1;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
             }
-            Log.Debug("AdvancedMappingsPage.RefreshButtonContents OUT");
-        }
+            else
+            {
+                button.Content = mapping.GetCompositeKeyPhysical();
+                button.Opacity = 1;
+            }
 
+            return button;
+        }
+      
     }
 }

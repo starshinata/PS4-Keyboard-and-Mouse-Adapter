@@ -4,44 +4,56 @@ using Pizza.Common;
 using Pizza.KeyboardAndMouseAdapter.Backend.Mappings;
 using Serilog;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 
 namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 {
-    public partial class UserSettingsContainer
+    // 2022.07.03 pancakeslp
+    // This class is intentionally seperate from UserSettinsV1 / UserSettinsV2
+    // or whatever the current version is
+    // because i would really like UserSettinsVX to be a POJO / POCO
+    // its not going to be a POJO /  POCO but i can dream
+    public class UserSettingsContainer
     {
 
         public static string PROFILE_DEFAULT = "profiles/default-profile.json";
         public static string PROFILE_PREVIOUS = "profile-previous.json";
 
-        private static UserSettingsV2 ThisInstance = new UserSettingsV2();
-
+        private static UserSettingsV3 ThisInstance = new UserSettingsV3();
+        private static int nextMappingUid = 0;
 
         ////////////////////////////////////////////////////////////////////////////
 
 
         public static void BroadcastRefresh()
         {
-            ThisInstance.GetKeyboardMappings();
+            ThisInstance.RefreshOptimisations();
             ThisInstance.BroadcastRefresh();
         }
 
-        public static UserSettingsV2 GetInstance()
+        public static UserSettingsV3 GetInstance()
         {
             return ThisInstance;
+        }
+
+        public static int getNextMappingUid()
+        {
+            return nextMappingUid++;
         }
 
         public static void ImportValues(string file)
         {
             string json = File.ReadAllText(file);
 
-            UserSettingsV2 newSettings;
-            if (IsVersion2(json))
-            {
+            UserSettingsV3 newSettings;
 
-                newSettings = UserSettingsV2.ImportValues(json);
+            if (IsVersion3(json))
+            {
+                newSettings = UserSettingsV3.ImportValues(json);
+            }
+            else if (IsVersion2(json))
+            {
+                newSettings = UserSettingsV3.ImportValues(json);
             }
             else
             {
@@ -52,9 +64,9 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
             ImportValuesCurrent(newSettings);
         }
 
-        public static void ImportValuesCurrent(UserSettingsV2 NewSettings)
+        public static void ImportValuesCurrent(UserSettingsV3 NewSettings)
         {
-            Log.Information("UserSettings.ImportValuesCurrent()");
+            Log.Information("UserSettingsContainer.ImportValuesCurrent()");
 
             //reminder we want to import stuff into variable **ThisInstance**
 
@@ -89,51 +101,12 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 
             ThisInstance.XYRatio = NewSettings.XYRatio;
 
-            List<VirtualKey> virtualKeys = KeyUtility.GetVirtualKeyValues();
-            foreach (VirtualKey key in virtualKeys)
-            {
-                if (NewSettings.MappingsContainsKey(key))
-                {
-                    ThisInstance.Mappings[key] = NewSettings.Mappings[key];
-                }
-            }
+            ThisInstance.Mappings = NewSettings.Mappings;
 
-            ThisInstance.Version_2_0_0_OrGreater = true;
+
+            ThisInstance.Version = 3;
         }
 
-        public static bool IsVersion3(string json)
-        {
-
-            try
-            {
-                JObject newSetting2s = JsonConvert.DeserializeObject<JObject>(json);
-
-                foreach (JProperty property in newSetting2s.Properties())
-                {
-                    try
-                    {
-                        if (property.Name == "Version_2_0_0_OrGreater")
-                        {
-                            // remember to flip this value
-                            // if it is 1.0.11 we want to return true
-                            // if it is 2.0.0 or greater we want to return false
-                            bool value = !(bool)property.Value;
-                            return value;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        ExceptionLogger.LogException("UserSettings.IsLegacyConfig error(a)", ex);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                ExceptionLogger.LogException("UserSettings.IsLegacyConfig error(b)", ex);
-            }
-
-            return true;
-        }
         public static bool IsVersion2(string json)
         {
 
@@ -152,13 +125,45 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
                     }
                     catch (Exception ex)
                     {
-                        ExceptionLogger.LogException("UserSettings.IsVersion2 error(a)", ex);
+                        ExceptionLogger.LogException("UserSettingsContainer.IsVersion2 error(a)", ex);
                     }
                 }
             }
             catch (Exception ex)
             {
-                ExceptionLogger.LogException("UserSettings.IsVersion2 error(b)", ex);
+                ExceptionLogger.LogException("UserSettingsContainer.IsVersion2 error(b)", ex);
+            }
+
+            return false;
+        }
+
+        public static bool IsVersion3(string json)
+        {
+
+            try
+            {
+                JObject newSetting2s = JsonConvert.DeserializeObject<JObject>(json);
+
+                foreach (JProperty property in newSetting2s.Properties())
+                {
+                    try
+                    {
+                        if (property.Name == "Version")
+                        {
+
+                            int value = (int)property.Value;
+                            return value == 3;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ExceptionLogger.LogException("UserSettingsContainer.IsVersion3 error(a)", ex);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLogger.LogException("UserSettingsContainer.IsVersion3 error(b)", ex);
             }
 
             return false;
@@ -167,18 +172,18 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
         public static void Load(string file)
         {
             string fullFilePath = Path.GetFullPath(file);
-            Log.Debug("UserSettings.load fullFilePath={0}", fullFilePath);
+            Log.Debug("UserSettingsContainer.load fullFilePath={0}", fullFilePath);
 
             ImportValues(fullFilePath);
 
-            ThisInstance.GetKeyboardMappings();
+            ThisInstance.RefreshOptimisations();
             ThisInstance.BroadcastRefresh();
             ThisInstance.Print();
         }
 
         public static void LoadWithCatch(string file)
         {
-            Log.Information("UserSettings.LoadWithCatch file={0}", file);
+            Log.Information("UserSettingsContainer.LoadWithCatch file={0}", file);
 
             try
             {
@@ -192,22 +197,21 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 
         public static void LoadDefault()
         {
-            Log.Information("UserSettings.LoadDefault");
+            Log.Information("UserSettingsContainer.LoadDefault");
             LoadWithCatch(PROFILE_DEFAULT);
         }
 
         public static void LoadPrevious()
         {
-            Log.Information("UserSettings.LoadPrevious");
+            Log.Information("UserSettingsContainer.Container.LoadPrevious");
             LoadWithCatch(PROFILE_PREVIOUS);
         }
 
-
         public static void Save(string file)
         {
-            Log.Information("UserSettings.Save: " + file);
+            Log.Information("UserSettingsContainer.Container.Save: " + file);
 
-            UserSettingsV2 instanceForSaving = ThisInstance.Clone();
+            UserSettingsV3 instanceForSaving = ThisInstance.Clone();
             // removing KeyboardMappings, as these are generated after each key remapping
             instanceForSaving.KeyboardMappings = null;
 
@@ -217,9 +221,10 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 
         public static void SetMapping(VirtualKey key, PhysicalKey valueOld, PhysicalKey valueNew)
         {
-            Log.Information("MainViewModel.SetMapping {VirtualKey:" + key + ", PhysicalKey: '" + valueOld + " -> " + valueNew + "'}");
+            Log.Information("UserSettingsContainer.SetMapping {VirtualKey:" + key + ", PhysicalKey: '" + valueOld + " -> " + valueNew + "'}");
+            throw new Exception("UserSettingsContainer.SetMapping line 222 UNDEFINED");
 
-            if (!ThisInstance.MappingsContainsKey(key))
+            /*if (!ThisInstance.MappingsContainsKey(key))
             {
                 ThisInstance.Mappings[key] = new PhysicalKeyGroup();
             }
@@ -230,14 +235,15 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
             }
 
             ThisInstance.Mappings[key].PhysicalKeys.Add(valueNew);
-
+*/
             Save(PROFILE_PREVIOUS);
             ThisInstance.BroadcastRefresh();
         }
 
         public static void TestOnly_ResetUserSettings()
         {
-            ThisInstance = new UserSettingsV2();
+            nextMappingUid = 0;
+            ThisInstance = new UserSettingsV3();
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
     public class GamepadProcessor
     {
         private InstanceSettings InstanceSettings { get; set; } = InstanceSettings.GetInstance();
-        private UserSettingsV2 UserSettings { get; set; } = UserSettingsContainer.GetInstance();
+        private UserSettingsV3 UserSettings { get; set; } = UserSettingsContainer.GetInstance();
 
         ////////////////////////////////////////////////////////////////////////////
 
@@ -315,6 +315,27 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
             return IsAiming && UserSettings.MouseAimSensitivityEnabled;
         }
 
+        private bool IsAllPhysicalKeysPressed(Mapping mapping)
+        {
+            if (mapping == null || mapping.physicalKeys == null || mapping.physicalKeys.Count < 1)
+            {
+                return false;
+            }
+
+            int actualCount = 0;
+            int expectedCount = mapping.physicalKeys.Count;
+
+            foreach (PhysicalKey pk in mapping.physicalKeys)
+            {
+                if (IsPhysicalKeyPressed(pk))
+                {
+                    actualCount++;
+                }
+            }
+
+            return expectedCount == actualCount;
+        }
+
         private bool IsPhysicalKeyPressed(PhysicalKey key)
         {
             if (Keyboard.IsKeyPressed(key.KeyboardValue))
@@ -332,23 +353,26 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
             return false;
         }
 
-        private bool IsVirtualKeyPressed(VirtualKey key)
+        private bool IsVirtualKeyPressed(VirtualKey virtualKey)
         {
-            if (key == VirtualKey.NULL)
+            if (virtualKey == VirtualKey.NULL)
                 return false;
 
-            PhysicalKeyGroup pkg = UserSettings.Mappings[key];
-            if (pkg == null || pkg.PhysicalKeys == null)
-                return false;
-
-            foreach (PhysicalKey pk in pkg.PhysicalKeys)
+            foreach (Mapping mapping in UserSettings.Mappings)
             {
-                if (IsPhysicalKeyPressed(pk))
+                foreach (VirtualKey vk in mapping.virtualKeys)
                 {
-                    return true;
+                    //if ANY virtual key matches method input then continue
+                    if (vk == virtualKey)
+                    {
+                        if (IsAllPhysicalKeysPressed(mapping))
+                        {
+                            return true;
+                        }
+
+                    }
                 }
             }
-
             return false;
         }
 

@@ -147,6 +147,7 @@
     <Compile Include="Backend\AppUpdater.cs" />
     <Compile Include="Backend\AudioManager.cs" />
     <Compile Include="Backend\ColourSchemeChanger.cs" />
+    <Compile Include="Backend\Config\UserSettingsV3.cs" />
     <Compile Include="Backend\Config\UserSettingsV2.cs" />
     <Compile Include="Backend\Mappings\Mapping.cs" />
     <Compile Include="Backend\DebugLogging\DebugDump.cs" />

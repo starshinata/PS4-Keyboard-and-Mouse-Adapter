@@ -39,18 +39,27 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
 
             if (ExtraButtons.Unknown != scrollAction)
             {
-                UserSettingsV2 settings = UserSettingsContainer.GetInstance();
+                UserSettingsV3 settings = UserSettingsContainer.GetInstance();
                 if (settings.Mappings != null)
                 {
-                    foreach (VirtualKey virtualKey in settings.Mappings.Keys)
+                    foreach (Mapping mapping in settings.Mappings)
                     {
-                        if (settings.Mappings[virtualKey].PhysicalKeys != null)
+
+                        if (mapping != null && mapping.physicalKeys != null && mapping.virtualKeys != null)
                         {
-                            foreach (PhysicalKey physicalKey in settings.Mappings[virtualKey].PhysicalKeys)
+                            foreach (PhysicalKey physicalKey in mapping.physicalKeys)
                             {
-                                if (physicalKey.ExtraValue == scrollAction && !foundVirtualKeys.Contains(virtualKey))
+
+                                if (physicalKey.ExtraValue == scrollAction)
                                 {
-                                    foundVirtualKeys.Add(virtualKey);
+                                    foreach (VirtualKey virtualKey in mapping.virtualKeys)
+                                    {
+
+                                        if (!foundVirtualKeys.Contains(virtualKey))
+                                        {
+                                            foundVirtualKeys.Add(virtualKey);
+                                        }
+                                    }
                                 }
                             }
                         }

@@ -112,7 +112,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI
             tabs.Items.RemoveAt(0);
 
             // Refresh to ensure advancedMappingsPage isnt blank
-            advancedMappingsPage.RefreshButtonContents();
+            advancedMappingsPage.PopulateWithMappings();
         }
 
     }

@@ -13,18 +13,18 @@ namespace UnitTests.KeyboardAndMouseAdapter.Config.UserSettingsV2Test
         private static readonly string PROJECT_ROOT = "..\\..\\..\\";
         private static readonly string TEST_DIRECTORY = PROJECT_ROOT + "UnitTests\\KeyboardAndMouseAdapter\\backend\\Config\\UserSettingsContainer\\ImportValues\\";
 
-        private UserSettingsV2 ReadExpectedFile(string file)
+        private UserSettingsV3 ReadExpectedFile(string file)
         {
             string json = File.ReadAllText(file);
-            return JsonConvert.DeserializeObject<UserSettingsV2>(json);
+            return JsonConvert.DeserializeObject<UserSettingsV3>(json);
         }
 
         private void Run_ImportValues(string inputFile, string expectedFile)
         {
             UserSettingsContainer.ImportValues(inputFile);
-            UserSettingsV2 actual = UserSettingsContainer.GetInstance();
+            UserSettingsV3 actual = UserSettingsContainer.GetInstance();
             actual.KeyboardMappings = null;
-            UserSettingsV2 expected = ReadExpectedFile(expectedFile);
+            UserSettingsV3 expected = ReadExpectedFile(expectedFile);
 
             AssertionExtensions.Should(actual).BeEquivalentTo(expected);
         }
@@ -41,9 +41,9 @@ namespace UnitTests.KeyboardAndMouseAdapter.Config.UserSettingsV2Test
             string inputFile = TEST_DIRECTORY + "ImportValues--profile-1.0.11-default--input.json";
             string expectedFile = TEST_DIRECTORY + "ImportValues--profile-1.0.11-default--expected.json";
             UserSettingsContainer.ImportValues(inputFile);
-            UserSettingsV2 actual = UserSettingsContainer.GetInstance();
+            UserSettingsV3 actual = UserSettingsContainer.GetInstance();
             actual.KeyboardMappings = null;
-            UserSettingsV2 expected = ReadExpectedFile(expectedFile);
+            UserSettingsV3 expected = ReadExpectedFile(expectedFile);
 
             AssertionExtensions.Should(actual).BeEquivalentTo(expected);
         }
@@ -54,9 +54,9 @@ namespace UnitTests.KeyboardAndMouseAdapter.Config.UserSettingsV2Test
             string inputFile = TEST_DIRECTORY + "ImportValues--profile-2.0.0-default--input.json";
             string expectedFile = TEST_DIRECTORY + "ImportValues--profile-2.0.0-default--expected.json";
             UserSettingsContainer.ImportValues(inputFile);
-            UserSettingsV2 actual = UserSettingsContainer.GetInstance();
+            UserSettingsV3 actual = UserSettingsContainer.GetInstance();
             actual.KeyboardMappings = null;
-            UserSettingsV2 expected = ReadExpectedFile(expectedFile);
+            UserSettingsV3 expected = ReadExpectedFile(expectedFile);
 
             AssertionExtensions.Should(actual).BeEquivalentTo(expected);
         }
@@ -67,9 +67,9 @@ namespace UnitTests.KeyboardAndMouseAdapter.Config.UserSettingsV2Test
             string inputFile = TEST_DIRECTORY + "ImportValues--profile-empty--input.json";
             string expectedFile = TEST_DIRECTORY + "ImportValues--profile-empty--expected.json";
             UserSettingsContainer.ImportValues(inputFile);
-            UserSettingsV2 actual = UserSettingsContainer.GetInstance();
+            UserSettingsV3 actual = UserSettingsContainer.GetInstance();
             actual.KeyboardMappings = null;
-            UserSettingsV2 expected = ReadExpectedFile(expectedFile);
+            UserSettingsV3 expected = ReadExpectedFile(expectedFile);
 
             AssertionExtensions.Should(actual).BeEquivalentTo(expected);
         }

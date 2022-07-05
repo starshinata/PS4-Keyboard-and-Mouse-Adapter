@@ -9,23 +9,30 @@ using System.Reflection;
 
 namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 {
-    public class UserSettingsV2
+    public class UserSettingsV3
     {
+        // Only keep this if this is the MOST RECENT VERSION
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
-        ////////////////////////////////////////////////////////////////////////////
-        /// Static props
-        ////////////////////////////////////////////////////////////////////////////
-        private static readonly ILogger StaticLogger = Log.ForContext(typeof(UserSettingsV1));
+        ////////////////////////////////////////////////////////////////////////
 
 
+        // Note this property will not be serialised (see the save method)
+        // this property is just for populating sensible values for the SimpleConfigPage
         public Dictionary<VirtualKey, PhysicalKey> KeyboardMappings { get; set; } = new Dictionary<VirtualKey, PhysicalKey>();
-        public Dictionary<VirtualKey, PhysicalKeyGroup> Mappings { get; set; } = new Dictionary<VirtualKey, PhysicalKeyGroup>();
+
+        // Note this property will not be serialised (see the save method)
+        // this property is for simple processing of inputs in GamepadProcessor.cs
+        // but wait for this for be needed
+        public Dictionary<VirtualKey, PhysicalKey> GamepadProcessorMappings { get; set; } = new Dictionary<VirtualKey, PhysicalKey>();
+                
+        public List<Mapping> Mappings { get; set; } = new List<Mapping>();
+
+        ////////////////////////////////////////////////////////////////////////
 
         //
         // REMINDER if you add a new property, be sure to add it to ImportValues method
         //
-
-        public int AdvancedMappingPage_MappingsToShow { get; set; } = 4;
 
         public bool AimToggle { get; set; } = false;
 
@@ -89,11 +96,8 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
         //TODO do we still need this ?
         public double XYRatio { get; set; } = 1;
 
-
-        // false if we need to migrate
-        // true means we can ignore
-        // default is false until we find a value
-        public bool Version_2_0_0_OrGreater { get; set; } = false;
+        // Version of UserSettings
+        public int Version { get; set; } = 3;
 
         //
         // REMINDER if you add a new property, be sure to add it to ImportValues method
@@ -102,29 +106,44 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 
 
         ///////////////////////////////////////////////////////////////////////
-        // INSTANCE
+        // INSTANCE METHODS
         ///////////////////////////////////////////////////////////////////////
 
-        public UserSettingsV2()
+        public UserSettingsV3()
         {
             MousePollingRate = 60;
         }
 
-        public UserSettingsV2 Clone()
+        public void BroadcastRefresh()
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(""));
+        }
+
+        public UserSettingsV3 Clone()
         {
             // cloning by (serilise to string then deserialise)
             string json = JsonConvert.SerializeObject(this, Formatting.None);
-            return JsonConvert.DeserializeObject<UserSettingsV2>(json);
+            return JsonConvert.DeserializeObject<UserSettingsV3>(json);
         }
 
         public bool MappingsContainsKey(VirtualKey vk)
         {
-            return Mappings.ContainsKey(vk) && Mappings[vk] != null;
+            //TODO rewrite
+            //return Mappings.ContainsKey(vk) && Mappings[vk] != null;
+            return false;
         }
 
-        public void GetKeyboardMappings()
+        public void Print()
         {
-            List<VirtualKey> virtualKeys = KeyUtility.GetVirtualKeyValues();
+            UserSettingsV3.Print(this);
+        }
+
+        public void RefreshOptimisations()
+        {
+
+            //TODO rewrite
+
+            /*List<VirtualKey> virtualKeys = KeyUtility.GetVirtualKeyValues();
             foreach (VirtualKey vk in virtualKeys)
             {
                 if (Mappings.ContainsKey(vk))
@@ -141,90 +160,29 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
                         }
                     }
                 }
-            }
+            }*/
         }
-
-        public void Print()
-        {
-            UserSettingsV2.Print(this);
-        }
-
-
 
         ///////////////////////////////////////////////////////////////////////
-        // STATIC
+        // STATIC METHODS
         ///////////////////////////////////////////////////////////////////////
-
-
-        private static void AddMapping(UserSettingsV3 newSettings, VirtualKey vk, PhysicalKeyGroup pkg)
-        {
-
-            foreach (PhysicalKey pk in pkg.PhysicalKeys)
-            {
-                Mapping mapping = new Mapping();
-                mapping.uid = UserSettingsContainer.getNextMappingUid();
-                mapping.physicalKeys.Add(pk);
-                mapping.virtualKeys.Add(vk);
-
-                newSettings.Mappings.Add(mapping);
-            }
-        }
-
-
         public static UserSettingsV3 ImportValues(string json)
         {
-
-            StaticLogger.Information("UserSettingsV2.ImportValues()");
-
-            UserSettingsV2 legacySettings = JsonConvert.DeserializeObject<UserSettingsV2>(json);
-            UserSettingsV3 newSettings = new UserSettingsV3();
-
-            newSettings.AnalogStickLowerRange = legacySettings.AnalogStickLowerRange;
-            newSettings.AnalogStickUpperRange = legacySettings.AnalogStickUpperRange;
-
-            newSettings.MouseControlsL3 = legacySettings.MouseControlsL3;
-            newSettings.MouseControlsR3 = legacySettings.MouseControlsR3;
-
-            newSettings.MouseDistanceLowerRange = legacySettings.MouseDistanceLowerRange;
-            newSettings.MouseDistanceUpperRange = legacySettings.MouseDistanceUpperRange;
-            newSettings.MouseMaxDistance = legacySettings.MouseMaxDistance;
-
-            newSettings.MousePollingRate = legacySettings.MousePollingRate;
-
-            newSettings.MouseXAxisSensitivityAimModifier = legacySettings.MouseXAxisSensitivityAimModifier;
-            newSettings.MouseXAxisSensitivityLookModifier = legacySettings.MouseXAxisSensitivityAimModifier;
-            newSettings.MouseXAxisSensitivityMax = legacySettings.MouseXAxisSensitivityMax;
-
-            newSettings.MouseYAxisSensitivityAimModifier = legacySettings.MouseYAxisSensitivityAimModifier;
-            newSettings.MouseYAxisSensitivityLookModifier = legacySettings.MouseYAxisSensitivityLookModifier;
-            newSettings.MouseYAxisSensitivityMax = legacySettings.MouseYAxisSensitivityMax;
-
-            newSettings.XYRatio = legacySettings.XYRatio;
-
-
-            foreach (VirtualKey vk in legacySettings.Mappings.Keys)
-            {
-                PhysicalKeyGroup pkg = legacySettings.Mappings[vk];
-                AddMapping(newSettings, vk, pkg);
-            }
-
-
-
-            newSettings.RefreshOptimisations();
-            return newSettings;
+            return JsonConvert.DeserializeObject<UserSettingsV3>(json);
         }
 
-        public static void Print(UserSettingsV2 settings)
+        public static void Print(UserSettingsV3 settings)
         {
             Log.Information("UserSettings.Print()");
 
 
             Log.Information("print mappings");
-            List<VirtualKey> virtualKeys = KeyUtility.GetVirtualKeyValues();
+            //TODO rewrite
+            /*List<VirtualKey> virtualKeys = KeyUtility.GetVirtualKeyValues();
             foreach (VirtualKey key in virtualKeys)
             {
                 Log.Information("print Mappings:{VirtKey:" + key + ", PhysicalKeyGroup: " + settings.Mappings[key] + "}");
-            }
+            }*/
 
             Log.Information("print values");
             Type t = settings.GetType();
@@ -243,7 +201,6 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
                 }
             }
         }
-
 
     }
 }

@@ -88,11 +88,13 @@
     <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettingsContainer\ImportValues\ImportValues--profile-empty--input.json" />
     <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettingsContainer\ImportValues\ImportValues--profile-2.0.0-default--input.json" />
     <Compile Include="KeyboardAndMouseAdapter\Backend\Config\ApplicationSettings\ImportValuesTest.cs" />
+    <Compile Include="KeyboardAndMouseAdapter\Backend\Config\UserSettingsContainer\IsVersionX\IsVersion3Test.cs" />
     <Compile Include="KeyboardAndMouseAdapter\Backend\RewasdDetector\PathsTest.cs" />
     <Compile Include="KeyboardAndMouseAdapter\Backend\Config\UserSettingsContainer\ImportValues\ImportValuesTest.cs" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettingsContainer\IsVersion2\profile-v1-default-1.0.11.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettingsContainer\IsVersion2\profile-v2.json" />
-    <Compile Include="KeyboardAndMouseAdapter\Backend\Config\UserSettingsContainer\IsVersion2\IsVersion2Test.cs" />
+    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettingsContainer\IsVersionX\profile-v3.json" />
+    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettingsContainer\IsVersionX\profile-v1-default-1.0.11.json" />
+    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettingsContainer\IsVersionX\profile-v2.json" />
+    <Compile Include="KeyboardAndMouseAdapter\Backend\Config\UserSettingsContainer\IsVersionX\IsVersion2Test.cs" />
     <Compile Include="KeyboardAndMouseAdapter\UI\Controls\MiscellaneousSettings\GamepadUpdaterNoSleepControl\CalculateIsControlEnabledTest.cs" />
     <Compile Include="KeyboardAndMouseAdapter\UI\Controls\MiscellaneousSettings\RemotePlayToolbarSettingsControl\CalculateIsControlEnabledTest.cs" />
     <Compile Include="KeyboardAndMouseAdapter\UI\Controls\Welcome\EmulationPickerControl\SetInitialRadioChecked\WhenVigemInstalledTest.cs" />

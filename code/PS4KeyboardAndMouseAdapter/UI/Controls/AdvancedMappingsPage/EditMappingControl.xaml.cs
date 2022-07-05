@@ -46,10 +46,11 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.AdvancedMappingsPage
 
                         if (UserSettingsContainer.GetInstance().MappingsContainsKey(vk))
                         {
-                            if (index < UserSettingsContainer.GetInstance().Mappings[vk].PhysicalKeys.Count)
-                            {
-                                valueOld = UserSettingsContainer.GetInstance().Mappings[vk].PhysicalKeys[index];
-                            }
+                            //TODO rewrite
+                            //if (index < UserSettingsContainer.GetInstance().Mappings[vk].PhysicalKeys.Count)
+                            //{
+                            //    valueOld = UserSettingsContainer.GetInstance().Mappings[vk].PhysicalKeys[index];
+                            //}
                         }
 
                         PhysicalKey valueNew = new PhysicalKey();
