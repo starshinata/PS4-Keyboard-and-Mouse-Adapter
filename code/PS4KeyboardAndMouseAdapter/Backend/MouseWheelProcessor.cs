@@ -45,14 +45,14 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
                     foreach (Mapping mapping in settings.Mappings)
                     {
 
-                        if (mapping != null && mapping.physicalKeys != null && mapping.virtualKeys != null)
+                        if (mapping != null && mapping.PhysicalKeys != null && mapping.VirtualKeys != null)
                         {
-                            foreach (PhysicalKey physicalKey in mapping.physicalKeys)
+                            foreach (PhysicalKey physicalKey in mapping.PhysicalKeys)
                             {
 
                                 if (physicalKey.ExtraValue == scrollAction)
                                 {
-                                    foreach (VirtualKey virtualKey in mapping.virtualKeys)
+                                    foreach (VirtualKey virtualKey in mapping.VirtualKeys)
                                     {
 
                                         if (!foundVirtualKeys.Contains(virtualKey))

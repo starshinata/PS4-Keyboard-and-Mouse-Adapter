@@ -47,8 +47,8 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
         {
             Mapping mapping = new Mapping();
             mapping.uid = UserSettingsContainer.getNextMappingUid();
-            mapping.physicalKeys.Add(pk);
-            mapping.virtualKeys.Add(vk);
+            mapping.PhysicalKeys.Add(pk);
+            mapping.VirtualKeys.Add(vk);
 
             newSettings.Mappings.Add(mapping);
         }

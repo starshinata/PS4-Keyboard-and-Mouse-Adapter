@@ -110,13 +110,6 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
             MousePollingRate = 60;
         }
 
-        public UserSettingsV2 Clone()
-        {
-            // cloning by (serilise to string then deserialise)
-            string json = JsonConvert.SerializeObject(this, Formatting.None);
-            return JsonConvert.DeserializeObject<UserSettingsV2>(json);
-        }
-
         public bool MappingsContainsKey(VirtualKey vk)
         {
             return Mappings.ContainsKey(vk) && Mappings[vk] != null;
@@ -163,8 +156,8 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
             {
                 Mapping mapping = new Mapping();
                 mapping.uid = UserSettingsContainer.getNextMappingUid();
-                mapping.physicalKeys.Add(pk);
-                mapping.virtualKeys.Add(vk);
+                mapping.PhysicalKeys.Add(pk);
+                mapping.VirtualKeys.Add(vk);
 
                 newSettings.Mappings.Add(mapping);
             }
@@ -173,14 +166,18 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 
         public static UserSettingsV3 ImportValues(string json)
         {
-
             StaticLogger.Information("UserSettingsV2.ImportValues()");
 
             UserSettingsV2 legacySettings = JsonConvert.DeserializeObject<UserSettingsV2>(json);
             UserSettingsV3 newSettings = new UserSettingsV3();
 
+            newSettings.AimToggle = legacySettings.AimToggle;
+            newSettings.AimToggleRetoggleDelay = legacySettings.AimToggleRetoggleDelay;
+
             newSettings.AnalogStickLowerRange = legacySettings.AnalogStickLowerRange;
             newSettings.AnalogStickUpperRange = legacySettings.AnalogStickUpperRange;
+
+            newSettings.MouseAimSensitivityEnabled = legacySettings.MouseAimSensitivityEnabled;
 
             newSettings.MouseControlsL3 = legacySettings.MouseControlsL3;
             newSettings.MouseControlsR3 = legacySettings.MouseControlsR3;
@@ -191,13 +188,17 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 
             newSettings.MousePollingRate = legacySettings.MousePollingRate;
 
+            newSettings.MouseWheelScrollHoldDuration = legacySettings.MouseWheelScrollHoldDuration;
+
             newSettings.MouseXAxisSensitivityAimModifier = legacySettings.MouseXAxisSensitivityAimModifier;
-            newSettings.MouseXAxisSensitivityLookModifier = legacySettings.MouseXAxisSensitivityAimModifier;
+            newSettings.MouseXAxisSensitivityLookModifier = legacySettings.MouseXAxisSensitivityLookModifier;
             newSettings.MouseXAxisSensitivityMax = legacySettings.MouseXAxisSensitivityMax;
 
             newSettings.MouseYAxisSensitivityAimModifier = legacySettings.MouseYAxisSensitivityAimModifier;
             newSettings.MouseYAxisSensitivityLookModifier = legacySettings.MouseYAxisSensitivityLookModifier;
             newSettings.MouseYAxisSensitivityMax = legacySettings.MouseYAxisSensitivityMax;
+
+            newSettings.RemotePlayVolume = legacySettings.RemotePlayVolume;
 
             newSettings.XYRatio = legacySettings.XYRatio;
 

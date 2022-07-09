@@ -1,20 +1,20 @@
 {
   "AdvancedMappingPage_MappingsToShow": 4,
   "AimToggle": false,
-  "AimToggleRetoggleDelay":1234,
-    
+  "AimToggleRetoggleDelay": 1234,
+
   "AnalogStickLowerRange": 40,
   "AnalogStickUpperRange": 95,
-  
+
   "KeyboardMappings": null,
 
-  "Mappings": {
-  },
+  "Mappings": [
+  ],
 
   "MouseAimSensitivityEnabled": false,
   "MouseControlsL3": false,
   "MouseControlsR3": false,
-  
+
   "MouseDistanceLowerRange": 5.0,
   "MouseDistanceUpperRange": 96.0,
   "MouseMaxDistance": 960.0,

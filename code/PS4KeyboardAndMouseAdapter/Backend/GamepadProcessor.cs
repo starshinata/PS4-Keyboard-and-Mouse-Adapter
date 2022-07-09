@@ -317,15 +317,15 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
 
         private bool IsAllPhysicalKeysPressed(Mapping mapping)
         {
-            if (mapping == null || mapping.physicalKeys == null || mapping.physicalKeys.Count < 1)
+            if (mapping == null || mapping.PhysicalKeys == null || mapping.PhysicalKeys.Count < 1)
             {
                 return false;
             }
 
             int actualCount = 0;
-            int expectedCount = mapping.physicalKeys.Count;
+            int expectedCount = mapping.PhysicalKeys.Count;
 
-            foreach (PhysicalKey pk in mapping.physicalKeys)
+            foreach (PhysicalKey pk in mapping.PhysicalKeys)
             {
                 if (IsPhysicalKeyPressed(pk))
                 {
@@ -360,7 +360,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
 
             foreach (Mapping mapping in UserSettings.Mappings)
             {
-                foreach (VirtualKey vk in mapping.virtualKeys)
+                foreach (VirtualKey vk in mapping.VirtualKeys)
                 {
                     //if ANY virtual key matches method input then continue
                     if (vk == virtualKey)

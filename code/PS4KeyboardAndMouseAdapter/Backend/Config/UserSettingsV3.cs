@@ -16,20 +16,6 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 
         ////////////////////////////////////////////////////////////////////////
 
-
-        // Note this property will not be serialised (see the save method)
-        // this property is just for populating sensible values for the SimpleConfigPage
-        public Dictionary<VirtualKey, PhysicalKey> KeyboardMappings { get; set; } = new Dictionary<VirtualKey, PhysicalKey>();
-
-        // Note this property will not be serialised (see the save method)
-        // this property is for simple processing of inputs in GamepadProcessor.cs
-        // but wait for this for be needed
-        public Dictionary<VirtualKey, PhysicalKey> GamepadProcessorMappings { get; set; } = new Dictionary<VirtualKey, PhysicalKey>();
-                
-        public List<Mapping> Mappings { get; set; } = new List<Mapping>();
-
-        ////////////////////////////////////////////////////////////////////////
-
         //
         // REMINDER if you add a new property, be sure to add it to ImportValues method
         //
@@ -104,6 +90,20 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
         //
 
 
+        ////////////////////////////////////////////////////////////////////////
+
+
+        // Note this property will not be serialised (see the save method)
+        // this property is for simple processing of inputs in GamepadProcessor.cs
+        // but wait for this for be needed
+        public Dictionary<VirtualKey, PhysicalKey> GamepadProcessorMappings { get; set; } = new Dictionary<VirtualKey, PhysicalKey>();
+
+        // Note this property will not be serialised (see the save method)
+        // this property is just for populating sensible values for the SimpleConfigPage
+        public Dictionary<VirtualKey, PhysicalKey> KeyboardMappings { get; set; } = new Dictionary<VirtualKey, PhysicalKey>();
+
+        public List<Mapping> Mappings { get; set; } = new List<Mapping>();
+
 
         ///////////////////////////////////////////////////////////////////////
         // INSTANCE METHODS
@@ -119,11 +119,13 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
             PropertyChanged(this, new PropertyChangedEventArgs(""));
         }
 
-        public UserSettingsV3 Clone()
+        public UserSettingsV3 CloneForSave()
         {
             // cloning by (serilise to string then deserialise)
             string json = JsonConvert.SerializeObject(this, Formatting.None);
-            return JsonConvert.DeserializeObject<UserSettingsV3>(json);
+            UserSettingsV3 tempSettings = JsonConvert.DeserializeObject<UserSettingsV3>(json);
+
+            return tempSettings;
         }
 
         public bool MappingsContainsKey(VirtualKey vk)

@@ -1,40 +1,55 @@
 {
-  "KeyboardMappings": null,
-  "MouseControlsL3": false,
-  "MouseControlsR3": false,
-  "MouseXAxisSensitivityMax": 100.0,
-  "MouseXAxisSensitivityLookModifier": 2.0,
-  "MouseYAxisSensitivityMax": 100.0,
-  "MouseYAxisSensitivityLookModifier": 1.0,
-  "MousePollingRate": 10,
-  "MouseAimSensitivityEnabled": false,
-  "MouseXAxisSensitivityAimModifier": 2.0,
-  "MouseYAxisSensitivityAimModifier": 1.0,
-  "Version_2_0_0_OrGreater": true,
-  "Mappings": {
-    "L2": {
-      "PhysicalKeys": [
-        {
-          "KeyboardValue": -1,
-          "MouseValue": 1
-        }
-      ]
-    },
-    
-    "R2": {
-      "PhysicalKeys": [
-        {
-          "KeyboardValue": -1,
-          "MouseValue": 0
-        }
-      ]
-    }   
-  },
-  "AdvancedMappingPage_MappingsToShow": 4,
+
+  "AimToggle": false,
+  "AimToggleRetoggleDelay": 0,
   "AnalogStickLowerRange": 40,
   "AnalogStickUpperRange": 95,
+  "MouseAimSensitivityEnabled": false,
+  "MouseControlsL3": false,
+  "MouseControlsR3": false,
   "MouseDistanceLowerRange": 5.0,
   "MouseDistanceUpperRange": 96.0,
   "MouseMaxDistance": 960.0,
-  "XYRatio": 1
+  "MousePollingRate": 10,
+  "MouseWheelScrollHoldDuration": 40.0,
+  "MouseXAxisSensitivityAimModifier": 2.0,
+  "MouseXAxisSensitivityLookModifier": 2.0,
+  "MouseXAxisSensitivityMax": 100.0,
+  "MouseYAxisSensitivityAimModifier": 1.0,
+  "MouseYAxisSensitivityLookModifier": 1.0,
+  "MouseYAxisSensitivityMax": 100.0,
+  "RemotePlayVolume": 100.0,
+  "XYRatio": 1.0,
+  "Version": 3,
+
+    "GamepadProcessorMappings": {},
+  "KeyboardMappings": null,
+  "Mappings": [
+    {
+      "uid": 0,
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": -1,
+          "MouseValue": 1
+        }
+      ],
+      "VirtualKeys": [
+        14
+      ]
+    },
+    {
+      "uid": 1,
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": -1,
+          "MouseValue": 0
+        }
+      ],
+      "VirtualKeys": [
+        17
+      ]
+    }
+  ]
 }

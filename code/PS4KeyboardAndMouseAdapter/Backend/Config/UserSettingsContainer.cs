@@ -53,7 +53,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
             }
             else if (IsVersion2(json))
             {
-                newSettings = UserSettingsV3.ImportValues(json);
+                newSettings = UserSettingsV2.ImportValues(json);
             }
             else
             {
@@ -68,7 +68,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
         {
             Log.Information("UserSettingsContainer.ImportValuesCurrent()");
 
-            //reminder we want to import stuff into variable **ThisInstance**
+            // reminder we want to import stuff into variable **ThisInstance**
 
             ThisInstance.AimToggle = NewSettings.AimToggle;
             ThisInstance.AimToggleRetoggleDelay = NewSettings.AimToggleRetoggleDelay;
@@ -191,7 +191,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
             }
             catch (Exception ex)
             {
-                ExceptionLogger.LogException("UserSettings.LoadWithCatch failed", ex);
+                ExceptionLogger.LogException("UserSettingsContainer.LoadWithCatch failed", ex);
             }
         }
 
@@ -211,7 +211,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
         {
             Log.Information("UserSettingsContainer.Container.Save: " + file);
 
-            UserSettingsV3 instanceForSaving = ThisInstance.Clone();
+            UserSettingsV3 instanceForSaving = ThisInstance.CloneForSave();
             // removing KeyboardMappings, as these are generated after each key remapping
             instanceForSaving.KeyboardMappings = null;
 

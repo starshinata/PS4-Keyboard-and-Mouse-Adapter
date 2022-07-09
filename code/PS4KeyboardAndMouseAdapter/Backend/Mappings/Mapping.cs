@@ -5,17 +5,17 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Mappings
     public class Mapping
     {
         public int uid;
-        public List<PhysicalKey> physicalKeys = new List<PhysicalKey>();
-        public List<VirtualKey> virtualKeys = new List<VirtualKey>();
+        public List<PhysicalKey> PhysicalKeys = new List<PhysicalKey>();
+        public List<VirtualKey> VirtualKeys = new List<VirtualKey>();
 
         public string GetCompositeKeyPhysical()
         {
             bool first = true;
             string key = "";
 
-            if (virtualKeys != null)
+            if (VirtualKeys != null)
             {
-                foreach (PhysicalKey pk in physicalKeys)
+                foreach (PhysicalKey pk in PhysicalKeys)
                 {
                     if (first)
                     {
@@ -36,9 +36,9 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Mappings
             bool first = true;
             string key = "";
 
-            if (virtualKeys != null)
+            if (VirtualKeys != null)
             {
-                foreach (VirtualKey vk in virtualKeys)
+                foreach (VirtualKey vk in VirtualKeys)
                 {
                     if (first)
                     {
