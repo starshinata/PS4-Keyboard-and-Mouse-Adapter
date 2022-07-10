@@ -1,13 +1,12 @@
 ﻿using Pizza.KeyboardAndMouseAdapter.Backend;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
-using Serilog;
 
 namespace Pizza.KeyboardAndMouseAdapter
 {
 
     public class MainViewModel
     {
-        public ApplicationSettings ApplicationSettings { get; set; } = ApplicationSettings.GetInstance(); 
+        public ApplicationSettings ApplicationSettings { get; set; } = ApplicationSettings.GetInstance();
 
         public InstanceSettings InstanceSettings { get; set; } = InstanceSettings.GetInstance();
 

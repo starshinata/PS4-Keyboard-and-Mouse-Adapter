@@ -5,6 +5,9 @@ namespace Pizza.KeyboardAndMouseAdapter.UI
 {
     public class UIConstants
     {
+        public const HorizontalAlignment ALIGNMENT_HORIZONAL_CENTER = HorizontalAlignment.Center;
+        public const VerticalAlignment ALIGNMENT_VERTICAL_CENTER = VerticalAlignment.Center;
+
         public const double LOW_VISIBILITY = 0.1;
 
         public static readonly Brush TEXTBOX_COLOUR_GREEN = new SolidColorBrush(Colors.LimeGreen);

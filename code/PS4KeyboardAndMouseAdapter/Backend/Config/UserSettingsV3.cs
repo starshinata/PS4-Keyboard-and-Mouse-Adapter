@@ -95,7 +95,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 
         // Note this property will not be serialised (see the save method)
         // this property is for simple processing for AdvancedMappingsPag
-        public Dictionary<string, List<PhysicalKeyGroup>> Mappings_ForAdvancedMappingsPage { get; set; } = new Dictionary<string, List<PhysicalKeyGroup>>();
+        public Dictionary<string, List<Mapping>> Mappings_ForAdvancedMappingsPage = new Dictionary<string, List<Mapping>>();
 
         // Note this property will not be serialised (see the save method)
         // this property is for simple processing of inputs in GamepadProcessor.cs
@@ -155,22 +155,25 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 
         private void RefreshOptimisations_Mappings_ForAdvancedMappingsPage()
         {
+            Mappings_ForAdvancedMappingsPage = new Dictionary<string, List<Mapping>>();
+
             foreach (Mapping mapping in Mappings)
             {
                 string vk = mapping.GetCompositeKeyVirtual();
 
                 if (!Mappings_ForAdvancedMappingsPage.ContainsKey(vk))
                 {
-                    Mappings_ForAdvancedMappingsPage[vk] = new List<PhysicalKeyGroup>();
+                    Mappings_ForAdvancedMappingsPage[vk] = new List<Mapping>();
                 }
 
-                PhysicalKeyGroup pkg = new PhysicalKeyGroup(mapping.PhysicalKeys);
-                Mappings_ForAdvancedMappingsPage[vk].Add(pkg);
+                Mappings_ForAdvancedMappingsPage[vk].Add(mapping);
             }
         }
 
         private void RefreshOptimisations_Mappings_ForGamepadProcessor()
         {
+            Mappings_ForGamepadProcessor = new Dictionary<VirtualKey, List<PhysicalKeyGroup>>();
+
             foreach (Mapping mapping in Mappings)
             {
                 foreach (VirtualKey vk in mapping.VirtualKeys)
@@ -188,9 +191,11 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 
         private void RefreshOptimisations_Mappings_ForSimpleConfigPage()
         {
+            Mappings_ForSimpleConfigPage = new Dictionary<VirtualKey, PhysicalKey>();
+
             foreach (Mapping mapping in Mappings)
             {
-                if (mapping.isSimpleMapping())
+                if (mapping.IsSimpleMapping())
                 {
                     VirtualKey vk = ListUtil.First(mapping.VirtualKeys);
                     if (vk != VirtualKey.NULL && !Mappings_ForSimpleConfigPage.ContainsKey(vk))

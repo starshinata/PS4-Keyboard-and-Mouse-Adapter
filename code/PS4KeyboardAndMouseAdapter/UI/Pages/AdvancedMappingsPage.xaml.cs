@@ -12,13 +12,11 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Pages
     public partial class AdvancedMappingsPage : UserControl
     {
         private readonly double OpacityUnMappedButton = 0.5;
-        private readonly UserSettingsV3 Settings;
+        private readonly UserSettingsV3 UserSettings;
 
         private Thickness buttonMargin;
 
-
         private int MaxColumnCount = 0;
-        private Dictionary<string, List<Mapping>> CompositeKeyMappings = new Dictionary<string, List<Mapping>>();
 
         public AdvancedMappingsPage()
         {
@@ -28,7 +26,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Pages
             buttonMargin = new Thickness();
             buttonMargin.Left = 15;
 
-            Settings = UserSettingsContainer.GetInstance();
+            UserSettings = UserSettingsContainer.GetInstance();
             EditMapping_Hide();
 
             Log.Debug("AdvancedMappingsPage init OUT");
@@ -37,26 +35,23 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Pages
         // Needs to public
         public void EditMapping_Show(Button button)
         {
-            // TODO Send something to EditMappingControl
-
-
-            scrollViewer.Visibility = Visibility.Hidden;
-
             // if mappingHolder is enabled then buttons are still clickable
             // EVEN if you set button.IsEnabled = false
             mappingHolder.IsEnabled = false;
+            mappingHolder.Visibility = Visibility.Collapsed;
 
-            //TODO
-            //WaitForKeyPress_1.Visibility = Visibility.Visible;
+            Mapping mapping = null;
+            if (button.Tag != null)
+            {
+                mapping = (Mapping)button.Tag;
+            }
+            editMappingControl.ShowThis(mapping);
 
-            // WaitForKeyPress_2 is the stack panel
-            // if we dont focus it then keyboard key presses might not register
-
-            //TODO
-            //WaitForKeyPress_2.Focus();
+            stackpanel.HorizontalAlignment = HorizontalAlignment.Center;
+            stackpanel.VerticalAlignment = VerticalAlignment.Center;
 
             editMappingControl.Visibility = Visibility.Visible;
-            mappingHolder.Visibility = Visibility.Collapsed;
+            editMappingControl.Focus();
         }
 
         public void EditMapping_Hide()
@@ -66,6 +61,9 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Pages
             mappingHolder.IsEnabled = true;
             editMappingControl.Visibility = Visibility.Collapsed;
             mappingHolder.Visibility = Visibility.Visible;
+            //
+            stackpanel.HorizontalAlignment = HorizontalAlignment.Left;
+            stackpanel.VerticalAlignment = VerticalAlignment.Top;
 
             PopulateWithMappings();
         }
@@ -82,46 +80,16 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Pages
             PopulateWithMappings();
         }
 
-        private void Refresh_Internal_CompositeKeyMappings()
-        {
-            int _MaxColumnCount = 0;
-
-            Dictionary<string, List<Mapping>> _VirtualKeyMappings = new Dictionary<string, List<Mapping>>();
-
-            foreach (Mapping mapping in Settings.Mappings)
-            {
-                string key = mapping.GetCompositeKeyVirtual();
-
-                if (!_VirtualKeyMappings.ContainsKey(key))
-                {
-                    _VirtualKeyMappings.Add(key, new List<Mapping>());
-                }
-
-                _VirtualKeyMappings[key].Add(mapping);
-                if (_VirtualKeyMappings[key].Count > MaxColumnCount)
-                {
-                    _MaxColumnCount = _VirtualKeyMappings[key].Count;
-                }
-
-            }
-
-            MaxColumnCount = _MaxColumnCount;
-
-            CompositeKeyMappings = _VirtualKeyMappings;
-        }
-
         public void PopulateWithMappings()
         {
+            PopulateWithMappings_DeleteExistingButtons();
 
-            //TODO delete all buttons
+            PopulateWithMappings_GetColumnCount();
 
-            Refresh_Internal_CompositeKeyMappings();
-
-            foreach (string vk in CompositeKeyMappings.Keys)
+            foreach (string vk in UserSettings.Mappings_ForAdvancedMappingsPage.Keys)
             {
                 PopulateWithMappings_CompositKey(vk);
             }
-
         }
 
         private void PopulateWithMappings_CompositKey(string compositeKey)
@@ -141,9 +109,9 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Pages
             for (int i = 0; i < MaxColumnCount; i++)
             {
                 Mapping mapping = null;
-                if (i < CompositeKeyMappings[compositeKey].Count)
+                if (i < UserSettings.Mappings_ForAdvancedMappingsPage[compositeKey].Count)
                 {
-                    mapping = CompositeKeyMappings[compositeKey].ElementAt(i);
+                    mapping = UserSettings.Mappings_ForAdvancedMappingsPage[compositeKey].ElementAt(i);
                 }
 
                 Button button = PopulateWithMappings_GetButton(mapping);
@@ -151,6 +119,11 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Pages
             }
 
             mappingHolder.Children.Add(stackPanel);
+        }
+
+        private void PopulateWithMappings_DeleteExistingButtons()
+        {
+            mappingHolder.Children.Clear();
         }
 
         private Button PopulateWithMappings_GetButton(Mapping mapping)
@@ -170,9 +143,25 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Pages
             {
                 button.Content = mapping.GetCompositeKeyPhysical();
                 button.Opacity = 1;
+                button.Tag = mapping;
             }
 
             return button;
+        }
+
+        private void PopulateWithMappings_GetColumnCount()
+        {
+            int _MaxColumnCount = 0;
+
+            foreach (List<Mapping> mappings in UserSettings.Mappings_ForAdvancedMappingsPage.Values)
+            {
+                if (mappings.Count > _MaxColumnCount)
+                {
+                    _MaxColumnCount = mappings.Count;
+                }
+            }
+
+            MaxColumnCount = _MaxColumnCount + 1;
         }
 
     }

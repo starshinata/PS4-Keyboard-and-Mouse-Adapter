@@ -3,8 +3,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 
-    xmlns:common="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls.Common"
-    xmlns:page="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls.MiscellaneousSettings"
+    xmlns:ui_controls_common="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls.Common"
+    xmlns:ui_controls_MiscellaneousSettingsPage="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls.MiscellaneousSettingsPage"
     >
 
     <ScrollViewer
@@ -14,31 +14,31 @@
 
         <StackPanel Width="650">
             
-            <page:MiscellaneousSettingsGeneralControl/>
+            <ui_controls_MiscellaneousSettingsPage:MiscellaneousSettingsGeneralControl/>
             
             <!-- spacer -->
             <TextBlock/>
             <TextBlock/>
             
-            <page:RemotePlayToolbarSettingsControl/>
+            <ui_controls_MiscellaneousSettingsPage:RemotePlayToolbarSettingsControl/>
 
             <!-- spacer -->
             <TextBlock/>
             <TextBlock/>
             
-            <common:LogControl/>
+            <ui_controls_common:LogControl/>
 
             <!-- spacer -->
             <TextBlock/>
             <TextBlock/>
 
-            <page:GamepadUpdaterNoSleepControl/>
+            <ui_controls_MiscellaneousSettingsPage:GamepadUpdaterNoSleepControl/>
 
             <!-- spacer -->
             <TextBlock/>
             <TextBlock/>
 
-            <page:ColourSchemeToggleControl/>
+            <ui_controls_MiscellaneousSettingsPage:ColourSchemeToggleControl/>
 
         </StackPanel>
 

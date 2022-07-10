@@ -2,11 +2,11 @@
     x:Class="Pizza.KeyboardAndMouseAdapter.UI.Pages.AdvancedMappingsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-
     
-    xmlns:advancedMappingsPage="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls.AdvancedMappingsPage"
+    xmlns:ui_controls_advancedMappingsPage="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls.AdvancedMappingsPage"
+    
     d:DesignHeight="700" 
     d:DesignWidth="680"
     mc:Ignorable="d" 
@@ -15,15 +15,12 @@
     <Grid>
 
         <ScrollViewer
-            HorizontalScrollBarVisibility="Auto"
-            VerticalScrollBarVisibility="Auto"
             x:Name="scrollViewer">
 
             <StackPanel 
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                >
-                <advancedMappingsPage:EditMappingControl
+                x:Name="stackpanel">
+                
+                <ui_controls_advancedMappingsPage:EditMappingControl
                     x:Name="editMappingControl"
                     />
 

@@ -49,6 +49,12 @@ namespace Pizza.KeyboardAndMouseAdapter.UI
             }
         }
 
+
+        public AdvancedMappingsPage getPageAdvancedMappings()
+        {
+            return advancedMappingsPage;
+        }
+
         private void MainWindowView_OnActivated(object sender, EventArgs e)
         {
             RefreshRemotePlayProcess();

@@ -12,7 +12,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
     // This class is intentionally seperate from UserSettinsV1 / UserSettinsV2
     // or whatever the current version is
     // because i would really like UserSettinsVX to be a POJO / POCO
-    // its not going to be a POJO /  POCO but i can dream
+    // its not going to be a POJO / POCO but i can dream
     public class UserSettingsContainer
     {
 

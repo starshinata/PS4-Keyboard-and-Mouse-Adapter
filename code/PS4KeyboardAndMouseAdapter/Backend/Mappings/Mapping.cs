@@ -8,6 +8,25 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Mappings
         public List<PhysicalKey> PhysicalKeys = new List<PhysicalKey>();
         public List<VirtualKey> VirtualKeys = new List<VirtualKey>();
 
+        public Mapping Clone()
+        {
+            Mapping newMapping = new Mapping();
+
+            newMapping.uid = uid;
+
+            foreach (PhysicalKey physicalKey in PhysicalKeys)
+            {
+                newMapping.PhysicalKeys.Add(physicalKey);
+            }
+
+            foreach (VirtualKey virtualKey in VirtualKeys)
+            {
+                newMapping.VirtualKeys.Add(virtualKey);
+            }
+
+            return newMapping;
+        }
+
         public string GetCompositeKeyPhysical()
         {
             bool first = true;
@@ -54,7 +73,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Mappings
             return key;
         }
 
-        public bool isSimpleMapping()
+        public bool IsSimpleMapping()
         {
             return (PhysicalKeys != null &&
                 PhysicalKeys.Count == 1 &&

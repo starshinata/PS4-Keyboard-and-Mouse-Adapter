@@ -11,7 +11,7 @@
     mc:Ignorable="d"
 
     xmlns:backend_mappings="clr-namespace:Pizza.KeyboardAndMouseAdapter.Backend.Mappings"
-    xmlns:controls="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls"
+    xmlns:ui_controls="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls"
     xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
     >
 
@@ -204,7 +204,7 @@
                 />
 
             <!-- LEFT STICK -->
-            <controls:AnalogStickBindings 
+            <ui_controls:AnalogStickBindings 
                 Grid.Row="13"
                 Grid.RowSpan="4"
                 Grid.Column="2"
@@ -312,7 +312,7 @@
                 />
 
             <!-- RIGHT STICK -->
-            <controls:AnalogStickBindings
+            <ui_controls:AnalogStickBindings
                 Grid.Row="13"
                 Grid.RowSpan="4"
                 Grid.Column="8"
