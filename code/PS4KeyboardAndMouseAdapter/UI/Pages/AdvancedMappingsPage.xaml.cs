@@ -28,7 +28,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Pages
             buttonMargin = new Thickness();
             buttonMargin.Left = 15;
 
-            Settings = UserSettingsContainer.GetInstance(); 
+            Settings = UserSettingsContainer.GetInstance();
             EditMapping_Hide();
 
             Log.Debug("AdvancedMappingsPage init OUT");
@@ -140,7 +140,12 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Pages
 
             for (int i = 0; i < MaxColumnCount; i++)
             {
-                Mapping mapping = CompositeKeyMappings[compositeKey].ElementAt(i);
+                Mapping mapping = null;
+                if (i < CompositeKeyMappings[compositeKey].Count)
+                {
+                    mapping = CompositeKeyMappings[compositeKey].ElementAt(i);
+                }
+
                 Button button = PopulateWithMappings_GetButton(mapping);
                 stackPanel.Children.Add(button);
             }
@@ -169,6 +174,6 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Pages
 
             return button;
         }
-      
+
     }
 }

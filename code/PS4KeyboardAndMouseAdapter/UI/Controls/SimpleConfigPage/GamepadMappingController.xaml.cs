@@ -97,7 +97,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls
                         {
                             VirtualKey vk = (VirtualKey)lastClickedButton.Tag;
 
-                            PhysicalKey valueOld = UserSettingsContainer.GetInstance().KeyboardMappings[vk];
+                            PhysicalKey valueOld = UserSettingsContainer.GetInstance().Mappings_ForSimpleConfigPage[vk];
 
                             PhysicalKey valueNew = new PhysicalKey();
                             valueNew.KeyboardValue = key;

@@ -101,10 +101,13 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 
             ThisInstance.XYRatio = NewSettings.XYRatio;
 
+            ThisInstance.Version = 3;
+
             ThisInstance.Mappings = NewSettings.Mappings;
 
-
-            ThisInstance.Version = 3;
+            // 2022.07.09 pancakeslp
+            // dont bother doing RefreshOptimisations()
+            // that is done in the load method
         }
 
         public static bool IsVersion2(string json)
@@ -212,8 +215,6 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
             Log.Information("UserSettingsContainer.Container.Save: " + file);
 
             UserSettingsV3 instanceForSaving = ThisInstance.CloneForSave();
-            // removing KeyboardMappings, as these are generated after each key remapping
-            instanceForSaving.KeyboardMappings = null;
 
             string json = JsonConvert.SerializeObject(instanceForSaving, Formatting.Indented);
             File.WriteAllText(file, json);

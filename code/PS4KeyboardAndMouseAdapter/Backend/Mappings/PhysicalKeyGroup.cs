@@ -11,6 +11,11 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Mappings
             PhysicalKeys = new List<PhysicalKey>();
         }
 
+        public PhysicalKeyGroup(List<PhysicalKey> list)
+        {
+            PhysicalKeys = list;
+        }
+
         public override string ToString()
         {
             return ListUtil.ListToString(PhysicalKeys);

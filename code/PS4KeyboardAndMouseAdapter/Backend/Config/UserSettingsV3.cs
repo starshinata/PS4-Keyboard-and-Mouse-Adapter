@@ -94,13 +94,16 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 
 
         // Note this property will not be serialised (see the save method)
-        // this property is for simple processing of inputs in GamepadProcessor.cs
-        // but wait for this for be needed
-        public Dictionary<VirtualKey, PhysicalKey> GamepadProcessorMappings { get; set; } = new Dictionary<VirtualKey, PhysicalKey>();
+        // this property is for simple processing for AdvancedMappingsPag
+        public Dictionary<string, List<PhysicalKeyGroup>> Mappings_ForAdvancedMappingsPage { get; set; } = new Dictionary<string, List<PhysicalKeyGroup>>();
 
         // Note this property will not be serialised (see the save method)
-        // this property is just for populating sensible values for the SimpleConfigPage
-        public Dictionary<VirtualKey, PhysicalKey> KeyboardMappings { get; set; } = new Dictionary<VirtualKey, PhysicalKey>();
+        // this property is for simple processing of inputs in GamepadProcessor.cs
+        public Dictionary<VirtualKey, List<PhysicalKeyGroup>> Mappings_ForGamepadProcessor { get; set; } = new Dictionary<VirtualKey, List<PhysicalKeyGroup>>();
+
+        // Note this property will not be serialised (see the save method)
+        // this property is just for populating simple values for the SimpleConfigPage
+        public Dictionary<VirtualKey, PhysicalKey> Mappings_ForSimpleConfigPage { get; set; } = new Dictionary<VirtualKey, PhysicalKey>();
 
         public List<Mapping> Mappings { get; set; } = new List<Mapping>();
 
@@ -125,14 +128,17 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
             string json = JsonConvert.SerializeObject(this, Formatting.None);
             UserSettingsV3 tempSettings = JsonConvert.DeserializeObject<UserSettingsV3>(json);
 
-            return tempSettings;
-        }
+            // removing generated stuff, that dont need to be serialised
+            tempSettings.Mappings_ForAdvancedMappingsPage = null;
+            tempSettings.Mappings_ForGamepadProcessor = null;
+            tempSettings.Mappings_ForSimpleConfigPage = null;
 
-        public bool MappingsContainsKey(VirtualKey vk)
-        {
-            //TODO rewrite
-            //return Mappings.ContainsKey(vk) && Mappings[vk] != null;
-            return false;
+            foreach (Mapping mapping in tempSettings.Mappings)
+            {
+                mapping.uid = -1;
+            }
+
+            return tempSettings;
         }
 
         public void Print()
@@ -142,32 +148,64 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 
         public void RefreshOptimisations()
         {
+            RefreshOptimisations_Mappings_ForAdvancedMappingsPage();
+            RefreshOptimisations_Mappings_ForGamepadProcessor();
+            RefreshOptimisations_Mappings_ForSimpleConfigPage();
+        }
 
-            //TODO rewrite
-
-            /*List<VirtualKey> virtualKeys = KeyUtility.GetVirtualKeyValues();
-            foreach (VirtualKey vk in virtualKeys)
+        private void RefreshOptimisations_Mappings_ForAdvancedMappingsPage()
+        {
+            foreach (Mapping mapping in Mappings)
             {
-                if (Mappings.ContainsKey(vk))
+                string vk = mapping.GetCompositeKeyVirtual();
+
+                if (!Mappings_ForAdvancedMappingsPage.ContainsKey(vk))
                 {
-                    PhysicalKeyGroup pkg = Mappings[vk];
-                    if (pkg.PhysicalKeys != null)
+                    Mappings_ForAdvancedMappingsPage[vk] = new List<PhysicalKeyGroup>();
+                }
+
+                PhysicalKeyGroup pkg = new PhysicalKeyGroup(mapping.PhysicalKeys);
+                Mappings_ForAdvancedMappingsPage[vk].Add(pkg);
+            }
+        }
+
+        private void RefreshOptimisations_Mappings_ForGamepadProcessor()
+        {
+            foreach (Mapping mapping in Mappings)
+            {
+                foreach (VirtualKey vk in mapping.VirtualKeys)
+                {
+                    if (!Mappings_ForGamepadProcessor.ContainsKey(vk))
                     {
-                        foreach (PhysicalKey pk in pkg.PhysicalKeys)
-                        {
-                            if (pk != null && pk.KeyboardValue != Keyboard.Key.Unknown)
-                            {
-                                KeyboardMappings[vk] = pk;
-                            }
-                        }
+                        Mappings_ForGamepadProcessor[vk] = new List<PhysicalKeyGroup>();
+                    }
+
+                    PhysicalKeyGroup pkg = new PhysicalKeyGroup(mapping.PhysicalKeys);
+                    Mappings_ForGamepadProcessor[vk].Add(pkg);
+                }
+            }
+        }
+
+        private void RefreshOptimisations_Mappings_ForSimpleConfigPage()
+        {
+            foreach (Mapping mapping in Mappings)
+            {
+                if (mapping.isSimpleMapping())
+                {
+                    VirtualKey vk = ListUtil.First(mapping.VirtualKeys);
+                    if (vk != VirtualKey.NULL && !Mappings_ForSimpleConfigPage.ContainsKey(vk))
+                    {
+                        Mappings_ForSimpleConfigPage[vk] = ListUtil.First(mapping.PhysicalKeys);
                     }
                 }
-            }*/
+
+            }
         }
 
         ///////////////////////////////////////////////////////////////////////
         // STATIC METHODS
         ///////////////////////////////////////////////////////////////////////
+
         public static UserSettingsV3 ImportValues(string json)
         {
             return JsonConvert.DeserializeObject<UserSettingsV3>(json);

@@ -20,8 +20,11 @@
   "RemotePlayVolume": 100.0,
   "XYRatio": 1.0,
   "Version": 3,
-  "GamepadProcessorMappings": {},
-  "KeyboardMappings": null,
+
+  "Mappings_ForAdvancedMappingsPage": null,
+  "Mappings_ForGamepadProcessor": null,
+  "Mappings_ForSimpleConfigPage": null,
+
   "Mappings": [
     {
       "uid": 0,

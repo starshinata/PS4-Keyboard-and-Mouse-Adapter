@@ -44,7 +44,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.AdvancedMappingsPage
                         int index = (int)lastClickedButton.Tag;
                         PhysicalKey valueOld = null;
 
-                        if (UserSettingsContainer.GetInstance().MappingsContainsKey(vk))
+                        //if (UserSettingsContainer.GetInstance().MappingsContainsKey(vk))
                         {
                             //TODO rewrite
                             //if (index < UserSettingsContainer.GetInstance().Mappings[vk].PhysicalKeys.Count)

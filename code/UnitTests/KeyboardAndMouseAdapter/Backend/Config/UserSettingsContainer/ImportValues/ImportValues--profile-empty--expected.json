@@ -1,5 +1,4 @@
 {
-
   "AimToggle": false,
   "AimToggleRetoggleDelay": 0,
   "AnalogStickLowerRange": 40,
@@ -22,8 +21,10 @@
   "XYRatio": 1.0,
   "Version": 3,
 
-    "GamepadProcessorMappings": {},
-  "KeyboardMappings": null,
+  "Mappings_ForAdvancedMappingsPage": null,
+  "Mappings_ForGamepadProcessor": null,
+  "Mappings_ForSimpleConfigPage": null,
+
   "Mappings": [
     {
       "uid": 0,

@@ -5,10 +5,12 @@
   "AnalogStickLowerRange": 40,
   "AnalogStickUpperRange": 95,
 
-  "KeyboardMappings": null,
-
   "Mappings": [
   ],
+
+  "Mappings_ForAdvancedMappingsPage": null,
+  "Mappings_ForGamepadProcessor": null,
+  "Mappings_ForSimpleConfigPage": null,
 
   "MouseAimSensitivityEnabled": false,
   "MouseControlsL3": false,

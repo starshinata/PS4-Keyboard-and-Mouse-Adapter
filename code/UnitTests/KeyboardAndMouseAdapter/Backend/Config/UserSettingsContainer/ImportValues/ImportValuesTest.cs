@@ -5,7 +5,7 @@ using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using System;
 using System.IO;
 
-namespace UnitTests.KeyboardAndMouseAdapter.Config.UserSettingsV2Test
+namespace UnitTests.KeyboardAndMouseAdapter.Config.UserSettingsContainerTest
 {
     [TestClass]
     public class ImportValuesTest
@@ -24,7 +24,13 @@ namespace UnitTests.KeyboardAndMouseAdapter.Config.UserSettingsV2Test
             UserSettingsContainer.ImportValues(inputFile);
 
             UserSettingsV3 actual = UserSettingsContainer.GetInstance();
-            actual.KeyboardMappings = null;
+
+            // you may think about using actual.CloneForSave()
+            // but that removes the mapping uids
+            actual.Mappings_ForAdvancedMappingsPage = null;
+            actual.Mappings_ForGamepadProcessor = null;
+            actual.Mappings_ForSimpleConfigPage = null;
+
             string json = JsonConvert.SerializeObject(actual, Formatting.Indented);
             Console.WriteLine(json);
 

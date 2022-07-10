@@ -53,5 +53,13 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Mappings
             }
             return key;
         }
+
+        public bool isSimpleMapping()
+        {
+            return (PhysicalKeys != null &&
+                PhysicalKeys.Count == 1 &&
+                VirtualKeys != null &&
+                VirtualKeys.Count == 1);
+        }
     }
 }

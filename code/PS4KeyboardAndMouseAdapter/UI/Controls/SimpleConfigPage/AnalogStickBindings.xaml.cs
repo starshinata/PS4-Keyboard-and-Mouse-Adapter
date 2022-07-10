@@ -45,7 +45,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls
                 VirtualKey virtualKey = GetVirtualKey(button);
 
                 button.Tag = virtualKey;
-                Binding dataBinding = new Binding("UserSettings.KeyboardMappings[" + virtualKey + "]");
+                Binding dataBinding = new Binding("UserSettings.Mappings_ForSimpleConfigPage[" + virtualKey + "]");
                 button.SetBinding(ContentProperty, dataBinding);
             }
         }

@@ -142,7 +142,7 @@
                 Grid.Column="2"
                 Grid.ColumnSpan="3"
                 Tag="{x:Static backend_mappings:VirtualKey.L2}"
-                Content="{Binding Path=UserSettings.KeyboardMappings[(backend_mappings:VirtualKey)L2], UpdateSourceTrigger=PropertyChanged}"
+                Content="{Binding Path=UserSettings.Mappings_ForSimpleConfigPage[(backend_mappings:VirtualKey)L2], UpdateSourceTrigger=PropertyChanged}"
                 Visibility="Visible"
                 />
 
@@ -161,7 +161,7 @@
                 Grid.Column="2"
                 Grid.ColumnSpan="3"
                 Tag="{x:Static backend_mappings:VirtualKey.L1}"
-                Content="{Binding Path=UserSettings.KeyboardMappings[(backend_mappings:VirtualKey)L1], UpdateSourceTrigger=PropertyChanged}"
+                Content="{Binding Path=UserSettings.Mappings_ForSimpleConfigPage[(backend_mappings:VirtualKey)L1], UpdateSourceTrigger=PropertyChanged}"
                 Visibility="Visible"
                 />
 
@@ -171,7 +171,7 @@
                 Grid.Column="2"
                 Grid.ColumnSpan="3"
                 Tag="{x:Static backend_mappings:VirtualKey.DPadUp}"
-                Content="{Binding Path=UserSettings.KeyboardMappings[(backend_mappings:VirtualKey)DPadUp], UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                Content="{Binding Path=UserSettings.Mappings_ForSimpleConfigPage[(backend_mappings:VirtualKey)DPadUp], UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                 Visibility="Visible"
                 />
 
@@ -181,7 +181,7 @@
                 Grid.Column="2"
                 Grid.ColumnSpan="3"
                 Tag="{x:Static backend_mappings:VirtualKey.DPadLeft}"
-                Content="{Binding Path=UserSettings.KeyboardMappings[(backend_mappings:VirtualKey)DPadLeft], UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                Content="{Binding Path=UserSettings.Mappings_ForSimpleConfigPage[(backend_mappings:VirtualKey)DPadLeft], UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                 Visibility="Visible"
                 />
 
@@ -190,7 +190,7 @@
                 Grid.Column="2"
                 Grid.ColumnSpan="3"
                 Tag="{x:Static backend_mappings:VirtualKey.DPadDown}"
-                Content="{Binding Path=UserSettings.KeyboardMappings[(backend_mappings:VirtualKey)DPadDown], UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                Content="{Binding Path=UserSettings.Mappings_ForSimpleConfigPage[(backend_mappings:VirtualKey)DPadDown], UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                 Visibility="Visible"/>
 
             <Button
@@ -199,7 +199,7 @@
                 Grid.Column="2"
                 Grid.ColumnSpan="3"
                 Tag="{x:Static backend_mappings:VirtualKey.DPadRight}"
-                Content="{Binding Path=UserSettings.KeyboardMappings[(backend_mappings:VirtualKey)DPadRight], UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                Content="{Binding Path=UserSettings.Mappings_ForSimpleConfigPage[(backend_mappings:VirtualKey)DPadRight], UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                 Visibility="Visible"
                 />
 
@@ -217,7 +217,7 @@
                 Grid.Column="2"
                 Grid.ColumnSpan="3"
                 Tag="{x:Static backend_mappings:VirtualKey.Share}"
-                Content="{Binding Path=UserSettings.KeyboardMappings[(backend_mappings:VirtualKey)Share], UpdateSourceTrigger=PropertyChanged}"
+                Content="{Binding Path=UserSettings.Mappings_ForSimpleConfigPage[(backend_mappings:VirtualKey)Share], UpdateSourceTrigger=PropertyChanged}"
                 Visibility="Visible"
                 />
 
@@ -229,7 +229,7 @@
                 Grid.ColumnSpan="1"
                 Margin="0,10,0,0"
                 Tag="{x:Static backend_mappings:VirtualKey.TouchButton}"
-                Content="{Binding Path=UserSettings.KeyboardMappings[(backend_mappings:VirtualKey)TouchButton],  UpdateSourceTrigger=PropertyChanged}"
+                Content="{Binding Path=UserSettings.Mappings_ForSimpleConfigPage[(backend_mappings:VirtualKey)TouchButton],  UpdateSourceTrigger=PropertyChanged}"
                 MaxWidth="100px"
                 Visibility="Visible"
                 />
@@ -239,7 +239,7 @@
                 Grid.Column="8"
                 Grid.ColumnSpan="3"
                 Tag="{x:Static backend_mappings:VirtualKey.Options}"
-                Content="{Binding Path=UserSettings.KeyboardMappings[(backend_mappings:VirtualKey)Options], UpdateSourceTrigger=PropertyChanged}"
+                Content="{Binding Path=UserSettings.Mappings_ForSimpleConfigPage[(backend_mappings:VirtualKey)Options], UpdateSourceTrigger=PropertyChanged}"
                 Visibility="Visible"
                 />
 
@@ -247,7 +247,7 @@
                 Grid.Row="15"
                 Grid.Column="6"
                 Tag="{x:Static backend_mappings:VirtualKey.PlaystationButton}"
-                Content="{Binding Path=UserSettings.KeyboardMappings[(backend_mappings:VirtualKey)PlaystationButton], UpdateSourceTrigger=PropertyChanged}"
+                Content="{Binding Path=UserSettings.Mappings_ForSimpleConfigPage[(backend_mappings:VirtualKey)PlaystationButton], UpdateSourceTrigger=PropertyChanged}"
                 MaxWidth="100px"
                 Visibility="Visible"
                 />
@@ -258,7 +258,7 @@
                 Grid.Column="8"
                 Grid.ColumnSpan="3"
                 Tag="{x:Static backend_mappings:VirtualKey.R2}"
-                Content="{Binding Path=UserSettings.KeyboardMappings[(backend_mappings:VirtualKey)R2]}"
+                Content="{Binding Path=UserSettings.Mappings_ForSimpleConfigPage[(backend_mappings:VirtualKey)R2]}"
                 Visibility="Visible"
                 />
 
@@ -276,7 +276,7 @@
                 Grid.Column="8"
                 Grid.ColumnSpan="3"
                 Tag="{x:Static backend_mappings:VirtualKey.R1}"
-                Content="{Binding Path=UserSettings.KeyboardMappings[(backend_mappings:VirtualKey)R1]}"
+                Content="{Binding Path=UserSettings.Mappings_ForSimpleConfigPage[(backend_mappings:VirtualKey)R1]}"
                 Visibility="Visible"/>
 
             <Button 
@@ -284,7 +284,7 @@
                 Grid.Column="8"
                 Grid.ColumnSpan="3"
                 Tag="{x:Static backend_mappings:VirtualKey.Triangle}"
-                Content="{Binding Path=UserSettings.KeyboardMappings[(backend_mappings:VirtualKey)Triangle]}" 
+                Content="{Binding Path=UserSettings.Mappings_ForSimpleConfigPage[(backend_mappings:VirtualKey)Triangle]}" 
                 />
 
             <Button 
@@ -292,7 +292,7 @@
                 Grid.Column="8"
                 Grid.ColumnSpan="3"
                 Tag="{x:Static backend_mappings:VirtualKey.Circle}"
-                Content="{Binding Path=UserSettings.KeyboardMappings[(backend_mappings:VirtualKey)Circle]}"
+                Content="{Binding Path=UserSettings.Mappings_ForSimpleConfigPage[(backend_mappings:VirtualKey)Circle]}"
                 />
 
             <Button 
@@ -300,7 +300,7 @@
                 Grid.Column="8"
                 Grid.ColumnSpan="3"
                 Tag="{x:Static backend_mappings:VirtualKey.Square}"
-                Content="{Binding Path=UserSettings.KeyboardMappings[(backend_mappings:VirtualKey)Square]}"
+                Content="{Binding Path=UserSettings.Mappings_ForSimpleConfigPage[(backend_mappings:VirtualKey)Square]}"
                 />
 
             <Button 
@@ -308,7 +308,7 @@
                 Grid.Column="8"
                 Grid.ColumnSpan="3"
                 Tag="{x:Static backend_mappings:VirtualKey.Cross}"
-                Content="{Binding Path=UserSettings.KeyboardMappings[(backend_mappings:VirtualKey)Cross]}"
+                Content="{Binding Path=UserSettings.Mappings_ForSimpleConfigPage[(backend_mappings:VirtualKey)Cross]}"
                 />
 
             <!-- RIGHT STICK -->
