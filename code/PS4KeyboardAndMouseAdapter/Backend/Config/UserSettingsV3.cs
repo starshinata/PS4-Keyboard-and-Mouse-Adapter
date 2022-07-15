@@ -157,6 +157,18 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
         {
             Mappings_ForAdvancedMappingsPage = new Dictionary<string, List<Mapping>>();
 
+            // populate with VirtualKeys
+            // so that if we unbind the only mapping for a virtual key it doesnt disappear
+            foreach (VirtualKey vk in KeyUtility.GetVirtualKeyValues())
+            {
+                string vkString = vk.ToString();
+                if (!Mappings_ForAdvancedMappingsPage.ContainsKey(vkString))
+                {
+                    Mappings_ForAdvancedMappingsPage[vkString] = new List<Mapping>();
+                }
+            }
+
+            // build mappings properly
             foreach (Mapping mapping in Mappings)
             {
                 string vk = mapping.GetCompositeKeyVirtual();

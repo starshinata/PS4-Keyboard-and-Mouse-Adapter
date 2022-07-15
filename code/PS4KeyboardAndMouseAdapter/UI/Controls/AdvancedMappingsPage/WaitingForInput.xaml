@@ -1,0 +1,51 @@
+﻿<UserControl
+    x:Class="Pizza.KeyboardAndMouseAdapter.UI.Controls.AdvancedMappingsPage.WaitingForInput"
+
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+   
+    >
+
+    <StackPanel 
+        Background="#da6f03"    
+        Focusable="True"
+        Height="120px"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Width="620px"
+        >
+
+        <TextBlock 
+            FontFamily="consolas"
+            FontSize="30"
+            FontWeight="Bold" 
+
+            HorizontalAlignment="Center" 
+            Text="Waiting for input" 
+            />
+
+        <!-- space -->
+        <TextBlock 
+            />
+
+        <TextBlock 
+            FontFamily="consolas"
+            FontSize="15"
+            FontWeight="Bold" 
+
+            HorizontalAlignment="Center" 
+            Text="press any key mouse or keyboard" 
+            />
+
+        <TextBlock 
+            FontFamily="consolas"
+            FontSize="15"
+            FontWeight="Bold" 
+
+            HorizontalAlignment="Center" 
+            Text="or Escape to cancel" 
+            />
+    </StackPanel>
+
+
+</UserControl>

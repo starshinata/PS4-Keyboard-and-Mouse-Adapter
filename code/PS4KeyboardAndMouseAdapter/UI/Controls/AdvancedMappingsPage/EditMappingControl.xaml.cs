@@ -16,7 +16,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.AdvancedMappingsPage
 
     public partial class EditMappingControl : System.Windows.Controls.UserControl
     {
-        private bool IsAcceptingInput = true;
+        private bool IsAwaitingInput = false;
 
         private Mapping NewMapping;
 
@@ -34,26 +34,36 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.AdvancedMappingsPage
             pk.MouseValue = mouseValue;
 
             NewMapping.PhysicalKeys.Add(pk);
+            RenderRealInput();
         }
 
         private void Handler_AddMapping_OnKeyboardKeyDown(object sender, KeyEventArgs e)
         {
-            if (IsAcceptingInput)
+            if (IsAwaitingInput)
             {
-                foreach (Keyboard.Key key in Enum.GetValues(typeof(Keyboard.Key)).Cast<Keyboard.Key>())
+                if (Keyboard.IsKeyPressed(Keyboard.Key.Escape))
+                {
+                    WaitingForInput_Hide();
+                    return;
+                }
+
+                var keyboardKeys = Enum.GetValues(typeof(Keyboard.Key)).Cast<Keyboard.Key>();
+                foreach (Keyboard.Key key in keyboardKeys)
                 {
                     if (key != Keyboard.Key.Escape && Keyboard.IsKeyPressed(key))
-
                     {
                         Handler_AddMapping_GenericKeyDown(ExtraButtons.Unknown, key, MouseButton.Unknown);
+                        return;
                     }
                 }
+
+               
             }
         }
 
         private void Handler_AddMapping_OnMouseDown(object sender, RoutedEventArgs e)
         {
-            if (IsAcceptingInput)
+            if (IsAwaitingInput)
             {
                 Array mouseButtons = Enum.GetValues(typeof(Mouse.Button));
                 foreach (Mouse.Button button in mouseButtons)
@@ -69,7 +79,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.AdvancedMappingsPage
 
         private void Handler_AddMapping_OnMouseLeftButtonUp(object sender, RoutedEventArgs e)
         {
-            if (IsAcceptingInput)
+            if (IsAwaitingInput)
             {
                 Handler_AddMapping_GenericKeyDown(ExtraButtons.Unknown, Keyboard.Key.Unknown, MouseButton.Left);
             }
@@ -80,7 +90,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.AdvancedMappingsPage
             Log.Debug("Handler_AddMapping_OnMouseScroll");
             Log.Debug(DateTime.Now.ToString());
 
-            if (IsAcceptingInput)
+            if (IsAwaitingInput)
             {
                 System.Windows.Input.MouseWheelEventArgs mwea = (System.Windows.Input.MouseWheelEventArgs)e;
                 ExtraButtons scrollAction = MouseWheelScrollProcessor.GetScrollAction(mwea);
@@ -92,18 +102,18 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.AdvancedMappingsPage
         {
 
             ControllerInput controllerInput = new ControllerInput();
-            controllerInput.Height = 30;
+            controllerInput.Height = 25;
             controllerInput.MinWidth = 100;
             controllerInput.HorizontalAlignment = UIConstants.ALIGNMENT_HORIZONAL_CENTER;
             controllerInput.VerticalAlignment = UIConstants.ALIGNMENT_VERTICAL_CENTER;
-            
+
             PanelInputController.Children.Add(controllerInput);
 
         }
 
         private void Handler_ButtonAddRealInput(object sender, RoutedEventArgs e)
         {
-            IsAcceptingInput = true;
+            WaitingForInput_Show();
         }
 
         private void Handler_ButtonCancel(object sender, RoutedEventArgs e)
@@ -113,8 +123,10 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.AdvancedMappingsPage
 
         private void Handler_ButtonDeleteMapping(object sender, RoutedEventArgs e)
         {
-
+            UserSettingsContainer.DeleteMapping(NewMapping.uid);
+            HideThis();
         }
+
         private void Handler_ButtonRemoveRealInput(object sender, RoutedEventArgs e)
         {
             if (e.Source != null)
@@ -149,24 +161,15 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.AdvancedMappingsPage
 
         private void HideThis()
         {
-            System.Windows.Window window = System.Windows.Application.Current.MainWindow;
-            if (window != null)
+            // var becuase AdvancedMappingsPage is also a namespace
+            var page = GetPageReference.AdvancedMappings();
+            if (page != null)
             {
-                MainWindowView mainWindowView = ((MainWindowView)window);
-                // var becuase AdvancedMappingsPage is also a namespace
-                var page = mainWindowView.getPageAdvancedMappings();
-                if (page != null)
-                {
-                    page.EditMapping_Hide();
-                }
-                else
-                {
-                    Log.Information("EditMappingControl.HideThis() called but AdvancedMappingsPage is null");
-                }
+                page.EditMapping_Hide();
             }
             else
             {
-                Log.Information("EditMappingControl.HideThis() called but window is null");
+                Log.Information("EditMappingControl.HideThis() called but AdvancedMappingsPage is null");
             }
         }
 
@@ -212,6 +215,8 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.AdvancedMappingsPage
                     PanelInputController.Children.Add(controllerInput);
                 }
             }
+
+            WaitingForInput_Hide();
         }
 
         public void ShowThis(Mapping _mapping)
@@ -225,11 +230,24 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.AdvancedMappingsPage
                 NewMapping = new Mapping();
             }
 
-            IsAcceptingInput = false;
+            WaitingForInput_Hide();
             RenderRealInput();
         }
 
 
+        private void WaitingForInput_Hide()
+        {
+            IsAwaitingInput = false;
+            PanelWaitingForInput.Visibility = Visibility.Hidden;
+            PanelInputReal.Visibility = Visibility.Visible;
+        }
+
+        private void WaitingForInput_Show()
+        {
+            IsAwaitingInput = true;
+            PanelWaitingForInput.Visibility = Visibility.Visible;
+            PanelInputReal.Visibility = Visibility.Hidden;
+        }
     }
 }
 

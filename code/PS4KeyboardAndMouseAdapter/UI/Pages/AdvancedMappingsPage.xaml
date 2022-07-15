@@ -19,18 +19,14 @@
 
             <StackPanel 
                 x:Name="stackpanel">
-                
                 <ui_controls_advancedMappingsPage:EditMappingControl
                     x:Name="editMappingControl"
                     />
 
-                <StackPanel 
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    x:Name="mappingHolder"
-                    >
+                <ui_controls_advancedMappingsPage:MappingGridControl
+                    x:Name="mappingGrid"
+                    />
 
-                </StackPanel>
             </StackPanel>
         </ScrollViewer>
     </Grid>

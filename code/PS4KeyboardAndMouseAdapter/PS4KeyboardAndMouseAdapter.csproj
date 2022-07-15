@@ -174,6 +174,12 @@
     <Compile Include="Backend\Vigem\VigemManger.cs" />
     <Compile Include="Backend\Vigem\VigemInternals.cs" />
     <Compile Include="Backend\DS4State.cs" />
+    <Compile Include="UI\Controls\AdvancedMappingsPage\MappingGridControl.xaml.cs">
+      <DependentUpon>MappingGridControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\AdvancedMappingsPage\WaitingForInput.xaml.cs">
+      <DependentUpon>WaitingForInput.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\AdvancedMappingsPage\ControllerInput.xaml.cs">
       <DependentUpon>ControllerInput.xaml</DependentUpon>
     </Compile>
@@ -228,6 +234,7 @@
     <Compile Include="UI\Controls\Welcome\RemotePlayConnectedControl.xaml.cs">
       <DependentUpon>RemotePlayConnectedControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\GetPageReference.cs" />
     <Compile Include="UI\Pages\SimpleConfigPage.xaml.cs">
       <DependentUpon>SimpleConfigPage.xaml</DependentUpon>
     </Compile>
@@ -267,6 +274,14 @@
     </Compile>
     <Compile Include="UI\UIConstants.cs" />
     <Compile Include="UI\UITools.cs" />
+    <Page Include="UI\Controls\AdvancedMappingsPage\MappingGridControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Controls\AdvancedMappingsPage\WaitingForInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UI\Controls\AdvancedMappingsPage\ControllerInput.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

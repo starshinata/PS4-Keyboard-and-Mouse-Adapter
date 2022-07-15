@@ -31,12 +31,32 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
             ThisInstance.BroadcastRefresh();
         }
 
+        public static void DeleteMapping(int uid)
+        {
+            Mapping foundMapping = null;
+
+            foreach (Mapping mapping in ThisInstance.Mappings)
+            {
+                if (mapping.uid == uid)
+                {
+                    foundMapping = mapping;
+                }
+            }
+
+            if (foundMapping != null)
+            {
+                ThisInstance.Mappings.Remove(foundMapping);
+            }
+
+            BroadcastRefresh();
+        }
+
         public static UserSettingsV3 GetInstance()
         {
             return ThisInstance;
         }
 
-        public static int getNextMappingUid()
+        public static int GetNextMappingUid()
         {
             return nextMappingUid++;
         }

@@ -155,7 +155,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
             foreach (PhysicalKey pk in pkg.PhysicalKeys)
             {
                 Mapping mapping = new Mapping();
-                mapping.uid = UserSettingsContainer.getNextMappingUid();
+                mapping.uid = UserSettingsContainer.GetNextMappingUid();
                 mapping.PhysicalKeys.Add(pk);
                 mapping.VirtualKeys.Add(vk);
 
