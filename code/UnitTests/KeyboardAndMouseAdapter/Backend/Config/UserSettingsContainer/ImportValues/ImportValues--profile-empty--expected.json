@@ -27,7 +27,7 @@
 
   "Mappings": [
     {
-      "uid": 0,
+      "uid": 1,
       "PhysicalKeys": [
         {
           "ExtraValue": -1,
@@ -40,7 +40,7 @@
       ]
     },
     {
-      "uid": 1,
+      "uid": 2,
       "PhysicalKeys": [
         {
           "ExtraValue": -1,
