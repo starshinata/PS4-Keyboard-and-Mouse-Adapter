@@ -5,8 +5,8 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Mappings
     public class Mapping
     {
         public int uid;
-        public List<PhysicalKey> PhysicalKeys = new List<PhysicalKey>();
-        public List<VirtualKey> VirtualKeys = new List<VirtualKey>();
+        public HashSet<PhysicalKey> PhysicalKeys = new HashSet<PhysicalKey>();
+        public HashSet<VirtualKey> VirtualKeys = new HashSet<VirtualKey>();
 
         public Mapping Clone()
         {

@@ -209,13 +209,12 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
             {
                 if (mapping.IsSimpleMapping())
                 {
-                    VirtualKey vk = ListUtil.First(mapping.VirtualKeys);
+                    VirtualKey vk = CollectionsUtil.First(mapping.VirtualKeys);
                     if (vk != VirtualKey.NULL && !Mappings_ForSimpleConfigPage.ContainsKey(vk))
                     {
-                        Mappings_ForSimpleConfigPage[vk] = ListUtil.First(mapping.PhysicalKeys);
+                        Mappings_ForSimpleConfigPage[vk] = CollectionsUtil.First(mapping.PhysicalKeys);
                     }
                 }
-
             }
         }
 
@@ -225,6 +224,8 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 
         public static UserSettingsV3 ImportValues(string json)
         {
+            // if you are wondering about fixing mapping.uid
+            // then we do that in UserSettingsContainer.FixMappingUids()
             return JsonConvert.DeserializeObject<UserSettingsV3>(json);
         }
 

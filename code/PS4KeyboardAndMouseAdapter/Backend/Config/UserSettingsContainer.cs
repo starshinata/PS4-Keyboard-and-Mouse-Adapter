@@ -35,11 +35,15 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
         {
             Mapping foundMapping = null;
 
-            foreach (Mapping mapping in ThisInstance.Mappings)
+            // -1 being rogue for uninitialised
+            if (uid > -1)
             {
-                if (mapping.uid == uid)
+                foreach (Mapping mapping in ThisInstance.Mappings)
                 {
-                    foundMapping = mapping;
+                    if (mapping.uid == uid)
+                    {
+                        foundMapping = mapping;
+                    }
                 }
             }
 
@@ -51,6 +55,20 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
             BroadcastRefresh();
         }
 
+        public static void FixMappingUids(UserSettingsV3 NewSettings)
+        {
+            if (NewSettings.Mappings != null)
+            {
+                foreach (Mapping mapping in NewSettings.Mappings)
+                {
+                    if (mapping.uid <= 0)
+                    {
+                        mapping.uid = GetNextMappingUid();
+                    }
+                }
+            }
+        }
+
         public static UserSettingsV3 GetInstance()
         {
             return ThisInstance;
@@ -58,7 +76,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 
         public static int GetNextMappingUid()
         {
-            return nextMappingUid++;
+            return ++nextMappingUid;
         }
 
         public static void ImportValues(string file)
@@ -125,8 +143,10 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 
             ThisInstance.Mappings = NewSettings.Mappings;
 
+            FixMappingUids(ThisInstance);
+
             // 2022.07.09 pancakeslp
-            // dont bother doing RefreshOptimisations()
+            // dont bother doing RefreshOptimisations() here
             // that is done in the load method
         }
 
@@ -230,6 +250,11 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
             LoadWithCatch(PROFILE_PREVIOUS);
         }
 
+
+        // If you are looking for RemoveMapping() see DeleteMapping()
+        // #keepItCrud
+
+
         public static void Save(string file)
         {
             Log.Information("UserSettingsContainer.Container.Save: " + file);
@@ -245,7 +270,8 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
             Log.Information("UserSettingsContainer.SetMapping {VirtualKey:" + key + ", PhysicalKey: '" + valueOld + " -> " + valueNew + "'}");
             throw new Exception("UserSettingsContainer.SetMapping line 222 UNDEFINED");
 
-            /*if (!ThisInstance.MappingsContainsKey(key))
+            /*
+            if (!ThisInstance.MappingsContainsKey(key))
             {
                 ThisInstance.Mappings[key] = new PhysicalKeyGroup();
             }
@@ -256,7 +282,8 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
             }
 
             ThisInstance.Mappings[key].PhysicalKeys.Add(valueNew);
-*/
+            */
+
             Save(PROFILE_PREVIOUS);
             ThisInstance.BroadcastRefresh();
         }

@@ -165,7 +165,7 @@
     <Compile Include="Backend\RewasdDetector.cs" />
     <Compile Include="Backend\Mappings\ExtraButtons.cs" />
     <Compile Include="Backend\Config\ApplicationSettings.cs" />
-    <Compile Include="Backend\ListUtil.cs" />
+    <Compile Include="Backend\CollectionsUtil.cs" />
     <Compile Include="Backend\MouseWheelScrollProcessor.cs" />
     <Compile Include="Backend\MouseWheelProcessor.cs" />
     <Compile Include="Backend\PlaystationControllerDetector.cs" />

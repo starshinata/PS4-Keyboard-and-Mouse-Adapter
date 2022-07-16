@@ -4,21 +4,21 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Mappings
 {
     public class PhysicalKeyGroup
     {
-        public List<PhysicalKey> PhysicalKeys;
+        public HashSet<PhysicalKey> PhysicalKeys;
 
         public PhysicalKeyGroup()
         {
-            PhysicalKeys = new List<PhysicalKey>();
+            PhysicalKeys = new HashSet<PhysicalKey>();
         }
 
-        public PhysicalKeyGroup(List<PhysicalKey> list)
+        public PhysicalKeyGroup(HashSet<PhysicalKey> list)
         {
             PhysicalKeys = list;
         }
 
         public override string ToString()
         {
-            return ListUtil.ListToString(PhysicalKeys);
+            return CollectionsUtil.SetToString(PhysicalKeys);
         }
     }
 }
