@@ -37,8 +37,23 @@ Source: https://www.playstation.com/en-us/legal/softwarelicense/
 Because this software is not authorised by Sony, this may technically "invalidate your PlayStation system warranty"
 
 
+### Can this support Fortnite?
+
+Yes, but why do you want that?!<br>
+
+Fortnite on Consoles will natively support keyboard and mouse. <br>
+For example see
+* https://www.coolblue.be/en/advice/best-fortnite-accessories.html
+* https://screenrant.com/fortnite-mouse-keyboard-pros-cons-gameplay-pc/
+* https://playstation.fandom.com/wiki/List_of_PlayStation_4_games_with_keyboard_and_mouse_support
+* https://support.xbox.com/en-US/help/hardware-network/accessories/mouse-keyboard
+
+Native support will be better than this adapter.
+
+
 ### Does my PS need to be modded or jail breaked to use this?
 No!
+
 
 ### If I have modded or jail breaked my PS, can I still use this?
 We have been informed you can, and no extra action is needed from normal (assuming you have a PS remote play that connects to your modded PS
