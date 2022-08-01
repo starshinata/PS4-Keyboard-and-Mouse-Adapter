@@ -24,12 +24,11 @@ Main Adapter <br>
 :rocket: Click Download!--> [here (v.3.1.0)](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/3.1.0/application-setup.exe)
 
 
-## Troubleshooting
-see [here](documentation/troubleshooting.md)
+## Troubleshooting, Frequently Asked Questions, and Documentation
+see [troubleshooting](documentation/troubleshooting.md) <br>
+see [frequently-asked-questions](documentation/frequently-asked-questions.md)
 
-
-## Frequently Asked Questions
-see [here](documentation/frequently-asked-questions.md)
+All other documentation [here](documentation/)
 
 
 ## DISCORD
@@ -44,14 +43,7 @@ Try our discord here https://discord.gg/zgveKtme5s where you can either suggest 
 * support chiaki https://git.sr.ht/~thestr4ng3r/chiaki
 * support linux/mac 
 
-## Documentation
-All documentation [here](documentation/)
 
-But some popular topics are
-* [Glossary and Terms](documentation/glossary-and-terms.md)
-* [Mouse Configuration](documentation/mouse-configuration.md)
-* [Troubleshooting](documentation/troubleshooting.md)
-* [Version History](documentation/version-history.md)
 
 
 ## Shoutouts
