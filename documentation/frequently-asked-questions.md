@@ -24,6 +24,14 @@ I cannot find a specific text saying this is a bannable offense. But strictly be
 **No one has reported being banned for it.**
 
 
+## Can I use Macros with remote play
+AFAIK NO for PS4KMA
+
+But maybe try https://github.com/komefai/PS4Macro or https://github.com/evilC/AHK-ViGEm-Bus
+
+I cant be more helpful as I dont use macros for remote play
+
+
 ### Can this invalidate my Playstation warranty?
 
 From the PS4 License agreement (checked 2020.11.24)
