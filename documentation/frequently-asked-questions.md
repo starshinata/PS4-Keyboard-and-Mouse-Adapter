@@ -63,10 +63,6 @@ Native support will be better than this adapter.
 No!
 
 
-### If I have modded or jail breaked my PS, can I still use this?
-We have been informed you can, and no extra action is needed from normal (assuming you have a PS remote play that connects to your modded PS
-
-
 ### How do I connect to my PS on my home network
 see https://manuals.playstation.net/document/gb/psvita/ps4link/viaprivate.html#:~:text=%E2%84%A2%20system%202.-,On%20your%20system%2C%20select%20(PS4%20Link)%20%3E%20%5BStart,%E2%84%A2%20system%20from%20rest%20mode.
 
@@ -101,10 +97,20 @@ Goto `%AppData%\..\Local\PS4KeyboardAndMouseAdapter` in windows explorer and del
 see <a href="vigem.md">vigem.md</a>
 
 
+### How do I use macros?
+We dont explicitly support macros, but we have been asked enough times... <br>
+Auto Hot Key (AHK) has been tried and is usually not accomodating. <br>
+Discord user Domenick027#3614 has had success using https://www.macrorecorder.com/
+
+
 ### I have a question or issue, why havent you replied?
 We do this in our free time, and we normally have 9-5 day jobs to contend with.
 
 I would like to remind you this application is **free**.
+
+
+### If I have modded or jail breaked my PS, can I still use this?
+We have been informed you can, and no extra action is needed from normal (assuming you have a PS remote play that connects to your modded PS
 
 
 ### Is using a mouse and keyboard cheating?
