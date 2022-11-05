@@ -25,11 +25,15 @@ Main Adapter <br>
 
 
 ## Troubleshooting, Frequently Asked Questions, and Documentation
+
+
 see [troubleshooting](documentation/troubleshooting.md) <br>
 see [frequently-asked-questions](documentation/frequently-asked-questions.md)
 
 All other documentation [here](documentation/)
 
+Video for people who need it <br>
+<a href="https://www.youtube.com/watch?v=DwEQTrgN02g&t=14s" target="_blank"><img src="documentation/youtube-mini-player.png" alt="explanation video" width="280px"/></a>
 
 ## DISCORD
 Try our discord here https://discord.gg/zgveKtme5s where you can either suggest ideas or ask other members for help.
