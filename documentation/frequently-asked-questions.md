@@ -1,10 +1,11 @@
 # Frequently Asked Questions
 
-Questions ordered alphabetically, apart from the first one
-
-
 ### I need help
 See our troubleshooting instructions https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/blob/master/documentation/troubleshooting.md
+
+---
+
+Now questions ordered alphabetically
 
 
 ### Can I get a profile for *INSERT GAME*
@@ -63,6 +64,36 @@ Native support will be better than this adapter.
 No!
 
 
+### Does this work on laptop
+Yes - Install this adapter on your computer, and then conect to your PS via Remote Play
+
+
+### Does this work on Linux
+No not yet
+
+
+### Does this work on Mac
+No not yet
+
+
+### Does this work on PS3
+No - since you cant (AFAIK) conect to a PS3 via Remote Play
+
+
+### Does this work on PS4
+Yes - Install this adapter on your computer, and then conect to your PS4 via Remote Play
+
+
+### Does this work on PS5
+Yes - Install this adapter on your computer, and then conect to your PS5 via Remote Play <br>
+But note the developer doesn't have a PS5, so can't help with PS5 issues <br>
+Also note originally PS5 was not going to let you use PS4 controllers for PS5 games and vice versa, but Sony changed thier mind onn this
+
+
+### Does this work on XBOX
+No, but it's something we are am considering
+
+
 ### How do I connect to my PS on my home network
 see https://manuals.playstation.net/document/gb/psvita/ps4link/viaprivate.html#:~:text=%E2%84%A2%20system%202.-,On%20your%20system%2C%20select%20(PS4%20Link)%20%3E%20%5BStart,%E2%84%A2%20system%20from%20rest%20mode.
 
@@ -71,17 +102,6 @@ see https://manuals.playstation.net/document/gb/psvita/ps4link/viaprivate.html#:
 You cant
 
 This is a limitation of console controllers. For a better explanation watch the first minute of https://youtu.be/KtBHArN3QW0 
-
-
-### How do I make this work on PS5?
-AKA 
-* How do I make DualSense controller work
-* Is Dualsense supported?
-* Is PS5 supported?
-
-It does (or atleast I have had several people say it works) <br>
-But I do not have a PS5 console to test this myself, so I do expect some bugs to be raised. Note originally PS5 was not going to let you use PS4 controllers for PS5 games and vice versa.
-
 
 
 ### How do I set the volume for individual apps on windows?
