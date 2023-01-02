@@ -77,9 +77,9 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
             }
 
             // 2021.12.22 pancakeslp
-            // on window you can specify a sleep of 5ms, but it will probably 15ms
+            // on Windows OS you can specify a sleep of 5ms, but it will probably 15ms
             // as 15ms is roughly the minimum amount of time Thread.Sleep can sleep for
-            // it seems unix will honour sleep(1) to sleep for 1 ms
+            // it seems Unix will honour sleep(1) to sleep for 1 ms
             //
             // for more reading see 
             // https://stackoverflow.com/questions/19066900/thread-sleep1-takes-longer-than-1ms
