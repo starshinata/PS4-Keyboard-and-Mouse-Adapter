@@ -47,9 +47,10 @@ $env:Path += ";$VISUAL_STUDIO_PATH\Community\Common7\IDE\CommonExtensions\Micros
 
 $GENERATED_INSTALLER_PATH="SquirrelReleases"
 
-$PROJECT_DIRECTORY_COMMON="code\common"
+$PROJECT_DIRECTORY_COMMON="code\Common"
 $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER="code\PS4KeyboardAndMouseAdapter"
 $PROJECT_DIRECTORY_PS4_REMOTE_PLAY_INJECTION="code\PS4RemotePlayInjection"
+$PROJECT_DIRECTORY_TEST_TOOLS="code\TestTools"
 $PROJECT_DIRECTORY_UNIT_TESTS="code\UnitTests"
 
 $NUGET_PACKAGE_PATH="${env:HOME}\.nuget\packages\"
@@ -112,11 +113,43 @@ function cleanup-postbuild {
 }
 
 
-function dependencies-nuget {
-  ## this was a nuget command when using packages.config
-  ## now we use dotnet for dependencies defined via "packageref"
+function dependencies-install {
   dotnet restore
   error-on-bad-return-code
+}
+
+
+function dependencies-redo-templates {
+
+  echo "dependencies-redo-templates"
+
+  ## type is the windows equivalent of cat
+  $DEPENDENCIES=$( type code\dependencies.xml )
+
+  ##                                      $PROJECT_DIRECTORY                                 $DEPENDENCIES  $SOURCE                                     $DESTINATION
+  dependencies-redo-template-per-project  $PROJECT_DIRECTORY_COMMON                          $DEPENDENCIES  Common.csproj.template                      Common.csproj
+  dependencies-redo-template-per-project  $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER  $DEPENDENCIES  PS4KeyboardAndMouseAdapter.csproj.template  PS4KeyboardAndMouseAdapter.csproj
+  dependencies-redo-template-per-project  $PROJECT_DIRECTORY_PS4_REMOTE_PLAY_INJECTION       $DEPENDENCIES  PS4RemotePlayInjection.csproj.template      PS4RemotePlayInjection.csproj
+  dependencies-redo-template-per-project  $PROJECT_DIRECTORY_TEST_TOOLS                      $DEPENDENCIES  TestTools.csproj.template                   TestTools.csproj
+  dependencies-redo-template-per-project  $PROJECT_DIRECTORY_UNIT_TESTS                      $DEPENDENCIES  UnitTests.csproj.template                   UnitTests.csproj
+
+  echo ""
+}
+
+
+function dependencies-redo-template-per-project {
+  $PROJECT_DIRECTORY=$args[0]
+  $DEPENDENCIES=$args[1]
+  $SOURCE=$args[2]
+  $DESTINATION=$args[3]
+
+  echo $PROJECT_DIRECTORY
+  cd $PROJECT_DIRECTORY
+  Copy-Item  -Force  $SOURCE  $DESTINATION
+
+  sed -i "s|__DEPENDENCIES__|$DEPENDENCIES|g" $DESTINATION
+  error-on-bad-return-code
+  cd ../../
 }
 
 
@@ -134,7 +167,9 @@ function main_exec {
 
     cleanup-prebuild
 
-    dependencies-nuget
+    dependencies-redo-templates
+
+    dependencies-install
 
     valid-xaml-xmllint
 
@@ -390,3 +425,4 @@ function valid-xaml-xmllint {
 
 
 main_exec
+
