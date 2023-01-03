@@ -66,7 +66,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="KeyboardAndMouseAdapter\Backend\Config\ApplicationSettings\ImportValues--Default_whenEmpty--expected.json" />
     <None Include="KeyboardAndMouseAdapter\Backend\Config\ApplicationSettings\ImportValues--Default_whenEmpty--input.json" />
     <None Include="KeyboardAndMouseAdapter\Backend\Config\ApplicationSettings\ImportValues--property-ColourSchemeIsLight--expected.json" />
