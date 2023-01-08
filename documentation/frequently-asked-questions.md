@@ -25,14 +25,6 @@ I cannot find a specific text saying this is a bannable offense. But strictly be
 **No one has reported being banned for it.**
 
 
-### Can I use Macros with remote play
-AFAIK NO for PS4KMA
-
-But maybe try https://github.com/komefai/PS4Macro or https://github.com/evilC/AHK-ViGEm-Bus
-
-I cant be more helpful as I dont use macros for remote play
-
-
 ### Can this invalidate my Playstation warranty?
 
 From the PS4 License agreement (checked 2020.11.24)
@@ -43,10 +35,14 @@ Source: https://www.playstation.com/en-us/legal/softwarelicense/
 8. USE OF UNAUTHORIZED PRODUCTS. The use of software, peripherals or other products not authorized by SIE LLC may damage your PlayStation system and invalidate your PlayStation system warranty. Only official or licensed software and peripherals should be used with your PlayStation system (e.g., in the controller ports and memory card slots).
 `
 
-Because this software is not authorised by Sony, this may technically "invalidate your PlayStation system warranty"
+**Because this software is not authorised by Sony, this may technically "invalidate your PlayStation system warranty"**
 
 
-### Can this support Fortnite?
+### Does my PS need to be modded or jail breaked to use this?
+No!
+
+
+### Does this support Fortnite?
 
 Yes, but why do you want that?!<br>
 
@@ -60,11 +56,7 @@ For example see
 Native support will be better than this adapter.
 
 
-### Does my PS need to be modded or jail breaked to use this?
-No!
-
-
-### Does this work on laptop
+### Does this work on a Laptop
 Yes - Install this adapter on your computer, and then conect to your PS via Remote Play
 
 
@@ -85,9 +77,13 @@ Yes - Install this adapter on your computer, and then conect to your PS4 via Rem
 
 
 ### Does this work on PS5
+AKA 
+* Is DualSense supported?
+
 Yes - Install this adapter on your computer, and then conect to your PS5 via Remote Play <br>
-But note the developer doesn't have a PS5, so can't help with PS5 issues <br>
-Also note originally PS5 was not going to let you use PS4 controllers for PS5 games and vice versa, but Sony changed thier mind onn this
+<br>
+BUT note the developer doesn't have a PS5, so can't help with PS5 issues <br>
+ALSO note originally Sony was not going to let you use PS4 controllers for PS5 games and vice versa, but Sony changed thier mind on this
 
 
 ### Does this work on XBOX
@@ -108,17 +104,6 @@ This is a limitation of console controllers. For a better explanation watch the 
 see [this](how-to-make-remote-play-fullscreen.md) <br>
 
 
-### How do I make this work on PS5?
-AKA 
-* How do I make DualSense controller work
-* Is DualSense supported?
-* Is PS5 supported?
-
-It already works (or at least we have had several people say it works) <br>
-BUT I do not have a PS5 console to test this myself, so I do expect some bugs to be raised. <br>
-NOTE originally Sony was not going to let you use PS4 controllers for PS5 games and vice versa.
-
-
 ### How do I set the volume for individual apps on windows?
 Not a PS4KMA specific question, but have you tried 
 https://www.howtogeek.com/244963/how-to-adjust-the-volume-for-individual-apps-in-windows/
@@ -135,9 +120,10 @@ see <a href="vigem.md">vigem.md</a>
 
 
 ### How do I use macros?
-We dont explicitly support macros, but we have been asked enough times... <br>
+We (PS4KMA) dont explicitly support macros, but we have been asked enough times... <br>
 Auto Hot Key (AHK) has been tried and is usually not accommodating. <br>
-Discord user Domenick027#3614 has had success using https://www.macrorecorder.com/
+Discord user Domenick027#3614 has had success using https://www.macrorecorder.com/ <br>
+Alternatively try https://github.com/komefai/PS4Macro or https://github.com/evilC/AHK-ViGEm-Bus
 
 
 ### I have a question or issue, why haven't you replied?
