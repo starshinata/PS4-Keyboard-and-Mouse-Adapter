@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29609.76
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "code\Common\Common.csproj", "{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}"
 EndProject
@@ -13,7 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTools", "code\TestTools
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "code\UnitTests\UnitTests.csproj", "{7B4800EE-D943-4299-90FD-DFCE48662774}"
 EndProject
-
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9FF1BB60-DFEF-4108-A4A6-945C22D8882C}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
@@ -38,10 +37,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "documentation", "documentat
 		documentation\frequently-asked-questions.md = documentation\frequently-asked-questions.md
 		documentation\glossary-and-terms.md = documentation\glossary-and-terms.md
 		documentation\hid-lookup-table.txt = documentation\hid-lookup-table.txt
+		documentation\how-to-make-remote-play-fullscreen.md = documentation\how-to-make-remote-play-fullscreen.md
 		documentation\keyboard-keys-map.md = documentation\keyboard-keys-map.md
 		documentation\known-game-issues.md = documentation\known-game-issues.md
 		documentation\mouse-configuration.md = documentation\mouse-configuration.md
 		documentation\release-checklist.md = documentation\release-checklist.md
+		documentation\remote-play-fullscreen-1.png = documentation\remote-play-fullscreen-1.png
+		documentation\remote-play-fullscreen-2.png = documentation\remote-play-fullscreen-2.png
+		documentation\remote-play-fullscreen-3.png = documentation\remote-play-fullscreen-3.png
 		documentation\technical notes - needs a better name.txt = documentation\technical notes - needs a better name.txt
 		documentation\troubleshooting.md = documentation\troubleshooting.md
 		documentation\version-history.md = documentation\version-history.md
@@ -92,7 +95,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "vigemBusDriver", "vigemBusD
 		installers\vigemBusDriver\ViGEmBusSetup_x86.msi = installers\vigemBusDriver\ViGEmBusSetup_x86.msi
 	EndProjectSection
 EndProject
-
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Clean|Any CPU = Clean|Any CPU
@@ -139,18 +141,6 @@ Global
 		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Release|x64.ActiveCfg = Release|x64
 		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Release|x64.Build.0 = Release|x64
-		{7B4800EE-D943-4299-90FD-DFCE48662774}.Clean|Any CPU.ActiveCfg = Release|Any CPU
-		{7B4800EE-D943-4299-90FD-DFCE48662774}.Clean|Any CPU.Build.0 = Release|Any CPU
-		{7B4800EE-D943-4299-90FD-DFCE48662774}.Clean|x64.ActiveCfg = Release|Any CPU
-		{7B4800EE-D943-4299-90FD-DFCE48662774}.Clean|x64.Build.0 = Release|Any CPU
-		{7B4800EE-D943-4299-90FD-DFCE48662774}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7B4800EE-D943-4299-90FD-DFCE48662774}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7B4800EE-D943-4299-90FD-DFCE48662774}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{7B4800EE-D943-4299-90FD-DFCE48662774}.Debug|x64.Build.0 = Debug|Any CPU
-		{7B4800EE-D943-4299-90FD-DFCE48662774}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7B4800EE-D943-4299-90FD-DFCE48662774}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7B4800EE-D943-4299-90FD-DFCE48662774}.Release|x64.ActiveCfg = Release|Any CPU
-		{7B4800EE-D943-4299-90FD-DFCE48662774}.Release|x64.Build.0 = Release|Any CPU
 		{6BA0344A-66F2-44E6-84F0-0AC81134CC9E}.Clean|Any CPU.ActiveCfg = Debug|Any CPU
 		{6BA0344A-66F2-44E6-84F0-0AC81134CC9E}.Clean|Any CPU.Build.0 = Debug|Any CPU
 		{6BA0344A-66F2-44E6-84F0-0AC81134CC9E}.Clean|x64.ActiveCfg = Debug|Any CPU
@@ -163,6 +153,18 @@ Global
 		{6BA0344A-66F2-44E6-84F0-0AC81134CC9E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6BA0344A-66F2-44E6-84F0-0AC81134CC9E}.Release|x64.ActiveCfg = Release|Any CPU
 		{6BA0344A-66F2-44E6-84F0-0AC81134CC9E}.Release|x64.Build.0 = Release|Any CPU
+		{7B4800EE-D943-4299-90FD-DFCE48662774}.Clean|Any CPU.ActiveCfg = Release|Any CPU
+		{7B4800EE-D943-4299-90FD-DFCE48662774}.Clean|Any CPU.Build.0 = Release|Any CPU
+		{7B4800EE-D943-4299-90FD-DFCE48662774}.Clean|x64.ActiveCfg = Release|Any CPU
+		{7B4800EE-D943-4299-90FD-DFCE48662774}.Clean|x64.Build.0 = Release|Any CPU
+		{7B4800EE-D943-4299-90FD-DFCE48662774}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B4800EE-D943-4299-90FD-DFCE48662774}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B4800EE-D943-4299-90FD-DFCE48662774}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7B4800EE-D943-4299-90FD-DFCE48662774}.Debug|x64.Build.0 = Debug|Any CPU
+		{7B4800EE-D943-4299-90FD-DFCE48662774}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B4800EE-D943-4299-90FD-DFCE48662774}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B4800EE-D943-4299-90FD-DFCE48662774}.Release|x64.ActiveCfg = Release|Any CPU
+		{7B4800EE-D943-4299-90FD-DFCE48662774}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

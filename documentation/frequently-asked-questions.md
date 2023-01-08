@@ -4,7 +4,7 @@ Questions ordered alphabetically, apart from the first one
 
 
 ### I need help
-See our troubleshooting instructions https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/blob/master/documentation/troubleshooting.md
+See our troubleshooting instructions [troubleshooting.md](troubleshooting.md)
 
 
 ### Can I get a profile for *INSERT GAME*
@@ -15,7 +15,7 @@ https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/blob/master/profil
 "I am looking for the perfect settings for ..." <br>
 Imagine you have walked in to a  shoe shop, and you ask for the perfect shoe. <br>
 The shoe salesman will likely tell you the perfect shoe for you will be specific to you. <br>
-If you are curious how settings can depend on the user please have a read of  https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/blob/master/documentation/mouse-configuration.md
+If you are curious how settings can depend on the user please have a read of [mouse-configuration.md](mouse-configuration.md)
 
 
 ### Can I get banned from PSN for using this application? 
@@ -24,7 +24,7 @@ I cannot find a specific text saying this is a bannable offense. But strictly be
 **No one has reported being banned for it.**
 
 
-## Can I use Macros with remote play
+### Can I use Macros with remote play
 AFAIK NO for PS4KMA
 
 But maybe try https://github.com/komefai/PS4Macro or https://github.com/evilC/AHK-ViGEm-Bus
@@ -64,7 +64,7 @@ No!
 
 
 ### How do I connect to my PS on my home network
-see https://manuals.playstation.net/document/gb/psvita/ps4link/viaprivate.html#:~:text=%E2%84%A2%20system%202.-,On%20your%20system%2C%20select%20(PS4%20Link)%20%3E%20%5BStart,%E2%84%A2%20system%20from%20rest%20mode.
+see https://manuals.playstation.net/document/gb/psvita/ps4link/viaprivate.html
 
 
 ### How do I increase mouse sensitivity so I can quickly turn 180 degrees?
@@ -73,24 +73,30 @@ You cant
 This is a limitation of console controllers. For a better explanation watch the first minute of https://youtu.be/KtBHArN3QW0 
 
 
+### How do I make PS Remote Play fullscreen
+see [this](how-to-make-remote-play-fullscreen.md) <br>
+
+
 ### How do I make this work on PS5?
 AKA 
 * How do I make DualSense controller work
-* Is Dualsense supported?
+* Is DualSense supported?
 * Is PS5 supported?
 
-It does (or atleast I have had several people say it works) <br>
-But I do not have a PS5 console to test this myself, so I do expect some bugs to be raised. Note originally PS5 was not going to let you use PS4 controllers for PS5 games and vice versa.
-
+It always works (or at least we have had several people say it works) <br>
+BUT I do not have a PS5 console to test this myself, so I do expect some bugs to be raised. <br>
+NOTE originally Sony was not going to let you use PS4 controllers for PS5 games and vice versa.
 
 
 ### How do I set the volume for individual apps on windows?
 Not a PS4KMA specific question, but have you tried 
 https://www.howtogeek.com/244963/how-to-adjust-the-volume-for-individual-apps-in-windows/
 
+But also have a look at the "miscellaneous settings" tab.
+
 
 ### How do I uninstall PS4 KMA?
-Goto `%AppData%\..\Local\PS4KeyboardAndMouseAdapter` in windows explorer and delete everything there
+Goto `%AppData%\..\Local\PS4KeyboardAndMouseAdapter` in Windows explorer and delete everything there
 
 
 ### How do I uninstall ViGEm?
@@ -99,18 +105,18 @@ see <a href="vigem.md">vigem.md</a>
 
 ### How do I use macros?
 We dont explicitly support macros, but we have been asked enough times... <br>
-Auto Hot Key (AHK) has been tried and is usually not accomodating. <br>
+Auto Hot Key (AHK) has been tried and is usually not accommodating. <br>
 Discord user Domenick027#3614 has had success using https://www.macrorecorder.com/
 
 
-### I have a question or issue, why havent you replied?
+### I have a question or issue, why haven't you replied?
 We do this in our free time, and we normally have 9-5 day jobs to contend with.
 
 I would like to remind you this application is **free**.
 
 
-### If I have modded or jail breaked my PS, can I still use this?
-We have been informed you can, and no extra action is needed from normal (assuming you have a PS remote play that connects to your modded PS
+### If I have a modded or jailbroken PS, can I still use this?
+We have been informed you can, and no extra action is needed from normal (assuming you have a PS remote play that connects to your modded PS)
 
 
 ### Is using a mouse and keyboard cheating?
@@ -122,7 +128,7 @@ If you are using an application to improve you aim or response time, that could 
 
 
 ### What are the best settings to play an FPS game
-Read https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/blob/master/documentation/mouse-to-analog-stick-notes.md
+Read [mouse-to-analog-stick-notes.md](mouse-to-analog-stick-notes.md) <br>
 Try https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/blob/master/profiles/pancakes-destiny-profile.json
 
 
@@ -134,3 +140,4 @@ Assumption: we do not expect you to be playing Valorant, while you have PS4KMA (
 Vanguard is running all the time. Vanguard anticheat should not be triggered by our adapter. If it is triggered by our adapter (and the above assumption holds true) then there are much bigger privacy concerns about running the Vanguard Anticheat.
 
 If you play Valorant with PS4KMA active then it *may* detect you as trying to cheat. It could be considered on par to using Discord's voice overlay (the overlay to see who is speaking). We dont see how capturing keyboard and mouse input could be used for cheating, but Vanguard is proprietary and we cannot look at it's inner workings.
+
