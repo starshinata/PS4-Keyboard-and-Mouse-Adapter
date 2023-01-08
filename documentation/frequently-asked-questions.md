@@ -1,10 +1,11 @@
 # Frequently Asked Questions
 
-Questions ordered alphabetically, apart from the first one
-
-
 ### I need help
 See our troubleshooting instructions [troubleshooting.md](troubleshooting.md)
+
+---
+
+Now questions ordered alphabetically
 
 
 ### Can I get a profile for *INSERT GAME*
@@ -63,6 +64,36 @@ Native support will be better than this adapter.
 No!
 
 
+### Does this work on laptop
+Yes - Install this adapter on your computer, and then conect to your PS via Remote Play
+
+
+### Does this work on Linux
+No not yet
+
+
+### Does this work on Mac
+No not yet
+
+
+### Does this work on PS3
+No - since you cant (AFAIK) conect to a PS3 via Remote Play
+
+
+### Does this work on PS4
+Yes - Install this adapter on your computer, and then conect to your PS4 via Remote Play
+
+
+### Does this work on PS5
+Yes - Install this adapter on your computer, and then conect to your PS5 via Remote Play <br>
+But note the developer doesn't have a PS5, so can't help with PS5 issues <br>
+Also note originally PS5 was not going to let you use PS4 controllers for PS5 games and vice versa, but Sony changed thier mind onn this
+
+
+### Does this work on XBOX
+No, but it's something we are am considering
+
+
 ### How do I connect to my PS on my home network
 see https://manuals.playstation.net/document/gb/psvita/ps4link/viaprivate.html
 
@@ -83,7 +114,7 @@ AKA
 * Is DualSense supported?
 * Is PS5 supported?
 
-It always works (or at least we have had several people say it works) <br>
+It already works (or at least we have had several people say it works) <br>
 BUT I do not have a PS5 console to test this myself, so I do expect some bugs to be raised. <br>
 NOTE originally Sony was not going to let you use PS4 controllers for PS5 games and vice versa.
 
