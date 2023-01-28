@@ -16,6 +16,8 @@ I cant fix this, this is a limitation of console controllers.
 
 For a better explanation watch the first minute of https://youtu.be/KtBHArN3QW0 
 
+**"But XIM can do it"** <br>
+XIM is paid, this is free
 
 ---
 
