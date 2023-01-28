@@ -3,6 +3,20 @@
 ### I need help
 See our troubleshooting instructions [troubleshooting.md](troubleshooting.md)
 
+
+### Mouse moves like a stick
+aka
+* How do I fix the reverse acceleration 
+* How do I increase mouse sensitivity so I can quickly turn 180 degrees?
+* When I move the mouse slowly it goes faster, and when I move it fast it goes slow
+* Why can't I do a quick 180 turn
+
+
+I cant fix this, this is a limitation of console controllers.
+
+For a better explanation watch the first minute of https://youtu.be/KtBHArN3QW0 
+
+
 ---
 
 Now questions ordered alphabetically
