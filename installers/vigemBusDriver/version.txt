@@ -1,1 +1,1 @@
-https://github.com/ViGEm/ViGEmBus/releases/tag/setup-v1.17.333
+https://github.com/ViGEm/ViGEmBus/releases/download/v1.21.442.0/ViGEmBus_1.21.442_x64_x86_arm64.exe

@@ -2,6 +2,7 @@
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using Serilog;
 using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Forms;
 
@@ -24,12 +25,31 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
             }
             catch (Nefarius.ViGEm.Client.Exceptions.VigemBusNotFoundException e)
             {
-                ExceptionLogger.LogException("VigemManager.IsVigemDriverInstalled error L27", e);
+                ExceptionLogger.LogException("VigemManager.IsVigemDriverInstalled error L28", e);
+                return false;
+            }
+            catch (Win32Exception e)
+            {
+                Log.Error("message: " + e.Message);
+                Log.Error("ErrorCode:" + e.ErrorCode.ToString());
+                Log.Error("NativeErrorCode: " + e.NativeErrorCode.ToString());
+                Log.Error("Data:" + e.Data);
+                Log.Error("HResult :" + e.HResult);
+                Log.Error("HelpLink :" + e.HelpLink);
+                Log.Error("Source: " + e.Source);
+                Log.Error(e.StackTrace);
+                Exception b = e.GetBaseException();
+                if (b != null)
+                {
+                    Log.Error("b.Message: " + b.Message);
+                }
+
+                ExceptionLogger.LogException("VigemManager.IsVigemDriverInstalled error L33", e);
                 return false;
             }
             catch (Exception e)
             {
-                ExceptionLogger.LogException("VigemManager.IsVigemDriverInstalled error L32", e);
+                ExceptionLogger.LogException("VigemManager.IsVigemDriverInstalled error L38", e);
                 return false;
             }
 
