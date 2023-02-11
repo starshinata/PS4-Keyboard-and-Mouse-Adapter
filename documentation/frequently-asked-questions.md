@@ -1,7 +1,23 @@
 # Frequently Asked Questions
 
 ### I need help
-See our troubleshooting instructions https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/blob/master/documentation/troubleshooting.md
+See our troubleshooting instructions [troubleshooting.md](troubleshooting.md)
+
+
+### Mouse moves like a stick
+aka
+* How do I fix the reverse acceleration 
+* How do I increase mouse sensitivity so I can quickly turn 180 degrees?
+* When I move the mouse slowly it goes faster, and when I move it fast it goes slow
+* Why can't I do a quick 180 turn
+
+
+I cant fix this, this is a limitation of console controllers.
+
+For a better explanation watch the first minute of https://youtu.be/KtBHArN3QW0 
+
+**"But XIM can do it"** <br>
+XIM is paid, this is free
 
 ---
 
@@ -16,21 +32,13 @@ https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/blob/master/profil
 "I am looking for the perfect settings for ..." <br>
 Imagine you have walked in to a  shoe shop, and you ask for the perfect shoe. <br>
 The shoe salesman will likely tell you the perfect shoe for you will be specific to you. <br>
-If you are curious how settings can depend on the user please have a read of  https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/blob/master/documentation/mouse-configuration.md
+If you are curious how settings can depend on the user please have a read of [mouse-configuration.md](mouse-configuration.md)
 
 
 ### Can I get banned from PSN for using this application? 
 I cannot find a specific text saying this is a bannable offense. But strictly because it is an unauthorised third party application I would not be surprised if Sony claimed that using this is a banable offense.
 
 **No one has reported being banned for it.**
-
-
-## Can I use Macros with remote play
-AFAIK NO for PS4KMA
-
-But maybe try https://github.com/komefai/PS4Macro or https://github.com/evilC/AHK-ViGEm-Bus
-
-I cant be more helpful as I dont use macros for remote play
 
 
 ### Can this invalidate my Playstation warranty?
@@ -43,10 +51,14 @@ Source: https://www.playstation.com/en-us/legal/softwarelicense/
 8. USE OF UNAUTHORIZED PRODUCTS. The use of software, peripherals or other products not authorized by SIE LLC may damage your PlayStation system and invalidate your PlayStation system warranty. Only official or licensed software and peripherals should be used with your PlayStation system (e.g., in the controller ports and memory card slots).
 `
 
-Because this software is not authorised by Sony, this may technically "invalidate your PlayStation system warranty"
+**Because this software is not authorised by Sony, this may technically "invalidate your PlayStation system warranty"**
 
 
-### Can this support Fortnite?
+### Does my PS need to be modded or jail breaked to use this?
+No!
+
+
+### Does this support Fortnite?
 
 Yes, but why do you want that?!<br>
 
@@ -60,11 +72,7 @@ For example see
 Native support will be better than this adapter.
 
 
-### Does my PS need to be modded or jail breaked to use this?
-No!
-
-
-### Does this work on laptop
+### Does this work on a Laptop
 Yes - Install this adapter on your computer, and then conect to your PS via Remote Play
 
 
@@ -85,9 +93,13 @@ Yes - Install this adapter on your computer, and then conect to your PS4 via Rem
 
 
 ### Does this work on PS5
+AKA 
+* Is DualSense supported?
+
 Yes - Install this adapter on your computer, and then conect to your PS5 via Remote Play <br>
-But note the developer doesn't have a PS5, so can't help with PS5 issues <br>
-Also note originally PS5 was not going to let you use PS4 controllers for PS5 games and vice versa, but Sony changed thier mind onn this
+<br>
+BUT note the developer doesn't have a PS5, so can't help with PS5 issues <br>
+ALSO note originally Sony was not going to let you use PS4 controllers for PS5 games and vice versa, but Sony changed thier mind on this
 
 
 ### Does this work on XBOX
@@ -95,7 +107,7 @@ No, but it's something we are am considering
 
 
 ### How do I connect to my PS on my home network
-see https://manuals.playstation.net/document/gb/psvita/ps4link/viaprivate.html#:~:text=%E2%84%A2%20system%202.-,On%20your%20system%2C%20select%20(PS4%20Link)%20%3E%20%5BStart,%E2%84%A2%20system%20from%20rest%20mode.
+see https://manuals.playstation.net/document/gb/psvita/ps4link/viaprivate.html
 
 
 ### How do I increase mouse sensitivity so I can quickly turn 180 degrees?
@@ -104,13 +116,19 @@ You cant
 This is a limitation of console controllers. For a better explanation watch the first minute of https://youtu.be/KtBHArN3QW0 
 
 
+### How do I make PS Remote Play fullscreen
+see [this](how-to-make-remote-play-fullscreen.md) <br>
+
+
 ### How do I set the volume for individual apps on windows?
 Not a PS4KMA specific question, but have you tried 
 https://www.howtogeek.com/244963/how-to-adjust-the-volume-for-individual-apps-in-windows/
 
+But also have a look at the "miscellaneous settings" tab.
+
 
 ### How do I uninstall PS4 KMA?
-Goto `%AppData%\..\Local\PS4KeyboardAndMouseAdapter` in windows explorer and delete everything there
+Goto `%AppData%\..\Local\PS4KeyboardAndMouseAdapter` in Windows explorer and delete everything there
 
 
 ### How do I uninstall ViGEm?
@@ -118,19 +136,20 @@ see <a href="vigem.md">vigem.md</a>
 
 
 ### How do I use macros?
-We dont explicitly support macros, but we have been asked enough times... <br>
-Auto Hot Key (AHK) has been tried and is usually not accomodating. <br>
-Discord user Domenick027#3614 has had success using https://www.macrorecorder.com/
+We (PS4KMA) dont explicitly support macros, but we have been asked enough times... <br>
+Auto Hot Key (AHK) has been tried and is usually not accommodating. <br>
+Discord user Domenick027#3614 has had success using https://www.macrorecorder.com/ <br>
+Alternatively try https://github.com/komefai/PS4Macro or https://github.com/evilC/AHK-ViGEm-Bus
 
 
-### I have a question or issue, why havent you replied?
+### I have a question or issue, why haven't you replied?
 We do this in our free time, and we normally have 9-5 day jobs to contend with.
 
 I would like to remind you this application is **free**.
 
 
-### If I have modded or jail breaked my PS, can I still use this?
-We have been informed you can, and no extra action is needed from normal (assuming you have a PS remote play that connects to your modded PS
+### If I have a modded or jailbroken PS, can I still use this?
+We have been informed you can, and no extra action is needed from normal (assuming you have a PS remote play that connects to your modded PS)
 
 
 ### Is using a mouse and keyboard cheating?
@@ -142,7 +161,7 @@ If you are using an application to improve you aim or response time, that could 
 
 
 ### What are the best settings to play an FPS game
-Read https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/blob/master/documentation/mouse-to-analog-stick-notes.md
+Read [mouse-to-analog-stick-notes.md](mouse-to-analog-stick-notes.md) <br>
 Try https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/blob/master/profiles/pancakes-destiny-profile.json
 
 
@@ -154,3 +173,4 @@ Assumption: we do not expect you to be playing Valorant, while you have PS4KMA (
 Vanguard is running all the time. Vanguard anticheat should not be triggered by our adapter. If it is triggered by our adapter (and the above assumption holds true) then there are much bigger privacy concerns about running the Vanguard Anticheat.
 
 If you play Valorant with PS4KMA active then it *may* detect you as trying to cheat. It could be considered on par to using Discord's voice overlay (the overlay to see who is speaking). We dont see how capturing keyboard and mouse input could be used for cheating, but Vanguard is proprietary and we cannot look at it's inner workings.
+
