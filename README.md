@@ -52,10 +52,11 @@ Try our discord here https://discord.gg/zgveKtme5s where you can either suggest 
 
 ## Shoutouts
 
-
+(in alphabetical order)
 * [DS4Windows](https://github.com/Ryochan7/DS4Windows) - don't need to explain that one
 * [EasyHook](https://easyhook.github.io) - The best tool for Windows API hooking.
-* [PS4Macro](https://github.com/komefai/PS4Macro) - Big thanks to komefai for making and open-sourcing this tool. Komefai is MIA since 2018 and his repo is not supported anymore but you can still write pretty good bots with it, definitely check it out if you are into that kind of stuff
-*[PS4RemotePlayInterceptor](https://github.com/komefai/PS4RemotePlayInterceptor) a module by Komefai used in PS4Macro
+* [PS4RemotePlayInterceptor](https://github.com/komefai/PS4RemotePlayInterceptor) a module by used in [PS4Macro](https://github.com/komefai/PS4Macro).<br>
+  Big thanks to [komefai](https://github.com/komefai). <br>
+  If this wasn't available PS4KMA might not have happened.
 * [soulehshaikh9](https://github.com/soulehshaikh99/self-signed-certificate-generator) for pfx certificate generator
-* [ViGEm.NET](https://github.com/ViGEm/ViGEm.NET) - to help with emulation in v3.0.0+
+* [ViGEm.NET](https://github.com/ViGEm/ViGEm.NET) - (to help with emulation in v3.0.0+) Big thanks to [nefarius](https://github.com/nefarius) for making this. 
