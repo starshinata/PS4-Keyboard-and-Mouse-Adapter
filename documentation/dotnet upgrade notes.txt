@@ -1,0 +1,50 @@
+## dot net framework 4 to dot net 6
+ 
+There was a "dotnet Porting assistant" its now deprecated in place of "dotnet upgrade assistant"
+
+https://dotnet.microsoft.com/en-us/platform/upgrade-assistant/tutorial/install-upgrade-assistant
+
+```
+dotnet tool install -g --add-source "https://api.nuget.org/v3/index.json" --ignore-failed-sources upgrade-assistant
+dotnet tool update -g upgrade-assistant
+upgrade-assistant analyze <Path to csproj or sln to upgrade>
+``
+
+it will generate a Sarif report, use https://microsoft.github.io/sarif-web-component/ to view the output
+
+run the upgrade assistant (but do it from powershell outside of Visual Studio unless you like lots of popups saying the project has been modified
+
+```
+upgrade-assistant upgrade <Path to csproj or sln to upgrade>
+```
+
+
+
+
+
+## IPC and DLL injection
+
+After upgrading from "dotnet framework 4.8" to "dotnet standard 2", you will realise that the System.Remoting package was removed
+For specifics on that see 
+https://learn.microsoft.com/en-us/dotnet/core/porting/net-framework-tech-unavailable#remoting
+
+We use EasyHook for DLL injection, but that is currently constrained to dotnet framework 4.8
+Have a read for the github issue "Target net standard" https://github.com/EasyHook/EasyHook/issues/278
+
+which seems to suggest https://github.com/unknownv2/CoreHook
+After trying CoreHook the examples aren't great, and it looks abandoned.
+
+With a bit of googling found https://www.youtube.com/watch?v=CAkRsmhO2FI
+which links to https://github.com/Akaion/Bleak
+which links to https://github.com/Dewera/Lunar
+both projects dont show (or atleast it isnt obvious) how to communicate with the child prcess which had the DLL injected
+
+
+later pulled System.Runtime.Remoting.dll, from ".Net Framework 4.8"
+and added it as "code\PS4RemotePlayInjection\dnf_4.8.System.Runtime.Remoting.dll"
+
+
+
+## Squirrel for dot net
+https://github.com/clowd/Clowd.Squirrel
+

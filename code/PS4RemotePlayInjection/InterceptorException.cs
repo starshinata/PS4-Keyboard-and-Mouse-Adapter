@@ -26,6 +26,7 @@ using System;
 
 namespace PS4RemotePlayInterceptor
 {
+    //TODO WHY IS THIS EMPTY ?!
     public class InterceptorException : Exception
     {
         public InterceptorException()

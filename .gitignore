@@ -359,3 +359,4 @@ MigrationBackup/
 
 /packages
 /SquirrelReleases
+/.sarif

@@ -25,6 +25,7 @@ namespace PS4RemotePlayInterceptor
         private static string _channelName2 = null;
         private static IpcServerChannel _ipcServer;
         private static IpcServerChannel _ipcServer2;
+
         private static bool _noGAC = false;
 
         public static DateTime LastPingTime { get; set; }
@@ -89,7 +90,7 @@ namespace PS4RemotePlayInterceptor
                 //    shouldInject = true;
                 //}
 
-
+/*
                 if (_ipcServer == null)
                 {
                     Log.Debug("Injector.Inject making ipcServer1");
@@ -107,7 +108,7 @@ namespace PS4RemotePlayInterceptor
                     _ipcServer2 = RemoteHooking.IpcCreateServer<InjectionInterface>(ref _channelName2, WellKnownObjectMode.Singleton, WellKnownSidType.WorldSid);
                     shouldInject = true;
                     Log.Debug("Injector.Inject _ipcServer2 made");
-                }
+                }*/
 
 
             }

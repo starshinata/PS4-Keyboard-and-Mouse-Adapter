@@ -29,28 +29,37 @@ $CERT_DIRECTORY="D:\workspace\##certificates\github.com-pancakeslp"
 #$MS_BUILD_CONFIG="Debug"
 $MS_BUILD_CONFIG="Release"
 
-$VERSION="3.1.0"
+$VERSION="4.0.0"
 
 ################################
 ################################
+
+$VISUAL_STUDIO_PATH="C:\Program Files\Microsoft Visual Studio\2022\Community\"
 
 ## Path for MSBuild.exe
-$env:Path += ";C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\amd64\"
+$env:Path += ";$VISUAL_STUDIO_PATH\MSBuild\Current\Bin\amd64\"
 
 ## Path for signtool.exe
 $env:Path += ";C:\Program Files (x86)\Windows Kits\10\bin\10.0.17763.0\x64\"
 
 ## Path for vstest.console.exe
-$env:Path += ";C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\TestWindow"
+$env:Path += ";$VISUAL_STUDIO_PATH\Common7\IDE\CommonExtensions\Microsoft\TestWindow"
 
 $GENERATED_INSTALLER_PATH="SquirrelReleases"
+
+$NUGET_PACKAGE_PATH="${env:HOME}\.nuget\packages\"
 
 $PROJECT_DIRECTORY_COMMON="code\common"
 $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER="code\PS4KeyboardAndMouseAdapter"
 $PROJECT_DIRECTORY_PS4_REMOTE_PLAY_INJECTION="code\PS4RemotePlayInjection"
 $PROJECT_DIRECTORY_UNIT_TESTS="code\UnitTests"
 
-$NUGET_PACKAGE_PATH="${env:HOME}\.nuget\packages\"
+
+################################
+################################
+
+$BIN_DIRECTORY_UNIT_TESTS="$PROJECT_DIRECTORY_UNIT_TESTS\bin\$MS_BUILD_CONFIG\net6.0-windows\"
+$BIN_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER="$PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\net6.0-windows\win-x86\"
 
 ################################
 ################################
@@ -282,7 +291,7 @@ function remove {
 function sign-executables {
   echo ""
   echo "sign-ing executables" 
-  manually-sign-file  "$PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\PS4KeyboardAndMouseAdapter.exe"
+  manually-sign-file  "$BIN_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\PS4KeyboardAndMouseAdapter.exe"
   echo "signed executables"
 }
 
@@ -323,17 +332,23 @@ function squirrel {
 function test-vstest {
 
   echo "vstest-ing"
-  $UNIT_TEST_DLL="$PROJECT_DIRECTORY_UNIT_TESTS\bin\$MS_BUILD_CONFIG\UnitTests.dll"
+  $UNIT_TESTS_DLL="$BIN_DIRECTORY_UNIT_TESTS\UnitTests.dll"
+  $CSFML_DLL="$BIN_DIRECTORY_UNIT_TESTS\csfml-Window.dll"
 
-  if (!(Test-Path $UNIT_TEST_DLL )) {
-    echo "UnitTests.dll missing! ... path $UNIT_TEST_DLL"
+  if (!(Test-Path $UNIT_TESTS_DLL )) {
+    echo "UnitTests.dll missing! ... path $CSFML_DLL"
     exit 1
   }
 
-  vstest.console.exe $UNIT_TEST_DLL --ListTests
+  if (!(Test-Path $CSFML_DLL )) {
+    echo "csfml-Window.dll missing! ... path $CSFML_DLL"
+    exit 1
+  }
+
+  vstest.console.exe $UNIT_TESTS_DLL --ListTests
   echo ""
 
-  vstest.console.exe $UNIT_TEST_DLL $PROJECT_DIRECTORY_UNIT_TESTS\bin\$MS_BUILD_CONFIG\csfml-Window.dll
+  vstest.console.exe $UNIT_TESTS_DLL $CSFML_DLL
   
   if ( $LASTEXITCODE -ne 0) {
     echo "vstest failed"
