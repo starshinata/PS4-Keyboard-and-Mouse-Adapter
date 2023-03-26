@@ -58,8 +58,8 @@ $PROJECT_DIRECTORY_UNIT_TESTS="code\UnitTests"
 ################################
 ################################
 
-$BIN_DIRECTORY_UNIT_TESTS="$PROJECT_DIRECTORY_UNIT_TESTS\bin\$MS_BUILD_CONFIG\net6.0-windows\"
 $BIN_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER="$PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\net6.0-windows\win-x86\"
+$BIN_DIRECTORY_UNIT_TESTS="$PROJECT_DIRECTORY_UNIT_TESTS\bin\$MS_BUILD_CONFIG\net6.0-windows\"
 
 ################################
 ################################
@@ -350,6 +350,10 @@ function test-vstest {
 
   vstest.console.exe $UNIT_TESTS_DLL $CSFML_DLL
   
+  echo  $LASTEXITCODE
+  echo "exiting until resolved"
+  exit 1
+
   if ( $LASTEXITCODE -ne 0) {
     echo "vstest failed"
     exit $LASTEXITCODE 
