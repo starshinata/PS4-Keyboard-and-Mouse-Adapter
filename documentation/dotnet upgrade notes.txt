@@ -48,3 +48,47 @@ and added it as "code\PS4RemotePlayInjection\dnf_4.8.System.Runtime.Remoting.dll
 ## Squirrel for dot net
 https://github.com/clowd/Clowd.Squirrel
 
+##Unit tests (1)
+made new project using dotnet template (instead of dotnet framework template
+
+various errors
+needed flags for vstext.console.exe
+which is funny because documenation says it will take the latest detected SDK/ dot net version
+
+
+##Unit tests (2)
+Exception for missing files
+```
+... threw exception:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'D:\workspace\PS4-Keyboard-and-Mouse-Adapter\master.move-to-dotnet-6\code\UnitTests\UnitTests\KeyboardAndMouseAdapter\backend\Config\UserSettings\IsLegacyConfig--profile-2.0.0-provisional.json'.
+  Stack Trace:
+      at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategy(FileStream fileStream, String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Encoding encoding, Int32 bufferSize)
+   at System.IO.File.InternalReadAllText(String path, Encoding encoding)
+   at System.IO.File.ReadAllText(String path)
+   ...
+```
+
+the project "UnitTests" was defined twice in path
+'D:\workspace\PS4-Keyboard-and-Mouse-Adapter\master.move-to-dotnet-6\code\UnitTests\UnitTests\KeyboardAndMouseAdapter\backend\Config\UserSettings\IsLegacyConfig--profile-2.0.0-provisional.json'.
+
+
+##Unit tests (3)
+"System.InvalidOperationException: The calling thread must be STA, because many UI components require this."
+
+per https://stackoverflow.com/questions/2220418/using-wpf-components-in-nunit-tests-how-to-use-sta
+
+
+##Unit tests (4)
+Testhost process exited with error: A fatal error was encountered. The library 'hostpolicy.dll' required to execute the application was not found in 'C:\Program Files\dotnet'.
+Failed to run as a self-contained app.
+  - The application was run as a self-contained app because 'D:\workspace\PS4-Keyboard-and-Mouse-Adapter\master.move-to-dotnet-6\code\UnitTests\bin\Release\net6.0-windows\testhost.runtimeconfig.json' was not found.
+  - If this should be a framework-dependent app, add the 'D:\workspace\PS4-Keyboard-and-Mouse-Adapter\master.move-to-dotnet-6\code\UnitTests\bin\Release\net6.0-windows\testhost.runtimeconfig.json' file and specify the appropriate framework.
+. Please check the diagnostic logs for more information.
+
+Test Run Aborted.
+

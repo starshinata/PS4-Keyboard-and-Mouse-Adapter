@@ -8,7 +8,7 @@ namespace UnitTests.KeyboardAndMouseAdapter.Config.ApplicationSettingsTest
     [TestClass]
     public class ImportValuesTest
     {
-        private static readonly string PROJECT_ROOT = "..\\..\\..\\";
+        private static readonly string PROJECT_ROOT = "..\\..\\..\\..\\";
         private static readonly string PROFILE_DIRECTORY = PROJECT_ROOT + "UnitTests\\KeyboardAndMouseAdapter\\backend\\Config\\ApplicationSettings\\";
 
         private string ReadExpectedFile(string file)

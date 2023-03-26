@@ -122,7 +122,7 @@ function cleanup-postbuild {
 function dependencies-nuget {
   ## this was a nuget command when using packages.config
   ## now we use dotnet for dependencies defined via "packageref"
-  dotnet restore
+  dotnet restore 
   error-on-bad-return-code
 }
 
@@ -344,11 +344,14 @@ function test-vstest {
     echo "csfml-Window.dll missing! ... path $CSFML_DLL"
     exit 1
   }
-
+  vstest.console.exe /help
   vstest.console.exe $UNIT_TESTS_DLL --ListTests
   echo ""
+  ##/e "C:\Program Files\dotnet\sdk\6.0.301\Sdks"
+  vstest.console.exe $UNIT_TESTS_DLL $CSFML_DLL `
+      --Framework:.NETCoreApp,Version=v6.0      `
+      /Platform:x64
 
-  vstest.console.exe $UNIT_TESTS_DLL $CSFML_DLL
   
   echo  $LASTEXITCODE
   echo "exiting until resolved"

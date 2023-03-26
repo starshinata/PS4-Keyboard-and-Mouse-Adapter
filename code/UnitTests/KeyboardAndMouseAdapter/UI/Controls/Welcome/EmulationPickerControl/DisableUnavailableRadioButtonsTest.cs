@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using Pizza.KeyboardAndMouseAdapter.UI.Controls.Welcome;
+using Pizza.TestTools;
 using System.Collections.Generic;
 
 namespace UnitTests.KeyboardAndMouseAdapter.UI.Controls.Welcome.EmulationPickerControlTest
@@ -16,7 +17,7 @@ namespace UnitTests.KeyboardAndMouseAdapter.UI.Controls.Welcome.EmulationPickerC
             ApplicationSettings.GetInstance().EmulationMode = -1;
         }
 
-        [TestMethod]
+        [TestMethodForUiControl]
         public void ShouldEnableAll_WhenVigemInstalled()
         {
             EmulationPickerControl classUnderTest = new EmulationPickerControl();
@@ -30,7 +31,7 @@ namespace UnitTests.KeyboardAndMouseAdapter.UI.Controls.Welcome.EmulationPickerC
             Assert.AreEqual(true, actualRadioButtons[2].IsEnabled);
         }
 
-        [TestMethod]
+        [TestMethodForUiControl]
         public void ShouldEnableProcess_WhenVigemNotInstalled()
         {
             EmulationPickerControl classUnderTest = new EmulationPickerControl();

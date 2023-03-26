@@ -3,7 +3,6 @@
 	<TargetFramework>net6.0-windows</TargetFramework>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Pizza.KeyboardAndMouseAdapter</RootNamespace>
-    <RuntimeIdentifier>win-x86</RuntimeIdentifier>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
