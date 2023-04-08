@@ -95,6 +95,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "vigemBusDriver", "vigemBusD
 		installers\vigemBusDriver\ViGEmBusSetup_x86.msi = installers\vigemBusDriver\ViGEmBusSetup_x86.msi
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "extract-me-bin", "extract-me-bin", "{6F3F2544-A927-4914-A91D-87C532146896}"
+	ProjectSection(SolutionItems) = preProject
+		manualBuild\extract-me-bin\PS4KeyboardAndMouseAdapter.exe = manualBuild\extract-me-bin\PS4KeyboardAndMouseAdapter.exe
+		manualBuild\extract-me-bin\Update.exe = manualBuild\extract-me-bin\Update.exe
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Clean|Any CPU = Clean|Any CPU
@@ -178,6 +184,7 @@ Global
 		{6852A938-F1C8-4D31-A2E1-419C08CC42DA} = {9FF1BB60-DFEF-4108-A4A6-945C22D8882C}
 		{89924932-08BA-4A52-A21B-EB3D418436AA} = {6852A938-F1C8-4D31-A2E1-419C08CC42DA}
 		{F10F9F23-C09E-454C-A783-A56F8451911C} = {6852A938-F1C8-4D31-A2E1-419C08CC42DA}
+		{6F3F2544-A927-4914-A91D-87C532146896} = {60A1671E-B17D-48D6-8515-D21D96B6CFD3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {215189D4-FCF7-4F3E-BC57-0EA3347DD037}

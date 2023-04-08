@@ -1,4 +1,5 @@
-﻿using Pizza.KeyboardAndMouseAdapter.Backend;
+﻿using Pizza.Common;
+using Pizza.KeyboardAndMouseAdapter.Backend;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using Pizza.KeyboardAndMouseAdapter.Backend.Vigem;
 using PS4RemotePlayInjection;
@@ -31,19 +32,25 @@ namespace Pizza.KeyboardAndMouseAdapter
             ApplicationSettings.Load();
             UserSettings.LoadPrevious();
 
+            try
+            {
+                SquirrelAwareApp.HandleEvents(
+                    onInitialInstall: SquirrelOnAppInstall,
+                    onAppUninstall: SquirrelOnAppUninstall,
+                    onEveryRun: SquirrelOnAppRun);
+                /*            AppUpdater appUpdater = new AppUpdater();
 
-            SquirrelAwareApp.HandleEvents(
-                onInitialInstall: SquirrelOnAppInstall,
-                onAppUninstall: SquirrelOnAppUninstall,
-                onEveryRun: SquirrelOnAppRun);
-            /*            AppUpdater appUpdater = new AppUpdater();
-
-                        await appUpdater.UpdateIfAvailable();*/
+                            await appUpdater.UpdateIfAvailable();*/
+            }
+            catch (Exception ex)
+            {
+                ExceptionLogger.LogException("App L47 ", ex);
+            }
         }
 
         private void OnAppExit(object sender, ExitEventArgs e)
         {
-            Log.Debug("App OnAppExit");
+            Log.Information("App OnAppExit");
             InstanceSettings.GetInstance().EnableMouseInput = false;
 
             // cause not having a cursor is a pain in the ass
@@ -58,21 +65,30 @@ namespace Pizza.KeyboardAndMouseAdapter
             //Injector.FindProcess("RemotePlay").Kill();
         }
 
-
         private static void SquirrelOnAppInstall(SemanticVersion version, IAppTools tools)
         {
+            Log.Information("App SquirrelOnAppInstall");
             tools.CreateShortcutForThisExe(ShortcutLocation.StartMenu | ShortcutLocation.Desktop);
         }
 
         private static void SquirrelOnAppRun(SemanticVersion version, IAppTools tools, bool firstRun)
         {
-            tools.SetProcessAppUserModelId();
-            // show a welcome message when the app is first installed
-            if (firstRun) MessageBox.Show("Thanks for installing my application!");
+            try
+            {
+                Log.Information("App SquirrelOnAppRun");
+                tools.SetProcessAppUserModelId();
+
+            }
+            catch (Exception ex)
+            {
+                ExceptionLogger.LogException("App L87 ", ex);
+            }
+
         }
 
         private static void SquirrelOnAppUninstall(SemanticVersion version, IAppTools tools)
         {
+            Log.Information("App SquirrelOnAppUninstall");
             tools.RemoveShortcutForThisExe(ShortcutLocation.StartMenu | ShortcutLocation.Desktop);
         }
 

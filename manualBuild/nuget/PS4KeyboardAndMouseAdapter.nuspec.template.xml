@@ -7,12 +7,9 @@
 		<owners>Me</owners>
 		<!-- The description will appear as the program name when viewed in the list of installed programs within the Control Panel -->
 		<description>PS4KeyboardAndMouseAdapter</description>
-		<dependencies>
-			<group targetFramework=".NETFramework4.6.1" />
-		</dependencies>
 		<releaseNotes>a release note</releaseNotes>
 	</metadata>
 	<files>
-		<file src="..\..\code\PS4KeyboardandMouseAdapter\bin\Release\**\**" target="lib\net461\" exclude="*.pdb;*.vshost.*"/>
+		<file src="..\..\code\PS4KeyboardandMouseAdapter\bin\Release\**\**" target="lib\net6.0\" exclude="*.pdb;*.vshost.*"/>
 	</files>
 </package>

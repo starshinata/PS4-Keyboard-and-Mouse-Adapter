@@ -92,3 +92,4 @@ Failed to run as a self-contained app.
 
 Test Run Aborted.
 
+remove CSFML.dll and it seems happy
