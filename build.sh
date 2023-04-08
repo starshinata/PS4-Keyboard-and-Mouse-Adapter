@@ -16,4 +16,10 @@ taskkill.exe -im "PS4KeyboardAndMouseAdapter*" -f
 ## stops the execution of the script if a command or pipeline has an error
 set -e
 
-time powershell ./build.ps1
+##TODO!
+
+#time powershell ./build.ps1 -execGenerateArtefact FALSE
+time powershell ./build.ps1 -execTest FALSE
+#time powershell ./build.ps1 -execGenerateArtefact FALSE -execTest FALSE
+#time powershell ./build.ps1 
+

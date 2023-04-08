@@ -47,18 +47,22 @@ $env:Path += ";$VISUAL_STUDIO_PATH\Common7\IDE\CommonExtensions\Microsoft\TestWi
 ################################
 ################################
 
-$DIRECTORY_WIP_INSTALLERS_COMMON = "temp\common"
-$DIRECTORY_WIP_INSTALLERS_SQUIRREL = "temp\squirrel"
-$DIRECTORY_WIP_INSTALLERS_ZIP = "temp\zip"
-$DIRECTORY_RELEASE = "ReleaseArtefacts"
+$DIRECTORY_WIP_INSTALLERS_COMMON = "temp\common\"
+$DIRECTORY_WIP_INSTALLERS_NUGET = "temp\nuget\"
+$DIRECTORY_WIP_INSTALLERS_ZIP = "temp\zip\"
+$DIRECTORY_RELEASE = "ReleaseArtefacts\"
 
 $EXE_SQUIRREL = "${env:HOME}\.nuget\packages\clowd.squirrel\2.9.42\tools\Squirrel.exe"
+
+$FILE_NUGET_SPEC_SOURCE = "manualBuild\nuget\PS4KeyboardAndMouseAdapter.nuspec.template.xml"
+$FILE_NUGET_SPEC_TARGET = "manualBuild\nuget\PS4KeyboardAndMouseAdapter.nuspec"
 $FILE_PS4KMA_NUPKG = "PS4KeyboardAndMouseAdapter.${VERSION}.nupkg"
 
-$PROJECT_DIRECTORY_COMMON = "code\common"
-$PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER = "code\PS4KeyboardAndMouseAdapter"
-$PROJECT_DIRECTORY_PS4_REMOTE_PLAY_INJECTION = "code\PS4RemotePlayInjection"
-$PROJECT_DIRECTORY_UNIT_TESTS = "code\UnitTests"
+
+$PROJECT_DIRECTORY_COMMON = "code\common\"
+$PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER = "code\PS4KeyboardAndMouseAdapter\"
+$PROJECT_DIRECTORY_PS4_REMOTE_PLAY_INJECTION = "code\PS4RemotePlayInjection\"
+$PROJECT_DIRECTORY_UNIT_TESTS = "code\UnitTests\"
 
 
 ################################
@@ -115,7 +119,7 @@ function cleanup-prebuild {
     remove $DIRECTORY_RELEASE
 
     remove $DIRECTORY_WIP_INSTALLERS_COMMON
-    remove $DIRECTORY_WIP_INSTALLERS_SQUIRREL
+    remove $DIRECTORY_WIP_INSTALLERS_NUGET
     remove $DIRECTORY_WIP_INSTALLERS_ZIP
 
     remove PS4KeyboardAndMouseAdapter.*.nupkg
@@ -199,18 +203,22 @@ function main_exec {
 
         copy-non-cs-project-files
         echo ""
-        make-installer-windows-common
+        make-installer-common
         sign-executables
 
         echo ""
 
+        ## pancakeslp 2023.04.08 
+        ## if you run `make-installer-zip` then `make-installer-exe` zip size is about 18mb
+        ## if you run `make-installer-exe` then `make-installer-zip` zip size is about 70mb 
+        ## extra size is because it will include nuget stuff
+## TODO fix this        
+
+        make-installer-exe 
         make-installer-zip
 
-        make-nuget-package
 
-        squirrel
-
-        sign-installer
+        
 
         echo "artefact generation FINISHED"
 
@@ -218,12 +226,12 @@ function main_exec {
     else {
         echo "artefact generation SKIPPED, because "
 
-        if (-Not$execGenerateArtefact -eq "TRUE") {
-            echo "artefact generation SKIPPED, because arg execGenerateArtefact was '$execGenerateArtefact'"
+        if (-Not $execGenerateArtefact -eq "TRUE") {
+            echo "... arg execGenerateArtefact was '$execGenerateArtefact'"
         }
 
-        if (-Not$MS_BUILD_CONFIG -eq "Release") {
-            echo "artefact generation SKIPPED, because arg execGenerateArtefact was '$execGenerateArtefact'"
+        if (-Not $MS_BUILD_CONFIG -eq "Release") {
+            echo "... arg MS_BUILD_CONFIG was '$MS_BUILD_CONFIG'"
         }
     }
 
@@ -240,19 +248,84 @@ function make-dir {
     }
 }
 
-function make-installer-windows-common {
+function make-installer-common {
 
     echo ""
-    echo "running make-installer-windows-common"
-
-
+    echo "running make-installer-common"
 
     make-dir $DIRECTORY_WIP_INSTALLERS_COMMON
     Copy-Item  -Force -Recurse   $BIN_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\*   $DIRECTORY_WIP_INSTALLERS_COMMON
 
-
-    echo "ran make-installer-windows-common"
+    echo "ran make-installer-common"
 }
+
+
+function make-installer-exe {
+    echo ""
+    echo "running make-installer-exe"
+
+    make-dir $DIRECTORY_RELEASE
+    make-dir $DIRECTORY_WIP_INSTALLERS_NUGET
+    
+
+    make-installer-nuget
+    make-installer-nuget-to-exe
+    sign-installer-exe
+    echo "ran make-installer-exe"
+}
+
+
+function make-installer-nuget {
+    echo ""
+    echo "running make-nuget-package"
+
+    echo "DIRECTORY_WIP_INSTALLERS_COMMON '$DIRECTORY_WIP_INSTALLERS_COMMON'"
+    dir $DIRECTORY_WIP_INSTALLERS_COMMON
+    echo ""
+
+    echo "DIRECTORY_WIP_INSTALLERS_NUGET  '$DIRECTORY_WIP_INSTALLERS_NUGET'"
+    dir $DIRECTORY_WIP_INSTALLERS_NUGET
+    echo ""
+
+    Copy-Item  -Force -Recurse  ${DIRECTORY_WIP_INSTALLERS_COMMON}\*  ${DIRECTORY_WIP_INSTALLERS_NUGET}
+
+    make-nuget-spec
+
+    nuget pack $FILE_NUGET_SPEC_TARGET
+    error-on-bad-return-code
+
+    echo "ran nuget-package"
+}
+
+
+function make-installer-nuget-to-exe {
+    echo ""
+    echo "running make-installer-nuget-to-exe ..."
+
+    ## arg --allowUnaware is because it isnt detecting "SquirrelAwareVersion" in code\PS4KeyboardAndMouseAdapter\app.manifest
+    $COMMAND = " $EXE_SQUIRREL releasify --package=$FILE_PS4KMA_NUPKG  --releaseDir=$DIRECTORY_RELEASE "
+    echo "command"
+    echo "  $COMMAND"
+    echo ""
+
+    powershell.exe -ExecutionPolicy Bypass -Command "$COMMAND | Write-Output"
+    error-on-bad-return-code
+
+    ## this is a duplicate file, remove it
+    remove $FILE_PS4KMA_NUPKG
+    error-on-bad-return-code
+
+    ## squirrel makes an MSI
+    ## but the MSI seems to do nothing, so lets delete it
+    ##TODO
+    #remove $DIRECTORY_WIP_INSTALLERS_COMMON\setup.msi
+
+    ## move setup.exe as we have two setup files (one a exe one a zip)
+    Move-Item -Path $DIRECTORY_RELEASE\PS4KeyboardAndMouseAdapterSetup.exe -Destination $DIRECTORY_RELEASE\application-setup.exe
+
+    echo "ran make-installer-nuget-to-exe"
+}
+
 
 function make-installer-zip {
 
@@ -260,15 +333,17 @@ function make-installer-zip {
     echo "running make-installer-zip"
 
 
+    make-dir $DIRECTORY_RELEASE
     make-dir $DIRECTORY_WIP_INSTALLERS_ZIP
     make-dir $DIRECTORY_WIP_INSTALLERS_ZIP\app-$VERSION
+    
 
-    Copy-Item  -Force -Recurse  $DIRECTORY_WIP_INSTALLERS_COMMON $DIRECTORY_WIP_INSTALLERS_ZIP\app-$VERSION
-    Copy-Item  -Force           manualBuild\extract-me-bin\*     $DIRECTORY_WIP_INSTALLERS_ZIP
+    Copy-Item  -Force -Recurse  $DIRECTORY_WIP_INSTALLERS_COMMON\* $DIRECTORY_WIP_INSTALLERS_ZIP\app-$VERSION
+    Copy-Item  -Force           manualBuild\extract-me-bin\*       $DIRECTORY_WIP_INSTALLERS_ZIP
 
     $compress = @{
         Path            = "$DIRECTORY_WIP_INSTALLERS_ZIP\*"
-        DestinationPath = "$DIRECTORY_WIP_INSTALLERS_COMMON\application-extract-me.zip"
+        DestinationPath = "$DIRECTORY_RELEASE\application-extract-me.zip"
     }
     Compress-Archive @compress
     error-on-bad-return-code
@@ -280,25 +355,16 @@ function make-installer-zip {
 }
 
 
-function make-nuget-package {
-    echo ""
-    echo "making nuget-package"
+function make-nuget-spec {
 
     $FIND = "<version>REPLACE_VERSION_REPLACE</version>"
     $REPLACE = "<version>$VERSION</version>"
-    $SOURCE_NUSPEC_FILE = "manualBuild\nuget\PS4KeyboardAndMouseAdapter.nuspec.template.xml"
-    $TARGET_NUSPEC_FILE = "manualBuild\nuget\PS4KeyboardAndMouseAdapter.nuspec"
 
-    remove $TARGET_NUSPEC_FILE
+    remove $FILE_NUGET_SPEC_TARGET
 
-    Copy-Item $SOURCE_NUSPEC_FILE -Destination $TARGET_NUSPEC_FILE
+    Copy-Item $FILE_NUGET_SPEC_SOURCE -Destination $FILE_NUGET_SPEC_TARGET
 
-    ((Get-Content -path $TARGET_NUSPEC_FILE -Raw) -replace $FIND, $REPLACE) | Set-Content -Path $TARGET_NUSPEC_FILE
-
-    nuget pack $TARGET_NUSPEC_FILE
-    error-on-bad-return-code
-
-    echo "made nuget-package"
+    ((Get-Content -path $FILE_NUGET_SPEC_TARGET -Raw) -replace $FIND, $REPLACE) | Set-Content -Path $FILE_NUGET_SPEC_TARGET
 }
 
 
@@ -350,44 +416,13 @@ function sign-executables {
 }
 
 
-function sign-installer {
+function sign-installer-exe {
     echo ""
-    echo "sign-ing installer"
+    echo "running sign-installer-exe ..."
 
-    manually-sign-file  $DIRECTORY_WIP_INSTALLERS_COMMON\application-setup.exe
+    manually-sign-file  $DIRECTORY_RELEASE\application-setup.exe
 
-    echo "signed installer"
-}
-
-
-function squirrel {
-    echo ""
-    echo "squirrel-ing package ..."
-
-    ## arg --allowUnaware is because it isnt detecting "SquirrelAwareVersion" in code\PS4KeyboardAndMouseAdapter\app.manifest
-    $COMMAND = " $EXE_SQUIRREL releasify --package=$FILE_PS4KMA_NUPKG  --releaseDir=$DIRECTORY_WIP_INSTALLERS_COMMON --allowUnaware "
-    echo "command"
-    echo "  $COMMAND"
-    echo ""
-
-    powershell.exe -ExecutionPolicy Bypass -Command "$COMMAND | Write-Output"
-    error-on-bad-return-code
-
-    ## this is a duplicate file, remove it
-    remove $FILE_PS4KMA_NUPKG
-    error-on-bad-return-code
-
-    ## squirrel makes an MSI
-    ## but the MSI seems to do nothing, so lets delete it
-    ##TODO
-    #remove $DIRECTORY_WIP_INSTALLERS_COMMON\setup.msi
-
-    ## move setup.exe as we have two setup files (one a exe one a zip)
-    Move-Item -Path $DIRECTORY_WIP_INSTALLERS_COMMON\PS4KeyboardAndMouseAdapterSetup.exe -Destination $DIRECTORY_WIP_INSTALLERS_COMMON\application-setup.exe
-
-
-
-    echo "squirrel-ed package!"
+    echo "ran sign-installer-exe"
 }
 
 
