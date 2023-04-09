@@ -303,7 +303,7 @@ function make-installer-nuget-to-exe {
     echo "running make-installer-nuget-to-exe ..."
 
     ## arg --allowUnaware is because it isnt detecting "SquirrelAwareVersion" in code\PS4KeyboardAndMouseAdapter\app.manifest
-    $COMMAND = " $EXE_SQUIRREL releasify --package=$FILE_PS4KMA_NUPKG  --releaseDir=$DIRECTORY_RELEASE "
+    $COMMAND = " $EXE_SQUIRREL releasify --package=$FILE_PS4KMA_NUPKG  --releaseDir=$DIRECTORY_RELEASE --framework net6.0"
     echo "command"
     echo "  $COMMAND"
     echo ""
