@@ -16,22 +16,25 @@ on:
 jobs:
   analyze:
     name: Analyze
-    ## choice of ubuntu-latest, windows-latest, and macos-latest
-    ## 2022.03.13  "windows-latest" yields "Windows Server 2022"
-    ## A fatal error occurred: It looks like you are running Windows Server 2022. The CodeQL build tracer does not currently support this OS version.
 
     ## Environment variable
     env:
       ACTIONS_ALLOW_UNSECURE_COMMANDS: true  
-      
-    runs-on: windows-2019
+
     permissions:
       actions: read
       contents: read
       security-events: write
 
+    ## For a list of available runner types, refer to
+    ## https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    ## TLDR choice of ubuntu-latest, windows-latest, and macos-latest
+    ## 2022.03.13  "windows-latest" yields "Windows Server 2022"
+    ## A fatal error occurred: It looks like you are running Windows Server 2022. The CodeQL build tracer does not currently support this OS version.
+    runs-on: windows-2019
+
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         language: [ 'csharp' ]
         # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby' ]
@@ -44,19 +47,16 @@ jobs:
       uses: actions/checkout@v2
 
 
-    - name: Setup Path MSBuild 
-      uses: warrenbuckley/Setup-MSBuild@v1
-
-
-    - name: Setup Path VSTest
-      uses: darenm/Setup-VSTest@v1
-
-
-    - name: Setup dotnet CORE
-      uses: actions/setup-dotnet@v1
+    # Install the .NET Core workload
+    - name: Install .NET Core
+      uses: actions/setup-dotnet@v3
       with:
-        ## working versions [ '2.1.x', '3.1.x', '5.0.x' ]
-        dotnet-version: '2.1.x'
+        dotnet-version: 6.0.x
+
+
+    # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v1.0.2
 
 
     - name: Initialize CodeQL tools for scanning.
@@ -68,8 +68,6 @@ jobs:
     - name: Run ./build.ps1
       run: |
        powershell ./build.ps1 -execTest FALSE -execGenerateArtefact FALSE
-       
-       
 
 
     - name: Perform CodeQL Analysis
