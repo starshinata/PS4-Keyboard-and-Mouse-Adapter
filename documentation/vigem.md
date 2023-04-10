@@ -1,20 +1,21 @@
 # ViGEm
 
 ## What is ViGEm
-ViGEm stands for "Virtual Gamepad Emulation" Framework, see https://vigem.org/
+ViGEm stands for "**Vi**rtual **G**amepad **Em**ulation" Framework.
 
-It is a way of emulating a console controller.
+It is a way of emulating a console controller (PS4 DualShock 4, or Xbox 360 controller).
+
+For more information see https://vigem.org/
 
 ## Installation
-Goto https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/tree/master/installers/vigemBusDriver/ and select the applicable installer file
-
-* Select x86 if you are on 32 bit Windows
-* Select x64 if you are on 64 bit Windows
-
-If you are unsure what version of window you are on [Google "am i on 32 or 64 bit "](https://www.google.com/search?q=am+i+on+32+or+64+bit), and add your Operating system (like windows 10)
+Goto https://github.com/ViGEm/ViGEmBus/releases and select the installer file <br>
+(Or if that repo is unavailable we have a backup at https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/tree/master/installers/vigemBusDriver/)
 
 ## Uninstallation
-Goto ` Control Panel > Programs and Files` <br>
-Then search for "Nefarius Virtual Gamepad Emulation Bus Driver", like you can see in the below image.
-<a href="vigem-uninstall.png" target="_blank"><img src="vigem-uninstall.png" alt="Program and Files screen"/></a>
-Select "Nefarius Virtual Gamepad Emulation Bus Driver" and hit uninstall and follow the prompts.
+* Goto ` Control Panel > Programs and Files`
+* Then search for **"Virtual Gamepad Emulation Bus Driver"** <br>
+  <a href="vigem-uninstall-1.png" target="_blank"><img src="vigem-uninstall-1.png" alt="Program and Files screen for 'Virtual Gamepad Emulation Bus Driver'"/></a> <br>
+  and if you don't find it search for **"ViGEm Bus Driver"** <br>
+  (what you are searching for depends on the version of ViGEm you installed)
+  <a href="vigem-uninstall-2.png" target="_blank"><img src="vigem-uninstall-2.png" alt="Program and Files screen for 'ViGEm Bus Driver'"/></a>
+* Select the application and hit uninstall and follow the prompts.
