@@ -31,7 +31,8 @@ jobs:
     ## TLDR choice of ubuntu-latest, windows-latest, and macos-latest
     ## 2022.03.13  "windows-latest" yields "Windows Server 2022"
     ## A fatal error occurred: It looks like you are running Windows Server 2022. The CodeQL build tracer does not currently support this OS version.
-    runs-on: windows-2019
+    #runs-on: windows-2019
+    runs-on: windows-latest
 
     strategy:
       fail-fast: true
