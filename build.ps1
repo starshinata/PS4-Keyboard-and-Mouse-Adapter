@@ -29,25 +29,28 @@ $CERT_DIRECTORY="D:\workspace\##certificates\github.com-pancakeslp"
 #$MS_BUILD_CONFIG="Debug"
 $MS_BUILD_CONFIG="Release"
 
-$VERSION="3.1.0"
+$VERSION="3.2.0"
 
 ################################
 ################################
+
+$VISUAL_STUDIO_PATH="C:\Program Files\Microsoft Visual Studio\2022\"
 
 ## Path for MSBuild.exe
-$env:Path += ";C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\amd64\"
+$env:Path += ";$VISUAL_STUDIO_PATH\Community\MSBuild\Current\Bin\amd64\"
 
 ## Path for signtool.exe
 $env:Path += ";C:\Program Files (x86)\Windows Kits\10\bin\10.0.17763.0\x64\"
 
 ## Path for vstest.console.exe
-$env:Path += ";C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\TestWindow"
+$env:Path += ";$VISUAL_STUDIO_PATH\Community\Common7\IDE\CommonExtensions\Microsoft\TestWindow"
 
 $GENERATED_INSTALLER_PATH="SquirrelReleases"
 
-$PROJECT_DIRECTORY_COMMON="code\common"
+$PROJECT_DIRECTORY_COMMON="code\Common"
 $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER="code\PS4KeyboardAndMouseAdapter"
 $PROJECT_DIRECTORY_PS4_REMOTE_PLAY_INJECTION="code\PS4RemotePlayInjection"
+$PROJECT_DIRECTORY_TEST_TOOLS="code\TestTools"
 $PROJECT_DIRECTORY_UNIT_TESTS="code\UnitTests"
 
 $NUGET_PACKAGE_PATH="${env:HOME}\.nuget\packages\"
@@ -110,13 +113,10 @@ function cleanup-postbuild {
 }
 
 
-function dependencies-nuget {
-  ## this was a nuget command when using packages.config
-  ## now we use dotnet for dependencies defined via "packageref"
+function dependencies-install {
   dotnet restore
   error-on-bad-return-code
 }
-
 
 function error-on-bad-return-code {
   if ( $LASTEXITCODE -ne 0 ) {
@@ -132,7 +132,7 @@ function main_exec {
 
     cleanup-prebuild
 
-    dependencies-nuget
+    dependencies-install
 
     valid-xaml-xmllint
 
@@ -388,3 +388,4 @@ function valid-xaml-xmllint {
 
 
 main_exec
+
