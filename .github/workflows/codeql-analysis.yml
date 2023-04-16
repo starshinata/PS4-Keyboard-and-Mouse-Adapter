@@ -29,10 +29,12 @@ jobs:
     ## For a list of available runner types, refer to
     ## https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
     ## TLDR choice of ubuntu-latest, windows-latest, and macos-latest
-    ## 2022.03.13  "windows-latest" yields "Windows Server 2022"
-    ## A fatal error occurred: It looks like you are running Windows Server 2022. The CodeQL build tracer does not currently support this OS version.
-    #runs-on: windows-2019
-    runs-on: windows-latest
+    ## 2023.04.16  "windows-latest" yields "Windows Server 2022"
+    ## it seems we have some dotnet framework 4.6.1 dependencies
+    ## and Windows Server 2022 doesnt include 4.6.1 dependencies
+    ## TODO once we have removed these dependencies we should retry windows-latest
+    runs-on: windows-2019
+    #runs-on: windows-latest
 
     strategy:
       fail-fast: true
@@ -47,27 +49,6 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-
-    - name: Install component on windows 2022
-      shell: pwsh
-      run: |
-        Set-Location "C:\Program Files (x86)\Microsoft Visual Studio\Installer\"
-        $InstallPath = "C:\Program Files\Microsoft Visual Studio\2022\Enterprise"
-        $componentsToAdd = @(
-          "Microsoft.Net.Component.4.6.1.SDK"
-        )
-        [string]$workloadArgs = $componentsToAdd | ForEach-Object {" --add " +  $_}
-        $Arguments = ('/c', "vs_installer.exe", 'modify', '--installPath', "`"$InstallPath`"",$workloadArgs, '--quiet', '--norestart', '--nocache')
-        $process = Start-Process -FilePath cmd.exe -ArgumentList $Arguments -Wait -PassThru -WindowStyle Hidden
-        if ($process.ExitCode -eq 0)
-        {
-            Write-Host "components have been successfully added"
-        }
-        else
-        {
-            Write-Host "components were not installed"
-            exit 1
-        }
 
     # Install the .NET Core workload
     - name: Install .NET Core
