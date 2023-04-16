@@ -72,10 +72,12 @@ function build-msbuild {
   echo "msbuild-ing"
 
   ## "-p:UseSharedCompilation=false" for CodeQL
-  MSBuild.exe PS4KeyboardAndMouseAdapter.sln `
-    -p:Configuration=$MS_BUILD_CONFIG        `
-    -p:UseSharedCompilation=false            `
+  MSBuild.exe PS4KeyboardAndMouseAdapter.sln    `
+    -p:Configuration=$MS_BUILD_CONFIG           `
+    -p:FrameworkPathOverride="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1" `
+    -p:UseSharedCompilation=false               `
     -p:VersionNumber=$VERSION
+    
 
   if ( $LASTEXITCODE -ne 0) {
     echo "msbuild failed"
