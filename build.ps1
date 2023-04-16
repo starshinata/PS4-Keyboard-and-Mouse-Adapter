@@ -127,7 +127,10 @@ function error-on-bad-return-code {
 
 
 function main_exec {
-
+    dir "C:\Program Files\Reference Assemblies\Microsoft\Framework"
+    dir "C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\"
+    dir "C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework"
+    
     add-build-date
 
     cleanup-prebuild
