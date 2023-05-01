@@ -33,12 +33,8 @@
 * The PS4 you are trying to connect to is set as your PSN account's Primary PS4 <br>
   PS4 -> select (Settings) -> [Account Management] -> [Activate as Your Primary PS4] -> [Activate].
 
-* PS Remote Play connects via a code <br>
-  see [Playstation 4: add a device](https://manuals.playstation.net/document/en/ps4/settings/adddevice.html) <br>
-  This should mean you are using your local network, instead of going over the internet <br>
-  <br>
-  To confirm this, on your PS4 `Settings -> Remote Play Connection Settings --> Connection History --> select a connection` <br>
-  After selecting a connection, you will see "Connection Method". If it says "Nearby" instead of "Via Internet", that should be local network.
+* PS Remote Play connects via a code (LAN mode) <br>
+  see [how do I connect to Remote Play on LAN](how%20do%20I%20connect%20to%20Remote%20Play%20on%20LAN.md)
 
 * PS Remote Play application has its video settings set to the lowest <br>
   (This should reduce the the amount of data your PS4 has to send, and how much your Remote Play application has to receive) <br>
