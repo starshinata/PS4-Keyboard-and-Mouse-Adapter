@@ -107,7 +107,15 @@ No, but it's something we are am considering
 
 
 ### How do I connect to my PS on my home network
-see https://manuals.playstation.net/document/gb/psvita/ps4link/viaprivate.html
+see [how do I connect to Remote Play on LAN](how%20do%20I%20connect%20to%20Remote%20Play%20on%20LAN.md)
+
+
+### How do I connect to my PS via LAN
+see [how do I connect to Remote Play on LAN](how%20do%20I%20connect%20to%20Remote%20Play%20on%20LAN.md)
+
+
+### How do I connect to my PS without Internet
+see [how do I connect to Remote Play on LAN](how%20do%20I%20connect%20to%20Remote%20Play%20on%20LAN.md)
 
 
 ### How do I increase mouse sensitivity so I can quickly turn 180 degrees?
