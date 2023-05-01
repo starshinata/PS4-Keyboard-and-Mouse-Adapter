@@ -150,6 +150,13 @@ Discord user Domenick027#3614 has had success using https://www.macrorecorder.co
 Alternatively try https://github.com/komefai/PS4Macro or https://github.com/evilC/AHK-ViGEm-Bus
 
 
+### How good does my internet need to be?
+If you can stream Netflix it's probably good enough
+
+But remember you dont need the internet aslong has you have  Local Area Network <br>
+see [how do I connect to Remote Play on LAN](how%20do%20I%20connect%20to%20Remote%20Play%20on%20LAN.md)
+
+
 ### I have a question or issue, why haven't you replied?
 We do this in our free time, and we normally have 9-5 day jobs to contend with.
 
