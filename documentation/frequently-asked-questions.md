@@ -118,6 +118,10 @@ see [how do I connect to Remote Play on LAN](how%20do%20I%20connect%20to%20Remot
 see [how do I connect to Remote Play on LAN](how%20do%20I%20connect%20to%20Remote%20Play%20on%20LAN.md)
 
 
+### How do I donate?
+see [Donations](donations.md)
+
+
 ### How do I increase mouse sensitivity so I can quickly turn 180 degrees?
 You cant
 
