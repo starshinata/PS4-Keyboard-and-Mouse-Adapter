@@ -35,8 +35,13 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
-  </ItemGroup>
-
+		<ProjectReference Include="..\GreeterProtos\GreeterProtos.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Google.Protobuf" Version="3.0.0" />
+		<PackageReference Include="Grpc" Version="1.0.1" />
+		<PackageReference Include="Grpc.Core" Version="1.0.1" />
+	</ItemGroup>
   <ItemGroup>
     <PackageReference Include="AppDomainToolkit">
       <Version>1.0.4.3</Version>

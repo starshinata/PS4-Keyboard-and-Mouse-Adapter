@@ -1,4 +1,4 @@
-﻿// PS4RemotePlayInterceptor (File: Classes/DualShockState.cs)
+﻿// PS4RemotePlayInjection (File: Classes/DualShockState.cs)
 //
 // Copyright (c) 2018 Komefai
 //
@@ -31,7 +31,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace PS4RemotePlayInterceptor
+namespace PS4RemotePlayInjection
 {
     // References
     // https://github.com/Jays2Kings/DS4Windows/blob/jay/DS4Windows/DS4Library/DS4Device.cs

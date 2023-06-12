@@ -55,7 +55,7 @@ Try our discord here https://discord.gg/zgveKtme5s where you can either suggest 
 (in alphabetical order)
 * [DS4Windows](https://github.com/Ryochan7/DS4Windows) - don't need to explain that one
 * [EasyHook](https://easyhook.github.io) - The best tool for Windows API hooking.
-* [PS4RemotePlayInterceptor](https://github.com/komefai/PS4RemotePlayInterceptor) a module by used in [PS4Macro](https://github.com/komefai/PS4Macro).<br>
+* [PS4RemotePlayInjection](https://github.com/komefai/PS4RemotePlayInjection) a module by used in [PS4Macro](https://github.com/komefai/PS4Macro).<br>
   Big thanks to [komefai](https://github.com/komefai). <br>
   If this wasn't available PS4KMA might not have happened.
 * [soulehshaikh9](https://github.com/soulehshaikh99/self-signed-certificate-generator) for pfx certificate generator

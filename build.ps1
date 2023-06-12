@@ -23,7 +23,7 @@ $ErrorActionPreference = "Stop"
 ################################
 
 ## might need configuring
-$CERT_DIRECTORY = "D:\workspace\##certificates\github.com-pancakeslp"
+$CERT_DIRECTORY = "C:\workspace\##certificates\github.com-pancakeslp"
 
 #$MS_BUILD_CONFIG="Debug"
 $MS_BUILD_CONFIG = "Release"

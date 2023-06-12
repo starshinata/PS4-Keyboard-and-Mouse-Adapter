@@ -1,4 +1,4 @@
-﻿// PS4RemotePlayInterceptor (File: Classes/Hooks.cs)
+﻿// PS4RemotePlayInjection (File: Classes/Hooks.cs)
 //
 // Copyright (c) 2018 Komefai
 //
@@ -24,7 +24,7 @@
 
 using EasyHook;
 using Pizza.Common;
-using PS4RemotePlayInterceptor;
+using PS4RemotePlayInjection;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

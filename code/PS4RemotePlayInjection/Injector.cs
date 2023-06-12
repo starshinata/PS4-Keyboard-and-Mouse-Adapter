@@ -1,5 +1,7 @@
 ﻿using EasyHook;
 using Pizza.Common;
+using PS4RemotePlayInjection;
+using PS4RemotePlayInjection;
 using Serilog;
 using System;
 using System.Diagnostics;
@@ -8,9 +10,10 @@ using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels.Ipc;
 using System.Security.Principal;
 
-namespace PS4RemotePlayInterceptor
+namespace PS4RemotePlayInjection
 {
     public delegate void InterceptionDelegate(ref DualShockState state);
+
 
     public enum InjectionMode
     {
@@ -20,6 +23,9 @@ namespace PS4RemotePlayInterceptor
 
     public class Injector
     {
+
+        public static IpcClient ipcClient;
+
         // EasyHook
         private static string _channelName = null;
         private static string _channelName2 = null;
@@ -40,6 +46,11 @@ namespace PS4RemotePlayInterceptor
 
         public static int Inject(int emulationMode, string processName, string dllToInject)
         {
+            Log.Logger.Information("IPC a");
+            ipcClient = new IpcClient();
+            Log.Logger.Information("IPC b");
+            ipcClient.Setup();
+            Log.Logger.Information("IPC c");
 
             Log.Logger.Information("Injector.Inject {emulationMode:{0}||{1}, processName:{2},  dllToInject:{3}",
                 emulationMode,
@@ -90,25 +101,25 @@ namespace PS4RemotePlayInterceptor
                 //    shouldInject = true;
                 //}
 
-/*
-                if (_ipcServer == null)
-                {
-                    Log.Debug("Injector.Inject making ipcServer1");
+                /*
+                                if (_ipcServer == null)
+                                {
+                                    Log.Debug("Injector.Inject making ipcServer1");
 
-                    // Setup remote hooking
-                    _channelName = DateTime.Now.ToString("yy-MM-dd hh:mm:ss");
-                    _ipcServer = RemoteHooking.IpcCreateServer<InjectionInterface>(ref _channelName, WellKnownObjectMode.Singleton, WellKnownSidType.WorldSid);
-                    Log.Debug("Injector.Inject _ipcServer1 made");
-                }
+                                    // Setup remote hooking
+                                    _channelName = DateTime.Now.ToString("yy-MM-dd hh:mm:ss");
+                                    _ipcServer = RemoteHooking.IpcCreateServer<InjectionInterface>(ref _channelName, WellKnownObjectMode.Singleton, WellKnownSidType.WorldSid);
+                                    Log.Debug("Injector.Inject _ipcServer1 made");
+                                }
 
-                if (_ipcServer2 == null)
-                {
-                    Log.Debug("Injector.Inject making ipcServer2");
-                    _channelName2 = "dotnethooks";
-                    _ipcServer2 = RemoteHooking.IpcCreateServer<InjectionInterface>(ref _channelName2, WellKnownObjectMode.Singleton, WellKnownSidType.WorldSid);
-                    shouldInject = true;
-                    Log.Debug("Injector.Inject _ipcServer2 made");
-                }*/
+                                if (_ipcServer2 == null)
+                                {
+                                    Log.Debug("Injector.Inject making ipcServer2");
+                                    _channelName2 = "dotnethooks";
+                                    _ipcServer2 = RemoteHooking.IpcCreateServer<InjectionInterface>(ref _channelName2, WellKnownObjectMode.Singleton, WellKnownSidType.WorldSid);
+                                    shouldInject = true;
+                                    Log.Debug("Injector.Inject _ipcServer2 made");
+                                }*/
 
 
             }

@@ -1,6 +1,6 @@
 ﻿using Gma.System.MouseKeyHook;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
-using PS4RemotePlayInterceptor;
+using PS4RemotePlayInjection;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Forms;

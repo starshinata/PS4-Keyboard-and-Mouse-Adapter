@@ -1,4 +1,4 @@
-﻿// PS4RemotePlayInterceptor (File: Classes/InterceptorException.cs)
+﻿// PS4RemotePlayInjection (File: Classes/InterceptorException.cs)
 //
 // Copyright (c) 2018 Komefai
 //
@@ -24,7 +24,7 @@
 
 using System;
 
-namespace PS4RemotePlayInterceptor
+namespace PS4RemotePlayInjection
 {
     //TODO WHY IS THIS EMPTY ?!
     public class InterceptorException : Exception

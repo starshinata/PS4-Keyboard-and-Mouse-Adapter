@@ -1,7 +1,7 @@
 ﻿using Nefarius.ViGEm.Client.Targets;
 using Nefarius.ViGEm.Client.Targets.DualShock4;
 
-using PS4RemotePlayInterceptor;
+using PS4RemotePlayInjection;
 
 namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
 {

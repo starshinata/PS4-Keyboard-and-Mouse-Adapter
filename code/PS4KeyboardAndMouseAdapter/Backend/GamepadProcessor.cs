@@ -1,6 +1,6 @@
 ﻿using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using PS4RemotePlayInjection;
-using PS4RemotePlayInterceptor;
+using PS4RemotePlayInjection;
 using Serilog;
 using SFML.System;
 using SFML.Window;

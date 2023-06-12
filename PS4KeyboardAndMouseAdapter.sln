@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "code\Common\Common.csproj", "{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PS4KeyboardAndMouseAdapter", "code\PS4KeyboardAndMouseAdapter\PS4KeyboardAndMouseAdapter.csproj", "{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{62EC74F8-B76B-4703-A3AD-C184C198EBEB} = {62EC74F8-B76B-4703-A3AD-C184C198EBEB}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PS4RemotePlayInjection", "code\PS4RemotePlayInjection\PS4RemotePlayInjection.csproj", "{D3D6F621-7CB9-4992-80AC-FF9745D974EC}"
 EndProject
@@ -101,6 +104,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "extract-me-bin", "extract-m
 		manualBuild\extract-me-bin\Update.exe = manualBuild\extract-me-bin\Update.exe
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreeterProtos", "code\GreeterProtos\GreeterProtos.csproj", "{62EC74F8-B76B-4703-A3AD-C184C198EBEB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Clean|Any CPU = Clean|Any CPU
@@ -171,6 +176,18 @@ Global
 		{0DED13E9-848F-4AC7-A1CA-2399001AA429}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0DED13E9-848F-4AC7-A1CA-2399001AA429}.Release|x64.ActiveCfg = Release|Any CPU
 		{0DED13E9-848F-4AC7-A1CA-2399001AA429}.Release|x64.Build.0 = Release|Any CPU
+		{62EC74F8-B76B-4703-A3AD-C184C198EBEB}.Clean|Any CPU.ActiveCfg = Debug|Any CPU
+		{62EC74F8-B76B-4703-A3AD-C184C198EBEB}.Clean|Any CPU.Build.0 = Debug|Any CPU
+		{62EC74F8-B76B-4703-A3AD-C184C198EBEB}.Clean|x64.ActiveCfg = Debug|Any CPU
+		{62EC74F8-B76B-4703-A3AD-C184C198EBEB}.Clean|x64.Build.0 = Debug|Any CPU
+		{62EC74F8-B76B-4703-A3AD-C184C198EBEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62EC74F8-B76B-4703-A3AD-C184C198EBEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62EC74F8-B76B-4703-A3AD-C184C198EBEB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{62EC74F8-B76B-4703-A3AD-C184C198EBEB}.Debug|x64.Build.0 = Debug|Any CPU
+		{62EC74F8-B76B-4703-A3AD-C184C198EBEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62EC74F8-B76B-4703-A3AD-C184C198EBEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62EC74F8-B76B-4703-A3AD-C184C198EBEB}.Release|x64.ActiveCfg = Release|Any CPU
+		{62EC74F8-B76B-4703-A3AD-C184C198EBEB}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -45,7 +45,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
                 {
                     try
                     {
-                        PS4RemotePlayInterceptor.DualShockState x = gp.GetState();
+                        PS4RemotePlayInjection.DualShockState x = gp.GetState();
                         if (x != null)
                         {
                             //Log.Information("ds" + gp.DualShockStateToString(ref x));

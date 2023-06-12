@@ -1,4 +1,4 @@
-﻿// PS4RemotePlayInterceptor (File: Classes/InjectionInterface.cs)
+﻿// PS4RemotePlayInjection (File: Classes/InjectionInterface.cs)
 //
 // Copyright (c) 2018 Komefai
 //
@@ -30,7 +30,7 @@ using System;
 using System.Linq;
 using System.Text;
 
-namespace PS4RemotePlayInterceptor
+namespace PS4RemotePlayInjection
 {
     /// <summary>
     /// Provides an interface for communicating from the client (target) to the server (injector)
