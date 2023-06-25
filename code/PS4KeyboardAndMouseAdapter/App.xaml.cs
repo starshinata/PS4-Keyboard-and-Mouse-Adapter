@@ -27,7 +27,7 @@ namespace Pizza.KeyboardAndMouseAdapter
             Log.Information("PS4KMA v{0} started", VersionUtil.GetVersionWithBuildDate());
 
             // cause not having a cursor is a pain in the ass
-            Utility.ShowCursor(true);
+            CursorUtility.ShowCursor(true);
 
             ApplicationSettings.Load();
             UserSettings.LoadPrevious();
@@ -54,7 +54,7 @@ namespace Pizza.KeyboardAndMouseAdapter
             InstanceSettings.GetInstance().EnableMouseInput = false;
 
             // cause not having a cursor is a pain in the ass
-            Utility.ShowCursor(true);
+            CursorUtility.ShowCursor(true);
 
             UserSettings.Save(UserSettings.PROFILE_PREVIOUS);
             ApplicationSettings.Save();

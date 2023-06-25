@@ -31,6 +31,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Remote
             serverTask = RunServiceAsync(server, tokenSource.Token);
         }
 
+        //todo
         public void Shutdown()
         {
             tokenSource.Cancel();

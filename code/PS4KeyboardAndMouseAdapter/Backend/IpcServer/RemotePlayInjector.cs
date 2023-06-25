@@ -1,7 +1,6 @@
 ﻿using Pizza.Common;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using PS4RemotePlayInjection;
-using PS4RemotePlayInjection;
 using Serilog;
 using System;
 using System.Diagnostics;
@@ -40,7 +39,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Remote
                 Log.Logger.Information("RemotePlayInjector.Inject remotePlayProcessId " + remotePlayProcessId);
                 Process RemotePlayProcess = Process.GetProcessById(remotePlayProcessId);
                 RemotePlayProcess.EnableRaisingEvents = true;
-                RemotePlayProcess.Exited += (sender, args) => { Utility.ShowCursor(true); };
+                RemotePlayProcess.Exited += (sender, args) => { CursorUtility.ShowCursor(true); };
 
                 RefreshRemotePlayProcess();
 

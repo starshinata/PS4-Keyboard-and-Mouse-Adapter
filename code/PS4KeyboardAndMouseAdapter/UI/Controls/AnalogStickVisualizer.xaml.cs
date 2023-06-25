@@ -60,8 +60,8 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls
 
             var dotLeftmostX = Canvas.GetLeft(v.circle) - v.dot.Width / 2;
             var dotTopmostY = Canvas.GetTop(v.circle) - v.dot.Height / 2;
-            var dotOffsetX = Utility.map(v.analogX, 0, 255, 0, v.Diameter);
-            var dotOffsetY = Utility.map(v.analogY, 0, 255, 0, v.Diameter);
+            var dotOffsetX = AngleUtility.map(v.analogX, 0, 255, 0, v.Diameter);
+            var dotOffsetY = AngleUtility.map(v.analogY, 0, 255, 0, v.Diameter);
             Canvas.SetLeft(v.dot, dotLeftmostX + dotOffsetX);
             Canvas.SetTop(v.dot, dotTopmostY + dotOffsetY);
         }

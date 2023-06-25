@@ -1,6 +1,7 @@
 ﻿using GreeterProtos;
 using Grpc.Core;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
+using PS4RemotePlayInjection;
 using System;
 using System.Threading.Tasks;
 using static GreeterProtos.GreetingService;
@@ -12,8 +13,15 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Remote
     {
         public override Task<HelloResponse> Greeting(HelloRequest request, ServerCallContext context)
         {
-            Console.WriteLine($"Greeter Service Received: Name {request.Name} Sentiment {request.Sentiment} Age{request.Age}");
-            return Task.FromResult(new HelloResponse { Greeting = "Hello " + InstanceSettings.GetInstance().GetRemotePlayProcess().Id });
+            Console.WriteLine($"Greeter Service Received: ");
+
+            var x = new HelloResponse
+            {
+                ProcessId = InstanceSettings.GetInstance().GetRemotePlayProcess().Id,
+                IsToolBarVisible = UtilityData.IsToolBarVisible
+            };
+
+            return Task.FromResult(x);
         }
     }
 }

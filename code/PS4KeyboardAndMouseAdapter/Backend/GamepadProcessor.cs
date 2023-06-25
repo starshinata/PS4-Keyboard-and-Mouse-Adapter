@@ -241,7 +241,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
 
             if (EnableMouseInput)
             {
-                Utility.ShowCursor(false);
+                CursorUtility.ShowCursor(false);
 
                 // mouse displacement relative to the anchor
                 MouseDirection = FeedMouseCoords();
@@ -268,7 +268,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
 
                 // Cap length to fit range.
 
-                double normalizedLength = Utility.mapcap(direction.Length(),
+                double normalizedLength = AngleUtility.mapcap(direction.Length(),
                     UserSettings.MouseDistanceLowerRange, UserSettings.MouseDistanceUpperRange,
                     UserSettings.AnalogStickLowerRange / 100f, UserSettings.AnalogStickUpperRange / 100f);
 
@@ -278,8 +278,8 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
                 // L3R3 center is 127, 
                 // full left/up is 0
                 // full right/down is 255
-                byte scaledX = (byte)Utility.map(direction.X * normalizedLength, -1, 1, 0, 255);
-                byte scaledY = (byte)Utility.map(direction.Y * normalizedLength, -1, 1, 0, 255);
+                byte scaledX = (byte)AngleUtility.map(direction.X * normalizedLength, -1, 1, 0, 255);
+                byte scaledY = (byte)AngleUtility.map(direction.Y * normalizedLength, -1, 1, 0, 255);
 
                 direction.X *= (float)UserSettings.XYRatio;
                 direction = Vector2.Normalize(direction);
@@ -440,7 +440,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
             if (!ProcessUtil.IsRemotePlayInForeground())
             {
                 Log.Verbose(uuid + "GamepadProcessor.GetState return null");
-                Utility.ShowCursor(true);
+                CursorUtility.ShowCursor(true);
                 return null;
             }
 

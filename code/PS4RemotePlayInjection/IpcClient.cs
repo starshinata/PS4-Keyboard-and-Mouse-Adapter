@@ -14,45 +14,37 @@ namespace PS4RemotePlayInjection
         private Channel channel;
         private GreetingService.GreetingServiceClient client;
 
-
-        public async Task Setup()
+        public void Setup()
         {
-            try
-            {
-                var channelTarget = $"{DefaultHost}:{Port}";
+            string hostAndPort = $"{DefaultHost}:{Port}";
 
-                Console.WriteLine($"Target: {channelTarget}");
-
-                //TODO insecure?!
-                // Create a channel
-                channel = new Channel(channelTarget, ChannelCredentials.Insecure);
-
-                // Create a client with the channel
-                client = new GreetingService.GreetingServiceClient(channel);
-
-                // Create a request
-                var request = new HelloRequest
-                {
-                    Name = "Mete - on C#",
-                    Age = 34,
-                    Sentiment = Sentiment.Happy
-                };
-
-                // Send the request
-                Console.WriteLine("GreeterClient sending request");
-                var response = await client.GreetingAsync(request);
-
-                Console.WriteLine("GreeterClient received response: " + response.Greeting);
-            }
-            finally { await Shutdown(); }
+            //TODO insecure?!
+            channel = new Channel(hostAndPort, ChannelCredentials.Insecure);
+            client = new GreetingService.GreetingServiceClient(channel);
         }
 
-        //TODO do proper shutdown
-        private async Task Shutdown()
+        public async Task DoWork()
         {
-            // Shutdown
-            await channel.ShutdownAsync();
+            Console.WriteLine("IpcClient DoWork");
+            // Create a request
+            var request = new HelloRequest();
 
+            // Send the request
+            Console.WriteLine("GreeterClient sending request");
+            var response = await client.GreetingAsync(request);
+
+            Console.WriteLine("GreeterClient received response: " + response.ProcessId);
+            Console.WriteLine("GreeterClient received response: " + response.IsToolBarVisible);
+            UtilityData.pid = response.ProcessId;
+            UtilityData.IsToolBarVisible = response.IsToolBarVisible;
+        }
+
+        public async Task Shutdown()
+        {
+            if (channel != null)
+            {
+                await channel.ShutdownAsync();
+            }
         }
     }
 }

@@ -21,11 +21,11 @@ mkdir -p ${generated_dir}
 
 PROTOS=$( find ${greeter_protos_dir} -type f -name '*.proto' )
 
-echo PROTOS $PROTOS
+echo PROTOS \"$PROTOS\"
 
 for PROTO in $PROTOS ; do
 
-    echo PROTO $PROTO
+    echo PROTO \"$PROTO\"
 	
     ${proto_tools}/protoc${PROTO_EXTENSION} $PROTO \
         --csharp_out ${generated_dir}              \

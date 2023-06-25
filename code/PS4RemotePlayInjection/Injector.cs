@@ -1,14 +1,12 @@
 ﻿using EasyHook;
 using Pizza.Common;
-using PS4RemotePlayInjection;
-using PS4RemotePlayInjection;
 using Serilog;
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels.Ipc;
-using System.Security.Principal;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace PS4RemotePlayInjection
 {
@@ -21,10 +19,12 @@ namespace PS4RemotePlayInjection
         Compatibility
     }
 
+
     public class Injector
     {
+        //TODO why is everything static
 
-        public static IpcClient ipcClient;
+        private static ThreadRpcUpdateListener ThreadRpcUpdateListener;
 
         // EasyHook
         private static string _channelName = null;
@@ -38,25 +38,27 @@ namespace PS4RemotePlayInjection
 
         // Injection
         public static InjectionMode InjectionMode = InjectionMode.Auto;
+
         // Emulation
         public static int EmulationMode = -1;
 
         // Delegate
         public static InterceptionDelegate Callback { get; set; }
 
+        private static ThreadRpcUpdateListener threadRpcUpdateListener;
+
         public static int Inject(int emulationMode, string processName, string dllToInject)
         {
-            Log.Logger.Information("IPC a");
-            ipcClient = new IpcClient();
-            Log.Logger.Information("IPC b");
-            ipcClient.Setup();
-            Log.Logger.Information("IPC c");
+            threadRpcUpdateListener = new ThreadRpcUpdateListener();
+            Thread thread = new Thread(threadRpcUpdateListener.DoWork);
+            thread.Start();
+
 
             Log.Logger.Information("Injector.Inject {emulationMode:{0}||{1}, processName:{2},  dllToInject:{3}",
-                emulationMode,
-                EmulationConstants.ToString(emulationMode),
-                processName,
-                dllToInject);
+                    emulationMode,
+                    EmulationConstants.ToString(emulationMode),
+                    processName,
+                    dllToInject);
 
             EmulationMode = emulationMode;
 
@@ -164,8 +166,10 @@ namespace PS4RemotePlayInjection
             }
         }
 
-        public static void StopInjection()
+        public static async Task StopInjectionAsync()
         {
+            await threadRpcUpdateListener.ShutdownAsync();
+
             if (_ipcServer != null)
             {
                 _ipcServer.StopListening(null);

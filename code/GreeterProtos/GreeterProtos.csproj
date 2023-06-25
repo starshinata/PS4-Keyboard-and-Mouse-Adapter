@@ -24,7 +24,7 @@
   <Target Name="GenProtos" BeforeTargets="BeforeBuild" Inputs="@(Proto)" Outputs="@(Generated)">
     <Message Text="Generating protos @(Proto)" Importance="High" />
     <!-- TODO: Run different command lines per OS. -->
-    <Exec Command="$(ProjectDir)/gen_protos.sh" />
+    <Exec Command="bash $(ProjectDir)/generate_proto_classes.sh" />
     <!-- Ensure all of the generated files are compiled. -->
     <ItemGroup Condition="'@(Compile)' == ''">
       <Compile Include="generated\*.cs" />
