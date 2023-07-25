@@ -358,3 +358,4 @@ MigrationBackup/
 /ReleaseArtefacts
 /.sarif/
 /temp/
+/code/GreeterProtos/generated/*.cs

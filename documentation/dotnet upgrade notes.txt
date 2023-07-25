@@ -96,11 +96,40 @@ System.IO.DirectoryNotFoundException: Could not find a part of the path 'D:\work
 the project "UnitTests" was defined twice in path
 'D:\workspace\PS4-Keyboard-and-Mouse-Adapter\master.move-to-dotnet-6\code\UnitTests\UnitTests\KeyboardAndMouseAdapter\backend\Config\UserSettings\IsLegacyConfig--profile-2.0.0-provisional.json'.
 
+Extra "..\\" was needed to get to project root
 
 ##Unit tests (3)
 "System.InvalidOperationException: The calling thread must be STA, because many UI components require this."
 
-per https://stackoverflow.com/questions/2220418/using-wpf-components-in-nunit-tests-how-to-use-sta
+ERROR
+```
+  Failed WhenEmulationMode__Unknown__ShouldDisableTheControl [< 1 ms]
+  Error Message:
+   Test method UnitTests.KeyboardAndMouseAdapter.UI.Controls.GamepadUpdaterNoSleepControlTest.CalculateIsControlEnabledTest.WhenEmulationMode__Unknown__ShouldDisableTheControl th
+rew exception:
+System.InvalidOperationException: The calling thread must be STA, because many UI components require this.
+  Stack Trace:
+      at System.Windows.Input.InputManager..ctor()
+   at System.Windows.Input.InputManager.GetCurrentInputManagerImpl()
+   at System.Windows.Input.InputManager.get_Current()
+   at System.Windows.Input.KeyboardNavigation..ctor()
+   at System.Windows.FrameworkElement.FrameworkServices..ctor()
+   at System.Windows.FrameworkElement.EnsureFrameworkServices()
+   at System.Windows.FrameworkElement..ctor()
+   at System.Windows.Controls.Control..ctor()
+   at System.Windows.Controls.UserControl..ctor()
+```
+
+Issue seems to be that in older versions tests were automatically run the the STA trhead
+
+Workaround given at https://stackoverflow.com/questions/2220418/using-wpf-components-in-nunit-tests-how-to-use-sta
+
+Or we can use this available on nuget 
+https://github.com/saikrishnav/testfxSTAext
+
+Nunit had a fix in the first few results of google, so another idea the nunit is the way to go...
+MSTest required lots of digging
+
 
 
 ##Unit tests (4)

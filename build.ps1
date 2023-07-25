@@ -39,7 +39,7 @@ $VISUAL_STUDIO_PATH = "C:\Program Files\Microsoft Visual Studio\2022\Community\"
 $env:Path += ";$VISUAL_STUDIO_PATH\MSBuild\Current\Bin\amd64\"
 
 ## Path for signtool.exe
-$env:Path += ";C:\Program Files (x86)\Windows Kits\10\bin\10.0.17763.0\x64\"
+$env:Path += ";C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x64\"
 
 ## Path for vstest.console.exe
 $env:Path += ";$VISUAL_STUDIO_PATH\Common7\IDE\CommonExtensions\Microsoft\TestWindow"
