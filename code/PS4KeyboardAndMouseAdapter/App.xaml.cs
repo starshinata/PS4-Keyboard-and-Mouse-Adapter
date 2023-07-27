@@ -81,7 +81,7 @@ namespace Pizza.KeyboardAndMouseAdapter
             }
             catch (Exception ex)
             {
-                ExceptionLogger.LogException("App L87 ", ex);
+                ExceptionLogger.LogException("App L84 ", ex);
             }
 
         }

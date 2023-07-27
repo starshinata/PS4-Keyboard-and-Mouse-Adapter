@@ -27,14 +27,16 @@ namespace PS4RemotePlayInjection
         {
             Console.WriteLine("IpcClient DoWork");
             // Create a request
-            var request = new HelloRequest();
+            var request = new UpdateRequest();
 
             // Send the request
             Console.WriteLine("GreeterClient sending request");
             var response = await client.GreetingAsync(request);
 
-            Console.WriteLine("GreeterClient received response: " + response.ProcessId);
-            Console.WriteLine("GreeterClient received response: " + response.IsToolBarVisible);
+            Console.WriteLine("GreeterClient received response.ProcessId: " + response.ProcessId);
+            Console.WriteLine("GreeterClient received response.IsToolBarVisible: " + response.IsToolBarVisible);
+            Console.WriteLine("GreeterClient received response.EmulationMode: " + response.EmulationMode);
+            Console.WriteLine("GreeterClient received response.DualShockProto: " + response.DualShockProto);
             UtilityData.pid = response.ProcessId;
             UtilityData.IsToolBarVisible = response.IsToolBarVisible;
         }
