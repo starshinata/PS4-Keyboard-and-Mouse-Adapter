@@ -292,7 +292,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
 
                 if (scaledX != 127 && scaledX != 128 && scaledY != 127 && scaledY != 128)
                 {
-                    // Log.Verbose("GamepadProcessor.HandleMouseCursor scaledX={0} scaledY={1}", scaledX, scaledY);
+                    Log.Verbose("GamepadProcessor.HandleMouseCursor scaledX={0} scaledY={1}", scaledX, scaledY);
                 }
 
                 if (UserSettings.MouseControlsL3)
@@ -429,7 +429,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
             }
 
             Guid uuid = Guid.NewGuid();
-            // Log.Verbose(uuid + " GamepadProcessor.GetState in a");
+            //        LogVerboseWithUuid(uuid , " GamepadProcessor.GetState in a");
 
             // Create the default state to modify
             if (true)//CurrentState == null)
@@ -439,7 +439,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
 
             if (!ProcessUtil.IsRemotePlayInForeground())
             {
-                Log.Verbose(uuid + "GamepadProcessor.GetState return null");
+                LogVerboseWithUuid(uuid, "GamepadProcessor.GetState return null");
                 Utility.ShowCursor(true);
                 return null;
             }
@@ -447,7 +447,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
             //Stopwatch OnReceiveDataTimer = new Stopwatch();
             //OnReceiveDataTimer.Start();
 
-            // Log.Verbose(uuid + " GamepadProcessor.GetState in b");
+            //LogVerboseWithUuid(uuid , " GamepadProcessor.GetState in b");
 
             HandleButtonPressed();
 
@@ -455,13 +455,20 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
             HandleMouseCursor();
             MouseWheelProcessor.Process(CurrentState);
 
-            //Log.Verbose(uuid + " GamepadProcessor.GetState out " + DualShockStateToString(ref CurrentState));
+            LogVerboseWithUuid(uuid, " GamepadProcessor.GetState out " + DualShockStateToString(ref CurrentState));
 
-            //Log.Verbose(uuid + " GamepadProcessor.GetState OnReceiveDataTimer {0} ms ", + OnReceiveDataTimer.ElapsedMilliseconds);
+            //LogVerboseWithUuid(uuid , " GamepadProcessor.GetState OnReceiveDataTimer {0} ms ", + OnReceiveDataTimer.ElapsedMilliseconds);
             //OnReceiveDataTimer.Stop();
 
-            Log.Verbose(uuid + "GamepadProcessor.GetState return THING");
+            LogVerboseWithUuid(uuid, "GamepadProcessor.GetState return THING");
             return CurrentState;
         }
+
+        private void LogVerboseWithUuid(Guid uuid, string message)
+        {
+            Log.Verbose(uuid + " " + message);
+        }
+
+
     }
 }
