@@ -1,6 +1,14 @@
+# PS Remote Play v6.0.0.2240
+PS4KMA has issues with the latest version of PS Remote Play, and thus you can't currently use the latest version of PS Remote Play
+
+For workaround see https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/issues/85
+
+
+---
+
+
 # PS4 Keyboard and Mouse Adapter 
 Disclaimer: This project is not endorsed or certified by Sony, Playstation or any of their partners.
-
 
 ## UI
 
@@ -43,7 +51,7 @@ Try our discord here https://discord.gg/zgveKtme5s where you can either suggest 
 * some games need to detect you shaking the controller, need to figure out how to handle/emulate that
 * touchpad needs more work :(
 * support for analog input like from a controller stick, controller trigger, or Steering wheel
-* supporting ps5 (its a bit hit or miss atm)
+* formally support ps5 (it is a bit hit or miss atm)
 * support chiaki https://git.sr.ht/~thestr4ng3r/chiaki
 * support linux/mac 
 
@@ -54,9 +62,9 @@ Try our discord here https://discord.gg/zgveKtme5s where you can either suggest 
 
 (in alphabetical order)
 * [DS4Windows](https://github.com/Ryochan7/DS4Windows) - don't need to explain that one
-* [EasyHook](https://easyhook.github.io) - The best tool for Windows API hooking.
-* [PS4RemotePlayInterceptor](https://github.com/komefai/PS4RemotePlayInterceptor) a module by used in [PS4Macro](https://github.com/komefai/PS4Macro).<br>
-  Big thanks to [komefai](https://github.com/komefai). <br>
-  If this wasn't available PS4KMA might not have happened.
+* [EasyHook](https://easyhook.github.io) for Windows API hooking
+* [komefai](https://github.com/komefai) for making [PS4RemotePlayInterceptor](https://github.com/komefai/PS4RemotePlayInterceptor), and [PS4Macro](https://github.com/komefai/PS4Macro)
+* [nefarius](https://github.com/nefarius) for making [ViGEmBus](https://github.com/ViGEm/ViGEmBus), [ViGEm.NET](https://github.com/ViGEm/ViGEm.NET)
+  (This is allowed the emulation added in PS4KMA v3.0.0+)
 * [soulehshaikh9](https://github.com/soulehshaikh99/self-signed-certificate-generator) for pfx certificate generator
-* [ViGEm.NET](https://github.com/ViGEm/ViGEm.NET) - (to help with emulation in v3.0.0+) Big thanks to [nefarius](https://github.com/nefarius) for making this. 
+  
