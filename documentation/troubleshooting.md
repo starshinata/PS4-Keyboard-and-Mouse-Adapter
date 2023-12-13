@@ -1,16 +1,29 @@
 # Troubleshooting
 
 
-## Recommended user environment
+## Recommendations
+
+* Don't use a HP Omen laptop<br>
+  HP use a fork of [ViGEm](https://github.com/nefarius/ViGEmBus) with conflicts with the ViGEm we require<br>
+  For more details see https://github.com/nefarius/ViGEmBus/issues/99
+
+* Don't Windows Server as your OS<br>
+  Windows Server has alot of issues with controller/gamepad support <br>
+  For more details see https://github.com/nefarius/ViGEmBus/issues/153
+
+* If you have Comodo Firewall, please disable HIPS <br>
+  If you leave HIPS enabled, launching PS4KMA may crash your computer <br>
+  https://help.comodo.com/topic-72-1-451-4760-.html <br>
+  https://www.comodo.com/home/internet-security/free-internet-security.php
+  
+* If you have Input mapper, please uninstall it <br>
+  Input mapper being installed can cause interference with this application  <br>
+  https://beta.inputmapper.com/  
 
 * If you have Rewasd installed, please uninstall it <br>
-  https://www.rewasd.com/ <br>
-  Rewasd being installed can cause interference with this application
-
-* If you have Input mapper, please uninstall it <br>
-  https://beta.inputmapper.com/ <br>
-  Input mapper being installed can cause interference with this application
-  
+  Rewasd being installed can cause interference with this application  <br>
+  https://www.rewasd.com/
+    
 * Make sure that "PS Remote Play" is closed before starting the adapter
 
 * Do not start "PS Remote Play" yourself <br>
@@ -20,11 +33,11 @@
 * If you have a DS4 or DS5 controller/gamepad, unplug it from computer <br>
   Either being plugged in can cause interference with this application
   
-* PS4 is connected to your router via Ethernet cable <br>
-  (this reduces lag, and make your PS4 more consistently find-able from the "PS Remote Play" application)
+* PS is connected to your router via Ethernet cable <br>
+  (this reduces lag, and make your PS more consistently find-able from the "PS Remote Play" application)
 
-* Use video from the PS4 <br>
-  Plug a HDMI cable into your PS4, and connect the other end into your monitor/TV even when using remote play <br>
+* Use video from the PS <br>
+  Plug a HDMI cable into your PS, and connect the other end into your monitor/TV even when using remote play <br>
   (If you choose to use the video from the "PS Remote Play" then you are adding delay/lag which is generally undesired)
 
 * The PS4 you are trying to connect to has Remote play enabled <br>
@@ -61,10 +74,6 @@ Can you check three things,
 * your antivirus hasnt quarantined PS4KeyboardAndMouseAdapter.exe (we have been flagged as a virus because we arent vetted by a big/known/trusted corporation). <br> We submit executable scans to https://www.virustotal.com/ for every release, and they have yet to detect a real threat.
 
 If that doesnt resolve it, please delete the folder "C:\Users\\{USER}\AppData\Local\PS4KeyboardAndMouseAdapter", restart your PC, then try again
-
-
-#### (Runtime) Application says "need to install remote play" but I already have it installed
-If you are on PS4KeyboardAndMouseAdapter v1.0.7 or lower, you need to upgrade to a newer version. Sometime in October 2020 Sony issued a new version of "PS Remote Play" to support PS5, that broke some things in older versions of our application.
 
 
 #### (Runtime) Presentation Framework-SystemCore Error
