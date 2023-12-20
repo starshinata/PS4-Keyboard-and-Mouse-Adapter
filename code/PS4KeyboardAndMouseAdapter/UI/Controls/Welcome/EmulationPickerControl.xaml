@@ -9,7 +9,7 @@
     d:DesignHeight="450"
     d:DesignWidth="680"
              
-    xmlns:welcome="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls.Welcome"
+    xmlns:ui_controls_welcome="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls.Welcome"
     >
 
     <StackPanel>
@@ -85,7 +85,7 @@
         <StackPanel
             x:Name="Panel_RadioButtonGroup">
             <RadioButton
-                Tag="{x:Static welcome:EmulationPickerControl.ONLY_VIGEM}">
+                Tag="{x:Static ui_controls_welcome:EmulationPickerControl.ONLY_VIGEM}">
                 ViGEm and NO process injection for the bottom toolbar
             </RadioButton>
 
@@ -93,7 +93,7 @@
             <TextBlock />
 
             <RadioButton
-                Tag="{x:Static welcome:EmulationPickerControl.VIGEM_AND_PROCESS_INJECTION}">
+                Tag="{x:Static ui_controls_welcome:EmulationPickerControl.VIGEM_AND_PROCESS_INJECTION}">
                 ViGEm and process injection for the bottom toolbar
             </RadioButton>
 
@@ -109,7 +109,7 @@
             <TextBlock />
 
             <RadioButton
-                Tag="{x:Static welcome:EmulationPickerControl.ONLY_PROCESS_INJECTION}">
+                Tag="{x:Static ui_controls_welcome:EmulationPickerControl.ONLY_PROCESS_INJECTION}">
                 NO ViGEm, just process injection
             </RadioButton>
 

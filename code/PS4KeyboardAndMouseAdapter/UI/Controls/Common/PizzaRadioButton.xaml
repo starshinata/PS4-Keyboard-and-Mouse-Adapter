@@ -1,0 +1,32 @@
+﻿<UserControl
+    x:Class="Pizza.KeyboardAndMouseAdapter.UI.Controls.Common.PizzaRadioButton"
+    x:Name="This"
+
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
+    xmlns:wpfspark="clr-namespace:WPFSpark;assembly=WPFSpark" 
+    
+    mc:Ignorable="d" 
+    d:DesignHeight="100"
+    d:DesignWidth="300"
+    >
+
+    <wpfspark:ToggleSwitch 
+            Grid.Row="6"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Background="black"
+            BorderThickness="2px"
+            IsChecked="{Binding Path=UserSettings.MouseControlsL3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Height="30"
+            HorizontalAlignment="Right"
+            Margin="0,2,1,-4"
+            Style="{StaticResource {ComponentResourceKey ResourceId=ToggleSwitch.iOS.Light.Style, TypeInTargetAssembly={x:Type wpfspark:ToggleSwitch}}}"
+            VerticalAlignment="Center"
+            Width="60" />
+
+
+</UserControl>

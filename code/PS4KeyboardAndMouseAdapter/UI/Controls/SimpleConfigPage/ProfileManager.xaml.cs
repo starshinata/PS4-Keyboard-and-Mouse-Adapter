@@ -29,7 +29,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls
                 openFileDialog.ShowDialog();
                 if (openFileDialog.FileName != "")
                 {
-                    UserSettings.Load(openFileDialog.FileName);
+                    UserSettingsContainer.Load(openFileDialog.FileName);
                 }
             }
             catch (JsonReaderException ex)
@@ -50,7 +50,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls
         public void HandleReset(object sender, RoutedEventArgs e)
         {
             Log.Debug("ProfileManager.HandleReset");
-            UserSettings.LoadDefault();
+            UserSettingsContainer.LoadDefault();
         }
 
         public void HandleSave(object sender, RoutedEventArgs e)
@@ -65,7 +65,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls
                 saveFileDialog.ShowDialog();
 
                 if (saveFileDialog.FileName != "") { 
-                    UserSettings.Save(saveFileDialog.FileName);
+                    UserSettingsContainer.Save(saveFileDialog.FileName);
             }
             }
             catch (Exception ex)

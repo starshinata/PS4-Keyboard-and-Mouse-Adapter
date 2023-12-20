@@ -39,7 +39,7 @@
 
         </Grid.ColumnDefinitions>
 
-        <!-- reminder the below data bindings are done via the .xaml.cs file in fixButton method -->
+        <!-- reminder the below data bindings are done via the .xaml.cs file in InitializeButton method -->
 
         <!-- row 0 -->
         <Button

@@ -1,5 +1,5 @@
 ﻿
-namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
+namespace Pizza.KeyboardAndMouseAdapter.Backend.Mappings
 {
     public enum VirtualKey
     {

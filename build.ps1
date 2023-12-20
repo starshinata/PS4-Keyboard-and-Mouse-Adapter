@@ -29,19 +29,21 @@ $CERT_DIRECTORY="D:\workspace\##certificates\github.com-pancakeslp"
 #$MS_BUILD_CONFIG="Debug"
 $MS_BUILD_CONFIG="Release"
 
-$VERSION="3.1.0"
+$VERSION="4.0.0"
 
 ################################
 ################################
+
+$VISUAL_STUDIO_PATH="C:\Program Files\Microsoft Visual Studio\2022\"
 
 ## Path for MSBuild.exe
-$env:Path += ";C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\amd64\"
+$env:Path += ";$VISUAL_STUDIO_PATH\Community\MSBuild\Current\Bin\amd64\"
 
 ## Path for signtool.exe
 $env:Path += ";C:\Program Files (x86)\Windows Kits\10\bin\10.0.17763.0\x64\"
 
 ## Path for vstest.console.exe
-$env:Path += ";C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\TestWindow"
+$env:Path += ";$VISUAL_STUDIO_PATH\Community\Common7\IDE\CommonExtensions\Microsoft\TestWindow"
 
 $GENERATED_INSTALLER_PATH="SquirrelReleases"
 

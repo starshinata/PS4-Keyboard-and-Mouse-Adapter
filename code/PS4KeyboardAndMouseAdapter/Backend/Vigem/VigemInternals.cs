@@ -73,7 +73,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
             int sleepDuration = 0;
             if (!ApplicationSettings.GetInstance().GamepadUpdaterNoSleep)
             {
-                sleepDuration = 1000 / UserSettings.GetInstance().MousePollingRate;
+                sleepDuration = 1000 / UserSettingsContainer.GetInstance().MousePollingRate;
             }
 
             // 2021.12.22 pancakeslp

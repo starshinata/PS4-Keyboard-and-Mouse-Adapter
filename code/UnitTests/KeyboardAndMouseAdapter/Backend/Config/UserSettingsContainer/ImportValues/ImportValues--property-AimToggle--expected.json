@@ -1,20 +1,21 @@
 {
+  "AimToggle": true,
+  "AimToggleRetoggleDelay": 0,
   "AdvancedMappingPage_MappingsToShow": 4,
-  "AimToggle": false,
-  "AimToggleRetoggleDelay":0,
-  
   "AnalogStickLowerRange": 40,
   "AnalogStickUpperRange": 95,
-  
-  "KeyboardMappings": null,
 
-  "Mappings": {
-  },
+  "Mappings": [
+  ],
 
-  "MouseAimSensitivityEnabled": true,
+  "Mappings_ForAdvancedMappingsPage": null,
+  "Mappings_ForGamepadProcessor": null,
+  "Mappings_ForSimpleConfigPage": null,
+
+  "MouseAimSensitivityEnabled": false,
   "MouseControlsL3": false,
   "MouseControlsR3": false,
-  
+
   "MouseDistanceLowerRange": 5.0,
   "MouseDistanceUpperRange": 96.0,
   "MouseMaxDistance": 960.0,
@@ -27,6 +28,7 @@
   "MouseYAxisSensitivityAimModifier": 1.0,
   "MouseYAxisSensitivityLookModifier": 1.0,
   "MouseYAxisSensitivityMax": 100.0,
+
 
   "XYRatio": 1,
   "Version_2_0_0_OrGreater": true

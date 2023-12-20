@@ -5,7 +5,7 @@ using Serilog;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.MiscellaneousSettings
+namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.MiscellaneousSettingsPage
 {
     public partial class RemotePlayToolbarSettingsControl : UserControl
     {

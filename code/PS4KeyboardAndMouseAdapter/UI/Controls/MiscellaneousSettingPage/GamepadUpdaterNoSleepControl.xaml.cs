@@ -3,7 +3,7 @@ using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.MiscellaneousSettings
+namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.MiscellaneousSettingsPage
 {
     public partial class GamepadUpdaterNoSleepControl : UserControl
     {

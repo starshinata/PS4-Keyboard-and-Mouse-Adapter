@@ -1,17 +1,16 @@
 ﻿using Pizza.KeyboardAndMouseAdapter.Backend;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
-using Serilog;
 
 namespace Pizza.KeyboardAndMouseAdapter
 {
 
     public class MainViewModel
     {
-        public ApplicationSettings ApplicationSettings { get; set; } = ApplicationSettings.GetInstance(); 
+        public ApplicationSettings ApplicationSettings { get; set; } = ApplicationSettings.GetInstance();
 
         public InstanceSettings InstanceSettings { get; set; } = InstanceSettings.GetInstance();
 
-        public UserSettings UserSettings { get; set; } = UserSettings.GetInstance();
+        public UserSettingsV3 UserSettings { get; set; } = UserSettingsContainer.GetInstance();
 
         public GamepadProcessor GamepadProcessor;
 
@@ -25,7 +24,7 @@ namespace Pizza.KeyboardAndMouseAdapter
         public void RefreshData()
         {
             InstanceSettings.BroadcastRefresh();
-            UserSettings.BroadcastRefresh();
+            UserSettingsContainer.BroadcastRefresh();
         }
 
     }

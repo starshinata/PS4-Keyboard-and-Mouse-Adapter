@@ -1,5 +1,6 @@
 ﻿using Gma.System.MouseKeyHook;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
+using Pizza.KeyboardAndMouseAdapter.Backend.Mappings;
 using PS4RemotePlayInterceptor;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -38,18 +39,27 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
 
             if (ExtraButtons.Unknown != scrollAction)
             {
-                UserSettings settings = UserSettings.GetInstance();
+                UserSettingsV3 settings = UserSettingsContainer.GetInstance();
                 if (settings.Mappings != null)
                 {
-                    foreach (VirtualKey virtualKey in settings.Mappings.Keys)
+                    foreach (Mapping mapping in settings.Mappings)
                     {
-                        if (settings.Mappings[virtualKey].PhysicalKeys != null)
+
+                        if (mapping != null && mapping.PhysicalKeys != null && mapping.VirtualKeys != null)
                         {
-                            foreach (PhysicalKey physicalKey in settings.Mappings[virtualKey].PhysicalKeys)
+                            foreach (PhysicalKey physicalKey in mapping.PhysicalKeys)
                             {
-                                if (physicalKey.ExtraValue == scrollAction && !foundVirtualKeys.Contains(virtualKey))
+
+                                if (physicalKey.ExtraValue == scrollAction)
                                 {
-                                    foundVirtualKeys.Add(virtualKey);
+                                    foreach (VirtualKey virtualKey in mapping.VirtualKeys)
+                                    {
+
+                                        if (!foundVirtualKeys.Contains(virtualKey))
+                                        {
+                                            foundVirtualKeys.Add(virtualKey);
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -185,7 +195,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
 
         public void Process(DualShockState state)
         {
-            if (MouseButtonHoldTimer.ElapsedMilliseconds > UserSettings.GetInstance().MouseWheelScrollHoldDuration)
+            if (MouseButtonHoldTimer.ElapsedMilliseconds > UserSettingsContainer.GetInstance().MouseWheelScrollHoldDuration)
             {
                 LastVirtualKeys = null;
             }
