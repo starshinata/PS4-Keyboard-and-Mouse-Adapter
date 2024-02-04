@@ -4,6 +4,12 @@
 ## be error tolerant for process killing
 set +e
 
+
+echo "REMINDER this is to RUN, not BUILD"
+echo "REMINDER this is to RUN, not BUILD"
+echo ""
+
+
 echo "killing RemotePlay"
 ## documentation says /im but mingw no likey
 taskkill.exe -im RemotePlay* -f

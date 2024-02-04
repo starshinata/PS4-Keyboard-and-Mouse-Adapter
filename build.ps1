@@ -24,6 +24,7 @@ $ErrorActionPreference = "Stop"
 
 ## might need configuring
 $CERT_DIRECTORY = "C:\workspace\##certificates\github.com-pancakeslp"
+$CERT_DIRECTORY = "E:\workspace\##certificates\github.com-pancakeslp"
 
 #$MS_BUILD_CONFIG="Debug"
 $MS_BUILD_CONFIG = "Release"
@@ -432,7 +433,7 @@ function test-vstest {
     $UNIT_TESTS_DLL = "$BIN_DIRECTORY_UNIT_TESTS\UnitTests.dll"
 
     if (!(Test-Path $UNIT_TESTS_DLL)) {
-        echo "UnitTests.dll missing! ... path $CSFML_DLL"
+        echo "UnitTests.dll missing! ... path $UNIT_TESTS_DLL"
         exit 1
     }
 
