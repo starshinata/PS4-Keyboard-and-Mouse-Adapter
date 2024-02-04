@@ -107,7 +107,19 @@ No, but it's something we are am considering
 
 
 ### How do I connect to my PS on my home network
-see https://manuals.playstation.net/document/gb/psvita/ps4link/viaprivate.html
+see [how do I connect to Remote Play on LAN](how%20do%20I%20connect%20to%20Remote%20Play%20on%20LAN.md)
+
+
+### How do I connect to my PS via LAN
+see [how do I connect to Remote Play on LAN](how%20do%20I%20connect%20to%20Remote%20Play%20on%20LAN.md)
+
+
+### How do I connect to my PS without Internet
+see [how do I connect to Remote Play on LAN](how%20do%20I%20connect%20to%20Remote%20Play%20on%20LAN.md)
+
+
+### How do I donate?
+see [Donations](donations.md)
 
 
 ### How do I increase mouse sensitivity so I can quickly turn 180 degrees?
@@ -140,6 +152,13 @@ We (PS4KMA) dont explicitly support macros, but we have been asked enough times.
 Auto Hot Key (AHK) has been tried and is usually not accommodating. <br>
 Discord user Domenick027#3614 has had success using https://www.macrorecorder.com/ <br>
 Alternatively try https://github.com/komefai/PS4Macro or https://github.com/evilC/AHK-ViGEm-Bus
+
+
+### How good does my internet need to be?
+If you can stream Netflix it's probably good enough
+
+But remember you dont need the internet aslong has you have  Local Area Network <br>
+see [how do I connect to Remote Play on LAN](how%20do%20I%20connect%20to%20Remote%20Play%20on%20LAN.md)
 
 
 ### I have a question or issue, why haven't you replied?
