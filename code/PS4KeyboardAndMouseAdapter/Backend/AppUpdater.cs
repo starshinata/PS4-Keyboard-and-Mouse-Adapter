@@ -1,5 +1,4 @@
-﻿using NuGet;
-using Pizza.Common;
+﻿using Pizza.Common;
 using Serilog;
 using Squirrel;
 using System;

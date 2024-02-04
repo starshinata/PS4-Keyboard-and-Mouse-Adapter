@@ -354,8 +354,8 @@ MigrationBackup/
 
 /code/package
 /code/PS4KeyboardAndMouseAdapter/Resources/BuildDate.txt
-/nuget/PS4KeyboardAndMouseAdapter.nuspec
 /manualBuild/nuget/PS4KeyboardAndMouseAdapter.nuspec
-
-/packages
-/SquirrelReleases
+/ReleaseArtefacts
+/.sarif/
+/temp/
+/code/GreeterProtos/generated/*.cs

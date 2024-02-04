@@ -36,6 +36,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.MiscellaneousSettings
 
         private void Handler_ToolBarVisibleToggle(object sender, System.Windows.RoutedEventArgs e)
         {
+            //TODO
             Log.Debug("RemotePlayToolbarSettingsControl.Handler_ToolBarVisibleToggle");
             UtilityData.IsToolBarVisible = !UtilityData.IsToolBarVisible;
         }

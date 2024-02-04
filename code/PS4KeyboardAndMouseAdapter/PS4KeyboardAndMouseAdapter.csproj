@@ -1,23 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}</ProjectGuid>
+	<TargetFramework>net6.0-windows</TargetFramework>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Pizza.KeyboardAndMouseAdapter</RootNamespace>
-    <AssemblyName>PS4KeyboardAndMouseAdapter</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <RuntimeIdentifier>win</RuntimeIdentifier>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <TargetFrameworkProfile />
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -34,47 +19,18 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>ds4.ico</ApplicationIcon>
@@ -95,7 +51,7 @@
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Clean|AnyCPU'">
     <OutputPath>bin\Clean\</OutputPath>
@@ -105,265 +61,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
-    <Reference Include="System" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
-    <Reference Include="System.Management" />
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceProcess" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml">
+    <Reference Update="System.Xml">
       <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Xml.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="UIAutomationClient" />
-    <Reference Include="UIAutomationTypes" />
-    <Reference Include="WindowsBase">
-      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\WindowsBase.dll</HintPath>
-    </Reference>
-    <Reference Include="PresentationCore">
-      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\PresentationCore.dll</HintPath>
-    </Reference>
-    <Reference Include="PresentationFramework">
-      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\PresentationFramework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="Backend\AppUpdater.cs" />
-    <Compile Include="Backend\AudioManager.cs" />
-    <Compile Include="Backend\ColourSchemeChanger.cs" />
-    <Compile Include="Backend\DebugLogging\DebugDump.cs" />
-    <Compile Include="Backend\DebugLogging\GetOsVersion.cs" />
-    <Compile Include="Backend\DebugLogging\HidFacade.cs" />
-    <Compile Include="Backend\DebugLogging\ProcessCommandLine.cs" />
-    <Compile Include="Backend\DebugLogging\ServiceComparerByName.cs" />
-    <Compile Include="Backend\DebugLogging\ProcessComparerByName.cs" />
-    <Compile Include="Backend\LogManager.cs" />
-    <Compile Include="Backend\RemotePlayInstaller.cs" />
-    <Compile Include="Backend\Vigem\GamepadConverter.cs" />
-    <Compile Include="Backend\LogUtility.cs" />
-    <Compile Include="Backend\HidConstants.cs" />
-    <Compile Include="Backend\RemotePlayStarter.cs" />
-    <Compile Include="Backend\RewasdDetector.cs" />
-    <Compile Include="Backend\Config\ExtraButtons.cs" />
-    <Compile Include="Backend\Config\ApplicationSettings.cs" />
-    <Compile Include="Backend\ListUtil.cs" />
-    <Compile Include="Backend\MouseWheelScrollProcessor.cs" />
-    <Compile Include="Backend\MouseWheelProcessor.cs" />
-    <Compile Include="Backend\PlaystationControllerDetector.cs" />
-    <Compile Include="Backend\ProcessUtil.cs" />
-    <Compile Include="Backend\RemotePlayConstants.cs" />
-    <Compile Include="Backend\Vigem\VigemManger.cs" />
-    <Compile Include="Backend\Vigem\VigemInternals.cs" />
-    <Compile Include="Backend\DS4State.cs" />
-    <Compile Include="UI\Controls\Common\LogControl.xaml.cs">
-      <DependentUpon>LogControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Controls\MiscellaneousSettingPage\GamepadUpdaterNoSleepControl.xaml.cs">
-      <DependentUpon>GamepadUpdaterNoSleepControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Controls\MiscellaneousSettingPage\ColourSchemeToggleControl.xaml.cs">
-      <DependentUpon>ColourSchemeToggleControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Controls\MiscellaneousSettingPage\RemotePlayToolbarSettingsControl.xaml.cs">
-      <DependentUpon>RemotePlayToolbarSettingsControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Controls\MiscellaneousSettingPage\MiscellaneousSettingsGeneralControl.xaml.cs">
-      <DependentUpon>MiscellaneousSettingsGeneralControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Backend\VersionUtil.cs" />
-    <Compile Include="Backend\WindowUtil.cs" />
-    <Compile Include="Backend\Config\KeyUtility.cs" />
-    <Compile Include="Backend\Config\MouseButton.cs" />
-    <Compile Include="Backend\Config\PhysicalKeyGroup.cs" />
-    <Compile Include="Backend\Config\PhysicalKey.cs" />
-    <Compile Include="Backend\Config\InstanceSettings.cs" />
-    <Compile Include="Backend\Config\UserSettings_1_0_11.cs" />
-    <Compile Include="Backend\Config\UserSettings.cs" />
-    <Compile Include="Backend\Config\UserSettings_Instance.cs" />
-    <Compile Include="Backend\Config\UserSettings_Static.cs" />
-    <Compile Include="Backend\Config\VirtualKey.cs" />
-    <Compile Include="Backend\Dll\Rect.cs" />
-    <Compile Include="Backend\Dll\User32.cs" />
-    <Compile Include="Backend\GamepadProcessor.cs" />
-    <Compile Include="Backend\RemotePlayInjector.cs" />
-    <Compile Include="Backend\MouseAnchor.cs" />
-    <Compile Include="UI\Controls\SimpleConfigPage\GamepadMappingController.xaml.cs">
-      <DependentUpon>GamepadMappingController.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Controls\SimpleConfigPage\MouseSettingsSimpleControl.xaml.cs">
-      <DependentUpon>MouseSettingsSimpleControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Controls\Welcome\EmulationPickerControl.xaml.cs">
-      <DependentUpon>EmulationPickerControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Controls\Welcome\RemotePlayLaunchedControl.xaml.cs">
-      <DependentUpon>RemotePlayLaunchedControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Controls\Welcome\RemotePlayConnectedControl.xaml.cs">
-      <DependentUpon>RemotePlayConnectedControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Pages\SimpleConfigPage.xaml.cs">
-      <DependentUpon>SimpleConfigPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Pages\MouseAdvancedConfigPage.xaml.cs">
-      <DependentUpon>MouseAdvancedConfigPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Pages\AdvancedMappingsPage.xaml.cs">
-      <DependentUpon>AdvancedMappingsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Controls\SimpleConfigPage\ProfileManager.xaml.cs">
-      <DependentUpon>ProfileManager.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Controls\SimpleConfigPage\AnalogStickBindings.xaml.cs">
-      <DependentUpon>AnalogStickBindings.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Controls\AnalogStickVisualizer.xaml.cs">
-      <DependentUpon>AnalogStickVisualizer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Controls\Common\RangeSlider.xaml.cs">
-      <DependentUpon>RangeSlider.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Controls\MouseSettingsControl.xaml.cs">
-      <DependentUpon>MouseSettingsControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Controls\Common\SliderV.xaml.cs">
-      <DependentUpon>SliderV.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Pages\MiscellaneousSettingsPage.xaml.cs">
-      <DependentUpon>MiscellaneousSettingsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Controls\Welcome\WelcomeSetupControl.xaml.cs">
-      <DependentUpon>WelcomeSetupControl.xaml</DependentUpon>
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\Pages\WelcomePage.xaml.cs">
-      <DependentUpon>WelcomePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\UIConstants.cs" />
-    <Compile Include="UI\UITools.cs" />
-    <Page Include="UI\Controls\Common\LogControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UI\Controls\MiscellaneousSettingPage\GamepadUpdaterNoSleepControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UI\Controls\MiscellaneousSettingPage\ColourSchemeToggleControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UI\Controls\MiscellaneousSettingPage\RemotePlayToolbarSettingsControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UI\Controls\Welcome\EmulationPickerControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Controls\Welcome\RemotePlayLaunchedControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UI\Controls\Welcome\RemotePlayConnectedControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UI\MainWindowView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MainViewModel.cs" />
-    <Compile Include="UI\MainWindowView.xaml.cs">
-      <DependentUpon>MainWindowView.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="UI\Controls\SimpleConfigPage\AnalogStickBindings.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UI\Controls\AnalogStickVisualizer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Controls\MiscellaneousSettingPage\MiscellaneousSettingsGeneralControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UI\Controls\SimpleConfigPage\ProfileManager.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UI\Controls\Common\RangeSlider.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Controls\MouseSettingsControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Controls\Common\SliderV.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Controls\SimpleConfigPage\GamepadMappingController.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Controls\SimpleConfigPage\MouseSettingsSimpleControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Pages\SimpleConfigPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Pages\MouseAdvancedConfigPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Pages\AdvancedMappingsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Pages\MiscellaneousSettingsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Controls\Welcome\WelcomeSetupControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Pages\WelcomePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Content Include="profile-previous.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="application-settings.json">
+    <None Update="application-settings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -373,45 +81,12 @@
     <None Include="Resources\BuildDate.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <None Include="Properties\app.manifest" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
+    <ProjectReference Include="..\Common\Common.csproj" />
+	  <ProjectReference Include="..\GreeterProtos\GreeterProtos.csproj" />
+    <ProjectReference Include="..\PS4RemotePlayInjection\PS4RemotePlayInjection.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{7fbd8f7b-99da-400d-b5c6-5da010d8213f}</Project>
-      <Name>Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PS4RemotePlayInjection\PS4RemotePlayInjection.csproj">
-      <Project>{d3d6f621-7cb9-4992-80ac-ff9745d974ec}</Project>
-      <Name>PS4RemotePlayInjection</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="cursor.cur">
+    <None Update="cursor.cur">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -435,34 +110,26 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="AdonisUI">
-      <Version>1.14.0</Version>
-    </PackageReference>
+	<ItemGroup>
+		<PackageReference Include="Google.Protobuf" Version="3.0.0" />
+		<PackageReference Include="Grpc" Version="1.0.1" />
+		<PackageReference Include="Grpc.Core" Version="1.0.1" />
+	</ItemGroup>
+	<ItemGroup>
     <PackageReference Include="AdonisUI.ClassicTheme">
       <Version>1.14.0</Version>
     </PackageReference>
     <Content Include="C:\Users\$(USERNAME)\.nuget\packages\csfml\2.5.0\runtimes\win-x86\native\csfml-Window.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <PackageReference Include="Clowd.Squirrel" Version="2.9.42" />
     <PackageReference Include="CSFML">
       <Version>2.5.0</Version>
-    </PackageReference>
-    <PackageReference Include="DeltaCompressionDotNet">
-      <Version>1.1.0</Version>
-    </PackageReference>
-    <PackageReference Include="Extended.Wpf.Toolkit">
-      <Version>3.8.1</Version>
-    </PackageReference>
-    <PackageReference Include="FlaUI.Core">
-      <Version>3.0.0</Version>
     </PackageReference>
     <PackageReference Include="FlaUI.UIA2">
       <Version>3.0.0</Version>
     </PackageReference>
-    <PackageReference Include="Mono.Cecil">
-      <Version>0.9.6.4</Version>
-    </PackageReference>
+
     <PackageReference Include="MouseKeyHook">
       <Version>5.6.0</Version>
     </PackageReference>
@@ -481,48 +148,24 @@
     <PackageReference Include="Serilog.Sinks.File">
       <Version>4.1.0</Version>
     </PackageReference>
-    <PackageReference Include="SFML.Audio">
-      <Version>2.5.0</Version>
-    </PackageReference>
-    <PackageReference Include="SFML.Graphics">
-      <Version>2.5.0</Version>
-    </PackageReference>
     <PackageReference Include="SFML.Net">
       <Version>2.5.0</Version>
     </PackageReference>
-    <PackageReference Include="SFML.System">
-      <Version>2.5.0</Version>
-    </PackageReference>
-    <PackageReference Include="SFML.Window">
-      <Version>2.5.0</Version>
-    </PackageReference>
-    <PackageReference Include="SharpCompress">
-      <Version>0.17.1</Version>
-    </PackageReference>
-    <PackageReference Include="SharpVectors.Reloaded">
-      <Version>1.5.0</Version>
-    </PackageReference>
-    <PackageReference Include="Splat">
-      <Version>1.6.2</Version>
-    </PackageReference>
-    <PackageReference Include="squirrel.windows">
-      <Version>1.9.1</Version>
-    </PackageReference>
-    <PackageReference Include="System.Management">
-      <Version>4.7.0</Version>
-    </PackageReference>
+    <PackageReference Include="SharpCompress" Version="0.31.0" />
     <PackageReference Include="System.Runtime.Serialization.Formatters">
-      <Version>4.3.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Runtime.Serialization.Primitives">
       <Version>4.3.0</Version>
     </PackageReference>
     <PackageReference Include="System.ValueTuple">
       <Version>4.4.0</Version>
     </PackageReference>
-    <PackageReference Include="WPFSpark">
-      <Version>1.4.0</Version>
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.410601">
+      <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="3.8.2" />
+    <PackageReference Include="Mono.Cecil" Version="0.11.4" />
+    <PackageReference Include="SharpVectors.Reloaded" Version="1.8.1" />
+    <PackageReference Include="WPFSpark" Version="1.5.0" />
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="7.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ds4.ico" />
@@ -557,5 +200,11 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Backend\MouseAnchor2.cs" />
+  </ItemGroup>
 </Project>

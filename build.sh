@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## cause i keep forgetting to write powershell infront of the ps1 file
+## this file basically exist cause pancakes keeps forgetting to write powershell infront of the ps1 file
 
 ## be error tolerant for process killing
 set +e
@@ -16,4 +16,11 @@ taskkill.exe -im "PS4KeyboardAndMouseAdapter*" -f
 ## stops the execution of the script if a command or pipeline has an error
 set -e
 
-powershell ./build.ps1
+
+## orderd shortest to longest run time 
+#time powershell ./build.ps1 -execGenerateArtefact FALSE -execTest FALSE
+#time powershell ./build.ps1 -execGenerateArtefact FALSE
+#time powershell ./build.ps1 -execTest FALSE
+
+time powershell ./build.ps1 
+

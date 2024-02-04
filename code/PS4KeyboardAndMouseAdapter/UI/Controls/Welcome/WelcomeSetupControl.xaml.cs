@@ -2,6 +2,7 @@
 using Pizza.KeyboardAndMouseAdapter.Backend;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using Pizza.KeyboardAndMouseAdapter.Backend.DebugLogging;
+using Pizza.KeyboardAndMouseAdapter.Backend.Remote;
 using System;
 using System.IO;
 using System.Windows;
