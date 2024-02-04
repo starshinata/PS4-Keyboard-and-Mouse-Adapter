@@ -57,10 +57,10 @@ namespace PS4RemotePlayInjection
         public bool Circle { get; set; }
         public bool Cross { get; set; }
         public bool Square { get; set; }
-        public bool DPad_Up { get; set; }
-        public bool DPad_Down { get; set; }
-        public bool DPad_Left { get; set; }
-        public bool DPad_Right { get; set; }
+        public bool DPadUp { get; set; }
+        public bool DPadDown { get; set; }
+        public bool DPadLeft { get; set; }
+        public bool DPadRight { get; set; }
         public bool L1 { get; set; }
         public bool R1 { get; set; }
         public bool Share { get; set; }
@@ -111,10 +111,10 @@ namespace PS4RemotePlayInjection
             Circle = state.Circle;
             Cross = state.Cross;
             Square = state.Square;
-            DPad_Up = state.DPad_Up;
-            DPad_Down = state.DPad_Down;
-            DPad_Left = state.DPad_Left;
-            DPad_Right = state.DPad_Right;
+            DPadUp = state.DPadUp;
+            DPadDown = state.DPadDown;
+            DPadLeft = state.DPadLeft;
+            DPadRight = state.DPadRight;
             L1 = state.L1;
             R3 = state.R3;
             Share = state.Share;
@@ -150,10 +150,10 @@ namespace PS4RemotePlayInjection
             state.Circle = Circle;
             state.Cross = Cross;
             state.Square = Square;
-            state.DPad_Up = DPad_Up;
-            state.DPad_Down = DPad_Down;
-            state.DPad_Left = DPad_Left;
-            state.DPad_Right = DPad_Right;
+            state.DPadUp = DPadUp;
+            state.DPadDown = DPadDown;
+            state.DPadLeft = DPadLeft;
+            state.DPadRight = DPadRight;
             state.L1 = L1;
             state.R3 = R3;
             state.Share = Share;
@@ -197,10 +197,10 @@ namespace PS4RemotePlayInjection
                     state.Circle == _defaultState.Circle &&
                     state.Cross == _defaultState.Cross &&
                     state.Square == _defaultState.Square &&
-                    state.DPad_Up == _defaultState.DPad_Up &&
-                    state.DPad_Down == _defaultState.DPad_Down &&
-                    state.DPad_Left == _defaultState.DPad_Left &&
-                    state.DPad_Right == _defaultState.DPad_Right &&
+                    state.DPadUp == _defaultState.DPadUp &&
+                    state.DPadDown == _defaultState.DPadDown &&
+                    state.DPadLeft == _defaultState.DPadLeft &&
+                    state.DPadRight == _defaultState.DPadRight &&
                     state.L1 == _defaultState.L1 &&
                     state.R1 == _defaultState.R1 &&
                     state.Share == _defaultState.Share &&
@@ -235,31 +235,31 @@ namespace PS4RemotePlayInjection
             result.Circle = (data[5] & (byte)VK.Circle) != 0;
             result.Cross = (data[5] & (byte)VK.Cross) != 0;
             result.Square = (data[5] & (byte)VK.Square) != 0;
-            result.DPad_Up = (data[5] & (byte)VK.DPad_Up) != 0;
-            result.DPad_Down = (data[5] & (byte)VK.DPad_Down) != 0;
-            result.DPad_Left = (data[5] & (byte)VK.DPad_Left) != 0;
-            result.DPad_Right = (data[5] & (byte)VK.DPad_Right) != 0;
+            result.DPadUp = (data[5] & (byte)VK.DPad_Up) != 0;
+            result.DPadDown = (data[5] & (byte)VK.DPad_Down) != 0;
+            result.DPadLeft = (data[5] & (byte)VK.DPad_Left) != 0;
+            result.DPadRight = (data[5] & (byte)VK.DPad_Right) != 0;
 
             //Convert dpad into individual On/Off bits instead of a clock representation
             byte dpadState = 0;
 
             dpadState = (byte)(
-            ((result.DPad_Right ? 1 : 0) << 0) |
-            ((result.DPad_Left ? 1 : 0) << 1) |
-            ((result.DPad_Down ? 1 : 0) << 2) |
-            ((result.DPad_Up ? 1 : 0) << 3));
+            ((result.DPadRight ? 1 : 0) << 0) |
+            ((result.DPadLeft ? 1 : 0) << 1) |
+            ((result.DPadDown ? 1 : 0) << 2) |
+            ((result.DPadUp ? 1 : 0) << 3));
 
             switch (dpadState)
             {
-                case 0: result.DPad_Up = true; result.DPad_Down = false; result.DPad_Left = false; result.DPad_Right = false; break; // ↑
-                case 1: result.DPad_Up = true; result.DPad_Down = false; result.DPad_Left = false; result.DPad_Right = true; break; // ↑→
-                case 2: result.DPad_Up = false; result.DPad_Down = false; result.DPad_Left = false; result.DPad_Right = true; break; // →
-                case 3: result.DPad_Up = false; result.DPad_Down = true; result.DPad_Left = false; result.DPad_Right = true; break; // ↓→
-                case 4: result.DPad_Up = false; result.DPad_Down = true; result.DPad_Left = false; result.DPad_Right = false; break; // ↓
-                case 5: result.DPad_Up = false; result.DPad_Down = true; result.DPad_Left = true; result.DPad_Right = false; break; // ↓←
-                case 6: result.DPad_Up = false; result.DPad_Down = false; result.DPad_Left = true; result.DPad_Right = false; break; // ←
-                case 7: result.DPad_Up = true; result.DPad_Down = false; result.DPad_Left = true; result.DPad_Right = false; break; // ↑←
-                case 8: result.DPad_Up = false; result.DPad_Down = false; result.DPad_Left = false; result.DPad_Right = false; break; // -
+                case 0: result.DPadUp = true; result.DPadDown = false; result.DPadLeft = false; result.DPadRight = false; break; // ↑
+                case 1: result.DPadUp = true; result.DPadDown = false; result.DPadLeft = false; result.DPadRight = true; break; // ↑→
+                case 2: result.DPadUp = false; result.DPadDown = false; result.DPadLeft = false; result.DPadRight = true; break; // →
+                case 3: result.DPadUp = false; result.DPadDown = true; result.DPadLeft = false; result.DPadRight = true; break; // ↓→
+                case 4: result.DPadUp = false; result.DPadDown = true; result.DPadLeft = false; result.DPadRight = false; break; // ↓
+                case 5: result.DPadUp = false; result.DPadDown = true; result.DPadLeft = true; result.DPadRight = false; break; // ↓←
+                case 6: result.DPadUp = false; result.DPadDown = false; result.DPadLeft = true; result.DPadRight = false; break; // ←
+                case 7: result.DPadUp = true; result.DPadDown = false; result.DPadLeft = true; result.DPadRight = false; break; // ↑←
+                case 8: result.DPadUp = false; result.DPadDown = false; result.DPadLeft = false; result.DPadRight = false; break; // -
             }
 
             bool L2Pressed = (data[6] & (byte)VK.L2) != 0;
@@ -340,15 +340,15 @@ namespace PS4RemotePlayInjection
             if (Circle) { data_5 += (byte)VK.Circle; }
             if (Cross) { data_5 += (byte)VK.Cross; }
             if (Square) { data_5 += (byte)VK.Square; }
-            if (DPad_Up && !DPad_Down && !DPad_Left && !DPad_Right) { data_5 += 0; } // ↑
-            if (DPad_Up && !DPad_Down && !DPad_Left && DPad_Right) { data_5 += 1; } // ↑→
-            if (!DPad_Up && !DPad_Down && !DPad_Left && DPad_Right) { data_5 += 2; } // →
-            if (!DPad_Up && DPad_Down && !DPad_Left && DPad_Right) { data_5 += 3; } // ↓→
-            if (!DPad_Up && DPad_Down && !DPad_Left && !DPad_Right) { data_5 += 4; } // ↓
-            if (!DPad_Up && DPad_Down && DPad_Left && !DPad_Right) { data_5 += 5; } // ↓←
-            if (!DPad_Up && !DPad_Down && DPad_Left && !DPad_Right) { data_5 += 6; } // ←
-            if (DPad_Up && !DPad_Down && DPad_Left && !DPad_Right) { data_5 += 7; } // ↑←
-            if (!DPad_Up && !DPad_Down && !DPad_Left && !DPad_Right) { data_5 += 8; } // -
+            if (DPadUp && !DPadDown && !DPadLeft && !DPadRight) { data_5 += 0; } // ↑
+            if (DPadUp && !DPadDown && !DPadLeft && DPadRight) { data_5 += 1; } // ↑→
+            if (!DPadUp && !DPadDown && !DPadLeft && DPadRight) { data_5 += 2; } // →
+            if (!DPadUp && DPadDown && !DPadLeft && DPadRight) { data_5 += 3; } // ↓→
+            if (!DPadUp && DPadDown && !DPadLeft && !DPadRight) { data_5 += 4; } // ↓
+            if (!DPadUp && DPadDown && DPadLeft && !DPadRight) { data_5 += 5; } // ↓←
+            if (!DPadUp && !DPadDown && DPadLeft && !DPadRight) { data_5 += 6; } // ←
+            if (DPadUp && !DPadDown && DPadLeft && !DPadRight) { data_5 += 7; } // ↑←
+            if (!DPadUp && !DPadDown && !DPadLeft && !DPadRight) { data_5 += 8; } // -
             data[5] = data_5;
 
             byte data_6 = 0;

@@ -9,13 +9,13 @@ namespace PS4RemotePlayInjection
     public class ThreadRpcUpdateListener
     {
         private bool keepWorking = true;
-        private IpcClient ipcClient;
+        private IpcKmaClient ipcClient;
 
         
         public ThreadRpcUpdateListener()
         {
             Log.Logger.Information("IPC a");
-            ipcClient = new IpcClient();
+            ipcClient = new IpcKmaClient();
             Log.Logger.Information("IPC b");
             ipcClient.Setup();
             Log.Logger.Information("IPC c");

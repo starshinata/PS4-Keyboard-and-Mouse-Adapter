@@ -2,10 +2,11 @@
 using Grpc.Core;
 using GreeterProtos;
 using System.Threading.Tasks;
+using PS4RemotePlayInjection.ControllerState;
 
 namespace PS4RemotePlayInjection
 {
-    public class IpcClient
+    public class IpcKmaClient
     {
 
         const string DefaultHost = "localhost";
@@ -39,6 +40,11 @@ namespace PS4RemotePlayInjection
             Console.WriteLine("GreeterClient received response.DualShockProto: " + response.DualShockProto);
             UtilityData.pid = response.ProcessId;
             UtilityData.IsToolBarVisible = response.IsToolBarVisible;
+            UtilityData.DualShockState = ProtoToController.GetProtoAsDualShockState(response.DualShockProto);
+            Console.WriteLine("UtilityData.DualShockState");
+            Console.WriteLine(UtilityData.DualShockState.ToString());
+            Console.WriteLine("UtilityData.DualShockState.X");
+            Console.WriteLine(UtilityData.DualShockState.Cross);
         }
 
         public async Task Shutdown()

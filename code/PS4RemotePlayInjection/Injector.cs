@@ -76,7 +76,7 @@ namespace PS4RemotePlayInjection
             Log.Information("Injector.Inject() injectionLibrary " + injectionLibrary);
 
 
-            bool shouldInject = false;
+            bool shouldInject = true;
             try
             {
 

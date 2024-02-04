@@ -23,7 +23,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Remote
             // Build a server
             var server = new Server
             {
-                Services = { GreetingService.BindService(new GreeterServiceImpl()) },
+                Services = { GreetingService.BindService(new SendToRemotePlayIpcServiceImpl()) },
                 Ports = { new ServerPort(Host, Port, ServerCredentials.Insecure) }
             };
 

@@ -25,13 +25,17 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
+        private LogManager logManager = null;
         public bool EnableMouseInput { get; set; } = false;
 
-        private LogManager logManager = null;
+        // TODO this smells
+        // refactor GamepadProcessor to be called without needing to get it via MainViewModel
+        public DualShockState DualShockState = null;
 
         private VigemInternals vigemInternals = null;
 
         //////////////////////////////////////////////////////////////////////
+        
 
         public LogManager GetLogManager()
         {

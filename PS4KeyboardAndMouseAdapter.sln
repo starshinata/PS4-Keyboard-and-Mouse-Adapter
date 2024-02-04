@@ -31,7 +31,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "documentation", "documentation", "{0439F286-1E5F-4B55-B902-F7EF43C7B22B}"
 	ProjectSection(SolutionItems) = preProject
-		documentation\developer-notes.md = documentation\developer-notes.md
 		documentation\example-ui-1.png = documentation\example-ui-1.png
 		documentation\example-ui-2.png = documentation\example-ui-2.png
 		documentation\example-ui-3.png = documentation\example-ui-3.png
@@ -39,16 +38,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "documentation", "documentat
 		documentation\example-ui-5.png = documentation\example-ui-5.png
 		documentation\frequently-asked-questions.md = documentation\frequently-asked-questions.md
 		documentation\glossary-and-terms.md = documentation\glossary-and-terms.md
-		documentation\hid-lookup-table.txt = documentation\hid-lookup-table.txt
 		documentation\how-to-make-remote-play-fullscreen.md = documentation\how-to-make-remote-play-fullscreen.md
 		documentation\keyboard-keys-map.md = documentation\keyboard-keys-map.md
 		documentation\known-game-issues.md = documentation\known-game-issues.md
 		documentation\mouse-configuration.md = documentation\mouse-configuration.md
-		documentation\release-checklist.md = documentation\release-checklist.md
 		documentation\remote-play-fullscreen-1.png = documentation\remote-play-fullscreen-1.png
 		documentation\remote-play-fullscreen-2.png = documentation\remote-play-fullscreen-2.png
 		documentation\remote-play-fullscreen-3.png = documentation\remote-play-fullscreen-3.png
-		documentation\technical notes - needs a better name.txt = documentation\technical notes - needs a better name.txt
 		documentation\troubleshooting.md = documentation\troubleshooting.md
 		documentation\version-history.md = documentation\version-history.md
 		documentation\vigem.md = documentation\vigem.md
@@ -105,6 +101,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "extract-me-bin", "extract-m
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreeterProtos", "code\GreeterProtos\GreeterProtos.csproj", "{62EC74F8-B76B-4703-A3AD-C184C198EBEB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "developer", "developer", "{520E6586-29EE-4F4A-A33F-E4E668881D90}"
+	ProjectSection(SolutionItems) = preProject
+		documentation\developer\Building for linux.txt = documentation\developer\Building for linux.txt
+		documentation\developer\code breakdown.md = documentation\developer\code breakdown.md
+		documentation\developer\developer-notes.md = documentation\developer\developer-notes.md
+		documentation\developer\dotnet upgrade notes.txt = documentation\developer\dotnet upgrade notes.txt
+		documentation\developer\hid-lookup-table.txt = documentation\developer\hid-lookup-table.txt
+		documentation\developer\release-checklist.md = documentation\developer\release-checklist.md
+		documentation\developer\technical notes - needs a better name.txt = documentation\developer\technical notes - needs a better name.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -202,6 +209,7 @@ Global
 		{89924932-08BA-4A52-A21B-EB3D418436AA} = {6852A938-F1C8-4D31-A2E1-419C08CC42DA}
 		{F10F9F23-C09E-454C-A783-A56F8451911C} = {6852A938-F1C8-4D31-A2E1-419C08CC42DA}
 		{6F3F2544-A927-4914-A91D-87C532146896} = {60A1671E-B17D-48D6-8515-D21D96B6CFD3}
+		{520E6586-29EE-4F4A-A33F-E4E668881D90} = {0439F286-1E5F-4B55-B902-F7EF43C7B22B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {215189D4-FCF7-4F3E-BC57-0EA3347DD037}

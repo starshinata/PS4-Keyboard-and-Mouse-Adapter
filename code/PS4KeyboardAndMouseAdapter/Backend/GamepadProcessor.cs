@@ -145,16 +145,16 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
 
             //left face
             if (IsVirtualKeyPressed(VirtualKey.DPadUp))
-                CurrentState.DPad_Up = true;
+                CurrentState.DPadUp = true;
 
             if (IsVirtualKeyPressed(VirtualKey.DPadLeft))
-                CurrentState.DPad_Left = true;
+                CurrentState.DPadLeft = true;
 
             if (IsVirtualKeyPressed(VirtualKey.DPadDown))
-                CurrentState.DPad_Down = true;
+                CurrentState.DPadDown = true;
 
             if (IsVirtualKeyPressed(VirtualKey.DPadRight))
-                CurrentState.DPad_Right = true;
+                CurrentState.DPadRight = true;
 
             //left stick Analog
             if (IsVirtualKeyPressed(VirtualKey.LeftStickLeft))
@@ -387,14 +387,14 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
             sb.Append(", 'triangle':");
             sb.Append(state.Triangle);
 
-            sb.Append(", 'DPad_Up':");
-            sb.Append(state.DPad_Up);
-            sb.Append(", 'DPad_Down':");
-            sb.Append(state.DPad_Down);
-            sb.Append(", 'DPad_Left':");
-            sb.Append(state.DPad_Left);
-            sb.Append(", 'DPad_Right':");
-            sb.Append(state.DPad_Right);
+            sb.Append(", 'DPadUp':");
+            sb.Append(state.DPadUp);
+            sb.Append(", 'DPadDown':");
+            sb.Append(state.DPadDown);
+            sb.Append(", 'DPadLeft':");
+            sb.Append(state.DPadLeft);
+            sb.Append(", 'DPadRight':");
+            sb.Append(state.DPadRight);
 
             sb.Append(", 'PS':");
             sb.Append(state.PS);
@@ -417,6 +417,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
         {
             string screenWidth = Screen.PrimaryScreen.Bounds.Width.ToString();
             string screenHeight = Screen.PrimaryScreen.Bounds.Height.ToString();
+            Log.Information("GamepadProcessor.GetState screen width={0} height={1}", screenWidth, screenHeight);
             Log.Verbose("GamepadProcessor.GetState screen width={0} height={1}", screenWidth, screenHeight);
 
             RequestsPerSecondCounter++;

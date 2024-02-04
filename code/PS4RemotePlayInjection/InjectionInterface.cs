@@ -53,7 +53,7 @@ namespace PS4RemotePlayInjection
         /// </summary>
         public void OnInjectionSuccess(int clientPID)
         {
-            // printing at all four levels to confirm what logging it working
+            // printing at all four levels to confirm what logging is working
             Log.Error("(NOT AN ERROR) OnInjectionSuccess clientPID {0}", clientPID);
             Log.Verbose("OnInjectionSuccess clientPID {0}", clientPID);
             Log.Debug("OnInjectionSuccess clientPID {0}", clientPID);
@@ -70,11 +70,15 @@ namespace PS4RemotePlayInjection
                 //  PrintAnalogSticksAsDegrees(inputReport.Skip(1).Take(4).ToArray());
 
                 // Expect inputReport to be modified
+                Log.Verbose("Injector.Callback");
+                Log.Verbose(Injector.Callback.ToString());
+
                 if (Injector.Callback != null)
                 {
                     Log.Verbose("InjectionInterface.OnReadFile Injector.Callback " + Injector.Callback.ToString());
                     // Parse the state
-                    DualShockState state = DualShockState.ParseFromDualshockRaw(inputReport);
+                    //DualShockState state = DualShockState.ParseFromDualshockRaw(inputReport);
+                    DualShockState state = UtilityData.DualShockState;
 
                     // Skip if state is invalid
                     if (state == null)
@@ -85,6 +89,11 @@ namespace PS4RemotePlayInjection
 
                     // Convert it back
                     state.ConvertToDualshockRaw(ref inputReport);
+
+                    if (state.Cross)
+                    {
+                        LogInformation("X pressed");
+                    }
                 }
             }
             catch (Exception ex)

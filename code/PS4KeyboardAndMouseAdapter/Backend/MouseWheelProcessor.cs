@@ -94,16 +94,16 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
 
             //left face
             if (VirtualKey.DPadUp == virtualKey)
-                dualShockState.DPad_Up = true;
+                dualShockState.DPadUp = true;
 
             if (VirtualKey.DPadLeft == virtualKey)
-                dualShockState.DPad_Left = true;
+                dualShockState.DPadLeft = true;
 
             if (VirtualKey.DPadDown == virtualKey)
-                dualShockState.DPad_Down = true;
+                dualShockState.DPadDown = true;
 
             if (VirtualKey.DPadRight == virtualKey)
-                dualShockState.DPad_Right = true;
+                dualShockState.DPadRight = true;
 
             //left stick Analog
             if (VirtualKey.LeftStickLeft == virtualKey)

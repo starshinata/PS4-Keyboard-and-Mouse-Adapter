@@ -3,7 +3,7 @@ using Grpc.Core;
 using Pizza.Common;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using PS4RemotePlayInjection;
-using System;
+using Serilog;
 using System.Threading.Tasks;
 using System.Windows;
 using static GreeterProtos.GreetingService;
@@ -11,29 +11,31 @@ using static GreeterProtos.GreetingService;
 namespace Pizza.KeyboardAndMouseAdapter.Backend.Remote
 {
 
-    public class GreeterServiceImpl : GreetingServiceBase
+    public class SendToRemotePlayIpcServiceImpl : GreetingServiceBase
     {
 
         public override Task<UpdateResponse> Greeting(UpdateRequest request, ServerCallContext context)
         {
 
-            Console.WriteLine($"Greeter Service Received: ");
+            Log.Information($"Greeter Service Received: ");
 
+            
             DualShockProto dualShockProto = null;
             if (ApplicationSettings.GetInstance().EmulationMode == EmulationConstants.ONLY_PROCESS_INJECTION)
             {
                 dualShockProto = GetDualShockStateAsProto();
             }
 
-            // TODO
-            // do i need to pass EmulationMode ?
-            // EmulationMode = ApplicationSettings.GetInstance().EmulationMode,
+            // we can argue we dont need to send emulationMode
+            // if we say dualShockProto === null means no emulation
+            // BUT what should we send when dualShockProto is null because the user isnt focused on remoteplay ?
+            int emulationMode = ApplicationSettings.GetInstance().EmulationMode;
 
-            var x = new UpdateResponse
+            UpdateResponse x = new UpdateResponse
             {
                 ProcessId = InstanceSettings.GetInstance().GetRemotePlayProcess().Id,
                 IsToolBarVisible = UtilityData.IsToolBarVisible,
-                EmulationMode = 999,
+                EmulationMode = emulationMode,
                 DualShockProto = dualShockProto
             };
 
@@ -42,6 +44,13 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Remote
 
         private DualShockState GetDualShockState()
         {
+
+            // TODO this smells
+            // refactor GamepadProcessor to be called without needing to get it via MainViewModel
+
+            return InstanceSettings.GetInstance().DualShockState;
+            
+            
             var window = Application.Current.MainWindow;
             if (window == null) { return null; }
 
@@ -78,10 +87,10 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Remote
             proto.Cross = dualShockState.Cross;
             proto.Square = dualShockState.Square;
 
-            proto.DPadUp = dualShockState.DPad_Up;
-            proto.DPadDown = dualShockState.DPad_Down;
-            proto.DPadLeft = dualShockState.DPad_Left;
-            proto.DPadRight = dualShockState.DPad_Right;
+            proto.DPadUp = dualShockState.DPadUp;
+            proto.DPadDown = dualShockState.DPadDown;
+            proto.DPadLeft = dualShockState.DPadLeft;
+            proto.DPadRight = dualShockState.DPadRight;
 
             proto.Share = dualShockState.Share;
             proto.Options = dualShockState.Options;
