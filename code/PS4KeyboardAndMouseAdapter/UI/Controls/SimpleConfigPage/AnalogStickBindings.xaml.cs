@@ -1,7 +1,7 @@
-﻿using System.Windows;
+﻿using Pizza.KeyboardAndMouseAdapter.Backend.Mappings;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using Button = System.Windows.Controls.Button;
 
 namespace Pizza.KeyboardAndMouseAdapter.UI.Controls
@@ -45,7 +45,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls
                 VirtualKey virtualKey = GetVirtualKey(button);
 
                 button.Tag = virtualKey;
-                Binding dataBinding = new Binding("UserSettings.KeyboardMappings[" + virtualKey + "]");
+                Binding dataBinding = new Binding("UserSettings.Mappings_ForSimpleConfigPage[" + virtualKey + "]");
                 button.SetBinding(ContentProperty, dataBinding);
             }
         }

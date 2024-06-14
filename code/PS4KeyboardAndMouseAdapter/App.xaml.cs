@@ -19,7 +19,7 @@ namespace Pizza.KeyboardAndMouseAdapter
             // cause not having a cursor is a pain in the ass
             Utility.ShowCursor(true);
 
-            UserSettings.Save(UserSettings.PROFILE_PREVIOUS);
+            UserSettingsContainer.Save(UserSettingsContainer.PROFILE_PREVIOUS);
             ApplicationSettings.Save();
 
             VigemManager.Stop(InstanceSettings.GetInstance());
@@ -42,11 +42,14 @@ namespace Pizza.KeyboardAndMouseAdapter
             Utility.ShowCursor(true);
 
             ApplicationSettings.Load();
-            UserSettings.LoadPrevious();
+            UserSettingsContainer.LoadPrevious();
 
             AppUpdater appUpdater = new AppUpdater();
 
             await appUpdater.UpdateIfAvailable();
+
+            //If you want to set the default screen to load
+            // you should instead look at MainWindowView.xaml.cs's init method
         }
 
     }

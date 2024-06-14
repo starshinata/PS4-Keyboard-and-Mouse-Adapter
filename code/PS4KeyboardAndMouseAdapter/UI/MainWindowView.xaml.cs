@@ -21,6 +21,8 @@ namespace Pizza.KeyboardAndMouseAdapter.UI
             InitializeComponent();
             KeyDown += MainWindowView_OnKeyDown;
             ChangeColourScheme(ApplicationSettings.GetInstance().ColourSchemeIsLight);
+            //
+            WelcomeStep3Done_ConnectAdapter();
         }
 
         private void AddTab(string tabText, UserControl control)
@@ -45,6 +47,12 @@ namespace Pizza.KeyboardAndMouseAdapter.UI
             {
                 simpleConfigPage.ChangeScheme(colourScheme);
             }
+        }
+
+
+        public AdvancedMappingsPage getPageAdvancedMappings()
+        {
+            return advancedMappingsPage;
         }
 
         private void MainWindowView_OnActivated(object sender, EventArgs e)
@@ -110,7 +118,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI
             tabs.Items.RemoveAt(0);
 
             // Refresh to ensure advancedMappingsPage isnt blank
-            advancedMappingsPage.RefreshButtonContents();
+            advancedMappingsPage.Refresh();
         }
 
     }

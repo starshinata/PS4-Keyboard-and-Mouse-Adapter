@@ -9,8 +9,8 @@
     d:DesignHeight="530" 
     d:DesignWidth="680"
 
-    xmlns:common="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls.Common"
-    xmlns:welcome="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls.Welcome"
+    xmlns:ui_controls_common="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls.Common"
+    xmlns:ui_controls_welcome="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls.Welcome"
     >
 
     <StackPanel
@@ -20,7 +20,7 @@
 
         <TextBlock FontWeight="Bold" FontSize="16">Step 1</TextBlock>
 
-        <welcome:EmulationPickerControl
+        <ui_controls_welcome:EmulationPickerControl
             x:Name="emulationPickerControl"/>
 
         <!-- used as a spacer -->
@@ -109,7 +109,7 @@
 
         <TextBlock FontWeight="Bold" FontSize="16">Step 5</TextBlock>
 
-        <common:LogControl/>
+        <ui_controls_common:LogControl/>
 
         <!-- used as a spacer -->
         <TextBlock />

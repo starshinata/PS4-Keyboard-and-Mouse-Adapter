@@ -1,6 +1,6 @@
 ﻿using static SFML.Window.Keyboard;
 
-namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
+namespace Pizza.KeyboardAndMouseAdapter.Backend.Mappings
 {
     public class PhysicalKey
     {
@@ -8,9 +8,26 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
         public Key KeyboardValue = Key.Unknown;
         public MouseButton MouseValue = MouseButton.Unknown;
 
+        public override bool Equals(object obj)
+        {
+            return obj is PhysicalKey key &&
+                   ExtraValue == key.ExtraValue &&
+                   KeyboardValue == key.KeyboardValue &&
+                   MouseValue == key.MouseValue;
+        }
+
         public string ExtraButtonToString(ExtraButtons key)
         {
             return key.ToString();
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1994028664;
+            hashCode = hashCode * -1521134295 + ExtraValue.GetHashCode();
+            hashCode = hashCode * -1521134295 + KeyboardValue.GetHashCode();
+            hashCode = hashCode * -1521134295 + MouseValue.GetHashCode();
+            return hashCode;
         }
 
         public string KeyboardButtonToString(Key key)
@@ -89,8 +106,8 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
                 return MouseButtonToString(MouseValue);
             }
 
-
             return "";
         }
+
     }
 }

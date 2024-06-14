@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
+namespace Pizza.KeyboardAndMouseAdapter.Backend.Mappings
 {
     class KeyUtility
     {

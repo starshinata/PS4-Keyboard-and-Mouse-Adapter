@@ -1,15 +1,17 @@
-﻿using Serilog;
+﻿using Newtonsoft.Json;
+using Pizza.KeyboardAndMouseAdapter.Backend.Mappings;
+using Serilog;
 using SFML.Window;
 using System.Collections.Generic;
 
 namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 {
-    public class UserSettings_1_0_11
+    public class UserSettingsV1
     {
         ////////////////////////////////////////////////////////////////////////////
         /// Static props
         ////////////////////////////////////////////////////////////////////////////
-        private static readonly ILogger StaticLogger = Log.ForContext(typeof(UserSettings_1_0_11));
+        private static readonly ILogger StaticLogger = Log.ForContext(typeof(UserSettingsV1));
 
         ////////////////////////////////////////////////////////////////////////////
         /// Instance props
@@ -40,31 +42,30 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
         /// Static Methods
         ////////////////////////////////////////////////////////////////////////////
 
-        private static void AddManualMouseMapping(UserSettings newSettings, VirtualKey vk, MouseButton mouseButton)
-        {
-            if (!newSettings.MappingsContainsKey(vk))
-            {
-                newSettings.Mappings[vk] = new PhysicalKeyGroup();
-            }
 
+        private static void AddMapping(UserSettingsV3 newSettings, VirtualKey vk, PhysicalKey pk)
+        {
+            Mapping mapping = new Mapping();
+            mapping.uid = UserSettingsContainer.GetNextMappingUid();
+            mapping.PhysicalKeys.Add(pk);
+            mapping.VirtualKeys.Add(vk);
+
+            newSettings.Mappings.Add(mapping);
+        }
+
+        private static void AddMouseMapping(UserSettingsV3 newSettings, VirtualKey vk, MouseButton mouseButton)
+        {
             PhysicalKey pk = new PhysicalKey();
             pk.MouseValue = mouseButton;
-
-            newSettings.Mappings[vk].PhysicalKeys.Add(pk);
+            AddMapping(newSettings, vk, pk);
         }
 
-        public static PhysicalKeyGroup GetPhysicalKeyGroup(PhysicalKey pk)
+        public static UserSettingsV3 ImportValues(string json)
         {
-            PhysicalKeyGroup pkg = new PhysicalKeyGroup();
-            pkg.PhysicalKeys.Add(pk);
-            return pkg;
-        }
+            StaticLogger.Information("UserSettingsV1.ImportValues()");
 
-        public static UserSettings ImportValues(UserSettings_1_0_11 legacySettings)
-        {
-            StaticLogger.Information("UserSettings_1_0_11.ImportValues()");
-
-            UserSettings newSettings = UserSettings.GetInstance();
+            UserSettingsV1 legacySettings = JsonConvert.DeserializeObject<UserSettingsV1>(json);
+            UserSettingsV3 newSettings = new UserSettingsV3();
 
             newSettings.AnalogStickLowerRange = legacySettings.AnalogStickLowerRange;
             newSettings.AnalogStickUpperRange = legacySettings.AnalogStickUpperRange;
@@ -89,19 +90,20 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
             newSettings.XYRatio = legacySettings.XYRatio;
 
 
-            foreach (VirtualKey key in legacySettings.Mappings.Keys)
+            foreach (VirtualKey vk in legacySettings.Mappings.Keys)
             {
                 PhysicalKey pk = new PhysicalKey();
-                pk.KeyboardValue = legacySettings.Mappings[key];
+                pk.KeyboardValue = legacySettings.Mappings[vk];
 
-                newSettings.Mappings[key] = GetPhysicalKeyGroup(pk);
+                AddMapping(newSettings, vk, pk);
             }
 
-            // Now readd the mouse bindings that didnt exist as config in 1.0.11
-            AddManualMouseMapping(newSettings, VirtualKey.L2, MouseButton.Right);
-            AddManualMouseMapping(newSettings, VirtualKey.R2, MouseButton.Left);
 
-            newSettings.Version_2_0_0_OrGreater = true;
+            // Now add the mouse bindings that didnt exist as config in V1
+            AddMouseMapping(newSettings, VirtualKey.L2, MouseButton.Right);
+            AddMouseMapping(newSettings, VirtualKey.R2, MouseButton.Left);
+
+            newSettings.RefreshOptimisations();
 
             return newSettings;
         }

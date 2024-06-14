@@ -1,0 +1,394 @@
+{
+  "AimToggle": false,
+  "AimToggleRetoggleDelay": 0,
+  "AnalogStickLowerRange": 40,
+  "AnalogStickUpperRange": 95,
+  "MouseAimSensitivityEnabled": false,
+  "MouseControlsL3": false,
+  "MouseControlsR3": false,
+  "MouseDistanceLowerRange": 5.0,
+  "MouseDistanceUpperRange": 96.0,
+  "MouseMaxDistance": 960.0,
+  "MousePollingRate": 10,
+  "MouseWheelScrollHoldDuration": 40.0,
+  "MouseXAxisSensitivityAimModifier": 2.0,
+  "MouseXAxisSensitivityLookModifier": 2.0,
+  "MouseXAxisSensitivityMax": 100.0,
+  "MouseYAxisSensitivityAimModifier": 1.0,
+  "MouseYAxisSensitivityLookModifier": 1.0,
+  "MouseYAxisSensitivityMax": 100.0,
+  "RemotePlayVolume": 100.0,
+  "XYRatio": 1.0,
+  "Version": 3,
+
+  "Mappings_ForAdvancedMappingsPage": null,
+  "Mappings_ForGamepadProcessor": null,
+  "Mappings_ForSimpleConfigPage": null,
+
+  "Mappings": [
+    {
+      "uid": 1,
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 0,
+          "MouseValue": -1
+        }
+      ],
+      "VirtualKeys": [
+        19
+      ]
+    },
+    {
+      "uid": 2,
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 3,
+          "MouseValue": -1
+        }
+      ],
+      "VirtualKeys": [
+        20
+      ]
+    },
+    {
+      "uid": 3,
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 22,
+          "MouseValue": -1
+        }
+      ],
+      "VirtualKeys": [
+        21
+      ]
+    },
+    {
+      "uid": 4,
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 18,
+          "MouseValue": -1
+        }
+      ],
+      "VirtualKeys": [
+        22
+      ]
+    },
+    {
+      "uid": 5,
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 9,
+          "MouseValue": -1
+        }
+      ],
+      "VirtualKeys": [
+        23
+      ]
+    },
+    {
+      "uid": 6,
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 11,
+          "MouseValue": -1
+        }
+      ],
+      "VirtualKeys": [
+        24
+      ]
+    },
+    {
+      "uid": 7,
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 8,
+          "MouseValue": -1
+        }
+      ],
+      "VirtualKeys": [
+        25
+      ]
+    },
+    {
+      "uid": 8,
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 10,
+          "MouseValue": -1
+        }
+      ],
+      "VirtualKeys": [
+        26
+      ]
+    },
+    {
+      "uid": 9,
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 5,
+          "MouseValue": -1
+        }
+      ],
+      "VirtualKeys": [
+        9
+      ]
+    },
+    {
+      "uid": 10,
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 2,
+          "MouseValue": -1
+        }
+      ],
+      "VirtualKeys": [
+        10
+      ]
+    },
+    {
+      "uid": 11,
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 21,
+          "MouseValue": -1
+        }
+      ],
+      "VirtualKeys": [
+        11
+      ]
+    },
+    {
+      "uid": 12,
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 17,
+          "MouseValue": -1
+        }
+      ],
+      "VirtualKeys": [
+        12
+      ]
+    },
+    {
+      "uid": 13,
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 16,
+          "MouseValue": -1
+        }
+      ],
+      "VirtualKeys": [
+        13
+      ]
+    },
+    {
+      "uid": 14,
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 10,
+          "MouseValue": -1
+        }
+      ],
+      "VirtualKeys": [
+        14
+      ]
+    },
+    {
+      "uid": 15,
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 38,
+          "MouseValue": -1
+        }
+      ],
+      "VirtualKeys": [
+        15
+      ]
+    },
+    {
+      "uid": 16,
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 4,
+          "MouseValue": -1
+        }
+      ],
+      "VirtualKeys": [
+        16
+      ]
+    },
+    {
+      "uid": 17,
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 9,
+          "MouseValue": -1
+        }
+      ],
+      "VirtualKeys": [
+        17
+      ]
+    },
+    {
+      "uid": 18,
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 11,
+          "MouseValue": -1
+        }
+      ],
+      "VirtualKeys": [
+        18
+      ]
+    },
+    {
+      "uid": 19,
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 14,
+          "MouseValue": -1
+        }
+      ],
+      "VirtualKeys": [
+        2
+      ]
+    },
+    {
+      "uid": 20,
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 13,
+          "MouseValue": -1
+        }
+      ],
+      "VirtualKeys": [
+        3
+      ]
+    },
+    {
+      "uid": 21,
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 27,
+          "MouseValue": -1
+        }
+      ],
+      "VirtualKeys": [
+        7
+      ]
+    },
+    {
+      "uid": 22,
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 28,
+          "MouseValue": -1
+        }
+      ],
+      "VirtualKeys": [
+        5
+      ]
+    },
+    {
+      "uid": 23,
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 29,
+          "MouseValue": -1
+        }
+      ],
+      "VirtualKeys": [
+        8
+      ]
+    },
+    {
+      "uid": 24,
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 30,
+          "MouseValue": -1
+        }
+      ],
+      "VirtualKeys": [
+        6
+      ]
+    },
+    {
+      "uid": 25,
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 12,
+          "MouseValue": -1
+        }
+      ],
+      "VirtualKeys": [
+        4
+      ]
+    },
+    {
+      "uid": 26,
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": 1,
+          "MouseValue": -1
+        }
+      ],
+      "VirtualKeys": [
+        1
+      ]
+    },
+    {
+      "uid": 27,
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": -1,
+          "MouseValue": 1
+        }
+      ],
+      "VirtualKeys": [
+        14
+      ]
+    },
+    {
+      "uid": 28,
+      "PhysicalKeys": [
+        {
+          "ExtraValue": -1,
+          "KeyboardValue": -1,
+          "MouseValue": 0
+        }
+      ],
+      "VirtualKeys": [
+        17
+      ]
+    }
+  ]
+}

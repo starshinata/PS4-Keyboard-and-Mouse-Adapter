@@ -1,5 +1,6 @@
 ﻿using AdonisUI;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
+using Pizza.KeyboardAndMouseAdapter.Backend.Mappings;
 using Serilog;
 using System;
 using System.Linq;
@@ -96,11 +97,11 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls
                         {
                             VirtualKey vk = (VirtualKey)lastClickedButton.Tag;
 
-                            PhysicalKey valueOld = UserSettings.GetInstance().KeyboardMappings[vk];
+                            PhysicalKey valueOld = UserSettingsContainer.GetInstance().Mappings_ForSimpleConfigPage[vk];
 
                             PhysicalKey valueNew = new PhysicalKey();
                             valueNew.KeyboardValue = key;
-                            UserSettings.SetMapping(vk, valueOld, valueNew);
+                            UserSettingsContainer.SetMapping(vk, valueOld, valueNew);
                         }
 
                         lastClickedButton = null;

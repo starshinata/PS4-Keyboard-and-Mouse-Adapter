@@ -2,7 +2,7 @@
 using Pizza.Common;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using Pizza.KeyboardAndMouseAdapter.UI;
-using Pizza.KeyboardAndMouseAdapter.UI.Controls.MiscellaneousSettings;
+using Pizza.KeyboardAndMouseAdapter.UI.Controls.MiscellaneousSettingsPage;
 
 namespace UnitTests.KeyboardAndMouseAdapter.UI.Controls.GamepadUpdaterNoSleepControlTest
 {
