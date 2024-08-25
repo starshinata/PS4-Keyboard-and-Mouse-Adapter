@@ -1,39 +1,13 @@
-﻿// PS4RemotePlayInterceptor (File: Classes/InjectionInterface.cs)
-//
-// Copyright (c) 2018 Komefai
-//
-// Visit http://komefai.com for more information
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
-
-
-using Pizza.Common;
-using PS4RemotePlayInjection;
+﻿using Pizza.Common;
 using Serilog;
 using System;
 using System.Linq;
 using System.Text;
 
-namespace PS4RemotePlayInterceptor
+namespace PS4RemotePlayInjection
 {
     /// <summary>
-    /// Provides an interface for communicating from the client (target) to the server (injector)
+    /// Provides an interface for communicating from the client (PsRemotePlay) to the server (injector)
     /// </summary>
     public class InjectionInterface : MarshalByRefObject
     {
@@ -79,7 +53,7 @@ namespace PS4RemotePlayInterceptor
         /// </summary>
         public void OnInjectionSuccess(int clientPID)
         {
-            // printing at all four levels to confirm what logging it working
+            // printing at all four levels to confirm what logging is working
             Log.Error("(NOT AN ERROR) OnInjectionSuccess clientPID {0}", clientPID);
             Log.Verbose("OnInjectionSuccess clientPID {0}", clientPID);
             Log.Debug("OnInjectionSuccess clientPID {0}", clientPID);
@@ -96,11 +70,15 @@ namespace PS4RemotePlayInterceptor
                 //  PrintAnalogSticksAsDegrees(inputReport.Skip(1).Take(4).ToArray());
 
                 // Expect inputReport to be modified
+                Log.Verbose("Injector.Callback");
+                Log.Verbose(Injector.Callback.ToString());
+
                 if (Injector.Callback != null)
                 {
                     Log.Verbose("InjectionInterface.OnReadFile Injector.Callback " + Injector.Callback.ToString());
                     // Parse the state
-                    DualShockState state = DualShockState.ParseFromDualshockRaw(inputReport);
+                    //DualShockState state = DualShockState.ParseFromDualshockRaw(inputReport);
+                    DualShockState state = UtilityData.DualShockState;
 
                     // Skip if state is invalid
                     if (state == null)
@@ -111,6 +89,11 @@ namespace PS4RemotePlayInterceptor
 
                     // Convert it back
                     state.ConvertToDualshockRaw(ref inputReport);
+
+                    if (state.Cross)
+                    {
+                        LogInformation("X pressed");
+                    }
                 }
             }
             catch (Exception ex)

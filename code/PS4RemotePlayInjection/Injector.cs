@@ -4,13 +4,14 @@ using Serilog;
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels.Ipc;
-using System.Security.Principal;
+using System.Threading;
+using System.Threading.Tasks;
 
-namespace PS4RemotePlayInterceptor
+namespace PS4RemotePlayInjection
 {
     public delegate void InterceptionDelegate(ref DualShockState state);
+
 
     public enum InjectionMode
     {
@@ -18,33 +19,46 @@ namespace PS4RemotePlayInterceptor
         Compatibility
     }
 
+
     public class Injector
     {
+        //TODO why is everything static
+
+        private static ThreadRpcUpdateListener ThreadRpcUpdateListener;
+
         // EasyHook
         private static string _channelName = null;
         private static string _channelName2 = null;
         private static IpcServerChannel _ipcServer;
         private static IpcServerChannel _ipcServer2;
+
         private static bool _noGAC = false;
 
         public static DateTime LastPingTime { get; set; }
 
         // Injection
         public static InjectionMode InjectionMode = InjectionMode.Auto;
+
         // Emulation
         public static int EmulationMode = -1;
 
         // Delegate
         public static InterceptionDelegate Callback { get; set; }
 
+        private static ThreadRpcUpdateListener threadRpcUpdateListener;
+
         public static int Inject(int emulationMode, string processName, string dllToInject)
         {
+            threadRpcUpdateListener = new ThreadRpcUpdateListener();
+            Thread thread = new Thread(threadRpcUpdateListener.DoWork);
+            thread.Start();
+
 
             Log.Logger.Information("Injector.Inject {emulationMode:{0}||{1}, processName:{2},  dllToInject:{3}",
-                emulationMode,
-                EmulationConstants.ToString(emulationMode),
-                processName,
-                dllToInject);
+                    emulationMode,
+                    EmulationConstants.ToString(emulationMode),
+                    processName,
+                    dllToInject);
 
             EmulationMode = emulationMode;
 
@@ -62,7 +76,7 @@ namespace PS4RemotePlayInterceptor
             Log.Information("Injector.Inject() injectionLibrary " + injectionLibrary);
 
 
-            bool shouldInject = false;
+            bool shouldInject = true;
             try
             {
 
@@ -89,25 +103,25 @@ namespace PS4RemotePlayInterceptor
                 //    shouldInject = true;
                 //}
 
+                /*
+                                if (_ipcServer == null)
+                                {
+                                    Log.Debug("Injector.Inject making ipcServer1");
 
-                if (_ipcServer == null)
-                {
-                    Log.Debug("Injector.Inject making ipcServer1");
+                                    // Setup remote hooking
+                                    _channelName = DateTime.Now.ToString("yy-MM-dd hh:mm:ss");
+                                    _ipcServer = RemoteHooking.IpcCreateServer<InjectionInterface>(ref _channelName, WellKnownObjectMode.Singleton, WellKnownSidType.WorldSid);
+                                    Log.Debug("Injector.Inject _ipcServer1 made");
+                                }
 
-                    // Setup remote hooking
-                    _channelName = DateTime.Now.ToString("yy-MM-dd hh:mm:ss");
-                    _ipcServer = RemoteHooking.IpcCreateServer<InjectionInterface>(ref _channelName, WellKnownObjectMode.Singleton, WellKnownSidType.WorldSid);
-                    Log.Debug("Injector.Inject _ipcServer1 made");
-                }
-
-                if (_ipcServer2 == null)
-                {
-                    Log.Debug("Injector.Inject making ipcServer2");
-                    _channelName2 = "dotnethooks";
-                    _ipcServer2 = RemoteHooking.IpcCreateServer<InjectionInterface>(ref _channelName2, WellKnownObjectMode.Singleton, WellKnownSidType.WorldSid);
-                    shouldInject = true;
-                    Log.Debug("Injector.Inject _ipcServer2 made");
-                }
+                                if (_ipcServer2 == null)
+                                {
+                                    Log.Debug("Injector.Inject making ipcServer2");
+                                    _channelName2 = "dotnethooks";
+                                    _ipcServer2 = RemoteHooking.IpcCreateServer<InjectionInterface>(ref _channelName2, WellKnownObjectMode.Singleton, WellKnownSidType.WorldSid);
+                                    shouldInject = true;
+                                    Log.Debug("Injector.Inject _ipcServer2 made");
+                                }*/
 
 
             }
@@ -152,8 +166,10 @@ namespace PS4RemotePlayInterceptor
             }
         }
 
-        public static void StopInjection()
+        public static async Task StopInjectionAsync()
         {
+            await threadRpcUpdateListener.ShutdownAsync();
+
             if (_ipcServer != null)
             {
                 _ipcServer.StopListening(null);

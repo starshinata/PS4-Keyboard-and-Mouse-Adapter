@@ -1,0 +1,15 @@
+﻿# What is "dnf_4.8.System.Runtime.Remoting.dll"
+It is "System.Runtime.Remoting.dll" from ".Net Framework 4.8"
+
+
+# How did you get it ?
+VS > view >Object browser
+Browse > ".Net Framework 4.8"
+Scroll down to "System.Runtime.Remoting.dll"
+Then it will give you a path like "C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.Runtime.Remoting.dll"
+
+# How do you use it / reference it?
+Per https://stackoverflow.com/a/65017892/10209703
+Right click on the project you want to use it in
+> Add > Project Reference > Browse (bottom right)
+then navigate to the dll you want to use

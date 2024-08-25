@@ -1,0 +1,56 @@
+// proto to c# mappings
+// https://learn.microsoft.com/en-us/aspnet/core/grpc/protobuf?view=aspnetcore-7.0
+
+syntax = "proto3";
+
+package GreeterProtos;
+
+///////////////////////////////////////////////////////////////////////////////
+// MESSAGES
+///////////////////////////////////////////////////////////////////////////////
+
+message DualShockProto {
+        bool L1 = 1;
+        int32 L2 = 2;
+        bool L3 = 3;
+        int32 LX = 4;
+        int32 LY = 5;
+
+        bool R1 = 6;
+        int32 R2 = 7;
+        bool R3 = 8;
+        int32 RX = 9;
+        int32 RY = 10;
+        
+        bool Triangle = 11;
+        bool Circle = 12;
+        bool Cross = 13;
+        bool Square = 14;
+
+        bool DPad_Up = 15;
+        bool DPad_Down = 16;
+        bool DPad_Left = 17;
+        bool DPad_Right = 18;
+        
+        bool Share = 19;
+        bool Options = 20;        
+}
+
+message UpdateRequest {
+}
+
+message UpdateResponse {
+    int32 ProcessId = 1;
+    bool IsToolBarVisible = 2;
+    int32 EmulationMode = 3;
+    DualShockProto DualShockProto = 4;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+// SERVICES
+///////////////////////////////////////////////////////////////////////////////
+
+service GreetingService {
+    rpc Greeting(UpdateRequest) returns (UpdateResponse);
+}

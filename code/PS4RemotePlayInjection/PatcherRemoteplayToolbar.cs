@@ -1,5 +1,5 @@
 ﻿using HarmonyLib;
-using PS4RemotePlayInterceptor;
+using PS4RemotePlayInjection;
 using System;
 using System.Linq;
 

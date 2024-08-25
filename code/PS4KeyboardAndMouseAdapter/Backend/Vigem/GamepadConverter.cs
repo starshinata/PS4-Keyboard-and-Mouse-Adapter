@@ -1,7 +1,7 @@
 ﻿using Nefarius.ViGEm.Client.Targets;
 using Nefarius.ViGEm.Client.Targets.DualShock4;
 
-using PS4RemotePlayInterceptor;
+using PS4RemotePlayInjection;
 
 namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
 {
@@ -77,14 +77,14 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
             controller.SetButtonState(DualShock4Button.ThumbLeft, state.L3);
 
             DualShock4DPadDirection tempDPad = DualShock4DPadDirection.None;
-            if (state.DPad_Up && state.DPad_Right) tempDPad = DualShock4DPadDirection.Northeast;
-            else if (state.DPad_Up && state.DPad_Left) tempDPad = DualShock4DPadDirection.Northwest;
-            else if (state.DPad_Up) tempDPad = DualShock4DPadDirection.North;
-            else if (state.DPad_Right && state.DPad_Down) tempDPad = DualShock4DPadDirection.Southeast;
-            else if (state.DPad_Right) tempDPad = DualShock4DPadDirection.East;
-            else if (state.DPad_Down && state.DPad_Left) tempDPad = DualShock4DPadDirection.Southwest;
-            else if (state.DPad_Down) tempDPad = DualShock4DPadDirection.South;
-            else if (state.DPad_Left) tempDPad = DualShock4DPadDirection.West;
+            if (state.DPadUp && state.DPadRight) tempDPad = DualShock4DPadDirection.Northeast;
+            else if (state.DPadUp && state.DPadLeft) tempDPad = DualShock4DPadDirection.Northwest;
+            else if (state.DPadUp) tempDPad = DualShock4DPadDirection.North;
+            else if (state.DPadRight && state.DPadDown) tempDPad = DualShock4DPadDirection.Southeast;
+            else if (state.DPadRight) tempDPad = DualShock4DPadDirection.East;
+            else if (state.DPadDown && state.DPadLeft) tempDPad = DualShock4DPadDirection.Southwest;
+            else if (state.DPadDown) tempDPad = DualShock4DPadDirection.South;
+            else if (state.DPadLeft) tempDPad = DualShock4DPadDirection.West;
             controller.SetDPadDirection(tempDPad);
 
             controller.SetAxisValue(DualShock4Axis.LeftThumbX, state.LX);

@@ -4,6 +4,12 @@
 ## be error tolerant for process killing
 set +e
 
+
+echo "REMINDER this is to RUN, not BUILD"
+echo "REMINDER this is to RUN, not BUILD"
+echo ""
+
+
 echo "killing RemotePlay"
 ## documentation says /im but mingw no likey
 taskkill.exe -im RemotePlay* -f
@@ -13,8 +19,8 @@ taskkill.exe -im RemotePlay* -f
 set -e
 
 
-BINARY_FOLDER="code/PS4KeyboardAndMouseAdapter/bin/Debug"
-BINARY_FOLDER="code/PS4KeyboardAndMouseAdapter/bin/Release"
+BINARY_FOLDER="code/PS4KeyboardAndMouseAdapter/bin/Debug/net6.0-windows/"
+BINARY_FOLDER="code/PS4KeyboardAndMouseAdapter/bin/Release/net6.0-windows/"
 
 cp profiles/pancakes-destiny-profile.json $BINARY_FOLDER/profile-previous.json
 

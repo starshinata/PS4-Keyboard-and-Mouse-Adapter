@@ -2,17 +2,29 @@
 <package>
 	<metadata>
 		<id>PS4KeyboardAndMouseAdapter</id>
-		<version>REPLACE_VERSION_REPLACE</version>
-		<authors>Me</authors>
-		<owners>Me</owners>
+		
+		<!-- everything below alphabetically ordered -->
+		
+		<authors>pancakeslp</authors>
+		<owners>pancakeslp</owners>
+		
+		<!-- pancakeslp 2023.04.08
+		if you are told to add a dependency like below, note squirrel will complain,
+		as apparently package "must have no dependencies" -->
+		<!--
+		<dependencies>
+			<group targetFramework=".NETCoreApp6.0" />
+		</dependencies>
+		-->
+		
 		<!-- The description will appear as the program name when viewed in the list of installed programs within the Control Panel -->
 		<description>PS4KeyboardAndMouseAdapter</description>
-		<dependencies>
-			<group targetFramework=".NETFramework4.6.1" />
-		</dependencies>
-		<releaseNotes>a release note</releaseNotes>
+		<releaseNotes>a release note to shush squirrel</releaseNotes>
+		<version>REPLACE_VERSION_REPLACE</version>
 	</metadata>
+
 	<files>
-		<file src="..\..\code\PS4KeyboardandMouseAdapter\bin\Release\**\**" target="lib\net461\" exclude="*.pdb;*.vshost.*"/>
+		<!-- ..\..\ as starting in manualBuild\nuget\ -->
+		<file src="..\..\temp\nuget\**" target="lib\net6.0\" exclude="*.pdb;*.vshost.*"/>
 	</files>
 </package>

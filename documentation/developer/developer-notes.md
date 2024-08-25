@@ -42,11 +42,6 @@ BadImageFormatException: An attempt was made to load a program with an incorrect
 2. Set your CPU to ANY instead of x64
 
 
-#### "Markup is invalid"
-1. Clean the projects
-2. rebuild the solution
-
-
 #### "Could not copy \Squirrel.exe"
 you need to set "SquirrelToolsPath" in your project properties
 
@@ -62,3 +57,37 @@ so then  ` SquirrelToolsPath = packages\squirrel.windows.1.9.1\tools `
 2. Visual Studio Code > Tools > Nuget Package Manager > Package manager Console
 3. ` Install-Package WPFSpark `
 
+
+#### "Markup is invalid"
+1. Clean the projects
+2. rebuild the solution
+
+
+### Powershell ./build.ps1 cannot be loaded because running scripts is disabled on this system
+run this
+```
+powershell Get-ExecutionPolicy -List
+powershell Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+powershell Get-ExecutionPolicy -List
+```
+
+If that doesn't work read this
+https://learn.microsoft.com/en-gb/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.3
+
+### signtool.exe not found
+Error 
+```
+signtool.exe : The term 'signtool.exe' is not recognized as the name of a cmdlet, function, script file, or operable
+program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+At C:\workspace\PS4-Keyboard-and-Mouse-Adapter\master.move-to-dotnet-6\build.ps1:384 char:5
++     signtool.exe sign                       `
++     ~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (signtool.exe:String) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : CommandNotFoundException
+```
+
+Check in build.ps1 to see what the path for signtool is defined as, and check if the path exists
+
+if it doesnt exist, then use  ` gitroot\installers\windows10sdk\winsdksetup.exe `
+
+then check the path again

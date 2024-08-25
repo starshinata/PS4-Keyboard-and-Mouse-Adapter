@@ -1,7 +1,6 @@
 ﻿using Pizza.Common;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using PS4RemotePlayInjection;
-using PS4RemotePlayInterceptor;
 using Serilog;
 using System;
 using System.Diagnostics;
@@ -9,7 +8,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Forms;
 
-namespace Pizza.KeyboardAndMouseAdapter.Backend
+namespace Pizza.KeyboardAndMouseAdapter.Backend.Remote
 {
 
     public class RemotePlayInjector : RemotePlayStarter
@@ -40,7 +39,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
                 Log.Logger.Information("RemotePlayInjector.Inject remotePlayProcessId " + remotePlayProcessId);
                 Process RemotePlayProcess = Process.GetProcessById(remotePlayProcessId);
                 RemotePlayProcess.EnableRaisingEvents = true;
-                RemotePlayProcess.Exited += (sender, args) => { Utility.ShowCursor(true); };
+                RemotePlayProcess.Exited += (sender, args) => { CursorUtility.ShowCursor(true); };
 
                 RefreshRemotePlayProcess();
 
@@ -56,6 +55,11 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
                 ExceptionLogger.LogException("RemotePlayInjector.Inject error", e);
             }
         }
+        private void StartIpc()
+        {
+            var x = new ServerThing();
+            x.Moooain();
+        }
 
         public void OpenRemotePlayAndInject(GamepadProcessor gamepadProcessor)
         {
@@ -66,6 +70,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
                 bool success = OpenRemotePlayInternal();
                 if (success)
                 {
+                    StartIpc();
                     Inject(gamepadProcessor);
                 }
             }

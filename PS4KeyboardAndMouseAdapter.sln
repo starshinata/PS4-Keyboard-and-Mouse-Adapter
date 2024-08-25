@@ -3,15 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "code\Common\Common.csproj", "{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "code\Common\Common.csproj", "{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PS4KeyboardAndMouseAdapter", "code\PS4KeyboardAndMouseAdapter\PS4KeyboardAndMouseAdapter.csproj", "{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PS4KeyboardAndMouseAdapter", "code\PS4KeyboardAndMouseAdapter\PS4KeyboardAndMouseAdapter.csproj", "{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{62EC74F8-B76B-4703-A3AD-C184C198EBEB} = {62EC74F8-B76B-4703-A3AD-C184C198EBEB}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PS4RemotePlayInjection", "code\PS4RemotePlayInjection\PS4RemotePlayInjection.csproj", "{D3D6F621-7CB9-4992-80AC-FF9745D974EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PS4RemotePlayInjection", "code\PS4RemotePlayInjection\PS4RemotePlayInjection.csproj", "{D3D6F621-7CB9-4992-80AC-FF9745D974EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTools", "code\TestTools\TestTools.csproj", "{6BA0344A-66F2-44E6-84F0-0AC81134CC9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestTools", "code\TestTools\TestTools.csproj", "{6BA0344A-66F2-44E6-84F0-0AC81134CC9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "code\UnitTests\UnitTests.csproj", "{7B4800EE-D943-4299-90FD-DFCE48662774}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "code\UnitTests\UnitTests.csproj", "{0DED13E9-848F-4AC7-A1CA-2399001AA429}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9FF1BB60-DFEF-4108-A4A6-945C22D8882C}"
 	ProjectSection(SolutionItems) = preProject
@@ -28,7 +31,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "documentation", "documentation", "{0439F286-1E5F-4B55-B902-F7EF43C7B22B}"
 	ProjectSection(SolutionItems) = preProject
-		documentation\developer-notes.md = documentation\developer-notes.md
 		documentation\example-ui-1.png = documentation\example-ui-1.png
 		documentation\example-ui-2.png = documentation\example-ui-2.png
 		documentation\example-ui-3.png = documentation\example-ui-3.png
@@ -36,16 +38,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "documentation", "documentat
 		documentation\example-ui-5.png = documentation\example-ui-5.png
 		documentation\frequently-asked-questions.md = documentation\frequently-asked-questions.md
 		documentation\glossary-and-terms.md = documentation\glossary-and-terms.md
-		documentation\hid-lookup-table.txt = documentation\hid-lookup-table.txt
 		documentation\how-to-make-remote-play-fullscreen.md = documentation\how-to-make-remote-play-fullscreen.md
 		documentation\keyboard-keys-map.md = documentation\keyboard-keys-map.md
 		documentation\known-game-issues.md = documentation\known-game-issues.md
 		documentation\mouse-configuration.md = documentation\mouse-configuration.md
-		documentation\release-checklist.md = documentation\release-checklist.md
 		documentation\remote-play-fullscreen-1.png = documentation\remote-play-fullscreen-1.png
 		documentation\remote-play-fullscreen-2.png = documentation\remote-play-fullscreen-2.png
 		documentation\remote-play-fullscreen-3.png = documentation\remote-play-fullscreen-3.png
-		documentation\technical notes - needs a better name.txt = documentation\technical notes - needs a better name.txt
 		documentation\troubleshooting.md = documentation\troubleshooting.md
 		documentation\version-history.md = documentation\version-history.md
 		documentation\vigem.md = documentation\vigem.md
@@ -95,6 +94,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "vigemBusDriver", "vigemBusD
 		installers\vigemBusDriver\ViGEmBusSetup_x86.msi = installers\vigemBusDriver\ViGEmBusSetup_x86.msi
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "extract-me-bin", "extract-me-bin", "{6F3F2544-A927-4914-A91D-87C532146896}"
+	ProjectSection(SolutionItems) = preProject
+		manualBuild\extract-me-bin\PS4KeyboardAndMouseAdapter.exe = manualBuild\extract-me-bin\PS4KeyboardAndMouseAdapter.exe
+		manualBuild\extract-me-bin\Update.exe = manualBuild\extract-me-bin\Update.exe
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreeterProtos", "code\GreeterProtos\GreeterProtos.csproj", "{62EC74F8-B76B-4703-A3AD-C184C198EBEB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "developer", "developer", "{520E6586-29EE-4F4A-A33F-E4E668881D90}"
+	ProjectSection(SolutionItems) = preProject
+		documentation\developer\Building for linux.txt = documentation\developer\Building for linux.txt
+		documentation\developer\code breakdown.md = documentation\developer\code breakdown.md
+		documentation\developer\developer-notes.md = documentation\developer\developer-notes.md
+		documentation\developer\dotnet upgrade notes.txt = documentation\developer\dotnet upgrade notes.txt
+		documentation\developer\hid-lookup-table.txt = documentation\developer\hid-lookup-table.txt
+		documentation\developer\release-checklist.md = documentation\developer\release-checklist.md
+		documentation\developer\technical notes - needs a better name.txt = documentation\developer\technical notes - needs a better name.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Clean|Any CPU = Clean|Any CPU
@@ -107,36 +125,36 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}.Clean|Any CPU.ActiveCfg = Clean|Any CPU
 		{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}.Clean|Any CPU.Build.0 = Clean|Any CPU
-		{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}.Clean|x64.ActiveCfg = Clean|x64
-		{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}.Clean|x64.Build.0 = Clean|x64
+		{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}.Clean|x64.ActiveCfg = Debug|Any CPU
+		{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}.Clean|x64.Build.0 = Debug|Any CPU
 		{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}.Debug|x64.ActiveCfg = Debug|x64
-		{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}.Debug|x64.Build.0 = Debug|x64
+		{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}.Debug|x64.Build.0 = Debug|Any CPU
 		{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}.Release|x64.ActiveCfg = Release|x64
 		{7FBD8F7B-99DA-400D-B5C6-5DA010D8213F}.Release|x64.Build.0 = Release|x64
 		{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}.Clean|Any CPU.ActiveCfg = Clean|Any CPU
 		{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}.Clean|Any CPU.Build.0 = Clean|Any CPU
-		{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}.Clean|x64.ActiveCfg = Clean|x64
-		{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}.Clean|x64.Build.0 = Clean|x64
+		{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}.Clean|x64.ActiveCfg = Debug|Any CPU
+		{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}.Clean|x64.Build.0 = Debug|Any CPU
 		{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}.Debug|x64.ActiveCfg = Debug|x64
-		{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}.Debug|x64.Build.0 = Debug|x64
+		{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}.Debug|x64.Build.0 = Debug|Any CPU
 		{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}.Release|x64.ActiveCfg = Release|x64
 		{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}.Release|x64.Build.0 = Release|x64
 		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Clean|Any CPU.ActiveCfg = Clean|Any CPU
 		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Clean|Any CPU.Build.0 = Clean|Any CPU
-		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Clean|x64.ActiveCfg = Clean|x64
-		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Clean|x64.Build.0 = Clean|x64
+		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Clean|x64.ActiveCfg = Debug|Any CPU
+		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Clean|x64.Build.0 = Debug|Any CPU
 		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Debug|x64.ActiveCfg = Debug|x64
-		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Debug|x64.Build.0 = Debug|x64
+		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Debug|x64.Build.0 = Debug|Any CPU
 		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D3D6F621-7CB9-4992-80AC-FF9745D974EC}.Release|x64.ActiveCfg = Release|x64
@@ -153,18 +171,30 @@ Global
 		{6BA0344A-66F2-44E6-84F0-0AC81134CC9E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6BA0344A-66F2-44E6-84F0-0AC81134CC9E}.Release|x64.ActiveCfg = Release|Any CPU
 		{6BA0344A-66F2-44E6-84F0-0AC81134CC9E}.Release|x64.Build.0 = Release|Any CPU
-		{7B4800EE-D943-4299-90FD-DFCE48662774}.Clean|Any CPU.ActiveCfg = Release|Any CPU
-		{7B4800EE-D943-4299-90FD-DFCE48662774}.Clean|Any CPU.Build.0 = Release|Any CPU
-		{7B4800EE-D943-4299-90FD-DFCE48662774}.Clean|x64.ActiveCfg = Release|Any CPU
-		{7B4800EE-D943-4299-90FD-DFCE48662774}.Clean|x64.Build.0 = Release|Any CPU
-		{7B4800EE-D943-4299-90FD-DFCE48662774}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7B4800EE-D943-4299-90FD-DFCE48662774}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7B4800EE-D943-4299-90FD-DFCE48662774}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{7B4800EE-D943-4299-90FD-DFCE48662774}.Debug|x64.Build.0 = Debug|Any CPU
-		{7B4800EE-D943-4299-90FD-DFCE48662774}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7B4800EE-D943-4299-90FD-DFCE48662774}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7B4800EE-D943-4299-90FD-DFCE48662774}.Release|x64.ActiveCfg = Release|Any CPU
-		{7B4800EE-D943-4299-90FD-DFCE48662774}.Release|x64.Build.0 = Release|Any CPU
+		{0DED13E9-848F-4AC7-A1CA-2399001AA429}.Clean|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DED13E9-848F-4AC7-A1CA-2399001AA429}.Clean|Any CPU.Build.0 = Debug|Any CPU
+		{0DED13E9-848F-4AC7-A1CA-2399001AA429}.Clean|x64.ActiveCfg = Debug|Any CPU
+		{0DED13E9-848F-4AC7-A1CA-2399001AA429}.Clean|x64.Build.0 = Debug|Any CPU
+		{0DED13E9-848F-4AC7-A1CA-2399001AA429}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DED13E9-848F-4AC7-A1CA-2399001AA429}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DED13E9-848F-4AC7-A1CA-2399001AA429}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0DED13E9-848F-4AC7-A1CA-2399001AA429}.Debug|x64.Build.0 = Debug|Any CPU
+		{0DED13E9-848F-4AC7-A1CA-2399001AA429}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DED13E9-848F-4AC7-A1CA-2399001AA429}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DED13E9-848F-4AC7-A1CA-2399001AA429}.Release|x64.ActiveCfg = Release|Any CPU
+		{0DED13E9-848F-4AC7-A1CA-2399001AA429}.Release|x64.Build.0 = Release|Any CPU
+		{62EC74F8-B76B-4703-A3AD-C184C198EBEB}.Clean|Any CPU.ActiveCfg = Debug|Any CPU
+		{62EC74F8-B76B-4703-A3AD-C184C198EBEB}.Clean|Any CPU.Build.0 = Debug|Any CPU
+		{62EC74F8-B76B-4703-A3AD-C184C198EBEB}.Clean|x64.ActiveCfg = Debug|Any CPU
+		{62EC74F8-B76B-4703-A3AD-C184C198EBEB}.Clean|x64.Build.0 = Debug|Any CPU
+		{62EC74F8-B76B-4703-A3AD-C184C198EBEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62EC74F8-B76B-4703-A3AD-C184C198EBEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62EC74F8-B76B-4703-A3AD-C184C198EBEB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{62EC74F8-B76B-4703-A3AD-C184C198EBEB}.Debug|x64.Build.0 = Debug|Any CPU
+		{62EC74F8-B76B-4703-A3AD-C184C198EBEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62EC74F8-B76B-4703-A3AD-C184C198EBEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62EC74F8-B76B-4703-A3AD-C184C198EBEB}.Release|x64.ActiveCfg = Release|Any CPU
+		{62EC74F8-B76B-4703-A3AD-C184C198EBEB}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -178,6 +208,8 @@ Global
 		{6852A938-F1C8-4D31-A2E1-419C08CC42DA} = {9FF1BB60-DFEF-4108-A4A6-945C22D8882C}
 		{89924932-08BA-4A52-A21B-EB3D418436AA} = {6852A938-F1C8-4D31-A2E1-419C08CC42DA}
 		{F10F9F23-C09E-454C-A783-A56F8451911C} = {6852A938-F1C8-4D31-A2E1-419C08CC42DA}
+		{6F3F2544-A927-4914-A91D-87C532146896} = {60A1671E-B17D-48D6-8515-D21D96B6CFD3}
+		{520E6586-29EE-4F4A-A33F-E4E668881D90} = {0439F286-1E5F-4B55-B902-F7EF43C7B22B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {215189D4-FCF7-4F3E-BC57-0EA3347DD037}
