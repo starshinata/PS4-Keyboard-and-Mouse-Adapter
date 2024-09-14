@@ -24,24 +24,28 @@ $ErrorActionPreference = "Stop"
 ################################
 
 ## might need configuring
-$CERT_DIRECTORY="D:\workspace\##certificates\github.com-pancakeslp"
+$CERT_DIRECTORY = "E:\workspace\##certificates\github.com-pancakeslp"
 
-#$MS_BUILD_CONFIG="Debug"
-$MS_BUILD_CONFIG="Release"
+#$MS_BUILD_CONFIG = "Debug"
+$MS_BUILD_CONFIG = "Release"
 
-$VERSION="3.1.0"
+$VERSION = "3.1.1"
 
 ################################
 ################################
+$VISUAL_STUDIO_PATH = "C:\Program Files\Microsoft Visual Studio\2022\Community\"
 
 ## Path for MSBuild.exe
-$env:Path += ";C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\amd64\"
+$env:Path += ";$VISUAL_STUDIO_PATH\MSBuild\Current\Bin\amd64\"
 
 ## Path for signtool.exe
-$env:Path += ";C:\Program Files (x86)\Windows Kits\10\bin\10.0.17763.0\x64\"
+$env:Path += ";C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x64\"
 
 ## Path for vstest.console.exe
-$env:Path += ";C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\TestWindow"
+$env:Path += ";$VISUAL_STUDIO_PATH\Common7\IDE\CommonExtensions\Microsoft\TestWindow"
+
+################################
+################################
 
 $GENERATED_INSTALLER_PATH="SquirrelReleases"
 
@@ -257,8 +261,8 @@ function manually-sign-file {
       /f ${CERT_PFX}                      `
       /p ${CERT_PASSWORD}                 `
       /fd sha256                          `
-	  /tr http://timestamp.digicert.com   `
-	  /td sha256                          `
+      /tr http://timestamp.digicert.com   `
+      /td sha256                          `
       $FILE_NAME
 
   error-on-bad-return-code	
@@ -333,8 +337,8 @@ function test-vstest {
   vstest.console.exe $UNIT_TEST_DLL --ListTests
   echo ""
 
-  vstest.console.exe $UNIT_TEST_DLL $PROJECT_DIRECTORY_UNIT_TESTS\bin\$MS_BUILD_CONFIG\csfml-Window.dll
-  
+  vstest.console.exe $UNIT_TEST_DLL
+
   if ( $LASTEXITCODE -ne 0) {
     echo "vstest failed"
     exit $LASTEXITCODE 
