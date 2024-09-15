@@ -19,6 +19,7 @@ jobs:
 
     ## Environment variable
     env:
+      HELLO: 'WORLD'
       ##use  this to prefer node 12 ...
       ## why would you want this in 2024 ?!
       #ACTIONS_ALLOW_UNSECURE_COMMANDS: true
