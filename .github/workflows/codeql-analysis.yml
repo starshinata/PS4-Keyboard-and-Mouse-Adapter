@@ -19,7 +19,9 @@ jobs:
 
     ## Environment variable
     env:
-      ACTIONS_ALLOW_UNSECURE_COMMANDS: true  
+      ##use  this to prefer node 12 ...
+      ## why would you want this in 2024 ?!
+      #ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
     permissions:
       actions: read
@@ -47,19 +49,19 @@ jobs:
     steps:
 
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
 
     # Install the .NET Core workload
     - name: Install .NET Core
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 6.0.x
 
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@v1.0.2
+      uses: microsoft/setup-msbuild@v2
 
 
     - name: Initialize CodeQL tools for scanning.
