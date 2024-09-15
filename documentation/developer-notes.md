@@ -9,11 +9,11 @@
 
 
 ## Setup
-visual studio 2019
+visual studio 2022
 
 Workloads ?
 * .net Development
-* Windows and web develoment
+* Windows and web development
   (Specifically "ClickOnce Publishing Tools")
 
 
