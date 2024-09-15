@@ -29,7 +29,7 @@ $CERT_DIRECTORY = "E:\workspace\##certificates\github.com-pancakeslp"
 #$MS_BUILD_CONFIG = "Debug"
 $MS_BUILD_CONFIG = "Release"
 
-$VERSION = "3.1.1"
+$VERSION = "3.1.2"
 
 ################################
 ################################
