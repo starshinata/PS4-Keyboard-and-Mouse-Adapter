@@ -1,5 +1,5 @@
-﻿<UserControl 
-    x:Class="Pizza.KeyboardAndMouseAdapter.UI.Controls.GamepadMappingController"
+<UserControl 
+    x:Class="Pizza.KeyboardAndMouseAdapter.UI.Controls.OnScreenController.GamepadMouseInput"
 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -11,10 +11,13 @@
     mc:Ignorable="d"
 
     xmlns:config="clr-namespace:Pizza.KeyboardAndMouseAdapter.Backend.Config"
-    xmlns:controls="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls"
+    xmlns:controls="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls.SimpleConfig"
     xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
     >
 
+    <!-- TODO
+    Fix "Pizza.KeyboardAndMouseAdapter.UI.Controls.SimpleConfig"
+    its not THIS pages control's-->
     <Grid>
 
         <Grid.Resources>
@@ -23,36 +26,8 @@
             </Style>
         </Grid.Resources>
 
-        <StackPanel 
-            Grid.Row="1"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            Panel.ZIndex="99"
-            x:Name="WaitForKeyPress" >
-
-            <TextBlock 
-                FontFamily="consolas"
-                FontSize="30"
-                FontWeight="Bold" 
-                Foreground="Crimson" 
-                HorizontalAlignment="Center" 
-                Text="Press any Keyboard key to map" 
-                VerticalAlignment="Center" 
-                />
-
-            <TextBlock 
-                FontFamily="consolas"
-                FontSize="20"
-                FontWeight="Bold" 
-                Foreground="Crimson" 
-                HorizontalAlignment="Center" 
-                Text="or Escape to cancel" 
-                VerticalAlignment="Center" 
-                />
-
-        </StackPanel>
-
         <Grid 
+            Background="Black"
             Grid.Column="1"
             Grid.Row="1"
             Visibility="Visible">

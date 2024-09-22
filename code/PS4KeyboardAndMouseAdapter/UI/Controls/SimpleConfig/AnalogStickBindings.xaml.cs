@@ -4,7 +4,7 @@ using System.Windows.Data;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using Button = System.Windows.Controls.Button;
 
-namespace Pizza.KeyboardAndMouseAdapter.UI.Controls
+namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.SimpleConfig
 {
 
     public partial class AnalogStickBindings : UserControl

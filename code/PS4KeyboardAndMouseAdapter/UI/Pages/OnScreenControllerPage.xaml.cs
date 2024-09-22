@@ -1,22 +1,22 @@
-﻿using Pizza.KeyboardAndMouseAdapter.UI.Controls.SimpleConfig;
+using Pizza.KeyboardAndMouseAdapter.UI.Controls.OnScreenController;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace Pizza.KeyboardAndMouseAdapter.UI.Pages
 {
-    public partial class SimpleConfigPage : UserControl
+    public partial class OnScreenControllerPage : UserControl
     {
-        public GamepadMappingController gamepadMappingController;
+        public GamepadMouseInput gamepadMouseInput;
 
-        public SimpleConfigPage()
+        public OnScreenControllerPage()
         {
             InitializeComponent();
-            gamepadMappingController = gamepadMappingControllerInner;
+            gamepadMouseInput = gamepadMouseInputInner;
         }
 
         public void ChangeScheme(System.Uri colourScheme)
         {
-            gamepadMappingController.ChangeScheme(colourScheme);
+            gamepadMouseInput.ChangeScheme(colourScheme);
         }
 
         private void GotFocusLocal(object sender, RoutedEventArgs e)

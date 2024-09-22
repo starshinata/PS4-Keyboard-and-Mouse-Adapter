@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="Pizza.KeyboardAndMouseAdapter.UI.Controls.AnalogStickBindings"
+    x:Class="Pizza.KeyboardAndMouseAdapter.UI.Controls.SimpleConfig.AnalogStickBindings"
     x:Name="This"
 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
