@@ -203,10 +203,10 @@
     <Compile Include="Backend\GamepadProcessor.cs" />
     <Compile Include="Backend\RemotePlayInjector.cs" />
     <Compile Include="Backend\MouseAnchor.cs" />
-    <Compile Include="UI\Controls\OnScreenControllerPage\AnalogStickMouseInput.xaml.cs">
+    <Compile Include="UI\Controls\OnScreenController\AnalogStickMouseInput.xaml.cs">
       <DependentUpon>AnalogStickMouseInput.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Controls\OnScreenControllerPage\GamepadMouseInput.xaml.cs">
+    <Compile Include="UI\Controls\OnScreenController\GamepadMouseInput.xaml.cs">
       <DependentUpon>GamepadMouseInput.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\SimpleConfig\GamepadMappingController.xaml.cs">
@@ -282,11 +282,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Controls\OnScreenControllerPage\AnalogStickMouseInput.xaml">
+    <Page Include="UI\Controls\OnScreenController\AnalogStickMouseInput.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Controls\OnScreenControllerPage\GamepadMouseInput.xaml">
+    <Page Include="UI\Controls\OnScreenController\GamepadMouseInput.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

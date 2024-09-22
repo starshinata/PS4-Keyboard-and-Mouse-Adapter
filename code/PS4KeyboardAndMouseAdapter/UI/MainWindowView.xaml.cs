@@ -72,6 +72,14 @@ namespace Pizza.KeyboardAndMouseAdapter.UI
             }
         }
 
+        private void MainWindowView_Resized(object sender, EventArgs e)
+        {
+            if (onScreenControllerPage != null)
+            {
+                onScreenControllerPage.WindowResized();
+            }
+        }
+
         private void RefreshRemotePlayProcess()
         {
             if (InstanceSettings.GetInstance().GetRemotePlayProcess() != null)
@@ -110,13 +118,15 @@ namespace Pizza.KeyboardAndMouseAdapter.UI
             MouseAdvancedConfigPage mouseAdvancedConfigPage = new MouseAdvancedConfigPage();
             MiscellaneousSettingsPage miscellaneousSettingsPage = new MiscellaneousSettingsPage();
 
-
+            //TODO dont leave this as the FIRST TAB
+            AddTab("On Screen Controller", onScreenControllerPage);
 
             AddTab("Simple Config", simpleConfigPage);
             AddTab("Advanced mappings", advancedMappingsPage);
             AddTab("Mouse Advanced Config", mouseAdvancedConfigPage);
             AddTab("Miscellaneous Settings", miscellaneousSettingsPage);
-            AddTab("On Screen Controller", onScreenControllerPage);
+            //TODO
+            //AddTab("On Screen Controller", onScreenControllerPage);
 
             // remove the welcome tab
             tabs.Items.RemoveAt(0);

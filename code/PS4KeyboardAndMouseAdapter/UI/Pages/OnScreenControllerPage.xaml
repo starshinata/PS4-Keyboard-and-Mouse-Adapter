@@ -1,9 +1,16 @@
 <UserControl
     x:Class="Pizza.KeyboardAndMouseAdapter.UI.Pages.OnScreenControllerPage"
+
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 
     xmlns:controls="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls.OnScreenController"
+    
+    d:DesignHeight="700"
+    d:DesignWidth="640"
+    mc:Ignorable="d"
 
     GotFocus="GotFocusLocal"
     >
@@ -14,13 +21,13 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="350px" />
                 <RowDefinition Height="15px" />
-                <RowDefinition Height="230px" />
+                <RowDefinition Height="230*" MinHeight="100px"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="62*"/>
+                <ColumnDefinition Width="100*"/>
                 <ColumnDefinition Width="30px"/>
-                <ColumnDefinition Width="129*"/>
+                <ColumnDefinition Width="100*"/>
             </Grid.ColumnDefinitions>
 
             <controls:GamepadMouseInput
@@ -29,7 +36,17 @@
                 Grid.Column="0"  
                 Grid.ColumnSpan="3"/>
 
-           
+            <controls:AnalogStickMouseInput
+                x:Name="stickLeft"
+                Grid.Row="2"  
+                Grid.Column="0"  
+                Grid.ColumnSpan="1"/>
+
+            <controls:AnalogStickMouseInput
+                x:Name="stickRight"
+                Grid.Row="2"  
+                Grid.Column="2"  
+                Grid.ColumnSpan="1"/>
 
         </Grid>
     </ScrollViewer>
