@@ -353,9 +353,9 @@ MigrationBackup/
 .idea
 
 /code/package
+/code/packages
 /code/PS4KeyboardAndMouseAdapter/Resources/BuildDate.txt
 /nuget/PS4KeyboardAndMouseAdapter.nuspec
 /manualBuild/nuget/PS4KeyboardAndMouseAdapter.nuspec
-
 /packages
 /SquirrelReleases
