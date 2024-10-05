@@ -29,8 +29,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Pages
 
         public void WindowResized()
         {
-            stickLeft.RepaintStickCenter();
-            stickRight.RepaintStickCenter();
+            analogStickMouseInputs.WindowResized();
         }
     }
 }

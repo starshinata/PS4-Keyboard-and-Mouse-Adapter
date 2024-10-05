@@ -24,29 +24,15 @@
                 <RowDefinition Height="230*" MinHeight="100px"/>
             </Grid.RowDefinitions>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100*"/>
-                <ColumnDefinition Width="30px"/>
-                <ColumnDefinition Width="100*"/>
-            </Grid.ColumnDefinitions>
-
             <controls:GamepadMouseInput
                 x:Name="gamepadMouseInputInner"
-                Grid.Row="0"  
-                Grid.Column="0"  
-                Grid.ColumnSpan="3"/>
+                Grid.Row="0" 
+                />
 
-            <controls:AnalogStickMouseInput
-                x:Name="stickLeft"
+            <controls:AnalogStickMouseInputs
+                 x:Name="analogStickMouseInputs"
                 Grid.Row="2"  
-                Grid.Column="0"  
-                Grid.ColumnSpan="1"/>
-
-            <controls:AnalogStickMouseInput
-                x:Name="stickRight"
-                Grid.Row="2"  
-                Grid.Column="2"  
-                Grid.ColumnSpan="1"/>
+                />
 
         </Grid>
     </ScrollViewer>

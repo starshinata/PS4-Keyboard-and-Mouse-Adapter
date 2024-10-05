@@ -16,6 +16,7 @@
         <Canvas 
             x:Name="canvas" 
             Grid.Column="0"
+            MouseUp="Canvas_MouseUp"
             MouseMove="Canvas_MouseMove"
             MouseDown="Canvas_MouseDown"
             >

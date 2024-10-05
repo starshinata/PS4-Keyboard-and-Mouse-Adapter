@@ -203,6 +203,9 @@
     <Compile Include="Backend\GamepadProcessor.cs" />
     <Compile Include="Backend\RemotePlayInjector.cs" />
     <Compile Include="Backend\MouseAnchor.cs" />
+    <Compile Include="UI\Controls\OnScreenController\AnalogStickMouseInputs.xaml.cs">
+      <DependentUpon>AnalogStickMouseInputs.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\OnScreenController\AnalogStickMouseInput.xaml.cs">
       <DependentUpon>AnalogStickMouseInput.xaml</DependentUpon>
     </Compile>
@@ -279,6 +282,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\Controls\MiscellaneousSetting\RemotePlayToolbarSettingsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Controls\OnScreenController\AnalogStickMouseInputs.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

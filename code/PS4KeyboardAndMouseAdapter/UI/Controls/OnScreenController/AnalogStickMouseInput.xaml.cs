@@ -5,11 +5,13 @@ using System.Windows.Input;
 
 namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.OnScreenController
 {
-    /// <summary>
-    /// Interaction logic for AnalogStickVisualizer.xaml
-    /// </summary>
     public partial class AnalogStickMouseInput : UserControl
     {
+
+        private Point centre;
+        private double radius;
+        private string label;
+
 
         public AnalogStickMouseInput()
         {
@@ -20,36 +22,82 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.OnScreenController
         {
             if (ActualHeight > 10 && ActualWidth > 10)
             {
+
+                // We are setting circle horizontal alignment to centred
+                // we are NOT setting circle vertical alignment, so top will always be ZERO
+
                 double diameter = Math.Min(ActualHeight, ActualWidth);
-                double shapeCircleOffset = (ActualWidth - diameter) / 2.0;
-                Canvas.SetLeft(shapeCircle, shapeCircleOffset);
+                radius = diameter / 2;
+
+                // shape CIRCLE START
+
+                double shapeCircle_offsetLeft = (ActualWidth - diameter) / 2.0;
+                Canvas.SetLeft(shapeCircle, shapeCircle_offsetLeft);
 
                 shapeCircle.Height = diameter;
                 shapeCircle.Width = diameter;
+                // shape CIRCLE END
 
+
+                centre = new Point(shapeCircle_offsetLeft + radius, radius);
+
+
+                // shape CENTRE START
                 shapeCenter.Height = 10;
                 shapeCenter.Width = 10;
 
-                double shapeCenterTopOffset =  (diameter / 2) - (shapeCenter.Width / 2);
-                double shapeCenterLeftOffset = shapeCircleOffset + shapeCenterTopOffset;
-                Canvas.SetLeft(shapeCenter, shapeCenterLeftOffset);
-                Canvas.SetTop(shapeCenter, shapeCenterTopOffset);
+                double shapeCenter_offsetTop = (radius) - (shapeCenter.Width / 2);
+                double shapeCenter_offsetLeft = shapeCircle_offsetLeft + shapeCenter_offsetTop;
+
+                Canvas.SetLeft(shapeCenter, shapeCenter_offsetLeft);
+                Canvas.SetTop(shapeCenter, shapeCenter_offsetTop);
+                // shape CENTRE END
             }
         }
 
-        //TODO
-        private void Canvas_MouseMove(object sender, MouseEventArgs e)
+        public void SetLabel(String s)
         {
-            //Console.WriteLine("Canvas_MouseMove");
+            label = s;
         }
 
-        //TODO mouse drag
+        // references
+        // is a point in a circle - https://youtu.be/S6BHQMk8C_A?si=yOPoWzh0FvsieTh4
+        // having watched this video i now feel dumb for drawing a blank on how to detect if a point in a circle
+        // https://stackoverflow.com/questions/11555355/calculating-the-distance-between-2-points
+        private bool isInCircle(Point mousePoint)
+        {
+            // when debugging
+            // if the canvas background isnt painted
+            // then you will almost always see TRUE as the result
+            // if the canvas background is painted
+            // then you will see a sensible amount of TRUE and FALSE
+
+            //Console.WriteLine("isInCircle" + label + " centre " + centre);
+            //Console.WriteLine("isInCircle" + label + " radius " + radius);
+            double distance = Point.Subtract(mousePoint, centre).Length;
+            //Console.WriteLine("isInCircle" + label + " distance " + distance);
+            return distance < radius;
+        }
+
+        private void Canvas_MouseMove(object sender, MouseEventArgs e)
+        {
+
+            Point p = Mouse.GetPosition(canvas);
+            //Console.WriteLine("Canvas_MouseMove " + label + " current point " + p);
+            //Console.WriteLine("isInCircle " + isInCircle(p));
+        }
 
         private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Console.WriteLine("Canvas_MouseDown");
+            //Console.WriteLine("Canvas_MouseDown " + label);
             Point p = Mouse.GetPosition(canvas);
-            Console.WriteLine(p);
+            //Console.WriteLine(p);
+            //Console.WriteLine("isInCircle " + isInCircle(p) + " " + p);
+        }
+
+        private void Canvas_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }
