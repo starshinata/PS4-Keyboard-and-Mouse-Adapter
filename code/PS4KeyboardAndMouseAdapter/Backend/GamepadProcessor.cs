@@ -1,4 +1,5 @@
 ﻿using Pizza.KeyboardAndMouseAdapter.Backend.Config;
+using Pizza.KeyboardAndMouseAdapter.Backend.ControllerState;
 using PS4RemotePlayInjection;
 using PS4RemotePlayInterceptor;
 using Serilog;
@@ -88,7 +89,8 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
             // it might seem sensible to say that we should only return a value when enough time has passed (as per MousePollingRate)
             // and if enough time has not passed, return null
             //
-            // if we return null, then the DS/Controller will register that as no stick movement
+            // BUT if we return null, then the DS/Controller will register that as no stick movement
+            // reseting sticks to appear centered
             // thus the mouse input is perceived as unresponsive or jumpy
             //
             // to mitigate this, just return the previously polled value (and wait for the new value)
@@ -309,6 +311,61 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
             }
         }
 
+        // return TRUE if we did an operation using On Screen Sticks
+        // otherwise return FALSE
+        private bool HandleOnscreenSticks()
+        {
+            bool EnableOnscreenSticks = InstanceSettings.EnableMouseInput;
+
+
+            if (EnableOnscreenSticks)
+            {
+                //TODO get value
+                LeftRightSticks x = null;
+
+                if (x != null && x.Left != null && x.Right != null)
+                {
+
+                    byte leftX = HandleOnscreenStickCoordinate(x.Left.X);
+                    byte leftY = HandleOnscreenStickCoordinate(x.Left.Y);
+
+                    CurrentState.LX = leftX;
+                    CurrentState.LY = leftY;
+
+                    byte rightX = HandleOnscreenStickCoordinate(x.Right.X);
+                    byte rightY = HandleOnscreenStickCoordinate(x.Right.Y);
+
+                    CurrentState.RX = rightX;
+                    CurrentState.RY = rightY;
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        // in Point you have two Coordinates
+        // Each coordinates is a range between -1 and 1
+        // 
+        // think of
+        // -1 as 100% Left
+        // 1 as 100% Right
+        // -1 as 100% Up
+        // 1 as 100% Down
+        private byte HandleOnscreenStickCoordinate(double xOrY)
+        {
+            // convert the range -1 to 1
+            // to -127 to 127
+            int scaledXOrY = (int)(xOrY * 127);
+
+            // convert the range -127 to 127
+            // to 0 to 255
+            scaledXOrY += 127;
+
+            return (byte)scaledXOrY;
+        }
+
         private bool IsAimingWithAimSpecificSensitivity()
         {
             return IsAiming && UserSettings.MouseAimSensitivityEnabled;
@@ -450,9 +507,15 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
             // Log.Verbose(uuid + " GamepadProcessor.GetState in b");
 
             HandleButtonPressed();
-
             HandleAimToggle();
-            HandleMouseCursor();
+
+            // if onscreenSticksUsed we probably not need to hand mouse cursor
+            bool onscreenSticksUsed = HandleOnscreenSticks();
+            if (!onscreenSticksUsed)
+            {
+                HandleMouseCursor();
+            }
+
             MouseWheelProcessor.Process(CurrentState);
 
             //Log.Verbose(uuid + " GamepadProcessor.GetState out " + DualShockStateToString(ref CurrentState));

@@ -27,6 +27,10 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 
         public bool EnableMouseInput { get; set; } = false;
 
+        public bool EnableOnscreenSticks { get; set; } = false;
+
+        public bool OnscreenSticksClickRequired { get; set; } = true;
+        
         private LogManager logManager = null;
 
         private VigemInternals vigemInternals = null;

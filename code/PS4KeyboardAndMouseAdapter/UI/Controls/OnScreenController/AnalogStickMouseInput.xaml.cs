@@ -1,3 +1,4 @@
+using Pizza.KeyboardAndMouseAdapter.Backend.ControllerState;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,8 +10,21 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.OnScreenController
     {
 
         private Point centre;
+        private bool clicked = false;
         private double radius;
         private string label;
+
+
+        // If not null, you will have a Point
+        // in Point you have two Coordinates
+        // Each coordinates is a range between -1 and 1
+        // 
+        // think of
+        // -1 as 100% Left
+        // 1 as 100% Right
+        // -1 as 100% Up
+        // 1 as 100% Down
+        public NullablePoint pointAsPercentage;
 
 
         public AnalogStickMouseInput()
@@ -81,8 +95,19 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.OnScreenController
 
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
         {
-
             Point p = Mouse.GetPosition(canvas);
+            if (clicked && isInCircle(p))
+            {
+                //Console.WriteLine("Canvas_MouseMove " + label + " current point " + p);
+
+                double centeredX = p.X - centre.X;
+                double centeredY = p.Y - centre.Y;
+
+                pointAsPercentage = new NullablePoint(centeredX / radius, centeredY / radius);
+                //Console.WriteLine("Canvas_MouseMove " + label + " scaled point " + pointAsPercentage.X + ", " + pointAsPercentage.Y);
+
+            }
+
             //Console.WriteLine("Canvas_MouseMove " + label + " current point " + p);
             //Console.WriteLine("isInCircle " + isInCircle(p));
         }
@@ -90,14 +115,16 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.OnScreenController
         private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
             //Console.WriteLine("Canvas_MouseDown " + label);
-            Point p = Mouse.GetPosition(canvas);
+            //Point p = Mouse.GetPosition(canvas);
             //Console.WriteLine(p);
             //Console.WriteLine("isInCircle " + isInCircle(p) + " " + p);
+            clicked = true;
         }
 
         private void Canvas_MouseUp(object sender, MouseButtonEventArgs e)
         {
-
+            clicked = false;
+            pointAsPercentage = null;
         }
     }
 }

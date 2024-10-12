@@ -8,6 +8,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 
     xmlns:controls="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls.OnScreenController"
+    xmlns:wpfspark="clr-namespace:WPFSpark;assembly=WPFSpark" 
     
     d:DesignHeight="200" 
     d:DesignWidth="200"
@@ -17,20 +18,81 @@
     <Grid>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="70px"/>
+            <ColumnDefinition Width="50*"/>
             <ColumnDefinition Width="30px"/>
-            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="70px"/>
         </Grid.ColumnDefinitions>
-     
-        <controls:AnalogStickMouseInput
-            x:Name="stickLeft"
-            Grid.Column="0"  
-            Grid.ColumnSpan="1"/>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="31px" />
+            <RowDefinition Height="31px" />
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        
+        <!-- https://www.codeproject.com/Articles/1060961/WPFSpark-v -->
+        <wpfspark:ToggleSwitch
+            x:Name="toggleEnableOnscreenSticks"
+            Grid.Row="0"
+            Grid.Column="0"
+            Background="black"
+            BorderThickness="2px"
+            IsChecked="{Binding Path=InstanceSettings.EnableOnscreenSticks, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Height="30"
+            HorizontalAlignment="Left"
+            Style="{StaticResource {ComponentResourceKey ResourceId=ToggleSwitch.iOS.Light.Style, TypeInTargetAssembly={x:Type wpfspark:ToggleSwitch}}}" 
+            VerticalAlignment="Top"
+            Width="60"/>
+
+        <TextBlock 
+            Grid.Row="0"
+            Grid.Column="1"
+            Grid.ColumnSpan="4"
+            Text="toggleEnableOnscreenSticks"
+            TextWrapping="Wrap"
+            />
+
+
+        <!-- https://www.codeproject.com/Articles/1060961/WPFSpark-v -->
+        <wpfspark:ToggleSwitch
+             x:Name="toggleOnscreenSticksClickRequired"
+            Grid.Row="1"
+            Grid.Column="0"
+            
+            Background="black"
+            BorderThickness="2px"
+            IsChecked="{Binding Path=InstanceSettings.OnscreenSticksClickRequired, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Height="30"
+            HorizontalAlignment="Left"
+            Style="{StaticResource {ComponentResourceKey ResourceId=ToggleSwitch.iOS.Light.Style, TypeInTargetAssembly={x:Type wpfspark:ToggleSwitch}}}" 
+            VerticalAlignment="Top"
+            Width="60"/>
+
+        <TextBlock 
+            Grid.Row="1"
+            Grid.Column="1"
+            Grid.ColumnSpan="4"
+            Text="toggleOnscreenSticksClickRequired"
+            TextWrapping="Wrap"
+            />
+        
 
         <controls:AnalogStickMouseInput
+            x:Name="stickLeft"
+            Grid.Row="2"  
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            />
+
+        
+        <controls:AnalogStickMouseInput
             x:Name="stickRight"
+            Grid.Row="2"  
             Grid.Column="2"  
-            Grid.ColumnSpan="1"/>
+            Grid.ColumnSpan="2"
+            />
 
     </Grid>
 

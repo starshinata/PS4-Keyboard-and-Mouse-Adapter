@@ -147,6 +147,8 @@
     <Compile Include="Backend\AppUpdater.cs" />
     <Compile Include="Backend\AudioManager.cs" />
     <Compile Include="Backend\ColourSchemeChanger.cs" />
+    <Compile Include="Backend\ControllerState\LeftRightSticks.cs" />
+    <Compile Include="Backend\ControllerState\NullablePoint.cs" />
     <Compile Include="Backend\DebugLogging\DebugDump.cs" />
     <Compile Include="Backend\DebugLogging\GetOsVersion.cs" />
     <Compile Include="Backend\DebugLogging\HidFacade.cs" />
