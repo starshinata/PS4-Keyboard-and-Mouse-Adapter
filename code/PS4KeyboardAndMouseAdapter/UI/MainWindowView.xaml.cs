@@ -15,12 +15,14 @@ namespace Pizza.KeyboardAndMouseAdapter.UI
     {
         private SimpleConfigPage simpleConfigPage;
         private AdvancedMappingsPage advancedMappingsPage;
+        private OnScreenControllerPage onScreenControllerPage;
 
         public MainWindowView()
         {
             InitializeComponent();
             KeyDown += MainWindowView_OnKeyDown;
             ChangeColourScheme(ApplicationSettings.GetInstance().ColourSchemeIsLight);
+            WelcomeStep3Done_ConnectAdapter();
         }
 
         private void AddTab(string tabText, UserControl control)
@@ -40,6 +42,11 @@ namespace Pizza.KeyboardAndMouseAdapter.UI
         {
             System.Uri colourScheme = isLight ? ResourceLocator.LightColorScheme : ResourceLocator.DarkColorScheme;
             ResourceLocator.SetColorScheme(Application.Current.Resources, colourScheme);
+
+            if (onScreenControllerPage != null)
+            {
+                onScreenControllerPage.ChangeScheme(colourScheme);
+            }
 
             if (simpleConfigPage != null)
             {
@@ -62,6 +69,14 @@ namespace Pizza.KeyboardAndMouseAdapter.UI
             if (simpleConfigPage != null)
             {
                 simpleConfigPage.gamepadMappingController.Handler_OnKeyDown(sender, e);
+            }
+        }
+
+        private void MainWindowView_Resized(object sender, EventArgs e)
+        {
+            if (onScreenControllerPage != null)
+            {
+                onScreenControllerPage.WindowResized();
             }
         }
 
@@ -96,15 +111,22 @@ namespace Pizza.KeyboardAndMouseAdapter.UI
             ApplicationSettings.Save();
             InstanceSettings.GetInstance().EnableMouseInput = true;
 
-            simpleConfigPage = new SimpleConfigPage();
             advancedMappingsPage = new AdvancedMappingsPage();
+            onScreenControllerPage = new OnScreenControllerPage();
+            simpleConfigPage = new SimpleConfigPage();
+
             MouseAdvancedConfigPage mouseAdvancedConfigPage = new MouseAdvancedConfigPage();
             MiscellaneousSettingsPage miscellaneousSettingsPage = new MiscellaneousSettingsPage();
+
+            //TODO dont leave this as the FIRST TAB
+            AddTab("On Screen Controller", onScreenControllerPage);
 
             AddTab("Simple Config", simpleConfigPage);
             AddTab("Advanced mappings", advancedMappingsPage);
             AddTab("Mouse Advanced Config", mouseAdvancedConfigPage);
             AddTab("Miscellaneous Settings", miscellaneousSettingsPage);
+            //TODO
+            //AddTab("On Screen Controller", onScreenControllerPage);
 
             // remove the welcome tab
             tabs.Items.RemoveAt(0);

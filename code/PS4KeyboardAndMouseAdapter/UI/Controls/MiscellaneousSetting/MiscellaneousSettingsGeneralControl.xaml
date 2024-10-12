@@ -9,7 +9,7 @@
     d:DesignWidth="640"
     mc:Ignorable="d"
 
-    xmlns:controls="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls"
+    xmlns:controls="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls.Common"
     >
 
     <Grid >
