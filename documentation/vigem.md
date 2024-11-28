@@ -5,7 +5,7 @@ ViGEm stands for "**Vi**rtual **G**amepad **Em**ulation" Framework.
 
 It is a way of emulating a console controller (PS4 DualShock 4, or Xbox 360 controller).
 
-For more information see https://vigem.org/
+For more information see https://github.com/nefarius/ViGEmBus/
 
 ## Installation
 Goto https://github.com/ViGEm/ViGEmBus/releases and select the installer file <br>
