@@ -11,7 +11,6 @@ using System.Diagnostics;
 using System.Numerics;
 using System.Text;
 using System.Windows.Forms;
-using System.Windows.Media;
 
 namespace Pizza.KeyboardAndMouseAdapter.Backend
 {

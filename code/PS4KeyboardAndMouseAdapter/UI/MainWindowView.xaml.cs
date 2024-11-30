@@ -1,7 +1,6 @@
 ﻿using AdonisUI;
 using Pizza.Common;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
-using Pizza.KeyboardAndMouseAdapter.Backend.ControllerState;
 using Pizza.KeyboardAndMouseAdapter.Backend.Vigem;
 using Pizza.KeyboardAndMouseAdapter.UI.Pages;
 using System;

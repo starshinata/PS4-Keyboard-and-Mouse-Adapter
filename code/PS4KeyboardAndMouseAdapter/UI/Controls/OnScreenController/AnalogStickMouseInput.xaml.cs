@@ -1,5 +1,6 @@
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using Pizza.KeyboardAndMouseAdapter.Backend.ControllerState;
+using Serilog;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,6 +13,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.OnScreenController
 
         private Point centre;
         private bool clicked = false;
+        private InstanceSettings InstanceSettings { get; set; } = InstanceSettings.GetInstance();
         private string label;
         private double radius;
 
@@ -74,19 +76,19 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.OnScreenController
             // if the canvas background is painted
             // then you will see a sensible amount of TRUE and FALSE
 
-            //Log.Information("isInCircle" + label + " centre " + centre);
-            //Log.Information("isInCircle" + label + " radius " + radius);
+            //Log.Information("AnalogStickMouseInput isInCircle" + label + " centre " + centre);
+            //Log.Information("AnalogStickMouseInput isInCircle" + label + " radius " + radius);
             double distance = Point.Subtract(mousePoint, centre).Length;
-            //Log.Information("isInCircle" + label + " distance " + distance);
+            //Log.Information("AnalogStickMouseInput isInCircle" + label + " distance " + distance);
             return distance < radius;
         }
 
         private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            //Log.Information("Canvas_MouseDown " + label);
-            //Point p = Mouse.GetPosition(canvas);
-            //Log.Information(p);
-            //Log.Information("isInCircle " + isInCircle(p) + " " + p);
+            Log.Information("AnalogStickMouseInput Canvas_MouseDown label " + label);
+            Point p = Mouse.GetPosition(canvas);
+            Log.Information("AnalogStickMouseInput Canvas_MouseDown p " + p);
+            Log.Information("AnalogStickMouseInput Canvas_MouseDown isInCircle " + isInCircle(p) + " " + p);
             clicked = true;
             UpdateStickWithValue();
         }
@@ -117,29 +119,36 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.OnScreenController
         {
             Point p = Mouse.GetPosition(canvas);
             bool inCircle = isInCircle(p);
-            if (clicked && inCircle)
+
+            if (inCircle)
             {
-                //Log.Information("UpdateStick " + label + " current point " + p);
 
-                double centeredX = p.X - centre.X;
-                double centeredY = p.Y - centre.Y;
+                if ((InstanceSettings.OnscreenSticksClickRequired && clicked) ||
+                    !InstanceSettings.OnscreenSticksClickRequired)
+                {
+                    Log.Information("AnalogStickMouseInput UpdateStickWithValue " + label + " current point " + p);
 
-                //by dividing it by radius we are basically returning it as percentage of radius,
-                // negative means left or up
-                // positive means right or down 
-                NullablePoint point = new NullablePoint(centeredX / radius, centeredY / radius);
-                InstanceSettings.GetInstance().SetStick(label, point);
+                    double centeredX = p.X - centre.X;
+                    double centeredY = p.Y - centre.Y;
 
-                //Log.Information("UpdateStick " + label + " saved point " + point.X + ", " + point.Y);
+                    // by dividing it by radius we are basically making it a percentage of radius,
+                    // negative means left or up
+                    // positive means right or down 
+                    NullablePoint point = new NullablePoint(centeredX / radius, centeredY / radius);
+                    InstanceSettings.GetInstance().SetStick(label, point);
+
+                    Log.Information("AnalogStickMouseInput UpdateStickWithValue " + label + " saved point " + point.X + ", " + point.Y);
+
+                }
 
             }
-            else if (!inCircle)
+            else
             {
                 UpdateStickReset();
             }
 
-            //Log.Information("UpdateStick " + label + " current point " + p);
-            //Log.Information("isInCircle " + isInCircle(p));
+            Log.Information("AnalogStickMouseInput UpdateStickWithValue 142 " + label + " current point " + p);
+            Log.Information("AnalogStickMouseInput UpdateStickWithValue 143 isInCircle " + isInCircle(p));
         }
     }
 }
