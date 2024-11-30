@@ -16,7 +16,6 @@
         <Canvas 
             x:Name="canvas" 
             Grid.Column="0"
-            Background="Pink"
 
             MouseDown="Canvas_MouseDown"
             MouseLeave="Canvas_MouseLeave"
@@ -25,21 +24,21 @@
             >
 
             <Ellipse x:Name="shapeCircle"
-                Height="200px"
-                Width="200px"
+                Height="50px"
+                Width="50px"
                 Fill="Black"
                 Stroke="#f0f0f0"
                 Canvas.Left="0"
                 Canvas.Top="0"
                 StrokeThickness="0"/>
 
-            <!-- FYI ON RESIZE code will align this properly -->
+            <!-- FYI on window RESIZE, the code will align this properly -->
             <Ellipse x:Name="shapeCenter"
                 Height="10" 
                 Width="10"
                 Fill="#f0f0f0" 
-                Canvas.Left="95" 
-                Canvas.Top="95"
+                Canvas.Left="25" 
+                Canvas.Top="25"
                 />
         </Canvas>
 

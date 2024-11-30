@@ -6,6 +6,7 @@ using Pizza.KeyboardAndMouseAdapter.UI.Pages;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 
 namespace Pizza.KeyboardAndMouseAdapter.UI
@@ -131,9 +132,14 @@ namespace Pizza.KeyboardAndMouseAdapter.UI
 
             // Refresh to ensure advancedMappingsPage isnt blank
             advancedMappingsPage.RefreshButtonContents();
-            
-            //TODO needs to be like a js sleep 0
-            onScreenControllerPage.WindowResized();
+
+            // Dispatch is basically wait til need refresh
+            // (to make sure the stuff queued is done
+            // kinda like a JS sleep 0
+            Dispatcher.BeginInvoke(DispatcherPriority.Input, new Action(delegate ()
+            {
+                onScreenControllerPage.WindowResized();
+            }));
         }
 
     }

@@ -17,7 +17,8 @@
 
     <!-- TODO
     Fix "Pizza.KeyboardAndMouseAdapter.UI.Controls.SimpleConfig"
-    its not THIS pages control's-->
+    its not THIS pages control's
+    -->
     <Grid>
 
         <Grid.Resources>
@@ -26,6 +27,28 @@
             </Style>
         </Grid.Resources>
 
+        <StackPanel 
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            
+            Background="Gray"
+            Opacity=".9"
+            Panel.ZIndex="99"
+            x:Name="WaitForKeyPress" >
+
+            <TextBlock 
+                FontFamily="consolas"
+                FontSize="30"
+                FontWeight="Bold" 
+                Foreground="Crimson" 
+                HorizontalAlignment="Center" 
+                Text="Later...." 
+                VerticalAlignment="Center" 
+                />
+
+        </StackPanel>
+        
         <Grid 
             Background="Black"
             Grid.Column="1"

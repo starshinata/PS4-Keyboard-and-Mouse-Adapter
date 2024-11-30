@@ -29,7 +29,8 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 
         public bool EnableMouseInput { get; set; } = false;
 
-        public bool EnableOnscreenSticks { get; set; } = false;
+        // TODO do we still want this setting
+        public bool EnableOnscreenSticks { get; set; } = true;
 
         // If not null, you will have a Point
         // in Point you have two Coordinates
