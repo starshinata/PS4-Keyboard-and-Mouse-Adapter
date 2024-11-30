@@ -1,4 +1,4 @@
-﻿using Pizza.KeyboardAndMouseAdapter.UI.Controls;
+﻿using Pizza.KeyboardAndMouseAdapter.UI.Controls.SimpleConfig;
 using System.Windows;
 using System.Windows.Controls;
 

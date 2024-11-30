@@ -216,7 +216,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 
         public static void SetMapping(VirtualKey key, PhysicalKey valueOld, PhysicalKey valueNew)
         {
-            Log.Information("MainViewModel.SetMapping {VirtualKey:" + key + ", PhysicalKey: '" + valueOld + " -> " + valueNew + "'}");
+            Log.Information("UserSettings.SetMapping {VirtualKey:" + key + ", PhysicalKey: '" + valueOld + " -> " + valueNew + "'}");
 
             if (!ThisInstance.MappingsContainsKey(key))
             {

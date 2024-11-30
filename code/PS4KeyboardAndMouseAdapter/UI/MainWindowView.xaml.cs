@@ -1,12 +1,12 @@
 ﻿using AdonisUI;
 using Pizza.Common;
-using Pizza.KeyboardAndMouseAdapter.Backend;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using Pizza.KeyboardAndMouseAdapter.Backend.Vigem;
 using Pizza.KeyboardAndMouseAdapter.UI.Pages;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 
 namespace Pizza.KeyboardAndMouseAdapter.UI
@@ -15,12 +15,17 @@ namespace Pizza.KeyboardAndMouseAdapter.UI
     {
         private SimpleConfigPage simpleConfigPage;
         private AdvancedMappingsPage advancedMappingsPage;
+        private OnScreenControllerPage onScreenControllerPage;
 
         public MainWindowView()
         {
             InitializeComponent();
             KeyDown += MainWindowView_OnKeyDown;
             ChangeColourScheme(ApplicationSettings.GetInstance().ColourSchemeIsLight);
+
+            // DEBUG HELPER
+            // uncomment this if you want to SKIP pass the wizard
+            //WelcomeStep3Done_ConnectAdapter();
         }
 
         private void AddTab(string tabText, UserControl control)
@@ -40,6 +45,11 @@ namespace Pizza.KeyboardAndMouseAdapter.UI
         {
             System.Uri colourScheme = isLight ? ResourceLocator.LightColorScheme : ResourceLocator.DarkColorScheme;
             ResourceLocator.SetColorScheme(Application.Current.Resources, colourScheme);
+
+            if (onScreenControllerPage != null)
+            {
+                onScreenControllerPage.ChangeScheme(colourScheme);
+            }
 
             if (simpleConfigPage != null)
             {
@@ -62,6 +72,14 @@ namespace Pizza.KeyboardAndMouseAdapter.UI
             if (simpleConfigPage != null)
             {
                 simpleConfigPage.gamepadMappingController.Handler_OnKeyDown(sender, e);
+            }
+        }
+
+        private void MainWindowView_Resized(object sender, EventArgs e)
+        {
+            if (onScreenControllerPage != null)
+            {
+                onScreenControllerPage.WindowResized();
             }
         }
 
@@ -96,11 +114,14 @@ namespace Pizza.KeyboardAndMouseAdapter.UI
             ApplicationSettings.Save();
             InstanceSettings.GetInstance().EnableMouseInput = true;
 
-            simpleConfigPage = new SimpleConfigPage();
             advancedMappingsPage = new AdvancedMappingsPage();
+            onScreenControllerPage = new OnScreenControllerPage();
+            simpleConfigPage = new SimpleConfigPage();
+
             MouseAdvancedConfigPage mouseAdvancedConfigPage = new MouseAdvancedConfigPage();
             MiscellaneousSettingsPage miscellaneousSettingsPage = new MiscellaneousSettingsPage();
 
+            AddTab("On Screen Controller", onScreenControllerPage);
             AddTab("Simple Config", simpleConfigPage);
             AddTab("Advanced mappings", advancedMappingsPage);
             AddTab("Mouse Advanced Config", mouseAdvancedConfigPage);
@@ -111,6 +132,14 @@ namespace Pizza.KeyboardAndMouseAdapter.UI
 
             // Refresh to ensure advancedMappingsPage isnt blank
             advancedMappingsPage.RefreshButtonContents();
+
+            // Dispatch is basically wait til need refresh
+            // (to make sure the stuff queued is done
+            // kinda like a JS sleep 0
+            Dispatcher.BeginInvoke(DispatcherPriority.Input, new Action(delegate ()
+            {
+                onScreenControllerPage.WindowResized();
+            }));
         }
 
     }

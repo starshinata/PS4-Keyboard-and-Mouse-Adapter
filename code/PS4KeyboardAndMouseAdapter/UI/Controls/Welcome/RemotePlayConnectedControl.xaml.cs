@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Pizza.KeyboardAndMouseAdapter.Backend;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.Welcome
@@ -12,8 +13,8 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.Welcome
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Window window = Application.Current.MainWindow;
-            ((MainWindowView)window).WelcomeStep3Done_ConnectAdapter();
+            MainWindowView window = WindowUtil.GetMainWindowView();
+            window.WelcomeStep3Done_ConnectAdapter();
         }
     }
 }

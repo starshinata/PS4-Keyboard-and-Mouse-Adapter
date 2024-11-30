@@ -1,4 +1,6 @@
-﻿using Pizza.KeyboardAndMouseAdapter.Backend.Config;
+﻿using Pizza.Common;
+using Pizza.KeyboardAndMouseAdapter.Backend.Config;
+using Pizza.KeyboardAndMouseAdapter.Backend.ControllerState;
 using PS4RemotePlayInjection;
 using PS4RemotePlayInterceptor;
 using Serilog;
@@ -88,7 +90,8 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
             // it might seem sensible to say that we should only return a value when enough time has passed (as per MousePollingRate)
             // and if enough time has not passed, return null
             //
-            // if we return null, then the DS/Controller will register that as no stick movement
+            // BUT if we return null, then the DS/Controller will register that as no stick movement
+            // reseting sticks to appear centered
             // thus the mouse input is perceived as unresponsive or jumpy
             //
             // to mitigate this, just return the previously polled value (and wait for the new value)
@@ -286,11 +289,14 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
 
                 if (float.IsNaN(direction.X) && float.IsNaN(direction.Y))
                 {
-                    scaledX = 127;
-                    scaledY = 127;
+                    scaledX = ControllerStickAsByteConstants.CENTRE;
+                    scaledY = ControllerStickAsByteConstants.CENTRE;
                 }
 
-                if (scaledX != 127 && scaledX != 128 && scaledY != 127 && scaledY != 128)
+                if (scaledX != ControllerStickAsByteConstants.CENTRE &&
+                    scaledX != ControllerStickAsByteConstants.CENTRE &&
+                    scaledY != ControllerStickAsByteConstants.CENTRE &&
+                    scaledY != ControllerStickAsByteConstants.CENTRE)
                 {
                     // Log.Verbose("GamepadProcessor.HandleMouseCursor scaledX={0} scaledY={1}", scaledX, scaledY);
                 }
@@ -307,6 +313,78 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
                     CurrentState.RY = scaledY;
                 }
             }
+        }
+
+        // return TRUE if we did an operation using On Screen Sticks
+        // otherwise return FALSE
+        private bool HandleOnscreenSticks()
+        {
+            bool handledOnscreen = false;
+
+            NullablePoint leftStick = InstanceSettings.GetLeftStick();
+            NullablePoint rightStick = InstanceSettings.GetRightStick();
+            Log.Information("HandleOnscreenSticks() leftStick " + leftStick);
+            Log.Information("HandleOnscreenSticks() rightStick " + rightStick);
+
+            if (leftStick != null)
+            {
+                byte leftX = HandleOnscreenStickCoordinate(leftStick.X);
+                byte leftY = HandleOnscreenStickCoordinate(leftStick.Y);
+                Log.Information("HandleOnscreenSticks() leftX " + leftX);
+                Log.Information("HandleOnscreenSticks() leftY " + leftY);
+                CurrentState.LX = leftX;
+                CurrentState.LY = leftY;
+                handledOnscreen = true;
+            }
+            else
+            {
+                Log.Information("HandleOnscreenSticks() LX LY " + ControllerStickAsByteConstants.CENTRE);
+                // reset to centre
+                CurrentState.LX = ControllerStickAsByteConstants.CENTRE;
+                CurrentState.LY = ControllerStickAsByteConstants.CENTRE;
+            }
+
+            if (rightStick != null)
+            {
+                byte rightX = HandleOnscreenStickCoordinate(rightStick.X);
+                byte rightY = HandleOnscreenStickCoordinate(rightStick.Y);
+                Log.Information("HandleOnscreenSticks() rightX " + rightX);
+                Log.Information("HandleOnscreenSticks() rightY " + rightY);
+                CurrentState.RX = rightX;
+                CurrentState.RY = rightY;
+                handledOnscreen = true;
+            }
+            else
+            {
+                Log.Information("HandleOnscreenSticks() RX RY " + ControllerStickAsByteConstants.CENTRE);
+                // reset to centre
+                CurrentState.RX = ControllerStickAsByteConstants.CENTRE;
+                CurrentState.RY = ControllerStickAsByteConstants.CENTRE;
+            }
+
+            Log.Information("HandleOnscreenSticks() handledOnscreen  " + handledOnscreen);
+            return handledOnscreen;
+        }
+
+        // in Point you have two Coordinates
+        // Each coordinates is a range between -1 and 1
+        // 
+        // think of
+        // -1 as 100% Left
+        // 1 as 100% Right
+        // -1 as 100% Up
+        // 1 as 100% Down
+        private byte HandleOnscreenStickCoordinate(double xOrY)
+        {
+            // convert the range -1 to 1
+            // to -127 to 127
+            int scaledXOrY = (int)(xOrY * ControllerStickAsByteConstants.CENTRE);
+
+            // convert the range -127 to 127
+            // to 0 to 255
+            scaledXOrY += ControllerStickAsByteConstants.CENTRE;
+
+            return (byte)scaledXOrY;
         }
 
         private bool IsAimingWithAimSpecificSensitivity()
@@ -437,9 +515,31 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
                 CurrentState = new DualShockState() { Battery = 255 };
             }
 
+            Log.Information("GetState() EnableOnscreenSticks  " + InstanceSettings.EnableOnscreenSticks);
+            Log.Information("GetState() OnscreenSticksClickRequired  " + InstanceSettings.OnscreenSticksClickRequired);
+
+            bool onscreenSticksUsed = false;
+            if (InstanceSettings.EnableOnscreenSticks)
+            {
+                onscreenSticksUsed = HandleOnscreenSticks();
+            }
+
+            Log.Information("GetState() onscreenSticksUsed " + onscreenSticksUsed);
+            if (onscreenSticksUsed)
+            {
+                Log.Information(uuid + "GamepadProcessor.GetState return CurrentState onscreenSticksUsed");
+                return CurrentState;
+            }
+
+            if (ProcessUtil.IsKmaInForeground())
+            {
+                Log.Information(uuid + "GamepadProcessor.GetState return CurrentState KMA has focus");
+                return CurrentState;
+            }
+
             if (!ProcessUtil.IsRemotePlayInForeground())
             {
-                Log.Verbose(uuid + "GamepadProcessor.GetState return null");
+                Log.Information(uuid + "GamepadProcessor.GetState return null");
                 Utility.ShowCursor(true);
                 return null;
             }
@@ -450,9 +550,9 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
             // Log.Verbose(uuid + " GamepadProcessor.GetState in b");
 
             HandleButtonPressed();
-
             HandleAimToggle();
             HandleMouseCursor();
+
             MouseWheelProcessor.Process(CurrentState);
 
             //Log.Verbose(uuid + " GamepadProcessor.GetState out " + DualShockStateToString(ref CurrentState));
@@ -460,7 +560,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
             //Log.Verbose(uuid + " GamepadProcessor.GetState OnReceiveDataTimer {0} ms ", + OnReceiveDataTimer.ElapsedMilliseconds);
             //OnReceiveDataTimer.Stop();
 
-            Log.Verbose(uuid + "GamepadProcessor.GetState return THING");
+            Log.Information(uuid + "GamepadProcessor.GetState return CurrentState FULL");
             return CurrentState;
         }
     }

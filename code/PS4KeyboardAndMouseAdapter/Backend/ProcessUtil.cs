@@ -46,6 +46,11 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
             }
         }
 
+        public static bool IsKmaInForeground()
+        {
+            return IsInForeground(Process.GetCurrentProcess());
+        }
+
         public static bool IsRemotePlayInForeground()
         {
             return IsInForeground(InstanceSettings.GetInstance().GetRemotePlayProcess());
