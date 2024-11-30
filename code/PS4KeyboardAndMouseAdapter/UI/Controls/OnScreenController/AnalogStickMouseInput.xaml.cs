@@ -1,3 +1,4 @@
+using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using Pizza.KeyboardAndMouseAdapter.Backend.ControllerState;
 using System;
 using System.Windows;
@@ -11,21 +12,8 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.OnScreenController
 
         private Point centre;
         private bool clicked = false;
-        private double radius;
         private string label;
-
-
-        // If not null, you will have a Point
-        // in Point you have two Coordinates
-        // Each coordinates is a range between -1 and 1
-        // 
-        // think of
-        // -1 as 100% Left
-        // 1 as 100% Right
-        // -1 as 100% Up
-        // 1 as 100% Down
-        public NullablePoint pointAsPercentage;
-
+        private double radius;
 
         public AnalogStickMouseInput()
         {
@@ -69,7 +57,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.OnScreenController
             }
         }
 
-        public void SetLabel(String s)
+        public void SetLabel(string s)
         {
             label = s;
         }
@@ -86,45 +74,72 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.OnScreenController
             // if the canvas background is painted
             // then you will see a sensible amount of TRUE and FALSE
 
-            //Console.WriteLine("isInCircle" + label + " centre " + centre);
-            //Console.WriteLine("isInCircle" + label + " radius " + radius);
+            //Log.Information("isInCircle" + label + " centre " + centre);
+            //Log.Information("isInCircle" + label + " radius " + radius);
             double distance = Point.Subtract(mousePoint, centre).Length;
-            //Console.WriteLine("isInCircle" + label + " distance " + distance);
+            //Log.Information("isInCircle" + label + " distance " + distance);
             return distance < radius;
-        }
-
-        private void Canvas_MouseMove(object sender, MouseEventArgs e)
-        {
-            Point p = Mouse.GetPosition(canvas);
-            if (clicked && isInCircle(p))
-            {
-                //Console.WriteLine("Canvas_MouseMove " + label + " current point " + p);
-
-                double centeredX = p.X - centre.X;
-                double centeredY = p.Y - centre.Y;
-
-                pointAsPercentage = new NullablePoint(centeredX / radius, centeredY / radius);
-                //Console.WriteLine("Canvas_MouseMove " + label + " scaled point " + pointAsPercentage.X + ", " + pointAsPercentage.Y);
-
-            }
-
-            //Console.WriteLine("Canvas_MouseMove " + label + " current point " + p);
-            //Console.WriteLine("isInCircle " + isInCircle(p));
         }
 
         private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            //Console.WriteLine("Canvas_MouseDown " + label);
+            //Log.Information("Canvas_MouseDown " + label);
             //Point p = Mouse.GetPosition(canvas);
-            //Console.WriteLine(p);
-            //Console.WriteLine("isInCircle " + isInCircle(p) + " " + p);
+            //Log.Information(p);
+            //Log.Information("isInCircle " + isInCircle(p) + " " + p);
             clicked = true;
+            UpdateStickWithValue();
+        }
+
+        private void Canvas_MouseLeave(object sender, EventArgs e)
+        {
+            clicked = false;
+            UpdateStickReset();
+        }
+
+        private void Canvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            UpdateStickWithValue();
         }
 
         private void Canvas_MouseUp(object sender, MouseButtonEventArgs e)
         {
             clicked = false;
-            pointAsPercentage = null;
+            UpdateStickReset();
+        }
+
+        private void UpdateStickReset()
+        {
+            InstanceSettings.GetInstance().SetStick(label, null);
+        }
+
+        private void UpdateStickWithValue()
+        {
+            Point p = Mouse.GetPosition(canvas);
+            bool inCircle = isInCircle(p);
+            if (clicked && inCircle)
+            {
+                //Log.Information("UpdateStick " + label + " current point " + p);
+
+                double centeredX = p.X - centre.X;
+                double centeredY = p.Y - centre.Y;
+
+                //by dividing it by radius we are basically returning it as percentage of radius,
+                // negative means left or up
+                // positive means right or down 
+                NullablePoint point = new NullablePoint(centeredX / radius, centeredY / radius);
+                InstanceSettings.GetInstance().SetStick(label, point);
+
+                //Log.Information("UpdateStick " + label + " saved point " + point.X + ", " + point.Y);
+
+            }
+            else if (!inCircle)
+            {
+                UpdateStickReset();
+            }
+
+            //Log.Information("UpdateStick " + label + " current point " + p);
+            //Log.Information("isInCircle " + isInCircle(p));
         }
     }
 }

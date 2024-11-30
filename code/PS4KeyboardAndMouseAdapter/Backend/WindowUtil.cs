@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Pizza.KeyboardAndMouseAdapter.UI;
+using System;
 using System.Runtime.InteropServices;
+using System.Windows;
 
 namespace Pizza.KeyboardAndMouseAdapter.Backend
 {
@@ -8,6 +10,13 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
 
         [DllImport("user32.dll", SetLastError = true)]
         private static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+
+
+        public static MainWindowView GetMainWindowView()
+        {
+            Window window = System.Windows.Application.Current.MainWindow;
+            return (MainWindowView)window;
+        }
 
         [DllImport("user32.dll", SetLastError = true)]
         private static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);

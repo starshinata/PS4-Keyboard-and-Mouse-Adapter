@@ -13,5 +13,10 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.ControllerState
             X = x;
             Y = y;
         }
+
+        public override string ToString()
+        {
+            return "{ X:" + X + ", Y: " + Y + "}";
+        }
     }
 }

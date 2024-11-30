@@ -8,7 +8,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     
     d:DesignHeight="200" 
-    d:DesignWidth="200"
+    d:DesignWidth="230"
     mc:Ignorable="d" 
     >
 
@@ -16,9 +16,12 @@
         <Canvas 
             x:Name="canvas" 
             Grid.Column="0"
-            MouseUp="Canvas_MouseUp"
-            MouseMove="Canvas_MouseMove"
+            Background="Pink"
+
             MouseDown="Canvas_MouseDown"
+            MouseLeave="Canvas_MouseLeave"
+            MouseMove="Canvas_MouseMove"
+            MouseUp="Canvas_MouseUp"
             >
 
             <Ellipse x:Name="shapeCircle"
@@ -27,7 +30,8 @@
                 Fill="Black"
                 Stroke="#f0f0f0"
                 Canvas.Left="0"
-                Canvas.Top="0" />
+                Canvas.Top="0"
+                StrokeThickness="0"/>
 
             <!-- FYI ON RESIZE code will align this properly -->
             <Ellipse x:Name="shapeCenter"

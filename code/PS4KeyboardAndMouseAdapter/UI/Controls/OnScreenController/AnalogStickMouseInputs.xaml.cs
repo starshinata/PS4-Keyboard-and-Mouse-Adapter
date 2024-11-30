@@ -1,4 +1,3 @@
-using Pizza.KeyboardAndMouseAdapter.Backend.ControllerState;
 using System.Windows.Controls;
 
 namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.OnScreenController
@@ -19,11 +18,6 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.OnScreenController
         {
             stickLeft.RepaintStickCenter();
             stickRight.RepaintStickCenter();
-        }
-
-        public LeftRightSticks GetValues()
-        {
-            return new LeftRightSticks(stickLeft.pointAsPercentage, stickRight.pointAsPercentage);
         }
     }
 }

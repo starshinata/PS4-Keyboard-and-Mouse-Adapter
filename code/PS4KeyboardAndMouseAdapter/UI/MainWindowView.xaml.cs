@@ -1,7 +1,7 @@
 ﻿using AdonisUI;
 using Pizza.Common;
-using Pizza.KeyboardAndMouseAdapter.Backend;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
+using Pizza.KeyboardAndMouseAdapter.Backend.ControllerState;
 using Pizza.KeyboardAndMouseAdapter.Backend.Vigem;
 using Pizza.KeyboardAndMouseAdapter.UI.Pages;
 using System;
@@ -22,7 +22,10 @@ namespace Pizza.KeyboardAndMouseAdapter.UI
             InitializeComponent();
             KeyDown += MainWindowView_OnKeyDown;
             ChangeColourScheme(ApplicationSettings.GetInstance().ColourSchemeIsLight);
-            WelcomeStep3Done_ConnectAdapter();
+
+            // DEBUG HELPER
+            // uncomment this if you want to SKIP pass the wizard
+            //WelcomeStep3Done_ConnectAdapter();
         }
 
         private void AddTab(string tabText, UserControl control)
@@ -118,21 +121,20 @@ namespace Pizza.KeyboardAndMouseAdapter.UI
             MouseAdvancedConfigPage mouseAdvancedConfigPage = new MouseAdvancedConfigPage();
             MiscellaneousSettingsPage miscellaneousSettingsPage = new MiscellaneousSettingsPage();
 
-            //TODO dont leave this as the FIRST TAB
             AddTab("On Screen Controller", onScreenControllerPage);
-
             AddTab("Simple Config", simpleConfigPage);
             AddTab("Advanced mappings", advancedMappingsPage);
             AddTab("Mouse Advanced Config", mouseAdvancedConfigPage);
             AddTab("Miscellaneous Settings", miscellaneousSettingsPage);
-            //TODO
-            //AddTab("On Screen Controller", onScreenControllerPage);
 
             // remove the welcome tab
             tabs.Items.RemoveAt(0);
 
             // Refresh to ensure advancedMappingsPage isnt blank
             advancedMappingsPage.RefreshButtonContents();
+            
+            //TODO needs to be like a js sleep 0
+            onScreenControllerPage.WindowResized();
         }
 
     }

@@ -147,7 +147,6 @@
     <Compile Include="Backend\AppUpdater.cs" />
     <Compile Include="Backend\AudioManager.cs" />
     <Compile Include="Backend\ColourSchemeChanger.cs" />
-    <Compile Include="Backend\ControllerState\LeftRightSticks.cs" />
     <Compile Include="Backend\ControllerState\NullablePoint.cs" />
     <Compile Include="Backend\DebugLogging\DebugDump.cs" />
     <Compile Include="Backend\DebugLogging\GetOsVersion.cs" />
@@ -156,6 +155,8 @@
     <Compile Include="Backend\DebugLogging\ServiceComparerByName.cs" />
     <Compile Include="Backend\DebugLogging\ProcessComparerByName.cs" />
     <Compile Include="Backend\LogManager.cs" />
+    <Compile Include="searchHelpers\MainViewWindow.cs" />
+    <Compile Include="searchHelpers\MainWindowView.cs" />
     <Compile Include="Backend\RemotePlayInstaller.cs" />
     <Compile Include="Backend\Vigem\GamepadConverter.cs" />
     <Compile Include="Backend\LogUtility.cs" />

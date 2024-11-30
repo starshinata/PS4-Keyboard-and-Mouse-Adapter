@@ -1,4 +1,5 @@
-﻿using Pizza.KeyboardAndMouseAdapter.Backend.Config;
+﻿using Pizza.Common;
+using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using Pizza.KeyboardAndMouseAdapter.Backend.ControllerState;
 using PS4RemotePlayInjection;
 using PS4RemotePlayInterceptor;
@@ -10,6 +11,7 @@ using System.Diagnostics;
 using System.Numerics;
 using System.Text;
 using System.Windows.Forms;
+using System.Windows.Media;
 
 namespace Pizza.KeyboardAndMouseAdapter.Backend
 {
@@ -288,11 +290,14 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
 
                 if (float.IsNaN(direction.X) && float.IsNaN(direction.Y))
                 {
-                    scaledX = 127;
-                    scaledY = 127;
+                    scaledX = ControllerStickAsByteConstants.CENTRE;
+                    scaledY = ControllerStickAsByteConstants.CENTRE;
                 }
 
-                if (scaledX != 127 && scaledX != 128 && scaledY != 127 && scaledY != 128)
+                if (scaledX != ControllerStickAsByteConstants.CENTRE &&
+                    scaledX != ControllerStickAsByteConstants.CENTRE &&
+                    scaledY != ControllerStickAsByteConstants.CENTRE &&
+                    scaledY != ControllerStickAsByteConstants.CENTRE)
                 {
                     // Log.Verbose("GamepadProcessor.HandleMouseCursor scaledX={0} scaledY={1}", scaledX, scaledY);
                 }
@@ -315,34 +320,51 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
         // otherwise return FALSE
         private bool HandleOnscreenSticks()
         {
-            bool EnableOnscreenSticks = InstanceSettings.EnableMouseInput;
+            bool handledOnscreen = false;
 
+            NullablePoint leftStick = InstanceSettings.GetLeftStick();
+            NullablePoint rightStick = InstanceSettings.GetRightStick();
+            Log.Information("HandleOnscreenSticks() leftStick " + leftStick);
+            Log.Information("HandleOnscreenSticks() rightStick " + rightStick);
 
-            if (EnableOnscreenSticks)
+            if (leftStick != null)
             {
-                //TODO get value
-                LeftRightSticks x = null;
-
-                if (x != null && x.Left != null && x.Right != null)
-                {
-
-                    byte leftX = HandleOnscreenStickCoordinate(x.Left.X);
-                    byte leftY = HandleOnscreenStickCoordinate(x.Left.Y);
-
-                    CurrentState.LX = leftX;
-                    CurrentState.LY = leftY;
-
-                    byte rightX = HandleOnscreenStickCoordinate(x.Right.X);
-                    byte rightY = HandleOnscreenStickCoordinate(x.Right.Y);
-
-                    CurrentState.RX = rightX;
-                    CurrentState.RY = rightY;
-
-                    return true;
-                }
+                byte leftX = HandleOnscreenStickCoordinate(leftStick.X);
+                byte leftY = HandleOnscreenStickCoordinate(leftStick.Y);
+                Log.Information("HandleOnscreenSticks() leftX " + leftX);
+                Log.Information("HandleOnscreenSticks() leftY " + leftY);
+                CurrentState.LX = leftX;
+                CurrentState.LY = leftY;
+                handledOnscreen = true;
+            }
+            else
+            {
+                Log.Information("HandleOnscreenSticks() LX LY " + ControllerStickAsByteConstants.CENTRE);
+                // reset to centre
+                CurrentState.LX = ControllerStickAsByteConstants.CENTRE;
+                CurrentState.LY = ControllerStickAsByteConstants.CENTRE;
             }
 
-            return false;
+            if (rightStick != null)
+            {
+                byte rightX = HandleOnscreenStickCoordinate(rightStick.X);
+                byte rightY = HandleOnscreenStickCoordinate(rightStick.Y);
+                Log.Information("HandleOnscreenSticks() rightX " + rightX);
+                Log.Information("HandleOnscreenSticks() rightY " + rightY);
+                CurrentState.RX = rightX;
+                CurrentState.RY = rightY;
+                handledOnscreen = true;
+            }
+            else
+            {
+                Log.Information("HandleOnscreenSticks() RX RY " + ControllerStickAsByteConstants.CENTRE);
+                // reset to centre
+                CurrentState.RX = ControllerStickAsByteConstants.CENTRE;
+                CurrentState.RY = ControllerStickAsByteConstants.CENTRE;
+            }
+
+            Log.Information("HandleOnscreenSticks() handledOnscreen  " + handledOnscreen);
+            return handledOnscreen;
         }
 
         // in Point you have two Coordinates
@@ -357,11 +379,11 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
         {
             // convert the range -1 to 1
             // to -127 to 127
-            int scaledXOrY = (int)(xOrY * 127);
+            int scaledXOrY = (int)(xOrY * ControllerStickAsByteConstants.CENTRE);
 
             // convert the range -127 to 127
             // to 0 to 255
-            scaledXOrY += 127;
+            scaledXOrY += ControllerStickAsByteConstants.CENTRE;
 
             return (byte)scaledXOrY;
         }
@@ -494,9 +516,31 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
                 CurrentState = new DualShockState() { Battery = 255 };
             }
 
+            Log.Information("GetState() EnableOnscreenSticks  " + InstanceSettings.EnableOnscreenSticks);
+            Log.Information("GetState() OnscreenSticksClickRequired  " + InstanceSettings.OnscreenSticksClickRequired);
+
+            bool onscreenSticksUsed = false;
+            if (InstanceSettings.EnableOnscreenSticks)
+            {
+                onscreenSticksUsed = HandleOnscreenSticks();
+            }
+
+            Log.Information("GetState() onscreenSticksUsed " + onscreenSticksUsed);
+            if (onscreenSticksUsed)
+            {
+                Log.Information(uuid + "GamepadProcessor.GetState return CurrentState onscreenSticksUsed");
+                return CurrentState;
+            }
+
+            if (ProcessUtil.IsKmaInForeground())
+            {
+                Log.Information(uuid + "GamepadProcessor.GetState return CurrentState KMA has focus");
+                return CurrentState;
+            }
+
             if (!ProcessUtil.IsRemotePlayInForeground())
             {
-                Log.Verbose(uuid + "GamepadProcessor.GetState return null");
+                Log.Information(uuid + "GamepadProcessor.GetState return null");
                 Utility.ShowCursor(true);
                 return null;
             }
@@ -508,13 +552,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
 
             HandleButtonPressed();
             HandleAimToggle();
-
-            // if onscreenSticksUsed we probably not need to hand mouse cursor
-            bool onscreenSticksUsed = HandleOnscreenSticks();
-            if (!onscreenSticksUsed)
-            {
-                HandleMouseCursor();
-            }
+            HandleMouseCursor();
 
             MouseWheelProcessor.Process(CurrentState);
 
@@ -523,7 +561,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
             //Log.Verbose(uuid + " GamepadProcessor.GetState OnReceiveDataTimer {0} ms ", + OnReceiveDataTimer.ElapsedMilliseconds);
             //OnReceiveDataTimer.Stop();
 
-            Log.Verbose(uuid + "GamepadProcessor.GetState return THING");
+            Log.Information(uuid + "GamepadProcessor.GetState return CurrentState FULL");
             return CurrentState;
         }
     }

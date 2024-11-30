@@ -90,7 +90,7 @@
         <controls:AnalogStickMouseInput
             x:Name="stickRight"
             Grid.Row="2"  
-            Grid.Column="2"  
+            Grid.Column="3"  
             Grid.ColumnSpan="2"
             />
 
