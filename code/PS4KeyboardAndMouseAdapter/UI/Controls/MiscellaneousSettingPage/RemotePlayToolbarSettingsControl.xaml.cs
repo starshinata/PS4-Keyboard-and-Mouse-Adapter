@@ -1,6 +1,9 @@
 ﻿using Pizza.Common;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
-using PS4RemotePlayInjection;
+
+
+
+
 using Serilog;
 using System.Windows;
 using System.Windows.Controls;
@@ -38,7 +41,14 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.MiscellaneousSettings
         {
             //TODO
             Log.Debug("RemotePlayToolbarSettingsControl.Handler_ToolBarVisibleToggle");
-            UtilityData.IsToolBarVisible = !UtilityData.IsToolBarVisible;
+
+            Log.Information("RemotePlayToolbarSettingsControl.Handler_ToolBarVisibleToggle IM DOING NOTHING");
+            Log.Information("IM DOING NOTHING");
+            Log.Information("IM DOING NOTHING");
+            Log.Information("IM DOING NOTHING");
+            Log.Information("IM DOING NOTHING");
+
+            //UtilityData.IsToolBarVisible = !UtilityData.IsToolBarVisible;
         }
 
         #region testonly

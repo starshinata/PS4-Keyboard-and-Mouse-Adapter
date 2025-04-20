@@ -1,5 +1,5 @@
-﻿using Pizza.KeyboardAndMouseAdapter.Backend;
-using Pizza.KeyboardAndMouseAdapter.Backend.Config;
+﻿using Pizza.KeyboardAndMouseAdapter.Backend.Config;
+using Pizza.KeyboardAndMouseAdapter.Backend.GamepadProcessing;
 using Serilog;
 using SFML.Window;
 using System;

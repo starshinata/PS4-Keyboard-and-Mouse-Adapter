@@ -1,7 +1,6 @@
 ﻿using Nefarius.ViGEm.Client.Targets;
 using Nefarius.ViGEm.Client.Targets.DualShock4;
-
-using PS4RemotePlayInjection;
+using Pizza.Common.Gamepad;
 
 namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
 {
@@ -59,7 +58,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
             controller.SubmitReport();
         }
 
-        // DualShockState from PS4RemotePlayInjection
+        // DualShockState from Komefai
         public static void ConvertandSendReport(IDualShock4Controller controller, DualShockState state)
         {
 

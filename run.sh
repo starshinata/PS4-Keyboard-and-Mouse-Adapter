@@ -18,9 +18,9 @@ taskkill.exe -im RemotePlay* -f
 ## stops the execution of the script if a command or pipeline has an error
 set -e
 
-
-BINARY_FOLDER="code/PS4KeyboardAndMouseAdapter/bin/Debug/net6.0-windows/"
-BINARY_FOLDER="code/PS4KeyboardAndMouseAdapter/bin/Release/net6.0-windows/"
+DOTNET_BUILD_TARGET="/net8.0-windows7.0/"
+BINARY_FOLDER="code/PS4KeyboardAndMouseAdapter/bin/Debug/$DOTNET_BUILD_TARGET/"
+BINARY_FOLDER="code/PS4KeyboardAndMouseAdapter/bin/Release/$DOTNET_BUILD_TARGET/"
 
 cp profiles/pancakes-destiny-profile.json $BINARY_FOLDER/profile-previous.json
 

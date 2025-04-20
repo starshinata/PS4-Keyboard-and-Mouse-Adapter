@@ -3,11 +3,13 @@
 
 syntax = "proto3";
 
+// do give these a better name than GREETER
 package GreeterProtos;
 
 ///////////////////////////////////////////////////////////////////////////////
 // MESSAGES
 ///////////////////////////////////////////////////////////////////////////////
+
 
 message DualShockProto {
         bool L1 = 1;
@@ -40,7 +42,7 @@ message UpdateRequest {
 }
 
 message UpdateResponse {
-    int32 ProcessId = 1;
+    string stamp = 1;
     bool IsToolBarVisible = 2;
     int32 EmulationMode = 3;
     DualShockProto DualShockProto = 4;

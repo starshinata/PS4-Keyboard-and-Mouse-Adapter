@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-	<TargetFramework>net6.0-windows</TargetFramework>
+	<TargetFramework>net8.0-windows7.0</TargetFramework>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Pizza.KeyboardAndMouseAdapter</RootNamespace>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -81,11 +81,6 @@
     <None Include="Resources\BuildDate.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj" />
-	  <ProjectReference Include="..\GreeterProtos\GreeterProtos.csproj" />
-    <ProjectReference Include="..\PS4RemotePlayInjection\PS4RemotePlayInjection.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <None Update="cursor.cur">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -119,6 +114,9 @@
     <PackageReference Include="AdonisUI.ClassicTheme">
       <Version>1.14.0</Version>
     </PackageReference>
+	<Content Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.Runtime.Remoting.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="C:\Users\$(USERNAME)\.nuget\packages\csfml\2.5.0\runtimes\win-x86\native\csfml-Window.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -169,36 +167,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ds4.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\mouse-left-button-dark-theme.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\mouse-left-button-light-theme.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\mouse-right-button-dark-theme.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\mouse-right-button-light-theme.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\ds4-dark-theme.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\ds4-light-theme.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
@@ -207,4 +181,14 @@
   <ItemGroup>
     <Compile Remove="Backend\MouseAnchor2.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common-v6\Common-v6.csproj" />
+    <ProjectReference Include="..\GreeterProtos\GreeterProtos.csproj" />
+    <ProjectReference Include="..\RemotePlayInjector\RemotePlayInjector.csproj" />
+
+  </ItemGroup>
+    <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+  </PropertyGroup>
 </Project>

@@ -48,6 +48,8 @@ $env:Path += ";$VISUAL_STUDIO_PATH\Common7\IDE\CommonExtensions\Microsoft\TestWi
 ################################
 ################################
 
+$DOT_NET_BUILD_TARGET="net8.0-windows"
+
 $DIRECTORY_WIP_INSTALLERS_COMMON = "temp\common\"
 $DIRECTORY_WIP_INSTALLERS_NUGET = "temp\nuget\"
 $DIRECTORY_WIP_INSTALLERS_ZIP = "temp\zip\"
@@ -69,8 +71,8 @@ $PROJECT_DIRECTORY_UNIT_TESTS = "code\UnitTests\"
 ################################
 ################################
 
-$BIN_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER = "$PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\net6.0-windows\"
-$BIN_DIRECTORY_UNIT_TESTS = "$PROJECT_DIRECTORY_UNIT_TESTS\bin\$MS_BUILD_CONFIG\net6.0-windows\"
+$BIN_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER = "$PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\$DOT_NET_BUILD_TARGET\"
+$BIN_DIRECTORY_UNIT_TESTS = "$PROJECT_DIRECTORY_UNIT_TESTS\bin\$MS_BUILD_CONFIG\$DOT_NET_BUILD_TARGET\"
 
 ################################
 ################################
@@ -92,7 +94,7 @@ function add-build-date {
 
 function build-msbuild {
 
-    echo "msbuild-ing"
+    echo "@@@ msbuild-ing"
 
     ## "-p:UseSharedCompilation=false" for CodeQL
     MSBuild.exe PS4KeyboardAndMouseAdapter.sln `
@@ -105,17 +107,17 @@ function build-msbuild {
         exit $LASTEXITCODE
     }
 
-    echo "msbuild sleep"
+    echo "@@@ msbuild sleep"
     ## sleep cause sometimes this step returns too early
     ## wait to make sure nothing errors
     Start-Sleep -Milliseconds 500
 
-    echo "msbuild done"
+    echo "@@@ msbuild done"
 }
 
 
 function cleanup-prebuild {
-    echo "running cleanup-prebuild"
+    echo "@@@ cleanup-prebuild running "
 
     remove $DIRECTORY_RELEASE
 
@@ -135,18 +137,18 @@ function cleanup-prebuild {
     remove temp
     remove TestResults
 
-    echo "ran cleanup-prebuild"
+    echo "@@@ cleanup-prebuild ran "
 }
 
 
 function cleanup-postbuild {
-    echo "running cleanup-postbuild"
+    echo "@@@ cleanup-postbuild running"
 
     remove PS4KeyboardAndMouseAdapter.*.nupkg
     remove temp
     remove TestResults
 
-    echo "ran cleanup-postbuild"
+    echo "@@@ cleanup-postbuild ran "
 }
 
 
@@ -159,20 +161,64 @@ function copy-non-cs-project-files {
 
 
 function dependencies-nuget {
+    echo "@@@ dependencies-nuget running"
     ## this was a nuget command when using packages.config
     ## now we use dotnet for dependencies defined via "packageref"
     dotnet restore
     error-on-bad-return-code
+    echo "@@@ dependencies-nuget ran"
 }
 
 
 function error-on-bad-return-code {
+    echo "LASTEXITCODE '$LASTEXITCODE'"
+
     if ($LASTEXITCODE -ne 0) {
         echo "error-on-bad-return-code!"
         exit $LASTEXITCODE
     }
 }
+ function generate-artefact-release {
+ 
 
+    if ($execGenerateArtefact -eq "TRUE" -And $MS_BUILD_CONFIG -eq "Release") {
+
+        echo "@@@ generate-artefact-release running"
+        echo ""
+
+        copy-non-cs-project-files
+        echo ""
+        make-installer-common
+        sign-executables
+
+        echo ""
+
+        ## pancakeslp 2023.04.08 
+        ## if you run `make-installer-zip` then `make-installer-exe` zip size is about 18mb
+        ## if you run `make-installer-exe` then `make-installer-zip` zip size is about 70mb 
+        ## extra size is because it will include nuget stuff
+## TODO fix this        
+
+        make-installer-exe 
+        make-installer-zip
+
+
+        
+        echo "@@@ generate-artefact-release ran"
+
+    }
+    else {
+        echo "@@@ generate-artefact-release SKIPPED, because "
+
+        if (-Not $execGenerateArtefact -eq "TRUE") {
+            echo "... arg execGenerateArtefact was '$execGenerateArtefact'"
+        }
+
+        if (-Not $MS_BUILD_CONFIG -eq "Release") {
+            echo "... arg MS_BUILD_CONFIG was '$MS_BUILD_CONFIG'"
+        }
+    }
+ }
 
 function main_exec {
 
@@ -197,44 +243,6 @@ function main_exec {
     }
     echo ""
 
-    if ($execGenerateArtefact -eq "TRUE" -And $MS_BUILD_CONFIG -eq "Release") {
-
-        echo "artefact generation STARTED"
-        echo ""
-
-        copy-non-cs-project-files
-        echo ""
-        make-installer-common
-        sign-executables
-
-        echo ""
-
-        ## pancakeslp 2023.04.08 
-        ## if you run `make-installer-zip` then `make-installer-exe` zip size is about 18mb
-        ## if you run `make-installer-exe` then `make-installer-zip` zip size is about 70mb 
-        ## extra size is because it will include nuget stuff
-## TODO fix this        
-
-        make-installer-exe 
-        make-installer-zip
-
-
-        
-
-        echo "artefact generation FINISHED"
-
-    }
-    else {
-        echo "artefact generation SKIPPED, because "
-
-        if (-Not $execGenerateArtefact -eq "TRUE") {
-            echo "... arg execGenerateArtefact was '$execGenerateArtefact'"
-        }
-
-        if (-Not $MS_BUILD_CONFIG -eq "Release") {
-            echo "... arg MS_BUILD_CONFIG was '$MS_BUILD_CONFIG'"
-        }
-    }
 
     ##TODO
     ##cleanup-postbuild
@@ -252,18 +260,18 @@ function make-dir {
 function make-installer-common {
 
     echo ""
-    echo "running make-installer-common"
+    echo "@@@ make-installer-common running"
 
     make-dir $DIRECTORY_WIP_INSTALLERS_COMMON
     Copy-Item  -Force -Recurse   $BIN_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\*   $DIRECTORY_WIP_INSTALLERS_COMMON
 
-    echo "ran make-installer-common"
+    echo "@@@ make-installer-common ran"
 }
 
 
 function make-installer-exe {
     echo ""
-    echo "running make-installer-exe"
+    echo "@@@ make-installer-exe running"
 
     make-dir $DIRECTORY_RELEASE
     make-dir $DIRECTORY_WIP_INSTALLERS_NUGET
@@ -272,13 +280,13 @@ function make-installer-exe {
     make-installer-nuget
     make-installer-nuget-to-exe
     sign-installer-exe
-    echo "ran make-installer-exe"
+    echo "@@@ make-installer-exe ran"
 }
 
 
 function make-installer-nuget {
     echo ""
-    echo "running make-nuget-package"
+    echo "@@@ make-installer-nuget running"
 
     echo "DIRECTORY_WIP_INSTALLERS_COMMON '$DIRECTORY_WIP_INSTALLERS_COMMON'"
     dir $DIRECTORY_WIP_INSTALLERS_COMMON
@@ -295,14 +303,15 @@ function make-installer-nuget {
     nuget pack $FILE_NUGET_SPEC_TARGET
     error-on-bad-return-code
 
-    echo "ran nuget-package"
+    echo "@@@ make-installer-nuget ran"
 }
 
 
 function make-installer-nuget-to-exe {
     echo ""
-    echo "running make-installer-nuget-to-exe ..."
+    echo "@@@ make-installer-nuget-to-exe running ..."
 
+    ##TODO should this be "--framework net8.0" now?
     ## arg --allowUnaware is because it isnt detecting "SquirrelAwareVersion" in code\PS4KeyboardAndMouseAdapter\app.manifest
     $COMMAND = " $EXE_SQUIRREL releasify --package=$FILE_PS4KMA_NUPKG  --releaseDir=$DIRECTORY_RELEASE --framework net6.0"
     echo "command"
@@ -324,14 +333,14 @@ function make-installer-nuget-to-exe {
     ## move setup.exe as we have two setup files (one a exe one a zip)
     Move-Item -Path $DIRECTORY_RELEASE\PS4KeyboardAndMouseAdapterSetup.exe -Destination $DIRECTORY_RELEASE\application-setup.exe
 
-    echo "ran make-installer-nuget-to-exe"
+    echo "@@@ make-installer-nuget-to-exe ran"
 }
 
 
 function make-installer-zip {
 
     echo ""
-    echo "running make-installer-zip"
+    echo "@@@ make-installer-zip running"
 
 
     make-dir $DIRECTORY_RELEASE
@@ -352,7 +361,7 @@ function make-installer-zip {
     ##TODO
     ##remove $EXTRACTED_PATH
 
-    echo "ran make-installer-zip"
+    echo "@@@ make-installer-zip ran"
 }
 
 
@@ -411,25 +420,25 @@ function remove {
 
 function sign-executables {
     echo ""
-    echo "sign-ing executables"
+    echo "@@@ sign-executables running"
     manually-sign-file  "$BIN_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\PS4KeyboardAndMouseAdapter.exe"
-    echo "signed executables"
+    echo "@@@ sign-executables ran"
 }
 
 
 function sign-installer-exe {
     echo ""
-    echo "running sign-installer-exe ..."
+    echo "@@@ sign-installer-exe running"
 
     manually-sign-file  $DIRECTORY_RELEASE\application-setup.exe
 
-    echo "ran sign-installer-exe"
+    echo "@@@ sign-installer-exe ran"
 }
 
 
 function test-vstest {
 
-    echo "vstest-ing"
+    echo "@@@ test-vstest running"
     $UNIT_TESTS_DLL = "$BIN_DIRECTORY_UNIT_TESTS\UnitTests.dll"
 
     if (!(Test-Path $UNIT_TESTS_DLL)) {
@@ -442,7 +451,7 @@ function test-vstest {
     echo ""
 
     vstest.console.exe $UNIT_TESTS_DLL       `
-        --Framework:.NETCoreApp,Version=v6.0 `
+        --Framework:.NETCoreApp,Version=v8.0 `
         /Platform:x64
 
     if ($LASTEXITCODE -ne 0) {
@@ -458,7 +467,7 @@ function test-vstest {
     ##  exit $LASTEXITCODE
     ##}
 
-    echo "vstest done"
+    echo "@@@ test-vstest ran"
 }
 
 
@@ -474,7 +483,7 @@ function update-assembly-info {
 
 function valid-xaml-xmllint {
     echo ""
-    echo "validating xamls xmllint"
+    echo "@@@ valid-xaml-xmllint running"
 
     $files = Get-ChildItem -recurse *.xaml | where { !$_.PSIsContainer }
 
@@ -489,7 +498,7 @@ function valid-xaml-xmllint {
 
     }
 
-    echo "validated xamls xmllint"
+    echo "@@@ valid-xaml-xmllint ran"
 }
 
 

@@ -1,5 +1,6 @@
 ﻿using Pizza.KeyboardAndMouseAdapter.Backend;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
+using Pizza.KeyboardAndMouseAdapter.Backend.GamepadProcessing;
 
 namespace Pizza.KeyboardAndMouseAdapter
 {

@@ -2,7 +2,6 @@
 using Pizza.KeyboardAndMouseAdapter.Backend;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using Pizza.KeyboardAndMouseAdapter.Backend.Vigem;
-using PS4RemotePlayInjection;
 using Serilog;
 using Squirrel;
 using System;

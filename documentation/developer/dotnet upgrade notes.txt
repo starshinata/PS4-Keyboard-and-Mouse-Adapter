@@ -20,8 +20,6 @@ upgrade-assistant upgrade <Path to csproj or sln to upgrade>
 
 
 
-
-
 ## IPC and DLL injection
 
 After upgrading from "dotnet framework 4.8" to "dotnet standard 2", you will realise that the System.Remoting package was removed
@@ -46,8 +44,8 @@ later pulled System.Runtime.Remoting.dll, from ".Net Framework 4.8"
 and added it as "code\PS4RemotePlayInjection\dnf_4.8.System.Runtime.Remoting.dll"
 
 
-2023.06.11
-Probably important to understand DLL doesn't need IPC
+### 2023.06.11
+Probably important to understand injecting a DLL doesn't need IPC
 and IPC stands for Inter Process Communication 
 And this is where pancakes' brain has been failing him, as he was thinking one comes with the other
 
@@ -60,8 +58,19 @@ So thinking some sort of RPC (cause i dont want to manually do marshalling from 
 https://github.com/grpc/grpc-dotnet
 https://github.com/meteatamel/grpc-samples-dotnet
 
-2023.06.13
-seems to be working
+### 2024.08.25 
+but we were still using EasyHook for DLL injection, which is constrained to dotnet framework 4.8
+Now trying https://github.com/nefarius/Injector/
+
+### 2025.01.11
+We need to remember that if we are using EasyHook, it INJECTS and CALLS stuff from the DLL.
+If you want a more pure DLL injection you should be looking at writing c++ code, 
+like https://www.ired.team/offensive-security/code-injection-process-injection/how-to-hook-windows-api-using-c++
+or https://trustedsec.com/blog/putting-our-hooks-into-windows
+
+Next approach is to segregate code into dotnet latest and dotnet framework 4.8
+and let the DNF 4.8 code do teh easy hooking and the injection
+both codebases can talk to each other via IPC
 
 
 
@@ -73,7 +82,7 @@ made new project using dotnet template (instead of dotnet framework template
 
 various errors
 needed flags for vstext.console.exe
-which is funny because documenation says it will take the latest detected SDK/ dot net version
+which is funny because documentation says it will take the latest detected SDK/ dot net version
 
 
 ##Unit tests (2)

@@ -2,7 +2,7 @@
 using Pizza.KeyboardAndMouseAdapter.Backend;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using Pizza.KeyboardAndMouseAdapter.Backend.DebugLogging;
-using Pizza.KeyboardAndMouseAdapter.Backend.Remote;
+using Pizza.KeyboardAndMouseAdapter.Backend.GamepadProcessing;
 using System;
 using System.IO;
 using System.Windows;
@@ -127,16 +127,17 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.Welcome
 
         private void StartRemotePlayAndConditionallyInject()
         {
+            //TODO smells, we should be telling the user that we need the prcess dead, or this might appear as a bug to them
+            ProcessUtil.FindProcess(RemotePlayConstants.TARGET_PROCESS_NAME)?.Kill();
 
             if (EmulationConstants.ONLY_VIGEM.Equals(ApplicationSettings.GetInstance().EmulationMode))
             {
-                RemotePlayStarter rps = new RemotePlayStarter();
-                rps.OpenRemotePlay();
+                RemotePlayStarter.OpenRemotePlay();
             }
             else
             {
                 GamepadProcessor gp = ((MainViewModel)DataContext).GamepadProcessor;
-                RemotePlayInjector RemotePlayInjector = new RemotePlayInjector();
+                RemotePlayInjector99 RemotePlayInjector = new RemotePlayInjector99();
                 RemotePlayInjector.OpenRemotePlayAndInject(gp);
             }
         }

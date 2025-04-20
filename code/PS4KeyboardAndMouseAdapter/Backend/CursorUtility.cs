@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-//TODO rename
-namespace PS4RemotePlayInjection
+namespace Pizza.KeyboardAndMouseAdapter.Backend
 {
     public class CursorUtility
     {
@@ -32,19 +31,21 @@ namespace PS4RemotePlayInjection
             // these actions are expensive - it was the cause of issue https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/issues/27
             // so we should check to see if there is a difference between requested value and current value
             // then execute if there is a difference
-            if (show != UtilityData.IsCursorVisible)
-            {
-                if (!show)
-                {
-                    ShowCursorTransparent();
-                }
-                else
-                {
-                    ShowCursorReset();
-                }
 
-                UtilityData.IsCursorVisible = show;
-            }
+            //TODO
+            /* if (show != UtilityData.IsCursorVisible)
+             {
+                 if (!show)
+                 {
+                     ShowCursorTransparent();
+                 }
+                 else
+                 {
+                     ShowCursorReset();
+                 }
+
+                 UtilityData.IsCursorVisible = show;
+             }*/
         }
 
         public static void ShowCursorReset()

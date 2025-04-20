@@ -1,7 +1,9 @@
 ﻿using Nefarius.ViGEm.Client;
 using Nefarius.ViGEm.Client.Targets;
 using Pizza.Common;
+using Pizza.Common.Gamepad;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
+using Pizza.KeyboardAndMouseAdapter.Backend.GamepadProcessing;
 using Serilog;
 using System;
 using System.Diagnostics;
@@ -36,7 +38,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
             RequestsPerSecondTimer.Start();
 
             GamepadProcessor gp = new GamepadProcessor();
-            
+
             Task.Factory.StartNew(() =>
             {
                 controller.ResetReport();
@@ -45,7 +47,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
                 {
                     try
                     {
-                        PS4RemotePlayInjection.DualShockState x = gp.GetState();
+                        DualShockState x = gp.GetState();
                         if (x != null)
                         {
                             //Log.Information("ds" + gp.DualShockStateToString(ref x));

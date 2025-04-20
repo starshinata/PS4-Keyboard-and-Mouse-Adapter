@@ -1,6 +1,5 @@
 ﻿
-//TODO rename
-namespace PS4RemotePlayInjection
+namespace Pizza.KeyboardAndMouseAdapter.Backend
 {
     public class AngleUtility
     {
