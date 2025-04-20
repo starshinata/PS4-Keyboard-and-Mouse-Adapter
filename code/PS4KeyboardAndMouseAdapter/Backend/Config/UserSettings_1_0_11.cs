@@ -1,4 +1,5 @@
-﻿using Serilog;
+﻿using Pizza.Common;
+using Serilog;
 using SFML.Window;
 using System.Collections.Generic;
 
@@ -23,8 +24,8 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
         public bool MouseControlsR3 { get; set; } = false;
 
         public double MouseDistanceLowerRange { get; set; } = 5;
-        public double MouseDistanceUpperRange { get; set; } = VideoMode.DesktopMode.Width / 20f;
-        public double MouseMaxDistance { get; set; } = VideoMode.DesktopMode.Width / 2f;
+        public double MouseDistanceUpperRange { get; set; } = 0;
+        public double MouseMaxDistance { get; set; } = 0;
 
         public int MousePollingRate { get; set; }
 
@@ -39,6 +40,23 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
         ////////////////////////////////////////////////////////////////////////////
         /// Static Methods
         ////////////////////////////////////////////////////////////////////////////
+
+
+        protected UserSettings_1_0_11()
+        {
+            int width = 1920;
+            try
+            {
+                width = (int)VideoMode.DesktopMode.Width;
+            }
+            catch (System.BadImageFormatException e)
+            {
+                ExceptionLogger.LogException("UserSettings_1_0_11 init fail", e);
+            }
+
+            MouseDistanceUpperRange = width / 20f;
+            MouseMaxDistance = width / 2f;
+        }
 
         private static void AddManualMouseMapping(UserSettings newSettings, VirtualKey vk, MouseButton mouseButton)
         {

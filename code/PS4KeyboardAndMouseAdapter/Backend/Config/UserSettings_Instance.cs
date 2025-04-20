@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
+using Pizza.Common;
 using SFML.Window;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
@@ -36,8 +38,8 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
         public bool MouseControlsR3 { get; set; } = false;
 
         public double MouseDistanceLowerRange { get; set; } = 5;
-        public double MouseDistanceUpperRange { get; set; } = VideoMode.DesktopMode.Width / 20f;
-        public double MouseMaxDistance { get; set; } = VideoMode.DesktopMode.Width / 2f;
+        public double MouseDistanceUpperRange { get; set; } = 0;
+        public double MouseMaxDistance { get; set; } = 0;
 
         private int _MousePollingRate;
 
@@ -101,6 +103,19 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
         protected UserSettings()
         {
             MousePollingRate = 60;
+
+            int width = 1920;
+            try
+            {
+                width = (int)VideoMode.DesktopMode.Width;
+            }
+            catch (System.BadImageFormatException e)
+            {
+                ExceptionLogger.LogException("userSettings_instances init fail", e);
+            }
+
+            MouseDistanceUpperRange = width / 20f;
+            MouseMaxDistance = width / 2f;
         }
 
         public UserSettings Clone()

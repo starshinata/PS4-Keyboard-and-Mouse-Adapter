@@ -11,15 +11,16 @@ on:
     # The branches below must be a subset of the branches above
     branches: [ master, develop-pancakeslp ]
   schedule:
-    - cron: '37 7 * * 4'
+    # Run at 07:37 AM, every Friday
+    - cron: '37 7 * * 5'
 
 jobs:
   analyze:
     name: Analyze
 
     ## Environment variable
-    env:
-      ACTIONS_ALLOW_UNSECURE_COMMANDS: true  
+    #env:
+    #  HELLO: 'WORLD'
 
     permissions:
       actions: read
@@ -40,30 +41,28 @@ jobs:
       fail-fast: true
       matrix:
         language: [ 'csharp' ]
-        # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby' ]
-        # Learn more about CodeQL language support at https://git.io/codeql-language-support
 
 
     steps:
 
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
 
     # Install the .NET Core workload
     - name: Install .NET Core
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 6.0.x
 
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@v1.0.2
+      uses: microsoft/setup-msbuild@v2
 
 
     - name: Initialize CodeQL tools for scanning.
-      uses: github/codeql-action/init@v2
+      uses: github/codeql-action/init@v3
       with:
         languages: ${{ matrix.language }}
 
@@ -74,4 +73,4 @@ jobs:
 
 
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v2
+      uses: github/codeql-action/analyze@v3

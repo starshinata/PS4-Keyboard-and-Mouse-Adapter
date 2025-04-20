@@ -1,4 +1,4 @@
-# PS Remote Play v6.0.0.2240
+# PS Remote Play v6.0.0.2240 and above
 PS4KMA has issues with the latest version of PS Remote Play, and thus you can't currently use the latest version of PS Remote Play
 
 For workaround see https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/issues/85
@@ -28,8 +28,11 @@ Main Adapter <br>
 <a href="documentation/example-ui-5.png" target="_blank"><img src="documentation/example-ui-5.png" alt="example UI Tab 4" width="280px"/></a>
 
 
-## DOWNLOAD
-:rocket: Click Download!--> [here (v.3.1.0)](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/3.1.0/application-setup.exe)
+## :rocket: DOWNLOAD :rocket:
+1. Get the installer <br>Click [here (v.3.1.0)](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/releases/download/3.1.0/application-setup.exe)
+2. Install it
+3. If you have a newer version of Remote Play we ask that you "down-grade"/"down-patch" it [see](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/issues/85)
+4. If Remoteplay Crashes, and you are using "NO ViGEm, just process injection"<br> Can we instead STRONGLY recommend you use the [Vigem](https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/blob/master/documentation/vigem.md) option <br>(PS4KMA > Welcome > Setup > Controller Emulation settings > "ViGEm, and  process injection for the bottom toolbar")
 
 
 ## Troubleshooting, Frequently Asked Questions, and Documentation
@@ -40,8 +43,7 @@ see [frequently-asked-questions](documentation/frequently-asked-questions.md)
 
 All other documentation [here](documentation/)
 
-Video for people who need it <br>
-<a href="https://youtu.be/BEBskXlyIFk?t=10s" target="_blank"><img src="documentation/youtube-mini-player.png" alt="explanation video" width="280px"/></a>
+
 
 ## DISCORD
 Try our discord here https://discord.gg/zgveKtme5s where you can either suggest ideas or ask other members for help.
