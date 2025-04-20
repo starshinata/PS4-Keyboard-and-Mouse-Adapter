@@ -506,7 +506,7 @@ function test-vstest {
     echo ""
 
     vstest.console.exe $UNIT_TESTS_DLL       `
-        --Framework:.NETCoreApp,Version=v8.0 `
+        "--Framework:.NETCoreApp,Version=v8.0" `
         /Platform:x64
 
     if ($LASTEXITCODE -ne 0) {
