@@ -87,8 +87,7 @@ $PROJECT_DIRECTORY_PS4_REMOTE_PLAY_INJECTION="${DIRECTORY_REPO_ROOT_ABSOLUTE}\co
 $PROJECT_DIRECTORY_UNIT_TESTS="${DIRECTORY_REPO_ROOT_ABSOLUTE}\code\UnitTests"
 
 $NUGET_PACKAGE_PATH="${env:USERPROFILE}\.nuget\packages\"
-##TODO do this for EVERY path
-error-if-path-does-not-exist $NUGET_PACKAGE_PATH
+
 ################################
 ################################
 
@@ -343,6 +342,8 @@ function squirrel {
   echo ""
   echo "squirrel-ing package ..."
 
+  ##TODO do this for EVERY path
+  error-if-path-does-not-exist $NUGET_PACKAGE_PATH
 
   $SQUIRREL_PATH="$NUGET_PACKAGE_PATH\squirrel.windows\1.9.1"
 
