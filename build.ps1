@@ -50,7 +50,7 @@ function error-if-path-does-not-exist {
 ################################
 
 ## might need configuring
-$CERT_DIRECTORY = "E:\workspace\##certificates\github.com-pancakeslp"
+$CERT_DIRECTORY = "E:\workspace\##certificates\github.com-pancakeslp\"
 error-if-path-does-not-exist $CERT_DIRECTORY
 
 #$MS_BUILD_CONFIG="Debug"
@@ -70,7 +70,7 @@ $env:Path += ";$VISUAL_STUDIO_PATH\MSBuild\Current\Bin\amd64\"
 $env:Path += ";C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x64\"
 
 ## Path for vstest.console.exe
-$env:Path += ";$VISUAL_STUDIO_PATH\Common7\IDE\CommonExtensions\Microsoft\TestWindow"
+$env:Path += ";$VISUAL_STUDIO_PATH\Common7\IDE\CommonExtensions\Microsoft\TestWindow\"
 
 ################################
 ################################
@@ -88,18 +88,10 @@ $DIRECTORY_REPO_ROOT_ABSOLUTE = $pwd
 ################################
 ################################
 
-$DOT_NET_BUILD_TARGET = "net8.0-windows"
-
 $DIRECTORY_WIP_INSTALLERS_COMMON = "temp\common\"
 $DIRECTORY_WIP_INSTALLERS_NUGET = "temp\nuget\"
 $DIRECTORY_WIP_INSTALLERS_ZIP = "temp\zip\"
 $DIRECTORY_RELEASE = "ReleaseArtefacts\"
-
-$FILE_NUGET_SPEC_SOURCE = "manualBuild\nuget\PS4KeyboardAndMouseAdapter.nuspec.template.xml"
-$FILE_NUGET_SPEC_TARGET = "manualBuild\nuget\PS4KeyboardAndMouseAdapter.nuspec"
-$FILE_PS4KMA_NUPKG = "PS4KeyboardAndMouseAdapter.${VERSION}.nupkg"
-
-$GENERATED_INSTALLER_PATH = "SquirrelReleases"
 
 $PROJECT_DIRECTORY_COMMON = "code\common\"
 $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER = "code\PS4KeyboardAndMouseAdapter\"
@@ -109,11 +101,17 @@ $PROJECT_DIRECTORY_UNIT_TESTS = "code\UnitTests\"
 ################################
 ################################
 
+$FILE_NUGET_SPEC_SOURCE = "manualBuild\nuget\PS4KeyboardAndMouseAdapter.nuspec.template.xml"
+$FILE_NUGET_SPEC_TARGET = "manualBuild\nuget\PS4KeyboardAndMouseAdapter.nuspec"
+$FILE_PS4KMA_NUPKG = "PS4KeyboardAndMouseAdapter.${VERSION}.nupkg"
+
 $NUGET_PACKAGE_PATH = "${env:USERPROFILE}\.nuget\packages\"
 $EXE_SQUIRREL = "${NUGET_PACKAGE_PATH}\clowd.squirrel\2.9.42\tools\Squirrel.exe"
 
 ################################
 ################################
+
+$DOT_NET_BUILD_TARGET = "net8.0-windows7.0"
 
 $BIN_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER = "$PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\$DOT_NET_BUILD_TARGET\"
 $BIN_DIRECTORY_UNIT_TESTS = "$PROJECT_DIRECTORY_UNIT_TESTS\bin\$MS_BUILD_CONFIG\$DOT_NET_BUILD_TARGET\"
@@ -123,6 +121,7 @@ $BIN_DIRECTORY_UNIT_TESTS = "$PROJECT_DIRECTORY_UNIT_TESTS\bin\$MS_BUILD_CONFIG\
 
 ## print env variables
 dir env:
+echo ""
 
 ################################
 ################################
@@ -130,7 +129,7 @@ dir env:
 function add-build-date {
     make-dir $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\Resources\
 
-    ## format s means sortable aka ISO 8601
+    ## "-Format s" means sortable aka ISO 8601
     $DATETIME = (get-date -Format s)
     echo $DATETIME > $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\Resources\BuildDate.txt
 }
@@ -157,6 +156,7 @@ function build-msbuild {
     Start-Sleep -Milliseconds 500
 
     echo "@@@ msbuild done"
+    echo ""
 }
 
 
@@ -184,6 +184,7 @@ function cleanup-prebuild {
     remove TestResults
 
     echo "@@@ cleanup-prebuild ran "
+    echo ""
 }
 
 
@@ -195,6 +196,7 @@ function cleanup-postbuild {
     remove TestResults
 
     echo "@@@ cleanup-postbuild ran "
+    echo ""
 }
 
 
@@ -208,11 +210,14 @@ function copy-non-cs-project-files {
 
 function dependencies-nuget {
     echo "@@@ dependencies-nuget running"
+
     ## this was a nuget command when using packages.config
     ## now we use dotnet for dependencies defined via "packageref"
     dotnet restore
     error-on-bad-return-code
+
     echo "@@@ dependencies-nuget ran"
+    echo ""
 }
 
 
@@ -264,6 +269,8 @@ function generate-artefact-release {
             echo "... arg MS_BUILD_CONFIG was '$MS_BUILD_CONFIG'"
         }
     }
+
+    echo ""
 }
 
 
@@ -285,19 +292,16 @@ function main_exec {
 
     build-msbuild
 
+    ##TODO
+    #test-vstest
 
-    echo ""
-    if ($execTest -eq "TRUE") {
-        test-vstest
-    }
-    else {
-        echo "tests SKIPPED, because arg execTest was '$execTest'"
-    }
-    echo ""
-
+    generate-artefact-release
 
     ##TODO
     ##cleanup-postbuild
+
+    echo ""
+    echo "build.ps1 SUCCESS!"
 }
 
 
@@ -340,13 +344,8 @@ function make-installer-nuget {
     echo ""
     echo "@@@ make-installer-nuget running"
 
-    echo "DIRECTORY_WIP_INSTALLERS_COMMON '$DIRECTORY_WIP_INSTALLERS_COMMON'"
-    dir $DIRECTORY_WIP_INSTALLERS_COMMON
-    echo ""
-
-    echo "DIRECTORY_WIP_INSTALLERS_NUGET  '$DIRECTORY_WIP_INSTALLERS_NUGET'"
-    dir $DIRECTORY_WIP_INSTALLERS_NUGET
-    echo ""
+    error-if-path-does-not-exist  $DIRECTORY_WIP_INSTALLERS_COMMON
+    error-if-path-does-not-exist  $DIRECTORY_WIP_INSTALLERS_NUGET
 
     Copy-Item  -Force -Recurse  ${DIRECTORY_WIP_INSTALLERS_COMMON}\*  ${DIRECTORY_WIP_INSTALLERS_NUGET}
 
@@ -413,6 +412,7 @@ function make-installer-zip {
     ##remove $EXTRACTED_PATH
 
     echo "@@@ make-installer-zip ran"
+    echo ""
 }
 
 
@@ -463,7 +463,7 @@ function nuget {
 function remove {
     $FILE_NAME = $args[0]
 
-    if (Test-Path $FILE_NAME) {
+    if (($FILE_NAME) -And (Test-Path $FILE_NAME)) {
         Remove-Item -Recurse $FILE_NAME
     }
 }
@@ -472,9 +472,8 @@ function remove {
 function sign-executables {
     echo ""
     echo "@@@ sign-executables running"
-    ##TODO pick one
+
     manually-sign-file  "$BIN_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\PS4KeyboardAndMouseAdapter.exe"
-    manually-sign-file  "$PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\PS4KeyboardAndMouseAdapter.exe"
     echo "@@@ sign-executables ran"
 }
 
@@ -483,15 +482,16 @@ function sign-installer-exe {
     echo ""
     echo "@@@ sign-installer-exe running"
 
-    ##TODO pick one
     manually-sign-file  $DIRECTORY_RELEASE\application-setup.exe
-    manually-sign-file  $GENERATED_INSTALLER_PATH\application-setup.exe
-
     echo "@@@ sign-installer-exe ran"
 }
 
 
 function test-vstest {
+
+    if (!($execTest -eq "TRUE")) {
+        echo "@@@ test-vstest SKIPPED, because arg execTest was '$execTest'"
+    }
 
     echo "@@@ test-vstest running"
     $UNIT_TESTS_DLL = "$BIN_DIRECTORY_UNIT_TESTS\UnitTests.dll"
@@ -523,6 +523,7 @@ function test-vstest {
     ##}
 
     echo "@@@ test-vstest ran"
+    echo ""
 }
 
 
