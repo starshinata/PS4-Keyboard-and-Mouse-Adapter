@@ -1,8 +1,19 @@
+##
+## USAGE
+##     powershell build.ps1
+##
+## USAGE ARGS
+##
+##     -execGenerateArtefact=FALSE  - DO NOT generate the artefacts
+##     -execGenerateArtefact=TRUE   - generate the artefacts (ZIPs and EXEs)
+##                                    If flag 'execGenerateArtefact' is omitted this we default to TRUE
+##
+##     -execTest=FALSE              - DO NOT run units tests
+##     -execTest=TRUE               - run unit tests
+##                                    If flag 'execTest' is omitted this we default to TRUE
+##
+##
 
-## if this fails you may want to run AS ADMIN
-## `  powershell Set-ExecutionPolicy RemoteSigned  `
-## if that doesnt work try 
-## `  powershell Set-ExecutionPolicy Unrestricted  `
 
 ## param needs to be first non comment line of file
 param ([string]$execGenerateArtefact='TRUE', [string]$execTest='TRUE')
@@ -20,11 +31,22 @@ echo ""
 ## exit on first error
 $ErrorActionPreference = "Stop"
 
+
+## at top as you must define a function before calling it
+function error-if-path-does-not-exist {
+  $PATH  = $args[0]
+  if (!(Test-Path -Path $PATH)) {
+    echo "Path doesn't exist. '$PATH'"
+    exit 99
+  }
+}
+
+
 ################################
 ################################
 
 ## might need configuring
-$CERT_DIRECTORY = "E:\workspace\##certificates\github.com-pancakeslp"
+$CERT_DIRECTORY = "E:\workspace\##certificates\github.com-pancakeslp\"
 
 #$MS_BUILD_CONFIG = "Debug"
 $MS_BUILD_CONFIG = "Release"
@@ -47,15 +69,26 @@ $env:Path += ";$VISUAL_STUDIO_PATH\Common7\IDE\CommonExtensions\Microsoft\TestWi
 ################################
 ################################
 
-$GENERATED_INSTALLER_PATH="SquirrelReleases"
+## cd to repo root, to be adjacent to build.ps1
+$scriptPath = $MyInvocation.MyCommand.Path
+$scriptDirectory = Split-Path $scriptPath
+Set-Location -Path $scriptDirectory
 
-$PROJECT_DIRECTORY_COMMON="code\common"
-$PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER="code\PS4KeyboardAndMouseAdapter"
-$PROJECT_DIRECTORY_PS4_REMOTE_PLAY_INJECTION="code\PS4RemotePlayInjection"
-$PROJECT_DIRECTORY_UNIT_TESTS="code\UnitTests"
+$DIRECTORY_REPO_ROOT_ABSOLUTE=$pwd
 
-$NUGET_PACKAGE_PATH="${env:HOME}\.nuget\packages\"
+################################
+################################
 
+$GENERATED_INSTALLER_PATH="${DIRECTORY_REPO_ROOT_ABSOLUTE}\SquirrelReleases"
+
+$PROJECT_DIRECTORY_COMMON="${DIRECTORY_REPO_ROOT_ABSOLUTE}\code\common"
+$PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER="${DIRECTORY_REPO_ROOT_ABSOLUTE}\code\PS4KeyboardAndMouseAdapter"
+$PROJECT_DIRECTORY_PS4_REMOTE_PLAY_INJECTION="${DIRECTORY_REPO_ROOT_ABSOLUTE}\code\PS4RemotePlayInjection"
+$PROJECT_DIRECTORY_UNIT_TESTS="${DIRECTORY_REPO_ROOT_ABSOLUTE}\code\UnitTests"
+
+$NUGET_PACKAGE_PATH="${env:USERPROFILE}\.nuget\packages\"
+##TODO do this for EVERY path
+error-if-path-does-not-exist $NUGET_PACKAGE_PATH
 ################################
 ################################
 
@@ -80,7 +113,7 @@ function build-msbuild {
 
   if ( $LASTEXITCODE -ne 0) {
     echo "msbuild failed"
-    exit $LASTEXITCODE 
+    exit $LASTEXITCODE
   }
 
   echo "msbuild sleep"
@@ -94,13 +127,13 @@ function build-msbuild {
 
 function cleanup-prebuild {
   remove $GENERATED_INSTALLER_PATH
-  
+
   remove PS4KeyboardAndMouseAdapter.*.nupkg
-  
+
   remove $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\
   remove $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\logs\
   remove $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\obj\
-  
+
   remove $PROJECT_DIRECTORY_PS4_REMOTE_PLAY_INJECTION\bin\
   remove $PROJECT_DIRECTORY_PS4_REMOTE_PLAY_INJECTION\obj\
 
@@ -125,9 +158,13 @@ function dependencies-nuget {
 function error-on-bad-return-code {
   if ( $LASTEXITCODE -ne 0 ) {
     echo "error-on-bad-return-code!"
-    exit $LASTEXITCODE 
+    exit $LASTEXITCODE
   }
 }
+
+
+## see top of file
+## function error-if-path-does-not-exist {
 
 
 function main_exec {
@@ -138,9 +175,10 @@ function main_exec {
 
     dependencies-nuget
 
-    valid-xaml-xmllint
+    validate-xaml-xmllint
 
     update-assembly-info
+
     build-msbuild
 
 
@@ -247,11 +285,11 @@ function manually-sign-file {
   $FILE_NAME = $args[0]
 
   ## type is the windows equivalent of cat
-  $CERT_PASSWORD=$( type ${CERT_DIRECTORY}\cert-password.txt )
-  $CERT_PFX="${CERT_DIRECTORY}\github.com-pancakeslp.pfx"
+  $CERT_PASSWORD=$( type ${CERT_DIRECTORY}cert-password.txt )
+  $CERT_PFX="${CERT_DIRECTORY}github.com-pancakeslp.pfx"
 
   if(![System.IO.File]::Exists($FILE_NAME)) {
-    Write-Error "file $FILE_NAME missing!" 
+    Write-Error "file $FILE_NAME missing!"
     exit 1
   }
 
@@ -265,7 +303,7 @@ function manually-sign-file {
       /td sha256                          `
       $FILE_NAME
 
-  error-on-bad-return-code	
+  error-on-bad-return-code
 }
 
 
@@ -285,7 +323,7 @@ function remove {
 
 function sign-executables {
   echo ""
-  echo "sign-ing executables" 
+  echo "sign-ing executables"
   manually-sign-file  "$PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\PS4KeyboardAndMouseAdapter.exe"
   echo "signed executables"
 }
@@ -293,8 +331,8 @@ function sign-executables {
 
 function sign-installer {
   echo ""
-  echo "sign-ing installer" 
-  
+  echo "sign-ing installer"
+
   manually-sign-file  $GENERATED_INSTALLER_PATH\application-setup.exe
 
   echo "signed installer"
@@ -304,14 +342,14 @@ function sign-installer {
 function squirrel {
   echo ""
   echo "squirrel-ing package ..."
-  
+
 
   $SQUIRREL_PATH="$NUGET_PACKAGE_PATH\squirrel.windows\1.9.1"
 
   $COMMAND=" ${SQUIRREL_PATH}\tools\Squirrel.exe  --releasify \`"PS4KeyboardAndMouseAdapter.${VERSION}.nupkg\`"  --releaseDir $GENERATED_INSTALLER_PATH "
-  
+
   powershell.exe -ExecutionPolicy Bypass -Command "$COMMAND | Write-Output"
-  error-on-bad-return-code	
+  error-on-bad-return-code
 
   ## squirrel makes an MSI
   ## but the MSI seems to do nothing, so lets delete it
@@ -341,15 +379,15 @@ function test-vstest {
 
   if ( $LASTEXITCODE -ne 0) {
     echo "vstest failed"
-    exit $LASTEXITCODE 
+    exit $LASTEXITCODE
   }
 
-   
 
-  ##manualBuild\NUnit.Console-3.13.0\bin\net35\nunit3-console.exe NunitTests\bin\Release\net461\NunitTests.dll 
+
+  ##manualBuild\NUnit.Console-3.13.0\bin\net35\nunit3-console.exe NunitTests\bin\Release\net461\NunitTests.dll
   ##if ( $LASTEXITCODE -ne 0) {
   ##  echo "nunit tests failed"
-  ##  exit $LASTEXITCODE 
+  ##  exit $LASTEXITCODE
   ##}
 
   echo "vstest done"
@@ -361,23 +399,32 @@ function update-assembly-info {
 
   if ( $LASTEXITCODE -ne 0) {
     echo "AssemblyInfoUtil.ex failed"
-    exit $LASTEXITCODE 
+    exit $LASTEXITCODE
   }
 }
 
 
-function valid-xaml-xmllint {
+function validate-xaml-xmllint {
+
+  ## here we are using xmllint, which is provided by libxml
+  ## if you need to install it, use the chocolatey command
+  ##```
+  ##  choco install xsltproc
+  ##```
+  ## if you dont know chocolatey, then see https://chocolatey.org/
+
   echo ""
   echo "validating xamls xmllint"
 
   $files =  Get-ChildItem -recurse *.xaml | where {! $_.PSIsContainer}
 
   foreach ($file in $files) {
- 
-    manualBuild\libxml\bin\xmllint.exe $file.FullName  --noout
 
+    xmllint.exe $file.FullName  --noout
+
+    ## if you get a negative exit coder assume the binary is either corrupted or missing DLLs
     if ( $LASTEXITCODE -ne 0) {
-      echo "ERROR for file $file"
+      echo "ERROR - xmllint exit code '$LASTEXITCODE' for file '$file'"
       exit $LASTEXITCODE 
     }
 

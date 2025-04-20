@@ -9,18 +9,32 @@
 
 
 ## Setup
-visual studio 2022
-
-Workloads ?
-* .net Development
-* Windows and web development
-  (Specifically "ClickOnce Publishing Tools")
+* dot net framework 4.8
+* visual studio 2022 - https://visualstudio.microsoft.com/
+* Workloads ?
+  * .net Development
+  * Windows and web development
+    (Specifically "ClickOnce Publishing Tools")
+* chocolatey - https://chocolatey.org/
+* libxml <br>` choco install xsltproc `
 
 
 ## Build
-run the powershell script
 
-` build.ps1 `
+Open Command prompt
+
+```
+ powershell ./build.ps1 
+```
+
+If you get an execution policy error, try one of the following <br> in Command
+prompt **AS ADMIN**, the retry the above
+```
+powershell Set-ExecutionPolicy RemoteSigned 
+```  
+```
+powershell Set-ExecutionPolicy Unrestricted 
+```
 
 
 ## Code Signing
