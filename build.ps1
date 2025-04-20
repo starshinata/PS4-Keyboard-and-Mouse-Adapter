@@ -38,11 +38,11 @@ $ErrorActionPreference = "Stop"
 
 ## at top as you must define a function before calling it
 function error-if-path-does-not-exist {
-  $PATH  = $args[0]
-  if (!(Test-Path -Path $PATH)) {
-    echo "Path doesn't exist. '$PATH'"
-    exit 99
-  }
+    $PATH = $args[0]
+    if (!(Test-Path -Path $PATH)) {
+        echo "Path doesn't exist. '$PATH'"
+        exit 99
+    }
 }
 
 
@@ -51,6 +51,7 @@ function error-if-path-does-not-exist {
 
 ## might need configuring
 $CERT_DIRECTORY = "E:\workspace\##certificates\github.com-pancakeslp"
+error-if-path-does-not-exist $CERT_DIRECTORY
 
 #$MS_BUILD_CONFIG="Debug"
 $MS_BUILD_CONFIG = "Release"
@@ -60,7 +61,7 @@ $VERSION = "4.0.0"
 ################################
 ################################
 $VISUAL_STUDIO_PATH = "C:\Program Files\Microsoft Visual Studio\2022\Community\"
-
+error-if-path-does-not-exist $VISUAL_STUDIO_PATH
 
 ## Path for MSBuild.exe
 $env:Path += ";$VISUAL_STUDIO_PATH\MSBuild\Current\Bin\amd64\"
@@ -74,38 +75,42 @@ $env:Path += ";$VISUAL_STUDIO_PATH\Common7\IDE\CommonExtensions\Microsoft\TestWi
 ################################
 ################################
 
-## cd to repo root, to be adjacent to build.ps1
+## get location of script
 $scriptPath = $MyInvocation.MyCommand.Path
 $scriptDirectory = Split-Path $scriptPath
+
+## cd location of script
 Set-Location -Path $scriptDirectory
 
-$DIRECTORY_REPO_ROOT_ABSOLUTE=$pwd
+## now PWD should be absolute location of GIT REPO
+$DIRECTORY_REPO_ROOT_ABSOLUTE = $pwd
 
 ################################
 ################################
 
-$DOT_NET_BUILD_TARGET="net8.0-windows"
+$DOT_NET_BUILD_TARGET = "net8.0-windows"
 
 $DIRECTORY_WIP_INSTALLERS_COMMON = "temp\common\"
 $DIRECTORY_WIP_INSTALLERS_NUGET = "temp\nuget\"
 $DIRECTORY_WIP_INSTALLERS_ZIP = "temp\zip\"
 $DIRECTORY_RELEASE = "ReleaseArtefacts\"
 
-$EXE_SQUIRREL = "${env:HOME}\.nuget\packages\clowd.squirrel\2.9.42\tools\Squirrel.exe"
-
 $FILE_NUGET_SPEC_SOURCE = "manualBuild\nuget\PS4KeyboardAndMouseAdapter.nuspec.template.xml"
 $FILE_NUGET_SPEC_TARGET = "manualBuild\nuget\PS4KeyboardAndMouseAdapter.nuspec"
 $FILE_PS4KMA_NUPKG = "PS4KeyboardAndMouseAdapter.${VERSION}.nupkg"
 
-$GENERATED_INSTALLER_PATH="${DIRECTORY_REPO_ROOT_ABSOLUTE}\SquirrelReleases"
+$GENERATED_INSTALLER_PATH = "SquirrelReleases"
 
 $PROJECT_DIRECTORY_COMMON = "code\common\"
 $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER = "code\PS4KeyboardAndMouseAdapter\"
 $PROJECT_DIRECTORY_PS4_REMOTE_PLAY_INJECTION = "code\PS4RemotePlayInjection\"
 $PROJECT_DIRECTORY_UNIT_TESTS = "code\UnitTests\"
 
-$NUGET_PACKAGE_PATH="${env:USERPROFILE}\.nuget\packages\"
+################################
+################################
 
+$NUGET_PACKAGE_PATH = "${env:USERPROFILE}\.nuget\packages\"
+$EXE_SQUIRREL = "${NUGET_PACKAGE_PATH}\clowd.squirrel\2.9.42\tools\Squirrel.exe"
 
 ################################
 ################################
@@ -117,7 +122,7 @@ $BIN_DIRECTORY_UNIT_TESTS = "$PROJECT_DIRECTORY_UNIT_TESTS\bin\$MS_BUILD_CONFIG\
 ################################
 
 ## print env variables
-#dir env:
+dir env:
 
 ################################
 ################################
@@ -141,10 +146,10 @@ function build-msbuild {
         -p:UseSharedCompilation=false          `
         -p:VersionNumber=$VERSION
 
-  if ( $LASTEXITCODE -ne 0) {
-    echo "msbuild failed"
-    exit $LASTEXITCODE
-  }
+    if ( $LASTEXITCODE -ne 0) {
+        echo "msbuild failed"
+        exit $LASTEXITCODE
+    }
 
     echo "@@@ msbuild sleep"
     ## sleep cause sometimes this step returns too early
@@ -212,15 +217,15 @@ function dependencies-nuget {
 
 
 function error-on-bad-return-code {
-    echo "LASTEXITCODE '$LASTEXITCODE'"
-
     if ($LASTEXITCODE -ne 0) {
+        echo "LASTEXITCODE '$LASTEXITCODE'"
         echo "error-on-bad-return-code!"
         exit $LASTEXITCODE
     }
 }
- function generate-artefact-release {
 
+
+function generate-artefact-release {
 
     if ($execGenerateArtefact -eq "TRUE" -And $MS_BUILD_CONFIG -eq "Release") {
 
@@ -238,7 +243,7 @@ function error-on-bad-return-code {
         ## if you run `make-installer-zip` then `make-installer-exe` zip size is about 18mb
         ## if you run `make-installer-exe` then `make-installer-zip` zip size is about 70mb
         ## extra size is because it will include nuget stuff
-## TODO fix this
+        ## TODO fix this
 
         make-installer-exe
         make-installer-zip
@@ -259,7 +264,8 @@ function error-on-bad-return-code {
             echo "... arg MS_BUILD_CONFIG was '$MS_BUILD_CONFIG'"
         }
     }
- }
+}
+
 
 ## see top of file
 ## function error-if-path-does-not-exist {
@@ -357,9 +363,8 @@ function make-installer-nuget-to-exe {
     echo ""
     echo "@@@ make-installer-nuget-to-exe running ..."
 
-    ##TODO should this be "--framework net8.0" now?
     ## arg --allowUnaware is because it isnt detecting "SquirrelAwareVersion" in code\PS4KeyboardAndMouseAdapter\app.manifest
-    $COMMAND = " $EXE_SQUIRREL releasify --package=$FILE_PS4KMA_NUPKG  --releaseDir=$DIRECTORY_RELEASE --framework net6.0"
+    $COMMAND = " $EXE_SQUIRREL releasify --package=$FILE_PS4KMA_NUPKG  --releaseDir=$DIRECTORY_RELEASE --framework net8.0"
     echo "command"
     echo "  $COMMAND"
     echo ""
@@ -427,26 +432,26 @@ function make-nuget-spec {
 function manually-sign-file {
     $FILE_NAME = $args[0]
 
-  ## type is the windows equivalent of cat
-  $CERT_PASSWORD=$( type ${CERT_DIRECTORY}cert-password.txt )
-  $CERT_PFX="${CERT_DIRECTORY}github.com-pancakeslp.pfx"
+    ## type is the windows equivalent of cat
+    $CERT_PASSWORD = $( type ${CERT_DIRECTORY}cert-password.txt )
+    $CERT_PFX = "${CERT_DIRECTORY}github.com-pancakeslp.pfx"
 
-  if(![System.IO.File]::Exists($FILE_NAME)) {
-    Write-Error "file $FILE_NAME missing!"
-    exit 1
-  }
+    if (![System.IO.File]::Exists($FILE_NAME)) {
+        Write-Error "file $FILE_NAME missing!"
+        exit 1
+    }
 
-  ## if something isnt going right try /debug arg
-  signtool.exe sign                       `
-      /a                                  `
-      /f ${CERT_PFX}                      `
-      /p ${CERT_PASSWORD}                 `
-      /fd sha256                          `
-      /tr http://timestamp.digicert.com   `
-      /td sha256                          `
-      $FILE_NAME
+    ## if something isnt going right try /debug arg
+    signtool.exe sign                       `
+        /a                                  `
+        /f ${CERT_PFX}                      `
+        /p ${CERT_PASSWORD}                 `
+        /fd sha256                          `
+        /tr http://timestamp.digicert.com   `
+        /td sha256                          `
+        $FILE_NAME
 
-  error-on-bad-return-code
+    error-on-bad-return-code
 }
 
 
@@ -478,35 +483,11 @@ function sign-installer-exe {
     echo ""
     echo "@@@ sign-installer-exe running"
 
-##TODO pick one
+    ##TODO pick one
     manually-sign-file  $DIRECTORY_RELEASE\application-setup.exe
     manually-sign-file  $GENERATED_INSTALLER_PATH\application-setup.exe
 
     echo "@@@ sign-installer-exe ran"
-}
-
-function squirrel {
-  echo ""
-  echo "squirrel-ing package ..."
-
-  ##TODO do this for EVERY path
-  error-if-path-does-not-exist $NUGET_PACKAGE_PATH
-
-  $SQUIRREL_PATH="$NUGET_PACKAGE_PATH\squirrel.windows\1.9.1"
-
-  $COMMAND=" ${SQUIRREL_PATH}\tools\Squirrel.exe  --releasify \`"PS4KeyboardAndMouseAdapter.${VERSION}.nupkg\`"  --releaseDir $GENERATED_INSTALLER_PATH "
-
-  powershell.exe -ExecutionPolicy Bypass -Command "$COMMAND | Write-Output"
-  error-on-bad-return-code
-
-  ## squirrel makes an MSI
-  ## but the MSI seems to do nothing, so lets delete it
-  remove $GENERATED_INSTALLER_PATH\setup.msi
-
-  ## move setup.exe as we have two setup files (one a exe one a zip)
-  Move-Item -Path $GENERATED_INSTALLER_PATH\setup.exe -Destination $GENERATED_INSTALLER_PATH\application-setup.exe
-
-  echo "squirrel-ed package!"
 }
 
 
@@ -535,11 +516,11 @@ function test-vstest {
 
 
 
-  ##manualBuild\NUnit.Console-3.13.0\bin\net35\nunit3-console.exe NunitTests\bin\Release\net461\NunitTests.dll
-  ##if ( $LASTEXITCODE -ne 0) {
-  ##  echo "nunit tests failed"
-  ##  exit $LASTEXITCODE
-  ##}
+    ##manualBuild\NUnit.Console-3.13.0\bin\net35\nunit3-console.exe NunitTests\bin\Release\net461\NunitTests.dll
+    ##if ( $LASTEXITCODE -ne 0) {
+    ##  echo "nunit tests failed"
+    ##  exit $LASTEXITCODE
+    ##}
 
     echo "@@@ test-vstest ran"
 }
@@ -548,37 +529,34 @@ function test-vstest {
 function update-assembly-info {
     manualBuild\c-sharp-assembly-info-util\AssemblyInfoUtil.exe -set:$VERSION "$PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\Properties\AssemblyInfo.cs"
 
-  if ( $LASTEXITCODE -ne 0) {
-    echo "AssemblyInfoUtil.ex failed"
-    exit $LASTEXITCODE
-  }
+    if ( $LASTEXITCODE -ne 0) {
+        echo "AssemblyInfoUtil.ex failed"
+        exit $LASTEXITCODE
+    }
 }
 
 
-function     validate-xaml-xmllint{
+function validate-xaml-xmllint {
     echo ""
     echo "@@@ validate-xaml-xmllint  running"
 
-  ## here we are using xmllint, which is provided by libxml
-  ## if you need to install it, use the chocolatey command
-  ##```
-  ##  choco install xsltproc
-  ##```
-  ## if you dont know chocolatey, then see https://chocolatey.org/
-
-
-
     $files = Get-ChildItem -recurse *.xaml | where { !$_.PSIsContainer }
 
-  foreach ($file in $files) {
+    foreach ($file in $files) {
 
-    xmllint.exe $file.FullName  --noout
+        ## here we are using xmllint, which is provided by libxml
+        ## if you need to install it, use the chocolatey command
+        ##```
+        ##  choco install xsltproc
+        ##```
+        ## if you dont know chocolatey, then see https://chocolatey.org/
+        xmllint.exe $file.FullName  --noout
 
-    ## if you get a negative exit coder assume the binary is either corrupted or missing DLLs
-    if ( $LASTEXITCODE -ne 0) {
-      echo "ERROR - xmllint exit code '$LASTEXITCODE' for file '$file'"
-      exit $LASTEXITCODE 
-    }
+        ## if you get a negative exit coder assume the binary is either corrupted or missing DLLs
+        if ( $LASTEXITCODE -ne 0) {
+            echo "ERROR - xmllint exit code '$LASTEXITCODE' for file '$file'"
+            exit $LASTEXITCODE 
+        }
 
     }
 
