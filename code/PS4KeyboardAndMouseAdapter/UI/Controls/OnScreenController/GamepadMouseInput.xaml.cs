@@ -1,18 +1,14 @@
-﻿using AdonisUI;
-using Pizza.KeyboardAndMouseAdapter.Backend.Config;
+using AdonisUI;
 using Serilog;
 using System;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using Button = System.Windows.Controls.Button;
-using Keyboard = SFML.Window.Keyboard;
-using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 
-namespace Pizza.KeyboardAndMouseAdapter.UI.Controls
+namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.OnScreenController
 {
-    public partial class GamepadMappingController : UserControl
+    public partial class GamepadMouseInput : UserControl
     {
         private Button lastClickedButton;
 
@@ -25,12 +21,10 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls
         private readonly Uri uriMouseRightDark;
         private readonly Uri uriMouseRightLight;
 
-        public GamepadMappingController()
+        public GamepadMouseInput()
         {
-            Log.Debug("GamepadMappingController constructor IN");
+            Log.Debug("GamepadMouseInput constructor IN");
             InitializeComponent();
-
-            WaitingForKeyPress_Hide();
 
 
             // imageGamepad
@@ -49,7 +43,7 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls
             uriMouseRightDark = new Uri("pack://application:,,,/images/mouse-right-button-dark-theme.svg");
             uriMouseRightLight = new Uri("pack://application:,,,/images/mouse-right-button-light-theme.svg");
 
-            Log.Debug("GamepadMappingController constructor OUT");
+            Log.Debug("GamepadMouseInput constructor OUT");
         }
 
         public void ChangeScheme(Uri colourScheme)
@@ -81,60 +75,8 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls
         private void Handler_ButtonClicked(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
-            WaitingForKeyPress_Show(button);
+            //TODO
         }
 
-        public void Handler_OnKeyDown(object sender, KeyEventArgs e)
-        {
-            if (lastClickedButton != null && lastClickedButton.Tag != null)
-            {
-                foreach (Keyboard.Key key in Enum.GetValues(typeof(Keyboard.Key)).Cast<Keyboard.Key>())
-                {
-                    if (Keyboard.IsKeyPressed(key))
-                    {
-                        if (key != Keyboard.Key.Escape)
-                        {
-                            VirtualKey vk = (VirtualKey)lastClickedButton.Tag;
-
-                            PhysicalKey valueOld = UserSettings.GetInstance().KeyboardMappings[vk];
-
-                            PhysicalKey valueNew = new PhysicalKey();
-                            valueNew.KeyboardValue = key;
-                            UserSettings.SetMapping(vk, valueOld, valueNew);
-                        }
-
-                        lastClickedButton = null;
-                        ((MainViewModel)DataContext).RefreshData();
-                        WaitingForKeyPress_Hide();
-                    }
-                }
-            }
-        }
-
-        public void WaitingForKeyPress_Show(Button sender)
-        {
-            lastClickedButton = sender;
-
-            WaitForKeyPress.Opacity = 0.7;
-            ImageGamepad.Opacity = UIConstants.LOW_VISIBILITY;
-
-            foreach (Button button in UITools.FindVisualChildren<Button>(this))
-            {
-                button.Opacity = UIConstants.LOW_VISIBILITY;
-                button.IsEnabled = false;
-            }
-        }
-
-        private void WaitingForKeyPress_Hide()
-        {
-            WaitForKeyPress.Opacity = 0;
-            ImageGamepad.Opacity = 1;
-
-            foreach (Button button in UITools.FindVisualChildren<Button>(this))
-            {
-                button.Opacity = 1;
-                button.IsEnabled = true;
-            }
-        }
     }
 }

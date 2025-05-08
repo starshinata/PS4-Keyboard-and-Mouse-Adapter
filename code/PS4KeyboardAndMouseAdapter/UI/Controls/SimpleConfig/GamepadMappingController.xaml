@@ -1,0 +1,325 @@
+﻿<UserControl 
+    x:Class="Pizza.KeyboardAndMouseAdapter.UI.Controls.SimpleConfig.GamepadMappingController"
+
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
+    d:DesignHeight="340"
+    d:DesignWidth="640"
+    mc:Ignorable="d"
+
+    xmlns:config="clr-namespace:Pizza.KeyboardAndMouseAdapter.Backend.Config"
+    xmlns:controls="clr-namespace:Pizza.KeyboardAndMouseAdapter.UI.Controls.SimpleConfig"
+    xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+    >
+
+    <Grid>
+
+        <Grid.Resources>
+            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+                <EventSetter Event="Click" Handler="Handler_ButtonClicked" />
+            </Style>
+        </Grid.Resources>
+
+        <StackPanel 
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Panel.ZIndex="99"
+            x:Name="WaitForKeyPress" >
+
+            <TextBlock 
+                FontFamily="consolas"
+                FontSize="30"
+                FontWeight="Bold" 
+                Foreground="Crimson" 
+                HorizontalAlignment="Center" 
+                Text="Press any Keyboard key to map" 
+                VerticalAlignment="Center" 
+                />
+
+            <TextBlock 
+                FontFamily="consolas"
+                FontSize="20"
+                FontWeight="Bold" 
+                Foreground="Crimson" 
+                HorizontalAlignment="Center" 
+                Text="or Escape to cancel" 
+                VerticalAlignment="Center" 
+                />
+
+        </StackPanel>
+
+        <Grid 
+            Grid.Column="1"
+            Grid.Row="1"
+            Visibility="Visible">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="8*" />
+                <ColumnDefinition Width="28px" />
+                <ColumnDefinition Width="28px" />
+                <ColumnDefinition Width="28px" />
+                <ColumnDefinition Width="28px" />
+
+
+                <ColumnDefinition Width="2*" />
+                <!-- col 5 aka middle and image -->
+                <ColumnDefinition Width="410"/>
+                <ColumnDefinition Width="2*" />
+
+                <ColumnDefinition Width="28px" />
+                <ColumnDefinition Width="28px" />
+                <ColumnDefinition Width="28px" />
+                <ColumnDefinition Width="28px" />
+                <ColumnDefinition Width="8*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15"/>
+
+                <!-- button row (share) -->
+                <RowDefinition Height="25px" />
+
+                <RowDefinition Height="5px" />
+                <RowDefinition Height="14"/>
+
+                <!-- button row (L2) -->
+                <RowDefinition Height="25" />
+                <RowDefinition Height="8" />
+                <!-- button row (L1) -->
+                <RowDefinition Height="25px" />
+
+                <RowDefinition Height="18px" />
+
+                <!-- button rows (D pad) -->
+                <RowDefinition Height="25px" />
+                <RowDefinition Height="25px" />
+                <RowDefinition Height="25px" />
+                <RowDefinition Height="25px" />
+                <RowDefinition Height="8px" />
+
+                <!-- button rows (top of analogue stick) -->
+                <RowDefinition Height="25px" />
+                <RowDefinition Height="25px" />
+                <RowDefinition Height="25px" />
+                <RowDefinition Height="25px" />
+
+                <RowDefinition Height="10px" />
+                <RowDefinition Height="15px" />
+                <RowDefinition Height="25px" />
+
+            </Grid.RowDefinitions>
+
+            <!-- RowSpan 999 means stretch all -->
+            <StackPanel
+                Grid.RowSpan="999"
+                Grid.Column="6"
+                Grid.ColumnSpan="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Width="410">
+
+                <Image
+                    Margin="0,10"
+                    Stretch="Uniform"
+                    x:Name="ImageGamepad"
+                    >
+                    <Image.Source>
+                        <BitmapImage 
+                            UriSource="pack://application:,,,/images/ds4-dark-theme.png"
+                            />
+                    </Image.Source>
+                </Image>
+            </StackPanel>
+
+            <!-- LEFT half of controller -->
+            <Button 
+                Grid.Row="4"
+                Grid.RowSpan="1"
+                Grid.Column="2"
+                Grid.ColumnSpan="3"
+                Tag="{x:Static config:VirtualKey.L2}"
+                Content="{Binding Path=UserSettings.KeyboardMappings[(config:VirtualKey)L2], UpdateSourceTrigger=PropertyChanged}"
+                Visibility="Visible"
+                />
+
+            <svgc:SvgViewbox
+                Grid.Row="4"
+                Grid.RowSpan="1"
+                Grid.Column="1"
+                Grid.ColumnSpan="1"
+                Source="pack://application:,,,/images/mouse-right-button-dark-theme.svg"
+                Stretch="Uniform"
+                x:Name="ImageMouseRight"
+                />
+
+            <Button 
+                Grid.Row="6"
+                Grid.Column="2"
+                Grid.ColumnSpan="3"
+                Tag="{x:Static config:VirtualKey.L1}"
+                Content="{Binding Path=UserSettings.KeyboardMappings[(config:VirtualKey)L1], UpdateSourceTrigger=PropertyChanged}"
+                Visibility="Visible"
+                />
+
+            <Button 
+                Grid.Row="8"
+                Grid.RowSpan="1"
+                Grid.Column="2"
+                Grid.ColumnSpan="3"
+                Tag="{x:Static config:VirtualKey.DPadUp}"
+                Content="{Binding Path=UserSettings.KeyboardMappings[(config:VirtualKey)DPadUp], UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                Visibility="Visible"
+                />
+
+            <Button 
+                Grid.Row="9"
+                Grid.RowSpan="1"
+                Grid.Column="2"
+                Grid.ColumnSpan="3"
+                Tag="{x:Static config:VirtualKey.DPadLeft}"
+                Content="{Binding Path=UserSettings.KeyboardMappings[(config:VirtualKey)DPadLeft], UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                Visibility="Visible"
+                />
+
+            <Button 
+                Grid.Row="10"
+                Grid.Column="2"
+                Grid.ColumnSpan="3"
+                Tag="{x:Static config:VirtualKey.DPadDown}"
+                Content="{Binding Path=UserSettings.KeyboardMappings[(config:VirtualKey)DPadDown], UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                Visibility="Visible"/>
+
+            <Button
+                Grid.Row="11"
+                Grid.RowSpan="1"
+                Grid.Column="2"
+                Grid.ColumnSpan="3"
+                Tag="{x:Static config:VirtualKey.DPadRight}"
+                Content="{Binding Path=UserSettings.KeyboardMappings[(config:VirtualKey)DPadRight], UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                Visibility="Visible"
+                />
+
+            <!-- LEFT STICK -->
+            <controls:AnalogStickBindings 
+                Grid.Row="13"
+                Grid.RowSpan="4"
+                Grid.Column="2"
+                Grid.ColumnSpan="3"
+                StickContext="LEFT"/>
+
+            <!-- MIDDLE of controller -->
+            <Button 
+                Grid.Row="1"
+                Grid.Column="2"
+                Grid.ColumnSpan="3"
+                Tag="{x:Static config:VirtualKey.Share}"
+                Content="{Binding Path=UserSettings.KeyboardMappings[(config:VirtualKey)Share], UpdateSourceTrigger=PropertyChanged}"
+                Visibility="Visible"
+                />
+
+            <!-- REMINDER make sure this button doesnt overlap with the Presss any key Text -->
+            <Button
+                Grid.Row="4"
+                Grid.RowSpan="2"
+                Grid.Column="6"
+                Grid.ColumnSpan="1"
+                Margin="0,10,0,0"
+                Tag="{x:Static config:VirtualKey.TouchButton}"
+                Content="{Binding Path=UserSettings.KeyboardMappings[(config:VirtualKey)TouchButton],  UpdateSourceTrigger=PropertyChanged}"
+                MaxWidth="100px"
+                Visibility="Visible"
+                />
+
+            <Button 
+                Grid.Row="1"
+                Grid.Column="8"
+                Grid.ColumnSpan="3"
+                Tag="{x:Static config:VirtualKey.Options}"
+                Content="{Binding Path=UserSettings.KeyboardMappings[(config:VirtualKey)Options], UpdateSourceTrigger=PropertyChanged}"
+                Visibility="Visible"
+                />
+
+            <Button 
+                Grid.Row="15"
+                Grid.Column="6"
+                Tag="{x:Static config:VirtualKey.PlaystationButton}"
+                Content="{Binding Path=UserSettings.KeyboardMappings[(config:VirtualKey)PlaystationButton], UpdateSourceTrigger=PropertyChanged}"
+                MaxWidth="100px"
+                Visibility="Visible"
+                />
+
+            <!-- RIGHT half of controller -->
+            <Button 
+                Grid.Row="4" 
+                Grid.Column="8"
+                Grid.ColumnSpan="3"
+                Tag="{x:Static config:VirtualKey.R2}"
+                Content="{Binding Path=UserSettings.KeyboardMappings[(config:VirtualKey)R2]}"
+                Visibility="Visible"
+                />
+
+            <svgc:SvgViewbox
+                Grid.Row="4"
+                Grid.RowSpan="1" 
+                Grid.Column="11"
+                Source="pack://application:,,,/images/mouse-left-button-dark-theme.svg"
+                Stretch="Uniform"
+                x:Name="ImageMouseLeft"
+                />
+
+            <Button
+                Grid.Row="6"
+                Grid.Column="8"
+                Grid.ColumnSpan="3"
+                Tag="{x:Static config:VirtualKey.R1}"
+                Content="{Binding Path=UserSettings.KeyboardMappings[(config:VirtualKey)R1]}"
+                Visibility="Visible"/>
+
+            <Button 
+                Grid.Row="8"
+                Grid.Column="8"
+                Grid.ColumnSpan="3"
+                Tag="{x:Static config:VirtualKey.Triangle}"
+                Content="{Binding Path=UserSettings.KeyboardMappings[(config:VirtualKey)Triangle]}" 
+                />
+
+            <Button 
+                Grid.Row="9" 
+                Grid.Column="8"
+                Grid.ColumnSpan="3"
+                Tag="{x:Static config:VirtualKey.Circle}"
+                Content="{Binding Path=UserSettings.KeyboardMappings[(config:VirtualKey)Circle]}"
+                />
+
+            <Button 
+                Grid.Row="10" 
+                Grid.Column="8"
+                Grid.ColumnSpan="3"
+                Tag="{x:Static config:VirtualKey.Square}"
+                Content="{Binding Path=UserSettings.KeyboardMappings[(config:VirtualKey)Square]}"
+                />
+
+            <Button 
+                Grid.Row="11" 
+                Grid.Column="8"
+                Grid.ColumnSpan="3"
+                Tag="{x:Static config:VirtualKey.Cross}"
+                Content="{Binding Path=UserSettings.KeyboardMappings[(config:VirtualKey)Cross]}"
+                />
+
+            <!-- RIGHT STICK -->
+            <controls:AnalogStickBindings
+                Grid.Row="13"
+                Grid.RowSpan="4"
+                Grid.Column="8"
+                Grid.ColumnSpan="3"
+                StickContext="RIGHT"
+                />
+
+        </Grid>
+    </Grid>
+</UserControl>

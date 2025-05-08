@@ -1,6 +1,8 @@
-﻿using Pizza.KeyboardAndMouseAdapter.Backend.Vigem;
+﻿using Pizza.KeyboardAndMouseAdapter.Backend.ControllerState;
+using Pizza.KeyboardAndMouseAdapter.Backend.Vigem;
 using PS4RemotePlayInjection;
 using Serilog;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 
@@ -27,7 +29,26 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 
         public bool EnableMouseInput { get; set; } = false;
 
+        // TODO do we still want this setting
+        public bool EnableOnscreenSticks { get; set; } = true;
+
+        // If not null, you will have a Point
+        // in Point you have two Coordinates
+        // Each coordinates is a range between -1 and 1
+        // 
+        // think of
+        // -1 as 100% Left
+        // 1 as 100% Right
+        // -1 as 100% Up
+        // 1 as 100% Down
+        private NullablePoint LeftStick = null;
+
         private LogManager logManager = null;
+
+        public bool OnscreenSticksClickRequired { get; set; } = true;
+
+        // see LeftStick for documentation
+        private NullablePoint RightStick = null;
 
         private VigemInternals vigemInternals = null;
 
@@ -59,6 +80,34 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
             Log.Error("InstanceSettings.SetRemotePlayProcess (UtilityData.RemotePlayProcess) get c " + UtilityData.pid);
             Log.Error("InstanceSettings.SetRemotePlayProcess (UtilityData.RemotePlayProcess) get d " + Process.GetCurrentProcess());
             Log.Error("InstanceSettings.SetRemotePlayProcess (UtilityData.RemotePlayProcess) get d " + Process.GetCurrentProcess().Id);
+        }
+
+
+        public NullablePoint GetLeftStick()
+        {
+            return LeftStick;
+        }
+
+        public NullablePoint GetRightStick()
+        {
+            return RightStick;
+        }
+
+        public void SetStick(string label, NullablePoint stick)
+        {
+            if (string.Equals("LEFT", label, StringComparison.OrdinalIgnoreCase))
+            {
+                LeftStick = stick;
+            }
+            else if (string.Equals("RIGHT", label, StringComparison.OrdinalIgnoreCase))
+            {
+                RightStick = stick;
+            }
+            else
+            {
+                Log.Error("InstanceSettings.SetStick() recieved label " + label);
+                throw new Exception("UNKNOWN STICK");
+            }
         }
 
         public VigemInternals GetVigemInternals()
