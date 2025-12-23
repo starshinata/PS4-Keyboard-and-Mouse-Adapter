@@ -238,11 +238,8 @@ function generate-artefact-release {
         echo ""
 
         copy-non-cs-project-files
-        echo ""
         make-installer-common
         sign-executables
-
-        echo ""
 
         ## pancakeslp 2023.04.08
         ## if you run `make-installer-zip` then `make-installer-exe` zip size is about 18mb
@@ -252,8 +249,6 @@ function generate-artefact-release {
 
         make-installer-exe
         make-installer-zip
-
-
 
         echo "@@@ generate-artefact-release ran"
 
@@ -550,7 +545,12 @@ function validate-xaml-xmllint {
         ##```
         ##  choco install xsltproc
         ##```
-        ## if you dont know chocolatey, then see https://chocolatey.org/
+        ##
+        ## if you dont know chocolatey,
+        ## then see https://chocolatey.org/
+        ##
+        ## if you dont know xmllint,
+        ## then see https://gnome.pages.gitlab.gnome.org/libxml2/xmllint.html
         xmllint.exe $file.FullName  --noout
 
         ## if you get a negative exit coder assume the binary is either corrupted or missing DLLs
