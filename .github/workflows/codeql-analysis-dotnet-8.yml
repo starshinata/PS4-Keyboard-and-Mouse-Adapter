@@ -6,10 +6,10 @@ name: "CodeQL"
 
 on:
   push:
-    branches: [ master, develop-pancakeslp ]
+    branches: [ master.move-to-dotnet-8 ]
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: [ master, develop-pancakeslp ]
+    branches: [ master.move-to-dotnet-8 ]
   schedule:
     # Run at 07:37 AM, every Friday
     - cron: '37 7 * * 5'
@@ -30,12 +30,7 @@ jobs:
     ## For a list of available runner types, refer to
     ## https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
     ## TLDR choice of ubuntu-latest, windows-latest, and macos-latest
-    ## 2023.04.16  "windows-latest" yields "Windows Server 2022"
-    ## it seems we have some dotnet framework 4.6.1 dependencies
-    ## and Windows Server 2022 doesnt include 4.6.1 dependencies
-    ## TODO once we have removed these dependencies we should retry windows-latest
-    runs-on: windows-2019
-    #runs-on: windows-latest
+    runs-on: windows-latest
 
     strategy:
       fail-fast: true

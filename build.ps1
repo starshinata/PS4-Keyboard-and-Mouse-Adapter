@@ -221,6 +221,10 @@ function dependencies-nuget {
 }
 
 
+## see top of file for this declaration
+## function error-if-path-does-not-exist {}
+
+
 function error-on-bad-return-code {
     if ($LASTEXITCODE -ne 0) {
         echo "LASTEXITCODE '$LASTEXITCODE'"
@@ -267,10 +271,6 @@ function generate-artefact-release {
 
     echo ""
 }
-
-
-## see top of file
-## function error-if-path-does-not-exist {
 
 
 function main_exec {
