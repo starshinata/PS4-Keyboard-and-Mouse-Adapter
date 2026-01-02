@@ -51,7 +51,10 @@ function error-if-path-does-not-exist {
 
 ## might need configuring
 $CERT_DIRECTORY = "E:\workspace\##certificates\github.com-pancakeslp\"
-error-if-path-does-not-exist $CERT_DIRECTORY
+if ( -Not $env:CI ) {
+    error-if-path-does-not-exist $CERT_DIRECTORY
+}
+
 
 #$MS_BUILD_CONFIG="Debug"
 $MS_BUILD_CONFIG = "Release"

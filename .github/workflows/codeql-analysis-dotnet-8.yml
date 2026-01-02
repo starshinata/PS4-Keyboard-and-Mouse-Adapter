@@ -7,9 +7,6 @@ name: "CodeQL"
 on:
   push:
     branches: [ master.move-to-dotnet-8 ]
-  pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [ master.move-to-dotnet-8 ]
   schedule:
     # Run at 07:37 AM, every Friday
     - cron: '37 7 * * 5'
