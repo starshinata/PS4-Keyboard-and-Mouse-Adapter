@@ -35,6 +35,15 @@ $ErrorActionPreference = "Stop"
 ################################
 ################################
 
+## print env variables - before we manip
+echo "print ENV (1/2)"
+dir env:
+echo ""
+
+################################
+################################
+
+
 
 ## at top as you must define a function before calling it
 function error-if-path-does-not-exist {
@@ -128,7 +137,8 @@ $BIN_DIRECTORY_UNIT_TESTS = "$PROJECT_DIRECTORY_UNIT_TESTS\bin\$MS_BUILD_CONFIG\
 ################################
 ################################
 
-## print env variables
+## print env variables - after manipulating
+echo "print ENV (2/2)"
 dir env:
 echo ""
 

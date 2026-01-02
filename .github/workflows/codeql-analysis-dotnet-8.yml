@@ -2,7 +2,7 @@
 ## but was then customised for this specific project
 ##
 
-name: "CodeQL"
+name: "pipeline dot net 8.x"
 
 on:
   push:
@@ -34,10 +34,7 @@ jobs:
       matrix:
         language: [ 'csharp' ]
 
-
     steps:
-    - name: echo ENV
-      run: "powershell dir env:"
 
     - name: Checkout repository
       uses: actions/checkout@v4

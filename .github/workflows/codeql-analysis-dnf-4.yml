@@ -2,13 +2,10 @@
 ## but was then customised for this specific project
 ##
 
-name: "CodeQL"
+name: "pipeline dot net framework 4.x"
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    # The branches below must be a subset of the branches above
     branches: [ master ]
   schedule:
     # Run at 07:37 AM, every Friday
