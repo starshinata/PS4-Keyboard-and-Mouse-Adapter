@@ -39,6 +39,8 @@ jobs:
 
 
     steps:
+    - name: echo ENV
+      run: "powershell dir env:"
 
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -48,7 +50,7 @@ jobs:
     - name: Install .NET Core
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: 8.0.x
 
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
