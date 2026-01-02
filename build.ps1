@@ -51,10 +51,6 @@ function error-if-path-does-not-exist {
 
 ## might need configuring
 $CERT_DIRECTORY = "E:\workspace\##certificates\github.com-pancakeslp\"
-if ( -Not $env:CI ) {
-    error-if-path-does-not-exist $CERT_DIRECTORY
-}
-
 
 #$MS_BUILD_CONFIG="Debug"
 $MS_BUILD_CONFIG = "Release"
@@ -64,7 +60,6 @@ $VERSION = "4.0.0"
 ################################
 ################################
 $VISUAL_STUDIO_PATH = "C:\Program Files\Microsoft Visual Studio\2022\Community\"
-error-if-path-does-not-exist $VISUAL_STUDIO_PATH
 
 ## Path for MSBuild.exe
 $env:Path += ";$VISUAL_STUDIO_PATH\MSBuild\Current\Bin\amd64\"
@@ -77,6 +72,17 @@ $env:Path += ";$VISUAL_STUDIO_PATH\Common7\IDE\CommonExtensions\Microsoft\TestWi
 
 ################################
 ################################
+
+if ( -Not $env:CI ) {
+    error-if-path-does-not-exist $CERT_DIRECTORY
+
+    error-if-path-does-not-exist $VISUAL_STUDIO_PATH
+}
+
+################################
+################################
+
+
 
 ## get location of script
 $scriptPath = $MyInvocation.MyCommand.Path
