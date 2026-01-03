@@ -32,7 +32,7 @@ namespace Pizza.Common
             // * in theory max disk space should be 3 gb at worst (but that is unlikely unless we have very verbose logging)
             Logger log = new LoggerConfiguration()
                 .MinimumLevel.ControlledBy(levelSwitch)
-                .WriteTo.Console(outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} {Level:u3}] {Message:lj}{NewLine}{Exception}")
+                .WriteTo.Console(outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}")
                 .WriteTo.File(LogUtility.GetLogFile(),
                 fileSizeLimitBytes: THREE_HUNDRED_MB_AS_BYTES,
                     retainedFileCountLimit: 10,

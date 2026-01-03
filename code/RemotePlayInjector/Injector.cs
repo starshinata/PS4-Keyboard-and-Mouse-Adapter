@@ -35,15 +35,17 @@ namespace Pizza.RemotePlayInjector
         {
             Log.Information("REMINDER");
             Log.Information("Injector.Inject IS NOT CALLING ThreadRpcUpdateListener");
+
+            Log.Information("REMINDER");
+            Log.Information("Injector.Inject IS NOT CALLING ThreadRpcUpdateListener");
+
             Process remotePlayProcess = Process.GetProcessById(processId);
-
-
             if (remotePlayProcess == null)
             {
                 throw new Exception("Injector.Inject remotePlayProcess is null");
             }
 
-            Log.Logger.Information("Injector.Inject {emulationMode:{0}||{1}, processName:{2}",
+            Log.Information("Injector.Inject {emulationMode:{0}||{1}, processName:{2}",
                     emulationMode,
                     EmulationConstants.ToString(emulationMode),
                     remotePlayProcess.ProcessName);
@@ -52,11 +54,10 @@ namespace Pizza.RemotePlayInjector
 
             // Full path to our dll file
             string injectionLibrary = getDllPath();
+Log.Information("injectionLibrary: " + injectionLibrary);
 
             try
             {
-
-
                 Log.Debug("Injector.Inject RemoteHooking.Inject start");
 
                 //TODO needed?
@@ -86,6 +87,15 @@ namespace Pizza.RemotePlayInjector
             string dllToInject = "RemotePlayInjected.dll";
             var applicationPath = PathUtil.GetApplicationPath();
             Log.Information("applicationPath: " + applicationPath);
+
+//TODO hardcoded for today
+// but long term we set this DLL to be copied into the bundle folder
+//     <Content Include="C:\Users\$(USERNAME)\.nuget\packages\csfml\2.5.0\runtimes\win-x86\native\csfml-Window.dll">
+//         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+//     </Content>
+
+//todo remove test line
+//return @"E:\workspace\PS4-Keyboard-and-Mouse-Adapter\master.move-to-dotnet-8.2025\code\PS4RemotePlayInjection\bin\Release\PS4RemotePlayInjection.dll";
 
             if (applicationPath.Contains("E:\\workspace\\PS4-Keyboard-and-Mouse-Adapter\\"))
             {

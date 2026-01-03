@@ -2,13 +2,9 @@
 using Pizza.Common;
 using Pizza.RemotePlayInjector;
 using Serilog;
-using System;
 
 namespace RemotePlayInjector
 {
-
-
-
     public class RunMe
     {
         static void Main(string[] args)
@@ -20,8 +16,9 @@ namespace RemotePlayInjector
                .WithParsed<Options>(o =>
                {
                    Log.Information("detected args");
-                   Log.Information("EmulationMode " + o.EmulationMode);
-                   Log.Information("ProcessId " + o.ProcessId);
+                   Log.Information("EmulationMode: " + o.EmulationMode);
+                   Log.Information("ProcessId: " + o.ProcessId);
+
                    if (o.EmulationMode <= 0 || o.EmulationMode > 3)
                    {
                        Log.Information("EmulationMode out of range");

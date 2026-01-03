@@ -9,8 +9,8 @@ namespace Pizza.Common
         {
             Log.Error("kmaMessage:" + kmaMessage);
             Log.Error("errorMessage: " + e.Message);
-            Log.Error(e.GetType().ToString());
-            Log.Error(e.StackTrace);
+            Log.Error("type: " + e.GetType().ToString());
+            Log.Error("stackTrace:" +e.StackTrace);
         }
     }
 }

@@ -6,6 +6,14 @@ namespace PS4RemotePlayInjection
 {
     public class EntryPoint
     {
+
+    //
+    //
+    // 2026
+    // this is not the entryPoint.cs you are looking for
+    // try `code/RemotePlayInjected/EntryPoint.cs`
+    //
+    //
         static EntryPoint()
         {
             Console.WriteLine("EntryPoint static constructor");
