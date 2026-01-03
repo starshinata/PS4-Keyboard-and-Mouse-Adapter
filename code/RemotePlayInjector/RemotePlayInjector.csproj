@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Injector.cs" />
+    <Compile Include="Options.cs" />
     <Compile Include="RunMe.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -108,6 +109,7 @@
     <Content Include="C:\Users\$(USERNAME)\.nuget\packages\easyhook\2.7.7097\content\net40\EasyLoad64.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <PackageReference Include="CommandLineParser" Version="2.9.1" />
     <PackageReference Include="EasyHook">
       <Version>2.7.7097</Version>
     </PackageReference>

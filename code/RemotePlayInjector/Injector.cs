@@ -31,23 +31,22 @@ namespace Pizza.RemotePlayInjector
         public static InterceptionDelegate Callback { get; set; }
 
 
-        public static void Inject(int emulationMode, Process remotePlayPlayProccess)
+        public static void Inject(int emulationMode, int processId)
         {
-            //TODO do i need to call logmanger.SetupLogging
-
+            Log.Information("REMINDER");
             Log.Information("Injector.Inject IS NOT CALLING ThreadRpcUpdateListener");
+            Process remotePlayProcess = Process.GetProcessById(processId);
 
 
-
-            if (remotePlayPlayProccess == null)
+            if (remotePlayProcess == null)
             {
-                throw new Exception("Injector.Inject remotePlayPlayProccess is null");
+                throw new Exception("Injector.Inject remotePlayProcess is null");
             }
 
             Log.Logger.Information("Injector.Inject {emulationMode:{0}||{1}, processName:{2}",
                     emulationMode,
                     EmulationConstants.ToString(emulationMode),
-                    remotePlayPlayProccess.ProcessName);
+                    remotePlayProcess.ProcessName);
 
             EmulationMode = emulationMode;
 
@@ -64,7 +63,7 @@ namespace Pizza.RemotePlayInjector
                 var _channelName = "PS4KMA--" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
 
                 RemoteHooking.Inject(
-                     remotePlayPlayProccess.Id, // ID of process to inject into
+                     remotePlayProcess.Id, // ID of process to inject into
                      InjectionOptions.Default,
                      // if not using GAC allow assembly without strong name
                      injectionLibrary, // 32-bit version (the same because AnyCPU)

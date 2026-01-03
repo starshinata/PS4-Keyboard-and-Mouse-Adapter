@@ -22,18 +22,16 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
             {
                 var remotePlayProcess = InstanceSettings.GetInstance().GetRemotePlayProcess();
 
-// TODO do detection
-// TODO rename project
-// (a) RemotePlayInjectior to
-// (b) RemotePlayInjector
+                // TODO rename project
+                // (a) RemotePlayInjectior to
+                // (b) RemotePlayInjector
                 string exe = "RemotePlayInjectior.exe";
 
-                //TODO processName -> PID
-                string processArguments = " --emulationMode " + ApplicationSettings.GetInstance().EmulationMode +
-                    " --processName " + remotePlayProcess.ProcessName;
+                 string processArguments = " --emulationMode " + ApplicationSettings.GetInstance().EmulationMode +
+                " --processId " + remotePlayProcess.Id;
 
-Log.Error("FileName:" + exe);
-Log.Error("Arguments:" + processArguments);
+                Log.Error("FileName:" + exe);
+                Log.Error("Arguments:" + processArguments);
 
                 Process injectorProcess = new Process
                 {
@@ -48,13 +46,13 @@ Log.Error("Arguments:" + processArguments);
                     }
                 };
 
-                 injectorProcess.Start();
+                injectorProcess.Start();
 
-       //* Read the output (or the error)
-       string output = injectorProcess.StandardOutput.ReadToEnd();
-       Log.Information(output);
-       string err = injectorProcess.StandardError.ReadToEnd();
-Log.Error(err);
+                //* Read the output (or the error)
+                string output = injectorProcess.StandardOutput.ReadToEnd();
+                Log.Information(output);
+                string err = injectorProcess.StandardError.ReadToEnd();
+                Log.Error(err);
 
                 injectorProcess.WaitForExit();
 
