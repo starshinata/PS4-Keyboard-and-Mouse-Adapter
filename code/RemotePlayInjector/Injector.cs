@@ -33,6 +33,8 @@ namespace Pizza.RemotePlayInjector
 
         public static void Inject(int emulationMode, Process remotePlayPlayProccess)
         {
+            //TODO do i need to call logmanger.SetupLogging
+
             Log.Information("Injector.Inject IS NOT CALLING ThreadRpcUpdateListener");
 
 

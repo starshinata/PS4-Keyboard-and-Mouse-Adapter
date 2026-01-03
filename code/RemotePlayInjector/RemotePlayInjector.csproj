@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{161EA7FA-0DA2-4B6F-877C-E01013DABC24}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PS4RemotePlayInjection-v4.7</RootNamespace>
     <AssemblyName>RemotePlayInjectior</AssemblyName>
@@ -62,6 +62,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Clean|x64'">
     <OutputPath>bin\x64\Clean\</OutputPath>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>RemotePlayInjector.RunMe</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -75,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Injector.cs" />
+    <Compile Include="RunMe.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

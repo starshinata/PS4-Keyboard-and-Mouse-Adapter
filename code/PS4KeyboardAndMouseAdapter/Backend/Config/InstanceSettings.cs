@@ -1,4 +1,5 @@
-﻿using Pizza.Common.Gamepad;
+﻿using Pizza.Common;
+using Pizza.Common.Gamepad;
 using Pizza.KeyboardAndMouseAdapter.Backend.Vigem;
 using Serilog;
 using System.ComponentModel;

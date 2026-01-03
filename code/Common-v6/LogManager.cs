@@ -2,7 +2,7 @@
 using Serilog.Core;
 using Serilog.Events;
 
-namespace Pizza.KeyboardAndMouseAdapter.Backend
+namespace Pizza.Common
 {
     public class LogManager
     {

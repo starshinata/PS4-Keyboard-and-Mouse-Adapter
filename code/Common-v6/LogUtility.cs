@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.IO;
 
-namespace Pizza.KeyboardAndMouseAdapter.Backend
+namespace Pizza.Common
 {
     public class LogUtility
     {

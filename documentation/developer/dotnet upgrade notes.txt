@@ -1,4 +1,4 @@
-## dot net framework 4 to dot net 6
+# dot net framework 4 to dot net 6 (now 8)
  
 There was a "dotnet Porting assistant" its now deprecated in place of "dotnet upgrade assistant"
 
@@ -18,6 +18,8 @@ run the upgrade assistant (but do it from powershell outside of Visual Studio un
 upgrade-assistant upgrade <Path to csproj or sln to upgrade>
 ```
 
+
+---
 
 
 ## IPC and DLL injection
@@ -43,13 +45,12 @@ both projects dont show (or atleast it isnt obvious) how to communicate with the
 later pulled System.Runtime.Remoting.dll, from ".Net Framework 4.8"
 and added it as "code\PS4RemotePlayInjection\dnf_4.8.System.Runtime.Remoting.dll"
 
-
 ### 2023.06.11
 Probably important to understand injecting a DLL doesn't need IPC
 and IPC stands for Inter Process Communication 
 And this is where pancakes' brain has been failing him, as he was thinking one comes with the other
 
-Back to the Micrsoft advice
+Back to the Microsoft advice
 https://learn.microsoft.com/en-us/dotnet/core/porting/net-framework-tech-unavailable#remoting
 PIPES ... but pipes are normally 1 way
 https://learn.microsoft.com/en-us/dotnet/api/system.io.pipes.namedpipeclientstream?view=net-6.0
@@ -58,7 +59,7 @@ So thinking some sort of RPC (cause i dont want to manually do marshalling from 
 https://github.com/grpc/grpc-dotnet
 https://github.com/meteatamel/grpc-samples-dotnet
 
-### 2024.08.25 
+### 2024.08.25
 but we were still using EasyHook for DLL injection, which is constrained to dotnet framework 4.8
 Now trying https://github.com/nefarius/Injector/
 
@@ -73,11 +74,17 @@ and let the DNF 4.8 code do teh easy hooking and the injection
 both codebases can talk to each other via IPC
 
 
+---
+
 
 ## Squirrel for dot net
 https://github.com/clowd/Clowd.Squirrel
 
-##Unit tests (1)
+---
+
+## Unit tests
+
+### Unit tests (1)
 made new project using dotnet template (instead of dotnet framework template
 
 various errors
@@ -85,7 +92,7 @@ needed flags for vstext.console.exe
 which is funny because documentation says it will take the latest detected SDK/ dot net version
 
 
-##Unit tests (2)
+### Unit tests (2)
 Exception for missing files
 ```
 ... threw exception:
@@ -107,7 +114,9 @@ the project "UnitTests" was defined twice in path
 
 Extra "..\\" was needed to get to project root
 
-##Unit tests (3)
+---
+
+### Unit tests (3)
 "System.InvalidOperationException: The calling thread must be STA, because many UI components require this."
 
 ERROR
@@ -141,7 +150,7 @@ MSTest required lots of digging
 
 
 
-##Unit tests (4)
+### Unit tests (4)
 Testhost process exited with error: A fatal error was encountered. The library 'hostpolicy.dll' required to execute the application was not found in 'C:\Program Files\dotnet'.
 Failed to run as a self-contained app.
   - The application was run as a self-contained app because 'D:\workspace\PS4-Keyboard-and-Mouse-Adapter\master.move-to-dotnet-6\code\UnitTests\bin\Release\net6.0-windows\testhost.runtimeconfig.json' was not found.
@@ -151,3 +160,14 @@ Failed to run as a self-contained app.
 Test Run Aborted.
 
 remove CSFML.dll and it seems happy
+
+
+---
+
+
+## 2026
+
+### 2026.01.02
+Look at
+* `code/PS4KeyboardAndMouseAdapter/Backend/RemotePlayInjector99.cs`
+* `code/RemotePlayInjector/RunMe.cs`

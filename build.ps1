@@ -269,9 +269,8 @@ function generate-artefact-release {
         ## if you run `make-installer-exe` then `make-installer-zip` zip size is about 70mb
         ## extra size is because it will include nuget stuff
         ## TODO fix this
-
-        make-installer-exe
         make-installer-zip
+        make-installer-exe
 
         echo "@@@ generate-artefact-release ran"
 

@@ -3,6 +3,7 @@ using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using Pizza.KeyboardAndMouseAdapter.Backend.GamepadProcessing;
 using Pizza.KeyboardAndMouseAdapter.Backend.IpcCommunication;
 using Pizza.RemotePlayInjector;
+using Serilog;
 using System;
 using System.Diagnostics;
 using System.Windows;
@@ -21,23 +22,48 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
             {
                 var remotePlayProcess = InstanceSettings.GetInstance().GetRemotePlayProcess();
 
-                string exe = "E:\\workspace\\PS4-Keyboard-and-Mouse-Adapter\\master.move-to-dotnet-8\\code-dnf48\\PS4RemotePlayInjection\\bin\\Debug\\PS4RemotePlayInjection.exe";
+// TODO do detection
+// TODO rename project
+// (a) RemotePlayInjectior to
+// (b) RemotePlayInjector
+                string exe = "RemotePlayInjectior.exe";
 
                 //TODO processName -> PID
                 string processArguments = " --emulationMode " + ApplicationSettings.GetInstance().EmulationMode +
                     " --processName " + remotePlayProcess.ProcessName;
 
-                Process injectorProcess = Process.Start(exe, processArguments);
+Log.Error("FileName:" + exe);
+Log.Error("Arguments:" + processArguments);
 
-                remotePlayProcess.EnableRaisingEvents = true;
-                remotePlayProcess.Exited += (sender, args) => { CursorUtility.ShowCursor(true); };
+                Process injectorProcess = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = exe,
+                        Arguments = processArguments,
+                        UseShellExecute = false,
+                        RedirectStandardOutput = true,
+                        RedirectStandardError = true,
+                        CreateNoWindow = true
+                    }
+                };
 
-                Injector.Callback += gamepadProcessor.OnReceiveData;
+                 injectorProcess.Start();
+
+       //* Read the output (or the error)
+       string output = injectorProcess.StandardOutput.ReadToEnd();
+       Log.Information(output);
+       string err = injectorProcess.StandardError.ReadToEnd();
+Log.Error(err);
+
+                injectorProcess.WaitForExit();
+
             }
             catch (Exception e)
             {
                 ExceptionLogger.LogException("RemotePlayInjector.Inject error", e);
                 //TODO shouldnt this be fatal?
+                throw e;
             }
         }
 
@@ -50,21 +76,68 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
 
         public void OpenRemotePlayAndInject(GamepadProcessor gamepadProcessor)
         {
+ Log.Error("RemotePlayInjector99.OpenRemotePlayAndInject line 64");
+
+
             try
             {
                 RemotePlayStarter.OpenRemotePlay();
-                StartIpc();
-                Inject(gamepadProcessor);
-
             }
             catch (Exception e)
             {
 
-                ExceptionLogger.LogException("RemotePlayInjector.OpenRemotePlayAndInject() fatal error", e);
+                ExceptionLogger.LogException("RemotePlayInjector.OpenRemotePlayAndInject() fatal error 69", e);
 
                 System.Windows.MessageBox.Show(
-                    "Fatal error, program closing",
-                    "fatal",
+                    e.Message,
+                    "Fatal error",
+                    (MessageBoxButton)MessageBoxButtons.OK,
+                    (MessageBoxImage)MessageBoxIcon.Error);
+
+                throw e;
+            }
+
+Log.Error("RemotePlayInjector99.OpenRemotePlayAndInject line 85");
+
+            try
+            {
+                StartIpc();
+            }
+            catch (Exception e)
+            {
+
+                ExceptionLogger.LogException("RemotePlayInjector.OpenRemotePlayAndInject() fatal error 93", e);
+
+                System.Windows.MessageBox.Show(
+                    e.Message,
+                    "Fatal error",
+                    (MessageBoxButton)MessageBoxButtons.OK,
+                    (MessageBoxImage)MessageBoxIcon.Error);
+
+                throw e;
+            }
+
+
+Log.Error("RemotePlayInjector99.OpenRemotePlayAndInject line 104");
+            try
+            {
+                Log.Error("RemotePlayInjector99.OpenRemotePlayAndInject line 109");
+                      string exe = @"E:\workspace\PS4-Keyboard-and-Mouse-Adapter\master.move-to-dotnet-8.2025\code\RemotePlayInjector\bin\Release\RemotePlayInjectior.exe";
+                Log.Error("Inject 33");
+                                //TODO correct log level
+                 Log.Error("exe:" + exe);
+
+                Inject(gamepadProcessor);
+                Log.Error("RemotePlayInjector99.OpenRemotePlayAndInject line 111");
+            }
+            catch (Exception e)
+            {
+
+                ExceptionLogger.LogException("RemotePlayInjector.OpenRemotePlayAndInject() fatal error 116", e);
+
+                System.Windows.MessageBox.Show(
+                    e.Message,
+                    "Fatal error",
                     (MessageBoxButton)MessageBoxButtons.OK,
                     (MessageBoxImage)MessageBoxIcon.Error);
 
