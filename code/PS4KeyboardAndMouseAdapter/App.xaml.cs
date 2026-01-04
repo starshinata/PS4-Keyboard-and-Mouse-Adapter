@@ -11,6 +11,15 @@ namespace Pizza.KeyboardAndMouseAdapter
     public partial class App : Application
     {
 
+        [STAThread]
+        private static void Main(string[] args)
+        {
+            VelopackApp.Build().Run();
+            App app = new();
+            app.InitializeComponent();
+            app.Run();
+        }
+
         private void OnAppExit(object sender, ExitEventArgs e)
         {
             Log.Debug("App OnAppExit");

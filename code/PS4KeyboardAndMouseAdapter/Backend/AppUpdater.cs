@@ -1,11 +1,11 @@
 ﻿using NuGet;
 using Pizza.Common;
 using Serilog;
-using Squirrel;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using VelopackApp;
 
 namespace Pizza.KeyboardAndMouseAdapter.Backend
 {
