@@ -1,28 +1,4 @@
-﻿// PS4RemotePlayInterceptor (File: Classes/DualShockState.cs)
-//
-// Copyright (c) 2018 Komefai
-//
-// Visit http://komefai.com for more information
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
-
-using Pizza.Common;
+﻿using Pizza.Common;
 using RemotePlayInjected.Injected;
 using System;
 using System.Collections.Generic;
@@ -32,49 +8,13 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace PS4RemotePlayInterceptor
+namespace RemotePlayInjected.Injected.ControllerState
 {
     // References
     // https://github.com/Jays2Kings/DS4Windows/blob/jay/DS4Windows/DS4Library/DS4Device.cs
     // https://github.com/Jays2Kings/DS4Windows/blob/jay/DS4Windows/DS4Library/DS4Sixaxis.cs
     // https://github.com/Jays2Kings/DS4Windows/blob/jay/DS4Windows/DS4Library/DS4Touchpad.cs
     // http://www.psdevwiki.com/ps4/DS4-USB
-
-    public class Touch
-    {
-        public byte TouchID { get; set; }
-        public bool IsTouched { get; set; }
-        public int X { get; set; }
-        public int Y { get; set; }
-
-        /* Constructors */
-        public Touch()
-        {
-            TouchID = 0;
-            IsTouched = false;
-            X = 0;
-            Y = 0;
-        }
-        public Touch(byte touchID, bool isTouched, int x, int y)
-        {
-            TouchID = touchID;
-            IsTouched = isTouched;
-            X = x;
-            Y = y;
-        }
-        public Touch(Touch touch)
-        {
-            TouchID = touch.TouchID;
-            IsTouched = touch.IsTouched;
-            X = touch.X;
-            Y = touch.Y;
-        }
-
-        public Touch Clone()
-        {
-            return new Touch(this);
-        }
-    }
 
     public class DualShockState
     {
@@ -118,10 +58,10 @@ namespace PS4RemotePlayInterceptor
         public bool Circle { get; set; }
         public bool Cross { get; set; }
         public bool Square { get; set; }
-        public bool DPad_Up { get; set; }
-        public bool DPad_Down { get; set; }
-        public bool DPad_Left { get; set; }
-        public bool DPad_Right { get; set; }
+        public bool DPadUp { get; set; }
+        public bool DPadDown { get; set; }
+        public bool DPadLeft { get; set; }
+        public bool DPadRight { get; set; }
         public bool L1 { get; set; }
         public bool R1 { get; set; }
         public bool Share { get; set; }
@@ -172,10 +112,10 @@ namespace PS4RemotePlayInterceptor
             Circle = state.Circle;
             Cross = state.Cross;
             Square = state.Square;
-            DPad_Up = state.DPad_Up;
-            DPad_Down = state.DPad_Down;
-            DPad_Left = state.DPad_Left;
-            DPad_Right = state.DPad_Right;
+            DPadUp = state.DPadUp;
+            DPadDown = state.DPadDown;
+            DPadLeft = state.DPadLeft;
+            DPadRight = state.DPadRight;
             L1 = state.L1;
             R3 = state.R3;
             Share = state.Share;
@@ -211,10 +151,10 @@ namespace PS4RemotePlayInterceptor
             state.Circle = Circle;
             state.Cross = Cross;
             state.Square = Square;
-            state.DPad_Up = DPad_Up;
-            state.DPad_Down = DPad_Down;
-            state.DPad_Left = DPad_Left;
-            state.DPad_Right = DPad_Right;
+            state.DPadUp = DPadUp;
+            state.DPadDown = DPadDown;
+            state.DPadLeft = DPadLeft;
+            state.DPadRight = DPadRight;
             state.L1 = L1;
             state.R3 = R3;
             state.Share = Share;
@@ -245,23 +185,23 @@ namespace PS4RemotePlayInterceptor
         public static bool IsDefaultState(DualShockState state)
         {
             return (state.LX == _defaultState.LX ||
-                        (state.LX >= AnalogDeadZoneMin && state.LX <= AnalogDeadZoneMax)) &&
+                        state.LX >= AnalogDeadZoneMin && state.LX <= AnalogDeadZoneMax) &&
                     (state.LY == _defaultState.LY ||
-                        (state.LY >= AnalogDeadZoneMin && state.LY <= AnalogDeadZoneMax)) &&
+                        state.LY >= AnalogDeadZoneMin && state.LY <= AnalogDeadZoneMax) &&
                     (state.RX == _defaultState.RX ||
-                        (state.RX >= AnalogDeadZoneMin && state.RX <= AnalogDeadZoneMax)) &&
+                        state.RX >= AnalogDeadZoneMin && state.RX <= AnalogDeadZoneMax) &&
                     (state.RY == _defaultState.RY ||
-                        (state.RY >= AnalogDeadZoneMin && state.RY <= AnalogDeadZoneMax)) &&
+                        state.RY >= AnalogDeadZoneMin && state.RY <= AnalogDeadZoneMax) &&
                     state.L2 == _defaultState.L2 &&
                     state.R2 == _defaultState.R2 &&
                     state.Triangle == _defaultState.Triangle &&
                     state.Circle == _defaultState.Circle &&
                     state.Cross == _defaultState.Cross &&
                     state.Square == _defaultState.Square &&
-                    state.DPad_Up == _defaultState.DPad_Up &&
-                    state.DPad_Down == _defaultState.DPad_Down &&
-                    state.DPad_Left == _defaultState.DPad_Left &&
-                    state.DPad_Right == _defaultState.DPad_Right &&
+                    state.DPadUp == _defaultState.DPadUp &&
+                    state.DPadDown == _defaultState.DPadDown &&
+                    state.DPadLeft == _defaultState.DPadLeft &&
+                    state.DPadRight == _defaultState.DPadRight &&
                     state.L1 == _defaultState.L1 &&
                     state.R1 == _defaultState.R1 &&
                     state.Share == _defaultState.Share &&
@@ -269,8 +209,8 @@ namespace PS4RemotePlayInterceptor
                     state.L3 == _defaultState.L3 &&
                     state.R3 == _defaultState.R3 &&
                     state.PS == _defaultState.PS &&
-                    (state.Touch1 != null && state.Touch1.IsTouched) &&
-                    (state.Touch2 != null && state.Touch2.IsTouched);
+                    state.Touch1 != null && state.Touch1.IsTouched &&
+                    state.Touch2 != null && state.Touch2.IsTouched;
         }
 
         public static DualShockState ParseFromDualshockRaw(byte[] data)
@@ -296,31 +236,31 @@ namespace PS4RemotePlayInterceptor
             result.Circle = (data[5] & (byte)VK.Circle) != 0;
             result.Cross = (data[5] & (byte)VK.Cross) != 0;
             result.Square = (data[5] & (byte)VK.Square) != 0;
-            result.DPad_Up = (data[5] & (byte)VK.DPad_Up) != 0;
-            result.DPad_Down = (data[5] & (byte)VK.DPad_Down) != 0;
-            result.DPad_Left = (data[5] & (byte)VK.DPad_Left) != 0;
-            result.DPad_Right = (data[5] & (byte)VK.DPad_Right) != 0;
+            result.DPadUp = (data[5] & (byte)VK.DPad_Up) != 0;
+            result.DPadDown = (data[5] & (byte)VK.DPad_Down) != 0;
+            result.DPadLeft = (data[5] & (byte)VK.DPad_Left) != 0;
+            result.DPadRight = (data[5] & (byte)VK.DPad_Right) != 0;
 
             //Convert dpad into individual On/Off bits instead of a clock representation
             byte dpadState = 0;
 
             dpadState = (byte)(
-            ((result.DPad_Right ? 1 : 0) << 0) |
-            ((result.DPad_Left ? 1 : 0) << 1) |
-            ((result.DPad_Down ? 1 : 0) << 2) |
-            ((result.DPad_Up ? 1 : 0) << 3));
+            (result.DPadRight ? 1 : 0) << 0 |
+            (result.DPadLeft ? 1 : 0) << 1 |
+            (result.DPadDown ? 1 : 0) << 2 |
+            (result.DPadUp ? 1 : 0) << 3);
 
             switch (dpadState)
             {
-                case 0: result.DPad_Up = true; result.DPad_Down = false; result.DPad_Left = false; result.DPad_Right = false; break; // ↑
-                case 1: result.DPad_Up = true; result.DPad_Down = false; result.DPad_Left = false; result.DPad_Right = true; break; // ↑→
-                case 2: result.DPad_Up = false; result.DPad_Down = false; result.DPad_Left = false; result.DPad_Right = true; break; // →
-                case 3: result.DPad_Up = false; result.DPad_Down = true; result.DPad_Left = false; result.DPad_Right = true; break; // ↓→
-                case 4: result.DPad_Up = false; result.DPad_Down = true; result.DPad_Left = false; result.DPad_Right = false; break; // ↓
-                case 5: result.DPad_Up = false; result.DPad_Down = true; result.DPad_Left = true; result.DPad_Right = false; break; // ↓←
-                case 6: result.DPad_Up = false; result.DPad_Down = false; result.DPad_Left = true; result.DPad_Right = false; break; // ←
-                case 7: result.DPad_Up = true; result.DPad_Down = false; result.DPad_Left = true; result.DPad_Right = false; break; // ↑←
-                case 8: result.DPad_Up = false; result.DPad_Down = false; result.DPad_Left = false; result.DPad_Right = false; break; // -
+                case 0: result.DPadUp = true; result.DPadDown = false; result.DPadLeft = false; result.DPadRight = false; break; // ↑
+                case 1: result.DPadUp = true; result.DPadDown = false; result.DPadLeft = false; result.DPadRight = true; break; // ↑→
+                case 2: result.DPadUp = false; result.DPadDown = false; result.DPadLeft = false; result.DPadRight = true; break; // →
+                case 3: result.DPadUp = false; result.DPadDown = true; result.DPadLeft = false; result.DPadRight = true; break; // ↓→
+                case 4: result.DPadUp = false; result.DPadDown = true; result.DPadLeft = false; result.DPadRight = false; break; // ↓
+                case 5: result.DPadUp = false; result.DPadDown = true; result.DPadLeft = true; result.DPadRight = false; break; // ↓←
+                case 6: result.DPadUp = false; result.DPadDown = false; result.DPadLeft = true; result.DPadRight = false; break; // ←
+                case 7: result.DPadUp = true; result.DPadDown = false; result.DPadLeft = true; result.DPadRight = false; break; // ↑←
+                case 8: result.DPadUp = false; result.DPadDown = false; result.DPadLeft = false; result.DPadRight = false; break; // -
             }
 
             bool L2Pressed = (data[6] & (byte)VK.L2) != 0;
@@ -370,12 +310,12 @@ namespace PS4RemotePlayInterceptor
 
                     byte touchID1 = (byte)(data[0 + TOUCHPAD_DATA_OFFSET + touchOffset] & 0x7F);
                     byte touchID2 = (byte)(data[4 + TOUCHPAD_DATA_OFFSET + touchOffset] & 0x7F);
-                    bool isTouch1 = (data[0 + TOUCHPAD_DATA_OFFSET + touchOffset] >> 7) != 0 ? false : true; // >= 1 touch detected
-                    bool isTouch2 = (data[4 + TOUCHPAD_DATA_OFFSET + touchOffset] >> 7) != 0 ? false : true; // 2 touches detected
-                    int currentX1 = data[1 + TOUCHPAD_DATA_OFFSET + touchOffset] + ((data[2 + TOUCHPAD_DATA_OFFSET + touchOffset] & 0x0F) * 255);
-                    int currentY1 = ((data[2 + TOUCHPAD_DATA_OFFSET + touchOffset] & 0xF0) >> 4) + (data[3 + TOUCHPAD_DATA_OFFSET + touchOffset] * 16);
-                    int currentX2 = data[5 + TOUCHPAD_DATA_OFFSET + touchOffset] + ((data[6 + TOUCHPAD_DATA_OFFSET + touchOffset] & 0x0F) * 255);
-                    int currentY2 = ((data[6 + TOUCHPAD_DATA_OFFSET + touchOffset] & 0xF0) >> 4) + (data[7 + TOUCHPAD_DATA_OFFSET + touchOffset] * 16);
+                    bool isTouch1 = data[0 + TOUCHPAD_DATA_OFFSET + touchOffset] >> 7 != 0 ? false : true; // >= 1 touch detected
+                    bool isTouch2 = data[4 + TOUCHPAD_DATA_OFFSET + touchOffset] >> 7 != 0 ? false : true; // 2 touches detected
+                    int currentX1 = data[1 + TOUCHPAD_DATA_OFFSET + touchOffset] + (data[2 + TOUCHPAD_DATA_OFFSET + touchOffset] & 0x0F) * 255;
+                    int currentY1 = ((data[2 + TOUCHPAD_DATA_OFFSET + touchOffset] & 0xF0) >> 4) + data[3 + TOUCHPAD_DATA_OFFSET + touchOffset] * 16;
+                    int currentX2 = data[5 + TOUCHPAD_DATA_OFFSET + touchOffset] + (data[6 + TOUCHPAD_DATA_OFFSET + touchOffset] & 0x0F) * 255;
+                    int currentY2 = ((data[6 + TOUCHPAD_DATA_OFFSET + touchOffset] & 0xF0) >> 4) + data[7 + TOUCHPAD_DATA_OFFSET + touchOffset] * 16;
 
                     result.TouchPacketCounter = data[-1 + TOUCHPAD_DATA_OFFSET + touchOffset];
                     result.Touch1 = new Touch(touchID1, isTouch1, currentX1, currentY1);
@@ -401,15 +341,15 @@ namespace PS4RemotePlayInterceptor
             if (Circle) { data_5 += (byte)VK.Circle; }
             if (Cross) { data_5 += (byte)VK.Cross; }
             if (Square) { data_5 += (byte)VK.Square; }
-            if (DPad_Up && !DPad_Down && !DPad_Left && !DPad_Right) { data_5 += 0; } // ↑
-            if (DPad_Up && !DPad_Down && !DPad_Left && DPad_Right) { data_5 += 1; } // ↑→
-            if (!DPad_Up && !DPad_Down && !DPad_Left && DPad_Right) { data_5 += 2; } // →
-            if (!DPad_Up && DPad_Down && !DPad_Left && DPad_Right) { data_5 += 3; } // ↓→
-            if (!DPad_Up && DPad_Down && !DPad_Left && !DPad_Right) { data_5 += 4; } // ↓
-            if (!DPad_Up && DPad_Down && DPad_Left && !DPad_Right) { data_5 += 5; } // ↓←
-            if (!DPad_Up && !DPad_Down && DPad_Left && !DPad_Right) { data_5 += 6; } // ←
-            if (DPad_Up && !DPad_Down && DPad_Left && !DPad_Right) { data_5 += 7; } // ↑←
-            if (!DPad_Up && !DPad_Down && !DPad_Left && !DPad_Right) { data_5 += 8; } // -
+            if (DPadUp && !DPadDown && !DPadLeft && !DPadRight) { data_5 += 0; } // ↑
+            if (DPadUp && !DPadDown && !DPadLeft && DPadRight) { data_5 += 1; } // ↑→
+            if (!DPadUp && !DPadDown && !DPadLeft && DPadRight) { data_5 += 2; } // →
+            if (!DPadUp && DPadDown && !DPadLeft && DPadRight) { data_5 += 3; } // ↓→
+            if (!DPadUp && DPadDown && !DPadLeft && !DPadRight) { data_5 += 4; } // ↓
+            if (!DPadUp && DPadDown && DPadLeft && !DPadRight) { data_5 += 5; } // ↓←
+            if (!DPadUp && !DPadDown && DPadLeft && !DPadRight) { data_5 += 6; } // ←
+            if (DPadUp && !DPadDown && DPadLeft && !DPadRight) { data_5 += 7; } // ↑←
+            if (!DPadUp && !DPadDown && !DPadLeft && !DPadRight) { data_5 += 8; } // -
             data[5] = data_5;
 
             byte data_6 = 0;
@@ -472,11 +412,11 @@ namespace PS4RemotePlayInterceptor
                             data[0 + TOUCHPAD_DATA_OFFSET + touchOffset] = oldTouchID;
 
                         var x = Touch1.X;
-                        var xRemain = (int)(x / 255);
-                        var xLeft = x - (xRemain * 255);
+                        var xRemain = x / 255;
+                        var xLeft = x - xRemain * 255;
                         var y = Touch1.Y;
-                        var yRemain = (int)(y / 16);
-                        var yLeft = y - (yRemain * 16);
+                        var yRemain = y / 16;
+                        var yLeft = y - yRemain * 16;
 
                         data[1 + TOUCHPAD_DATA_OFFSET + touchOffset] = (byte)xLeft;
                         data[2 + TOUCHPAD_DATA_OFFSET + touchOffset] = (byte)(xRemain + (yLeft << 4));
@@ -491,11 +431,11 @@ namespace PS4RemotePlayInterceptor
                             data[4 + TOUCHPAD_DATA_OFFSET + touchOffset] = oldTouchID;
 
                         var x = Touch2.X;
-                        var xRemain = (int)(x / 255);
-                        var xLeft = x - (xRemain * 255);
+                        var xRemain = x / 255;
+                        var xLeft = x - xRemain * 255;
                         var y = Touch2.Y;
-                        var yRemain = (int)(y / 16);
-                        var yLeft = y - (yRemain * 16);
+                        var yRemain = y / 16;
+                        var yLeft = y - yRemain * 16;
 
                         data[5 + TOUCHPAD_DATA_OFFSET + touchOffset] = (byte)xLeft;
                         data[6 + TOUCHPAD_DATA_OFFSET + touchOffset] = (byte)(xRemain + (yLeft << 4));
@@ -503,7 +443,8 @@ namespace PS4RemotePlayInterceptor
                     }
                 }
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 ExceptionLogger.LogException("DualShockState failed L506", e);
             }
         }

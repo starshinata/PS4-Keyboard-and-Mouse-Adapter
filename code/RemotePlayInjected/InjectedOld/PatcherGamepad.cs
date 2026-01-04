@@ -1,13 +1,37 @@
-﻿using EasyHook;
-using Junk;
+﻿// PS4RemotePlayInterceptor (File: Classes/Hooks.cs)
+//
+// Copyright (c) 2018 Komefai
+//
+// Visit http://komefai.com for more information
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+
+using EasyHook;
 using Pizza.Common;
+using PS4RemotePlayInterceptor;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace RemotePlayInjected.Injected
+namespace PS4RemotePlayInjection
 {
 
     public class PatcherGamepad
@@ -18,7 +42,7 @@ namespace RemotePlayInjected.Injected
         /// </summary>
         private readonly IntPtr _dummyHandle = new IntPtr(0xDABDAB);
 
-        private List<LocalHook> hooks = new List<LocalHook>();
+        private List<EasyHook.LocalHook> hooks = new List<LocalHook>();
 
         /// <summary>
         /// Reference to the server interface
@@ -94,80 +118,80 @@ namespace RemotePlayInjected.Injected
                 _server.LogDebug("PatcherGamepad.Run " + channelName + "  with emulation");
 
                 // CreateFile https://msdn.microsoft.com/en-us/library/windows/desktop/aa363858(v=vs.85).aspx
-                LocalHook createFileHook = LocalHook.Create(
-                    LocalHook.GetProcAddress("kernel32.dll", "CreateFileW"),
+                LocalHook createFileHook = EasyHook.LocalHook.Create(
+                    EasyHook.LocalHook.GetProcAddress("kernel32.dll", "CreateFileW"),
                     new CreateFile_Delegate(CreateFile_Hook),
                     this);
 
                 // ReadFile https://msdn.microsoft.com/en-us/library/windows/desktop/aa365467(v=vs.85).aspx
-                LocalHook readFileHook = LocalHook.Create(
-                    LocalHook.GetProcAddress("kernel32.dll", "ReadFile"),
+                LocalHook readFileHook = EasyHook.LocalHook.Create(
+                    EasyHook.LocalHook.GetProcAddress("kernel32.dll", "ReadFile"),
                     new ReadFile_Delegate(ReadFile_Hook),
                     this);
 
                 // WriteFile https://msdn.microsoft.com/en-us/library/windows/desktop/aa365747(v=vs.85).aspx
-                LocalHook writeFileHook = LocalHook.Create(
-                    LocalHook.GetProcAddress("kernel32.dll", "WriteFile"),
+                LocalHook writeFileHook = EasyHook.LocalHook.Create(
+                    EasyHook.LocalHook.GetProcAddress("kernel32.dll", "WriteFile"),
                     new WriteFile_Delegate(WriteFile_Hook),
                     this);
 
                 // HidD_GetAttributes http://www.pinvoke.net/default.aspx/hid.hidd_getattributes
-                LocalHook HidD_GetAttributesHook = LocalHook.Create(
-                    LocalHook.GetProcAddress("hid.dll", "HidD_GetAttributes"),
+                LocalHook HidD_GetAttributesHook = EasyHook.LocalHook.Create(
+                    EasyHook.LocalHook.GetProcAddress("hid.dll", "HidD_GetAttributes"),
                     new HidD_GetAttributes_Delegate(HidD_GetAttributes_Hook),
                     this);
 
                 // HidD_GetFeature http://www.pinvoke.net/default.aspx/hid.hidd_getfeature
-                LocalHook HidD_GetFeatureHook = LocalHook.Create(
-                    LocalHook.GetProcAddress("hid.dll", "HidD_GetFeature"),
+                LocalHook HidD_GetFeatureHook = EasyHook.LocalHook.Create(
+                    EasyHook.LocalHook.GetProcAddress("hid.dll", "HidD_GetFeature"),
                     new HidD_GetFeature_Delegate(HidD_GetFeature_Hook),
                     this);
 
                 // HidD_SetFeature https://msdn.microsoft.com/en-us/library/windows/hardware/ff539684(v=vs.85).aspx
-                LocalHook HidD_SetFeatureHook = LocalHook.Create(
-                    LocalHook.GetProcAddress("hid.dll", "HidD_SetFeature"),
+                LocalHook HidD_SetFeatureHook = EasyHook.LocalHook.Create(
+                    EasyHook.LocalHook.GetProcAddress("hid.dll", "HidD_SetFeature"),
                     new HidD_SetFeature_Delegate(HidD_SetFeature_Hook),
                     this);
 
                 // HidD_GetPreparsedData http://www.pinvoke.net/default.aspx/hid.hidd_getfeature
-                LocalHook HidD_GetPreparsedDataHook = LocalHook.Create(
-                    LocalHook.GetProcAddress("hid.dll", "HidD_GetPreparsedData"),
+                LocalHook HidD_GetPreparsedDataHook = EasyHook.LocalHook.Create(
+                    EasyHook.LocalHook.GetProcAddress("hid.dll", "HidD_GetPreparsedData"),
                     new HidD_GetPreparsedData_Delegate(HidD_GetPreparsedData_Hook),
                     this);
 
                 // HidD_FreePreparsedData http://www.pinvoke.net/default.aspx/hid.hidd_freepreparseddata
-                LocalHook HidD_FreePreparsedDataHook = LocalHook.Create(
-                    LocalHook.GetProcAddress("hid.dll", "HidD_FreePreparsedData"),
+                LocalHook HidD_FreePreparsedDataHook = EasyHook.LocalHook.Create(
+                    EasyHook.LocalHook.GetProcAddress("hid.dll", "HidD_FreePreparsedData"),
                     new HidD_FreePreparsedData_Delegate(HidD_FreePreparsedData_Hook),
                     this);
 
                 // HidD_GetManufacturerString https://msdn.microsoft.com/en-us/library/windows/hardware/ff538959(v=vs.85).aspx
-                LocalHook HidD_GetManufacturerStringHook = LocalHook.Create(
-                    LocalHook.GetProcAddress("hid.dll", "HidD_GetManufacturerString"),
+                LocalHook HidD_GetManufacturerStringHook = EasyHook.LocalHook.Create(
+                    EasyHook.LocalHook.GetProcAddress("hid.dll", "HidD_GetManufacturerString"),
                     new HidD_GetManufacturerString_Delegate(HidD_GetManufacturerString_Hook),
                     this);
 
                 // HidD_GetProductString https://msdn.microsoft.com/en-us/library/windows/hardware/ff539681(v=vs.85).aspx
-                LocalHook HidD_GetProductStringHook = LocalHook.Create(
-                    LocalHook.GetProcAddress("hid.dll", "HidD_GetProductString"),
+                LocalHook HidD_GetProductStringHook = EasyHook.LocalHook.Create(
+                    EasyHook.LocalHook.GetProcAddress("hid.dll", "HidD_GetProductString"),
                     new HidD_GetProductString_Delegate(HidD_GetProductString_Hook),
                     this);
 
                 // HidD_GetSerialNumberString https://msdn.microsoft.com/en-us/library/windows/hardware/ff539683(v=vs.85).aspx
-                LocalHook HidD_GetSerialNumberStringHook = LocalHook.Create(
-                    LocalHook.GetProcAddress("hid.dll", "HidD_GetSerialNumberString"),
+                LocalHook HidD_GetSerialNumberStringHook = EasyHook.LocalHook.Create(
+                    EasyHook.LocalHook.GetProcAddress("hid.dll", "HidD_GetSerialNumberString"),
                     new HidD_GetSerialNumberString_Delegate(HidD_GetSerialNumberString_Hook),
                     this);
 
                 // HidP_GetCapsHook http://www.pinvoke.net/default.aspx/hid.hidp_getcaps
-                LocalHook HidP_GetCapsHook = LocalHook.Create(
-                    LocalHook.GetProcAddress("hid.dll", "HidP_GetCaps"),
+                LocalHook HidP_GetCapsHook = EasyHook.LocalHook.Create(
+                    EasyHook.LocalHook.GetProcAddress("hid.dll", "HidP_GetCaps"),
                     new HidP_GetCaps_Delegate(HidP_GetCaps_Hook),
                     this);
 
                 // HidP_GetValueCapsHook https://msdn.microsoft.com/en-us/library/windows/hardware/ff539754(v=vs.85).aspx
-                LocalHook HidP_GetValueCapsHook = LocalHook.Create(
-                    LocalHook.GetProcAddress("hid.dll", "HidP_GetValueCaps"),
+                LocalHook HidP_GetValueCapsHook = EasyHook.LocalHook.Create(
+                    EasyHook.LocalHook.GetProcAddress("hid.dll", "HidP_GetValueCaps"),
                     new HidP_GetValueCaps_Delegate(HidP_GetValueCaps_Hook),
                     this);
 
@@ -203,12 +227,12 @@ namespace RemotePlayInjected.Injected
             // Activate hooks on all threads except the current thread
             foreach (LocalHook h in hooks)
             {
-                h.ThreadACL.SetExclusiveACL(new int[] { 0 });
+                h.ThreadACL.SetExclusiveACL(new Int32[] { 0 });
             }
             _server.LogDebug("PatcherGamepad.Run " + channelName + " activated hooks");
 
             // Wake up the process (required if using RemoteHooking.CreateAndInject)
-            RemoteHooking.WakeUpProcess();
+            EasyHook.RemoteHooking.WakeUpProcess();
         }
 
         public void RemoveGamepadHooks(string channelName)
@@ -222,7 +246,7 @@ namespace RemotePlayInjected.Injected
             _server.LogDebug("PatcherGamepad.Run " + channelName + " removed hooks");
 
             // Finalise cleanup of hooks
-            LocalHook.Release();
+            EasyHook.LocalHook.Release();
         }
 
         /// <summary>
@@ -255,12 +279,12 @@ namespace RemotePlayInjected.Injected
                     CharSet = CharSet.Unicode,
                     SetLastError = true)]
         delegate IntPtr CreateFile_Delegate(
-                    string filename,
-                    uint desiredAccess,
-                    uint shareMode,
+                    String filename,
+                    UInt32 desiredAccess,
+                    UInt32 shareMode,
                     IntPtr securityAttributes,
-                    uint creationDisposition,
-                    uint flagsAndAttributes,
+                    UInt32 creationDisposition,
+                    UInt32 flagsAndAttributes,
                     IntPtr templateFile);
 
         /// <summary>
@@ -279,12 +303,12 @@ namespace RemotePlayInjected.Injected
             CharSet = CharSet.Unicode,
             SetLastError = true, CallingConvention = CallingConvention.StdCall)]
         static extern IntPtr CreateFileW(
-            string filename,
-            uint desiredAccess,
-            uint shareMode,
+            String filename,
+            UInt32 desiredAccess,
+            UInt32 shareMode,
             IntPtr securityAttributes,
-            uint creationDisposition,
-            uint flagsAndAttributes,
+            UInt32 creationDisposition,
+            UInt32 flagsAndAttributes,
             IntPtr templateFile);
 
         /// <summary>
@@ -299,12 +323,12 @@ namespace RemotePlayInjected.Injected
         /// <param name="templateFile"></param>
         /// <returns></returns>
         IntPtr CreateFile_Hook(
-            string filename,
-            uint desiredAccess,
-            uint shareMode,
+            String filename,
+            UInt32 desiredAccess,
+            UInt32 shareMode,
             IntPtr securityAttributes,
-            uint creationDisposition,
-            uint flagsAndAttributes,
+            UInt32 creationDisposition,
+            UInt32 flagsAndAttributes,
             IntPtr templateFile)
         {
 
@@ -467,7 +491,7 @@ namespace RemotePlayInjected.Injected
 
                             // Assign the spoofed frame counter
                             __frameCounter++;
-                            fakeReport[7] = (byte)(__frameCounter << 2 & 0xFF);
+                            fakeReport[7] = (byte)((__frameCounter << 2) & 0xFF);
                             _server.LogVerbose("PatcherGamepad.ReadFile_Hook L495");
 
                             // Send to server
@@ -619,10 +643,10 @@ namespace RemotePlayInjected.Injected
         [StructLayout(LayoutKind.Sequential)]
         internal struct HIDD_ATTRIBUTES
         {
-            public int Size;
-            public short VendorID;
-            public short ProductID;
-            public short VersionNumber;
+            public Int32 Size;
+            public Int16 VendorID;
+            public Int16 ProductID;
+            public Int16 VersionNumber;
         }
 
         [UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode, SetLastError = true)]
@@ -664,12 +688,12 @@ namespace RemotePlayInjected.Injected
 
         #region HidD_GetFeature Hook
         [UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode, SetLastError = true)]
-        delegate bool HidD_GetFeature_Delegate(IntPtr hidDeviceObject, ref byte lpReportBuffer, int reportBufferLength);
+        delegate bool HidD_GetFeature_Delegate(IntPtr hidDeviceObject, ref Byte lpReportBuffer, Int32 reportBufferLength);
 
         [DllImport("hid.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        static extern bool HidD_GetFeature(IntPtr hidDeviceObject, ref byte lpReportBuffer, int reportBufferLength);
+        static extern bool HidD_GetFeature(IntPtr hidDeviceObject, ref Byte lpReportBuffer, Int32 reportBufferLength);
 
-        bool HidD_GetFeature_Hook(IntPtr hidDeviceObject, ref byte lpReportBuffer, int reportBufferLength)
+        bool HidD_GetFeature_Hook(IntPtr hidDeviceObject, ref Byte lpReportBuffer, Int32 reportBufferLength)
         {
             bool result = false;
 
@@ -739,12 +763,12 @@ namespace RemotePlayInjected.Injected
 
         #region HidD_SetFeature Hook
         [UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode, SetLastError = true)]
-        delegate bool HidD_SetFeature_Delegate(IntPtr hidDeviceObject, ref byte lpReportBuffer, int reportBufferLength);
+        delegate bool HidD_SetFeature_Delegate(IntPtr hidDeviceObject, ref Byte lpReportBuffer, Int32 reportBufferLength);
 
         [DllImport("hid.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        static extern bool HidD_SetFeature(IntPtr hidDeviceObject, ref byte lpReportBuffer, int reportBufferLength);
+        static extern bool HidD_SetFeature(IntPtr hidDeviceObject, ref Byte lpReportBuffer, Int32 reportBufferLength);
 
-        bool HidD_SetFeature_Hook(IntPtr hidDeviceObject, ref byte lpReportBuffer, int reportBufferLength)
+        bool HidD_SetFeature_Hook(IntPtr hidDeviceObject, ref Byte lpReportBuffer, Int32 reportBufferLength)
         {
             bool result = false;
 
@@ -843,12 +867,12 @@ namespace RemotePlayInjected.Injected
 
         #region HidD_GetManufacturerString Hook
         [UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode, SetLastError = true)]
-        delegate bool HidD_GetManufacturerString_Delegate(IntPtr hidDeviceObject, ref byte lpReportBuffer, int reportBufferLength);
+        delegate bool HidD_GetManufacturerString_Delegate(IntPtr hidDeviceObject, ref Byte lpReportBuffer, Int32 reportBufferLength);
 
         [DllImport("hid.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        static extern bool HidD_GetManufacturerString(IntPtr hidDeviceObject, ref byte lpReportBuffer, int reportBufferLength);
+        static extern bool HidD_GetManufacturerString(IntPtr hidDeviceObject, ref Byte lpReportBuffer, Int32 reportBufferLength);
 
-        bool HidD_GetManufacturerString_Hook(IntPtr hidDeviceObject, ref byte lpReportBuffer, int reportBufferLength)
+        bool HidD_GetManufacturerString_Hook(IntPtr hidDeviceObject, ref Byte lpReportBuffer, Int32 reportBufferLength)
         {
             bool result = false;
 
@@ -897,12 +921,12 @@ namespace RemotePlayInjected.Injected
 
         #region HidD_GetProductString Hook
         [UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode, SetLastError = true)]
-        delegate bool HidD_GetProductString_Delegate(IntPtr hidDeviceObject, ref byte lpReportBuffer, int reportBufferLength);
+        delegate bool HidD_GetProductString_Delegate(IntPtr hidDeviceObject, ref Byte lpReportBuffer, Int32 reportBufferLength);
 
         [DllImport("hid.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        static extern bool HidD_GetProductString(IntPtr hidDeviceObject, ref byte lpReportBuffer, int reportBufferLength);
+        static extern bool HidD_GetProductString(IntPtr hidDeviceObject, ref Byte lpReportBuffer, Int32 reportBufferLength);
 
-        bool HidD_GetProductString_Hook(IntPtr hidDeviceObject, ref byte lpReportBuffer, int reportBufferLength)
+        bool HidD_GetProductString_Hook(IntPtr hidDeviceObject, ref Byte lpReportBuffer, Int32 reportBufferLength)
         {
             bool result = false;
 
@@ -955,12 +979,12 @@ namespace RemotePlayInjected.Injected
 
         #region HidD_GetSerialNumberString Hook
         [UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode, SetLastError = true)]
-        delegate bool HidD_GetSerialNumberString_Delegate(IntPtr hidDeviceObject, ref byte lpReportBuffer, int reportBufferLength);
+        delegate bool HidD_GetSerialNumberString_Delegate(IntPtr hidDeviceObject, ref Byte lpReportBuffer, Int32 reportBufferLength);
 
         [DllImport("hid.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        static extern bool HidD_GetSerialNumberString(IntPtr hidDeviceObject, ref byte lpReportBuffer, int reportBufferLength);
+        static extern bool HidD_GetSerialNumberString(IntPtr hidDeviceObject, ref Byte lpReportBuffer, Int32 reportBufferLength);
 
-        bool HidD_GetSerialNumberString_Hook(IntPtr hidDeviceObject, ref byte lpReportBuffer, int reportBufferLength)
+        bool HidD_GetSerialNumberString_Hook(IntPtr hidDeviceObject, ref Byte lpReportBuffer, Int32 reportBufferLength)
         {
             bool result = false;
 
@@ -995,23 +1019,23 @@ namespace RemotePlayInjected.Injected
         [StructLayout(LayoutKind.Sequential)]
         internal struct HIDP_CAPS
         {
-            public short Usage;
-            public short UsagePage;
-            public short InputReportByteLength;
-            public short OutputReportByteLength;
-            public short FeatureReportByteLength;
+            public Int16 Usage;
+            public Int16 UsagePage;
+            public Int16 InputReportByteLength;
+            public Int16 OutputReportByteLength;
+            public Int16 FeatureReportByteLength;
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
-            public short[] Reserved;
-            public short NumberLinkCollectionNodes;
-            public short NumberInputButtonCaps;
-            public short NumberInputValueCaps;
-            public short NumberInputDataIndices;
-            public short NumberOutputButtonCaps;
-            public short NumberOutputValueCaps;
-            public short NumberOutputDataIndices;
-            public short NumberFeatureButtonCaps;
-            public short NumberFeatureValueCaps;
-            public short NumberFeatureDataIndices;
+            public Int16[] Reserved;
+            public Int16 NumberLinkCollectionNodes;
+            public Int16 NumberInputButtonCaps;
+            public Int16 NumberInputValueCaps;
+            public Int16 NumberInputDataIndices;
+            public Int16 NumberOutputButtonCaps;
+            public Int16 NumberOutputValueCaps;
+            public Int16 NumberOutputDataIndices;
+            public Int16 NumberFeatureButtonCaps;
+            public Int16 NumberFeatureValueCaps;
+            public Int16 NumberFeatureDataIndices;
         }
 
         [UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode, SetLastError = true)]
@@ -1161,12 +1185,12 @@ namespace RemotePlayInjected.Injected
         }
 
         [UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode, SetLastError = true)]
-        delegate int HidP_GetValueCaps_Delegate(HIDP_REPORT_TYPE reportType, ref byte valueCaps, ref short valueCapsLength, IntPtr preparsedData);
+        delegate int HidP_GetValueCaps_Delegate(HIDP_REPORT_TYPE reportType, ref Byte valueCaps, ref short valueCapsLength, IntPtr preparsedData);
 
         [DllImport("hid.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        static extern int HidP_GetValueCaps(HIDP_REPORT_TYPE reportType, ref byte valueCaps, ref short valueCapsLength, IntPtr preparsedData);
+        static extern int HidP_GetValueCaps(HIDP_REPORT_TYPE reportType, ref Byte valueCaps, ref short valueCapsLength, IntPtr preparsedData);
 
-        int HidP_GetValueCaps_Hook(HIDP_REPORT_TYPE reportType, ref byte valueCaps, ref short valueCapsLength, IntPtr preparsedData)
+        int HidP_GetValueCaps_Hook(HIDP_REPORT_TYPE reportType, ref Byte valueCaps, ref short valueCapsLength, IntPtr preparsedData)
         {
             int result = 0;
 

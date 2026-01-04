@@ -1,8 +1,9 @@
 ﻿using HarmonyLib;
+using PS4RemotePlayInterceptor;
 using System;
 using System.Linq;
 
-namespace RemotePlayInjected.Injected
+namespace PS4RemotePlayInjection
 {
     [Serializable]
     class PatcherRemoteplayToolbar
@@ -93,7 +94,7 @@ namespace RemotePlayInjected.Injected
         {
             bool dontHideHud = server.ShouldShowToolbar();
 
-            if (dontHideHud || !dontHideHud && isToolbarShown)
+            if (dontHideHud || (!dontHideHud && isToolbarShown))
             {
                 isToolbarShown = false;
                 return true;

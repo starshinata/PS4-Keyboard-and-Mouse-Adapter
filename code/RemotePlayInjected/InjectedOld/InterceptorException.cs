@@ -1,7 +1,4 @@
-Much of this C# project was sourced from Komefai's PS4RemotePlayInjection C# project
-so to honour this we are displaying his license here
-
-// PS4RemotePlayInjection
+﻿// PS4RemotePlayInterceptor (File: Classes/InterceptorException.cs)
 //
 // Copyright (c) 2018 Komefai
 //
@@ -24,3 +21,23 @@ so to honour this we are displaying his license here
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
+
+using System;
+
+namespace PS4RemotePlayInterceptor
+{
+    public class InterceptorException : Exception
+    {
+        public InterceptorException()
+        {
+        }
+
+        public InterceptorException(string message) : base(message)
+        {
+        }
+
+        public InterceptorException(string message, Exception inner) : base(message, inner)
+        {
+        }
+    }
+}

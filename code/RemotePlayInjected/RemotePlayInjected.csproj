@@ -82,15 +82,19 @@
   <ItemGroup>
     <Compile Include="DualShockState.cs" />
     <Compile Include="EntryPoint.cs" />
+    <Compile Include="Injected\ControllerState\DualShockState.cs" />
+    <Compile Include="Injected\ControllerState\ProtoToController.cs" />
+    <Compile Include="Injected\ControllerState\Touch.cs" />
+    <Compile Include="Injected\IpcKmaClient.cs" />
     <Compile Include="Injected\PatcherGamepad.cs" />
-    <Compile Include="Injected\Hooks.cs" />
     <Compile Include="Injected\InjectionInterface.cs" />
-    <Compile Include="Injected\Injector.cs" />
     <Compile Include="Injected\InterceptorException.cs" />
     <Compile Include="Injected\PatcherRemoteplayToolbar.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Injected\ThreadRpcUpdateListener.cs" />
     <Compile Include="Injected\UtilityData.cs" />
     <Compile Include="Injected\Utility.cs" />
+    <Compile Include="Junk\Injector.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Injected\KomefaiLicense.txt" />
@@ -145,6 +149,12 @@
       <Name>Common-v6</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GreeterProtos\GreeterProtos.csproj">
+      <Name>GreeterProtos</Name>
+    </ProjectReference>
+  </ItemGroup>
+
   <PropertyGroup>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>

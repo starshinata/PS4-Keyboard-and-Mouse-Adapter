@@ -1,7 +1,6 @@
-﻿using RemotePlayInjected.Injected.ControllerState;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
-namespace RemotePlayInjected.Injected
+namespace PS4RemotePlayInjection
 {
     public static class UtilityData
     {
@@ -9,6 +8,5 @@ namespace RemotePlayInjected.Injected
         public static int pid;
         public static bool IsCursorVisible = true;
         public static bool IsToolBarVisible = false;
-        public static DualShockState DualShockState;
     }
 }

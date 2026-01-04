@@ -1,5 +1,5 @@
 Much of this C# project was sourced from Komefai's PS4RemotePlayInjection C# project
-so to honour this we are displaying his license here
+so to honour this we are diplaying his license here 
 
 // PS4RemotePlayInjection
 //
