@@ -5,20 +5,12 @@ using PS4RemotePlayInjection;
 using Serilog;
 using System;
 using System.Windows;
+using Velopack;
 
 namespace Pizza.KeyboardAndMouseAdapter
 {
     public partial class App : Application
     {
-
-        [STAThread]
-        private static void Main(string[] args)
-        {
-            VelopackApp.Build().Run();
-            App app = new();
-            app.InitializeComponent();
-            app.Run();
-        }
 
         private void OnAppExit(object sender, ExitEventArgs e)
         {
@@ -32,12 +24,14 @@ namespace Pizza.KeyboardAndMouseAdapter
             ApplicationSettings.Save();
 
             VigemManager.Stop(InstanceSettings.GetInstance());
-
-            //TODO: hardcoded, fix.
-            //Injector.FindProcess("RemotePlay").Kill();
         }
 
         private async void OnAppStartup(object sender, StartupEventArgs e)
+        {
+            AppStart();
+        }
+
+        private void AppStart()
         {
             LogManager logManager = new LogManager();
             logManager.SetupLogger();
@@ -54,9 +48,30 @@ namespace Pizza.KeyboardAndMouseAdapter
             UserSettings.LoadPrevious();
 
             AppUpdater appUpdater = new AppUpdater();
-
-            await appUpdater.UpdateIfAvailable();
+            appUpdater.UpdateIfAvailable();
         }
 
+        // Since WPF has an "automatic" Program.Main, we need to create one Velopack.
+        // In order for this to work, you must also add the following to your .csproj:
+        // <StartupObject>Pizza.KeyboardAndMouseAdapter.App</StartupObject>
+        private static void Main(string[] args)
+        {
+            try {
+                // Velopack says it is important to Run() the VelopackApp as early as possible in app startup.
+                VelopackApp.Build().Run();
+
+                // We can now launch the WPF application as normal.
+                var app = new App();
+                app.InitializeComponent();
+
+
+
+                app.Run();
+                app.AppStart();
+
+            } catch (Exception ex) {
+                MessageBox.Show("Unhandled exception: " + ex.ToString());
+            }
+        }
     }
 }
