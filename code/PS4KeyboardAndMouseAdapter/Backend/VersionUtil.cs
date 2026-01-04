@@ -1,4 +1,5 @@
-﻿using NuGet;
+﻿using NuGet.Versioning;
+using Serilog;
 using System;
 using System.Reflection;
 
@@ -15,7 +16,10 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
         public static SemanticVersion GetSemanticVersion()
         {
             Version v = Assembly.GetExecutingAssembly().GetName().Version;
-            return new SemanticVersion(v.Major, v.Minor, v.Build, v.Revision);
+            SemanticVersion version =  new SemanticVersion(v.Major, v.Minor, v.Build);
+            //TODO what does this print ?!
+            Log.Information("version" + version);
+            return version;
         }
 
         public static string GetVersionWithBuildDate()

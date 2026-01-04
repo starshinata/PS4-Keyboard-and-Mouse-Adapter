@@ -31,6 +31,17 @@ echo ""
 ## exit on first error
 $ErrorActionPreference = "Stop"
 
+################################
+################################
+
+## print env variables - before we manip
+echo "print ENV (1/2)"
+dir env:
+echo ""
+
+################################
+################################
+
 
 ## at top as you must define a function before calling it
 function error-if-path-does-not-exist {
@@ -51,7 +62,7 @@ $CERT_DIRECTORY = "E:\workspace\##certificates\github.com-pancakeslp\"
 #$MS_BUILD_CONFIG = "Debug"
 $MS_BUILD_CONFIG = "Release"
 
-$VERSION = "3.1.2"
+$VERSION = "3.1.3"
 
 ################################
 ################################
@@ -65,6 +76,16 @@ $env:Path += ";C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x64\"
 
 ## Path for vstest.console.exe
 $env:Path += ";$VISUAL_STUDIO_PATH\Common7\IDE\CommonExtensions\Microsoft\TestWindow"
+
+
+################################
+################################
+
+if ( -Not $env:CI ) {
+    error-if-path-does-not-exist $CERT_DIRECTORY
+
+    error-if-path-does-not-exist $VISUAL_STUDIO_PATH
+}
 
 ################################
 ################################
@@ -91,6 +112,14 @@ $NUGET_PACKAGE_PATH="${env:USERPROFILE}\.nuget\packages\"
 ################################
 ################################
 
+## print env variables - after manipulating
+echo "print ENV (2/2)"
+dir env:
+echo ""
+
+################################
+################################
+
 function add-build-date {
   make-dir $PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\Resources\
 
@@ -102,7 +131,7 @@ function add-build-date {
 
 function build-msbuild {
 
-  echo "msbuild-ing"
+  echo "@@@ msbuild-ing"
 
   ## "-p:UseSharedCompilation=false" for CodeQL
   MSBuild.exe PS4KeyboardAndMouseAdapter.sln `
@@ -120,7 +149,7 @@ function build-msbuild {
   ## wait to make sure nothing errors
   Start-Sleep -Milliseconds 500
 
-  echo "msbuild done"
+  echo "@@@ msbuild done"
 }
 
 
@@ -146,12 +175,17 @@ function cleanup-postbuild {
 }
 
 
-function dependencies-nuget {
-  ## this was a nuget command when using packages.config
-  ## now we use dotnet for dependencies defined via "packageref"
-  dotnet restore
-  error-on-bad-return-code
+function dependencies-install {
+    echo "@@@ dependencies-install-ing..."
+    dotnet restore
+    error-on-bad-return-code
+
+    echo "@@@ dependencies-install-ed"
 }
+
+
+## see top of file for this declaration
+## function error-if-path-does-not-exist {}
 
 
 function error-on-bad-return-code {
@@ -165,31 +199,9 @@ function error-on-bad-return-code {
 ## see top of file
 ## function error-if-path-does-not-exist {
 
+function generate-artefact-release {
 
-function main_exec {
-
-    add-build-date
-
-    cleanup-prebuild
-
-    dependencies-nuget
-
-    validate-xaml-xmllint
-
-    update-assembly-info
-
-    build-msbuild
-
-
-    echo ""
-    if ( $execTest -eq "TRUE" ) {
-        test-vstest
-    } else {
-        echo "tests SKIPPED, because arg execTest was '$execTest'"
-    }
-    echo ""
-
-    if ( $execGenerateArtefact  -eq "TRUE" ) {
+    if ( $execGenerateArtefact  -eq "TRUE" -And $MS_BUILD_CONFIG -eq "Release" ) {
 
         echo "artefact generation STARTED"
 
@@ -202,25 +214,59 @@ function main_exec {
 
         echo ""
 
+        ## on branch (master.move-to-dotnet-8), we had this quirk
+        ## if you run `make-installer-zip` then `make-installer-exe` zip size is about 18mb
+        ## if you run `make-installer-exe` then `make-installer-zip` zip size is about 70mb
+        ## extra size is because it will include nuget stuff
+        ## TODO check if this is an issue
 
-        if( $MS_BUILD_CONFIG -eq "Release" ) {
+        make-extract-me-installer
 
-          make-extract-me-installer
+        make-nuget-package
 
-          make-nuget-package
+        squirrel
 
-          squirrel
+        sign-installer
 
-          sign-installer
-        }
 
         echo "artefact generation FINISHED"
 
     } else {
-        echo "artefact generation SKIPPED, because arg execGenerateArtefact was '$execGenerateArtefact'"
+        echo "@@@ generate-artefact-release SKIPPED, because "
+
+        if (-Not $execGenerateArtefact -eq "TRUE") {
+            echo "... arg execGenerateArtefact was '$execGenerateArtefact'"
+        }
+
+        if (-Not $MS_BUILD_CONFIG -eq "Release") {
+            echo "... arg MS_BUILD_CONFIG was '$MS_BUILD_CONFIG'"
+        }
     }
 
+}
+
+function main_exec {
+
+    add-build-date
+
+    cleanup-prebuild
+
+    dependencies-install
+
+    validate-xaml-xmllint
+
+    update-assembly-info
+
+    build-msbuild
+
+    test-vstest
+
+    generate-artefact-release
+
     cleanup-postbuild
+
+    echo ""
+    echo "@@@ build.ps1 SUCCESS!"
 }
 
 
@@ -236,7 +282,7 @@ function make-dir {
 function make-extract-me-installer {
 
   echo ""
-  echo "making extract-me-installer"
+  echo "@@@ making extract-me-installer"
 
   $EXTRACTED_PATH="$GENERATED_INSTALLER_PATH\extract-temp\"
 
@@ -255,13 +301,13 @@ function make-extract-me-installer {
 
   remove $EXTRACTED_PATH
 
-  echo "made extract-me-installer"
+  echo "@@@ made extract-me-installer"
 }
 
 
 function make-nuget-package {
   echo ""
-  echo "making nuget-package"
+  echo "@@@ making nuget-package"
 
   $FIND="<version>REPLACE_VERSION_REPLACE</version>"
   $REPLACE="<version>$VERSION</version>"
@@ -276,7 +322,7 @@ function make-nuget-package {
 
   nuget pack $TARGET_NUSPEC_FILE
   error-on-bad-return-code
-  echo "made nuget-package"
+  echo "@@@ made nuget-package"
 }
 
 
@@ -322,25 +368,26 @@ function remove {
 
 function sign-executables {
   echo ""
-  echo "sign-ing executables"
+  echo "@@@ sign-ing executables"
   manually-sign-file  "$PROJECT_DIRECTORY_PS4_KEYBOARD_AND_MOUSE_ADAPTER\bin\$MS_BUILD_CONFIG\PS4KeyboardAndMouseAdapter.exe"
-  echo "signed executables"
+  echo "@@@ signed executables"
 }
 
 
 function sign-installer {
   echo ""
-  echo "sign-ing installer"
+  echo "@@@ sign-ing installer"
 
   manually-sign-file  $GENERATED_INSTALLER_PATH\application-setup.exe
 
-  echo "signed installer"
+  echo "@@@ signed installer"
 }
 
+## TODO we traded squirrel for velopack
 
 function squirrel {
   echo ""
-  echo "squirrel-ing package ..."
+  echo "@@@ squirrel-ing package ..."
 
   ##TODO do this for EVERY path
   error-if-path-does-not-exist $NUGET_PACKAGE_PATH
@@ -359,29 +406,36 @@ function squirrel {
   ## move setup.exe as we have two setup files (one a exe one a zip)
   Move-Item -Path $GENERATED_INSTALLER_PATH\setup.exe -Destination $GENERATED_INSTALLER_PATH\application-setup.exe
 
-  echo "squirrel-ed package!"
+  echo "@@@ squirrel-ed package!"
 }
 
 
 function test-vstest {
 
-  echo "vstest-ing"
-  $UNIT_TEST_DLL="$PROJECT_DIRECTORY_UNIT_TESTS\bin\$MS_BUILD_CONFIG\UnitTests.dll"
+    if (!($execTest -eq "TRUE")) {
+        echo "@@@ test-vstest SKIPPED, because arg execTest was '$execTest'"
+        return
+    }
 
-  if (!(Test-Path $UNIT_TEST_DLL )) {
-    echo "UnitTests.dll missing! ... path $UNIT_TEST_DLL"
-    exit 1
-  }
+    echo "@@@ vstest-ing"
+    $UNIT_TEST_DLL = "$PROJECT_DIRECTORY_UNIT_TESTS\bin\$MS_BUILD_CONFIG\UnitTests.dll"
 
-  vstest.console.exe $UNIT_TEST_DLL --ListTests
-  echo ""
+    if (!(Test-Path $UNIT_TEST_DLL))
+    {
+        echo "UnitTests.dll missing! ... path $UNIT_TEST_DLL"
+        exit 1
+    }
 
-  vstest.console.exe $UNIT_TEST_DLL
+    vstest.console.exe $UNIT_TEST_DLL --ListTests
+    echo ""
 
-  if ( $LASTEXITCODE -ne 0) {
-    echo "vstest failed"
-    exit $LASTEXITCODE
-  }
+    vstest.console.exe $UNIT_TEST_DLL
+
+    if ($LASTEXITCODE -ne 0)
+    {
+        echo "vstest failed"
+        exit $LASTEXITCODE
+    }
 
 
 
@@ -391,7 +445,7 @@ function test-vstest {
   ##  exit $LASTEXITCODE
   ##}
 
-  echo "vstest done"
+  echo "@@@ vstest done"
 }
 
 
@@ -415,12 +469,14 @@ function validate-xaml-xmllint {
   ## if you dont know chocolatey, then see https://chocolatey.org/
 
   echo ""
-  echo "validating xamls xmllint"
+  echo "@@@ validating xamls xmllint"
 
   $files =  Get-ChildItem -recurse *.xaml | where {! $_.PSIsContainer}
 
   foreach ($file in $files) {
 
+    ## if you dont know xmllint,
+    ## then see https://gnome.pages.gitlab.gnome.org/libxml2/xmllint.html
     xmllint.exe $file.FullName  --noout
 
     ## if you get a negative exit coder assume the binary is either corrupted or missing DLLs
@@ -431,7 +487,7 @@ function validate-xaml-xmllint {
 
   }
 
-  echo "validated xamls xmllint"
+  echo "@@@ validated xamls xmllint"
 }
 
 
