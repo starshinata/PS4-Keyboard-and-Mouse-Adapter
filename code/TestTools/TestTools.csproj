@@ -10,7 +10,7 @@
     <RootNamespace>TestTools</RootNamespace>
     <AssemblyName>TestTools</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-	<RuntimeIdentifier>win</RuntimeIdentifier>
+    <RuntimeIdentifier>win</RuntimeIdentifier>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
@@ -57,10 +57,10 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="FluentAssertions">
-      <Version>6.5.1</Version>
+      <Version>8.8.0</Version>
     </PackageReference>
     <PackageReference Include="FluentAssertions.Json">
-      <Version>6.1.0</Version>
+      <Version>8.0.0</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
