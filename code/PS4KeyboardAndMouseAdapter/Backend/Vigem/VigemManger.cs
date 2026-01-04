@@ -29,7 +29,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Vigem
             }
             catch (Exception e)
             {
-                ExceptionLogger.LogException("VigemManager.IsVigemDriverInstalled error L32", e);
+                ExceptionLogger.LogException("VigemManager.IsVigemDriverInstalled error L32 \n" + "  If the below error has 'The operation completed successfully' then this implies Vigem isnt installed correctly, please check https://github.com/starshinata/PS4-Keyboard-and-Mouse-Adapter/issues/81", e);
                 return false;
             }
 

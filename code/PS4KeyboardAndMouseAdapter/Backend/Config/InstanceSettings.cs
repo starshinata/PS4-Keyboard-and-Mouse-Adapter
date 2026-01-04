@@ -1,5 +1,6 @@
-﻿using Pizza.KeyboardAndMouseAdapter.Backend.Vigem;
-using PS4RemotePlayInjection;
+﻿using Pizza.Common;
+using Pizza.Common.Gamepad;
+using Pizza.KeyboardAndMouseAdapter.Backend.Vigem;
 using Serilog;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -7,6 +8,8 @@ using System.Diagnostics;
 namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 {
     // a collection of settings that will die when application is closed
+    // AND ARE NOT PERSISTED ANYWHERE
+
     public class InstanceSettings : INotifyPropertyChanged
     {
         private static readonly InstanceSettings thisInstance = new InstanceSettings();
@@ -25,13 +28,19 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
+        private LogManager logManager = null;
         public bool EnableMouseInput { get; set; } = false;
 
-        private LogManager logManager = null;
+        // TODO this smells
+        // refactor GamepadProcessor to be called without needing to get it via MainViewModel
+        public DualShockState DualShockState = null;
 
         private VigemInternals vigemInternals = null;
 
+        private Process remotePlayProcess = null;
+
         //////////////////////////////////////////////////////////////////////
+
 
         public LogManager GetLogManager()
         {
@@ -45,20 +54,14 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 
         public Process GetRemotePlayProcess()
         {
-            return UtilityData.RemotePlayProcess;
+            return remotePlayProcess;
         }
 
         public void SetRemotePlayProcess(Process newProcess)
         {
-            Log.Error("InstanceSettings.SetRemotePlayProcess (UtilityData.RemotePlayProcess) set " + newProcess.Id);
-            UtilityData.RemotePlayProcess = newProcess;
-            UtilityData.pid = newProcess.Id;
-
-            Log.Error("InstanceSettings.SetRemotePlayProcess (UtilityData.RemotePlayProcess) get a " + UtilityData.RemotePlayProcess);
-            Log.Error("InstanceSettings.SetRemotePlayProcess (UtilityData.RemotePlayProcess) get b " + UtilityData.RemotePlayProcess.Id);
-            Log.Error("InstanceSettings.SetRemotePlayProcess (UtilityData.RemotePlayProcess) get c " + UtilityData.pid);
-            Log.Error("InstanceSettings.SetRemotePlayProcess (UtilityData.RemotePlayProcess) get d " + Process.GetCurrentProcess());
-            Log.Error("InstanceSettings.SetRemotePlayProcess (UtilityData.RemotePlayProcess) get d " + Process.GetCurrentProcess().Id);
+            remotePlayProcess = newProcess;
+            Log.Information("InstanceSettings.SetRemotePlayProcess (UtilityData.RemotePlayProcess) set {0} {1}",
+                remotePlayProcess.Id, remotePlayProcess.ProcessName);
         }
 
         public VigemInternals GetVigemInternals()

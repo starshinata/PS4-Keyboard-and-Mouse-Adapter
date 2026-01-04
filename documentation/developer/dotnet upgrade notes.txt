@@ -1,0 +1,180 @@
+# dot net framework 4 to dot net 6 (now 8)
+ 
+There was a "dotnet Porting assistant" its now deprecated in place of "dotnet upgrade assistant"
+
+https://dotnet.microsoft.com/en-us/platform/upgrade-assistant/tutorial/install-upgrade-assistant
+
+```
+dotnet tool install -g --add-source "https://api.nuget.org/v3/index.json" --ignore-failed-sources upgrade-assistant
+dotnet tool update -g upgrade-assistant
+upgrade-assistant analyze <Path to csproj or sln to upgrade>
+``
+
+it will generate a Sarif report, use https://microsoft.github.io/sarif-web-component/ to view the output
+
+run the upgrade assistant (but do it from powershell outside of Visual Studio unless you like lots of popups saying the project has been modified
+
+```
+upgrade-assistant upgrade <Path to csproj or sln to upgrade>
+```
+
+
+---
+
+
+## IPC and DLL injection
+
+After upgrading from "dotnet framework 4.8" to "dotnet standard 2", you will realise that the System.Remoting package was removed
+For specifics on that see 
+https://learn.microsoft.com/en-us/dotnet/core/porting/net-framework-tech-unavailable#remoting
+
+
+
+We use EasyHook for DLL injection, but that is currently constrained to dotnet framework 4.8
+Have a read for the github issue "Target net standard" https://github.com/EasyHook/EasyHook/issues/278
+
+which seems to suggest https://github.com/unknownv2/CoreHook
+After trying CoreHook the examples aren't great, and it looks abandoned.
+
+With a bit of googling found https://www.youtube.com/watch?v=CAkRsmhO2FI
+which links to https://github.com/Akaion/Bleak
+which links to https://github.com/Dewera/Lunar
+both projects dont show (or atleast it isnt obvious) how to communicate with the child process which had the DLL injected
+
+
+later pulled System.Runtime.Remoting.dll, from ".Net Framework 4.8"
+and added it as "code\PS4RemotePlayInjection\dnf_4.8.System.Runtime.Remoting.dll"
+
+### 2023.06.11
+Probably important to understand injecting a DLL doesn't need IPC
+and IPC stands for Inter Process Communication 
+And this is where pancakes' brain has been failing him, as he was thinking one comes with the other
+
+Back to the Microsoft advice
+https://learn.microsoft.com/en-us/dotnet/core/porting/net-framework-tech-unavailable#remoting
+PIPES ... but pipes are normally 1 way
+https://learn.microsoft.com/en-us/dotnet/api/system.io.pipes.namedpipeclientstream?view=net-6.0
+
+So thinking some sort of RPC (because i don't want to manually do marshalling from a raw stream)
+https://github.com/grpc/grpc-dotnet
+https://github.com/meteatamel/grpc-samples-dotnet
+
+### 2024.08.25
+but we were still using EasyHook for DLL injection, which is constrained to dotnet framework 4.8
+Now trying https://github.com/nefarius/Injector/
+
+### 2025.01.11
+We need to remember that if we are using EasyHook, it INJECTS and CALLS stuff from the DLL.
+If you want a more pure DLL injection you should be looking at writing c++ code, 
+like https://www.ired.team/offensive-security/code-injection-process-injection/how-to-hook-windows-api-using-c++
+or https://trustedsec.com/blog/putting-our-hooks-into-windows
+
+Next approach is to segregate code into dotnet latest and dotnet framework 4.8
+and let the DNF 4.8 code do teh easy hooking and the injection
+both codebases can talk to each other via IPC
+
+
+---
+
+
+## Squirrel for dot net
+https://github.com/clowd/Clowd.Squirrel
+
+---
+
+## Unit tests
+
+### Unit tests (1)
+made new project using dotnet template (instead of dotnet framework template
+
+various errors
+needed flags for vstext.console.exe
+which is funny because documentation says it will take the latest detected SDK/ dot net version
+
+
+### Unit tests (2)
+Exception for missing files
+```
+... threw exception:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'D:\workspace\PS4-Keyboard-and-Mouse-Adapter\master.move-to-dotnet-6\code\UnitTests\UnitTests\KeyboardAndMouseAdapter\backend\Config\UserSettings\IsLegacyConfig--profile-2.0.0-provisional.json'.
+  Stack Trace:
+      at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategy(FileStream fileStream, String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Encoding encoding, Int32 bufferSize)
+   at System.IO.File.InternalReadAllText(String path, Encoding encoding)
+   at System.IO.File.ReadAllText(String path)
+   ...
+```
+
+the project "UnitTests" was defined twice in path
+'D:\workspace\PS4-Keyboard-and-Mouse-Adapter\master.move-to-dotnet-6\code\UnitTests\UnitTests\KeyboardAndMouseAdapter\backend\Config\UserSettings\IsLegacyConfig--profile-2.0.0-provisional.json'.
+
+Extra "..\\" was needed to get to project root
+
+---
+
+### Unit tests (3)
+"System.InvalidOperationException: The calling thread must be STA, because many UI components require this."
+
+ERROR
+```
+  Failed WhenEmulationMode__Unknown__ShouldDisableTheControl [< 1 ms]
+  Error Message:
+   Test method UnitTests.KeyboardAndMouseAdapter.UI.Controls.GamepadUpdaterNoSleepControlTest.CalculateIsControlEnabledTest.WhenEmulationMode__Unknown__ShouldDisableTheControl th
+rew exception:
+System.InvalidOperationException: The calling thread must be STA, because many UI components require this.
+  Stack Trace:
+      at System.Windows.Input.InputManager..ctor()
+   at System.Windows.Input.InputManager.GetCurrentInputManagerImpl()
+   at System.Windows.Input.InputManager.get_Current()
+   at System.Windows.Input.KeyboardNavigation..ctor()
+   at System.Windows.FrameworkElement.FrameworkServices..ctor()
+   at System.Windows.FrameworkElement.EnsureFrameworkServices()
+   at System.Windows.FrameworkElement..ctor()
+   at System.Windows.Controls.Control..ctor()
+   at System.Windows.Controls.UserControl..ctor()
+```
+
+Issue seems to be that in older versions tests were automatically run the the STA trhead
+
+Workaround given at https://stackoverflow.com/questions/2220418/using-wpf-components-in-nunit-tests-how-to-use-sta
+
+Or we can use this available on nuget 
+https://github.com/saikrishnav/testfxSTAext
+
+Nunit had a fix in the first few results of google, so another idea the nunit is the way to go...
+MSTest required lots of digging
+
+
+
+### Unit tests (4)
+Testhost process exited with error: A fatal error was encountered. The library 'hostpolicy.dll' required to execute the application was not found in 'C:\Program Files\dotnet'.
+Failed to run as a self-contained app.
+  - The application was run as a self-contained app because 'D:\workspace\PS4-Keyboard-and-Mouse-Adapter\master.move-to-dotnet-6\code\UnitTests\bin\Release\net6.0-windows\testhost.runtimeconfig.json' was not found.
+  - If this should be a framework-dependent app, add the 'D:\workspace\PS4-Keyboard-and-Mouse-Adapter\master.move-to-dotnet-6\code\UnitTests\bin\Release\net6.0-windows\testhost.runtimeconfig.json' file and specify the appropriate framework.
+. Please check the diagnostic logs for more information.
+
+Test Run Aborted.
+
+remove CSFML.dll and it seems happy
+
+
+---
+
+
+## 2026
+
+### 2026.01.04
+
+2026-01-04 01:02:18.683 +00:00 [ERR] kmaMessage:EntryPoint.Run RPC startup error
+2026-01-04 01:02:18.683 +00:00 [ERR] errorMessage: Could not load file or assembly 'System.Runtime.Loader, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' or one of its dependencies. The system cannot find the file specified.
+2026-01-04 01:02:18.683 +00:00 [ERR] type: System.IO.FileNotFoundException
+2026-01-04 01:02:18.685 +00:00 [ERR] stackTrace:   at Grpc.Core.GrpcEnvironment.ShutdownHooks.Register()
+   at Grpc.Core.GrpcEnvironment.AddRef()
+   at Grpc.Core.Channel..ctor(String target, ChannelCredentials credentials, IEnumerable`1 options)
+   at RemotePlayInjected.Injected.IpcKmaClient.Setup() in E:\workspace\PS4-Keyboard-and-Mouse-Adapter\master.move-to-dotnet-8.2025\code\RemotePlayInjected\Injected\IpcKmaClient.cs:line 23
+   at RemotePlayInjected.Injected.ThreadRpcUpdateListener..ctor() in E:\workspace\PS4-Keyboard-and-Mouse-Adapter\master.move-to-dotnet-8.2025\code\RemotePlayInjected\Injected\ThreadRpcUpdateListener.cs:line 19
+   at RemotePlayInjected.EntryPoint.Run(IContext context) in E:\workspace\PS4-Keyboard-and-Mouse-Adapter\master.move-to-dotnet-8.2025\code\RemotePlayInjected\EntryPoint.cs:line 36

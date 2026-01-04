@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFrameworks>net48</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.0.0" />
+    <PackageReference Include="Grpc" Version="1.0.1" />
+    <PackageReference Include="Grpc.Core" Version="1.0.1" />
+    <PackageReference Include="Grpc.Tools" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Proto Include="*.proto" />
+    <Generated Include=".\generated\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'@(Generated)' == ''">
+    <Generated Include=".\generated\dummy.cs" />
+  </ItemGroup>
+
+  <!-- Generate the code from all of the proto files -->
+  <Target Name="GenProtos" BeforeTargets="BeforeBuild" Inputs="@(Proto)" Outputs="@(Generated)">
+    <Message Text="Generating protos @(Proto)" Importance="High" />
+    <!-- TODO: Run different command lines per OS. -->
+    <Exec Command="bash $(ProjectDir)/generate_proto_classes.sh" />
+    <!-- Ensure all of the generated files are compiled. -->
+    <ItemGroup Condition="'@(Compile)' == ''">
+      <Compile Include="generated\*.cs" />
+    </ItemGroup>
+  </Target>
+
+</Project>

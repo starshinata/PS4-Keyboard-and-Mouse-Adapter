@@ -1,0 +1,19 @@
+Other Playstation related githubs
+https://github.com/dhleong/ps4-waker/
+https://github.com/fueryon/ps4-remote-play
+https://github.com/grill2010/RemotePlayPrototype
+https://github.com/iharosi/ps5-wake
+https://github.com/Jays2Kings/DS4Windows
+https://github.com/komefai/PS4Macro
+https://github.com/komefai/PS4RemotePlayInjection
+https://github.com/MysteryDash/Offline-PS4-Remote-Play
+https://github.com/Ryochan7/DS4Windows (newer than Jays2Kings/DS4Windows)
+
+Other resources and things
+https://github.com/de4dot/de4dot .NET deobfuscator and unpacker.
+https://github.com/spazzarama/SharedMemory
+
+Controller em
+https://github.com/ViGEm/ViGEmBus
+	https://github.com/ViGEm/ViGEmBus/releases/tag/setup-v1.17.333
+https://www.kernel.org/doc/html/v4.12/input/uinput.html#:~:text=uinput%20is%20a%20kernel%20module,emulate%20input%20devices%20from%20userspace.&text=Once%20this%20virtual%20device%20is,userspace%20and%20in%2Dkernel%20consumers.

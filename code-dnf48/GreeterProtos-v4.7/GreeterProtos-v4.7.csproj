@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A6C113D9-328B-4D0A-9AE7-C7AF66468FCD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>GreeterProtos_v4._7</RootNamespace>
+    <AssemblyName>GreeterProtos-v4.7</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="generate_proto_classes.sh" />
+    <None Include="Greeter.proto" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.0.0" />
+    <PackageReference Include="Grpc" Version="1.0.1" />
+    <PackageReference Include="Grpc.Core" Version="1.0.1" />
+    <PackageReference Include="Grpc.Tools" Version="1.0.1" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Compile Include="generated\Greeter.cs" />
+    <Compile Include="generated\GreeterGrpc.cs" />
+  </ItemGroup>
+  <!-- Generate the code from all of the proto files -->
+  <Target Name="GenProtos" BeforeTargets="BeforeBuild" Inputs="@(Proto)" Outputs="@(Generated)">
+    <Message Text="Generating protos @(Proto)" Importance="High" />
+    <!-- TODO: Run different command lines per OS. -->
+    <Exec Command="bash $(ProjectDir)/generate_proto_classes.sh" />
+    <!-- Ensure all of the generated files are compiled. -->
+    <ItemGroup Condition="'@(Compile)' == ''">
+      <Compile Include="generated\*.cs" />
+    </ItemGroup>
+  </Target>
+</Project>
