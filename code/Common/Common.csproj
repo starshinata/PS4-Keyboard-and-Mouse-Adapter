@@ -14,6 +14,13 @@
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
+    <!-- warning NU1605 is a dependency mismatch
+    for example Package A requires 1.0.0,
+    but package B requires 1.0.1.
+    This has been a PITA, so we are making this warning as an error.
+    -->
+    <!-- REMINDER if you update this, UPDATE IT IN EVERY .csproj file! -->
+    <WarningsAsErrors>NU1605</WarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

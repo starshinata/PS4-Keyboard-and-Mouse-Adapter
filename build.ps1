@@ -383,6 +383,7 @@ function sign-installer {
   echo "@@@ signed installer"
 }
 
+## TODO we traded squirrel for velopack
 
 function squirrel {
   echo ""

@@ -54,6 +54,7 @@ namespace Pizza.KeyboardAndMouseAdapter
         // Since WPF has an "automatic" Program.Main, we need to create one Velopack.
         // In order for this to work, you must also add the following to your .csproj:
         // <StartupObject>Pizza.KeyboardAndMouseAdapter.App</StartupObject>
+        [STAThread]
         private static void Main(string[] args)
         {
             try {
