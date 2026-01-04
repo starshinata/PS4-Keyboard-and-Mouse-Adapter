@@ -75,24 +75,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   -->
-  <ItemGroup>
-    <Reference Include="System.Runtime.Remoting" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
+<!--   <ItemGroup> -->
+<!--     <Reference Include="System.Runtime.Remoting" /> -->
+<!--     <Reference Include="System.Xml" /> -->
+<!--   </ItemGroup> -->
   <ItemGroup>
     <Compile Include="DualShockState.cs" />
     <Compile Include="EntryPoint.cs" />
     <Compile Include="Injected\ControllerState\DualShockState.cs" />
     <Compile Include="Injected\ControllerState\ProtoToController.cs" />
     <Compile Include="Injected\ControllerState\Touch.cs" />
-    <Compile Include="Injected\IpcKmaClient.cs" />
-    <Compile Include="Injected\PatcherGamepad.cs" />
     <Compile Include="Injected\InjectionInterface.cs" />
     <Compile Include="Injected\InterceptorException.cs" />
+    <Compile Include="Injected\IpcKmaClient.cs" />
+    <Compile Include="Injected\PatcherGamepad.cs" />
     <Compile Include="Injected\PatcherRemoteplayToolbar.cs" />
     <Compile Include="Injected\ThreadRpcUpdateListener.cs" />
-    <Compile Include="Injected\UtilityData.cs" />
     <Compile Include="Injected\Utility.cs" />
+    <Compile Include="Injected\UtilityData.cs" />
     <Compile Include="Junk\Injector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -129,6 +129,11 @@
     <PackageReference Include="EasyHook">
       <Version>2.7.7097</Version>
     </PackageReference>
+    <!--
+     Lib.Harmony
+     A library for patching, replacing and decorating .NET and Mono methods during runtime.
+     https://github.com/pardeike/Harmony
+     -->
     <PackageReference Include="Lib.Harmony">
       <Version>2.0.0.10</Version>
     </PackageReference>
@@ -145,7 +150,6 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\Common-v6\Common-v6.csproj">
-      <Project>{9F12F438-2EE5-4D3B-8291-5690E684358C}</Project>
       <Name>Common-v6</Name>
     </ProjectReference>
   </ItemGroup>

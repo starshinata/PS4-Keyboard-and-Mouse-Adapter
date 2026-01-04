@@ -176,12 +176,13 @@
   <ItemGroup>
     <Compile Remove="Backend\MouseAnchor2.cs" />
   </ItemGroup>
+	
   <ItemGroup>
     <ProjectReference Include="..\Common-v6\Common-v6.csproj" />
     <ProjectReference Include="..\GreeterProtos\GreeterProtos.csproj" />
     <ProjectReference Include="..\RemotePlayInjector\RemotePlayInjector.csproj" />
-
   </ItemGroup>
+	
     <PropertyGroup>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>

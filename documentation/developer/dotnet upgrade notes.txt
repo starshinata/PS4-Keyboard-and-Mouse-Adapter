@@ -55,7 +55,7 @@ https://learn.microsoft.com/en-us/dotnet/core/porting/net-framework-tech-unavail
 PIPES ... but pipes are normally 1 way
 https://learn.microsoft.com/en-us/dotnet/api/system.io.pipes.namedpipeclientstream?view=net-6.0
 
-So thinking some sort of RPC (cause i dont want to manually do marshalling from stream)
+So thinking some sort of RPC (because i don't want to manually do marshalling from a raw stream)
 https://github.com/grpc/grpc-dotnet
 https://github.com/meteatamel/grpc-samples-dotnet
 
@@ -167,7 +167,14 @@ remove CSFML.dll and it seems happy
 
 ## 2026
 
-### 2026.01.02
-Look at
-* `code/PS4KeyboardAndMouseAdapter/Backend/RemotePlayInjector99.cs`
-* `code/RemotePlayInjector/RunMe.cs`
+### 2026.01.04
+
+2026-01-04 01:02:18.683 +00:00 [ERR] kmaMessage:EntryPoint.Run RPC startup error
+2026-01-04 01:02:18.683 +00:00 [ERR] errorMessage: Could not load file or assembly 'System.Runtime.Loader, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' or one of its dependencies. The system cannot find the file specified.
+2026-01-04 01:02:18.683 +00:00 [ERR] type: System.IO.FileNotFoundException
+2026-01-04 01:02:18.685 +00:00 [ERR] stackTrace:   at Grpc.Core.GrpcEnvironment.ShutdownHooks.Register()
+   at Grpc.Core.GrpcEnvironment.AddRef()
+   at Grpc.Core.Channel..ctor(String target, ChannelCredentials credentials, IEnumerable`1 options)
+   at RemotePlayInjected.Injected.IpcKmaClient.Setup() in E:\workspace\PS4-Keyboard-and-Mouse-Adapter\master.move-to-dotnet-8.2025\code\RemotePlayInjected\Injected\IpcKmaClient.cs:line 23
+   at RemotePlayInjected.Injected.ThreadRpcUpdateListener..ctor() in E:\workspace\PS4-Keyboard-and-Mouse-Adapter\master.move-to-dotnet-8.2025\code\RemotePlayInjected\Injected\ThreadRpcUpdateListener.cs:line 19
+   at RemotePlayInjected.EntryPoint.Run(IContext context) in E:\workspace\PS4-Keyboard-and-Mouse-Adapter\master.move-to-dotnet-8.2025\code\RemotePlayInjected\EntryPoint.cs:line 36
