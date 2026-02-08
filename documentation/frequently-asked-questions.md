@@ -75,6 +75,8 @@ Native support will be better than this adapter.
 ### Does this work on a Laptop
 Yes - Install this adapter on your computer, and then conect to your PS via Remote Play
 
+### Does this work on chiaki
+No not yet
 
 ### Does this work on Linux
 No not yet
