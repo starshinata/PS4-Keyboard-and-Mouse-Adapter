@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="Pizza.KeyboardAndMouseAdapter.UI.Controls.SliderV"
+    x:Class="Pizza.KeyboardAndMouseAdapter.UI.Controls.Common.SliderV"
     x:Name="This"
 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"

@@ -79,8 +79,9 @@ namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.Welcome
 
             DebugDump.Dump();
 
-            Window window = System.Windows.Application.Current.MainWindow;
-            ((MainWindowView)window).WelcomeStep1Done_SetupChecked();
+
+            MainWindowView window = WindowUtil.GetMainWindowView();
+            window.WelcomeStep1Done_SetupChecked();
 
             //element defined in xaml
             emulationPickerControl.GetValueAndSaveValueInApplicationSettings();

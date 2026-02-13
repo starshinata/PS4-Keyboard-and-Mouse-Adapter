@@ -147,6 +147,7 @@
     <Compile Include="Backend\AppUpdater.cs" />
     <Compile Include="Backend\AudioManager.cs" />
     <Compile Include="Backend\ColourSchemeChanger.cs" />
+    <Compile Include="Backend\ControllerState\NullablePoint.cs" />
     <Compile Include="Backend\DebugLogging\DebugDump.cs" />
     <Compile Include="Backend\DebugLogging\GetOsVersion.cs" />
     <Compile Include="Backend\DebugLogging\HidFacade.cs" />
@@ -154,6 +155,8 @@
     <Compile Include="Backend\DebugLogging\ServiceComparerByName.cs" />
     <Compile Include="Backend\DebugLogging\ProcessComparerByName.cs" />
     <Compile Include="Backend\LogManager.cs" />
+    <Compile Include="searchHelpers\MainViewWindow.cs" />
+    <Compile Include="searchHelpers\MainWindowView.cs" />
     <Compile Include="Backend\RemotePlayInstaller.cs" />
     <Compile Include="Backend\Vigem\GamepadConverter.cs" />
     <Compile Include="Backend\LogUtility.cs" />
@@ -174,16 +177,16 @@
     <Compile Include="UI\Controls\Common\LogControl.xaml.cs">
       <DependentUpon>LogControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Controls\MiscellaneousSettingPage\GamepadUpdaterNoSleepControl.xaml.cs">
+    <Compile Include="UI\Controls\MiscellaneousSetting\GamepadUpdaterNoSleepControl.xaml.cs">
       <DependentUpon>GamepadUpdaterNoSleepControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Controls\MiscellaneousSettingPage\ColourSchemeToggleControl.xaml.cs">
+    <Compile Include="UI\Controls\MiscellaneousSetting\ColourSchemeToggleControl.xaml.cs">
       <DependentUpon>ColourSchemeToggleControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Controls\MiscellaneousSettingPage\RemotePlayToolbarSettingsControl.xaml.cs">
+    <Compile Include="UI\Controls\MiscellaneousSetting\RemotePlayToolbarSettingsControl.xaml.cs">
       <DependentUpon>RemotePlayToolbarSettingsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Controls\MiscellaneousSettingPage\MiscellaneousSettingsGeneralControl.xaml.cs">
+    <Compile Include="UI\Controls\MiscellaneousSetting\MiscellaneousSettingsGeneralControl.xaml.cs">
       <DependentUpon>MiscellaneousSettingsGeneralControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Backend\VersionUtil.cs" />
@@ -203,10 +206,19 @@
     <Compile Include="Backend\GamepadProcessor.cs" />
     <Compile Include="Backend\RemotePlayInjector.cs" />
     <Compile Include="Backend\MouseAnchor.cs" />
-    <Compile Include="UI\Controls\SimpleConfigPage\GamepadMappingController.xaml.cs">
+    <Compile Include="UI\Controls\OnScreenController\AnalogStickMouseInputs.xaml.cs">
+      <DependentUpon>AnalogStickMouseInputs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\OnScreenController\AnalogStickMouseInput.xaml.cs">
+      <DependentUpon>AnalogStickMouseInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\OnScreenController\GamepadMouseInput.xaml.cs">
+      <DependentUpon>GamepadMouseInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\SimpleConfig\GamepadMappingController.xaml.cs">
       <DependentUpon>GamepadMappingController.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Controls\SimpleConfigPage\MouseSettingsSimpleControl.xaml.cs">
+    <Compile Include="UI\Controls\SimpleConfig\MouseSettingsSimpleControl.xaml.cs">
       <DependentUpon>MouseSettingsSimpleControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\Welcome\EmulationPickerControl.xaml.cs">
@@ -218,6 +230,9 @@
     <Compile Include="UI\Controls\Welcome\RemotePlayConnectedControl.xaml.cs">
       <DependentUpon>RemotePlayConnectedControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Pages\OnScreenControllerPage.xaml.cs">
+      <DependentUpon>OnScreenControllerPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Pages\SimpleConfigPage.xaml.cs">
       <DependentUpon>SimpleConfigPage.xaml</DependentUpon>
     </Compile>
@@ -227,10 +242,10 @@
     <Compile Include="UI\Pages\AdvancedMappingsPage.xaml.cs">
       <DependentUpon>AdvancedMappingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Controls\SimpleConfigPage\ProfileManager.xaml.cs">
+    <Compile Include="UI\Controls\SimpleConfig\ProfileManager.xaml.cs">
       <DependentUpon>ProfileManager.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Controls\SimpleConfigPage\AnalogStickBindings.xaml.cs">
+    <Compile Include="UI\Controls\SimpleConfig\AnalogStickBindings.xaml.cs">
       <DependentUpon>AnalogStickBindings.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\AnalogStickVisualizer.xaml.cs">
@@ -261,15 +276,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Controls\MiscellaneousSettingPage\GamepadUpdaterNoSleepControl.xaml">
+    <Page Include="UI\Controls\MiscellaneousSetting\GamepadUpdaterNoSleepControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Controls\MiscellaneousSettingPage\ColourSchemeToggleControl.xaml">
+    <Page Include="UI\Controls\MiscellaneousSetting\ColourSchemeToggleControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Controls\MiscellaneousSettingPage\RemotePlayToolbarSettingsControl.xaml">
+    <Page Include="UI\Controls\MiscellaneousSetting\RemotePlayToolbarSettingsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Controls\OnScreenController\AnalogStickMouseInputs.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Controls\OnScreenController\AnalogStickMouseInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Controls\OnScreenController\GamepadMouseInput.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -298,7 +325,7 @@
       <DependentUpon>MainWindowView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UI\Controls\SimpleConfigPage\AnalogStickBindings.xaml">
+    <Page Include="UI\Controls\SimpleConfig\AnalogStickBindings.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -306,11 +333,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Controls\MiscellaneousSettingPage\MiscellaneousSettingsGeneralControl.xaml">
+    <Page Include="UI\Controls\MiscellaneousSetting\MiscellaneousSettingsGeneralControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Controls\SimpleConfigPage\ProfileManager.xaml">
+    <Page Include="UI\Controls\SimpleConfig\ProfileManager.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -326,13 +353,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Controls\SimpleConfigPage\GamepadMappingController.xaml">
+    <Page Include="UI\Controls\SimpleConfig\GamepadMappingController.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Controls\SimpleConfigPage\MouseSettingsSimpleControl.xaml">
+    <Page Include="UI\Controls\SimpleConfig\MouseSettingsSimpleControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\OnScreenControllerPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\Pages\SimpleConfigPage.xaml">
       <SubType>Designer</SubType>
@@ -557,5 +588,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,6 +1,5 @@
 ﻿using Pizza.KeyboardAndMouseAdapter.Backend;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
-using Serilog;
 
 namespace Pizza.KeyboardAndMouseAdapter
 {

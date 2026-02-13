@@ -6,7 +6,7 @@ using Pizza.Common;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using Serilog;
 
-namespace Pizza.KeyboardAndMouseAdapter.UI.Controls
+namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.SimpleConfig
 {
     public partial class ProfileManager : System.Windows.Controls.UserControl
     {

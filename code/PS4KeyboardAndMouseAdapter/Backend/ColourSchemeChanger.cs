@@ -1,6 +1,5 @@
 ﻿using Pizza.KeyboardAndMouseAdapter.UI;
 using Serilog;
-using System.Windows;
 
 namespace Pizza.KeyboardAndMouseAdapter.Backend
 {
@@ -8,10 +7,11 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend
     {
         public static void Change(bool newValue)
         {
-            Window window = Application.Current.MainWindow;
+            MainWindowView window = WindowUtil.GetMainWindowView();
+
             if (window != null)
             {
-                ((MainWindowView)window).ChangeColourScheme(newValue);
+                window.ChangeColourScheme(newValue);
             }
             else
             {

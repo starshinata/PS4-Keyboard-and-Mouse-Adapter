@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 
-namespace Pizza.KeyboardAndMouseAdapter.UI.Controls
+namespace Pizza.KeyboardAndMouseAdapter.UI.Controls.Common
 {
     public partial class RangeSlider : UserControl
     {
