@@ -3,6 +3,7 @@ using Pizza.Common;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using Pizza.KeyboardAndMouseAdapter.UI;
 using Pizza.KeyboardAndMouseAdapter.UI.Controls.MiscellaneousSettings;
+using Pizza.TestTools;
 
 namespace UnitTests.KeyboardAndMouseAdapter.UI.Controls.GamepadUpdaterNoSleepControlTest
 {
@@ -11,7 +12,7 @@ namespace UnitTests.KeyboardAndMouseAdapter.UI.Controls.GamepadUpdaterNoSleepCon
     public class CalculateIsControlEnabledTest
     {
 
-        [TestMethod]
+        [TestMethodForUiControl]
         public void WhenEmulationMode__ONLY_PROCESS_INJECTION__ShouldDisableTheControl()
         {
             ApplicationSettings.GetInstance().EmulationMode = EmulationConstants.ONLY_PROCESS_INJECTION;
@@ -24,7 +25,7 @@ namespace UnitTests.KeyboardAndMouseAdapter.UI.Controls.GamepadUpdaterNoSleepCon
             Assert.AreEqual(UIConstants.VISIBILITY_VISIBLE, classUnderTest.testonly_GetElement_TextBlock_Warning().Visibility);
         }
 
-        [TestMethod]
+        [TestMethodForUiControl]
         public void WhenEmulationMode__ONLY_VIGEM__ShouldEnableTheControl()
         {
             ApplicationSettings.GetInstance().EmulationMode = EmulationConstants.ONLY_VIGEM;
@@ -37,7 +38,7 @@ namespace UnitTests.KeyboardAndMouseAdapter.UI.Controls.GamepadUpdaterNoSleepCon
             Assert.AreEqual(UIConstants.VISIBILITY_VISIBLE, classUnderTest.testonly_GetElement_Toggle().Visibility);
         }
 
-        [TestMethod]
+        [TestMethodForUiControl]
         public void WhenEmulationMode__Unknown__ShouldDisableTheControl()
         {
             ApplicationSettings.GetInstance().EmulationMode = -1;
@@ -50,7 +51,7 @@ namespace UnitTests.KeyboardAndMouseAdapter.UI.Controls.GamepadUpdaterNoSleepCon
             Assert.AreEqual(UIConstants.VISIBILITY_VISIBLE, classUnderTest.testonly_GetElement_TextBlock_Warning().Visibility);
         }
 
-        [TestMethod]
+        [TestMethodForUiControl]
         public void WhenEmulationMode__VIGEM_AND_PROCESS_INJECTION__ShouldAssumeRemotePlayProcessInjection()
         {
             ApplicationSettings.GetInstance().EmulationMode = EmulationConstants.VIGEM_AND_PROCESS_INJECTION;

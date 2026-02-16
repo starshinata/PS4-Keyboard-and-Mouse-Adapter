@@ -1,4 +1,5 @@
-﻿using Pizza.KeyboardAndMouseAdapter.Backend;
+﻿using Pizza.Common;
+using Pizza.KeyboardAndMouseAdapter.Backend;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
 using Serilog;
 using Serilog.Events;

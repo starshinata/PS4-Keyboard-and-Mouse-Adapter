@@ -8,6 +8,7 @@ using System.IO;
 namespace Pizza.KeyboardAndMouseAdapter.Backend.Config
 {
     // a collection of settings are not bound to a specific game
+    // BUT are remebered between each run of the application
     public class ApplicationSettings : INotifyPropertyChanged
     {
 

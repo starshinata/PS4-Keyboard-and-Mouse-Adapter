@@ -27,7 +27,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.DebugLogging
                 Log.Debug("OS " + GetOsVersion.Get());
                 Log.Debug("Is64BitOperatingSystem " + Environment.Is64BitOperatingSystem);
 
-                Dump_RemotePlay();
+                Dump_RemotePlayMightBeFaked();
 
                 Dump_ApplicationFolder();
                 Dump_CurrentCulture();
@@ -49,8 +49,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.DebugLogging
 
             try
             {
-                string applicationDirectory = Path.GetFullPath(".");
-                string[] files = Directory.GetFiles(applicationDirectory);
+                string[] files = Directory.GetFiles(PathUtil.GetApplicationPath());
                 foreach (string file in files)
                 {
                     Log.Debug("local file " + file);
@@ -114,7 +113,8 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.DebugLogging
                 Log.Debug("{ 'processName': '" + p.ProcessName +
                     "', 'pid': '" + p.Id +
                     "', 'mainWindowTitle': '" + p.MainWindowTitle +
-                    "', 'commandLine': '" + commandLine + "' }");
+                    "', 'commandLine': '" + commandLine +
+                    "', 'user':'" + ProcessGetUserUtil.GetUser(p) + "' }");
             }
         }
 
@@ -130,7 +130,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.DebugLogging
             }
         }
 
-        private static void Dump_RemotePlay()
+        private static void Dump_RemotePlayMightBeFaked()
         {
             Log.Debug("");
             string remotePlayVersion = "unknown";
@@ -154,7 +154,7 @@ namespace Pizza.KeyboardAndMouseAdapter.Backend.DebugLogging
                 ExceptionLogger.LogException("DebugDump.Dump_RemotePlay failed", ex);
             }
 
-            Log.Debug("remote play version " + remotePlayVersion);
+            Log.Debug("remote play version (might be faked): " + remotePlayVersion);
         }
     }
 }

@@ -1,0 +1,4 @@
+// only used for commit base events  like for retrigger codeql analysis
+// (codeql will only use the codeql config available for current commit, not the latest code ql in master)
+
+2023

@@ -1,165 +1,22 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7B4800EE-D943-4299-90FD-DFCE48662774}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UnitTests</RootNamespace>
-    <AssemblyName>UnitTests</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <RuntimeIdentifier>win</RuntimeIdentifier>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
-    <IsCodedUITest>False</IsCodedUITest>
-    <TestProjectType>UnitTest</TestProjectType>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+	  <TargetFramework>net8.0-windows</TargetFramework>
+	  <OutputType>Library</OutputType>
+	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	  <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\PS4KeyboardAndMouseAdapter\PS4KeyboardAndMouseAdapter.csproj" />
+		<ProjectReference Include="..\TestTools\TestTools.csproj" />
+	</ItemGroup>
+
   <ItemGroup>
-    <Reference Include="netstandard" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="System" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="WindowsBase" />
+    <PackageReference Include="Autofac.Extras.Moq" Version="6.1.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.2.8" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.2.8" />
+    <PackageReference Include="coverlet.collector" Version="3.1.2" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{7fbd8f7b-99da-400d-b5c6-5da010d8213f}</Project>
-      <Name>Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PS4KeyboardAndMouseAdapter\PS4KeyboardAndMouseAdapter.csproj">
-      <Project>{83AB8AF6-562F-496E-82EB-1D67FF83DB4F}</Project>
-      <Name>PS4KeyboardAndMouseAdapter</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TestTools\TestTools.csproj">
-      <Project>{6BA0344A-66F2-44E6-84F0-0AC81134CC9E}</Project>
-      <Name>TestTools</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\ApplicationSettings\ImportValues--Default_whenEmpty--expected.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\ApplicationSettings\ImportValues--Default_whenEmpty--input.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\ApplicationSettings\ImportValues--property-ColourSchemeIsLight--expected.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\ApplicationSettings\ImportValues--property-ColourSchemeIsLight--input.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--profile-1.0.11-default--expected.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--profile-1.0.11-default--input.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--profile-2.0.0-default--expected.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\ApplicationSettings\ImportValues--property-GamepadUpdaterNoSleep--expected.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\ApplicationSettings\ImportValues--property-GamepadUpdaterNoSleep--input.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--property-RemotePlayVolume--expected.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--property-AimToggleRetoggleDelay--expected.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--property-RemotePlayVolume--input.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--property-AimToggleRetoggleDelay--input.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--property-MouseAimSensitivityEnabled--expected.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--property-AimToggle--expected.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--profile-empty--expected.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--property-MouseAimSensitivityEnabled--input.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--property-AimToggle--input.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--profile-empty--input.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValues--profile-2.0.0-default--input.json" />
-    <Compile Include="KeyboardAndMouseAdapter\Backend\Config\ApplicationSettings\ImportValuesTest.cs" />
-    <Compile Include="KeyboardAndMouseAdapter\Backend\RewasdDetector\PathsTest.cs" />
-    <Compile Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\ImportValuesTest.cs" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\IsLegacyConfig--profile-1.0.11-default.json" />
-    <None Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\IsLegacyConfig--profile-2.0.0-provisional.json" />
-    <Compile Include="KeyboardAndMouseAdapter\Backend\Config\UserSettings\IsLegacyConfigTest.cs" />
-    <Compile Include="KeyboardAndMouseAdapter\UI\Controls\MiscellaneousSettings\GamepadUpdaterNoSleepControl\CalculateIsControlEnabledTest.cs" />
-    <Compile Include="KeyboardAndMouseAdapter\UI\Controls\MiscellaneousSettings\RemotePlayToolbarSettingsControl\CalculateIsControlEnabledTest.cs" />
-    <Compile Include="KeyboardAndMouseAdapter\UI\Controls\Welcome\EmulationPickerControl\SetInitialRadioChecked\WhenVigemInstalledTest.cs" />
-    <Compile Include="KeyboardAndMouseAdapter\UI\Controls\Welcome\EmulationPickerControl\SetInitialRadioChecked\WhenVigemNotInstalledTest.cs" />
-    <Compile Include="KeyboardAndMouseAdapter\UI\Controls\Welcome\EmulationPickerControl\DisableUnavailableRadioButtonsTest.cs" />
-    <Compile Include="KeyboardAndMouseAdapter\UI\Controls\Welcome\EmulationPickerControl\ShouldShowVigemInstallWarningTest.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Autofac">
-      <Version>6.3.0</Version>
-    </PackageReference>
-    <PackageReference Include="Autofac.Extras.Moq">
-      <Version>6.1.0</Version>
-    </PackageReference>
-    <PackageReference Include="Castle.Core">
-      <Version>4.4.0</Version>
-    </PackageReference>
-    <PackageReference Include="FluentAssertions">
-      <Version>6.5.1</Version>
-    </PackageReference>
-    <PackageReference Include="FluentAssertions.Json">
-      <Version>6.1.0</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces">
-      <Version>1.1.0</Version>
-    </PackageReference>
-    <PackageReference Include="Moq">
-      <Version>4.16.1</Version>
-    </PackageReference>
-    <PackageReference Include="MSTest.TestAdapter">
-      <Version>2.2.5</Version>
-    </PackageReference>
-    <PackageReference Include="MSTest.TestFramework">
-      <Version>2.2.5</Version>
-    </PackageReference>
-    <PackageReference Include="Newtonsoft.Json">
-      <Version>13.0.1</Version>
-    </PackageReference>
-    <PackageReference Include="System.Buffers">
-      <Version>4.5.1</Version>
-    </PackageReference>
-    <PackageReference Include="System.ComponentModel.Primitives">
-      <Version>4.1.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.ComponentModel.TypeConverter">
-      <Version>4.1.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Diagnostics.DiagnosticSource">
-      <Version>4.7.1</Version>
-    </PackageReference>
-    <PackageReference Include="System.Memory">
-      <Version>4.5.4</Version>
-    </PackageReference>
-    <PackageReference Include="System.Numerics.Vectors">
-      <Version>4.5.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe">
-      <Version>4.5.3</Version>
-    </PackageReference>
-    <PackageReference Include="System.Threading.Tasks.Extensions">
-      <Version>4.5.4</Version>
-    </PackageReference>
-    <PackageReference Include="System.ValueTuple">
-      <Version>4.4.0</Version>
-    </PackageReference>
-  </ItemGroup>
-  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
 </Project>

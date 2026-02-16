@@ -1,6 +1,6 @@
 ﻿using Pizza.KeyboardAndMouseAdapter.Backend;
 using Pizza.KeyboardAndMouseAdapter.Backend.Config;
-using Serilog;
+using Pizza.KeyboardAndMouseAdapter.Backend.GamepadProcessing;
 
 namespace Pizza.KeyboardAndMouseAdapter
 {

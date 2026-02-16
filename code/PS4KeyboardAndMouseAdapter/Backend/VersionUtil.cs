@@ -1,4 +1,4 @@
-﻿using NuGet;
+﻿using Squirrel;
 using System;
 using System.Reflection;
 

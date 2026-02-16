@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Pizza.KeyboardAndMouseAdapter.Backend.Vigem;
 using Pizza.KeyboardAndMouseAdapter.UI.Controls.Welcome;
+using Pizza.TestTools;
 
 namespace UnitTests.KeyboardAndMouseAdapter.UI.Controls.Welcome.EmulationPickerControlTest
 {
@@ -11,7 +12,7 @@ namespace UnitTests.KeyboardAndMouseAdapter.UI.Controls.Welcome.EmulationPickerC
     public class ShouldShowVigemInstallWarningTest
     {
 
-        [TestMethod]
+        [TestMethodForUiControl]
         public void WhenInstalled_ShouldSet__Panel_VigemNotInstalled__toBeCollapsed()
         {
             using (AutoMock mock = AutoMock.GetLoose())
@@ -29,7 +30,7 @@ namespace UnitTests.KeyboardAndMouseAdapter.UI.Controls.Welcome.EmulationPickerC
             }
         }
 
-        [TestMethod]
+        [TestMethodForUiControl]
         public void WhenInstalled_ShouldSet__Panel_VigemNotInstalled__toBeVisible()
         {
             using (AutoMock mock = AutoMock.GetLoose())
